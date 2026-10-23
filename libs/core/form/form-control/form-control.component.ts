@@ -9,6 +9,7 @@ import {
     Injector,
     input,
     numberAttribute,
+    output,
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
@@ -158,6 +159,12 @@ export class FormControlComponent implements FormItemControl {
      */
     readonly decimalSeparator = input<'.' | ','>('.');
 
+    /**
+     * Emits validation state for number inputs.
+     * Emits `true` when the value is valid, `false` when invalid.
+     */
+    readonly validationChange = output<boolean>();
+
     /** @hidden */
     readonly elementRef = inject<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(ElementRef);
 
@@ -276,6 +283,12 @@ export class FormControlComponent implements FormItemControl {
         if (!this._numberInputService.isValidKeyPress(event, currentValue, this.decimalSeparator())) {
             event.preventDefault();
         }
+
+        // Live validation - validate after keystroke
+        if (this.validationMode() === 'live') {
+            // Use setTimeout to wait for the input value to update
+            setTimeout(() => this._validateLive(inputElement), 0);
+        }
     }
 
     /** @hidden Handle paste events for number input validation */
@@ -331,6 +344,7 @@ export class FormControlComponent implements FormItemControl {
         // If empty, leave as empty (don't default to 0)
         if (!value || value === '-') {
             inputElement.value = '';
+            this.validationChange.emit(true); // Empty is valid
             return;
         }
 
@@ -340,6 +354,7 @@ export class FormControlComponent implements FormItemControl {
         if (numericValue === null) {
             // Invalid value - revert to value before focus or empty
             inputElement.value = this._valueBeforeFocus || '';
+            this.validationChange.emit(false);
             return;
         }
 
@@ -350,17 +365,22 @@ export class FormControlComponent implements FormItemControl {
             finalValue = parseFloat(numericValue.toFixed(precision));
         }
 
-        // Clamp to min/max if defined
+        // Check min/max boundaries and emit validation state
         const minValue = this.min();
         const maxValue = this.max();
+        let isValid = true;
+
         if (typeof minValue === 'number' && finalValue < minValue) {
-            finalValue = minValue;
+            isValid = false;
         }
         if (typeof maxValue === 'number' && finalValue > maxValue) {
-            finalValue = maxValue;
+            isValid = false;
         }
 
-        // Format and update the input
+        // Emit validation state
+        this.validationChange.emit(isValid);
+
+        // Format and update the input (but don't clamp the value - let user see their input)
         inputElement.value = this._numberInputService.formatNumber(
             finalValue,
             typeof precision === 'number' ? precision : undefined,
@@ -505,5 +525,38 @@ export class FormControlComponent implements FormItemControl {
             this.decimalSeparator(),
             this.useGrouping()
         );
+    }
+
+    /** @hidden Validate live during typing */
+    private _validateLive(inputElement: HTMLInputElement): void {
+        const value = inputElement.value;
+
+        // Empty or just minus is valid during typing
+        if (!value || value === '-') {
+            this.validationChange.emit(true);
+            return;
+        }
+
+        // Parse the value
+        const numericValue = this._numberInputService.parseNumericValue(value, this.decimalSeparator());
+
+        if (numericValue === null) {
+            this.validationChange.emit(false);
+            return;
+        }
+
+        // Check min/max boundaries
+        const minValue = this.min();
+        const maxValue = this.max();
+        let isValid = true;
+
+        if (typeof minValue === 'number' && numericValue < minValue) {
+            isValid = false;
+        }
+        if (typeof maxValue === 'number' && numericValue > maxValue) {
+            isValid = false;
+        }
+
+        this.validationChange.emit(isValid);
     }
 }

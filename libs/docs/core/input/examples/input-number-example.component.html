@@ -137,15 +137,22 @@
 <p>Minimum and maximum values enforce boundaries. Values outside the range show an error state.</p>
 <div fd-form-item>
     <label fd-form-label for="input-number-6" [colon]="true">Rating (min = 1, max = 10)</label>
-    <input
-        fd-form-control
-        type="number"
-        id="input-number-6"
-        placeholder="Rating"
-        [(ngModel)]="value6"
-        [min]="1"
-        [max]="10"
-    />
+    <fd-form-input-message-group>
+        <input
+            fd-form-control
+            type="number"
+            id="input-number-6"
+            placeholder="Rating"
+            [(ngModel)]="value6"
+            [min]="1"
+            [max]="10"
+            [state]="value6State"
+            (validationChange)="onValue6ValidationChange($event)"
+        />
+        @if (value6State === 'error') {
+            <fd-form-message type="error">Value must be between 1 and 10</fd-form-message>
+        }
+    </fd-form-input-message-group>
 </div>
 <p><strong>Instructions:</strong> Try entering 0 or 11 to see error state. Arrow keys stop at boundaries.</p>
 
@@ -172,16 +179,23 @@
 <p>Live validation validates immediately on each keystroke.</p>
 <div fd-form-item>
     <label fd-form-label for="input-number-8" [colon]="true">Percentage (0-100, live validation)</label>
-    <input
-        fd-form-control
-        type="number"
-        id="input-number-8"
-        placeholder="Percentage"
-        [(ngModel)]="value8"
-        [min]="0"
-        [max]="100"
-        [validationMode]="'live'"
-    />
+    <fd-form-input-message-group>
+        <input
+            fd-form-control
+            type="number"
+            id="input-number-8"
+            placeholder="Percentage"
+            [(ngModel)]="value8"
+            [min]="0"
+            [max]="100"
+            [validationMode]="'live'"
+            [state]="value8State"
+            (validationChange)="onValue8ValidationChange($event)"
+        />
+        @if (value8State === 'error') {
+            <fd-form-message type="error">Percentage must be between 0 and 100</fd-form-message>
+        }
+    </fd-form-input-message-group>
 </div>
 <p><strong>Instructions:</strong> Type 150 → error appears immediately as you type</p>
 
@@ -266,6 +280,10 @@
     <strong>Instructions:</strong> Focus input → Scroll to change value by 0.5 (displays with 2 decimal places). Start
     at 10.00 → Scroll up → 10.50 → Scroll up → 11.00
 </p>
+
+<hr />
+
+<h3>i18n</h3>
 <p>Decimal separator can be configured for different locales.</p>
 <div fd-form-item>
     <label fd-form-label for="input-number-11" [colon]="true">European Format (comma decimal)</label>
@@ -278,4 +296,4 @@
         [decimalSeparator]="','"
     />
 </div>
-<p><strong>Instructions:</strong> Decimal separator is comma (e.g., 1.234,56 instead of 1,234.56)</p>
+<p><strong>Instructions:</strong> Paste 1234.56 → blur → displays as 1234,56</p>
