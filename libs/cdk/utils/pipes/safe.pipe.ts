@@ -1,6 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml, SafeResourceUrl, SafeScript, SafeStyle, SafeUrl } from '@angular/platform-browser';
 
+/**
+ * @deprecated The `safe` pipe exposes Angular sanitization bypasses directly in templates.
+ *
+ * For URLs, bind the value directly and let Angular sanitize it. Validate the scheme in the
+ * component when the value comes from an untrusted source. For trusted HTML, styles, scripts,
+ * or resource URLs, inject `DomSanitizer` at the point of use and call the specific
+ * `bypassSecurityTrust*` method there. Document why that value is trusted.
+ *
+ * This pipe will be removed in a future major release.
+ */
 @Pipe({
     name: 'safe',
     standalone: true
