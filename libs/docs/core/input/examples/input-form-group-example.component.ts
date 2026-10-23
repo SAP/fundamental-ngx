@@ -35,6 +35,7 @@ export class InputFormGroupExampleComponent implements OnInit {
         this.myForm = this.fb.group({
             inputControl: new FormControl('', Validators.required),
             disabledInputControl: new FormControl({ value: 'initial value', disabled: true }, Validators.required),
+            quantityControl: new FormControl(5, [Validators.required, Validators.min(1), Validators.max(100)]),
             arr: this.arr
         });
     }
