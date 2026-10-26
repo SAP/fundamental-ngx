@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { DatetimeAdapter } from './datetime-adapter';
 import { convertToDesiredFormat } from './datetime-utils';
 import { FdDate } from './fd-date';
-import { FdDatetimeAdapterModule } from './fd-datetime.module';
+import { provideDateTimeFormats } from './provide-date-time';
 
 describe('convertToDesiredFormat', () => {
     it('should convert English day period labels to 24-hour time', () => {
@@ -23,20 +23,27 @@ describe('convertToDesiredFormat', () => {
         expect(convertToDesiredFormat('12:10 AM')).toBe('00:10');
     });
 
-    it('should produce a string that the adapter can parse back', () => {
-        TestBed.configureTestingModule({ imports: [FdDatetimeAdapterModule] });
-        const adapter: DatetimeAdapter<FdDate> = TestBed.inject(DatetimeAdapter);
-        const parseFormat: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        };
+    describe('with the datetime adapter', () => {
+        let adapter: DatetimeAdapter<FdDate>;
 
-        const date = adapter.parse(convertToDesiredFormat('October 23, 2026 at 09:05 in the evening'), parseFormat);
+        beforeEach(() => {
+            TestBed.configureTestingModule({ providers: provideDateTimeFormats() });
+            adapter = TestBed.inject(DatetimeAdapter);
+        });
 
-        expect(date?.isDateValid()).toBe(true);
-        expect([date?.year, date?.month, date?.day, date?.hour, date?.minute]).toEqual([2026, 10, 23, 21, 5]);
+        it('should produce a string that the adapter can parse back', () => {
+            const parseFormat: Intl.DateTimeFormatOptions = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+
+            const date = adapter.parse(convertToDesiredFormat('October 23, 2026 at 09:05 in the evening'), parseFormat);
+
+            expect(date?.isDateValid()).toBe(true);
+            expect([date?.year, date?.month, date?.day, date?.hour, date?.minute]).toEqual([2026, 10, 23, 21, 5]);
+        });
     });
 });
