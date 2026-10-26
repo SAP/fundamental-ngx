@@ -41,12 +41,12 @@ import { NumberInputService } from './number-input.service';
         '[attr.aria-labelledby]': 'ariaLabelledByAttr || ariaLabelledBy() || null',
         '[attr.aria-invalid]': 'state() === "error" ? true : null',
         '[style.text-align]': 'isEnhancedNumberMode() ? textAlign() : null',
-        '(keydown)': '_handleKeydown($any($event))',
-        '(paste)': '_handlePaste($any($event))',
-        '(input)': '_handleInput($any($event))',
-        '(focus)': '_handleFocus($any($event))',
-        '(blur)': '_handleBlur($any($event))',
-        '(wheel)': '_handleWheel($any($event))'
+        '(keydown)': 'handleKeydown($any($event))',
+        '(paste)': 'handlePaste($any($event))',
+        '(input)': 'handleInput($any($event))',
+        '(focus)': 'handleFocus($any($event))',
+        '(blur)': 'handleBlur($any($event))',
+        '(wheel)': 'handleWheel($any($event))'
     }
 })
 export class FormControlComponent implements FormItemControl {
@@ -246,7 +246,7 @@ export class FormControlComponent implements FormItemControl {
 
         // Determine from locale
         const localeIdValue = this.locale() || this.localeId;
-        return this._getDecimalSeparatorForLocale(localeIdValue);
+        return this.getDecimalSeparatorForLocale(localeIdValue);
     });
 
     /** @hidden */
@@ -280,7 +280,7 @@ export class FormControlComponent implements FormItemControl {
 
                 if (needsFormatting) {
                     // Small delay to let ngModel finish writing
-                    setTimeout(() => this._formatInitialValue(), 100);
+                    setTimeout(() => this.formatInitialValue(), 100);
                 }
             },
             { injector: this._injector }
@@ -288,7 +288,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Handle keydown events for number input validation */
-    protected _handleKeydown(event: KeyboardEvent): void {
+    protected handleKeydown(event: KeyboardEvent): void {
         // Only apply validation for number type
         if (this.type() !== 'number') {
             return;
@@ -301,26 +301,26 @@ export class FormControlComponent implements FormItemControl {
         switch (event.key) {
             case 'ArrowUp':
                 event.preventDefault();
-                this._stepValue(1, false);
+                this.stepValue(1, false);
                 return;
             case 'ArrowDown':
                 event.preventDefault();
-                this._stepValue(-1, false);
+                this.stepValue(-1, false);
                 return;
             case 'PageUp':
                 event.preventDefault();
-                this._stepValue(1, true);
+                this.stepValue(1, true);
                 return;
             case 'PageDown':
                 event.preventDefault();
-                this._stepValue(-1, true);
+                this.stepValue(-1, true);
                 return;
             case 'Enter':
-                this._handleEnterKey();
+                this.handleEnterKey();
                 return;
             case 'Escape':
                 event.preventDefault();
-                this._handleEscapeKey();
+                this.handleEscapeKey();
                 return;
         }
 
@@ -332,12 +332,12 @@ export class FormControlComponent implements FormItemControl {
         // Live validation - validate after keystroke
         if (this.validationMode() === 'live') {
             // Use setTimeout to wait for the input value to update
-            setTimeout(() => this._validateLive(inputElement), 0);
+            setTimeout(() => this.validateLive(inputElement), 0);
         }
     }
 
     /** @hidden Handle paste events for number input validation */
-    protected _handlePaste(event: ClipboardEvent): void {
+    protected handlePaste(event: ClipboardEvent): void {
         // Only apply validation for number type
         if (this.type() !== 'number') {
             return;
@@ -352,7 +352,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Handle input events - currently a pass-through for ngModel */
-    protected _handleInput(_event: Event): void {
+    protected handleInput(_event: Event): void {
         // Only apply for number type
         if (this.type() !== 'number') {
             return;
@@ -362,7 +362,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Handle focus - store current value for Escape reset */
-    protected _handleFocus(event: FocusEvent): void {
+    protected handleFocus(event: FocusEvent): void {
         if (this.type() !== 'number') {
             return;
         }
@@ -392,7 +392,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Handle blur - validate and format value */
-    protected _handleBlur(event: FocusEvent): void {
+    protected handleBlur(event: FocusEvent): void {
         if (this.type() !== 'number') {
             return;
         }
@@ -449,7 +449,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Handle mouse wheel events for number input */
-    protected _handleWheel(event: WheelEvent): void {
+    protected handleWheel(event: WheelEvent): void {
         // Only apply for number type and when input is focused
         if (this.type() !== 'number') {
             return;
@@ -469,11 +469,11 @@ export class FormControlComponent implements FormItemControl {
         const direction: 1 | -1 = event.deltaY < 0 ? 1 : -1;
 
         // Use normal step (not large step) for scroll
-        this._stepValue(direction, false);
+        this.stepValue(direction, false);
     }
 
     /** @hidden Step the value up or down */
-    private _stepValue(direction: 1 | -1, isLargeStep: boolean): void {
+    protected stepValue(direction: 1 | -1, isLargeStep: boolean): void {
         const inputElement = this.elementRef.nativeElement as HTMLInputElement;
         const currentValue = this.numberInputService.parseNumericValue(
             inputElement.value,
@@ -533,7 +533,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Handle Enter key - validate and format, default to 0 if empty */
-    private _handleEnterKey(): void {
+    protected handleEnterKey(): void {
         const inputElement = this.elementRef.nativeElement as HTMLInputElement;
         const value = inputElement.value;
 
@@ -550,7 +550,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Handle Escape key - restore value before focus */
-    private _handleEscapeKey(): void {
+    protected handleEscapeKey(): void {
         const inputElement = this.elementRef.nativeElement as HTMLInputElement;
 
         if (this._valueBeforeFocus !== null) {
@@ -560,7 +560,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Format initial value with proper decimal separator and optional grouping */
-    private _formatInitialValue(): void {
+    protected formatInitialValue(): void {
         const inputElement = this.elementRef.nativeElement as HTMLInputElement;
         const currentValue = inputElement.value;
 
@@ -591,7 +591,7 @@ export class FormControlComponent implements FormItemControl {
     }
 
     /** @hidden Validate live during typing */
-    private _validateLive(inputElement: HTMLInputElement): void {
+    protected validateLive(inputElement: HTMLInputElement): void {
         const value = inputElement.value;
 
         // Empty or just minus is valid during typing
@@ -628,7 +628,7 @@ export class FormControlComponent implements FormItemControl {
      * Get the decimal separator for a given locale.
      * Results are cached to avoid recreating Intl.NumberFormat on every call.
      */
-    private _getDecimalSeparatorForLocale(localeId: string): '.' | ',' {
+    protected getDecimalSeparatorForLocale(localeId: string): '.' | ',' {
         // Check cache first
         const cached = this._decimalSeparatorCache.get(localeId);
         if (cached !== undefined) {
