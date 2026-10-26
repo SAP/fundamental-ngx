@@ -489,6 +489,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
                 this._waitForFocusToDisappear();
                 return;
             }
+            // Clears focus before collapse: the 10ms debounce in _listenElementEvents races this 0ms timeout, keeping _tokenizerHasFocus=true during collapse and suppressing the indicator.
+            this._tokenizerHasFocus = false;
             this._forceAllTokensToDisplay = false;
             this._resetTokens();
             this._cdRef.detectChanges();
@@ -624,6 +626,13 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
 
             if (token) {
+                // Never hide the last visible token. When a single overlong token would remain,
+                // break and apply a width constraint (same approach as the single-token fast path above)
+                // so CSS truncates it instead of hiding it entirely.
+                const alreadyHidden = this.moreTokensLeft.length + this.moreTokensRight.length;
+                if (alreadyHidden >= this.tokenList.length - 1) {
+                    break;
+                }
                 if (moreTokens.indexOf(token) === -1) {
                     moreTokens.push(token);
                 }
@@ -634,6 +643,13 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             this._checkMoreElementVisibility();
             combinedTokenWidth = this.getCombinedTokenWidth();
             side === 'right' ? i-- : i++;
+        }
+
+        // If exactly one token remains visible but still overflows, constrain the tokens container
+        // so CSS can truncate it — mirrors the single-token fast path at the top of this function.
+        const remainingVisible = this.tokenList.length - this.moreTokensLeft.length - this.moreTokensRight.length;
+        if (remainingVisible === 1 && combinedTokenWidth > elementWidth) {
+            this._tokensContainerWidth = `calc(100% - ${this._getTokensAreaWidthWithoutTokens()}px)`;
         }
 
         this._cdRef.detectChanges();
@@ -886,6 +902,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             )
             .subscribe((focused) => {
                 this._tokenizerHasFocus = focused;
+                this._checkMoreElementVisibility();
                 this._cdRef.markForCheck();
             });
     }
