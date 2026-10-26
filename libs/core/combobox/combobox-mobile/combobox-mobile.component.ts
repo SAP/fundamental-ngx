@@ -172,7 +172,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxMobileBridge
             .subscribe(() => {
                 try {
                     const input = this._elementRef.nativeElement.querySelector('fd-input-group input[role="combobox"]');
-                    input.focus();
+                    input?.focus();
                 } catch (error) {
                     if (isDevMode()) {
                         console.error('Failed to focus combobox search input', error);
