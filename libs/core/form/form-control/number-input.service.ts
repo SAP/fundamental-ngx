@@ -1,21 +1,17 @@
-import { DOCUMENT } from '@angular/common';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /**
  * Service to handle numeric input validation and behavior
  */
 @Injectable()
 export class NumberInputService {
-    private readonly _document = inject(DOCUMENT);
-
     /**
      * Validates if a key press is allowed for numeric input
      * @param event The keyboard event
      * @param currentValue The current input value
-     * @param decimalSeparator The decimal separator character (. or ,)
      * @returns true if the key press is allowed, false otherwise
      */
-    isValidKeyPress(event: KeyboardEvent, currentValue: string, decimalSeparator: '.' | ',' = '.'): boolean {
+    isValidKeyPress(event: KeyboardEvent, currentValue: string): boolean {
         const key = event.key;
         const inputElement = event.target as HTMLInputElement;
         const selectionStart = inputElement.selectionStart ?? 0;
@@ -53,8 +49,6 @@ export class NumberInputService {
         // Allow minus sign only at the beginning
         if (key === '-') {
             // Check if minus would be at the start (considering selection)
-            const valueBeforeCursor = currentValue.substring(0, selectionStart);
-            const valueAfterCursor = currentValue.substring(selectionEnd);
             const hasMinusInValue = currentValue.includes('-');
 
             // Allow if selection will replace the entire value, or if at the beginning and no minus exists
@@ -83,7 +77,6 @@ export class NumberInputService {
 
         // Allow scientific notation (e or E) only once
         if (key === 'e' || key === 'E') {
-            const hasScientificNotation = /[eE]/.test(currentValue);
             // Check if scientific notation already exists outside selection
             const valueBeforeCursor = currentValue.substring(0, selectionStart);
             const valueAfterCursor = currentValue.substring(selectionEnd);
@@ -101,9 +94,11 @@ export class NumberInputService {
      * Validates if the paste content is valid numeric input
      * @param pastedText The text being pasted
      * @param decimalSeparator The decimal separator character (. or ,)
+     * @param precision Optional maximum number of decimal places. When set, pastes with more
+     * decimal digits than allowed are rejected.
      * @returns true if the paste is valid, false otherwise
      */
-    isValidPaste(pastedText: string, decimalSeparator: '.' | ',' = '.'): boolean {
+    isValidPaste(pastedText: string, decimalSeparator: '.' | ',' = '.', precision?: number): boolean {
         // Remove thousands separators (both , and space)
         let cleanedText = pastedText.replace(/[\s,]/g, '');
 
@@ -114,7 +109,19 @@ export class NumberInputService {
 
         // Validate numeric format: optional minus at start, digits, optional decimal, optional scientific notation
         const numericPattern = /^-?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/;
-        return numericPattern.test(cleanedText);
+        if (!numericPattern.test(cleanedText)) {
+            return false;
+        }
+
+        // Enforce precision: reject if the pasted value has more decimal places than allowed
+        if (typeof precision === 'number' && precision >= 0) {
+            const parsed = this.parseNumericValue(pastedText, decimalSeparator);
+            if (parsed !== null && this.countDecimals(parsed) > precision) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -286,5 +293,62 @@ export class NumberInputService {
         }
 
         return formatted;
+    }
+
+    /**
+     * Counts the number of decimal places in a numeric value.
+     * Handles scientific notation (e.g. 1e-5 → 5 decimal places).
+     * @param value The numeric value
+     * @returns The number of digits after the decimal point
+     */
+    countDecimals(value: number): number {
+        if (!isFinite(value) || Math.floor(value) === value) {
+            return 0;
+        }
+
+        const str = value.toString();
+
+        // Scientific notation, e.g. "1e-7" or "1.5e-7"
+        const scientificMatch = str.match(/^-?(\d+)(?:\.(\d+))?e([-+]?\d+)$/i);
+        if (scientificMatch) {
+            const fractionDigits = scientificMatch[2]?.length ?? 0;
+            const exponent = parseInt(scientificMatch[3], 10);
+            return Math.max(0, fractionDigits - exponent);
+        }
+
+        const decimalPart = str.split('.')[1];
+        return decimalPart ? decimalPart.length : 0;
+    }
+
+    /**
+     * Determines whether typing a character at the current selection would exceed the allowed
+     * number of decimal places. Used for live-validation blocking of digit input.
+     * @param event The keyboard event for the character being typed
+     * @param currentValue The current input value
+     * @param precision The maximum number of decimal places allowed
+     * @returns true if the keystroke would push the decimals past the precision limit
+     */
+    wouldExceedPrecision(event: KeyboardEvent, currentValue: string, precision: number): boolean {
+        // Only plain digit input can grow the decimal part
+        if (!/^[0-9]$/.test(event.key)) {
+            return false;
+        }
+
+        const inputElement = event.target as HTMLInputElement;
+        const selectionStart = inputElement.selectionStart ?? currentValue.length;
+        const selectionEnd = inputElement.selectionEnd ?? currentValue.length;
+
+        // Simulate the resulting value after the keystroke replaces the current selection
+        const nextValue = currentValue.substring(0, selectionStart) + event.key + currentValue.substring(selectionEnd);
+
+        // Count digits after the decimal separator in the simulated value
+        const separatorIndex = nextValue.search(/[.,]/);
+        if (separatorIndex === -1) {
+            return false;
+        }
+
+        // Ignore scientific-notation exponents when counting the fractional part
+        const fractional = nextValue.substring(separatorIndex + 1).split(/[eE]/)[0];
+        return fractional.length > precision;
     }
 }

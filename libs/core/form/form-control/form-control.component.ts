@@ -43,7 +43,6 @@ import { NumberInputService } from './number-input.service';
         '[style.text-align]': 'isEnhancedNumberMode() ? textAlign() : null',
         '(keydown)': 'handleKeydown($any($event))',
         '(paste)': 'handlePaste($any($event))',
-        '(input)': 'handleInput($any($event))',
         '(focus)': 'handleFocus($any($event))',
         '(blur)': 'handleBlur($any($event))',
         '(wheel)': 'handleWheel($any($event))'
@@ -170,7 +169,6 @@ export class FormControlComponent implements FormItemControl {
      * - '.': period (en-US style)
      * - ',': comma (de-DE style)
      * @default Determined by locale
-     * @deprecated Use `locale` input instead for automatic locale-based formatting
      */
     readonly decimalSeparator = input<'.' | ',' | undefined>(undefined);
 
@@ -235,10 +233,10 @@ export class FormControlComponent implements FormItemControl {
     /**
      * @hidden
      * Computed decimal separator based on locale or explicit override.
-     * Priority: decimalSeparator input (deprecated) > locale input > LOCALE_ID injection
+     * Priority: decimalSeparator input > locale input > LOCALE_ID injection
      */
     protected readonly effectiveDecimalSeparator = computed<'.' | ','>(() => {
-        // Explicit decimalSeparator takes precedence (backward compatibility)
+        // Explicit decimalSeparator takes precedence
         const explicitSeparator = this.decimalSeparator();
         if (explicitSeparator !== undefined) {
             return explicitSeparator;
@@ -267,8 +265,9 @@ export class FormControlComponent implements FormItemControl {
         this.ariaLabelledByAttr = ariaLabelledByAttr;
         this.contentDensityObserver.subscribe();
 
-        // Format initial value if enhanced number mode needs formatting
-        // Use a slightly longer delay to ensure ngModel has written its value
+        // Format initial value if enhanced number mode needs formatting.
+        // afterNextRender runs after the first render, but ngModel's ControlValueAccessor
+        // writes its value in a microtask, so defer one more microtask to read the settled value.
         afterNextRender(
             () => {
                 // Use untracked to avoid creating dependencies during initialization
@@ -279,8 +278,7 @@ export class FormControlComponent implements FormItemControl {
                 );
 
                 if (needsFormatting) {
-                    // Small delay to let ngModel finish writing
-                    setTimeout(() => this.formatInitialValue(), 100);
+                    queueMicrotask(() => this.formatInitialValue());
                 }
             },
             { injector: this._injector }
@@ -325,12 +323,22 @@ export class FormControlComponent implements FormItemControl {
         }
 
         // Validate the key press
-        if (!this.numberInputService.isValidKeyPress(event, currentValue, this.effectiveDecimalSeparator())) {
+        if (!this.numberInputService.isValidKeyPress(event, currentValue)) {
             event.preventDefault();
+            return;
         }
 
-        // Live validation - validate after keystroke
+        // Live validation - block input that would exceed precision, then validate the result
         if (this.validationMode() === 'live') {
+            const precision = this.valuePrecision();
+            if (
+                typeof precision === 'number' &&
+                this.numberInputService.wouldExceedPrecision(event, currentValue, precision)
+            ) {
+                event.preventDefault();
+                return;
+            }
+
             // Use setTimeout to wait for the input value to update
             setTimeout(() => this.validateLive(inputElement), 0);
         }
@@ -345,20 +353,12 @@ export class FormControlComponent implements FormItemControl {
 
         const pastedText = event.clipboardData?.getData('text') || '';
 
-        // Validate the pasted content
-        if (!this.numberInputService.isValidPaste(pastedText, this.effectiveDecimalSeparator())) {
+        // Validate the pasted content, including precision when defined
+        if (
+            !this.numberInputService.isValidPaste(pastedText, this.effectiveDecimalSeparator(), this.valuePrecision())
+        ) {
             event.preventDefault();
         }
-    }
-
-    /** @hidden Handle input events - currently a pass-through for ngModel */
-    protected handleInput(_event: Event): void {
-        // Only apply for number type
-        if (this.type() !== 'number') {
-            return;
-        }
-
-        // For now, let the input event propagate normally to ngModel. The formatting will be handled on blur
     }
 
     /** @hidden Handle focus - store current value for Escape reset */
@@ -397,55 +397,7 @@ export class FormControlComponent implements FormItemControl {
             return;
         }
 
-        const inputElement = event.target as HTMLInputElement;
-        const value = inputElement.value;
-
-        // If empty, leave as empty (don't default to 0)
-        if (!value || value === '-') {
-            inputElement.value = '';
-            this.validationChange.emit(true); // Empty is valid
-            return;
-        }
-
-        // Parse and validate the value
-        const numericValue = this.numberInputService.parseNumericValue(value, this.effectiveDecimalSeparator());
-
-        if (numericValue === null) {
-            // Invalid value - revert to value before focus or empty
-            inputElement.value = this._valueBeforeFocus || '';
-            this.validationChange.emit(false);
-            return;
-        }
-
-        // Apply precision if defined
-        let finalValue = numericValue;
-        const precision = this.valuePrecision();
-        if (typeof precision === 'number') {
-            finalValue = parseFloat(numericValue.toFixed(precision));
-        }
-
-        // Check min/max boundaries and emit validation state
-        const minValue = this.min();
-        const maxValue = this.max();
-        let isValid = true;
-
-        if (typeof minValue === 'number' && finalValue < minValue) {
-            isValid = false;
-        }
-        if (typeof maxValue === 'number' && finalValue > maxValue) {
-            isValid = false;
-        }
-
-        // Emit validation state
-        this.validationChange.emit(isValid);
-
-        // Format and update the input (but don't clamp the value - let user see their input)
-        inputElement.value = this.numberInputService.formatNumber(
-            finalValue,
-            typeof precision === 'number' ? precision : undefined,
-            this.effectiveDecimalSeparator(),
-            this.useGrouping()
-        );
+        this.commitValue(event.target as HTMLInputElement);
     }
 
     /** @hidden Handle mouse wheel events for number input */
@@ -517,7 +469,7 @@ export class FormControlComponent implements FormItemControl {
             newValue = parseFloat(newValue.toFixed(precision));
         }
 
-        // Update the input value
+        // Update the displayed (formatted) value
         inputElement.value = this.numberInputService.formatNumber(
             newValue,
             typeof precision === 'number' ? precision : undefined,
@@ -528,8 +480,8 @@ export class FormControlComponent implements FormItemControl {
         // Move cursor to end
         inputElement.setSelectionRange(inputElement.value.length, inputElement.value.length);
 
-        // Trigger input event for ngModel/formControl
-        inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+        // Sync the numeric model value (canonical numeric string, not the formatted display)
+        this.syncModelValue(inputElement, String(newValue));
     }
 
     /** @hidden Handle Enter key - validate and format, default to 0 if empty */
@@ -540,13 +492,13 @@ export class FormControlComponent implements FormItemControl {
         // If empty, set to 0
         if (!value || value === '-') {
             inputElement.value = '0';
-            inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+            this.syncModelValue(inputElement, '0');
+            this.validationChange.emit(true);
             return;
         }
 
-        // Otherwise, trigger blur logic (validate and format)
-        inputElement.blur();
-        inputElement.focus();
+        // Otherwise, validate and format in place (no blur/focus round-trip)
+        this.commitValue(inputElement);
     }
 
     /** @hidden Handle Escape key - restore value before focus */
@@ -555,7 +507,7 @@ export class FormControlComponent implements FormItemControl {
 
         if (this._valueBeforeFocus !== null) {
             inputElement.value = this._valueBeforeFocus;
-            inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+            this.syncModelValue(inputElement, this._valueBeforeFocus);
         }
     }
 
@@ -650,5 +602,88 @@ export class FormControlComponent implements FormItemControl {
         // Cache the result
         this._decimalSeparatorCache.set(localeId, separator);
         return separator;
+    }
+
+    /**
+     * @hidden
+     * Validate the current input, apply precision, emit validation state, and render the
+     * formatted display value. Shared by blur and Enter so neither needs a focus round-trip.
+     */
+    private commitValue(inputElement: HTMLInputElement): void {
+        const value = inputElement.value;
+
+        // If empty, leave as empty (don't default to 0)
+        if (!value || value === '-') {
+            inputElement.value = '';
+            this.syncModelValue(inputElement, '');
+            this.validationChange.emit(true); // Empty is valid
+            return;
+        }
+
+        // Parse and validate the value
+        const numericValue = this.numberInputService.parseNumericValue(value, this.effectiveDecimalSeparator());
+
+        if (numericValue === null) {
+            // Invalid value - revert to value before focus or empty
+            const reverted = this._valueBeforeFocus || '';
+            inputElement.value = reverted;
+            this.syncModelValue(inputElement, reverted);
+            this.validationChange.emit(false);
+            return;
+        }
+
+        // Apply precision if defined
+        let finalValue = numericValue;
+        const precision = this.valuePrecision();
+        if (typeof precision === 'number') {
+            finalValue = parseFloat(numericValue.toFixed(precision));
+        }
+
+        // Check min/max boundaries and emit validation state
+        const minValue = this.min();
+        const maxValue = this.max();
+        let isValid = true;
+
+        if (typeof minValue === 'number' && finalValue < minValue) {
+            isValid = false;
+        }
+        if (typeof maxValue === 'number' && finalValue > maxValue) {
+            isValid = false;
+        }
+
+        // Emit validation state
+        this.validationChange.emit(isValid);
+
+        // Render the formatted display value (don't clamp - let the user see their input)
+        inputElement.value = this.numberInputService.formatNumber(
+            finalValue,
+            typeof precision === 'number' ? precision : undefined,
+            this.effectiveDecimalSeparator(),
+            this.useGrouping()
+        );
+
+        // Sync the numeric model value (canonical numeric string, not the formatted display)
+        this.syncModelValue(inputElement, String(finalValue));
+    }
+
+    /**
+     * @hidden
+     * Notifies the bound ngModel/formControl of a numeric change without leaking the formatted
+     * display string (grouping, locale decimal separator) into the model. The displayed value is
+     * briefly swapped for a canonical JS-parseable numeric string while the `input` event fires,
+     * then restored so the user keeps seeing the formatted value.
+     */
+    private syncModelValue(inputElement: HTMLInputElement, canonicalValue: string): void {
+        const displayValue = inputElement.value;
+
+        if (displayValue !== canonicalValue) {
+            inputElement.value = canonicalValue;
+        }
+
+        inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+
+        if (inputElement.value !== displayValue) {
+            inputElement.value = displayValue;
+        }
     }
 }

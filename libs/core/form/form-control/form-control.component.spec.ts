@@ -77,6 +77,17 @@ export class NumberLocaleTestComponent {
     locale = 'en-US';
 }
 
+@Component({
+    selector: 'fd-number-live-precision-test',
+    template: `
+        <input fd-form-control type="number" [(ngModel)]="value" [valuePrecision]="2" [validationMode]="'live'" />
+    `,
+    imports: [FormControlComponent, FormsModule]
+})
+export class NumberLivePrecisionTestComponent {
+    value: number | null = null;
+}
+
 describe('FormControlComponent', () => {
     let fixture: ComponentFixture<TestComponent>, testComponent: TestComponent, debugElement: DebugElement;
 
@@ -417,6 +428,26 @@ describe('FormControlComponent - Number Input', () => {
         it('should have valuePrecision input configured', () => {
             expect(formControlInstance.valuePrecision()).toBe(2);
         });
+
+        it('should truncate to precision and sync the number on blur', fakeAsync(() => {
+            inputElement.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
+            inputElement.value = '3.14159';
+            inputElement.dispatchEvent(new FocusEvent('blur', { bubbles: true }));
+            fixture.detectChanges();
+            tick();
+
+            expect(inputElement.value).toBe('3.14');
+            expect(testComponent.value).toBe(3.14);
+        }));
+
+        it('should not block an over-precision keystroke in delayed mode (default)', fakeAsync(() => {
+            inputElement.value = '3.14';
+            inputElement.setSelectionRange(4, 4);
+            const event = new KeyboardEvent('keydown', { key: '5', bubbles: true, cancelable: true });
+            inputElement.dispatchEvent(event);
+
+            expect(event.defaultPrevented).toBe(false);
+        }));
     });
 
     describe('Escape Key Reset', () => {
@@ -454,6 +485,26 @@ describe('FormControlComponent - Number Input', () => {
             tick();
 
             expect(testComponent.value).toBe(0);
+        }));
+
+        it('should validate and sync the number on Enter without re-focusing', fakeAsync(() => {
+            testComponent.valuePrecision = 2;
+            fixture.detectChanges();
+            tick();
+
+            inputElement.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
+            const blurSpy = jest.spyOn(inputElement, 'blur');
+
+            inputElement.value = '12.3456';
+            const event = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true });
+            inputElement.dispatchEvent(event);
+            fixture.detectChanges();
+            tick();
+
+            // No blur/focus round-trip is used to commit the value
+            expect(blurSpy).not.toHaveBeenCalled();
+            expect(inputElement.value).toBe('12.35');
+            expect(testComponent.value).toBe(12.35);
         }));
     });
 
@@ -565,6 +616,19 @@ describe('FormControlComponent - Number Input Locale Support', () => {
             // During editing, always use dot
             expect(inputElement.value).toBe('1234.56');
         }));
+
+        it('should display the grouped locale value but keep the model a plain number on blur', fakeAsync(() => {
+            inputElement.dispatchEvent(new FocusEvent('focus', { bubbles: true }));
+            inputElement.value = '1234.56';
+            inputElement.dispatchEvent(new FocusEvent('blur', { bubbles: true }));
+            fixture.detectChanges();
+            tick();
+
+            // Display is formatted for the locale (period thousands, comma decimal)
+            expect(inputElement.value).toBe('1.234,56');
+            // ...but the bound model receives a canonical, JS-parseable numeric string
+            expect(parseFloat(testComponent.value as unknown as string)).toBe(1234.56);
+        }));
     });
 
     describe('fr-FR Locale (comma decimal)', () => {
@@ -577,5 +641,66 @@ describe('FormControlComponent - Number Input Locale Support', () => {
             const formControl = fixture.debugElement.query(By.directive(FormControlComponent)).componentInstance;
             expect(formControl.locale()).toBe('fr-FR');
         });
+    });
+});
+
+describe('FormControlComponent - Number Input Precision (live & paste)', () => {
+    let fixture: ComponentFixture<NumberLivePrecisionTestComponent>;
+    let inputElement: HTMLInputElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NumberLivePrecisionTestComponent]
+        });
+    }));
+
+    beforeEach(fakeAsync(() => {
+        fixture = TestBed.createComponent(NumberLivePrecisionTestComponent);
+        inputElement = fixture.nativeElement.querySelector('input');
+        fixture.detectChanges();
+        tick();
+    }));
+
+    it('should block a digit keystroke that would exceed precision', () => {
+        inputElement.value = '3.14';
+        inputElement.setSelectionRange(4, 4);
+        const event = new KeyboardEvent('keydown', { key: '5', bubbles: true, cancelable: true });
+        inputElement.dispatchEvent(event);
+
+        expect(event.defaultPrevented).toBe(true);
+    });
+
+    it('should allow a digit keystroke that stays within precision', () => {
+        inputElement.value = '3.1';
+        inputElement.setSelectionRange(3, 3);
+        const event = new KeyboardEvent('keydown', { key: '4', bubbles: true, cancelable: true });
+        inputElement.dispatchEvent(event);
+
+        expect(event.defaultPrevented).toBe(false);
+    });
+
+    it('should allow a digit typed before the decimal separator', () => {
+        inputElement.value = '3.14';
+        inputElement.setSelectionRange(0, 0);
+        const event = new KeyboardEvent('keydown', { key: '9', bubbles: true, cancelable: true });
+        inputElement.dispatchEvent(event);
+
+        expect(event.defaultPrevented).toBe(false);
+    });
+
+    it('should prevent pasting a value that exceeds the configured precision', () => {
+        const event = new Event('paste', { bubbles: true, cancelable: true });
+        Object.defineProperty(event, 'clipboardData', { value: { getData: (): string => '3.14159' } });
+        inputElement.dispatchEvent(event);
+
+        expect(event.defaultPrevented).toBe(true);
+    });
+
+    it('should allow pasting a value within the configured precision', () => {
+        const event = new Event('paste', { bubbles: true, cancelable: true });
+        Object.defineProperty(event, 'clipboardData', { value: { getData: (): string => '3.14' } });
+        inputElement.dispatchEvent(event);
+
+        expect(event.defaultPrevented).toBe(false);
     });
 });
