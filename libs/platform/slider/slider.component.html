@@ -15,6 +15,7 @@
     [customValues]="customValues"
     [tooltipMode]="tooltipMode"
     [hideProgressBar]="hideProgressBar"
+    [ngModelOptions]="{ standalone: true }"
     [ngModel]="value"
     [vertical]="vertical"
     (ngModelChange)="_onModelChange($event)"

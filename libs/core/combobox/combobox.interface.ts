@@ -14,7 +14,7 @@ export interface ComboboxInterface extends MobileMode {
 
     getValue(): any;
     dialogApprove(): void;
-    dialogDismiss(backup: string): void;
+    dialogDismiss(term?: any): void;
 }
 
 export interface ComboboxItemDirectiveContext<T = unknown> {

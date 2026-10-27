@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Дата',
         displayTypeTimeLabel: 'Час'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Навигационни пътеки',
         collapseLabel: 'Свиване на заглавна област',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Регулатор на плъзгач'
     },
     coreSplitButton: {
         arialLabel: 'Бутон разделяне',
@@ -440,6 +443,17 @@ export default {
             required: 'Полето е задължително',
             requiredTrue: 'Полето е задължително'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Избор на опции',

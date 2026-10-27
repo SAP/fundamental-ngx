@@ -6,6 +6,7 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormGroupComponent, FormItemComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ListComponent, StandardListItemComponent } from '@fundamental-ngx/platform/list';
 import { trackByFn } from '../helpers';
 import { ApprovalTeam } from '../interfaces';
@@ -31,7 +32,8 @@ import { ApprovalTeam } from '../interfaces';
         RadioButtonComponent,
         FormsModule,
         StandardListItemComponent,
-        IconComponent
+        IconComponent,
+        FdTranslatePipe
     ]
 })
 export class ApprovalFlowTeamListComponent {

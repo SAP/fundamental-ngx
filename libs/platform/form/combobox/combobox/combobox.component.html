@@ -60,6 +60,7 @@
                 (keydown)="onInputKeydownHandler($event)"
                 (keyup)="_captureAutocompleteCandidate()"
                 [disabled]="disabled"
+                [ngModelOptions]="{ standalone: true }"
                 [ngModel]="inputText"
                 (ngModelChange)="searchTermChanged($event)"
                 [placeholder]="placeholder"

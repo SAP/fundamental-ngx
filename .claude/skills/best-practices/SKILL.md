@@ -47,8 +47,8 @@ Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/revie
 
 ### 4. Component Structure
 
-- [ ] `ChangeDetectionStrategy.OnPush`
-- [ ] `fd-` selector prefix
+- [ ] No explicit `changeDetection` setting in new Angular 22 code; legacy uses are allowed
+- [ ] Selector prefix matches the owning library (`fd-`, `fdp-`, `fdk-`, `fdb-`, `cx-`, or `ui5-`)
 - [ ] Member ordering: decorated → signals → public → protected → private → constructor → methods
 - [ ] No oversized files (flag components > 400 lines for potential split)
 - [ ] Template logic kept simple — complex expressions in `computed()` not inline

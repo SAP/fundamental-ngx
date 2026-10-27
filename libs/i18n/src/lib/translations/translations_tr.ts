@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Tarih',
         displayTypeTimeLabel: 'Saat'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'İçerik Haritaları',
         collapseLabel: 'Üst Bilgiyi Daralt',
@@ -243,7 +246,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Kaydırıcı Tutamacı'
     },
     coreSplitButton: {
         arialLabel: 'İki bölümlü düğme',
@@ -440,6 +443,17 @@ export default {
             required: 'Bu alan zorunludur',
             requiredTrue: 'Bu alan zorunludur'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seçenekleri Belirle',

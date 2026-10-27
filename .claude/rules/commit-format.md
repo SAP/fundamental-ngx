@@ -16,7 +16,7 @@ alwaysApply: true
 
 **Types:** `feat` | `fix` | `docs` | `style` | `refactor` | `test` | `build` | `ci` | `chore`
 
-**Scopes:** `core` | `platform` | `cdk` | `btp` | `cx` | `i18n` | `datetime-adapter` | `ui5` | `docs` | `e2e` | `ci`
+**Scopes:** `core` | `platform` | `cdk` | `btp` | `cx` | `i18n` | `datetime-adapter` | `ui5` | `docs` | `e2e` | `ci` | `mcp` | `skills` | `agents`
 
 **Breaking changes:** add `!` after scope and include `BREAKING CHANGE:` footer:
 

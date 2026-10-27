@@ -1,0 +1,189 @@
+<ng-template #headingTemplate let-item>
+    <ng-template #directiveHeading>
+        <ng-template
+            [ngTemplateOutlet]="item.heading.message || item.description.message"
+            [ngTemplateOutletContext]="{ $implicit: item.heading.error }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #i18nHeading>
+        <ng-template
+            [ngTemplateOutlet]="item.heading.message"
+            [ngTemplateOutletContext]="{ $implicit: item.errors }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #stringHeading>
+        {{ (item.heading.message | fdTranslate: { error: item.heading.error } : item.heading.message)() }}
+    </ng-template>
+    <ng-template
+        [ngTemplateOutlet]="
+            item.heading.type === 'directive'
+                ? directiveHeading
+                : item.heading.type === 'string'
+                  ? stringHeading
+                  : i18nHeading
+        "
+    ></ng-template>
+</ng-template>
+<ng-template #descriptionTemplate let-item>
+    <ng-template #directiveDescription>
+        <ng-template
+            [ngTemplateOutlet]="item.description.message!"
+            [ngTemplateOutletContext]="{ $implicit: item.description.error }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #i18nDescription>
+        <ng-template
+            [ngTemplateOutlet]="item.description.message!"
+            [ngTemplateOutletContext]="{ $implicit: item.errors }"
+        ></ng-template>
+    </ng-template>
+    <ng-template #stringDescription>
+        {{ (item.description.message | fdTranslate: { error: item.description.error } : item.description.message)() }}
+    </ng-template>
+    <ng-template
+        [ngTemplateOutlet]="
+            item.description.type === 'directive'
+                ? directiveDescription
+                : item.description.type === 'string'
+                  ? stringDescription
+                  : i18nDescription
+        "
+    ></ng-template>
+</ng-template>
+<div class="fd-message-view">
+    <!-- Screen reader announcement region for details view navigation -->
+    <div aria-live="assertive" aria-atomic="true" class="fd-message-view__sr-only">
+        @if (currentScreen === 'details' && currentEntry) {
+            {{ getAnnouncementText(currentEntry) }}
+        }
+    </div>
+    <section
+        #listSection
+        class="fd-message-view__list"
+        [class.fd-message-view__list--hidden]="currentScreen === 'details'"
+        [attr.inert]="currentScreen === 'details' ? '' : null"
+        [attr.aria-hidden]="currentScreen === 'details'"
+        tabindex="-1"
+        fd-scrollbar
+    >
+        <ul #listView fd-list class="message-popover__list fd-list--message-view" [navigationIndicator]="true">
+            @for (group of filteredErrors; track group) {
+                @if (group.group) {
+                    <li fd-list-group-header>
+                        <span fd-list-title>{{ group.group }}</span>
+                    </li>
+                }
+                @for (item of group.errors; track item; let i = $index) {
+                    <li
+                        fd-list-item
+                        [tabindex]="i === 0 ? 0 : -1"
+                        [byline]="true"
+                        [counter]="item.aggregatedMessages!"
+                        (fdkClicked)="showDetails(item)"
+                    >
+                        <ng-template #itemIcon>
+                            <span
+                                fd-object-status
+                                class="fd-list__icon"
+                                [status]="item.state"
+                                [glyph]="getIconForType(item.type)"
+                            ></span>
+                        </ng-template>
+                        <ng-template #listSubtitle>
+                            @if (item.heading.type === 'string' && item.heading.message) {
+                                <fd-text
+                                    [text]="getHeadingText(item)"
+                                    [maxLines]="3"
+                                    [expandable]="true"
+                                    (fdkClicked)="$event.stopPropagation()"
+                                ></fd-text>
+                            } @else {
+                                <span fd-list-subline>
+                                    <ng-template
+                                        [ngTemplateOutlet]="headingTemplate"
+                                        [ngTemplateOutletContext]="{ $implicit: item }"
+                                    ></ng-template>
+                                </span>
+                            }
+                        </ng-template>
+                        @if (item.element && !!item.description.message) {
+                            <span fd-list-link [navigationIndicator]="!!item.description.message">
+                                <ng-template [ngTemplateOutlet]="itemIcon"></ng-template>
+                                <span fd-list-content>
+                                    <span fd-list-title>
+                                        <a tabindex="0" fd-link (fdkClicked)="_focusElement($event, item)">
+                                            {{ item.fieldName }}
+                                        </a>
+                                    </span>
+                                    <ng-template [ngTemplateOutlet]="listSubtitle"></ng-template>
+                                </span>
+                            </span>
+                        } @else {
+                            <a fd-list-link [navigationIndicator]="!!item.description.message">
+                                <ng-template [ngTemplateOutlet]="itemIcon"></ng-template>
+                                <span fd-list-content>
+                                    <span fd-list-title>{{ item.fieldName }}</span>
+                                    <ng-template [ngTemplateOutlet]="listSubtitle"></ng-template>
+                                </span>
+                            </a>
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </section>
+    <section
+        #detailsSection
+        class="fd-message-view__details"
+        [class.fd-message-view__details--visible]="currentScreen === 'details'"
+        [attr.inert]="currentScreen === 'list' ? '' : null"
+        [attr.aria-hidden]="currentScreen === 'list'"
+    >
+        <div #detailsView>
+            @if (currentEntry) {
+                <span class="fd-message-view__details-title">
+                    <span
+                        fd-object-status
+                        class="fd-message-view__icon"
+                        [status]="currentEntry.state"
+                        [glyph]="getIconForType(currentEntry.type)"
+                    ></span>
+                    <ng-template
+                        [ngTemplateOutlet]="headingTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: currentEntry }"
+                    ></ng-template>
+                </span>
+                @if (currentEntry.subtitle) {
+                    <span class="fd-message-view__details-subtitle">
+                        {{ currentEntry.subtitle }}
+                    </span>
+                }
+                @if (currentEntry.description.message) {
+                    <span class="fd-message-view__details-description">
+                        <ng-template
+                            [ngTemplateOutlet]="descriptionTemplate"
+                            [ngTemplateOutletContext]="{ $implicit: currentEntry }"
+                        ></ng-template>
+                    </span>
+                }
+                @if (currentEntry.link) {
+                    <span class="fd-message-view__details-link">
+                        @if (currentEntry.link.href) {
+                            <a
+                                fd-link
+                                [attr.href]="currentEntry.link.href"
+                                [attr.target]="currentEntry.link.target || '_blank'"
+                            >
+                                {{ currentEntry.link.text }}
+                            </a>
+                        } @else {
+                            <a fd-link tabindex="0" (fdkClicked)="currentEntry.link.callback?.()">
+                                {{ currentEntry.link.text }}
+                            </a>
+                        }
+                    </span>
+                }
+            }
+        </div>
+    </section>
+</div>

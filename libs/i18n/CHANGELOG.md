@@ -1,3 +1,494 @@
+## 0.66.1-rc.2 (2026-10-27)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.1 (2026-10-23)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.0 (2026-10-22)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0 (2026-10-22)
+
+### 🚀 Features
+
+- ⚠️  **ui5:** adopt UI5 Web Components 2.28 ([#14619](https://github.com/SAP/fundamental-ngx/pull/14619))
+- **platform:** add fdp-message-view component, refactor fdp-message-popover ([#14527](https://github.com/SAP/fundamental-ngx/pull/14527))
+- **agents:** add a ui5-wrapper-updater agent ([#14578](https://github.com/SAP/fundamental-ngx/pull/14578))
+
+### 🩹 Fixes
+
+- **core, platform, btp:** NG01354 warning for forms ([#14577](https://github.com/SAP/fundamental-ngx/pull/14577))
+
+### ⚠️  Breaking Changes
+
+- **ui5:** adopt UI5 Web Components 2.28  ([#14619](https://github.com/SAP/fundamental-ngx/pull/14619))
+  ui5-webcomponents has renamed ui5-number-input component to ui5-numeric-input. Use the new tag name and import the NumericInput instead of NumberInput."
+  A	apps/e2e-harness/e2e/specs/interaction/bar.spec.ts
+  A	apps/e2e-harness/e2e/specs/interaction/numeric-input.spec.ts
+  M	apps/e2e-harness/e2e/specs/interaction/popover.spec.ts
+  M	apps/e2e-harness/e2e/specs/interaction/side-navigation.spec.ts
+  A	apps/e2e-harness/e2e/specs/interaction/text-area.spec.ts
+  M	eslint.config.js
+  A	libs/docs/ui5-webcomponents-fiori/side-navigation/examples/search-filter-sample.html
+  A	libs/docs/ui5-webcomponents-fiori/side-navigation/examples/search-filter-sample.ts
+  M	libs/docs/ui5-webcomponents-fiori/side-navigation/side-navigation-docs.html
+  M	libs/docs/ui5-webcomponents-fiori/side-navigation/side-navigation-docs.ts
+  M	libs/docs/ui5-webcomponents/api-files.ts
+  M	libs/docs/ui5-webcomponents/bar/bar-docs.html
+  M	libs/docs/ui5-webcomponents/bar/bar-docs.ts
+  D	libs/docs/ui5-webcomponents/bar/examples/accessible-role.html
+  D	libs/docs/ui5-webcomponents/bar/examples/accessible-role.ts
+  M	libs/docs/ui5-webcomponents/bar/examples/basic-sample.ts
+  M	libs/docs/ui5-webcomponents/docs-data.json
+  M	libs/docs/ui5-webcomponents/docs-routes.ts
+  M	libs/docs/ui5-webcomponents/form/examples/validation.html
+  D	libs/docs/ui5-webcomponents/number-input/examples/states-sample.html
+  D	libs/docs/ui5-webcomponents/number-input/index.ts
+  D	libs/docs/ui5-webcomponents/number-input/number-input-docs.html
+  R061	libs/docs/ui5-webcomponents/number-input/examples/basic-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/basic-sample.html
+  R060	libs/docs/ui5-webcomponents/number-input/examples/basic-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/basic-sample.ts
+  R064	libs/docs/ui5-webcomponents/number-input/examples/min-max-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/min-max-sample.html
+  R061	libs/docs/ui5-webcomponents/number-input/examples/min-max-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/min-max-sample.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/examples/states-sample.html
+  R050	libs/docs/ui5-webcomponents/number-input/examples/states-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/states-sample.ts
+  R100	libs/docs/ui5-webcomponents/number-input/examples/styles.scss	libs/docs/ui5-webcomponents/numeric-input/examples/styles.scss
+  R065	libs/docs/ui5-webcomponents/number-input/examples/value-precision-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/value-precision-sample.html
+  R060	libs/docs/ui5-webcomponents/number-input/examples/value-precision-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/value-precision-sample.ts
+  R073	libs/docs/ui5-webcomponents/number-input/header/number-input-header.html	libs/docs/ui5-webcomponents/numeric-input/header/numeric-input-header.html
+  R069	libs/docs/ui5-webcomponents/number-input/header/number-input-header.ts	libs/docs/ui5-webcomponents/numeric-input/header/numeric-input-header.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/index.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/numeric-input-docs.html
+  R096	libs/docs/ui5-webcomponents/number-input/number-input-docs.ts	libs/docs/ui5-webcomponents/numeric-input/numeric-input-docs.ts
+  A	libs/docs/ui5-webcomponents/popover/examples/resizable-keyboard-sample.html
+  A	libs/docs/ui5-webcomponents/popover/examples/resizable-keyboard-sample.ts
+  M	libs/docs/ui5-webcomponents/popover/popover-docs.html
+  M	libs/docs/ui5-webcomponents/popover/popover-docs.ts
+  A	libs/docs/ui5-webcomponents/text-area/examples/character-counter-modes-sample.html
+  A	libs/docs/ui5-webcomponents/text-area/examples/character-counter-modes-sample.ts
+  D	libs/docs/ui5-webcomponents/text-area/examples/character-limit.html
+  D	libs/docs/ui5-webcomponents/text-area/examples/character-limit.ts
+  M	libs/docs/ui5-webcomponents/text-area/textarea-docs.html
+  M	libs/docs/ui5-webcomponents/text-area/textarea-docs.ts
+  M	package.json
+  M	yarn.lock
+
+### ❤️ Thank You
+
+- deno
+- fundamental-bot
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
+## 0.66.0-rc.9 (2026-10-22)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.8 (2026-10-22)
+
+### 🚀 Features
+
+- ⚠️  **ui5:** adopt UI5 Web Components 2.28 ([#14619](https://github.com/SAP/fundamental-ngx/pull/14619))
+
+### ⚠️  Breaking Changes
+
+- **ui5:** adopt UI5 Web Components 2.28  ([#14619](https://github.com/SAP/fundamental-ngx/pull/14619))
+  ui5-webcomponents has renamed ui5-number-input component to ui5-numeric-input. Use the new tag name and import the NumericInput instead of NumberInput."
+  A	apps/e2e-harness/e2e/specs/interaction/bar.spec.ts
+  A	apps/e2e-harness/e2e/specs/interaction/numeric-input.spec.ts
+  M	apps/e2e-harness/e2e/specs/interaction/popover.spec.ts
+  M	apps/e2e-harness/e2e/specs/interaction/side-navigation.spec.ts
+  A	apps/e2e-harness/e2e/specs/interaction/text-area.spec.ts
+  M	eslint.config.js
+  A	libs/docs/ui5-webcomponents-fiori/side-navigation/examples/search-filter-sample.html
+  A	libs/docs/ui5-webcomponents-fiori/side-navigation/examples/search-filter-sample.ts
+  M	libs/docs/ui5-webcomponents-fiori/side-navigation/side-navigation-docs.html
+  M	libs/docs/ui5-webcomponents-fiori/side-navigation/side-navigation-docs.ts
+  M	libs/docs/ui5-webcomponents/api-files.ts
+  M	libs/docs/ui5-webcomponents/bar/bar-docs.html
+  M	libs/docs/ui5-webcomponents/bar/bar-docs.ts
+  D	libs/docs/ui5-webcomponents/bar/examples/accessible-role.html
+  D	libs/docs/ui5-webcomponents/bar/examples/accessible-role.ts
+  M	libs/docs/ui5-webcomponents/bar/examples/basic-sample.ts
+  M	libs/docs/ui5-webcomponents/docs-data.json
+  M	libs/docs/ui5-webcomponents/docs-routes.ts
+  M	libs/docs/ui5-webcomponents/form/examples/validation.html
+  D	libs/docs/ui5-webcomponents/number-input/examples/states-sample.html
+  D	libs/docs/ui5-webcomponents/number-input/index.ts
+  D	libs/docs/ui5-webcomponents/number-input/number-input-docs.html
+  R061	libs/docs/ui5-webcomponents/number-input/examples/basic-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/basic-sample.html
+  R060	libs/docs/ui5-webcomponents/number-input/examples/basic-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/basic-sample.ts
+  R064	libs/docs/ui5-webcomponents/number-input/examples/min-max-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/min-max-sample.html
+  R061	libs/docs/ui5-webcomponents/number-input/examples/min-max-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/min-max-sample.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/examples/states-sample.html
+  R050	libs/docs/ui5-webcomponents/number-input/examples/states-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/states-sample.ts
+  R100	libs/docs/ui5-webcomponents/number-input/examples/styles.scss	libs/docs/ui5-webcomponents/numeric-input/examples/styles.scss
+  R065	libs/docs/ui5-webcomponents/number-input/examples/value-precision-sample.html	libs/docs/ui5-webcomponents/numeric-input/examples/value-precision-sample.html
+  R060	libs/docs/ui5-webcomponents/number-input/examples/value-precision-sample.ts	libs/docs/ui5-webcomponents/numeric-input/examples/value-precision-sample.ts
+  R073	libs/docs/ui5-webcomponents/number-input/header/number-input-header.html	libs/docs/ui5-webcomponents/numeric-input/header/numeric-input-header.html
+  R069	libs/docs/ui5-webcomponents/number-input/header/number-input-header.ts	libs/docs/ui5-webcomponents/numeric-input/header/numeric-input-header.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/index.ts
+  A	libs/docs/ui5-webcomponents/numeric-input/numeric-input-docs.html
+  R096	libs/docs/ui5-webcomponents/number-input/number-input-docs.ts	libs/docs/ui5-webcomponents/numeric-input/numeric-input-docs.ts
+  A	libs/docs/ui5-webcomponents/popover/examples/resizable-keyboard-sample.html
+  A	libs/docs/ui5-webcomponents/popover/examples/resizable-keyboard-sample.ts
+  M	libs/docs/ui5-webcomponents/popover/popover-docs.html
+  M	libs/docs/ui5-webcomponents/popover/popover-docs.ts
+  A	libs/docs/ui5-webcomponents/text-area/examples/character-counter-modes-sample.html
+  A	libs/docs/ui5-webcomponents/text-area/examples/character-counter-modes-sample.ts
+  D	libs/docs/ui5-webcomponents/text-area/examples/character-limit.html
+  D	libs/docs/ui5-webcomponents/text-area/examples/character-limit.ts
+  M	libs/docs/ui5-webcomponents/text-area/textarea-docs.html
+  M	libs/docs/ui5-webcomponents/text-area/textarea-docs.ts
+  M	package.json
+  M	yarn.lock
+
+### ❤️ Thank You
+
+- deno
+
+## 0.66.0-rc.7 (2026-10-22)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.6 (2026-10-22)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.5 (2026-10-21)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.4 (2026-10-21)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.3 (2026-10-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.2 (2026-10-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.1 (2026-10-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.0-rc.0 (2026-10-20)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.10 (2026-10-19)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.9 (2026-10-19)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.8 (2026-10-19)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.7 (2026-10-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.6 (2026-10-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.5 (2026-10-15)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.4 (2026-10-14)
+
+### 🚀 Features
+
+- **platform:** add fdp-message-view component, refactor fdp-message-popover ([#14527](https://github.com/SAP/fundamental-ngx/pull/14527))
+
+### ❤️ Thank You
+
+- fundamental-bot
+- Mike O'Donnell @mikerodonnell89
+
+## 0.65.1-rc.3 (2026-10-14)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.2 (2026-10-13)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.1-rc.1 (2026-10-07)
+
+### 🚀 Features
+
+- **agents:** add a ui5-wrapper-updater agent ([#14578](https://github.com/SAP/fundamental-ngx/pull/14578))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.65.1-rc.0 (2026-10-06)
+
+### 🩹 Fixes
+
+- **core, platform, btp:** NG01354 warning for forms ([#14577](https://github.com/SAP/fundamental-ngx/pull/14577))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.65.0 (2026-10-05)
+
+### 🚀 Features
+
+- **agents:** add docs-auditor Claude Code agent for stale pattern detection ([#14564](https://github.com/SAP/fundamental-ngx/pull/14564))
+- ⚠️  **i18n:** lazy registry + secondary entry points for tree-shaking ([#14495](https://github.com/SAP/fundamental-ngx/pull/14495))
+
+### 🩹 Fixes
+
+- **core:** restore dynamic page subheader pin functionality ([#14530](https://github.com/SAP/fundamental-ngx/pull/14530))
+
+### ⚠️  Breaking Changes
+
+- **i18n:** lazy registry + secondary entry points for tree-shaking  ([#14495](https://github.com/SAP/fundamental-ngx/pull/14495))
+  FD_LANGUAGE_* constants and provideAllFundamentalLanguages are no longer exported from the root entry. See MIGRATION.md for import path changes. provideFundamentalTranslations, FD_LANGUAGE_SIGNAL, all tokens, pipes, and utilities stay in the root."
+  M	.claude/rules/i18n.md
+  M	.claude/skills/i18n-manage/SKILL.md
+  M	.prettierignore
+  M	apps/docs/src/app.config.ts
+  M	apps/docs/src/environments/translations.prod.ts
+  M	apps/e2e-harness/src/app/app.config.ts
+  M	docs/agents/i18n-patterns.md
+  M	libs/core/calendar/i18n/calendar-i18n-labels.ts
+  M	libs/core/card/card.component.spec.ts
+  M	libs/core/date-picker/date-picker.component.spec.ts
+  M	libs/core/feed-list-item/components/item/feed-list-item.component.spec.ts
+  M	libs/core/step-input/step-input.component.spec.ts
+  M	libs/docs/core/datetime-picker/examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component.ts
+  M	libs/docs/i18n/changing-translations/changing-translations-docs.component.html
+  M	libs/docs/i18n/changing-translations/changing-translations-docs.component.ts
+  M	libs/docs/i18n/changing-translations/examples/i18n-auto-detect-example/auto-detect-example.component.ts
+  M	libs/docs/i18n/changing-translations/examples/i18n-custom-language-example/custom-language-example.component.ts
+  M	libs/docs/i18n/changing-translations/examples/i18n-language-change-example/language-change-example.component.ts
+  M	libs/docs/i18n/changing-translations/examples/i18n-locale-override-example/locale-override-example.component.ts
+  M	libs/docs/i18n/changing-translations/examples/i18n-migration-example/migration-example.component.ts
+  M	libs/docs/i18n/getting-started/examples/getting-started-example.component.ts
+  M	libs/docs/i18n/getting-started/getting-started-docs.component.html
+  M	libs/docs/i18n/getting-started/getting-started-docs.component.ts
+  M	libs/docs/i18n/loading-translations/examples/basic-usage-example/basic-usage-example.component.ts
+  M	libs/docs/i18n/loading-translations/examples/json-loading-example/json-loading-example.component.ts
+  M	libs/docs/i18n/loading-translations/examples/properties-loading-example/properties-loading-example.component.ts
+  M	libs/docs/i18n/translation-resolver/examples/basic-usage-example.component.ts
+  M	libs/docs/i18n/translation-resolver/examples/pipe-parameters-example/pipe-parameters-example.component.ts
+  M	libs/docs/i18n/translation-resolver/examples/using-translation-pipe-example.component.ts
+  M	libs/docs/i18n/translation-resolver/examples/using-utility-functions-example.component.ts
+  M	libs/docs/i18n/translation-resolver/translation-resolver-docs.component.html
+  M	libs/docs/i18n/troubleshooting/troubleshooting-docs.component.html
+  M	libs/docs/platform/settings-generator/examples/default/settings-generator-default-example.component.ts
+  M	libs/docs/platform/smart-filter-bar/examples/platform-smart-filter-bar-custom-labels-example.component.ts
+  A	libs/i18n/MIGRATION.md
+  M	libs/i18n/README.md
+  A	libs/i18n/all/all-languages.ts
+  A	libs/i18n/all/index.ts
+  A	libs/i18n/all/ng-package.json
+  A	libs/i18n/all/providers-all.ts
+  A	libs/i18n/ar/arabic.ts
+  A	libs/i18n/ar/index.ts
+  A	libs/i18n/ar/ng-package.json
+  A	libs/i18n/ar/translations_ar.ts
+  A	libs/i18n/bg/bulgarian.ts
+  A	libs/i18n/bg/index.ts
+  A	libs/i18n/bg/ng-package.json
+  A	libs/i18n/bg/translations_bg.ts
+  A	libs/i18n/cs/czech.ts
+  A	libs/i18n/cs/index.ts
+  A	libs/i18n/cs/ng-package.json
+  A	libs/i18n/cs/translations_cs.ts
+  A	libs/i18n/da/danish.ts
+  A	libs/i18n/da/index.ts
+  A	libs/i18n/da/ng-package.json
+  A	libs/i18n/da/translations_da.ts
+  A	libs/i18n/de/german.ts
+  A	libs/i18n/de/index.ts
+  A	libs/i18n/de/ng-package.json
+  A	libs/i18n/de/translations_de.ts
+  A	libs/i18n/el/greek.ts
+  A	libs/i18n/el/index.ts
+  A	libs/i18n/el/ng-package.json
+  A	libs/i18n/el/translations_el.ts
+  A	libs/i18n/en/english.ts
+  A	libs/i18n/en/index.ts
+  A	libs/i18n/en/ng-package.json
+  A	libs/i18n/en/translations.ts
+  A	libs/i18n/es/index.ts
+  A	libs/i18n/es/ng-package.json
+  A	libs/i18n/es/spanish.ts
+  A	libs/i18n/es/translations_es.ts
+  A	libs/i18n/fi/finnish.ts
+  A	libs/i18n/fi/index.ts
+  A	libs/i18n/fi/ng-package.json
+  A	libs/i18n/fi/translations_fi.ts
+  A	libs/i18n/fr/french.ts
+  A	libs/i18n/fr/index.ts
+  A	libs/i18n/fr/ng-package.json
+  A	libs/i18n/fr/translations_fr.ts
+  A	libs/i18n/he/hebrew.ts
+  A	libs/i18n/he/index.ts
+  A	libs/i18n/he/ng-package.json
+  A	libs/i18n/he/translations_he.ts
+  A	libs/i18n/hi/hindi.ts
+  A	libs/i18n/hi/index.ts
+  A	libs/i18n/hi/ng-package.json
+  A	libs/i18n/hi/translations_hi.ts
+  A	libs/i18n/hr/croatian.ts
+  A	libs/i18n/hr/index.ts
+  A	libs/i18n/hr/ng-package.json
+  A	libs/i18n/hr/translations_hr.ts
+  A	libs/i18n/hu/hungarian.ts
+  A	libs/i18n/hu/index.ts
+  A	libs/i18n/hu/ng-package.json
+  A	libs/i18n/hu/translations_hu.ts
+  A	libs/i18n/it/index.ts
+  A	libs/i18n/it/italian.ts
+  A	libs/i18n/it/ng-package.json
+  A	libs/i18n/it/translations_it.ts
+  A	libs/i18n/ja/index.ts
+  A	libs/i18n/ja/japanese.ts
+  A	libs/i18n/ja/ng-package.json
+  A	libs/i18n/ja/translations_ja.ts
+  M	libs/i18n/jest.config.ts
+  A	libs/i18n/ka/georgian.ts
+  A	libs/i18n/ka/index.ts
+  A	libs/i18n/ka/ng-package.json
+  A	libs/i18n/ka/translations_ka.ts
+  A	libs/i18n/kk/index.ts
+  A	libs/i18n/kk/kazakh.ts
+  A	libs/i18n/kk/ng-package.json
+  A	libs/i18n/kk/translations_kk.ts
+  A	libs/i18n/ko/index.ts
+  A	libs/i18n/ko/korean.ts
+  A	libs/i18n/ko/ng-package.json
+  A	libs/i18n/ko/translations_ko.ts
+  A	libs/i18n/ms/index.ts
+  A	libs/i18n/ms/malay.ts
+  A	libs/i18n/ms/ng-package.json
+  A	libs/i18n/ms/translations_ms.ts
+  A	libs/i18n/nl/dutch.ts
+  A	libs/i18n/nl/index.ts
+  A	libs/i18n/nl/ng-package.json
+  A	libs/i18n/nl/translations_nl.ts
+  A	libs/i18n/no/index.ts
+  A	libs/i18n/no/ng-package.json
+  A	libs/i18n/no/norwegian.ts
+  A	libs/i18n/no/translations_no.ts
+  A	libs/i18n/pl/index.ts
+  A	libs/i18n/pl/ng-package.json
+  A	libs/i18n/pl/polish.ts
+  A	libs/i18n/pl/translations_pl.ts
+  A	libs/i18n/pt/index.ts
+  A	libs/i18n/pt/ng-package.json
+  A	libs/i18n/pt/portuguese.ts
+  A	libs/i18n/pt/translations_pt.ts
+  A	libs/i18n/ro/index.ts
+  A	libs/i18n/ro/ng-package.json
+  A	libs/i18n/ro/romanian.ts
+  A	libs/i18n/ro/translations_ro.ts
+  A	libs/i18n/ru/index.ts
+  A	libs/i18n/ru/ng-package.json
+  A	libs/i18n/ru/russian.ts
+  A	libs/i18n/ru/translations_ru.ts
+  A	libs/i18n/sk/index.ts
+  A	libs/i18n/sk/ng-package.json
+  A	libs/i18n/sk/slovak.ts
+  A	libs/i18n/sk/translations_sk.ts
+  A	libs/i18n/sl/index.ts
+  A	libs/i18n/sl/ng-package.json
+  A	libs/i18n/sl/slovenian.ts
+  A	libs/i18n/sl/translations_sl.ts
+  A	libs/i18n/sq/albanian.ts
+  A	libs/i18n/sq/index.ts
+  A	libs/i18n/sq/ng-package.json
+  A	libs/i18n/sq/translations_sq.ts
+  A	libs/i18n/sr/index.ts
+  A	libs/i18n/sr/ng-package.json
+  A	libs/i18n/sr/serbian.ts
+  A	libs/i18n/sr/translations_sr.ts
+  M	libs/i18n/src/index.ts
+  M	libs/i18n/src/lib/directives/patch-language.directive.ts
+  M	libs/i18n/src/lib/languages/index.ts
+  M	libs/i18n/src/lib/pipes/fd-translate.pipe.spec.ts
+  A	libs/i18n/src/lib/providers.spec.ts
+  A	libs/i18n/src/lib/providers.ts
+  M	libs/i18n/src/lib/utils/detect-language.spec.ts
+  M	libs/i18n/src/lib/utils/detect-language.ts
+  M	libs/i18n/src/lib/utils/index.ts
+  M	libs/i18n/src/lib/utils/resolve-helpers/resolve-translations-signal.spec.ts
+  M	libs/i18n/src/lib/utils/tokens.spec.ts
+  M	libs/i18n/src/lib/utils/translation-resolver.ts
+  A	libs/i18n/sv/index.ts
+  A	libs/i18n/sv/ng-package.json
+  A	libs/i18n/sv/swedish.ts
+  A	libs/i18n/sv/translations_sv.ts
+  A	libs/i18n/th/index.ts
+  A	libs/i18n/th/ng-package.json
+  A	libs/i18n/th/thai.ts
+  A	libs/i18n/th/translations_th.ts
+  A	libs/i18n/tr/index.ts
+  A	libs/i18n/tr/ng-package.json
+  A	libs/i18n/tr/translations_tr.ts
+  A	libs/i18n/tr/turkish.ts
+  A	libs/i18n/uk/index.ts
+  A	libs/i18n/uk/ng-package.json
+  A	libs/i18n/uk/translations_uk.ts
+  A	libs/i18n/uk/ukrainian.ts
+  A	libs/i18n/zh-hans/chinese.ts
+  A	libs/i18n/zh-hans/chinese_simplified.ts
+  A	libs/i18n/zh-hans/index.ts
+  A	libs/i18n/zh-hans/ng-package.json
+  A	libs/i18n/zh-hans/translations_zh_CN.ts
+  A	libs/i18n/zh-hant/chinese_traditional.ts
+  A	libs/i18n/zh-hant/index.ts
+  A	libs/i18n/zh-hant/ng-package.json
+  A	libs/i18n/zh-hant/translations_zh_TW.ts
+  M	libs/platform/value-help-dialog/value-help-dialog/value-help-dialog.component.spec.ts
+  M	libs/ui5-webcomponents-base/i18n/ui5-language.service.spec.ts
+  M	tsconfig.base.json
+
+### ❤️ Thank You
+
+- deno
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+
+## 0.65.0-rc.33 (2026-10-05)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.32 (2026-10-02)
+
+### 🚀 Features
+
+- **agents:** add docs-auditor Claude Code agent for stale pattern detection ([#14564](https://github.com/SAP/fundamental-ngx/pull/14564))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.65.0-rc.31 (2026-10-01)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.65.0-rc.30 (2026-10-01)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
 ## 0.65.0-rc.29 (2026-09-29)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

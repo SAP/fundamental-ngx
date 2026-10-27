@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Dato',
         displayTypeTimeLabel: 'Klokkeslett'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigeringssti',
         collapseLabel: 'Komprimer overskrift',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Handle for glidebryter'
     },
     coreSplitButton: {
         arialLabel: 'Oppdelt knapp',
@@ -441,6 +444,17 @@ export default {
             required: 'Feltet er obligatorisk',
             requiredTrue: 'Feltet er obligatorisk'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Velg alternativer',

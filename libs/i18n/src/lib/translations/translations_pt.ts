@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Data',
         displayTypeTimeLabel: 'Hora'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
         collapseLabel: 'Recolher cabeçalho',
@@ -243,7 +246,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Alça do controle deslizante'
     },
     coreSplitButton: {
         arialLabel: 'Botão Ratear',
@@ -439,6 +442,17 @@ export default {
             required: 'O campo é obrigatório',
             requiredTrue: 'O campo é obrigatório'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Selecionar opções',

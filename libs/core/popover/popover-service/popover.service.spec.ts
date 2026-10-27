@@ -10,6 +10,7 @@ import { PopoverService, PopoverTemplate } from './popover.service';
             <fd-popover-body></fd-popover-body>
             <ng-template #templateRef>
                 <div class="template-content">Template Content</div>
+                <button class="popover-action">Popover action</button>
             </ng-template>
             <ng-container #container></ng-container>
             <button #triggerElement class="trigger-button">Open Popover</button>
@@ -417,6 +418,126 @@ describe('PopoverService', () => {
         });
     });
 
+    describe('focus when closing', () => {
+        beforeEach(() => {
+            service.focusAutoCapture.set(true);
+            service.restoreFocusOnClose.set(true);
+            service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
+            fixture.detectChanges();
+        });
+
+        it.each(['popover', 'body', 'ancestor'])(
+            'should restore trigger focus after an outside click leaves focus on the %s',
+            fakeAsync((focusLocation) => {
+                component.triggerRef.nativeElement.focus();
+                service.open();
+                fixture.detectChanges();
+                tick();
+                const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+                action.focus();
+                if (focusLocation === 'body') {
+                    action.blur();
+                } else if (focusLocation === 'ancestor') {
+                    const container = component.scrollContainerRef.nativeElement;
+                    container.tabIndex = 0;
+                    container.focus();
+                }
+
+                component.siblingRef.nativeElement.click();
+                fixture.detectChanges();
+                tick();
+
+                expect(service.isOpen()).toBe(false);
+                expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+            })
+        );
+
+        it('should respect disabled focus restoration after clicking outside', fakeAsync(() => {
+            service.restoreFocusOnClose.set(false);
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+            action.focus();
+
+            component.siblingRef.nativeElement.click();
+            fixture.detectChanges();
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).not.toBe(component.triggerRef.nativeElement);
+        }));
+
+        it.each(['button', 'input', 'div'])(
+            'should preserve focus on an outside focusable %s when it closes the popover',
+            fakeAsync((tagName) => {
+                const outsideControl = document.createElement(tagName);
+                outsideControl.tabIndex = 0;
+                fixture.nativeElement.appendChild(outsideControl);
+                component.triggerRef.nativeElement.focus();
+                service.open();
+                fixture.detectChanges();
+                tick();
+
+                outsideControl.focus();
+                outsideControl.click();
+                fixture.detectChanges();
+                tick();
+
+                expect(service.isOpen()).toBe(false);
+                expect(document.activeElement).toBe(outsideControl);
+            })
+        );
+
+        it('should restore focus to the trigger on Escape', fakeAsync(() => {
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+            action.focus();
+            action.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+        }));
+
+        it('should not restore focus when explicitly closed without restoration', fakeAsync(() => {
+            const outsideButton = document.createElement('button');
+            fixture.nativeElement.appendChild(outsideButton);
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            outsideButton.focus();
+
+            service.close(false);
+            fixture.detectChanges();
+            tick();
+
+            expect(service.isOpen()).toBe(false);
+            expect(document.activeElement).toBe(outsideButton);
+        }));
+
+        it('should restore focus when the open signal is set to false', fakeAsync(() => {
+            component.triggerRef.nativeElement.focus();
+            service.open();
+            fixture.detectChanges();
+            tick();
+            const action = document.querySelector<HTMLButtonElement>('.popover-action') as HTMLButtonElement;
+            action.focus();
+
+            service.isOpen.set(false);
+            fixture.detectChanges();
+            tick();
+
+            expect(document.querySelector('.popover-action')).toBeNull();
+            expect(document.activeElement).toBe(component.triggerRef.nativeElement);
+        }));
+    });
+
     describe('focusout trigger handling', () => {
         it('should not restore focus when closing via focusout trigger', fakeAsync(() => {
             service.triggers.set(['focusin', 'focusout']);
@@ -573,6 +694,24 @@ describe('PopoverService', () => {
         let observeSpy: jest.Mock;
         let disconnectSpy: jest.Mock;
         let updatePositionSpy: jest.SpyInstance;
+        let frameId = 0;
+        let frameCallbacks = new Map<number, FrameRequestCallback>();
+        let triggerY = 0;
+
+        const flushFrames = (): void => {
+            const callbacks = [...frameCallbacks.entries()];
+            frameCallbacks = new Map();
+            callbacks.forEach(([id, callback]) => callback(id));
+        };
+
+        const externalStyleMutation = (): MutationRecord => {
+            triggerY += 1;
+            return {
+                type: 'attributes',
+                attributeName: 'style',
+                target: component.siblingRef.nativeElement
+            } as MutationRecord;
+        };
 
         beforeEach(() => {
             observeSpy = jest.fn();
@@ -585,11 +724,27 @@ describe('PopoverService', () => {
                 return { observe: observeSpy, disconnect: disconnectSpy, takeRecords: jest.fn() };
             });
 
-            // Make requestAnimationFrame synchronous so mutation callbacks resolve immediately.
-            jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
-                cb(0);
-                return 0;
+            // Keep observer work asynchronous so bursts, cancellation, and stale callbacks can be tested.
+            jest.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+                const id = ++frameId;
+                frameCallbacks.set(id, callback);
+                return id;
             });
+            jest.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => frameCallbacks.delete(id));
+            jest.spyOn(component.triggerRef.nativeElement, 'getBoundingClientRect').mockImplementation(
+                () =>
+                    ({
+                        x: 90,
+                        y: triggerY,
+                        width: 57,
+                        height: 24,
+                        top: triggerY,
+                        right: 147,
+                        bottom: triggerY + 24,
+                        left: 90,
+                        toJSON: () => ({})
+                    }) as DOMRect
+            );
 
             service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
             fixture.detectChanges();
@@ -640,7 +795,12 @@ describe('PopoverService', () => {
             updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
             // Simulate childList mutation (element removed from DOM above the trigger).
-            mutationCallback([{ type: 'childList' } as MutationRecord], {} as MutationObserver);
+            triggerY += 1;
+            mutationCallback(
+                [{ type: 'childList', target: component.siblingRef.nativeElement } as MutationRecord],
+                {} as MutationObserver
+            );
+            flushFrames();
 
             expect(updatePositionSpy).toHaveBeenCalled();
         });
@@ -652,10 +812,8 @@ describe('PopoverService', () => {
             updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
             // Simulate attribute mutation (e.g. display:none set inline by autoDismiss directive).
-            mutationCallback(
-                [{ type: 'attributes', attributeName: 'style' } as MutationRecord],
-                {} as MutationObserver
-            );
+            mutationCallback([externalStyleMutation()], {} as MutationObserver);
+            flushFrames();
 
             expect(updatePositionSpy).toHaveBeenCalled();
         });
@@ -666,10 +824,18 @@ describe('PopoverService', () => {
 
             updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
+            triggerY += 1;
             mutationCallback(
-                [{ type: 'attributes', attributeName: 'class' } as MutationRecord],
+                [
+                    {
+                        type: 'attributes',
+                        attributeName: 'class',
+                        target: component.siblingRef.nativeElement
+                    } as MutationRecord
+                ],
                 {} as MutationObserver
             );
+            flushFrames();
 
             expect(updatePositionSpy).toHaveBeenCalled();
         });
@@ -719,15 +885,82 @@ describe('PopoverService', () => {
 
                 updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
-                const siblingRecord = {
-                    type: 'attributes',
-                    attributeName: 'style',
-                    target: component.siblingRef.nativeElement
-                } as unknown as MutationRecord;
-
-                mutationCallback([siblingRecord], {} as MutationObserver);
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
 
                 expect(updatePositionSpy).toHaveBeenCalled();
+            });
+
+            it('should coalesce mixed self and external mutations into one queued frame', () => {
+                service.open();
+                fixture.detectChanges();
+
+                const overlayElement = service['_overlayRef'].overlayElement;
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback(
+                    [
+                        { type: 'attributes', attributeName: 'style', target: overlayElement } as MutationRecord,
+                        externalStyleMutation(),
+                        externalStyleMutation()
+                    ],
+                    {} as MutationObserver
+                );
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+
+                expect(frameCallbacks.size).toBe(1);
+                flushFrames();
+                expect(updatePositionSpy).toHaveBeenCalledTimes(1);
+            });
+
+            it('should cancel a queued layout-shift frame on close and not reposition a reopened overlay', () => {
+                service.open();
+                fixture.detectChanges();
+
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                expect(frameCallbacks.size).toBe(1);
+
+                service.close();
+                service.open();
+                fixture.detectChanges();
+
+                const reopenedUpdatePosition = jest.spyOn(service['_overlayRef'], 'updatePosition');
+                flushFrames();
+
+                expect(reopenedUpdatePosition).not.toHaveBeenCalled();
+            });
+
+            it('should reposition for a real origin shift but settle when its geometry stops changing', () => {
+                let originY = 261;
+                jest.spyOn(component.triggerRef.nativeElement, 'getBoundingClientRect').mockImplementation(
+                    () =>
+                        ({
+                            x: 90,
+                            y: originY,
+                            width: 57,
+                            height: 24,
+                            top: originY,
+                            right: 147,
+                            bottom: originY + 24,
+                            left: 90,
+                            toJSON: () => ({})
+                        }) as DOMRect
+                );
+                service.open();
+                fixture.detectChanges();
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                originY = 309;
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
+                originY = 357;
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
+
+                expect(updatePositionSpy).toHaveBeenCalledTimes(2);
             });
 
             it('should NOT call updatePosition for a style mutation on the overlay position wrapper (hostElement)', () => {

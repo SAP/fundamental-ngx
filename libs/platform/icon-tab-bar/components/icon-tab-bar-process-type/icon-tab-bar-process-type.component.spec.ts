@@ -1,6 +1,6 @@
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 
-import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { IconTabBarComponent } from '../../icon-tab-bar.component';
@@ -188,3 +188,86 @@ describe('IconTabBarProcessTypeComponent', () => {
 const fakeOverflowDirective = {
     getAmountOfExtraItems: () => AMOUNT_OF_EXTRA_TABS
 };
+
+/**
+ * Regression coverage for #14593: when the parent drives [selectedUid] (e.g. scroll-spy
+ * crossing a tab boundary in stackContent mode), the process-type header must synchronize
+ * its selection-derived state WITHOUT re-emitting (selected) — a re-emit would round-trip
+ * through the parent's _selectItem → _scrollToPanel and jump the scroll position backward.
+ */
+describe('IconTabBarProcessTypeComponent — parent-driven selectedUid sync (#14593)', () => {
+    const initialSelectedIndex = 50;
+    let component: IconTabBarProcessTypeComponent;
+    let fixture: ComponentFixture<IconTabBarProcessTypeComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [IconTabBarProcessTypeComponent],
+            providers: [{ provide: IconTabBarComponent, useValue: {} }]
+        })
+            .overrideComponent(IconTabBarProcessTypeComponent, {
+                remove: { imports: [OverflowListDirective, OverflowListItemDirective] },
+                add: { imports: [MockOverflowListDirective, MockOverflowListItemDirective] }
+            })
+            .compileComponents();
+    });
+
+    beforeEach(fakeAsync(() => {
+        fixture = TestBed.createComponent(IconTabBarProcessTypeComponent);
+        component = fixture.componentInstance;
+
+        component.tabs = _generateTabBarItems(generateTestConfig(100));
+        fixture.detectChanges();
+        flush();
+
+        component._selectItem(component.tabs[initialSelectedIndex]);
+        component._lastVisibleTabIndex = 60;
+        component.overflowDirective = fakeOverflowDirective as OverflowListDirective;
+        component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
+        fixture.detectChanges();
+        flush();
+    }));
+
+    /** Simulates the parent setting [selectedUid] and Angular firing ngOnChanges. */
+    function driveSelectedUid(newUid: string): void {
+        const previousUid = component.selectedUid;
+        component.selectedUid = newUid;
+        component.ngOnChanges({
+            selectedUid: new SimpleChange(previousUid, newUid, false)
+        });
+    }
+
+    it('should not re-emit (selected) when the parent drives [selectedUid]', fakeAsync(() => {
+        const selectedSpy = jest.spyOn(component.selected, 'emit');
+
+        // Target a step currently hidden in the previous-steps overflow popover.
+        const target = component.tabs[10];
+        driveSelectedUid(target.uId);
+        flush();
+        fixture.detectChanges();
+
+        expect(selectedSpy).not.toHaveBeenCalled();
+    }));
+
+    it('should synchronize _currentStepIndex to the parent-driven selection', fakeAsync(() => {
+        const target = component.tabs[10];
+        driveSelectedUid(target.uId);
+        flush();
+        fixture.detectChanges();
+
+        // Without the sync hook, _currentStepIndex would remain stale at the initial index.
+        expect((component as any)._currentStepIndex).toBe(target.index);
+    }));
+
+    it('should keep the parent-driven active step visible instead of hidden in overflow', fakeAsync(() => {
+        const target = component.tabs[10];
+        expect(target.hidden).toBe(true); // precondition: currently in the prev-steps overflow
+
+        driveSelectedUid(target.uId);
+        flush();
+        fixture.detectChanges();
+
+        // Overflow recalculation must have re-centered on the fresh step, so it is now visible.
+        expect(component.tabs[target.index].hidden).toBe(false);
+    }));
+});

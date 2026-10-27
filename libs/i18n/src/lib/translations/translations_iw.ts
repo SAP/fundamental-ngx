@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'תאריך',
         displayTypeTimeLabel: 'זמן'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'שביל ניווט',
         collapseLabel: 'צמצם כותרת',
@@ -243,7 +246,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'נקודת אחיזה של מחוון'
     },
     coreSplitButton: {
         arialLabel: 'לחצן פיצול',
@@ -438,6 +441,17 @@ export default {
             required: 'השדה הוא חובה',
             requiredTrue: 'השדה הוא חובה'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'בחר אפשרויות',

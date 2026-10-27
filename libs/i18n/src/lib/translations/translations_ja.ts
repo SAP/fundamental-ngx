@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: '日付',
         displayTypeTimeLabel: '時刻'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '階層リンク',
         collapseLabel: 'ヘッダーを圧縮',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'スライダハンドル'
     },
     coreSplitButton: {
         arialLabel: '分割ボタン',
@@ -440,6 +443,17 @@ export default {
             required: 'このフィールドは必須です。',
             requiredTrue: 'このフィールドは必須です。'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'オプションを選択',

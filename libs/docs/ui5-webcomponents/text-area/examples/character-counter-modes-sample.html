@@ -1,0 +1,45 @@
+<div class="fd-container">
+    <div class="fd-row">
+        <div class="fd-col-4 fd-margin-end--sm">
+            <div class="fd-form-item">
+                <label id="text-area-counter-none-label" class="fd-form-label fd-margin--sm">
+                    None — hard limit (100)
+                </label>
+                <ui5-textarea
+                    accessibleNameRef="text-area-counter-none-label"
+                    [counterMode]="_counterMode.None"
+                    [maxlength]="100"
+                    placeholder="The counter is never shown"
+                />
+            </div>
+        </div>
+
+        <div class="fd-col-4 fd-margin-end--sm">
+            <div class="fd-form-item">
+                <label id="text-area-counter-auto-label" class="fd-form-label fd-margin--sm">
+                    Auto — counter on focus (100)
+                </label>
+                <ui5-textarea
+                    accessibleNameRef="text-area-counter-auto-label"
+                    [counterMode]="_counterMode.Auto"
+                    [maxlength]="100"
+                    placeholder="Focus to reveal the counter"
+                />
+            </div>
+        </div>
+
+        <div class="fd-col-4">
+            <div class="fd-form-item">
+                <label id="text-area-counter-always-label" class="fd-form-label fd-margin--sm">
+                    Always — soft limit (100)
+                </label>
+                <ui5-textarea
+                    accessibleNameRef="text-area-counter-always-label"
+                    [counterMode]="_counterMode.Always"
+                    [maxlength]="100"
+                    placeholder="The counter is always visible"
+                />
+            </div>
+        </div>
+    </div>
+</div>

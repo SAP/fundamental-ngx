@@ -1,0 +1,17 @@
+<div class="fd-margin-bottom--sm">
+    <ui5-button (ui5Click)="toggleNavigation()"> {{ _collapsed() ? 'Expand' : 'Collapse' }} Navigation </ui5-button>
+</div>
+
+<ui5-side-navigation #sideNavigation [collapsed]="_collapsed()" [highlightedText]="_query()">
+    <ui5-side-navigation-search-field
+        slot="filterSection"
+        accessibleName="Search navigation"
+        placeholder="Search navigation"
+        (ui5Input)="onSearchInput($event)"
+        (keydown)="onSearchKeydown($event)"
+    />
+
+    @for (item of _visibleItems(); track item.text) {
+    <ui5-side-navigation-item [icon]="item.icon" [text]="item.text" />
+    }
+</ui5-side-navigation>

@@ -347,7 +347,20 @@ export class IconTabBarComponent implements OnInit, AfterViewInit, TabList {
             return;
         }
         const activeTab = this.tabDirectives().find((tab) => tab.id() === id);
-        this._selectedUid.set(activeTab?.uId() || undefined);
+        const uId = activeTab?.uId();
+        this._selectedUid.set(uId || undefined);
+
+        // Scroll-spy moved the active tab because the user scrolled past a boundary. Notify
+        // consumers via (iconTabSelected) and update the active tab, but do NOT re-scroll:
+        // the content is already at this panel, so scrolling here would jump back (#14593).
+        // The header's _syncSelectedItem keeps the selection visually in sync separately.
+        const selectedItem = this._flatTabs$().find((tab) => tab.uId === uId);
+        if (selectedItem && this.activeTab !== selectedItem) {
+            this.activeTab = selectedItem;
+            this._tabRenderer$.set(selectedItem);
+            this.iconTabSelected.emit(selectedItem);
+        }
+
         if (scroll && activeTab) {
             this._scrollToPanel(activeTab);
         }

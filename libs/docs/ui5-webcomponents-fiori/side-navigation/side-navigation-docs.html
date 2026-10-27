@@ -12,6 +12,20 @@
 
 <separator />
 
+<fd-docs-section-title id="search-filter" componentName="side-navigation">Search and Filter</fd-docs-section-title>
+<description>
+    The search field provides search UI, while the application owns filtering. This example filters a local item
+    collection case-insensitively, passes the query to <code>highlightedText</code>, and uses Side Navigation's native
+    search-match announcement. Press Escape or use the clear action to restore all items. The filter section is hidden
+    when the side navigation is collapsed.
+</description>
+<component-example>
+    <ui5-doc-side-navigation-search-filter-sample />
+</component-example>
+<code-example [exampleFiles]="searchFilterExample()" />
+
+<separator />
+
 <fd-docs-section-title id="collapsed" componentName="side-navigation">
     Collapsed / Expanded Mode
 </fd-docs-section-title>

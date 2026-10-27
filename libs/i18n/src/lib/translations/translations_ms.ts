@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Tarikh',
         displayTypeTimeLabel: 'Masa'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Tinggalan',
         collapseLabel: 'Runtuhkan Pengepala',
@@ -243,7 +246,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Pemegang Penggelongsor'
     },
     coreSplitButton: {
         arialLabel: 'Butang pisahan',
@@ -438,6 +441,17 @@ export default {
             required: 'Medan adalah wajib',
             requiredTrue: 'Medan adalah wajib'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Pilih Pilihan',

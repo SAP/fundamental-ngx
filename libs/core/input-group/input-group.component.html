@@ -63,6 +63,7 @@
 </div>
 <ng-template #input>
     <input
+        [ngModelOptions]="{ standalone: true }"
         [(ngModel)]="inputText"
         [id]="_inputId"
         [attr.aria-label]="ariaLabel"

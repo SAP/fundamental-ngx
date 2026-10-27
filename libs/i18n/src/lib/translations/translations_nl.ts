@@ -1,7 +1,7 @@
 // Do not modify, it's automatically created. Modify translations_nl.properties instead
 export default {
     btpNavigation: {
-        expanderAriaLabel: 'Subelementen uitvouwen/samenvouwen',
+        expanderAriaLabel: 'Subitems uitvouwen/samenvouwen',
         moreButtonAriaLabel:
             'Geeft aanvullende navigatie-elementen weer die zijn verborgen vanwege beperkte schermruimte',
         overflowMenuAriaLabel: 'Aanvullende navigatie-elementen',
@@ -94,6 +94,9 @@ export default {
         displayDatetimeToggleLabel: 'Kalenderschakelaar weergeven',
         displayTypeDateLabel: 'Datum',
         displayTypeTimeLabel: 'Tijd'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigatiepad',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Greep van schuifbalk'
     },
     coreSplitButton: {
         arialLabel: 'Knop Splitsen',
@@ -441,6 +444,17 @@ export default {
             required: 'Dit is een verplicht veld',
             requiredTrue: 'Dit is een verplicht veld'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opties selecteren',

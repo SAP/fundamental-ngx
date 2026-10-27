@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'Ημερομηνία',
         displayTypeTimeLabel: 'Ώρα'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Δυναμικές διαδρομές',
         collapseLabel: 'Σύμπτυξη Κεφαλίδας',
@@ -440,6 +443,17 @@ export default {
             required: 'Το πεδίο είναι υποχρεωτικό',
             requiredTrue: 'Το πεδίο είναι υποχρεωτικό'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Επιλογή Δυνατοτήτων',

@@ -1,6 +1,9 @@
 <div
     #dialogWindow
-    role="dialog"
+    [attr.role]="role()"
+    [attr.aria-description]="
+        ariaDescription() || (dialogConfig.resizable ? ('coreDialog.resizable' | fdTranslate)() : null)
+    "
     tabindex="-1"
     aria-modal="true"
     fdkResize

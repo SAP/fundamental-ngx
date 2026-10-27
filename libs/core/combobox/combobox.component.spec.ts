@@ -1,6 +1,110 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { MOBILE_MODE_CONFIG, MobileModeConfig, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 
 import { ComboboxComponent } from './combobox.component';
+
+interface MobileFruit {
+    displayedValue: string;
+    value: string;
+}
+
+@Component({
+    template: `
+        <fd-combobox
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+            [dropdownValues]="items"
+            [communicateByObject]="communicateByObject"
+            [displayFn]="displayFn"
+            [valueProperty]="valueProperty"
+            [closeOnSelect]="closeOnSelect"
+            [(ngModel)]="value"
+            (ngModelChange)="cvaChanges = cvaChanges + 1"
+            (openChange)="openChanges.push($event)"
+        ></fd-combobox>
+    `,
+    imports: [ComboboxComponent, FormsModule]
+})
+class MobileComboboxHostComponent {
+    value: MobileFruit | string | null = '';
+    items: Array<MobileFruit | string> = ['Apple', 'Kiwi'];
+    communicateByObject = false;
+    valueProperty: 'value' | undefined;
+    closeOnSelect = true;
+    cvaChanges = 0;
+    openChanges: boolean[] = [];
+    readonly mobileConfig: MobileModeConfig = {
+        title: 'Mobile combobox',
+        approveButtonText: 'Approve',
+        cancelButtonText: 'Cancel',
+        hasCloseButton: true
+    };
+    displayFn = (item: MobileFruit | string | null): string =>
+        typeof item === 'object' && item !== null ? item.displayedValue : (item ?? '');
+}
+
+@Component({
+    template: `
+        <fd-combobox
+            [mobile]="true"
+            [dropdownValues]="items"
+            [closeOnSelect]="closeOnSelect"
+            [(ngModel)]="value"
+            (ngModelChange)="cvaChanges = cvaChanges + 1"
+            (openChange)="openChanges.push($event)"
+        ></fd-combobox>
+    `,
+    imports: [ComboboxComponent, FormsModule],
+    providers: [
+        {
+            provide: MOBILE_MODE_CONFIG,
+            multi: true,
+            useValue: {
+                target: MobileModeControl.COMBOBOX,
+                config: {
+                    title: 'Global mobile combobox',
+                    approveButtonText: 'Approve',
+                    cancelButtonText: 'Cancel',
+                    hasCloseButton: true
+                }
+            }
+        }
+    ]
+})
+class GlobalMobileComboboxHostComponent {
+    value = '';
+    readonly items = ['Apple', 'Kiwi'];
+    closeOnSelect = true;
+    cvaChanges = 0;
+    openChanges: boolean[] = [];
+}
+
+@Component({
+    template: `
+        <fd-combobox
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+            [dropdownValues]="items"
+            [formControl]="formControl"
+            (openChange)="openChanges.push($event)"
+        ></fd-combobox>
+    `,
+    imports: [ComboboxComponent, ReactiveFormsModule]
+})
+class ReactiveMobileComboboxHostComponent {
+    readonly formControl = new FormControl('Banana', { nonNullable: true });
+    readonly items = ['Apple', 'Banana', 'Kiwi'];
+    openChanges: boolean[] = [];
+    readonly mobileConfig: MobileModeConfig = {
+        title: 'Mobile combobox',
+        approveButtonText: 'Approve',
+        cancelButtonText: 'Cancel',
+        hasCloseButton: true
+    };
+}
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -1075,5 +1179,549 @@ describe('ComboboxComponent', () => {
             expect(component.inputText).toBe('Kiwi');
             expect(component.getValue()).toBe(kiwiItem);
         });
+    });
+
+    describe('autoComplete=false free-text mode (issue #14576)', () => {
+        interface AutoCompleteItem {
+            displayedValue: string;
+            value: string;
+        }
+
+        const appleItem: AutoCompleteItem = { displayedValue: 'Apple', value: 'apple-val' };
+        const bananaItem: AutoCompleteItem = { displayedValue: 'Banana', value: 'banana-val' };
+
+        beforeEach(() => {
+            fixture = TestBed.createComponent(ComboboxComponent<AutoCompleteItem>);
+            component = fixture.componentInstance;
+            component.dropdownValues = [appleItem, bananaItem];
+            component.autoComplete = false;
+            component.communicateByObject = true;
+            component.displayFn = (item: AutoCompleteItem): string => item?.displayedValue ?? '';
+            component.searchFn = () => {};
+            fixture.detectChanges();
+        });
+
+        it('should NOT revert typed text on _close() when autoComplete is false and communicateByObject is true', () => {
+            // Establish a prior confirmed selection so _lastConfirmedValue is set
+            component.onMenuClickHandler(appleItem);
+            expect(component.inputText).toBe('Apple');
+
+            // User opens the popover and types free text that matches no dropdown item
+            component.isOpenChangeHandle(true);
+            component.inputText = 'custom free text';
+            component.searchInputElement.nativeElement.value = 'custom free text';
+            fixture.detectChanges();
+
+            // Trigger _close() (as would happen on Tab-out)
+            component._close();
+
+            // The input must NOT revert to 'Apple' (the last confirmed value)
+            expect(component.inputText).toBe('custom free text');
+            expect(component.searchInputElement.nativeElement.value).toBe('custom free text');
+        });
+
+        it('should preserve free-text as the new _lastConfirmedValue after _close(), preventing future revert', () => {
+            // Establish a prior confirmed selection
+            component.onMenuClickHandler(bananaItem);
+            expect(component.inputText).toBe('Banana');
+
+            // User opens and types free text
+            component.isOpenChangeHandle(true);
+            component.inputText = 'my free text';
+            component.searchInputElement.nativeElement.value = 'my free text';
+            component._close();
+
+            // _lastConfirmedValue should now be the free text, so a second _close() also keeps it
+            component.isOpenChangeHandle(true);
+            component._close();
+
+            expect(component.inputText).toBe('my free text');
+        });
+
+        it('should NOT revert typed text on Tab-out when autoComplete is false and communicateByObject is true', () => {
+            // Establish a prior confirmed selection
+            component.onMenuClickHandler(appleItem);
+            expect(component.inputText).toBe('Apple');
+
+            // User opens the popover and types free text
+            component.isOpenChangeHandle(true);
+            component.inputText = 'typed something';
+            component.searchInputElement.nativeElement.value = 'typed something';
+            fixture.detectChanges();
+
+            // Simulate Tab key (the usual path that calls _close())
+            component.onInputKeydownHandler(new KeyboardEvent('keydown', { key: 'Tab' }));
+            fixture.detectChanges();
+
+            expect(component.inputText).toBe('typed something');
+        });
+
+        it('should NOT revert typed text with tabOutStrategy=close when autoComplete is false and communicateByObject is true', () => {
+            component.tabOutStrategy = 'close';
+            fixture.detectChanges();
+
+            // Establish a prior confirmed selection
+            component.onMenuClickHandler(bananaItem);
+            expect(component.inputText).toBe('Banana');
+
+            // User opens the popover and types free text
+            component.isOpenChangeHandle(true);
+            component.inputText = 'free entry close strategy';
+            component.searchInputElement.nativeElement.value = 'free entry close strategy';
+            fixture.detectChanges();
+
+            component._close();
+
+            expect(component.inputText).toBe('free entry close strategy');
+        });
+    });
+});
+
+describe('ComboboxComponent mobile selection transactions', () => {
+    let fixture: ComponentFixture<MobileComboboxHostComponent>;
+    let host: MobileComboboxHostComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [MobileComboboxHostComponent]
+        }).compileComponents();
+    }));
+
+    const createHost = async (configure?: (component: MobileComboboxHostComponent) => void): Promise<void> => {
+        fixture = TestBed.createComponent(MobileComboboxHostComponent);
+        host = fixture.componentInstance;
+        configure?.(host);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+    };
+
+    const dialog = (): HTMLElement => {
+        const element = fixture.nativeElement.querySelector('[role="dialog"]');
+        expect(element).toBeTruthy();
+        return element as HTMLElement;
+    };
+
+    const input = (): HTMLInputElement => {
+        const element = fixture.nativeElement.querySelector('input[role="combobox"]');
+        expect(element).toBeTruthy();
+        return element as HTMLInputElement;
+    };
+
+    const combobox = (): ComboboxComponent =>
+        fixture.debugElement.query(By.directive(ComboboxComponent)).componentInstance;
+
+    const captureClosingState = (): Array<{
+        nativeInputValue: string;
+        componentValue: unknown;
+        externalValue: MobileFruit | string | null;
+        cvaChanges: number;
+    }> => {
+        const closingStates: Array<{
+            nativeInputValue: string;
+            componentValue: unknown;
+            externalValue: MobileFruit | string | null;
+            cvaChanges: number;
+        }> = [];
+        combobox().openChange.subscribe((isOpen) => {
+            if (!isOpen) {
+                closingStates.push({
+                    nativeInputValue: input().value,
+                    componentValue: combobox().getValue(),
+                    externalValue: host.value,
+                    cvaChanges: host.cvaChanges
+                });
+            }
+        });
+        return closingStates;
+    };
+
+    const open = async (): Promise<void> => {
+        input().click();
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+        dialog();
+    };
+
+    const select = (label: string): void => {
+        const option = Array.from(dialog().querySelectorAll<HTMLElement>('li[role="option"]')).find(
+            (element) => element.textContent?.trim() === label
+        );
+        expect(option).toBeTruthy();
+        option?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+        option?.click();
+        fixture.detectChanges();
+    };
+
+    const clickDialogButton = (label: string): void => {
+        const button = Array.from(dialog().querySelectorAll<HTMLButtonElement>('button')).find(
+            (element) => element.getAttribute('aria-label') === label || element.textContent?.trim() === label
+        );
+        expect(button).toBeTruthy();
+        button?.click();
+        fixture.detectChanges();
+    };
+
+    it('keeps a primitive display value as a draft until Approve writes it once', async () => {
+        await createHost();
+        const closingStates = captureClosingState();
+        await open();
+        select('Kiwi');
+
+        expect(input().value).toBe('Kiwi');
+        expect(host.value).toBe('');
+        expect(host.cvaChanges).toBe(0);
+        expect(host.openChanges).toEqual([true]);
+
+        clickDialogButton('Approve');
+
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+        expect(closingStates).toEqual([
+            { nativeInputValue: 'Kiwi', componentValue: 'Kiwi', externalValue: 'Kiwi', cvaChanges: 1 }
+        ]);
+    });
+
+    it('restores a communicateByObject form value after Cancel without emitting the draft', async () => {
+        const apple: MobileFruit = { displayedValue: 'Apple', value: 'A1' };
+        const kiwi: MobileFruit = { displayedValue: 'Kiwi', value: 'K1' };
+        await createHost((component) => {
+            component.communicateByObject = true;
+            component.items = [apple, kiwi];
+            component.value = kiwi;
+        });
+        await open();
+        select('Apple');
+
+        expect(host.value).toBe(kiwi);
+        expect(host.cvaChanges).toBe(0);
+        expect(host.openChanges).toEqual([true]);
+
+        clickDialogButton('Cancel');
+
+        expect(input().value).toBe('Kiwi');
+        expect(host.value).toBe(kiwi);
+        expect(host.cvaChanges).toBe(0);
+        expect(host.openChanges).toEqual([true, false]);
+    });
+
+    it('restores the displayed object and scalar valueProperty form value after Cancel', async () => {
+        const apple: MobileFruit = { displayedValue: 'Apple', value: 'A1' };
+        const kiwi: MobileFruit = { displayedValue: 'Kiwi', value: 'K1' };
+        await createHost((component) => {
+            component.communicateByObject = true;
+            component.valueProperty = 'value';
+            component.items = [apple, kiwi];
+            component.value = 'K1';
+        });
+        await open();
+        select('Apple');
+        clickDialogButton('Cancel');
+
+        expect(input().value).toBe('Kiwi');
+        expect(host.value).toBe('K1');
+        expect(host.cvaChanges).toBe(0);
+        expect(host.openChanges).toEqual([true, false]);
+    });
+
+    it('restores a null initial form value after Cancel without rendering or emitting a draft', async () => {
+        await createHost((component) => {
+            component.value = null;
+        });
+        await open();
+        select('Apple');
+        clickDialogButton('Cancel');
+
+        expect(input().value).toBe('');
+        expect(host.value).toBeNull();
+        expect(host.cvaChanges).toBe(0);
+        expect(host.openChanges).toEqual([true, false]);
+        expect(fixture.nativeElement.textContent).not.toContain('null');
+        expect(fixture.nativeElement.textContent).not.toContain('undefined');
+    });
+
+    it('commits the selected object identity exactly once on Approve', async () => {
+        const apple: MobileFruit = { displayedValue: 'Apple', value: 'A1' };
+        const kiwi: MobileFruit = { displayedValue: 'Kiwi', value: 'K1' };
+        await createHost((component) => {
+            component.communicateByObject = true;
+            component.items = [apple, kiwi];
+        });
+        await open();
+        select('Apple');
+        clickDialogButton('Approve');
+
+        expect(input().value).toBe('Apple');
+        expect(host.value).toBe(apple);
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+    });
+
+    it('commits a valueProperty once and restores its confirmed object display on reopen and Cancel', async () => {
+        const apple: MobileFruit = { displayedValue: 'Apple', value: 'A1' };
+        const kiwi: MobileFruit = { displayedValue: 'Kiwi', value: 'K1' };
+        await createHost((component) => {
+            component.communicateByObject = true;
+            component.valueProperty = 'value';
+            component.items = [apple, kiwi];
+        });
+        await open();
+        select('Apple');
+        clickDialogButton('Approve');
+
+        expect(input().value).toBe('Apple');
+        expect(host.value).toBe('A1');
+        expect(host.cvaChanges).toBe(1);
+
+        await open();
+        select('Kiwi');
+        clickDialogButton('Cancel');
+
+        expect(input().value).toBe('Apple');
+        expect(host.value).toBe('A1');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false, true, false]);
+    });
+
+    it('treats a whitespace-only Approve label as immediate mode and does not render the action', async () => {
+        await createHost((component) => {
+            component.mobileConfig.approveButtonText = '   ';
+            component.mobileConfig.cancelButtonText = undefined;
+            component.closeOnSelect = true;
+        });
+        await open();
+        const actionButtons = dialog().querySelectorAll('fd-button-bar');
+
+        select('Kiwi');
+
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+        expect(fixture.nativeElement.querySelector('[role="dialog"]')).toBeNull();
+        expect(actionButtons).toHaveLength(0);
+    });
+
+    it('keeps a Cancel-only selection committed in immediate mode', async () => {
+        await createHost((component) => {
+            component.mobileConfig.approveButtonText = undefined;
+            component.mobileConfig.cancelButtonText = 'Cancel';
+            component.closeOnSelect = false;
+        });
+        await open();
+        select('Kiwi');
+
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true]);
+
+        clickDialogButton('Cancel');
+
+        expect(input().value).toBe('Kiwi');
+        expect(combobox().getValue()).toBe('Kiwi');
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+        expect(fixture.nativeElement.querySelector('[role="dialog"]')).toBeNull();
+    });
+
+    it('closes the real dialog after an immediate no-Approve selection when closeOnSelect is true', async () => {
+        await createHost((component) => {
+            component.mobileConfig.approveButtonText = undefined;
+            component.mobileConfig.cancelButtonText = undefined;
+            component.closeOnSelect = true;
+        });
+        const closingStates = captureClosingState();
+        await open();
+        select('Kiwi');
+
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+        expect(fixture.nativeElement.querySelector('[role="dialog"]')).toBeNull();
+        expect(closingStates).toEqual([
+            { nativeInputValue: 'Kiwi', componentValue: 'Kiwi', externalValue: 'Kiwi', cvaChanges: 1 }
+        ]);
+    });
+
+    it('keeps an immediate no-Approve selection after Close when closeOnSelect is false', async () => {
+        await createHost((component) => {
+            component.mobileConfig.approveButtonText = undefined;
+            component.mobileConfig.cancelButtonText = undefined;
+            component.closeOnSelect = false;
+        });
+        await open();
+        select('Kiwi');
+
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true]);
+
+        const closeButton = dialog().querySelector<HTMLButtonElement>('button[title="Close"]');
+        expect(closeButton).toBeTruthy();
+        closeButton?.click();
+        fixture.detectChanges();
+
+        expect(input().value).toBe('Kiwi');
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+    });
+
+    it('keeps an immediate no-Approve selection after Escape when closeOnSelect is false', async () => {
+        await createHost((component) => {
+            component.mobileConfig.approveButtonText = undefined;
+            component.mobileConfig.cancelButtonText = undefined;
+            component.closeOnSelect = false;
+        });
+        await open();
+        select('Kiwi');
+
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true]);
+
+        dialog().dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }));
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(fixture.nativeElement.querySelector('[role="dialog"]')).toBeNull();
+        expect(input().value).toBe('Kiwi');
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+    });
+});
+
+describe('ComboboxComponent global mobile confirmation configuration', () => {
+    let fixture: ComponentFixture<GlobalMobileComboboxHostComponent>;
+    let host: GlobalMobileComboboxHostComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [GlobalMobileComboboxHostComponent]
+        }).compileComponents();
+    }));
+
+    it('stages a global-only Approve selection until the rendered action commits and closes the dialog', async () => {
+        fixture = TestBed.createComponent(GlobalMobileComboboxHostComponent);
+        host = fixture.componentInstance;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const input = fixture.nativeElement.querySelector('input[role="combobox"]') as HTMLInputElement;
+        input.click();
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const dialog = fixture.nativeElement.querySelector('[role="dialog"]') as HTMLElement;
+        expect(dialog).toBeTruthy();
+        const approveButton = Array.from(dialog.querySelectorAll<HTMLButtonElement>('button')).find(
+            (element) => element.getAttribute('aria-label') === 'Approve' || element.textContent?.trim() === 'Approve'
+        );
+        expect(approveButton).toBeTruthy();
+
+        const option = Array.from(dialog.querySelectorAll<HTMLElement>('li[role="option"]')).find(
+            (element) => element.textContent?.trim() === 'Kiwi'
+        );
+        expect(option).toBeTruthy();
+        option?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+        option?.click();
+        fixture.detectChanges();
+
+        const combobox = fixture.debugElement.query(By.directive(ComboboxComponent)).componentInstance;
+        expect({
+            dialogVisible: !!fixture.nativeElement.querySelector('[role="dialog"]'),
+            componentOpen: combobox.open,
+            externalValue: host.value,
+            cvaChanges: host.cvaChanges,
+            openChanges: host.openChanges
+        }).toEqual({
+            dialogVisible: true,
+            componentOpen: true,
+            externalValue: '',
+            cvaChanges: 0,
+            openChanges: [true]
+        });
+
+        approveButton?.click();
+        fixture.detectChanges();
+
+        expect(host.value).toBe('Kiwi');
+        expect(host.cvaChanges).toBe(1);
+        expect(host.openChanges).toEqual([true, false]);
+        expect(combobox.open).toBe(false);
+        expect(fixture.nativeElement.querySelector('[role="dialog"]')).toBeNull();
+    });
+});
+
+describe('ComboboxComponent mobile confirmation external writes', () => {
+    let fixture: ComponentFixture<ReactiveMobileComboboxHostComponent>;
+    let host: ReactiveMobileComboboxHostComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveMobileComboboxHostComponent]
+        }).compileComponents();
+    }));
+
+    it('retains an external writeValue commit when Cancel discards an open confirmation draft', async () => {
+        fixture = TestBed.createComponent(ReactiveMobileComboboxHostComponent);
+        host = fixture.componentInstance;
+        const cvaChanges: string[] = [];
+        host.formControl.valueChanges.subscribe((value) => cvaChanges.push(value));
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const input = fixture.nativeElement.querySelector('input[role="combobox"]') as HTMLInputElement;
+        input.click();
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const dialog = (): HTMLElement => {
+            const element = fixture.nativeElement.querySelector('[role="dialog"]');
+            expect(element).toBeTruthy();
+            return element as HTMLElement;
+        };
+        const option = Array.from(dialog().querySelectorAll<HTMLElement>('li[role="option"]')).find(
+            (element) => element.textContent?.trim() === 'Apple'
+        );
+        expect(option).toBeTruthy();
+        option?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+        option?.click();
+        fixture.detectChanges();
+
+        expect(host.formControl.value).toBe('Banana');
+        expect(cvaChanges).toEqual([]);
+
+        host.formControl.setValue('Kiwi', { emitEvent: false });
+        fixture.detectChanges();
+        await fixture.whenStable();
+        fixture.detectChanges();
+
+        const combobox = fixture.debugElement.query(By.directive(ComboboxComponent)).componentInstance;
+        expect(input.value).toBe('Kiwi');
+        expect(combobox.getValue()).toBe('Kiwi');
+        expect(host.formControl.value).toBe('Kiwi');
+        expect(cvaChanges).toEqual([]);
+
+        const cancelButton = Array.from(dialog().querySelectorAll<HTMLButtonElement>('button')).find(
+            (element) => element.getAttribute('aria-label') === 'Cancel' || element.textContent?.trim() === 'Cancel'
+        );
+        expect(cancelButton).toBeTruthy();
+        cancelButton?.click();
+        fixture.detectChanges();
+
+        expect(input.value).toBe('Kiwi');
+        expect(combobox.getValue()).toBe('Kiwi');
+        expect(host.formControl.value).toBe('Kiwi');
+        expect(cvaChanges).toEqual([]);
+        expect(host.openChanges).toEqual([true, false]);
+        expect(fixture.nativeElement.querySelector('[role="dialog"]')).toBeNull();
     });
 });

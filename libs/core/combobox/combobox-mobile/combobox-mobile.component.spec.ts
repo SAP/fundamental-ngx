@@ -32,6 +32,8 @@ describe('ComboboxMobileComponent', () => {
         getValue() {
             return this.inputText;
         },
+        setMobileModeConfig: () => {},
+        hasMobileApproveAction: () => true,
         dialogDismiss: () => {},
         dialogApprove: () => {},
         openChange: new EventEmitter<boolean>()
@@ -83,6 +85,6 @@ describe('ComboboxMobileComponent', () => {
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
         component.handleDismiss();
-        expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith('test');
+        expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith();
     });
 });

@@ -1,0 +1,15 @@
+<label fd-form-label for="doc-core-combobox-mobile-global">Global-only confirmation</label>
+<br />
+<fd-combobox
+    id="doc-core-combobox-mobile-global"
+    placeholder="Search here..."
+    [mobile]="true"
+    [dropdownValues]="values()"
+    [ngModel]="selectedValue"
+    (ngModelChange)="onModelChange($event)"
+>
+</fd-combobox>
+<p id="doc-core-combobox-mobile-global-committed-value" aria-live="polite">
+    Committed value: {{ selectedValue || 'None' }}
+</p>
+<p id="doc-core-combobox-mobile-global-commit-count" aria-live="polite">Model commits: {{ commitCount }}</p>

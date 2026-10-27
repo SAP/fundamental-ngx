@@ -2,7 +2,7 @@
 
 > SAP Design System Angular component library for building modern product user experiences with the SAP look and feel.
 
-Fundamental Library for Angular (fundamental-ngx) is a comprehensive Angular component library that implements the SAP Fiori design language. It provides enterprise-ready UI components built with Angular 15+ and follows modern Angular patterns including signals, standalone components, and zoneless change detection.
+Fundamental Library for Angular (fundamental-ngx) is a comprehensive Angular component library that implements the SAP design language. It provides enterprise-ready UI components for Angular 22+ and follows modern Angular patterns including signals, standalone components, and zoneless change detection.
 
 ## Documentation
 
@@ -16,6 +16,7 @@ Fundamental Library for Angular (fundamental-ngx) is a comprehensive Angular com
 The library is organized into multiple npm packages:
 
 ### @fundamental-ngx/core
+
 The core package provides base Angular implementations of Fundamental Library Styles components. It offers a rich set of UI components with fine-grained customization at the HTML template level.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/core)
@@ -23,6 +24,7 @@ The core package provides base Angular implementations of Fundamental Library St
 - Install: `ng add @fundamental-ngx/core`
 
 ### @fundamental-ngx/platform
+
 Built on top of core, the platform package provides enhanced functionality with higher abstraction. It hides internal implementation details while providing application-driven features that boost productivity.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/platform)
@@ -30,6 +32,7 @@ Built on top of core, the platform package provides enhanced functionality with 
 - Install: `ng add @fundamental-ngx/platform`
 
 ### @fundamental-ngx/cdk
+
 A set of utilities and Angular directives for building custom UI components. Includes DataSource helpers, ControlValueAccessor utilities, focusable/selectable list helpers, and RxJS subscription management.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/cdk)
@@ -37,17 +40,20 @@ A set of utilities and Angular directives for building custom UI components. Inc
 - Install: `ng add @fundamental-ngx/cdk`
 
 ### @fundamental-ngx/i18n
+
 Internationalization support with signal-based i18n API, translation factory patterns, and dynamic translations with context.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/i18n)
 - [npm](https://www.npmjs.com/package/@fundamental-ngx/i18n)
 
 ### @fundamental-ngx/btp
+
 Business Technology Platform specific components and utilities.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/btp)
 
 ### @fundamental-ngx/cx
+
 Customer experience components.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/cx)
@@ -60,28 +66,34 @@ For static analysis and component discovery, see the comprehensive machine-reada
 
 **[components.json](https://sap.github.io/fundamental-ngx/components.json)** - All 1,000+ components with selectors, inputs, outputs, methods, and examples.
 
-Format:
-```
+Abridged format:
+
+This illustrative excerpt does not enumerate the complete catalog schema.
+
+```json
 {
-  "version": "0.63.0-rc.2",
-  "components": [
-    {
-      "name": "ButtonComponent",
-      "selector": "[fd-button], fd-button",
-      "library": "@fundamental-ngx/core",
-      "category": "button",
-      "inputs": [...],
-      "outputs": [...],
-      "examples": [...]
-    }
-  ]
+    "generatedAt": "ISO_TIMESTAMP",
+    "version": "PACKAGE_VERSION",
+    "components": [
+        {
+            "name": "ButtonComponent",
+            "selector": "[fd-button], fd-button",
+            "library": "@fundamental-ngx/core",
+            "category": "button",
+            "inputs": [],
+            "outputs": [],
+            "examples": []
+        }
+    ]
 }
 ```
 
 #### Core Components
+
 Common UI components including: Button, Checkbox, Dialog, Form, Icon, Input, List, Menu, Popover, Select, Switch, Table, Tabs, Toast, Toolbar, and many more.
 
 #### Platform Components
+
 Higher-level components including: Approval Flow, Dynamic Page, Search Field, Smart Filter Bar, Table with advanced features, Upload Collection, Value Help Dialog, and Wizard.
 
 ### Installation
@@ -109,9 +121,10 @@ export class ExampleComponent {}
 
 ## UI5 Web Components Angular Wrappers
 
-These packages provide Angular wrappers around UI5 Web Components, offering an alternative approach to building SAP Fiori applications. They provide Angular-friendly APIs with full TypeScript support and seamless integration with Angular's change detection.
+These packages provide Angular wrappers around UI5 Web Components, offering an alternative approach to building SAP applications. They provide Angular-friendly APIs with full TypeScript support and seamless integration with Angular's change detection.
 
 ### @fundamental-ngx/ui5-webcomponents
+
 Angular wrappers for the core UI5 Web Components. Provides fundamental UI elements like Button, Input, Dialog, List, Table, and more.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/ui5-webcomponents)
@@ -119,6 +132,7 @@ Angular wrappers for the core UI5 Web Components. Provides fundamental UI elemen
 - Install: `npm install @fundamental-ngx/ui5-webcomponents`
 
 ### @fundamental-ngx/ui5-webcomponents-fiori
+
 Angular wrappers for UI5 Fiori Web Components. Includes higher-level SAP Fiori patterns like ShellBar, DynamicPage, Timeline, Wizard, and other enterprise-specific components.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/ui5-webcomponents-fiori)
@@ -126,6 +140,7 @@ Angular wrappers for UI5 Fiori Web Components. Includes higher-level SAP Fiori p
 - Install: `npm install @fundamental-ngx/ui5-webcomponents-fiori`
 
 ### @fundamental-ngx/ui5-webcomponents-ai
+
 Angular wrappers for UI5 AI Web Components. Provides AI-powered UI elements like PromptInput and AI-enhanced buttons for building AI-integrated applications.
 
 - [Documentation](https://sap.github.io/fundamental-ngx/#/ui5-webcomponents-ai)
@@ -133,6 +148,7 @@ Angular wrappers for UI5 AI Web Components. Provides AI-powered UI elements like
 - Install: `npm install @fundamental-ngx/ui5-webcomponents-ai`
 
 ### @fundamental-ngx/ui5-webcomponents-base
+
 Base utilities and shared types for all UI5 Web Components Angular wrappers. Typically installed automatically as a dependency.
 
 - [npm](https://www.npmjs.com/package/@fundamental-ngx/ui5-webcomponents-base)
@@ -144,12 +160,15 @@ Base utilities and shared types for all UI5 Web Components Angular wrappers. Typ
 For static analysis and component discovery, see [components.json](https://sap.github.io/fundamental-ngx/components.json) - includes all UI5 Web Component wrappers with full selector information.
 
 #### Core UI5 Components
+
 Common UI elements including: Button, Input, Dialog, List, Table, Card, Panel, DatePicker, TimePicker, Select, ComboBox, MultiComboBox, and more.
 
 #### Fiori Components
+
 Enterprise patterns including: ShellBar, DynamicPage, FlexibleColumnLayout, Timeline, Wizard, NotificationList, SideNavigation, and UploadCollection.
 
 #### AI Components
+
 AI-powered elements including: PromptInput, AI Button for building intelligent user interfaces.
 
 ### Installation
@@ -183,15 +202,17 @@ import { ShellBar } from '@fundamental-ngx/ui5-webcomponents-fiori/shell-bar';
 })
 export class ExampleComponent {
     inputValue = '';
-    handleClick() { console.log('Clicked!'); }
+    handleClick() {
+        console.log('Clicked!');
+    }
 }
 ```
 
 ## Key Features
 
-- **Angular 21+ Support**: Modern Angular with signals, standalone components, and new control flow (@if, @for, @switch)
-- **SAP Fiori Design**: Implements SAP Fiori design guidelines via Fundamental Library Styles
-- **Accessibility**: WCAG 2.1 compliant with full keyboard navigation and screen reader support
+- **Angular 22+ Support**: Modern Angular with signals, standalone components, and new control flow (@if, @for, @switch)
+- **SAP Design**: Implements SAP design guidelines via Fundamental Library Styles
+- **Accessibility**: Components provide accessibility support appropriate to their documented behavior; validate integrations with axe plus manual keyboard, focus, and screen-reader checks
 - **RTL Support**: Right-to-left language support via RtlService
 - **Content Density**: Configurable compact, cozy, and condensed modes via ContentDensityService
 - **Theming**: Support for SAP Horizon and other SAP themes

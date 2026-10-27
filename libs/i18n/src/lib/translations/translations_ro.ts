@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Data',
         displayTypeTimeLabel: 'Ora'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Istoric navigare',
         collapseLabel: 'Restrângere antet',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Mâner cursor de reglare'
     },
     coreSplitButton: {
         arialLabel: 'Buton de divizare',
@@ -441,6 +444,17 @@ export default {
             required: 'Câmpul este obligatoriu',
             requiredTrue: 'Câmpul este obligatoriu'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opțiuni de selecție',

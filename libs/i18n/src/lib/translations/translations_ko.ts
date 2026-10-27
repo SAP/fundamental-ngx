@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: '날짜',
         displayTypeTimeLabel: '시간'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '탐색 경로',
         collapseLabel: '헤더 접기',
@@ -243,7 +246,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: '슬라이더 핸들'
     },
     coreSplitButton: {
         arialLabel: '분할 버튼',
@@ -438,6 +441,17 @@ export default {
             required: '필수 필드입니다.',
             requiredTrue: '필수 필드입니다.'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '옵션 선택',

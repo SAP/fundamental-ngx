@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Дата',
         displayTypeTimeLabel: 'Время'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Навигационная цепочка',
         collapseLabel: 'Свернуть заголовок',
@@ -108,7 +111,7 @@ export default {
         moreLabel: 'больше {count}'
     },
     coreFormMessage: {
-        error: 'Недопустимый ввод',
+        error: 'Недействительный ввод',
         information: 'Информация',
         success: 'Успешно',
         warning: 'Предупреждение'
@@ -195,7 +198,7 @@ export default {
         critical: 'Выведено предупреждение',
         indicationColor: 'Цвет индикации',
         informative: 'Информативная запись',
-        negative: 'Недопустимый ввод',
+        negative: 'Недействительный ввод',
         positive: 'Запись успешно проверена'
     },
     coreOverflowLayout: {
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Ползунок'
     },
     coreSplitButton: {
         arialLabel: 'Разделенная кнопка',
@@ -441,10 +444,21 @@ export default {
             requiredTrue: 'Это поле является обязательным'
         }
     },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
+    },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Опции выбора',
         inputIconTitle: 'Опции выбора',
-        invalidEntryError: 'Недопустимый ввод',
+        invalidEntryError: 'Недействительный ввод',
         mobileShowAllItemsButton: 'Показать все позиции',
         mobileShowSelectedItemsButton: 'Показать выбранные позиции'
     },

@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'Күні',
         displayTypeTimeLabel: 'Уақыт'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Шарлау тарихы',
         collapseLabel: 'Тақырыпты жию',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Жүгірткі'
     },
     coreSplitButton: {
         arialLabel: 'Бөлу түймесі',
@@ -440,6 +443,17 @@ export default {
             required: 'Бұл өріс міндетті',
             requiredTrue: 'Бұл өріс міндетті'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Таңдау опциялары',

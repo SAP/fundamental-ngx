@@ -21,6 +21,7 @@
             class="fd-textarea fd-feed-input__textarea"
             [disabled]="disabled"
             [placeholder]="placeholder"
+            [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="value"
             (ngModelChange)="onChange()"
         ></textarea>

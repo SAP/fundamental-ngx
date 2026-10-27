@@ -25,6 +25,7 @@
     [keepTwoDigitsTime]="keepTwoDigitsTime"
     (isOpenChange)="handleOpenChange($event)"
     (ngModelChange)="handleTimeChange($event)"
+    [ngModelOptions]="{ standalone: true }"
     [(ngModel)]="value"
 >
     <ng-content></ng-content>

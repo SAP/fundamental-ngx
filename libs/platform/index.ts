@@ -12,6 +12,7 @@ export * from '@fundamental-ngx/platform/list';
 export * from '@fundamental-ngx/platform/menu';
 export * from '@fundamental-ngx/platform/menu-button';
 export * from '@fundamental-ngx/platform/message-popover';
+export * from '@fundamental-ngx/platform/message-view';
 export * from '@fundamental-ngx/platform/object-attribute';
 export * from '@fundamental-ngx/platform/object-marker';
 export * from '@fundamental-ngx/platform/object-status';

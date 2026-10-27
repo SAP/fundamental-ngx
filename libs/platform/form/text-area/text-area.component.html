@@ -13,6 +13,7 @@
     [attr.wrap]="wrapType"
     [attr.maxlength]="!showExceededText ? maxLength : null"
     [attr.readonly]="readonly ? true : null"
+    [ngModelOptions]="{ standalone: true }"
     [(ngModel)]="value"
     [state]="getUpdatedState()"
     (paste)="handlePasteInteraction()"

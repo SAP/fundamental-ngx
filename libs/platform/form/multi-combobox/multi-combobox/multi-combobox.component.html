@@ -77,6 +77,7 @@
                     [name]="name"
                     (keydown)="onInputKeydownHandler($event)"
                     [disabled]="disabled"
+                    [ngModelOptions]="{ standalone: true }"
                     [(ngModel)]="inputText"
                     (ngModelChange)="searchTermChanged()"
                     [attr.placeholder]="_selectedSuggestions.length ? null : placeholder"
@@ -129,6 +130,7 @@
             [name]="name"
             (keydown)="onInputKeydownHandler($event)"
             [disabled]="disabled"
+            [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="inputText"
             (ngModelChange)="searchTermChanged()"
             [placeholder]="placeholder"
@@ -197,6 +199,7 @@
                         <fd-checkbox
                             (click)="onOptionCheckboxClicked($event, $index)"
                             (ngModelChange)="toggleSelection(optionItem)"
+                            [ngModelOptions]="{ standalone: true }"
                             [ngModel]="optionItem.selected"
                         >
                         </fd-checkbox>
@@ -219,6 +222,7 @@
                     <fd-checkbox
                         (click)="onOptionCheckboxClicked($event, $index)"
                         (ngModelChange)="toggleSelection(optionItem)"
+                        [ngModelOptions]="{ standalone: true }"
                         [ngModel]="optionItem.selected"
                     >
                     </fd-checkbox>

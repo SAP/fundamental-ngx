@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: 'თარიღი',
         displayTypeTimeLabel: 'დრო'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
         collapseLabel: 'სათაურის შეკუმშვა',
@@ -439,6 +442,17 @@ export default {
             required: 'ველი სავალდებულოა',
             requiredTrue: 'ველის შეყვანა სავალდებულოა'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'აირჩიეთ ოფციები',

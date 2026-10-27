@@ -21,6 +21,7 @@
             [attr.aria-required]="_cva.required"
             [attr.aria-checked]="_cva.value"
             [attr.aria-labelledby]="_cva.ariaLabelledBy + ' ' + (semantic ? _semanticLabelId : '')"
+            [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="isChecked"
         />
         <div class="fd-switch__slider">

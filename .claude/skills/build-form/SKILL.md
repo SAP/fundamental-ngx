@@ -68,7 +68,7 @@ export interface [Name]Fields {
 Import each platform form component directly — they are all standalone. There is no barrel `PlatformFormModule` to import.
 
 ```typescript
-import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
@@ -84,7 +84,6 @@ import {
 @Component({
     selector: 'app-[kebab-name]-form',
     templateUrl: './[kebab-name]-form.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ReactiveFormsModule,
         FormGroupComponent,

@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: '[[[Ďąţē]]]',
         displayTypeTimeLabel: '[[[Ţįɱē]]]'
     },
+    coreDialog: {
+        resizable: '[[[Řēşįžąƃĺē∙∙∙∙∙]]]'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '[[[Ɓŗēąƌċŗűɱƃş∙∙∙∙∙∙∙∙]]]',
         collapseLabel: '[[[Ĉŏĺĺąρşē Ĥēąƌēŗ∙∙∙∙]]]',
@@ -441,6 +444,17 @@ export default {
             required: '[[[Ţĥē ƒįēĺƌ įş ɱąŋƌąţŏŗŷ∙∙∙∙∙]]]',
             requiredTrue: '[[[Ţĥē ƒįēĺƌ įş ɱąŋƌąţŏŗŷ∙∙∙∙∙]]]'
         }
+    },
+    platformMessageView: {
+        additionalInformation: '[[[Āƌƌįţįŏŋąĺ įŋƒŏŗɱąţįŏŋ ąʋąįĺąƃĺē ʋįą ŗēąƌįŋğ ķēŷş∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]]]',
+        cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
+        detailsTitle: '[[[Μēşşąğē Ďēţąįĺş∙∙∙∙]]]',
+        errorButton: '[[[Ĕŗŗŏŗ∙∙∙∙∙∙∙∙∙]]]',
+        headerRoleDescription: '[[[Ĭŋţēŗąċţįʋē Ĥēąƌēŗ∙∙∙∙∙∙]]]',
+        informationButton: '[[[Ĭŋƒŏŗɱąţįŏŋ∙∙∙∙∙∙∙∙]]]',
+        successButton: '[[[Ŝűċċēşş∙∙∙∙∙∙∙]]]',
+        title: '[[[Μēşşąğēş∙∙∙∙∙∙]]]',
+        warningButton: '[[[Ŵąŗŋįŋğ∙∙∙∙∙∙∙]]]'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '[[[Ŝēĺēċţ Ŏρţįŏŋş∙∙∙∙∙]]]',

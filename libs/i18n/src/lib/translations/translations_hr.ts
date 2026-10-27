@@ -1,7 +1,7 @@
 // Do not modify, it's automatically created. Modify translations_hr.properties instead
 export default {
     btpNavigation: {
-        expanderAriaLabel: 'proširi/sažmi podstavke',
+        expanderAriaLabel: 'proširenje/sažimanje podstavki',
         moreButtonAriaLabel:
             'Prikazuje dodatne stavke navigacije koje su skrivene zbog ograničenog prostora na zaslonu',
         overflowMenuAriaLabel: 'Dodane stavke navigacije',
@@ -94,6 +94,9 @@ export default {
         displayDatetimeToggleLabel: 'Prikaz preklopnika kalendara',
         displayTypeDateLabel: 'Datum',
         displayTypeTimeLabel: 'Vrijeme'
+    },
+    coreDialog: {
+        resizable: 'Resizable'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Put navigacije',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'Ručica klizača'
     },
     coreSplitButton: {
         arialLabel: 'Gumb za razdiobu',
@@ -440,6 +443,17 @@ export default {
             required: 'Ovo je polje obvezno',
             requiredTrue: 'Ovo je polje obvezno'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Odaberi mogućnosti',

@@ -66,10 +66,10 @@ Create a complete Angular component with:
 1. **TypeScript file** (`.component.ts`):
 
     - Correct imports from `@fundamental-ngx/core`, `@fundamental-ngx/platform`, or `@fundamental-ngx/ui5-webcomponents`
-    - `ChangeDetectionStrategy.OnPush`
+    - No explicit `changeDetection` setting; OnPush is the Angular 22 default
     - Signal-based state (`signal()`, `computed()`)
     - `input()` / `output()` for component API
-    - Proper selector with `fd-` prefix conventions
+    - Selector prefix for the owning library (`fd-`, `fdp-`, `fdk-`, `fdb-`, `cx-`, or `ui5-`)
 
 2. **HTML template** (`.component.html`):
 

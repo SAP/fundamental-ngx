@@ -16,10 +16,13 @@
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body>
+            @if (mobileConfig.instruction) {
+                <p data-dialog-instruction>{{ mobileConfig.instruction }}</p>
+            }
             <ng-template [ngTemplateOutlet]="childContent?.listTemplate || null"></ng-template>
         </fd-dialog-body>
         <fd-dialog-footer>
-            @if (mobileConfig.approveButtonText) {
+            @if (_component.hasMobileApproveAction()) {
                 <fd-button-bar fdType="emphasized" [label]="mobileConfig.approveButtonText!" (click)="handleApprove()">
                 </fd-button-bar>
             }

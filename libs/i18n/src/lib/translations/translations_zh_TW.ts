@@ -94,6 +94,9 @@ export default {
         displayTypeDateLabel: '日期',
         displayTypeTimeLabel: '時間'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: '階層連結',
         collapseLabel: '摺疊表頭',
@@ -242,7 +245,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: '滑動軸控制器'
     },
     coreSplitButton: {
         arialLabel: '拆分按鈕',
@@ -437,6 +440,17 @@ export default {
             required: '欄位為必填',
             requiredTrue: '欄位為必填'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '選擇選項',

@@ -95,6 +95,9 @@ export default {
         displayTypeDateLabel: 'التاريخ',
         displayTypeTimeLabel: 'الوقت'
     },
+    coreDialog: {
+        resizable: 'Resizable'
+    },
     coreDynamicPage: {
         breadcrumbsLabel: 'مسارات التنقل',
         collapseLabel: 'طي المقدمة',
@@ -244,7 +247,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSlider: {
-        ariaLabel: 'Slider Handle'
+        ariaLabel: 'مؤشر مربع التمرير'
     },
     coreSplitButton: {
         arialLabel: 'الزر ’تقسيم‘',
@@ -439,6 +442,17 @@ export default {
             required: 'الحقل إلزامي',
             requiredTrue: 'الحقل إلزامي'
         }
+    },
+    platformMessageView: {
+        additionalInformation: 'Additional information available via reading keys',
+        cancel: 'Cancel',
+        detailsTitle: 'Message Details',
+        errorButton: 'Error',
+        headerRoleDescription: 'Interactive Header',
+        informationButton: 'Information',
+        successButton: 'Success',
+        title: 'Messages',
+        warningButton: 'Warning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'تحديد الخيارات',
