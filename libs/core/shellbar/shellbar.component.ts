@@ -179,6 +179,10 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private readonly _shellbar: ElementRef<HTMLElement>;
 
     /** @hidden */
+    @ViewChild('productGroup')
+    private readonly _productGroup: ElementRef<HTMLElement>;
+
+    /** @hidden */
     _showMobileSearch = false;
 
     /** @hidden */
@@ -341,10 +345,34 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     ngAfterViewInit(): void {
+        // Observe shellbar size changes (handles window resize, container changes)
         this._resizeObserverService
             .observe(this._shellbar.nativeElement)
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._setCurrentBreakpoint());
+
+        // Observe product group content changes (handles branding/title content growth)
+        if (this._productGroup) {
+            this._resizeObserverService
+                .observe(this._productGroup.nativeElement)
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => this._setCurrentBreakpoint());
+        }
+
+        // Observe context area content changes (handles context area item growth)
+        // Note: context area host has display:contents, so observe its child groups instead
+        const contextArea = this._contextArea();
+        if (contextArea?.contextAreaGroups) {
+            contextArea.contextAreaGroups.forEach((groupRef) => {
+                this._resizeObserverService
+                    .observe(groupRef.nativeElement)
+                    .pipe(takeUntilDestroyed(this._destroyRef))
+                    .subscribe(() => {
+                        this._setCurrentBreakpoint();
+                    });
+            });
+        }
+
         requestAnimationFrame(() => this._setCurrentBreakpoint());
 
         this._setSearchComponentListeners();

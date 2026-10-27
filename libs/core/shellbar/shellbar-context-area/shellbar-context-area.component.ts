@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, output } from '@angular/core';
-import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChildren, inject, output } from '@angular/core';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 /**
@@ -11,10 +10,20 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
     selector: 'fd-shellbar-context-area',
     standalone: true,
     template: `
-        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="left" role="group">
+        <div
+            class="fd-shellbar__group fd-shellbar__group--context-area"
+            data-position="left"
+            role="group"
+            #contextAreaGroup
+        >
             <ng-content select="[fdShellbarPosition='left'], :not([fdShellbarPosition])"></ng-content>
         </div>
-        <div class="fd-shellbar__group fd-shellbar__group--context-area" data-position="right" role="group">
+        <div
+            class="fd-shellbar__group fd-shellbar__group--context-area"
+            data-position="right"
+            role="group"
+            #contextAreaGroup
+        >
             <ng-content select="[fdShellbarPosition='right']"></ng-content>
         </div>
     `,
@@ -31,6 +40,10 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
     ]
 })
 export class ShellbarContextAreaComponent {
+    /** @hidden */
+    @ViewChildren('contextAreaGroup', { read: ElementRef })
+    readonly contextAreaGroups: QueryList<ElementRef<HTMLElement>>;
+
     /** Event emitted when items in the context area are hidden or shown. Event parameter is an array of all the items that are hidden. */
     contentItemVisibilityChange = output<HTMLElement[]>();
 
@@ -45,12 +58,6 @@ export class ShellbarContextAreaComponent {
 
     /** @hidden */
     private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT);
-
-    /** @hidden */
-    private readonly _resizeObserverService = inject(ResizeObserverService);
-
-    /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _hiddenItems: HTMLElement[];

@@ -12,6 +12,7 @@
             class="fd-shellbar__group fd-shellbar__group--product"
             [class.fd-shellbar__group--shrink]="groupFlex?.product?.shrink"
             [class.fd-shellbar__group--basis-auto]="groupFlex?.product?.flexBasisAuto"
+            #productGroup
         >
             @if (showNavigationButton && !_showMobileSearch) {
                 @if (navigationButtonTemplate) {
