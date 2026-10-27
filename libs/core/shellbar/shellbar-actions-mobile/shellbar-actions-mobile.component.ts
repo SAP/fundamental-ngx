@@ -116,7 +116,7 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     actionClicked(item: ShellbarActionComponent, event: MouseEvent | KeyboardEvent): void {
         const callbackFn = item.callback();
         if (callbackFn) {
-            callbackFn(event);
+            callbackFn(event as MouseEvent);
         }
     }
 
@@ -124,7 +124,7 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     assistiveToolsClickedHandler(event: MouseEvent | KeyboardEvent): void {
         const callback = this.assistiveToolsCallback();
         if (callback) {
-            callback(event);
+            callback(event as MouseEvent);
         }
     }
 

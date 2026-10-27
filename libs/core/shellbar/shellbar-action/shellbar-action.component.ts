@@ -40,7 +40,7 @@ export class ShellbarActionComponent {
     readonly glyphFont = input<IconFont>(FD_DEFAULT_ICON_FONT_FAMILY);
 
     /** Function to call when the action is clicked. */
-    readonly callback = input<Nullable<(event: MouseEvent | KeyboardEvent) => void>>(null);
+    readonly callback = input<Nullable<(event: MouseEvent) => void>>(null);
 
     /** Accessible label for the action. */
     readonly label = input<string>('');
