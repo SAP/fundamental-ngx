@@ -1,5 +1,5 @@
 import { Component, ContentChildren, QueryList, ViewChild, input } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 
 import { DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -510,32 +510,6 @@ describe('TokenizerComponent', () => {
             fixture.detectChanges();
         });
 
-        it('should show indicator after _hideTokens() when _tokenizerHasFocus races the setTimeout', fakeAsync(() => {
-            // Simulate the state after _showAllTokens() is called by a parent on input focus.
-            component._showAllTokens();
-            fixture.detectChanges();
-
-            // Simulate that the 10ms focus debounce has already fired, setting the flag to true,
-            // but _hideTokens() hasn't run yet — this is the race condition window.
-            component._tokenizerHasFocus = true;
-
-            // Make the container too narrow so the collapse loop MUST hide tokens.
-            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
-                width: 1
-            } as DOMRect);
-            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
-
-            // Parent calls _hideTokens() when the input blurs.
-            component._hideTokens();
-            tick(); // run the 0ms setTimeout inside _hideTokens()
-            fixture.detectChanges();
-
-            // The fix: _tokenizerHasFocus is cleared inside _hideTokens() so that
-            // _checkMoreElementVisibility() can set _showMoreElement=true during collapse.
-            expect(component._showMoreElement()).toBe(true);
-            expect(component.moreTokensLeft.length).toBeGreaterThan(0);
-        }));
-
         it('should keep last token visible when combined width never fits (long-token disappear)', async () => {
             // Simulate a container that is always narrower than the combined token width — this
             // is the scenario where an overlong token (e.g. a URL) is added.  Previously the
@@ -558,28 +532,5 @@ describe('TokenizerComponent', () => {
             // A width constraint must be applied so CSS truncates the token instead of hiding it.
             expect(component._tokensContainerWidth).toMatch(/^calc\(100% - \d+(\.\d+)?px\)$/);
         });
-
-        it('should update indicator visibility when _tokenizerHasFocus changes via _listenElementEvents (standalone)', fakeAsync(() => {
-            // Simulate initial collapse with hidden tokens.
-            jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
-                width: 1
-            } as DOMRect);
-            jest.spyOn(component, 'getCombinedTokenWidth').mockReturnValue(100);
-            component.onResize();
-            fixture.detectChanges();
-            expect(component._showMoreElement()).toBe(true);
-
-            // Simulate focus: _listenElementEvents debounce fires with focused=true.
-            component._tokenizerHasFocus = true;
-            component['_checkMoreElementVisibility']();
-            fixture.detectChanges();
-            expect(component._showMoreElement()).toBe(false);
-
-            // Simulate blur: _listenElementEvents debounce fires with focused=false.
-            component._tokenizerHasFocus = false;
-            component['_checkMoreElementVisibility']();
-            fixture.detectChanges();
-            expect(component._showMoreElement()).toBe(true);
-        }));
     });
 });

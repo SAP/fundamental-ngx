@@ -489,8 +489,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
                 this._waitForFocusToDisappear();
                 return;
             }
-            // Clears focus before collapse: the 10ms debounce in _listenElementEvents races this 0ms timeout, keeping _tokenizerHasFocus=true during collapse and suppressing the indicator.
-            this._tokenizerHasFocus = false;
             this._forceAllTokensToDisplay = false;
             this._resetTokens();
             this._cdRef.detectChanges();
@@ -902,7 +900,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             )
             .subscribe((focused) => {
                 this._tokenizerHasFocus = focused;
-                this._checkMoreElementVisibility();
                 this._cdRef.markForCheck();
             });
     }
