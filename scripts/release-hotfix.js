@@ -3,6 +3,15 @@ const { execSync } = require('child_process');
 const semver = require('semver');
 const hotfixBranchName = 'tmp_hotfix_branch';
 
+const getStableBranchVersion = () => {
+    const stableVersions = execSync('git tag --merged HEAD', { maxBuffer: Infinity, encoding: 'utf8' })
+        .split('\n')
+        .map((tag) => tag.trim().replace(/^v/, ''))
+        .filter((version) => semver.valid(version) && !semver.prerelease(version));
+
+    return semver.rsort(stableVersions)[0] ?? currentVersion;
+};
+
 const execAndLog = (command) => {
     console.log(execSync(command, { maxBuffer: Infinity, encoding: 'utf8' }));
 };
@@ -16,7 +25,8 @@ const execAndLog = (command) => {
  * you can run `git checkout main` and `git branch -D tmp_hotfix_branch` to clean up.
  */
 const releaseHotfix = async () => {
-    if (semver.prerelease(currentVersion, undefined)) {
+    const branchVersion = getStableBranchVersion();
+    if (semver.prerelease(branchVersion, undefined)) {
         throw new Error('Cannot release a hotfix from a prerelease version');
     }
     const gitDirty = execSync('git status --porcelain', { maxBuffer: Infinity, encoding: 'utf8' });
@@ -28,7 +38,7 @@ const releaseHotfix = async () => {
 
     execAndLog(`git checkout -b ${hotfixBranchName}`);
 
-    const nextVersion = semver.inc(currentVersion, 'patch');
+    const nextVersion = semver.inc(branchVersion, 'patch');
 
     // Update version using NX Release (without git operations first)
     execAndLog(`npx nx release version ${nextVersion} --git-commit=false --git-tag=false`);
