@@ -21,6 +21,7 @@ import {
 import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
 import {
+    convertToDesiredFormat,
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     DateTimeFormats,
@@ -458,9 +459,8 @@ export class TimePickerComponent<D>
         }
 
         if (inputValue !== '') {
-            // Regex to detect and rearrange day period in the time string
-            const dayPeriodPattern = /\b(night|morning|afternoon|evening)\b/g;
-            inputValue = inputValue.replace(dayPeriodPattern, '').trim();
+            // Convert English day period labels ("in the evening", "at night", ...) to a 24-hour time
+            inputValue = convertToDesiredFormat(inputValue);
 
             this.time = this._dateTimeAdapter.parse(inputValue, this.getParseFormat());
             this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(this.time!);
