@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    DestroyRef,
-    ElementRef,
-    inject,
-    output
-} from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, output } from '@angular/core';
 import { ResizeObserverService } from '@fundamental-ngx/cdk/utils';
 import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
@@ -39,7 +30,7 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
         `
     ]
 })
-export class ShellbarContextAreaComponent implements AfterViewInit {
+export class ShellbarContextAreaComponent {
     /** Event emitted when items in the context area are hidden or shown. Event parameter is an array of all the items that are hidden. */
     contentItemVisibilityChange = output<HTMLElement[]>();
 
@@ -63,17 +54,6 @@ export class ShellbarContextAreaComponent implements AfterViewInit {
 
     /** @hidden */
     private _hiddenItems: HTMLElement[];
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._resizeObserverService
-            .observe(this.el.nativeElement)
-            .pipe(takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => {
-                this.showElements();
-                this.hideElementsIfNeeded();
-            });
-    }
 
     /**
      * Iteratively hides elements if the end of the actions exceed the end of the shellbar.

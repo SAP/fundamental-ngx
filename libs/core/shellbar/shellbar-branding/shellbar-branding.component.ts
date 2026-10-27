@@ -10,8 +10,8 @@ import { FD_SHELLBAR_COMPONENT } from '../tokens';
         class="fd-shellbar__branding"
         [class.fd-shellbar__branding--non-interactive]="!interactiveBranding"
         [attr.aria-label]="ariaLabel()"
-        role="link"
-        tabindex="0"
+        [attr.role]="interactiveBranding ? 'link' : null"
+        [attr.tabindex]="interactiveBranding ? '0' : null"
     >
         <ng-content></ng-content>
     </div>`,

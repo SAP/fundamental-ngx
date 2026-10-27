@@ -12,7 +12,7 @@ import {
     viewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType, defaultButtonType } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
@@ -35,6 +35,7 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     standalone: true,
     imports: [
         ButtonComponent,
+        ClickedDirective,
         ContentDensityDirective,
         MenuAddonDirective,
         MenuComponent,
@@ -112,22 +113,18 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     }
 
     /** @hidden */
-    actionClicked(item: ShellbarActionComponent): void {
+    actionClicked(item: ShellbarActionComponent, event: MouseEvent | KeyboardEvent): void {
         const callbackFn = item.callback();
         if (callbackFn) {
-            // Create a synthetic mouse event since menu onSelect doesn't provide one
-            const syntheticEvent = new MouseEvent('click');
-            callbackFn(syntheticEvent);
+            callbackFn(event);
         }
     }
 
     /** @hidden */
-    assistiveToolsClickedHandler(): void {
+    assistiveToolsClickedHandler(event: MouseEvent | KeyboardEvent): void {
         const callback = this.assistiveToolsCallback();
         if (callback) {
-            // Create a synthetic mouse event since menu onSelect doesn't provide one
-            const syntheticEvent = new MouseEvent('click');
-            callback(syntheticEvent);
+            callback(event);
         }
     }
 

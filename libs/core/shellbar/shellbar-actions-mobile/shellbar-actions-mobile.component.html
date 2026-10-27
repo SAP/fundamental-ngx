@@ -31,17 +31,18 @@
                 </li>
             }
             @if (searchExists()) {
-                <li fd-menu-item (onSelect)="showSearch.emit(); menu.close()">
-                    <div fd-menu-interactive>
+                <li fd-menu-item>
+                    <div fd-menu-interactive (fdkClicked)="showSearch.emit(); menu.close()">
                         <fd-menu-addon position="before" [glyph]="'search'"></fd-menu-addon>
                         <span fd-menu-title>{{ ('coreShellbar.search' | fdTranslate)() }}</span>
                     </div>
                 </li>
             }
             @for (action of shellbarActions(); track action) {
-                <li fd-menu-item (onSelect)="actionClicked(action); menu.close()">
+                <li fd-menu-item>
                     <div
                         fd-menu-interactive
+                        (fdkClicked)="actionClicked(action, $event); menu.close()"
                         [attr.aria-label]="action.ariaLabel() || null"
                         [attr.aria-expanded]="action.ariaExpanded()"
                         [attr.aria-haspopup]="action.ariaHaspopup() || null"
@@ -61,8 +62,8 @@
                 </li>
             }
             @if (assistiveToolsCallback()) {
-                <li fd-menu-item (onSelect)="assistiveToolsClickedHandler(); menu.close()">
-                    <div fd-menu-interactive>
+                <li fd-menu-item>
+                    <div fd-menu-interactive (fdkClicked)="assistiveToolsClickedHandler($event); menu.close()">
                         <fd-menu-addon position="before" [glyph]="'sys-help'"></fd-menu-addon>
                         <span fd-menu-title>{{ ('coreShellbar.assistiveTools' | fdTranslate)() }}</span>
                     </div>

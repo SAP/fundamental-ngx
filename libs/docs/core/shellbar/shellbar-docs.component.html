@@ -126,8 +126,9 @@
     </p>
     <p>
         When the shellbar becomes too narrow, items are hidden based on their <code>fdShellbarHidePriority</code> value
-        (lower numbers are hidden first). Priority works globally across both left and right positioned items, allowing
-        fine-grained control over which items disappear when space is limited.
+        (higher numbers are hidden first - priority 1 is higher priority than priority 1000). Priority works globally
+        across both left and right positioned items, allowing fine-grained control over which items disappear when space
+        is limited.
     </p>
 </description>
 <component-example>
