@@ -1,3 +1,13 @@
+## 0.66.1-rc.2 (2026-10-27)
+
+### 🩹 Fixes
+
+- **core:** prevent popover layout-shift observer feedback loops ([#14610](https://github.com/SAP/fundamental-ngx/pull/14610), [#14629](https://github.com/SAP/fundamental-ngx/pull/14629))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1-rc.1 (2026-10-23)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
