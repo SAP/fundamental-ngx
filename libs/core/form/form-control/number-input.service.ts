@@ -46,19 +46,32 @@ export class NumberInputService {
             return true;
         }
 
-        // Allow minus sign only at the beginning
-        if (key === '-') {
-            // Check if minus would be at the start (considering selection)
-            const hasMinusInValue = currentValue.includes('-');
+        // Allow minus/plus sign at the beginning (leading sign) or directly after an exponent (e/E)
+        if (key === '-' || key === '+') {
+            const charBefore = currentValue.charAt(selectionStart - 1);
 
-            // Allow if selection will replace the entire value, or if at the beginning and no minus exists
-            if (selectionStart === 0 && !hasMinusInValue) {
-                return true;
+            // Exponent sign: allow a sign immediately after e/E, provided the exponent
+            // doesn't already have a sign right after the cursor
+            if (charBefore === 'e' || charBefore === 'E') {
+                const charAfter = currentValue.charAt(selectionEnd);
+                return charAfter !== '-' && charAfter !== '+';
             }
-            // If replacing entire value
+
+            // Only the minus sign is allowed as a leading sign
+            if (key === '+') {
+                return false;
+            }
+
+            // If replacing the entire value, a leading minus is always fine
             if (selectionStart === 0 && selectionEnd === currentValue.length) {
                 return true;
             }
+
+            // Leading minus: allow only at the start and when no leading minus already exists
+            if (selectionStart === 0) {
+                return currentValue.charAt(0) !== '-';
+            }
+
             return false;
         }
 
@@ -249,13 +262,17 @@ export class NumberInputService {
      * @param precision Optional precision (decimal places)
      * @param decimalSeparator The decimal separator character (. or ,)
      * @param useGrouping Whether to use thousands separator
+     * @param groupingSeparator Explicit thousands separator. When omitted, it is inferred from the
+     * decimal separator (`,` → `.`, otherwise `,`). Pass this for locales whose grouping separator
+     * is neither (e.g. fr-FR uses a narrow no-break space).
      * @returns The formatted string
      */
     formatNumber(
         value: number | null,
         precision?: number,
         decimalSeparator: '.' | ',' = '.',
-        useGrouping = false
+        useGrouping = false,
+        groupingSeparator?: string
     ): string {
         if (value === null || value === undefined) {
             return '';
@@ -274,9 +291,9 @@ export class NumberInputService {
             const integerPart = parts[0];
             const decimalPart = parts[1];
 
-            // Determine thousands separator based on decimal separator
-            // If decimal is comma, use period for thousands, otherwise use comma
-            const thousandsSeparator = decimalSeparator === ',' ? '.' : ',';
+            // Use the explicit grouping separator when provided, otherwise infer from the decimal
+            // separator (if decimal is comma, use period for thousands, otherwise use comma).
+            const thousandsSeparator = groupingSeparator ?? (decimalSeparator === ',' ? '.' : ',');
             const withGrouping = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator);
 
             // Reconstruct: integer part with grouping + decimal separator + decimal part

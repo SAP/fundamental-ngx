@@ -61,6 +61,42 @@ describe('NumberInputService', () => {
             expect(service.isValidKeyPress(mockEvent, '123')).toBe(false);
         });
 
+        it('should allow minus directly after exponent (e.g. 1e-5)', () => {
+            mockElement.value = '1e';
+            mockElement.setSelectionRange(2, 2);
+            mockEvent = new KeyboardEvent('keydown', { key: '-' });
+            Object.defineProperty(mockEvent, 'target', { value: mockElement });
+
+            expect(service.isValidKeyPress(mockEvent, '1e')).toBe(true);
+        });
+
+        it('should allow plus directly after exponent (e.g. 1e+5)', () => {
+            mockElement.value = '1E';
+            mockElement.setSelectionRange(2, 2);
+            mockEvent = new KeyboardEvent('keydown', { key: '+' });
+            Object.defineProperty(mockEvent, 'target', { value: mockElement });
+
+            expect(service.isValidKeyPress(mockEvent, '1E')).toBe(true);
+        });
+
+        it('should block a second sign in the exponent', () => {
+            mockElement.value = '1e-';
+            mockElement.setSelectionRange(3, 3);
+            mockEvent = new KeyboardEvent('keydown', { key: '-' });
+            Object.defineProperty(mockEvent, 'target', { value: mockElement });
+
+            expect(service.isValidKeyPress(mockEvent, '1e-')).toBe(false);
+        });
+
+        it('should block plus as a leading sign', () => {
+            mockElement.value = '';
+            mockElement.setSelectionRange(0, 0);
+            mockEvent = new KeyboardEvent('keydown', { key: '+' });
+            Object.defineProperty(mockEvent, 'target', { value: mockElement });
+
+            expect(service.isValidKeyPress(mockEvent, '')).toBe(false);
+        });
+
         it('should allow decimal separator once', () => {
             mockElement.value = '';
             mockElement.setSelectionRange(0, 0);
@@ -193,6 +229,14 @@ describe('NumberInputService', () => {
 
         it('should format with comma decimal and period thousands', () => {
             expect(service.formatNumber(1234.56, undefined, ',', true)).toBe('1.234,56');
+        });
+
+        it('should use an explicit grouping separator when provided (e.g. fr-FR space)', () => {
+            expect(service.formatNumber(1234.56, undefined, ',', true, ' ')).toBe('1 234,56');
+        });
+
+        it('should ignore the explicit grouping separator when grouping is disabled', () => {
+            expect(service.formatNumber(1234.56, undefined, ',', false, ' ')).toBe('1234,56');
         });
 
         it('should return empty string for null', () => {

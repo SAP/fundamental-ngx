@@ -9,6 +9,7 @@ import {
     Injector,
     input,
     LOCALE_ID,
+    model,
     numberAttribute,
     output,
     untracked,
@@ -73,8 +74,9 @@ export class FormControlComponent implements FormItemControl {
 
     /**
      * aria-labelledby for form-control.
+     * Writable so sibling directives (e.g. `fd-form-item`) can associate the control with a label.
      */
-    readonly ariaLabelledBy = input<string | undefined | null>();
+    readonly ariaLabelledBy = model<string | undefined | null>();
 
     // ===== Number Input Signal Inputs =====
 
@@ -247,6 +249,23 @@ export class FormControlComponent implements FormItemControl {
         return this.getDecimalSeparatorForLocale(localeIdValue);
     });
 
+    /**
+     * @hidden
+     * Computed grouping (thousands) separator based on locale.
+     * Falls back to inferring from the decimal separator when an explicit `decimalSeparator`
+     * override is set without a locale (e.g. a `,` decimal implies a `.` grouping separator).
+     */
+    protected readonly effectiveGroupingSeparator = computed<string>(() => {
+        // When the decimal separator is overridden without a locale, there's no locale to read a
+        // grouping separator from, so keep the decimal-derived default (handled by the service).
+        if (this.decimalSeparator() !== undefined && this.locale() === undefined) {
+            return this.effectiveDecimalSeparator() === ',' ? '.' : ',';
+        }
+
+        const localeIdValue = this.locale() || this.localeId;
+        return this.getGroupingSeparatorForLocale(localeIdValue);
+    });
+
     /** @hidden */
     private readonly _injector = inject(Injector);
 
@@ -255,6 +274,9 @@ export class FormControlComponent implements FormItemControl {
 
     /** @hidden Cache for locale to decimal separator mapping */
     private _decimalSeparatorCache = new Map<string, '.' | ','>();
+
+    /** @hidden Cache for locale to grouping (thousands) separator mapping */
+    private _groupingSeparatorCache = new Map<string, string>();
 
     /** @hidden */
     constructor(
@@ -474,7 +496,8 @@ export class FormControlComponent implements FormItemControl {
             newValue,
             typeof precision === 'number' ? precision : undefined,
             this.effectiveDecimalSeparator(),
-            this.useGrouping()
+            this.useGrouping(),
+            this.effectiveGroupingSeparator()
         );
 
         // Move cursor to end
@@ -538,7 +561,8 @@ export class FormControlComponent implements FormItemControl {
             finalValue,
             typeof precision === 'number' ? precision : undefined,
             this.effectiveDecimalSeparator(),
-            this.useGrouping()
+            this.useGrouping(),
+            this.effectiveGroupingSeparator()
         );
     }
 
@@ -606,6 +630,36 @@ export class FormControlComponent implements FormItemControl {
 
     /**
      * @hidden
+     * Get the grouping (thousands) separator for a given locale.
+     * Note this may be a non-ASCII space (e.g. fr-FR uses U+202F, a narrow no-break space).
+     * Results are cached to avoid recreating Intl.NumberFormat on every call.
+     */
+    protected getGroupingSeparatorForLocale(localeId: string): string {
+        const cached = this._groupingSeparatorCache.get(localeId);
+        if (cached !== undefined) {
+            return cached;
+        }
+
+        // Default: comma, matching the historical fallback for dot-decimal locales
+        let separator = ',';
+        try {
+            const formatter = new Intl.NumberFormat(localeId, { useGrouping: true });
+            const parts = formatter.formatToParts(1000000);
+            const groupPart = parts.find((part) => part.type === 'group');
+            if (groupPart?.value) {
+                separator = groupPart.value;
+            }
+        } catch {
+            // Fallback to comma if locale is invalid
+            separator = ',';
+        }
+
+        this._groupingSeparatorCache.set(localeId, separator);
+        return separator;
+    }
+
+    /**
+     * @hidden
      * Validate the current input, apply precision, emit validation state, and render the
      * formatted display value. Shared by blur and Enter so neither needs a focus round-trip.
      */
@@ -659,7 +713,8 @@ export class FormControlComponent implements FormItemControl {
             finalValue,
             typeof precision === 'number' ? precision : undefined,
             this.effectiveDecimalSeparator(),
-            this.useGrouping()
+            this.useGrouping(),
+            this.effectiveGroupingSeparator()
         );
 
         // Sync the numeric model value (canonical numeric string, not the formatted display)

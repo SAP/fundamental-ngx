@@ -5,7 +5,9 @@ import {
     ContentChild,
     HostBinding,
     Input,
-    ViewEncapsulation
+    Signal,
+    ViewEncapsulation,
+    WritableSignal
 } from '@angular/core';
 import { FORM_ITEM_CONTROL, FormItemControl } from '../form-item-control/form-item-control';
 import { FormLabelComponent } from '../form-label/form-label.component';
@@ -53,8 +55,34 @@ export class FormItemComponent implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.formLabel && this.formItemControl && !this.formItemControl.ariaLabelledBy) {
-            this.formItemControl.ariaLabelledBy = this.formLabel.formLabelId;
+        if (this.formLabel && this.formItemControl && !this._getAriaLabelledBy()) {
+            this._setAriaLabelledBy(this.formLabel.formLabelId);
         }
+    }
+
+    /** @hidden Reads `ariaLabelledBy` whether the control exposes it as a signal or a plain property. */
+    private _getAriaLabelledBy(): string | null | undefined {
+        const ariaLabelledBy = this.formItemControl?.ariaLabelledBy;
+        return typeof ariaLabelledBy === 'function' ? ariaLabelledBy() : ariaLabelledBy;
+    }
+
+    /** @hidden Writes `ariaLabelledBy` whether the control exposes it as a writable signal or a plain property. */
+    private _setAriaLabelledBy(value: string | null | undefined): void {
+        if (!this.formItemControl) {
+            return;
+        }
+        const ariaLabelledBy = this.formItemControl.ariaLabelledBy;
+        if (this._isWritableSignal(ariaLabelledBy)) {
+            ariaLabelledBy.set(value);
+        } else if (typeof ariaLabelledBy !== 'function') {
+            this.formItemControl.ariaLabelledBy = value;
+        }
+    }
+
+    /** @hidden Narrows a form-item control field to a writable signal. */
+    private _isWritableSignal(
+        value: string | null | undefined | Signal<string | null | undefined>
+    ): value is WritableSignal<string | null | undefined> {
+        return typeof value === 'function' && typeof (value as Partial<WritableSignal<unknown>>).set === 'function';
     }
 }
