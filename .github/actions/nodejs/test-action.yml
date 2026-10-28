@@ -58,22 +58,22 @@ jobs:
                   fi
                   echo "✅ Yarn cache is configured"
 
-    test-custom-node-version:
-        name: Test with custom Node.js version
+    test-supported-node-version:
+        name: Test with supported Node.js version
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
               uses: actions/checkout@v4.2.2
 
-            - name: Test nodejs action (Node 20.x)
+            - name: Test nodejs action (Node 22.x)
               uses: ./.github/actions/nodejs
               with:
-                  node-version: '20.x'
+                  node-version: '22.x'
 
             - name: Verify Node.js version
               run: |
                   node --version
-                  expected_version="v20"
+                  expected_version="v22"
                   actual_version=$(node --version | cut -d'.' -f1)
                   if [[ "$actual_version" != "$expected_version" ]]; then
                       echo "❌ Expected Node.js $expected_version, got $actual_version"

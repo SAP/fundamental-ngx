@@ -11,7 +11,7 @@ Test the nodejs composite action directly:
 ./.github/actions/nodejs/test-local.sh
 
 # Test with custom Node version
-NODE_VERSION=20.x ./.github/actions/nodejs/test-local.sh
+NODE_VERSION=22.x ./.github/actions/nodejs/test-local.sh
 
 # Test without frozen lockfile
 FROZEN_LOCKFILE=false ./.github/actions/nodejs/test-local.sh
@@ -69,8 +69,7 @@ act workflow_dispatch -W .github/workflows/create-release.yml -n
 | Test                          | Command                                                        |
 | ----------------------------- | -------------------------------------------------------------- |
 | Quick validation              | `./.github/actions/nodejs/test-local.sh`                       |
-| Node 20.x                     | `NODE_VERSION=20.x ./.github/actions/nodejs/test-local.sh`     |
-| Node 18.x                     | `NODE_VERSION=18.x ./.github/actions/nodejs/test-local.sh`     |
+| Node 22.x                     | `NODE_VERSION=22.x ./.github/actions/nodejs/test-local.sh`     |
 | No frozen lockfile            | `FROZEN_LOCKFILE=false ./.github/actions/nodejs/test-local.sh` |
 | **Release actions (dry run)** | `./.github/actions/test-release-actions.sh`                    |
 | **Helper functions**          | `./.github/actions/helpers/test-helpers.sh`                    |
@@ -219,7 +218,7 @@ Some differences between local and CI environment:
 - name: Setup Node.js 20.x
   uses: ./.github/actions/nodejs
   with:
-      node-version: '20.x'
+      node-version: '22.x'
 ```
 
 **Without Frozen Lockfile:**
