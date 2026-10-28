@@ -45,6 +45,8 @@ So, `Release Creation` job consists of multiple tasks:
   `isPrerelease`(boolean, whether the release is prerelease or not), and `releaseTag`(the tag which should be used
   for the npm, it is one of `latest`, `prerelease`, `hotfix` or `ng*`, where `*` is the major version of the Angular
   which is supported by the build).
+  For manual hotfix releases, the version is taken from the checked-out `libs/core/package.json` rather than the
+  general version resolver.
 - Get Release Tags - Depending on the `releaseTag` from the previous step, it gets the tags which should be used
   for the npm and github releases. For example
     - if the `releaseTag` is `latest`, then the tags will be `@latest` for npm and `isPrerelease` for github will be false, since it is not a prerelease.

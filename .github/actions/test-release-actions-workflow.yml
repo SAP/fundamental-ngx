@@ -25,6 +25,7 @@ on:
     push:
         paths:
             - '.github/actions/bump-version/**'
+            - '.github/actions/test-release-actions-workflow.yml'
             - '.github/actions/release-tags/**'
             - '.github/actions/generate-conventional-release-notes/**'
 
@@ -44,6 +45,9 @@ jobs:
 
             - name: Setup Node.js
               uses: ./.github/actions/nodejs
+
+            - name: Run version resolution tests
+              run: node --test .github/actions/bump-version/resolve-version.test.js
 
             - name: Get current version
               id: current
@@ -71,6 +75,34 @@ jobs:
                       echo "❌ newVersion output is empty"
                       exit 1
                   fi
+
+            - name: Prepare stable manual hotfix fixture
+              run: |
+                  cp libs/core/package.json /tmp/core-package.json
+                  node -e "const fs = require('fs'); const path = 'libs/core/package.json'; const pkg = JSON.parse(fs.readFileSync(path)); pkg.version = '0.65.1'; fs.writeFileSync(path, JSON.stringify(pkg, null, 4) + '\n');"
+
+            - name: Test bump-version (manual hotfix mode)
+              id: test-manual-hotfix
+              uses: ./.github/actions/bump-version
+              with:
+                  isManual: 'true'
+                  isPrerelease: 'false'
+                  isHotfix: 'true'
+
+            - name: Verify manual hotfix output
+              run: |
+                  echo "✅ Manual hotfix outputs:"
+                  echo "  New version: ${{ steps.test-manual-hotfix.outputs.newVersion }}"
+                  echo "  Is prerelease: ${{ steps.test-manual-hotfix.outputs.isPrerelease }}"
+                  echo "  Release tag: ${{ steps.test-manual-hotfix.outputs.releaseTag }}"
+
+                  test "${{ steps.test-manual-hotfix.outputs.newVersion }}" = "0.65.1"
+                  test "${{ steps.test-manual-hotfix.outputs.isPrerelease }}" = "false"
+                  test -n "${{ steps.test-manual-hotfix.outputs.releaseTag }}"
+
+            - name: Restore package fixture
+              if: always()
+              run: cp /tmp/core-package.json libs/core/package.json
 
             - name: Test bump-version (prerelease mode)
               id: test-prerelease
