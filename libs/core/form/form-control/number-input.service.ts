@@ -1,5 +1,22 @@
 import { Injectable } from '@angular/core';
 
+/** Keys that are always allowed in a numeric input (navigation, editing, control). */
+const ALLOWED_CONTROL_KEYS = new Set([
+    'Backspace',
+    'Delete',
+    'Tab',
+    'Escape',
+    'Enter',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowUp',
+    'ArrowDown',
+    'Home',
+    'End',
+    'PageUp',
+    'PageDown'
+]);
+
 /**
  * Service to handle numeric input validation and behavior
  */
@@ -18,21 +35,7 @@ export class NumberInputService {
         const selectionEnd = inputElement.selectionEnd ?? 0;
 
         // Allow control keys
-        if (
-            key === 'Backspace' ||
-            key === 'Delete' ||
-            key === 'Tab' ||
-            key === 'Escape' ||
-            key === 'Enter' ||
-            key === 'ArrowLeft' ||
-            key === 'ArrowRight' ||
-            key === 'ArrowUp' ||
-            key === 'ArrowDown' ||
-            key === 'Home' ||
-            key === 'End' ||
-            key === 'PageUp' ||
-            key === 'PageDown'
-        ) {
+        if (ALLOWED_CONTROL_KEYS.has(key)) {
             return true;
         }
 

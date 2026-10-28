@@ -123,7 +123,8 @@ describe('FormControlComponent', () => {
                 expect(control.elementRef.nativeElement.classList).toContain('fd-textarea');
                 expect(control.elementRef.nativeElement.classList).not.toContain('fd-input');
             } else {
-                expect(control.elementRef.nativeElement.classList).not.toContain(['fd-input', 'fd-textarea']);
+                expect(control.elementRef.nativeElement.classList).not.toContain('fd-input');
+                expect(control.elementRef.nativeElement.classList).not.toContain('fd-textarea');
             }
         });
     });
@@ -137,6 +138,18 @@ describe('FormControlComponent', () => {
         expect(fixture.debugElement.query(By.directive(FormControlComponent)).nativeElement.classList).toContain(
             'is-compact'
         );
+    });
+
+    it('should not stamp a type attribute onto a textarea host', () => {
+        const textarea: HTMLTextAreaElement = debugElement.query(By.css('textarea')).nativeElement;
+
+        expect(textarea.hasAttribute('type')).toBe(false);
+    });
+
+    it('should set type="text" on an input host by default', () => {
+        const input: HTMLInputElement = debugElement.query(By.css('input')).nativeElement;
+
+        expect(input.getAttribute('type')).toBe('text');
     });
 });
 

@@ -161,7 +161,8 @@ export class FormControlComponent implements FormItemControl {
      * - 'en-US': uses . for decimal and , for thousands (1,234.56)
      * - 'de-DE': uses , for decimal and . for thousands (1.234,56)
      * - 'fr-FR': uses , for decimal and space for thousands (1 234,56)
-     * @default Injected LOCALE_ID from Angular
+     * When not set, formatting falls back to the Angular `LOCALE_ID` injection token.
+     * @default undefined
      */
     readonly locale = input<string | undefined>(undefined);
 
@@ -223,8 +224,12 @@ export class FormControlComponent implements FormItemControl {
         return classes.join(' ');
     });
 
-    /** @hidden Internal type - converts number to text */
+    /** @hidden Internal type - converts number to text; omitted on non-input hosts (e.g. textarea) */
     protected readonly internalType = computed(() => {
+        // Textareas have no `type` attribute; don't stamp one onto them.
+        if (this.elementRef.nativeElement.tagName !== 'INPUT') {
+            return null;
+        }
         const inputType = this.type();
         return inputType === 'number' ? 'text' : inputType;
     });
