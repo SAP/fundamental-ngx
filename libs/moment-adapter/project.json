@@ -16,14 +16,16 @@
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "libs/docs/typedoc/moment-adapter",
                 "tsConfig": "libs/moment-adapter/tsconfig.typedoc.json"
-            },
-            "outputs": ["{options.outputPath}"]
+            }
         },
         "build": {
             "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "defaultConfiguration": "production",
             "options": {
                 "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
                 "project": "{projectRoot}/ng-package.json"
@@ -32,17 +34,10 @@
                 "production": {
                     "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
                 }
-            },
-            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
-            "defaultConfiguration": "production"
+            }
         },
         "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "{projectRoot}/jest.config.ts",
-                "tsConfig": "libs/moment-adapter/tsconfig.spec.json"
-            }
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}", "{workspaceRoot}/dist/coverage/moment-adapter"]
         }
     }
 }

@@ -11,15 +11,17 @@
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "libs/docs/typedoc/i18n",
                 "tsConfig": "libs/i18n/tsconfig.typedoc.json"
-            },
-            "outputs": ["{options.outputPath}"]
+            }
         },
         "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "defaultConfiguration": "production",
+            "dependsOn": ["^build", "i18n-sync"],
             "options": {
                 "project": "{projectRoot}/ng-package.json",
                 "tsConfig": "libs/i18n/tsconfig.lib.json"
@@ -29,27 +31,20 @@
                     "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
                 },
                 "development": {}
-            },
-            "defaultConfiguration": "production",
-            "dependsOn": ["^build", "i18n-sync"]
+            }
         },
         "i18n-sync": {
             "executor": "@fundamental-ngx/nx-plugin:i18n-manage",
+            "inputs": ["{projectRoot}/src/lib/translations/*.properties", "default"],
+            "outputs": ["{projectRoot}/src/lib/translations/*.ts"],
+            "cache": true,
             "options": {
                 "propertiesPath": "{projectRoot}/src/lib/translations",
                 "command": "sync"
-            },
-            "inputs": ["{projectRoot}/src/lib/translations/*.properties", "default"],
-            "outputs": ["{projectRoot}/src/lib/translations/*.ts"],
-            "cache": true
+            }
         },
         "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "{projectRoot}/jest.config.ts",
-                "tsConfig": "libs/i18n/tsconfig.spec.json"
-            },
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}", "{workspaceRoot}/dist/coverage/i18n"],
             "dependsOn": ["i18n-sync"]
         },
         "i18n-manage": {

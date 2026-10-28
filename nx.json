@@ -47,12 +47,6 @@
             "service": {
                 "type": "service"
             },
-            "scam": {
-                "type": "component"
-            },
-            "scam-directive": {
-                "type": "directive"
-            },
             "guard": {
                 "typeSeparator": "."
             },
@@ -113,9 +107,15 @@
             "cache": true
         },
         "lint": {
-            "cache": true
+            "cache": true,
+            "inputs": [
+                "default",
+                "{workspaceRoot}/eslint.config.js",
+                "{workspaceRoot}/eslint.config.cjs",
+                "{workspaceRoot}/eslint.config.mjs"
+            ]
         },
-        "@nx/jest:jest": {
+        "test": {
             "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
             "cache": true,
             "options": {
@@ -127,15 +127,6 @@
                     "codeCoverage": true
                 }
             }
-        },
-        "@nx/eslint:lint": {
-            "inputs": [
-                "default",
-                "{workspaceRoot}/eslint.config.js",
-                "{workspaceRoot}/eslint.config.cjs",
-                "{workspaceRoot}/eslint.config.mjs"
-            ],
-            "cache": true
         },
         "@nx/js:tsc": {
             "cache": true,
@@ -162,12 +153,27 @@
         ]
     },
     "useInferencePlugins": false,
+    "affected": {
+        "legacy": true
+    },
     "defaultBase": "main",
     "plugins": [
         {
             "plugin": "@nx/eslint/plugin",
             "options": {
                 "targetName": "lint"
+            }
+        },
+        {
+            "plugin": "@nx/jest/plugin",
+            "options": {
+                "targetName": "test"
+            }
+        },
+        {
+            "plugin": "@nx/playwright/plugin",
+            "options": {
+                "targetName": "e2e"
             }
         }
     ],

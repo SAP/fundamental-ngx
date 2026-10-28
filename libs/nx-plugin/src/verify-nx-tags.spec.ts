@@ -20,7 +20,7 @@ describe('Nx projects (nx.json)', () => {
     const graph = readCachedProjectGraph();
 
     Object.keys(graph.nodes).forEach((projectName) => {
-        if (projectName.endsWith('-schematics')) {
+        if (projectName === 'fundamental-ngx' || projectName.endsWith('-schematics')) {
             return;
         }
         const project = graph.nodes[projectName];

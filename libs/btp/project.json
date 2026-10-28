@@ -13,15 +13,16 @@
         },
         "compile-typedoc": {
             "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "outputs": ["{options.outputPath}"],
             "options": {
                 "outputPath": "libs/docs/typedoc/btp",
                 "tsConfig": "libs/btp/tsconfig.typedoc.json"
-            },
-            "outputs": ["{options.outputPath}"]
+            }
         },
         "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/btp"],
+            "defaultConfiguration": "production",
             "options": {
                 "tsConfig": "libs/btp/tsconfig.lib.json",
                 "project": "libs/btp/ng-package.json"
@@ -30,16 +31,10 @@
                 "production": {
                     "tsConfig": "libs/btp/tsconfig.lib.prod.json"
                 }
-            },
-            "defaultConfiguration": "production"
+            }
         },
         "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "libs/btp/jest.config.ts",
-                "tsConfig": "libs/btp/tsconfig.spec.json"
-            }
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}", "{workspaceRoot}/dist/coverage/cdk-data-source"]
         }
     }
 }
