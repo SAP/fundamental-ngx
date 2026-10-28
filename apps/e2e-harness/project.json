@@ -110,9 +110,9 @@
             "continuous": true
         },
         "e2e": {
-            "executor": "@nx/playwright:playwright",
+            "command": "playwright test --config=playwright.config.ts",
             "options": {
-                "config": "playwright.config.ts"
+                "cwd": "{workspaceRoot}"
             },
             "outputs": ["{workspaceRoot}/playwright-report"]
         }
