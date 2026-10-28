@@ -30,7 +30,7 @@
     "packageManager": "yarn@4.18.1",
     "scripts": {
         "preinstall": "npx only-allow yarn",
-        "build": "echo Building default app && nx compile",
+        "build": "echo Building default app && nx run docs:compile",
         "build-docs-netlify": "yarn run build --configuration=production-unoptimized",
         "build:umbrella": "echo Building umbrella libraries && nx run-many --target=build --all",
         "build:umbrella:prod": "echo Building umbrella libraries PROD && yarn run build:umbrella -- --configuration=production",
@@ -43,7 +43,7 @@
         "generate:ui5": "echo Generating UI5 Webcomponents Wrappers && nx run-many --target=generate --projects=ui5-webcomponents,ui5-webcomponents-ai,ui5-webcomponents-fiori,ui5-webcomponents-base",
         "ng": "ng",
         "hotfix-release": "node scripts/release-hotfix.js",
-        "start": "nx serve",
+        "start": "nx run docs:serve",
         "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
         "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
         "nx": "nx",
