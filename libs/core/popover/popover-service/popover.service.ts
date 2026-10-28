@@ -15,6 +15,7 @@ import {
     EventEmitter,
     Injectable,
     Injector,
+    NgZone,
     Renderer2,
     Signal,
     TemplateRef,
@@ -37,6 +38,21 @@ import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { PopoverContainerDirective } from '../popover-container/popover-container.directive';
 
 const MAX_BODY_SIZE = 99999999;
+
+interface LayoutShiftGeometry {
+    originX: number;
+    originY: number;
+    originWidth: number;
+    originHeight: number;
+    overlayWidth: number;
+    overlayHeight: number;
+    viewportTop: number;
+    viewportLeft: number;
+    viewportWidth: number;
+    viewportHeight: number;
+    triggerWidth: number | null;
+    triggerHeight: number | null;
+}
 
 export interface PopoverTemplate {
     container: ViewContainerRef;
@@ -217,8 +233,20 @@ export class PopoverService {
     /** @hidden */
     private readonly _injector = inject(Injector);
 
-    /** @hidden Watches DOM mutations within the scroll container when the popover is open to reposition after layout shifts (e.g. display:none on siblings). */
+    /** @hidden Watches document.body while open for mutations that may affect the overlay's position. */
     private _ancestorMutationObserver: MutationObserver | null = null;
+
+    /** @hidden Pending layout measurement frame, cancelled when its open session ends. */
+    private _layoutShiftAnimationFrame: number | null = null;
+
+    /** @hidden Session identity used to reject callbacks retained after close, deactivate or reopen. */
+    private _layoutShiftObserverSession = 0;
+
+    /** @hidden Geometry captured after positioning, used to suppress updates for unchanged layout. */
+    private _layoutShiftGeometry: LayoutShiftGeometry | null = null;
+
+    /** @hidden */
+    private readonly _ngZone = inject(NgZone);
 
     /** @hidden */
     private get _triggerHtmlElement(): HTMLElement {
@@ -284,8 +312,7 @@ export class PopoverService {
             this._clearHoverCloseTimer();
             this._removeOverlayHoverListeners();
             this._removeTriggerListeners();
-            this._ancestorMutationObserver?.disconnect();
-            this._ancestorMutationObserver = null;
+            this._stopLayoutShiftObserver();
             if (this._overlayRef) {
                 this._overlayRef.detach();
                 this._overlayRef.dispose();
@@ -336,8 +363,9 @@ export class PopoverService {
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
-        this._ancestorMutationObserver?.disconnect();
-        this._ancestorMutationObserver = null;
+        // Disposal emits a detachment; don't close again and override the focus decision.
+        this._stopCloseListening$.next();
+        this._stopLayoutShiftObserver();
 
         this._clearHoverCloseTimer();
         this._removeOverlayHoverListeners();
@@ -357,7 +385,6 @@ export class PopoverService {
         if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled() && this._triggerElement) {
             const position = this._getPositionStrategy();
             this._overlayRef = this._overlay.create(this._getOverlayConfig(position));
-            this._startAncestorResizeObserver();
 
             if (this._placementContainerValue) {
                 const placementElement =
@@ -390,6 +417,7 @@ export class PopoverService {
 
             // Update position - this will trigger the positionChanges observable
             this._overlayRef.updatePosition();
+            this._startLayoutShiftObserver();
         }
     }
 
@@ -440,11 +468,13 @@ export class PopoverService {
         const refPosition = this._getPositionStrategy(positions);
         this._listenForPositionChange(refPosition.positionChanges);
         this._overlayRef.updatePositionStrategy(refPosition);
+        this._resetLayoutShiftGeometry();
     }
 
     /** Method called to refresh position of opened popover */
     refreshPosition(): void {
         this._overlayRef?.updatePosition();
+        this._resetLayoutShiftGeometry();
     }
 
     /** Temporary sets the ignoring of the event triggers. */
@@ -570,6 +600,8 @@ export class PopoverService {
      * to enable it back in the future by initialise()
      */
     deactivate(): void {
+        this._stopLayoutShiftObserver();
+
         // Close the popover if it's open
         if (this.isOpen()) {
             this.close();
@@ -958,67 +990,152 @@ export class PopoverService {
 
     /**
      * @hidden
-     * Starts a MutationObserver on the nearest scrollable ancestor of the trigger element (falling
-     * back to document.body) to detect layout shifts that would invalidate the overlay position.
-     * Two mutation types are observed within the subtree:
-     *  - `childList`: catches elements being added to or removed from the DOM (e.g. a banner/toast
-     *    that is fully removed after its timer expires).
-     *  - `attributes` with `attributeFilter: ['style', 'class']`: catches visibility toggling via
-     *    CSS (e.g. `display: none` applied inline or through a utility class, as the
-     *    `fd-message-strip` autoDismiss directive does).
-     * The callback is debounced through `requestAnimationFrame` so that rapid batched mutations
-     * (Angular rendering a whole subtree at once) only trigger a single `updatePosition()` call.
+     * Starts a MutationObserver on document.body for DOM changes that may invalidate the
+     * overlay position — including mutations in elements outside the trigger's
+     * nearest scroll container (e.g. a collapsible header above a table pushing the trigger down).
+     *
+     * Observed mutation types:
+     *  - `childList`: elements added/removed from the DOM (Angular `@if`, ngIf, toast dismissed).
+     *  - `attributes` with `attributeFilter: ['style', 'class']`: visibility toggled via CSS.
+     *
+     * Starts after attachment and initial positioning to capture the initial geometry baseline.
+     * The observer and its requestAnimationFrame pipeline are registered outside Angular so
+     * their work does not schedule zone-driven change detection. Own-host mutations are ignored;
+     * other mutations are coalesced into at most one geometry measurement per frame.
+     *
+     * Calls updatePosition() only when the captured origin, overlay size, viewport or fill-mode
+     * trigger size changes, then captures the resulting geometry as the next baseline. This
+     * lets unchanged-layout mutation feedback settle while preserving later genuine shifts.
+     * There is no fixed update limit: a layout that keeps changing remains eligible for one
+     * reposition per frame. Session and overlay identity checks reject stale callbacks.
      */
-    private _startAncestorResizeObserver(): void {
-        const trigger = this._triggerHtmlElement;
-        if (!trigger) {
+    private _startLayoutShiftObserver(): void {
+        const overlayRef = this._overlayRef;
+        if (!this._triggerElement || !overlayRef?.hasAttached()) {
             return;
         }
 
-        let animationFrame: number | null = null;
-        const scheduleUpdate = (records: MutationRecord[]): void => {
-            // Skip self-caused mutations, else we loop: updatePosition() writes `style` on the
-            // overlay's position wrapper (.cdk-overlay-connected-position-bounding-box), which this
-            // observer would see and react to. Test against .cdk-overlay-container, not
-            // overlayElement -- the wrapper is overlayElement's parent, so it isn't contained by it.
-            const overlayEl = this._overlayRef?.overlayElement;
-            const overlayContainer = overlayEl?.closest('.cdk-overlay-container') ?? overlayEl;
-            if (overlayContainer && records.every((record) => overlayContainer.contains(record.target as Node))) {
-                return;
-            }
-            if (animationFrame !== null) {
-                return;
-            }
-            animationFrame = window.requestAnimationFrame(() => {
-                animationFrame = null;
-                this._overlayRef?.updatePosition();
+        this._stopLayoutShiftObserver();
+        const session = ++this._layoutShiftObserverSession;
+        this._layoutShiftGeometry = this._getLayoutShiftGeometry(overlayRef);
+
+        this._ngZone.runOutsideAngular(() => {
+            const scheduleUpdate = (records: MutationRecord[]): void => {
+                // Skip self-caused mutations: updatePosition() writes `style` on hostElement
+                // (the CDK position bounding-box) and its descendants. Using hostElement as the
+                // scope boundary covers both the default case (.cdk-overlay-container) and the
+                // placementContainer case where the host is moved outside that container.
+                if (records.every((record) => overlayRef.hostElement.contains(record.target as Node))) {
+                    return;
+                }
+                if (this._layoutShiftAnimationFrame !== null) {
+                    return;
+                }
+                this._layoutShiftAnimationFrame = window.requestAnimationFrame(() => {
+                    if (session !== this._layoutShiftObserverSession || this._overlayRef !== overlayRef) {
+                        return;
+                    }
+
+                    this._layoutShiftAnimationFrame = null;
+                    if (!overlayRef.hasAttached()) {
+                        return;
+                    }
+
+                    const geometry = this._getLayoutShiftGeometry(overlayRef);
+                    if (this._sameLayoutShiftGeometry(this._layoutShiftGeometry, geometry)) {
+                        return;
+                    }
+
+                    overlayRef.updatePosition();
+                    this._layoutShiftGeometry = this._getLayoutShiftGeometry(overlayRef);
+                });
+            };
+
+            this._ancestorMutationObserver = new MutationObserver(scheduleUpdate);
+            this._ancestorMutationObserver.observe(document.body, {
+                subtree: true,
+                childList: true,
+                attributes: true,
+                attributeFilter: ['style', 'class']
             });
-        };
-
-        this._ancestorMutationObserver = new MutationObserver(scheduleUpdate);
-
-        const container = this._findScrollableAncestor(trigger);
-        this._ancestorMutationObserver.observe(container, {
-            subtree: true,
-            childList: true,
-            attributes: true,
-            attributeFilter: ['style', 'class']
         });
     }
 
     /**
      * @hidden
-     * Returns the nearest scrollable ancestor, or document.body when none is found.
+     * Ends the current observer session, disconnects observation and cancels its pending frame.
+     * Invalidates session identity before clearing geometry so a retained callback cannot
+     * reposition a replacement overlay or clear its pending frame.
      */
-    private _findScrollableAncestor(el: HTMLElement): HTMLElement {
-        let parent = el.parentElement;
-        while (parent && parent !== document.body) {
-            const { overflow, overflowX, overflowY } = getComputedStyle(parent);
-            if (/auto|scroll|overlay/.test(overflow + overflowX + overflowY)) {
-                return parent;
-            }
-            parent = parent.parentElement;
+    private _stopLayoutShiftObserver(): void {
+        this._layoutShiftObserverSession++;
+        this._ancestorMutationObserver?.disconnect();
+        this._ancestorMutationObserver = null;
+        if (this._layoutShiftAnimationFrame !== null) {
+            window.cancelAnimationFrame(this._layoutShiftAnimationFrame);
+            this._layoutShiftAnimationFrame = null;
         }
-        return document.body;
+        this._layoutShiftGeometry = null;
+    }
+
+    /**
+     * @hidden
+     * Captures the attached overlay's geometry after refreshPosition() or applyNewPosition().
+     * Subsequent mutations are compared against that updated baseline, avoiding a redundant
+     * observer-driven reposition for layout already handled by the explicit operation.
+     */
+    private _resetLayoutShiftGeometry(): void {
+        if (this._overlayRef?.hasAttached()) {
+            this._layoutShiftGeometry = this._getLayoutShiftGeometry(this._overlayRef);
+        }
+    }
+
+    /**
+     * @hidden
+     * Captures the effective origin (appendTo or trigger), overlay size and viewport geometry.
+     * Includes the trigger's size in fill mode, where it can differ from the positioning origin.
+     * Overlay x/y are positioning outputs and are excluded to avoid treating position writes
+     * as new layout inputs. The snapshot does not track placement-container geometry.
+     */
+    private _getLayoutShiftGeometry(overlayRef: OverlayRef): LayoutShiftGeometry {
+        const origin = this.appendTo() ?? this._triggerHtmlElement;
+        const originElement = origin instanceof ElementRef ? origin.nativeElement : origin;
+        const originRect = originElement.getBoundingClientRect();
+        const overlayRect = overlayRef.overlayElement.getBoundingClientRect();
+        const viewportRect = this._viewportRuler.getViewportRect();
+        const triggerRect = this.fillControlMode() ? this._triggerHtmlElement.getBoundingClientRect() : null;
+
+        return {
+            originX: originRect.x,
+            originY: originRect.y,
+            originWidth: originRect.width,
+            originHeight: originRect.height,
+            overlayWidth: overlayRect.width,
+            overlayHeight: overlayRect.height,
+            viewportTop: viewportRect.top,
+            viewportLeft: viewportRect.left,
+            viewportWidth: viewportRect.width,
+            viewportHeight: viewportRect.height,
+            triggerWidth: triggerRect?.width ?? null,
+            triggerHeight: triggerRect?.height ?? null
+        };
+    }
+
+    /** @hidden Compares captured geometry; a missing previous snapshot requires positioning. */
+    private _sameLayoutShiftGeometry(previous: LayoutShiftGeometry | null, current: LayoutShiftGeometry): boolean {
+        return (
+            previous?.originX === current.originX &&
+            previous.originY === current.originY &&
+            previous.originWidth === current.originWidth &&
+            previous.originHeight === current.originHeight &&
+            previous.overlayWidth === current.overlayWidth &&
+            previous.overlayHeight === current.overlayHeight &&
+            previous.viewportTop === current.viewportTop &&
+            previous.viewportLeft === current.viewportLeft &&
+            previous.viewportWidth === current.viewportWidth &&
+            previous.viewportHeight === current.viewportHeight &&
+            previous.triggerWidth === current.triggerWidth &&
+            previous.triggerHeight === current.triggerHeight
+        );
     }
 }
