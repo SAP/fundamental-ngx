@@ -1,3 +1,13 @@
+## 0.66.1-rc.3 (2026-10-28)
+
+### 🩹 Fixes
+
+- **ci:** use branch version for manual hotfix releases ([#14635](https://github.com/SAP/fundamental-ngx/pull/14635))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1-rc.2 (2026-10-27)
 
 This was a version bump only for btp to align it with other projects, there were no code changes.
