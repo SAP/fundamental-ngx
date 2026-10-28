@@ -573,6 +573,24 @@ describe('PopoverService', () => {
         let observeSpy: jest.Mock;
         let disconnectSpy: jest.Mock;
         let updatePositionSpy: jest.SpyInstance;
+        let frameId = 0;
+        let frameCallbacks = new Map<number, FrameRequestCallback>();
+        let triggerY = 0;
+
+        const flushFrames = (): void => {
+            const callbacks = [...frameCallbacks.entries()];
+            frameCallbacks = new Map();
+            callbacks.forEach(([id, callback]) => callback(id));
+        };
+
+        const externalStyleMutation = (): MutationRecord => {
+            triggerY += 1;
+            return {
+                type: 'attributes',
+                attributeName: 'style',
+                target: component.siblingRef.nativeElement
+            } as MutationRecord;
+        };
 
         beforeEach(() => {
             observeSpy = jest.fn();
@@ -585,11 +603,27 @@ describe('PopoverService', () => {
                 return { observe: observeSpy, disconnect: disconnectSpy, takeRecords: jest.fn() };
             });
 
-            // Make requestAnimationFrame synchronous so mutation callbacks resolve immediately.
-            jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
-                cb(0);
-                return 0;
+            // Keep observer work asynchronous so bursts, cancellation, and stale callbacks can be tested.
+            jest.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
+                const id = ++frameId;
+                frameCallbacks.set(id, callback);
+                return id;
             });
+            jest.spyOn(window, 'cancelAnimationFrame').mockImplementation((id) => frameCallbacks.delete(id));
+            jest.spyOn(component.triggerRef.nativeElement, 'getBoundingClientRect').mockImplementation(
+                () =>
+                    ({
+                        x: 90,
+                        y: triggerY,
+                        width: 57,
+                        height: 24,
+                        top: triggerY,
+                        right: 147,
+                        bottom: triggerY + 24,
+                        left: 90,
+                        toJSON: () => ({})
+                    }) as DOMRect
+            );
 
             service.initialise(component.triggerRef, undefined, component.getPopoverTemplateData());
             fixture.detectChanges();
@@ -599,13 +633,17 @@ describe('PopoverService', () => {
             jest.restoreAllMocks();
         });
 
-        it('should start observing the scrollable ancestor when the popover opens', () => {
+        it('should observe document.body (not just the scroll container) so external layout shifts are detected', () => {
+            // Regression for https://github.com/SAP/fundamental-ngx/issues/13224:
+            // When elements OUTSIDE the scroll container change (e.g. a banner above it),
+            // the observer must still fire so the popover repositions. Watching only the
+            // scroll container's subtree misses those mutations.
             service.open();
             fixture.detectChanges();
 
             expect(observeSpy).toHaveBeenCalled();
             const [target, opts] = observeSpy.mock.calls[0];
-            expect(target).toBe(component.scrollContainerRef.nativeElement);
+            expect(target).toBe(document.body);
             expect(opts.subtree).toBe(true);
             expect(opts.childList).toBe(true);
             expect(opts.attributes).toBe(true);
@@ -636,7 +674,12 @@ describe('PopoverService', () => {
             updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
             // Simulate childList mutation (element removed from DOM above the trigger).
-            mutationCallback([{ type: 'childList' } as MutationRecord], {} as MutationObserver);
+            triggerY += 1;
+            mutationCallback(
+                [{ type: 'childList', target: component.siblingRef.nativeElement } as MutationRecord],
+                {} as MutationObserver
+            );
+            flushFrames();
 
             expect(updatePositionSpy).toHaveBeenCalled();
         });
@@ -648,10 +691,8 @@ describe('PopoverService', () => {
             updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
             // Simulate attribute mutation (e.g. display:none set inline by autoDismiss directive).
-            mutationCallback(
-                [{ type: 'attributes', attributeName: 'style' } as MutationRecord],
-                {} as MutationObserver
-            );
+            mutationCallback([externalStyleMutation()], {} as MutationObserver);
+            flushFrames();
 
             expect(updatePositionSpy).toHaveBeenCalled();
         });
@@ -662,10 +703,18 @@ describe('PopoverService', () => {
 
             updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
+            triggerY += 1;
             mutationCallback(
-                [{ type: 'attributes', attributeName: 'class' } as MutationRecord],
+                [
+                    {
+                        type: 'attributes',
+                        attributeName: 'class',
+                        target: component.siblingRef.nativeElement
+                    } as MutationRecord
+                ],
                 {} as MutationObserver
             );
+            flushFrames();
 
             expect(updatePositionSpy).toHaveBeenCalled();
         });
@@ -681,20 +730,167 @@ describe('PopoverService', () => {
             expect(observeSpy).not.toHaveBeenCalled();
         });
 
-        it('should fall back to document.body when no scrollable ancestor exists', () => {
-            // The triggerElement in the default template has a scrollable parent (scrollContainer).
-            // Point the trigger directly at document.body's child to test the fallback.
-            const orphan = document.createElement('button');
-            document.body.appendChild(orphan);
-            service.updateTriggerElement(orphan);
+        // ---------------------------------------------------------------------------------------
+        // Regression: self-feeding reposition loop. updatePosition() writes `style` on the overlay's
+        // own position elements; the observer watches that subtree, so it reacts to its own writes
+        // and loops. The guard must ignore mutations inside the overlay while still repositioning
+        // for genuine external shifts (the sibling tests above).
+        describe('self-feeding reposition loop guard', () => {
+            it('should NOT call updatePosition for a style mutation originating inside its own overlay', () => {
+                service.open();
+                fixture.detectChanges();
 
-            service.open();
-            fixture.detectChanges();
+                const overlayElement = service['_overlayRef'].overlayElement;
+                // Simulate the mutation CDK itself emits when updatePosition() rewrites the
+                // overlay's position styles: an attribute change whose target is inside the overlay.
+                const selfCausedRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: overlayElement
+                } as unknown as MutationRecord;
 
-            const observedTarget = observeSpy.mock.calls[0]?.[0];
-            expect(observedTarget).toBe(document.body);
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
 
-            document.body.removeChild(orphan);
+                mutationCallback([selfCausedRecord], {} as MutationObserver);
+
+                // Reacting to our own style write is what re-arms the loop. It must be skipped.
+                expect(updatePositionSpy).not.toHaveBeenCalled();
+            });
+
+            it('should still reposition for a genuine sibling mutation outside the overlay', () => {
+                // Guard must be target-aware: real external layout shifts must still reposition.
+                service.open();
+                fixture.detectChanges();
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
+
+                expect(updatePositionSpy).toHaveBeenCalled();
+            });
+
+            it('should coalesce mixed self and external mutations into one queued frame', () => {
+                service.open();
+                fixture.detectChanges();
+
+                const overlayElement = service['_overlayRef'].overlayElement;
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback(
+                    [
+                        { type: 'attributes', attributeName: 'style', target: overlayElement } as MutationRecord,
+                        externalStyleMutation(),
+                        externalStyleMutation()
+                    ],
+                    {} as MutationObserver
+                );
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+
+                expect(frameCallbacks.size).toBe(1);
+                flushFrames();
+                expect(updatePositionSpy).toHaveBeenCalledTimes(1);
+            });
+
+            it('should cancel a queued layout-shift frame on close and not reposition a reopened overlay', () => {
+                service.open();
+                fixture.detectChanges();
+
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                expect(frameCallbacks.size).toBe(1);
+
+                service.close();
+                service.open();
+                fixture.detectChanges();
+
+                const reopenedUpdatePosition = jest.spyOn(service['_overlayRef'], 'updatePosition');
+                flushFrames();
+
+                expect(reopenedUpdatePosition).not.toHaveBeenCalled();
+            });
+
+            it('should reposition for a real origin shift but settle when its geometry stops changing', () => {
+                let originY = 261;
+                jest.spyOn(component.triggerRef.nativeElement, 'getBoundingClientRect').mockImplementation(
+                    () =>
+                        ({
+                            x: 90,
+                            y: originY,
+                            width: 57,
+                            height: 24,
+                            top: originY,
+                            right: 147,
+                            bottom: originY + 24,
+                            left: 90,
+                            toJSON: () => ({})
+                        }) as DOMRect
+                );
+                service.open();
+                fixture.detectChanges();
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                originY = 309;
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
+                originY = 357;
+                mutationCallback([externalStyleMutation()], {} as MutationObserver);
+                flushFrames();
+
+                expect(updatePositionSpy).toHaveBeenCalledTimes(2);
+            });
+
+            it('should NOT call updatePosition for a style mutation on the overlay position wrapper (hostElement)', () => {
+                // hostElement is the CDK bounding-box element (.cdk-overlay-connected-position-bounding-box).
+                // CDK writes churning `style` updates on it during positioning; the guard must
+                // recognise these as self-caused and skip them.
+                service.open();
+                fixture.detectChanges();
+
+                const hostElement = service['_overlayRef'].hostElement;
+                const wrapperRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: hostElement
+                } as unknown as MutationRecord;
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback([wrapperRecord], {} as MutationObserver);
+
+                expect(updatePositionSpy).not.toHaveBeenCalled();
+            });
+
+            it('should guard against self-mutations when placementContainer is used (host moved outside .cdk-overlay-container)', () => {
+                // Regression guard: when placementContainer is set, CDK moves hostElement out of
+                // .cdk-overlay-container. The old guard (closest('.cdk-overlay-container') ?? overlayElement)
+                // fell back to overlayElement which does not contain hostElement, so self-mutations on the
+                // bounding-box still triggered updatePosition(). Using hostElement directly covers both cases.
+                const placementContainer = document.createElement('div');
+                document.body.appendChild(placementContainer);
+
+                service.refreshConfiguration({ placementContainer });
+                service.open();
+                fixture.detectChanges();
+
+                const hostElement = service['_overlayRef'].hostElement;
+                const selfRecord = {
+                    type: 'attributes',
+                    attributeName: 'style',
+                    target: hostElement
+                } as unknown as MutationRecord;
+
+                updatePositionSpy = jest.spyOn(service['_overlayRef'], 'updatePosition');
+
+                mutationCallback([selfRecord], {} as MutationObserver);
+
+                expect(updatePositionSpy).not.toHaveBeenCalled();
+
+                service.close();
+                placementContainer.remove();
+            });
         });
     });
 });
