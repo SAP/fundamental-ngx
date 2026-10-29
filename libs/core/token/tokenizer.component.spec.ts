@@ -33,6 +33,21 @@ class HostComponent {
     readonly externalHiddenCount = input(0);
 }
 
+@Component({
+    selector: 'fd-tokenizer-single-token-test-component',
+    template: `
+        <fd-tokenizer [fdCompact]="true">
+            <fd-token>Extremely Long Token Name That Should Be Moved To Overflow</fd-token>
+            <input fd-tokenizer-input fd-form-control />
+        </fd-tokenizer>
+    `,
+    standalone: true,
+    imports: [TokenComponent, TokenizerComponent, TokenizerInputDirective, FormControlComponent, ContentDensityModule]
+})
+class SingleTokenHostComponent {
+    @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
+}
+
 describe('TokenizerComponent', () => {
     let component: TokenizerComponent;
     let fixture: ComponentFixture<HostComponent>;
@@ -49,6 +64,62 @@ describe('TokenizerComponent', () => {
         await whenStable(fixture);
 
         component = fixture.componentInstance.tokenizer;
+    });
+
+    describe('single-token overflow behavior', () => {
+        let singleTokenFixture: ComponentFixture<SingleTokenHostComponent>;
+        let singleTokenComponent: TokenizerComponent;
+
+        beforeEach(async () => {
+            singleTokenFixture = TestBed.createComponent(SingleTokenHostComponent);
+            await whenStable(singleTokenFixture);
+            singleTokenComponent = singleTokenFixture.componentInstance.tokenizer;
+        });
+
+        it('moves a single overlong token to overflow and shows the indicator', async () => {
+            jest.spyOn(singleTokenComponent.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1
+            } as DOMRect);
+            const token = singleTokenComponent.tokenList.first;
+            jest.spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 100
+            } as DOMRect);
+
+            singleTokenComponent.onResize();
+            singleTokenFixture.detectChanges();
+            await whenStable(singleTokenFixture);
+
+            expect(token.elementRef.nativeElement.style.display).toBe('none');
+            expect(singleTokenComponent.moreTokensLeft).toEqual([token]);
+            expect(singleTokenComponent._tokensContainerWidth).toBe('auto');
+
+            const moreIndicator = singleTokenFixture.nativeElement.querySelector('.fd-tokenizer-more');
+            expect(moreIndicator).toBeTruthy();
+            expect(moreIndicator.textContent?.trim()).toContain('1');
+        });
+
+        it('opens the overflow popover for a single overlong token', async () => {
+            jest.spyOn(singleTokenComponent.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 1
+            } as DOMRect);
+            const token = singleTokenComponent.tokenList.first;
+            jest.spyOn(token.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+                width: 100
+            } as DOMRect);
+
+            singleTokenComponent.onResize();
+            singleTokenFixture.detectChanges();
+            await whenStable(singleTokenFixture);
+
+            const moreIndicator = singleTokenFixture.nativeElement.querySelector('.fd-tokenizer-more') as HTMLElement;
+            moreIndicator.click();
+            singleTokenFixture.detectChanges();
+            await whenStable(singleTokenFixture);
+
+            const popoverBody = document.querySelector('fd-popover-body');
+            expect(popoverBody).not.toBeNull();
+            expect(popoverBody?.textContent).toContain('Extremely Long Token Name That Should Be Moved To Overflow');
+        });
     });
 
     it('should create', () => {
@@ -191,13 +262,11 @@ describe('TokenizerComponent', () => {
         component.onResize();
 
         const tokenArray = component.tokenList.toArray();
-        // All but the last token are hidden; the last token stays visible
-        // so that an overlong token is never hidden entirely (fix for gh#14627).
-        for (let i = 0; i < tokenArray.length - 1; i++) {
+        // All tokens are hidden when combined width always exceeds element width.
+        for (let i = 0; i < tokenArray.length; i++) {
             expect(tokenArray[i].elementRef.nativeElement.style.display).toBe('none');
         }
-        expect(tokenArray[tokenArray.length - 1].elementRef.nativeElement.style.display).not.toBe('none');
-        expect(component.moreTokensLeft.length).toBe(tokenArray.length - 1);
+        expect(component.moreTokensLeft.length).toBe(tokenArray.length);
         expect(component.previousElementWidth).toBe(1);
     });
 
@@ -294,8 +363,8 @@ describe('TokenizerComponent', () => {
             const labelElement = fixture.nativeElement.querySelector('.fd-tokenizer-more');
             expect(labelElement).toBeTruthy();
             const labelText = labelElement?.textContent?.trim();
-            // Expected: tokenList.length - 1 width-hidden (guard keeps 1 visible) + 100 external = 102
-            expect(labelText).toContain('102');
+            // Expected: all 3 tokens width-hidden + 100 external = 103
+            expect(labelText).toContain('103');
         });
 
         it('adds externalHiddenCount to the "+N more" label in cozy mode', async () => {
@@ -510,11 +579,11 @@ describe('TokenizerComponent', () => {
             fixture.detectChanges();
         });
 
-        it('should keep last token visible when combined width never fits (long-token disappear)', async () => {
+        it('should hide all tokens and show overflow indicator when combined width never fits (long-token disappear)', async () => {
             // Simulate a container that is always narrower than the combined token width — this
-            // is the scenario where an overlong token (e.g. a URL) is added.  Previously the
-            // collapse loop would hide ALL tokens including the last one, leaving the tokenizer
-            // visually empty; the fix ensures the last visible token is always preserved.
+            // is the scenario where an overlong token (e.g. a URL) is added. The tokenizer must
+            // hide all overflowing tokens and display the "N more" overflow link so the user can
+            // still reach all tokens via the popover (per design spec).
             jest.spyOn(component.elementRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
                 width: 1
             } as DOMRect);
@@ -525,12 +594,13 @@ describe('TokenizerComponent', () => {
             await whenStable(fixture);
 
             const tokenArray = component.tokenList.toArray();
-            // The guard must have kicked in: exactly N-1 tokens are hidden, not all N.
-            expect(component.moreTokensLeft.length).toBe(tokenArray.length - 1);
-            // The last token stays visible — it must not have display:'none'.
-            expect(tokenArray[tokenArray.length - 1].elementRef.nativeElement.style.display).not.toBe('none');
-            // A width constraint must be applied so CSS truncates the token instead of hiding it.
-            expect(component._tokensContainerWidth).toMatch(/^calc\(100% - \d+(\.\d+)?px\)$/);
+            // All tokens must be hidden — none should remain visible.
+            expect(component.moreTokensLeft.length).toBe(tokenArray.length);
+            tokenArray.forEach((token) => {
+                expect(token.elementRef.nativeElement.style.display).toBe('none');
+            });
+            // Container width must be auto (no leftover CSS constraint).
+            expect(component._tokensContainerWidth).toBe('auto');
         });
     });
 });

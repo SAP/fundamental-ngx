@@ -592,16 +592,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this._cdRef.detectChanges();
         this._viewContainer.forEach((viewContainer) => viewContainer.clear());
 
-        const availableWidth = this._getTokensAreaWidthWithoutTokens();
-
-        if (this.tokenList.length === 1) {
-            const tokenWidth = this.tokenList.get(0)?.elementRef.nativeElement.getBoundingClientRect().width;
-            this._tokensContainerWidth = availableWidth < tokenWidth ? `calc(100% - ${availableWidth}px)` : 'auto';
-            return;
-        } else {
-            this._tokensContainerWidth = 'auto';
-        }
-
+        this._tokensContainerWidth = 'auto';
         this._checkMoreElementVisibility();
 
         this.tokenList.forEach((token) => token._viewContainer()!.createEmbeddedView(token._content()!));
@@ -624,13 +615,6 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             const moreTokens = side === 'right' ? this.moreTokensRight : this.moreTokensLeft;
 
             if (token) {
-                // Never hide the last visible token. When a single overlong token would remain,
-                // break and apply a width constraint (same approach as the single-token fast path above)
-                // so CSS truncates it instead of hiding it entirely.
-                const alreadyHidden = this.moreTokensLeft.length + this.moreTokensRight.length;
-                if (alreadyHidden >= this.tokenList.length - 1) {
-                    break;
-                }
                 if (moreTokens.indexOf(token) === -1) {
                     moreTokens.push(token);
                 }
@@ -643,20 +627,20 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             side === 'right' ? i-- : i++;
         }
 
-        // If exactly one token remains visible but still overflows, constrain the tokens container
-        // so CSS can truncate it — mirrors the single-token fast path at the top of this function.
-        const remainingVisible = this.tokenList.length - this.moreTokensLeft.length - this.moreTokensRight.length;
-        if (remainingVisible === 1 && combinedTokenWidth > elementWidth) {
-            this._tokensContainerWidth = `calc(100% - ${this._getTokensAreaWidthWithoutTokens()}px)`;
+        this._cdRef.detectChanges();
+        this._syncOverflowPopoverContent(this._hiddenTokens);
+    }
+
+    /** @hidden */
+    private _syncOverflowPopoverContent(hiddenTokens: TokenComponent[]): void {
+        if (!this.showOverflowPopover) {
+            return;
         }
 
-        this._cdRef.detectChanges();
-        if (this.showOverflowPopover) {
-            this._hiddenTokens.forEach((hiddenToken, index) => {
-                hiddenToken._viewContainer()?.clear();
-                this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content()!);
-            });
-        }
+        hiddenTokens.forEach((hiddenToken, index) => {
+            hiddenToken._viewContainer()?.clear();
+            this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content()!);
+        });
     }
 
     /** @hidden */
@@ -919,8 +903,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
                 this.moreTokensRight.length > 0 ||
                 this.hiddenCozyTokenCount > 0 ||
                 this.externalHiddenCount() > 0) &&
-            !this.open &&
-            !this._tokenizerHasFocus;
+            !this.open;
 
         if (showMoreElement === this._showMoreElement()) {
             return;
