@@ -40,11 +40,145 @@ When enabled, the mode extends the tab sequence by including elements that are n
 
 ---
 
+## Tooltip Behavior Fundamentals
+
+### Single-Tooltip Invariant
+
+**Critical Rule:** At most **one tooltip visible at any time** across the entire application.
+
+This invariant must be enforced by a **singleton coordinator service** at the root level, not by individual directive instances. When a new tooltip is triggered:
+
+1. Any existing open tooltip closes **immediately** (no delay)
+2. The new tooltip opens after the appropriate delay (500ms for first, 200ms for sequence)
+
+### Timing Rules
+
+All timing values are configurable via `TOOLTIP_CONFIG` InjectionToken with these defaults:
+
+| Trigger                 | Delay | Notes                                                                              |
+| ----------------------- | ----- | ---------------------------------------------------------------------------------- |
+| **Initial hover/focus** | 500ms | First tooltip shown                                                                |
+| **Sequence**            | 200ms | Moving from one tooltip-bearing element to another while a tooltip is already open |
+| **Hide on leave/blur**  | 500ms | Delay before closing                                                               |
+| **Touch long-press**    | 0ms   | Immediate show                                                                     |
+| **Keyboard shortcut**   | 0ms   | `Ctrl+Alt+I` toggles immediately                                                   |
+| **Dismiss actions**     | 0ms   | `Esc`, element action (`Enter`), outside click, window blur                        |
+
+**Sequence behavior example:**
+
+```
+User hovers Element A → wait 500ms → Tooltip A shows
+User moves to Element B → Tooltip A closes immediately → wait 200ms → Tooltip B shows
+User moves to Element C → Tooltip B closes immediately → wait 200ms → Tooltip C shows
+```
+
+### Modeless Tooltip Behavior
+
+Tooltips are **modeless** — they do not trap focus or interrupt the user's workflow:
+
+- Focus **always stays on the target element**, never moves into the tooltip
+- The tooltip container is **not focusable** (no `tabindex`)
+- The tooltip container is **not tabbable** — pressing `Tab` moves to the next element in the natural tab order
+- The tooltip is a passive overlay that provides supplemental information
+
+### Hover-able Tooltip
+
+The tooltip container itself is hover-able to support text selection:
+
+- If the pointer leaves the target but enters the tooltip container, the tooltip **stays open**
+- Text inside the tooltip is **selectable** (no `user-select: none`)
+- When the pointer leaves both the target AND the container, the hide delay starts
+
+**Use case:** Users can hover onto the tooltip to select and copy text (e.g., long truncated titles, error messages).
+
+### Placement & Auto-Flip
+
+The tooltip supports configurable placement with automatic viewport flipping:
+
+**Supported placements:**
+
+- `top` (default)
+- `bottom`
+- `left`
+- `right`
+
+**Auto-flip behavior:**
+
+- When the tooltip would overflow the viewport edge, it automatically flips to the opposite side
+- Example: tooltip with `placement="top"` at the top edge of the viewport automatically flips to `bottom`
+- Alignment options: `start`, `middle` (default), `end` along the chosen side
+
+**Arrow:**
+
+- Always points at the target element
+- Reuses Popover arrow implementation
+- Known SAPUI5 arrow-positioning limitation is accepted
+
+**Recommendation for vertical layouts:**
+
+- Prefer `left` or `right` placement for vertically-stacked elements to avoid visual clutter
+
+### Content Assembly (Caller Responsibility)
+
+The tooltip directive receives **already-assembled** content. Content ordering and separators are the **caller's** responsibility, not the directive's.
+
+**Content types:**
+
+- Label text (for unlabeled components like icon buttons)
+- Truncated text (shown only when actually truncated)
+- Supplementary description
+- Keyboard shortcut
+
+**Assembly order** (when multiple types present):
+
+```
+[Label/Truncated] - [Supplementary description] (Keyboard shortcut)
+```
+
+**Separator rules:**
+
+- General content joined by `-` (hyphen with leading + trailing space)
+- Keyboard shortcut in parentheses with leading space: `content (shortcut)`
+
+**Examples:**
+
+- Icon button: `"Save (Ctrl+S)"`
+- Truncated title: `"Risk and Criticality AT AlphaNumeric"`
+- Icon with description: `"Warning - Status Critical"`
+- Button with badge: `"Notifications - You have 3 unread messages (Ctrl+N)"`
+
+**Length guideline:**
+
+- Keep concise — a word, phrase, or single sentence
+- For longer content → use message strip or popover instead
+
+### Mobile & Touch Behavior
+
+**Touch interactions:**
+
+- **Long-press** on the target shows the tooltip **immediately** (no delay)
+- **Tap outside** the tooltip dismisses it
+- **Text selection** (double/triple-tap) MUST NOT be blocked by the tooltip
+
+**Special cases:**
+
+- **Links that open new pages:** Tooltip MUST be disabled on touch to preserve native context menu
+- **Custom context menu:** If present, shown together with tooltip on the same side
+- **Hardware keyboard attached:** With keyboard connected to touch device, behavior matches desktop (focus + keyboard shortcuts work)
+
+**Implementation note:**
+
+```ts
+// Detect long-press (~500ms hold) and show immediately
+// Use touch events: touchstart → touchend timing
+// Disable on <a> tags with target="_blank" or external hrefs
+```
+
+---
+
 ## When to Use Tooltips
 
 ### Recommended Use Cases
-
-Use tooltips in the following scenarios:
 
 1. **Truncated Text**
 
@@ -92,10 +226,11 @@ Do **not** use tooltips in the following situations:
 
 #### Keyboard Shortcut Activation
 
-- **Shortcut:** `Shift + Alt + F6` toggles the mode on or off
+- **Shortcut:** `Shift + Alt + F6` (or `Alt + Shift + F6`) toggles the mode on or off
 - **Scope:** The mode can be activated regardless of where you are on the page — it acts globally
 - **Feedback:** Show a toast message to indicate that the mode has been enabled or disabled
 - **Persistence:** If the page is reloaded or the user navigates to another page, the mode stays activated
+- **Note:** Both key combinations (`Shift + Alt + F6` and `Alt + Shift + F6`) appear in the spec — implementation should support both for consistency
 
 #### Screen Reader Announcements
 
@@ -349,16 +484,6 @@ Before: [⭐  List Item] (Star icon not focusable)
 After:  [[⭐]  List Item] (Star icon focused)
         Tooltip: "Favorite"
 ```
-
-#### Progress Indicator
-
-Progress indicator is not included.
-
-**More information** regarding progress indicator can be found here:
-
-- [FIORIDESIGN-13304](https://fioridesign-13304): [Guideline][IxD] Progress Indicator - Include information about value state in tooltips
-- [FIORIDESIGN-14063](https://fioridesign-14063): [Specification][VD] Progress Indicator
-- Evolution for the Progress Indicator with Focus and Tooltip
 
 ---
 
@@ -725,33 +850,79 @@ The tooltip foundation should be implemented as an **Angular directive** that ca
     - Should be a standalone directive
     - Can be applied via attribute selector (e.g., `[fdTooltip]` or `[fdExtendedKeyboardNav]`)
     - Should work with both signal-based and decorator-based inputs
+    - Use signal-based APIs for all new code (`input()`, `output()`, `computed()`)
 
 2. **Focus Management:**
 
     - Track Extended Keyboard Navigation mode state (global service or signal)
     - Dynamically manage `tabindex` based on mode state
     - Apply visible focus indicators using `host: { '[class]': }` binding
+    - Never use `@HostBinding` or `@HostListener` — use `host: {}` metadata
 
 3. **Tooltip Integration:**
 
-    - Integrate with existing tooltip component/service
+    - **Reuse Popover overlay infrastructure** — do not build a new overlay system
+    - Integrate with Angular CDK `Overlay` + `FlexibleConnectedPositionStrategy`
     - Handle show/hide logic based on focus/hover
     - Support keyboard shortcuts (`Ctrl + Alt + I`, `Esc`)
-    - Implement delay logic for tooltip appearance
+    - Implement delay logic for tooltip appearance (configurable via `TOOLTIP_CONFIG` token)
+    - Enforce **single-tooltip invariant** via coordinator service
 
 4. **Truncation Detection:**
 
     - Detect when text is truncated (compare `scrollWidth` vs `clientWidth` for single-line)
     - Use `ResizeObserver` to detect container size changes
     - Dynamically add/remove element from extended tab order
+    - **Important:** Debounce observations to prevent performance issues
 
 5. **Accessibility:**
 
-    - Add appropriate ARIA attributes
+    - Add appropriate ARIA attributes (`role="tooltip"`, `aria-describedby`)
+    - **Duplicate-announcement guard:** Only set `aria-describedby` when tooltip text differs from accessible name
     - Ensure screen reader compatibility (with documented limitations)
     - Handle `aria-describedby` for tooltip content
+    - Keyboard shortcuts exposed via `aria-keyshortcuts` on target element
 
 6. **State Management:**
+
     - Global service or signal to track mode activation state
-    - Toast notifications for mode activation/deactivation
-    - Persist mode state across page navigation (localStorage or session)
+    - Toast notifications for mode activation/deactivation (use `@fundamental-ngx/core/message-toast`)
+    - Persist mode state across page navigation (sessionStorage)
+    - Use `DestroyRef` + `takeUntilDestroyed()` for cleanup (no custom `DestroyedService`)
+    - Use `signal()` for local state (not `BehaviorSubject`)
+
+7. **Timing Configuration:**
+
+    - **Show delay:** 500ms (hover/focus)
+    - **Hide delay:** 500ms (leave/blur)
+    - **Sequence delay:** 200ms (when moving between tooltip-bearing elements)
+    - **Immediate:** Touch long-press, keyboard shortcut (`Ctrl+Alt+I`)
+    - All configurable via `TOOLTIP_CONFIG` InjectionToken
+
+8. **Touch Support:**
+    - Long-press shows tooltip immediately
+    - Tap outside dismisses
+    - **Disable tooltips on links that open new pages** (preserve native context menu)
+    - Hardware keyboard attached to touch device = desktop behavior
+
+### Two-Phase Delivery
+
+**Phase 1: Base Tooltip Directive**
+
+- `[fdTooltip]` directive with hover/focus/keyboard triggers
+- Tooltip service + coordinator
+- Container component (role="tooltip")
+- Full accessibility implementation
+- Touch support
+- Unit tests
+
+**Phase 2: Extended Keyboard Navigation**
+
+- `ExtendedKeyboardNavService` (global mode state)
+- `ExtendedKeyboardNavDirective` (opt-in focus management)
+- Truncation detection with ResizeObserver
+- Toast notifications
+- sessionStorage persistence
+- Unit tests
+
+This separation allows the base tooltip to ship independently while Extended Keyboard Nav is developed and tested.
