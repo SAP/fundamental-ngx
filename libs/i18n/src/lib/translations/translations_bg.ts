@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Час'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'С възможност за промяна на размера'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Навигационни пътеки',
@@ -113,7 +113,7 @@ export default {
     coreFormMessage: {
         error: 'Невалиден запис',
         information: 'Информация',
-        success: 'Успешно',
+        success: 'Успешно изпълнение',
         warning: 'Предупреждение'
     },
     coreGridList: {
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Допълнителна информация е налична чрез ключове за четене',
+        cancel: 'Отказ',
+        detailsTitle: 'Подробни данни за съобщението',
+        errorButton: 'Грешка',
+        headerRoleDescription: 'Интерактивно заглавие',
+        informationButton: 'Информация',
+        successButton: 'Успешно изпълнение',
+        title: 'Съобщения',
+        warningButton: 'Предупреждение'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Избор на опции',

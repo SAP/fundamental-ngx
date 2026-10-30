@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Masa'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Boleh diubah saiz semula'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Tinggalan',
@@ -440,15 +440,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Maklumat tambahan tersedia melalui kod bacaan',
+        cancel: 'Batal',
+        detailsTitle: 'Butiran Mesej',
+        errorButton: 'Ralat',
+        headerRoleDescription: 'Pengepala Interaktif',
+        informationButton: 'Maklumat',
+        successButton: 'Berjaya',
+        title: 'Mesej',
+        warningButton: 'Amaran'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Pilih Pilihan',

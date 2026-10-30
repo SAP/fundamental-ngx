@@ -88,7 +88,7 @@ export default {
         valueStateWarningMessage: 'Status vrednosti Upozorenje'
     },
     coreDatetimePicker: {
-        datetimeCancelLabel: 'Otkaži',
+        datetimeCancelLabel: 'Odustani',
         datetimeInputLabel: 'Unos datuma/vremena',
         datetimeOkLabel: 'Ok',
         displayDatetimeToggleLabel: 'Prikaži dugme kalendara',
@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Vreme'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Podesiva veličina'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigacija s putanjom',
@@ -117,7 +117,7 @@ export default {
         warning: 'Upozorenje'
     },
     coreGridList: {
-        filterBarCancelButtonTitle: 'Otkaži',
+        filterBarCancelButtonTitle: 'Odustani',
         listItemButtonDeleteTitle: 'Izbriši',
         listItemButtonDetailsTitle: 'Detalji',
         listItemCounterAriaLabel: 'Stavka ima {count} podređenih elemenata.',
@@ -239,7 +239,7 @@ export default {
     coreShellbar: {
         assistiveTools: 'Asistivni alati',
         backButtonLabel: 'Nazad',
-        cancel: 'Otkaži',
+        cancel: 'Odustani',
         collapsedItemMenuLabel: 'Sažeti meni stavke',
         navigationButtonLabel: 'Usmeravanje',
         search: 'Traži'
@@ -321,8 +321,8 @@ export default {
     },
     coreUploadCollection: {
         formItemPlaceholder: 'Naziv fajla',
-        menuCancelAriaLabel: 'Otkaži',
-        menuCancelText: 'Otkaži',
+        menuCancelAriaLabel: 'Odustani',
+        menuCancelText: 'Odustani',
         menuDeleteAriaLabel: 'Izbriši',
         menuEditAriaLabel: 'Uredi',
         menuOkAriaLabel: 'Uredi',
@@ -339,8 +339,8 @@ export default {
         addNodeAddActionBtnLabel: 'Dodaj',
         addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Zatvori',
         addNodeButtonTitle: 'Dodaj čvor',
-        addNodeCancelActionBtnLabel: 'Otkaži',
-        addNodeCancelApproverSelectionActionBtnLabel: 'Otkaži',
+        addNodeCancelActionBtnLabel: 'Odustani',
+        addNodeCancelApproverSelectionActionBtnLabel: 'Odustani',
         addNodeDialogAddToNext: 'Dodaj u sledeći serijski čvor',
         addNodeDialogApproverType: 'Tip davaoca odobrenja',
         addNodeDialogApproverTypeTeamAnyone: 'Bilo ko iz tima',
@@ -386,7 +386,7 @@ export default {
         nodeStatusXDaysOverdue: '{count} dana prekoračenja',
         nodeVariousTeams: 'Različiti timovi',
         prevButtonAriaLabel: 'Idi na prethodni slajd',
-        selectTypeDialogCancelButton: 'Otkaži',
+        selectTypeDialogCancelButton: 'Odustani',
         selectTypeDialogConfirmButton: 'Potvrdi',
         selectTypeDialogMoveApproverAs: 'Pomeri davaoca odobrenja kao',
         selectTypeDialogNodeTypeParallel: 'Paralelni davalac odobrenja',
@@ -403,7 +403,7 @@ export default {
         toolbarEditApprover: 'Uredi davaoca odobrenja',
         toolbarEditButton: 'Uredi',
         toolbarRemove: 'Ukloni',
-        userDetailsCancelBtnLabel: 'Otkaži',
+        userDetailsCancelBtnLabel: 'Odustani',
         userDetailsHeader: 'Detalj',
         userDetailsSendReminderBtnLabel: 'Pošalji podsetnik',
         userListSelectedItemsCountPlural: '{count} stavki odabrano',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Dodatne informacije dostupne preko ključeva čitanja',
+        cancel: 'Odustani',
+        detailsTitle: 'Detalji poruke',
+        errorButton: 'Greška',
+        headerRoleDescription: 'Interaktivno zaglavlje',
+        informationButton: 'Informacije',
+        successButton: 'Uspeh',
+        title: 'Poruke',
+        warningButton: 'Upozorenje'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Odaberi opcije',
@@ -465,7 +465,7 @@ export default {
     },
     platformSearchField: {
         allButtonLabel: 'Sve',
-        cancelLabel: 'Otkaži',
+        cancelLabel: 'Odustani',
         clearButtonTitle: 'Poništi traženje',
         counterLabel: 'Ukupni rezultati: {count}',
         deleteButtonAriaLabel: 'Ukloni',
@@ -490,7 +490,7 @@ export default {
     },
     platformSmartFilterBar: {
         defineConditionsAddConditionButtonLabel: 'Dodaj uslov',
-        defineConditionsCancelButton: 'Otkaži',
+        defineConditionsCancelButton: 'Odustani',
         defineConditionsRemoveConditionButtonTitle: 'Ukloni uslov',
         defineConditionsSubmitButtonLabel: 'Idi',
         filterConditionAfter: 'nakon',
@@ -516,7 +516,7 @@ export default {
         searchPlaceholder: 'Traži',
         selectFiltersActiveColumnLabel: 'Aktivno',
         selectFiltersAvailableFiltersText: 'Dostupni filteri',
-        selectFiltersCancelButton: 'Otkaži',
+        selectFiltersCancelButton: 'Odustani',
         selectFiltersFilterColumnLabel: 'Filtriraj',
         selectFiltersHeader: 'Filteri',
         selectFiltersSubmitButtonLabel: 'Idi',
@@ -539,7 +539,7 @@ export default {
         ariaLabel: 'Zameni unos'
     },
     platformTable: {
-        cancelBtnLabel: 'Otkaži',
+        cancelBtnLabel: 'Odustani',
         clearFilters: 'Obriši filtere',
         collapseAllAnnouncementLabel: 'Sažmi sve na šta se kliknulo',
         collapseRowButtonTitle: 'Sažmi red',
@@ -555,14 +555,14 @@ export default {
         expandAllAnnouncementLabel: 'Proširi sve na šta se kliknulo',
         expandRowButtonTitle: 'Proširi red',
         filterDialogBackToColumns: 'Usmeri nazad',
-        filterDialogCancelBtnLabel: 'Otkaži',
+        filterDialogCancelBtnLabel: 'Odustani',
         filterDialogConfirmBtnLabel: 'OK',
         filterDialogFilterBy: 'Filtriraj po',
         filterDialogFilterByLabel: 'Filtriraj po: {filterLabel}',
         filterDialogFilterTitle: 'Filtriraj',
         filterDialogNotFilteredLabel: '(Nije filtrirano)',
         filteredBy: 'Filtrirano prema',
-        groupDialogCancelBtnLabel: 'Otkaži',
+        groupDialogCancelBtnLabel: 'Odustani',
         groupDialogConfirmBtnLabel: 'OK',
         groupDialogGroupByHeader: 'Grupiši po',
         groupDialogGroupOrderAsc: 'Po rastućem redosledu',
@@ -583,7 +583,7 @@ export default {
         navigationColumnTitle: 'Radnje reda',
         noVisibleColumnsMessage:
             'Trenutno nema vidljivih kolona u tabeli. Odaberite kolone koje su vam potrebne u podešavanjima tabele.',
-        P13ColumnsDialogCancelBtnLabel: 'Otkaži',
+        P13ColumnsDialogCancelBtnLabel: 'Odustani',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogHeader: 'Kolone',
         P13ColumnsDialogMoveDownBtn: 'Pomeri dole',
@@ -598,7 +598,7 @@ export default {
         P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Da',
         P13FilterDialogAddFilterBtnTitle: 'Dodaj filter',
-        P13FilterDialogCancelBtnLabel: 'Otkaži',
+        P13FilterDialogCancelBtnLabel: 'Odustani',
         P13FilterDialogConfirmationBtnLabel: 'OK',
         P13FilterDialogExcludePanelTitleWithCount: 'Isključi ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Isključi',
@@ -621,14 +621,14 @@ export default {
         P13FilterStrategyLabelNotDefined: 'Nije definisano',
         P13FilterStrategyLabelOnOrAfter: 'dana ili nakon',
         P13GroupDialogAddNewGroupBtnTitle: 'Dodaj novo',
-        P13GroupDialogCancelBtnLabel: 'Otkaži',
+        P13GroupDialogCancelBtnLabel: 'Odustani',
         P13GroupDialogConfirmationBtnLabel: 'OK',
         P13GroupDialogHeader: 'Grupiši',
         P13GroupDialogNoneSelectedColumnSelectPlaceholder: '(nijedan)',
         P13GroupDialogRemoveGroupBtnTitle: 'Ukloni',
         P13GroupDialogShowFieldAsColumnCheckboxLabel: 'Pokaži polje kao kolonu',
         P13SortDialogAddNewSortBtnTitle: 'Dodaj novo',
-        P13SortDialogCancelBtnLabel: 'Otkaži',
+        P13SortDialogCancelBtnLabel: 'Odustani',
         P13SortDialogConfirmationBtnLabel: 'OK',
         P13SortDialogHeader: 'Sortiraj',
         P13SortDialogNoneSelectedColumn: '(nijedan)',
@@ -646,7 +646,7 @@ export default {
         settingsDialogHeader: 'Podešavanja',
         showingBlankOfBlank: 'Prikazuje se {totalGrowingItemsCount} od {totalGrowingItemsCount}',
         sortDialogAddSort: 'Dodaj kriterijum sortiranja',
-        sortDialogCancelBtnLabel: 'Otkaži',
+        sortDialogCancelBtnLabel: 'Odustani',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogDelete: 'Ukloni kriterijum sortiranja',
         sortDialogHeader: 'Sortiraj',
@@ -658,7 +658,7 @@ export default {
         sortDialogSortOrderDesc: 'Po opadajućem redosledu',
         sortDialogSortOrderHeader: 'Redosled sortiranja',
         toolbarActionButtonTitle: 'Podešavanja',
-        toolbarActionCancelButtonLabel: 'Otkaži',
+        toolbarActionCancelButtonLabel: 'Odustani',
         toolbarActionCollapseAllButtonTitle: 'Sažmi sve',
         toolbarActionColumnsButtonTitle: 'Kolone',
         toolbarActionCreateButtonLabel: 'Kreiraj',
@@ -681,7 +681,7 @@ export default {
             private: 'Privatno'
         },
         applyAutomatically: 'Primeni automatski',
-        cancel: 'Otkaži',
+        cancel: 'Odustani',
         createdBy: 'Kreirao',
         default: 'Standardno',
         manage: 'Upravljaj',
@@ -701,7 +701,7 @@ export default {
         view: 'Prikaži'
     },
     platformVHD: {
-        cancelButtonLabel: 'Otkaži',
+        cancelButtonLabel: 'Odustani',
         defineConditionAddConditionButtonLabel: 'Dodaj',
         defineConditionAddConditionButtonTitle: 'Dodaj uslov',
         defineConditionConditionsGroupHeaderExclude: 'Isključi',

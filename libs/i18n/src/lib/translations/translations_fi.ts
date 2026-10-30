@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Aika'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Koko muutettavissa'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigointipolut',
@@ -441,15 +441,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Lisätietoja saatavissa avaimia lukemalla',
+        cancel: 'Peruuta',
+        detailsTitle: 'Viestin lisätiedot',
+        errorButton: 'Virhe',
+        headerRoleDescription: 'Vuorovaikutteinen otsikko',
+        informationButton: 'Informaatio',
+        successButton: 'Onnistui',
+        title: 'Ilmoitukset',
+        warningButton: 'Varoitus'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Valitse vaihtoehdot',

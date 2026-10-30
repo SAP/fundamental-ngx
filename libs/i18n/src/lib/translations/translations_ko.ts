@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: '시간'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: '크기 조정 가능'
     },
     coreDynamicPage: {
         breadcrumbsLabel: '탐색 경로',
@@ -440,15 +440,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: '키를 읽어 추가 정보를 사용할 수 있습니다.',
+        cancel: '취소',
+        detailsTitle: '메시지 세부사항',
+        errorButton: '오류',
+        headerRoleDescription: '대화형 헤더',
+        informationButton: '정보',
+        successButton: '성공',
+        title: '메시지',
+        warningButton: '경고'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '옵션 선택',

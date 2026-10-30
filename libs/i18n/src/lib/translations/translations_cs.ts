@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Čas'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Lze měnit velikost'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigační cesty',
@@ -441,15 +441,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Další informace k dispozici prostřednictvím čtení klíčů',
+        cancel: 'Zrušit',
+        detailsTitle: 'Detaily zprávy',
+        errorButton: 'Chyba',
+        headerRoleDescription: 'Interaktivní hlavička',
+        informationButton: 'Informace',
+        successButton: 'Úspěch',
+        title: 'Zprávy',
+        warningButton: 'Varování'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Vybrat možnosti',

@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Час'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'З можливістю зміни розміру'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Історія навігації',
@@ -441,15 +441,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Додаткова інформація доступна через ключі зчитування',
+        cancel: 'Скасувати',
+        detailsTitle: 'Інформація про повідомлення',
+        errorButton: 'Помилка',
+        headerRoleDescription: 'Інтерактивний заголовок',
+        informationButton: 'Інформація',
+        successButton: 'Успішно',
+        title: 'Повідомлення',
+        warningButton: 'Попередження'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Вибрати опції',

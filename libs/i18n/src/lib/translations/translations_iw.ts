@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'זמן'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'ניתן לשנות את הגודל'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'שביל ניווט',
@@ -440,15 +440,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'מידע נוסף זמין דרך מפתחות קריאה',
+        cancel: 'בטל',
+        detailsTitle: 'פרטי הודעה',
+        errorButton: 'שגיאה',
+        headerRoleDescription: 'כותרת אינטראקטיבית',
+        informationButton: 'מידע',
+        successButton: 'הצלחה',
+        title: 'הודעות',
+        warningButton: 'אזהרה'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'בחר אפשרויות',

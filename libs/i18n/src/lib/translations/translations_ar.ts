@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'الوقت'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'قابل لتغيير الحجم'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'مسارات التنقل',
@@ -441,15 +441,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'تتوفر معلومات إضافية عبر مفاتيح القراءة',
+        cancel: 'إلغاء',
+        detailsTitle: 'تفاصيل الرسالة',
+        errorButton: 'خطأ',
+        headerRoleDescription: 'مقدمة تفاعلية',
+        informationButton: 'معلومات',
+        successButton: 'نجاح',
+        title: 'الرسائل',
+        warningButton: 'تحذير'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'تحديد الخيارات',

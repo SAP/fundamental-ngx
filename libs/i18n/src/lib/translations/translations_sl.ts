@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Čas'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Spremenljive velikosti'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Drobtinice',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Dodatne informacije so na voljo prek branja ključev',
+        cancel: 'Prekliči',
+        detailsTitle: 'Podrobnosti sporočila',
+        errorButton: 'Napaka',
+        headerRoleDescription: 'Interaktivna glava',
+        informationButton: 'Informacije',
+        successButton: 'Uspešno',
+        title: 'Sporočila',
+        warningButton: 'Opozorilo'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Izbira možnosti',

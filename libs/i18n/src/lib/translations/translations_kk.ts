@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Уақыт'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Өлшемі өзгертіледі'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Шарлау тарихы',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Қосымша ақпарат оқу кілттері арқылы қолжетімді',
+        cancel: 'Болдырмау',
+        detailsTitle: 'Хабар мәліметтері',
+        errorButton: 'Қате',
+        headerRoleDescription: 'Интерактивті тақырып',
+        informationButton: 'Ақпарат',
+        successButton: 'Сәтті',
+        title: 'Хабарлар',
+        warningButton: 'Ескерту'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Таңдау опциялары',

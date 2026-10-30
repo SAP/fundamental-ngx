@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Время'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Размер можно изменить'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Навигационная цепочка',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Дополнительная информация доступна путем считывания ключей',
+        cancel: 'Отмена',
+        detailsTitle: 'Сведения о сообщении',
+        errorButton: 'Ошибка',
+        headerRoleDescription: 'Интерактивный заголовок',
+        informationButton: 'Информация',
+        successButton: 'Успешно',
+        title: 'Сообщения',
+        warningButton: 'Предупреждение'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Опции выбора',

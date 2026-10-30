@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Heure'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Redimensionnable'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Fil d’Ariane',
@@ -444,15 +444,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
+        additionalInformation: 'Informations supplémentaires disponibles via les clés de lecture',
+        cancel: 'Annuler',
+        detailsTitle: 'Détails du message',
+        errorButton: 'Erreur',
+        headerRoleDescription: 'En-tête interactif',
+        informationButton: 'Informations',
+        successButton: 'Succès',
         title: 'Messages',
-        warningButton: 'Warning'
+        warningButton: 'Avertissement'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Sélectionner des options',

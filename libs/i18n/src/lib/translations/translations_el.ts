@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Ώρα'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Με δυνατότητα αλλαγής μεγέθους'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Δυναμικές διαδρομές',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Πρόσθετες πληροφορίες διαθέσιμες μέσω κλειδιών ανάγνωσης',
+        cancel: 'Ακύρωση',
+        detailsTitle: 'Στοιχεία Μηνύματος',
+        errorButton: 'Σφάλμα',
+        headerRoleDescription: 'Διαδραστική Κεφαλίδα',
+        informationButton: 'Πληροφορίες',
+        successButton: 'Πέτυχε',
+        title: 'Μηνύματα',
+        warningButton: 'Προειδοποίηση'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Επιλογή Δυνατοτήτων',

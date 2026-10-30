@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Hora'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Tamaño ajustable'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Rutas de navegación',
@@ -443,15 +443,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
+        additionalInformation: 'Información adicional disponible a través de claves de lectura',
+        cancel: 'Cancelar',
+        detailsTitle: 'Detalles de mensaje',
         errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        headerRoleDescription: 'Cabecera interactiva',
+        informationButton: 'Información',
+        successButton: 'Correcto',
+        title: 'Mensajes',
+        warningButton: 'Aviso'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seleccionar opciones',

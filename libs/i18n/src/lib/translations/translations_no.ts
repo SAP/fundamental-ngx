@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Klokkeslett'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Størrelsen kan endres'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigeringssti',
@@ -443,15 +443,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Mer informasjon er tilgjengelig via lesenøkler',
+        cancel: 'Avbryt',
+        detailsTitle: 'Meldingsdetaljer',
+        errorButton: 'Feil',
+        headerRoleDescription: 'Interaktiv topp',
+        informationButton: 'Informasjon',
+        successButton: 'Utført',
+        title: 'Meldinger',
+        warningButton: 'Advarsel'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Velg alternativer',

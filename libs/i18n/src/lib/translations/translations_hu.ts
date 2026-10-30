@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Időpont'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Átméretezhető'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Útkövetés',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Az olvasókulcsokon keresztül további információk érhetők el',
+        cancel: 'Mégse',
+        detailsTitle: 'Üzenet részletei',
+        errorButton: 'Hiba',
+        headerRoleDescription: 'Interaktív fejléc',
+        informationButton: 'Információ',
+        successButton: 'Sikeres',
+        title: 'Üzenetek',
+        warningButton: 'Figyelmeztetés'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Kiválasztási beállítások',
