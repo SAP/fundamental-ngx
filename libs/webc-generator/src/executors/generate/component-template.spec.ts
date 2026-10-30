@@ -1,4 +1,4 @@
-import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
+import type * as CEM from './cem-types';
 import { componentTemplate } from './component-template';
 
 const PACKAGE = '@ui5/webcomponents';
