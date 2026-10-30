@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Čas'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Možná zmena veľkosti'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Doplnkové informácie dostupné pomocou čítacích kľúčov',
+        cancel: 'Zrušiť',
+        detailsTitle: 'Detaily správy',
+        errorButton: 'Chyba',
+        headerRoleDescription: 'Interaktívna hlavička',
+        informationButton: 'Informácie',
+        successButton: 'Úspešné',
+        title: 'Správy',
+        warningButton: 'Upozornenie'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Výber - možnosti',
@@ -465,7 +465,7 @@ export default {
     },
     platformSearchField: {
         allButtonLabel: 'Všetky',
-        cancelLabel: 'Stornovať',
+        cancelLabel: 'Zrušiť',
         clearButtonTitle: 'Vymazať hľadanie',
         counterLabel: 'Celkový počet výsledkov: {count}',
         deleteButtonAriaLabel: 'Odstrániť',

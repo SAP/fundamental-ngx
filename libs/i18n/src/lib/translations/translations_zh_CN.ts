@@ -94,7 +94,7 @@ export default {
         displayTypeTimeLabel: '时间'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: '可重新调整大小'
     },
     coreDynamicPage: {
         breadcrumbsLabel: '面包屑导航',
@@ -438,15 +438,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: '通过读取键值可获取附加信息',
+        cancel: '取消',
+        detailsTitle: '消息详细信息',
+        errorButton: '错误',
+        headerRoleDescription: '交互式抬头',
+        informationButton: '信息',
+        successButton: '成功',
+        title: '消息',
+        warningButton: '警告'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '选择选项',

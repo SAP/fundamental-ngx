@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Ora'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Redimensionabil'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Istoric navigare',
@@ -443,15 +443,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Informații suplimentare disponibile prin chei de citire',
+        cancel: 'Anulare',
+        detailsTitle: 'Detalii mesaj',
+        errorButton: 'Eroare',
+        headerRoleDescription: 'Antet interactiv',
+        informationButton: 'Informații',
+        successButton: 'A reușit',
+        title: 'Mesaje',
+        warningButton: 'Avertisment'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opțiuni de selecție',

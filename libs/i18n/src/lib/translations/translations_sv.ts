@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Tid'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Justerbar storlek'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Breadcrumbs',
@@ -441,15 +441,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
+        additionalInformation: 'Ytterligare information tillgänglig via läsning av nycklar',
+        cancel: 'Avbryt',
+        detailsTitle: 'Meddelandedetaljer',
+        errorButton: 'Fel',
+        headerRoleDescription: 'Interaktivt huvud',
         informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        successButton: 'OK',
+        title: 'Meddelanden',
+        warningButton: 'Varning'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Välj alternativ',

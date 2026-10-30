@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: '時刻'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'サイズ調整可能'
     },
     coreDynamicPage: {
         breadcrumbsLabel: '階層リンク',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'キーを読み取ると利用できる追加情報',
+        cancel: 'キャンセル',
+        detailsTitle: 'メッセージの詳細',
+        errorButton: 'エラー',
+        headerRoleDescription: 'インタラクティブヘッダー',
+        informationButton: '情報',
+        successButton: '成功',
+        title: 'メッセージ',
+        warningButton: '注意'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'オプションを選択',

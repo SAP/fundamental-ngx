@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'เวลา'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'สามารถปรับขนาดได้'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'เมนูที่ใช้นำทางในเว็บไซต์ (Breadcrumb)',
@@ -441,15 +441,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'ดูข้อมูลเพิ่มเติมได้โดยการอ่านคีย์',
+        cancel: 'ยกเลิก',
+        detailsTitle: 'รายละเอียดข้อความ',
+        errorButton: 'ข้อผิดพลาด',
+        headerRoleDescription: 'ส่วนหัวแบบอินเตอร์แอคทีฟ',
+        informationButton: 'ข้อมูล',
+        successButton: 'สำเร็จ',
+        title: 'ข้อความ',
+        warningButton: 'คำเตือน'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'เลือกตัวเลือก',

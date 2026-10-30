@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Saat'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Yeniden boyutlandırılabilir'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'İçerik Haritaları',
@@ -442,15 +442,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Okuma anahtarları aracılığıyla ek bilgiler mevcut',
+        cancel: 'İptal',
+        detailsTitle: 'Mesaj Ayrıntıları',
+        errorButton: 'Hata',
+        headerRoleDescription: 'Etkileşimli Üst Bilgi',
+        informationButton: 'Bilgi',
+        successButton: 'Başarılı',
+        title: 'Mesajlar',
+        warningButton: 'Uyarı'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Seçenekleri Belirle',

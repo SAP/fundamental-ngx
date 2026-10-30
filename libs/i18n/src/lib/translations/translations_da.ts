@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: 'Klokkeslæt'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Størrelse kan tilpasses'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Brødkrummer',
@@ -441,15 +441,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Yderligere oplysninger er tilgængelige via læsning af nøgler',
+        cancel: 'Annuller',
+        detailsTitle: 'Meddelelsesdetaljer',
+        errorButton: 'Fejl',
+        headerRoleDescription: 'Interaktiv overskrift',
+        informationButton: 'Oplysninger',
+        successButton: 'Gennemført',
+        title: 'Meddelelser',
+        warningButton: 'Advarsel'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Vælg muligheder',

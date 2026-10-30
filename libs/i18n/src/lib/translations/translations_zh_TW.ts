@@ -95,7 +95,7 @@ export default {
         displayTypeTimeLabel: '時間'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: '可調整大小'
     },
     coreDynamicPage: {
         breadcrumbsLabel: '階層連結',
@@ -439,15 +439,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: '透過讀取金鑰提供其他資訊',
+        cancel: '取消',
+        detailsTitle: '訊息詳細資訊',
+        errorButton: '錯誤',
+        headerRoleDescription: '互動表頭',
+        informationButton: '資訊',
+        successButton: '成功',
+        title: '訊息',
+        warningButton: '警告'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '選擇選項',

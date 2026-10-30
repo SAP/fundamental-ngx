@@ -96,7 +96,7 @@ export default {
         displayTypeTimeLabel: 'Tijd'
     },
     coreDialog: {
-        resizable: 'Resizable'
+        resizable: 'Grootte aanpasbaar'
     },
     coreDynamicPage: {
         breadcrumbsLabel: 'Navigatiepad',
@@ -443,15 +443,15 @@ export default {
         }
     },
     platformMessageView: {
-        additionalInformation: 'Additional information available via reading keys',
-        cancel: 'Cancel',
-        detailsTitle: 'Message Details',
-        errorButton: 'Error',
-        headerRoleDescription: 'Interactive Header',
-        informationButton: 'Information',
-        successButton: 'Success',
-        title: 'Messages',
-        warningButton: 'Warning'
+        additionalInformation: 'Aanvullende informatie beschikbaar via leescodes',
+        cancel: 'Annuleren',
+        detailsTitle: 'Berichtdetails',
+        errorButton: 'Fout',
+        headerRoleDescription: 'Interactieve kop',
+        informationButton: 'Informatie',
+        successButton: 'Succesvol',
+        title: 'Berichten',
+        warningButton: 'Waarschuwing'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Opties selecteren',
