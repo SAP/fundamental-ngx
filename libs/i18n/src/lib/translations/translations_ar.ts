@@ -242,7 +242,9 @@ export default {
         cancel: 'إلغاء',
         collapsedItemMenuLabel: 'قائمة عناصر تم طيها',
         navigationButtonLabel: 'تنقل',
-        search: 'بحث'
+        openSearch: 'Open Search',
+        search: 'بحث',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'مؤشر مربع التمرير'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'موافق'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'إغلاق',
         previousButton: 'السابق'
     },

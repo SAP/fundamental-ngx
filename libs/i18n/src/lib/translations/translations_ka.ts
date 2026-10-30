@@ -241,7 +241,9 @@ export default {
         cancel: 'Cancel',
         collapsedItemMenuLabel: 'დამალული ელემენტი',
         navigationButtonLabel: 'Navigation',
-        search: 'Search'
+        openSearch: 'Open Search',
+        search: 'Search',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -328,6 +330,7 @@ export default {
         menuOkText: 'კარგი'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Close',
         previousButton: 'Previous'
     },

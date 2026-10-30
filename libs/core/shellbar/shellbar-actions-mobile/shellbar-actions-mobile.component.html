@@ -1,62 +1,74 @@
-@if (shellbarActions.length > 0 || searchExists) {
+@if (shellbarActions()?.length || searchExists() || titleHidden()) {
     <div class="fd-shellbar-collapse">
-        <fd-action-sheet placement="bottom-end" #actionSheet>
-            <fd-action-sheet-control>
-                <button
-                    fd-button
-                    [fdType]="fdType()"
-                    [class.fd-shellbar__button]="fdType() === 'standard'"
-                    [toggled]="toggled()"
-                    glyph="overflow"
-                    [attr.aria-label]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
-                    [title]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
-                    fdCozy
-                >
-                    @if (totalNotifications) {
-                        <span class="fd-button__badge">
-                            {{ totalNotifications }}
-                        </span>
-                    }
-                </button>
-            </fd-action-sheet-control>
-            <fd-action-sheet-body>
-                @if (searchExists) {
-                    <li
-                        fd-action-sheet-item
-                        tabindex="-1"
-                        glyph="search"
-                        [label]="('coreShellbar.search' | fdTranslate)()"
-                        (click)="showSearch.emit(); actionSheet.close()"
-                        fdCozy
-                    ></li>
-                }
-                @for (action of shellbarActions; track action) {
-                    <li
-                        fd-action-sheet-item
-                        tabindex="-1"
-                        [fdType]="action.fdType()"
-                        [toggled]="action.toggled()"
-                        [glyph]="action.glyph() || ''"
-                        [label]="action.label()"
-                        (click)="actionClicked(action, $event)"
-                        fdCozy
+        <button
+            fd-button
+            [fdMenuTrigger]="menu"
+            [fdType]="fdType()"
+            [class.fd-shellbar__button]="fdType() === 'standard'"
+            [toggled]="toggled()"
+            glyph="overflow"
+            [attr.aria-label]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
+            [title]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
+            fdCozy
+        >
+            @if (getTotalNotifications()) {
+                <span class="fd-button__badge">
+                    {{ getTotalNotifications() }}
+                </span>
+            }
+        </button>
+        <fd-menu #menu placement="bottom-end" [config]="{ additionalBodyClass: 'fd-shellbar-actions-mobile__menu' }">
+            @if (titleHidden() && (hiddenLogoElement() || hiddenTitleText())) {
+                <li fd-menu-item [hasSeparator]="true">
+                    <div
+                        fd-menu-interactive
+                        style="padding-inline: 0.8125rem"
+                        [attr.aria-label]="brandingAriaLabel() || null"
                     >
-                        @if (action.notificationCount()) {
-                            <span class="fd-button__badge">{{ action.notificationCount() }}</span>
+                        <span style="order: -1; margin-inline-end: 0.25rem" #logoContainer></span>
+                        <fd-text [text]="hiddenTitleText()" [maxLines]="2" fd-menu-title></fd-text>
+                    </div>
+                </li>
+            }
+            @if (searchExists()) {
+                <li fd-menu-item>
+                    <div fd-menu-interactive (fdkClicked)="showSearch.emit(); menu.close()">
+                        <fd-menu-addon position="before" [glyph]="'search'"></fd-menu-addon>
+                        <span fd-menu-title>{{ ('coreShellbar.search' | fdTranslate)() }}</span>
+                    </div>
+                </li>
+            }
+            @for (action of shellbarActions(); track action) {
+                <li fd-menu-item>
+                    <div
+                        fd-menu-interactive
+                        (fdkClicked)="actionClicked(action, $event); menu.close()"
+                        [attr.aria-label]="action.ariaLabel() || null"
+                        [attr.aria-expanded]="action.ariaExpanded()"
+                        [attr.aria-haspopup]="action.ariaHaspopup() || null"
+                        [attr.aria-controls]="action.ariaControls() || null"
+                        [attr.aria-describedby]="action.ariaDescribedby() || null"
+                    >
+                        @if (action.glyph()) {
+                            <fd-menu-addon position="before" [glyph]="action.glyph()"></fd-menu-addon>
                         }
-                    </li>
-                }
-                @if (!!assistiveToolsCallback) {
-                    <li
-                        fd-action-sheet-item
-                        tabindex="-1"
-                        glyph="sys-help"
-                        [label]="('coreShellbar.assistiveTools' | fdTranslate)()"
-                        (click)="assistiveToolsCallback($event)"
-                        fdCozy
-                    ></li>
-                }
-            </fd-action-sheet-body>
-        </fd-action-sheet>
+                        <span fd-menu-title>
+                            {{ action.label() }}
+                            @if (action.notificationCount()) {
+                                <span class="fd-button__badge">{{ action.notificationCount() }}</span>
+                            }
+                        </span>
+                    </div>
+                </li>
+            }
+            @if (assistiveToolsCallback()) {
+                <li fd-menu-item>
+                    <div fd-menu-interactive (fdkClicked)="assistiveToolsClickedHandler($event); menu.close()">
+                        <fd-menu-addon position="before" [glyph]="'sys-help'"></fd-menu-addon>
+                        <span fd-menu-title>{{ ('coreShellbar.assistiveTools' | fdTranslate)() }}</span>
+                    </div>
+                </li>
+            }
+        </fd-menu>
     </div>
 }

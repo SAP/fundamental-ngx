@@ -241,7 +241,9 @@ export default {
         cancel: 'Avbryt',
         collapsedItemMenuLabel: 'Komprimerad artikelmeny',
         navigationButtonLabel: 'Navigering',
-        search: 'Sök'
+        openSearch: 'Open Search',
+        search: 'Sök',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Reglagehandtag'
@@ -328,6 +330,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Stäng',
         previousButton: 'Föregående'
     },

@@ -242,7 +242,9 @@ export default {
         cancel: 'Anulare',
         collapsedItemMenuLabel: 'Meniu de elemente comprimate',
         navigationButtonLabel: 'Navigare',
-        search: 'Căutare'
+        openSearch: 'Open Search',
+        search: 'Căutare',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Mâner cursor de reglare'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Închidere',
         previousButton: 'Înapoi'
     },

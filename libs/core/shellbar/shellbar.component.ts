@@ -1,3 +1,5 @@
+import { InteractivityChecker } from '@angular/cdk/a11y';
+import { END, HOME, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -19,17 +21,19 @@ import {
     ViewChild,
     ViewEncapsulation,
     computed,
-    inject
+    contentChildren,
+    inject,
+    input
 } from '@angular/core';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ClickedDirective, Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, KeyUtil, Nullable, ResizeObserverService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityDirective, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { shallowEqual } from 'fast-equals';
 import { BehaviorSubject, Subscription, distinctUntilChanged } from 'rxjs';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
@@ -159,10 +163,6 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     productSwitches: QueryList<ProductSwitchComponent>;
 
     /** @hidden */
-    @ContentChild(ShellbarContextAreaComponent)
-    contextArea: ShellbarContextAreaComponent;
-
-    /** @hidden */
     @ContentChild(ShellbarBrandingComponent)
     branding: ShellbarBrandingComponent;
 
@@ -179,9 +179,40 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private readonly _shellbar: ElementRef<HTMLElement>;
 
     /** @hidden */
+    @ViewChild('productGroup')
+    private readonly _productGroup: ElementRef<HTMLElement>;
+
+    /** @hidden */
     _showMobileSearch = false;
 
+    /** @hidden */
+    _isTitleHidden = false;
+
+    /** Whether the navigation button is expanded (for aria-expanded). */
+    readonly navigationButtonExpanded = input<boolean | undefined>(undefined);
+
+    /** ID of the element controlled by the navigation button (for aria-controls). Typically references the side navigation element. */
+    readonly navigationButtonControls = input<string | undefined>(undefined);
+
+    /** @hidden */
     protected readonly navigationIcon = computed<string>(() => (this.isRtl() ? 'slim-arrow-right' : 'nav-back'));
+
+    /** @hidden */
+    protected readonly _contextAreas = contentChildren(ShellbarContextAreaComponent);
+
+    /** @hidden */
+    protected readonly _contextArea = computed(() => this._contextAreas()[0]);
+
+    /** @hidden */
+    protected readonly _shellbarLabel = resolveTranslationSignal('coreShellbar.shellbarLabel');
+
+    /**
+     * @hidden
+     * Backward compatibility getter for single context area.
+     */
+    get contextArea(): ShellbarContextAreaComponent | undefined {
+        return this._contextArea();
+    }
 
     /** @hidden */
     private readonly isRtl = computed<boolean>(() => this._rtlService?.rtl() ?? false);
@@ -293,12 +324,18 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _searchSubmitSubscription: Nullable<Subscription>;
 
     /** @hidden */
+    private _tabbableElementsCache: HTMLElement[] | null = null;
+
+    /** @hidden */
     private _resizeObserverService = inject(ResizeObserverService);
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
+
+    /** @hidden */
+    private readonly _interactivityChecker = inject(InteractivityChecker);
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -308,10 +345,34 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     ngAfterViewInit(): void {
+        // Observe shellbar size changes (handles window resize, container changes)
         this._resizeObserverService
             .observe(this._shellbar.nativeElement)
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._setCurrentBreakpoint());
+
+        // Observe product group content changes (handles branding/title content growth)
+        if (this._productGroup) {
+            this._resizeObserverService
+                .observe(this._productGroup.nativeElement)
+                .pipe(takeUntilDestroyed(this._destroyRef))
+                .subscribe(() => this._setCurrentBreakpoint());
+        }
+
+        // Observe context area content changes (handles context area item growth)
+        // Note: context area host has display:contents, so observe its child groups instead
+        const contextArea = this._contextArea();
+        if (contextArea?.contextAreaGroups) {
+            contextArea.contextAreaGroups.forEach((groupRef) => {
+                this._resizeObserverService
+                    .observe(groupRef.nativeElement)
+                    .pipe(takeUntilDestroyed(this._destroyRef))
+                    .subscribe(() => {
+                        this._setCurrentBreakpoint();
+                    });
+            });
+        }
+
         requestAnimationFrame(() => this._setCurrentBreakpoint());
 
         this._setSearchComponentListeners();
@@ -321,6 +382,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         });
 
         this._setProductSwitchDensities();
+
+        // Set up keyboard navigation listener
+        this._setupKeyboardNavigation();
     }
 
     /** @hidden */
@@ -407,6 +471,141 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
+    _notifyTitleHidden(hidden: boolean): void {
+        this._isTitleHidden = hidden;
+        this._actions?._setTitleHidden(
+            hidden,
+            this.branding?.getTitleText() || '',
+            this.branding?.getLogoElement() || null,
+            this.branding?.ariaLabel() || ''
+        );
+    }
+
+    /** @hidden */
+    _handleKeydown(event: KeyboardEvent): void {
+        // Don't interfere with text input behavior
+        const target = event.target as HTMLElement;
+        const isTextInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+        if (isTextInput) {
+            return;
+        }
+
+        // Check if the key is one we handle
+        if (!KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW, HOME, END])) {
+            return;
+        }
+
+        const tabbableElements = this._getTabbableElements();
+        const currentIndex = tabbableElements.indexOf(target);
+
+        // Only handle Home/End if focus is already in the shellbar
+        if (currentIndex === -1) {
+            return;
+        }
+
+        event.preventDefault();
+
+        let nextIndex: number;
+
+        // Handle Home and End keys
+        if (KeyUtil.isKeyCode(event, HOME)) {
+            // Move to first element
+            nextIndex = 0;
+        } else if (KeyUtil.isKeyCode(event, END)) {
+            // Move to last element
+            nextIndex = tabbableElements.length - 1;
+        } else {
+            // Handle arrow keys
+            // Handle RTL: swap arrow key behavior
+            const isLeftKey = KeyUtil.isKeyCode(event, LEFT_ARROW);
+            const shouldMovePrevious = this.isRtl() ? !isLeftKey : isLeftKey;
+
+            if (shouldMovePrevious) {
+                // Move to previous element (like Shift+Tab)
+                nextIndex = currentIndex - 1;
+                if (nextIndex < 0) {
+                    nextIndex = tabbableElements.length - 1;
+                }
+            } else {
+                // Move to next element (like Tab)
+                nextIndex = currentIndex + 1;
+                if (nextIndex >= tabbableElements.length) {
+                    nextIndex = 0;
+                }
+            }
+        }
+
+        const nextElement = tabbableElements[nextIndex];
+        if (nextElement) {
+            nextElement.focus();
+        }
+    }
+
+    /** @hidden */
+    private _setupKeyboardNavigation(): void {
+        // Listen for keydown events on the shellbar container
+        this._shellbar.nativeElement.addEventListener(
+            'keydown',
+            (event: KeyboardEvent) => {
+                this._handleKeydown(event);
+            },
+            true // Use capture phase to catch events before they reach the target
+        );
+
+        // Listen for global keyboard shortcuts
+        const handleGlobalShortcut = (event: KeyboardEvent): void => {
+            // Shift+Ctrl/Cmd+F: Focus search
+            if (event.shiftKey && (event.ctrlKey || event.metaKey) && (event.key === 'f' || event.key === 'F')) {
+                if (this.searchComponent) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.searchComponent.focus();
+                }
+            }
+        };
+
+        document.addEventListener('keydown', handleGlobalShortcut);
+
+        // Clean up the global listener on destroy
+        this._destroyRef.onDestroy(() => {
+            document.removeEventListener('keydown', handleGlobalShortcut);
+        });
+    }
+
+    /** @hidden */
+    private _getTabbableElements(): HTMLElement[] {
+        // Return cached result if available
+        if (this._tabbableElementsCache) {
+            return this._tabbableElementsCache;
+        }
+
+        const shellbarEl = this._shellbar.nativeElement;
+        // Query all descendant elements
+        const allElements = Array.from(shellbarEl.querySelectorAll<HTMLElement>('*'));
+
+        // Use CDK InteractivityChecker for robust tabbability detection
+        const tabbableElements = allElements.filter(
+            (el) => this._interactivityChecker.isTabbable(el) && this._interactivityChecker.isVisible(el)
+        );
+
+        // Filter out elements that are descendants of other tabbable elements
+        // This prevents navigating into nested focusable areas
+        const filteredElements = tabbableElements.filter(
+            (el) => !tabbableElements.some((otherEl) => otherEl !== el && otherEl.contains(el))
+        );
+
+        // Cache the result
+        this._tabbableElementsCache = filteredElements;
+
+        // Invalidate cache after a short delay to allow for DOM updates
+        setTimeout(() => {
+            this._tabbableElementsCache = null;
+        }, 100);
+
+        return filteredElements;
+    }
+
+    /** @hidden */
     private _setSearchComponentListeners(): void {
         this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
             this._showMobileSearch = showSearch;
@@ -433,7 +632,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private _placeSearch(): void {
         const size = this._currentSize$.value;
 
-        if ((size === 'xl' && !this.contextArea) || (size === 's' && this._showMobileSearch)) {
+        // Search stays in shellbar at XL only if NO context areas exist
+        if ((size === 'xl' && this._contextAreas().length === 0) || (size === 's' && this._showMobileSearch)) {
             this._attachSearch();
         } else {
             this._detachSearch();
@@ -465,11 +665,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
                 if (this._actionsExceedShellbarWidth()) {
                     this._actions._handleOverflow(true);
                 }
+                // Hide context area items first (they have lower priority than title)
+                const contextArea = this._contextArea();
+                if (contextArea) {
+                    contextArea.hideElementsIfNeeded();
+                }
+                // Then hide branding title if still overflowing
                 if (this.branding) {
                     this.branding.hideTitleIfNeeded();
-                }
-                if (this.contextArea) {
-                    this.contextArea.hideElementsIfNeeded();
                 }
                 if (this._showMobileSearch && this._actionsExceedShellbarWidth()) {
                     this._closeMobileSearch();
@@ -480,11 +683,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _resetOverflow(): void {
-        if (this.contextArea) {
-            this.contextArea.showElements();
-        }
         if (this.branding) {
             this.branding.showTitle();
+        }
+        const contextArea = this._contextArea();
+        if (contextArea) {
+            contextArea.showElements();
         }
         if (this._actions) {
             this._actions._handleOverflow(this._currentSize === 's' && this.showSearchFieldOnSizeSmall);

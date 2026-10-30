@@ -112,6 +112,58 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="dual-context-areas" componentName="shellbar">
+    Shellbar context area with positioned items
+</fd-docs-section-title>
+<description>
+    <p>
+        The shellbar context area can contain items positioned on the left (after branding) or right (before actions).
+        Use the <code>fdShellbarPosition</code> directive to specify each item's position.
+    </p>
+    <p>
+        Items default to the left position (after branding), or you can explicitly position them on the right (before
+        actions) using <code>fdShellbarPosition="right"</code>. The directive is optional for left-positioned items.
+    </p>
+    <p>
+        When the shellbar becomes too narrow, items are hidden based on their <code>fdShellbarHidePriority</code> value
+        (higher numbers are hidden first - priority 1 is higher priority than priority 1000). Priority works globally
+        across both left and right positioned items, allowing fine-grained control over which items disappear when space
+        is limited.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-dual-context-area-example></fd-shellbar-dual-context-area-example>
+</component-example>
+<code-example [exampleFiles]="shellbarDualContextAreaExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="context-area-events" componentName="shellbar">
+    Context Area Visibility Events
+</fd-docs-section-title>
+<description>
+    <p>
+        This example demonstrates using the <code>elementHidden</code> and <code>elementShown</code> events to
+        automatically show/hide a popover containing hidden context area items.
+    </p>
+    <p>
+        When items are hidden due to space constraints, they are collected via the <code>elementHidden</code> event and
+        displayed in a popover. A down-arrow button appears automatically when items are hidden. When space is restored,
+        the <code>elementShown</code> event removes items from the popover, and the button disappears when all items are
+        visible again.
+    </p>
+    <p>
+        Use the "Responsive preview" button on the top right corner to resize the shellbar and see the popover appear
+        and disappear dynamically.
+    </p>
+</description>
+<component-example>
+    <fd-shellbar-context-area-events-example></fd-shellbar-context-area-events-example>
+</component-example>
+<code-example [exampleFiles]="shellbarContextAreaEventsExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="context-area-overflow" componentName="shellbar">
     Context Area Overflow
 </fd-docs-section-title>
@@ -122,10 +174,25 @@
         popover listing the hidden items. When enough space is restored, the items reappear in the context area and the
         overflow button disappears.
     </p>
+    <p>The context area provides three events for tracking visibility changes:</p>
+    <ul>
+        <li>
+            <code>(contentItemVisibilityChange)</code> - Emits an array of all currently hidden elements. Use this for
+            bulk operations like rendering an overflow menu.
+        </li>
+        <li>
+            <code>(elementHidden)</code> - Emits each time an individual element is hidden. Useful for tracking or
+            animating individual hide events.
+        </li>
+        <li>
+            <code>(elementShown)</code> - Emits each time an individual element is shown. Useful for tracking or
+            animating individual show events.
+        </li>
+    </ul>
     <p>
-        This behavior is driven by listening to the <code>(contentItemVisibilityChange)</code> event emitted by
-        <code>fd-shellbar-context-area</code>. Use the "Responsive preview" button on the top right corner of the
-        example to go into responsive mode and resize the shellbar to observe the effect.
+        Use the "Responsive preview" button on the top right corner of the example to go into responsive mode and resize
+        the shellbar to observe the effect. Check the browser console to see the
+        <code>elementHidden</code> and <code>elementShown</code> events firing.
     </p>
 </description>
 <component-example>

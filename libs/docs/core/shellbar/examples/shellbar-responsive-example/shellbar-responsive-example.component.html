@@ -6,11 +6,17 @@
 </fd-segmented-button>
 <div [style.margin-top.px]="60" [style.maxWidth]="sizesWidth[currentSize] + 'px'">
     <fd-shellbar>
-        <fd-shellbar-branding [interactiveBranding]="true">
+        <fd-shellbar-branding
+            [interactiveBranding]="true"
+            ariaLabel="SAP This is a Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really Long Product Identifier Home"
+        >
             <fd-shellbar-logo>
                 <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
             </fd-shellbar-logo>
-            <fd-shellbar-title>Product Identifier</fd-shellbar-title>
+            <fd-shellbar-title
+                >This is a Really, Really, Really, Really, Really, Really, Really, Really, Really, Really, Really,
+                Really, Really, Really, Really, Really, Really, Really Long Product Identifier</fd-shellbar-title
+            >
         </fd-shellbar-branding>
         <fdp-search-field
             placeholder="Search"
@@ -18,6 +24,7 @@
             [categories]="categories"
             (searchSubmit)="onSearchSubmit($event)"
             (inputChange)="onInputChange($event)"
+            ariaDescription="search results will be shown in the main area"
         ></fdp-search-field>
         <fd-shellbar-actions>
             @for (action of actions; track action) {
