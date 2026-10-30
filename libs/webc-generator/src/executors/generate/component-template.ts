@@ -579,9 +579,10 @@ ${((): string => {
     const initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)} = (): void => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const currentValue = wcElement.${member.name}! || ${fallbackValue};
-      if (JSON.stringify(currentValue) !== JSON.stringify(this._${camelCaseName}Signal())) {
-        this._${camelCaseName}Signal.set(currentValue);
-      }
+      // Assign directly: the value may be a native DOM element (e.g. selectedOption),
+      // which cannot be serialized with JSON.stringify (circular Angular debug refs).
+      // Signal reference equality already suppresses redundant updates.
+      this._${camelCaseName}Signal.set(currentValue);
     };
 
     // Try immediate initialization
