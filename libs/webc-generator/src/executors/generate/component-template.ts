@@ -23,6 +23,11 @@ function isReadonlyField(member: CEM.ClassMember): member is CEM.ClassField {
     return member.kind === 'field' && member.privacy === 'public' && member.readonly === true;
 }
 
+/** Fallback value expression used when a readonly member is not yet available on the web component. */
+function getReadonlyFallback(member: CEM.ClassField): string {
+    return member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined');
+}
+
 /** Gets CVA configuration based on the component's form property metadata */
 function getCvaConfig(
     data: CEM.CustomElementDeclaration,
@@ -232,18 +237,21 @@ function generateProperties(data: CEM.CustomElementDeclaration): {
         if (relatedEvent) {
             // Generate signal-based reactive readonly property
             const typeString = member.type?.text || 'any';
-            const defaultValue = member.default || (typeString.includes('Array') ? '[]' : 'undefined');
+            // Array getters (e.g. SegmentedButton.selectedItems) return a new instance on every read
+            const signalOptions = typeString.includes('Array')
+                ? ', { equal: (a, b): boolean => a.length === b.length && a.every((item, i): boolean => item === b[i]) }'
+                : '';
 
             privateProperties.push(`
-  // Internal signal to track ${camelCaseName} from ${relatedEvent.name} events
-  private _${camelCaseName}Signal = signal<${typeString}>(${defaultValue});
+  // Internal signal to track ${camelCaseName} from ${relatedEvent.name} events and web component re-renders
+  private _${camelCaseName}Signal = signal<${typeString}>(${getReadonlyFallback(member)}${signalOptions});
 `);
 
             properties.push(`
   /**
    * ${member.description || `Returns ${member.name}.`}
    * @readonly This property is managed by the web component and updates reactively.
-   * Based on schema: readonly field that updates via ${relatedEvent.name} event parameters.
+   * Based on schema: readonly field that updates via ${relatedEvent.name} event parameters and after each re-render of the web component.
    */
   ${camelCaseName} = computed((): ${member.type?.text || 'any'} => this._${camelCaseName}Signal());`);
         } else {
@@ -451,13 +459,15 @@ ${outputEvents
     ];`
             : '';
 
-    // Generate readonly property signal updates for events
-    const readonlyMembers = (data.members ?? []).filter(isReadonlyField);
-    const readonlySignalUpdates = readonlyMembers
+    // Readonly members that have related events with parameters are backed by signals
+    const signalReadonlyMembers = (data.members ?? [])
+        .filter(isReadonlyField)
         .filter((member) =>
-            // Only include members that have related events with parameters
             outputEvents.some((event) => event._ui5parameters?.some((param) => param.name === member.name))
-        )
+        );
+
+    // Generate readonly property signal updates for events
+    const readonlySignalUpdates = signalReadonlyMembers
         .map((member) => {
             const camelCaseName = kebabToCamelCase(member.name);
             const relatedEvents = outputEvents.filter((event) =>
@@ -471,8 +481,7 @@ ${outputEvents
           if (eventName === '${event.name}') {
             const customEvent = e as CustomEvent<any>;
             // Use ${member.name} from event detail, fallback to web component property
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            const ${camelCaseName}Value = customEvent.detail?.${member.name} || wcElement.${member.name}! || ${member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined')};
+            const ${camelCaseName}Value = customEvent.detail?.${member.name} ?? wcElement.${member.name} ?? ${getReadonlyFallback(member)};
             this._${camelCaseName}Signal.set(${camelCaseName}Value);
           }`
                 )
@@ -501,6 +510,46 @@ ${readonlySignalUpdates}
     }
     this._destroyRef.onDestroy(() => _listeners.forEach((fn) => fn()));
   `
+            : '';
+
+    const readonlySignalSync =
+        signalReadonlyMembers.length > 0
+            ? `
+    // Readonly properties also change without events (e.g. programmatic value writes),
+    // so re-read them after every re-render of the web component
+    let readonlySyncScheduled = false;
+    const onInvalidate = (): void => {
+      if (readonlySyncScheduled) {
+        return;
+      }
+      readonlySyncScheduled = true;
+      // UI5 schedules its render frame before notifying, so this frame runs after the re-render
+      requestAnimationFrame((): void => {
+        readonlySyncScheduled = false;
+        this._syncReadonlySignals();
+      });
+    };
+    wcElement.attachInvalidate?.(onInvalidate);
+    this._destroyRef.onDestroy((): void => wcElement.detachInvalidate?.(onInvalidate));
+
+    this._syncReadonlySignals();
+    // Fallback in case the web component has not rendered yet
+    requestAnimationFrame((): void => this._syncReadonlySignals());`
+            : '';
+
+    const readonlySignalSyncMethod =
+        signalReadonlyMembers.length > 0
+            ? `
+
+  private _syncReadonlySignals(): void {
+    const wcElement = this.element;
+${signalReadonlyMembers
+    .map(
+        (member) =>
+            `    this._${kebabToCamelCase(member.name)}Signal.set(wcElement.${member.name} ?? ${getReadonlyFallback(member)});`
+    )
+    .join('\n')}
+  }`
             : '';
 
     return `
@@ -565,37 +614,8 @@ ${outputEvents.length > 0 ? '  private readonly _destroyRef = inject(DestroyRef)
     ${inputSyncLoop}
     ${outputsToSyncCode}
     ${outputSyncLoop}
-${((): string => {
-    const signalInits = readonlyMembers
-        .filter((member) =>
-            // Only initialize signals for members that have related events
-            (data.events || []).some((event) => event._ui5parameters?.some((param) => param.name === member.name))
-        )
-        .map((member) => {
-            const camelCaseName = kebabToCamelCase(member.name);
-            const fallbackValue = member.default || (member.type?.text?.includes('Array') ? '[]' : 'undefined');
-            return `    // Initialize ${camelCaseName} signal with current state using delayed initialization
-    // to handle web component timing properly
-    const initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)} = (): void => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const currentValue = wcElement.${member.name}! || ${fallbackValue};
-      if (JSON.stringify(currentValue) !== JSON.stringify(this._${camelCaseName}Signal())) {
-        this._${camelCaseName}Signal.set(currentValue);
-      }
-    };
-
-    // Try immediate initialization
-    initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}();
-
-    // Fallback delayed initialization if web component needs more time
-    // Use requestAnimationFrame for zoneless compatibility
-    requestAnimationFrame((): void => initialize${camelCaseName.charAt(0).toUpperCase() + camelCaseName.slice(1)}());`;
-        })
-        .join('\n');
-
-    return signalInits ? `\n${signalInits}` : '';
-})()}
-  }
+${readonlySignalSync}
+  }${readonlySignalSyncMethod}
 }
 ${typeExports}
 `;
