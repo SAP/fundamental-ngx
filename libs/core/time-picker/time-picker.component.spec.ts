@@ -61,6 +61,57 @@ describe('TimePickerComponent', () => {
             expect(component.time?.isDateValid()).toBe(true);
             expect(component._isInvalidTimeInput).toBe(false);
         });
+        describe('with English day period labels', () => {
+            const englishDayPeriodLabels: Record<string, string> = {
+                'coreTime.nightLabel': 'at night',
+                'coreTime.morningLabel': 'in the morning',
+                'coreTime.afternoonLabel': 'in the afternoon',
+                'coreTime.eveningLabel': 'in the evening'
+            };
+            const toDisplayedText = (formatted: string): string =>
+                formatted.replace(/coreTime\.\w+Label/, (key) => englishDayPeriodLabels[key]);
+
+            it('should keep the time valid when the displayed value is submitted unchanged', () => {
+                component.allowNull = false;
+                component.displayFormat = {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hourCycle: 'h23',
+                    dayPeriod: true
+                };
+
+                for (const [hour, label] of [
+                    [1, 'at night'],
+                    [9, 'in the morning'],
+                    [15, 'in the afternoon'],
+                    [21, 'in the evening']
+                ] as const) {
+                    const time = new FdDate(2026, 10, 23, hour, 5, 30);
+                    component.writeValue(time);
+                    const displayedText = toDisplayedText(component._inputTimeValue);
+                    expect(displayedText).toContain(label);
+
+                    component._timeInputChanged(displayedText);
+
+                    expect(component._isInvalidTimeInput).toBe(false);
+                    expect([component.time?.hour, component.time?.minute, component.time?.second]).toEqual([
+                        hour,
+                        5,
+                        30
+                    ]);
+                }
+            });
+
+            it('should convert a 12-hour time typed with a day period label', () => {
+                component.allowNull = false;
+                component._timeInputChanged('09:05 in the evening');
+
+                expect(component._isInvalidTimeInput).toBe(false);
+                expect([component.time?.hour, component.time?.minute]).toEqual([21, 5]);
+            });
+        });
+
         it('should be in invalid state if input value can not be parsed', () => {
             component.allowNull = false;
             component._timeInputChanged('hello');
