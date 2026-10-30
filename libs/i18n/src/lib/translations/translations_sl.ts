@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'Z možnostjo izbrisa'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'Še {count}',
         tokenizerLabel: 'Generator žetonov'
     },

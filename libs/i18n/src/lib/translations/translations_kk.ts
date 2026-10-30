@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'Жоюға болатын'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'Тағы {count}',
         tokenizerLabel: 'Маркер жасаушы'
     },

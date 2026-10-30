@@ -384,6 +384,8 @@ export interface FdLanguage {
     };
     coreTokenizer: {
         moreLabel: FdLanguageKey;
+        /** Overflow link text shown when a single token is hidden. */
+        overflowingItemLabel: FdLanguageKey;
         tokenizerLabel: FdLanguageKey;
     };
     coreToolbar: {

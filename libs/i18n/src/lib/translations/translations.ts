@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'Deletable'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} more',
         tokenizerLabel: 'Tokenizer'
     },

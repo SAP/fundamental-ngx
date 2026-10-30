@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'Може бути видалено'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'Ще {count}',
         tokenizerLabel: 'Генератор токенів'
     },

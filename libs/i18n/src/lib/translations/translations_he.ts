@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'ניתן למחיקה'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} יותר',
         tokenizerLabel: 'Tokenizer'
     },

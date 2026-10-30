@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'Törölhető'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'további {count}',
         tokenizerLabel: 'Tokenizáló'
     },

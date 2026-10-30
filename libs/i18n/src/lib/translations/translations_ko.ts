@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: '삭제 가능'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} 이상',
         tokenizerLabel: '토크나이저'
     },
