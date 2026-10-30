@@ -363,6 +363,90 @@ describe('componentTemplate', () => {
             const output = componentTemplate(readonlySignalDeclaration, [], PACKAGE);
             expect(output).not.toContain('get files()');
         });
+
+        it('re-reads the property from the web component after each re-render', () => {
+            const output = componentTemplate(readonlySignalDeclaration, [], PACKAGE);
+            expect(output).toContain('wcElement.attachInvalidate?.(onInvalidate);');
+            expect(output).toContain('wcElement.detachInvalidate?.(onInvalidate)');
+            expect(output).toContain('private _syncReadonlySignals(): void {');
+            expect(output).toContain('this._filesSignal.set(wcElement.files ?? undefined);');
+        });
+
+        it('does not generate readonly sync code for getter-style readonly', () => {
+            const output = componentTemplate(minimalDeclaration, [], PACKAGE);
+            expect(output).not.toContain('_syncReadonlySignals');
+            expect(output).not.toContain('attachInvalidate');
+        });
+    });
+
+    describe('readonly member — falsy values', () => {
+        const booleanReadonlyDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'FlexibleColumnLayout',
+            tagName: 'ui5-flexible-column-layout',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'startColumnVisible',
+                    privacy: 'public',
+                    readonly: true,
+                    type: { text: 'boolean' },
+                    default: 'true'
+                } as CEM.ClassField
+            ],
+            events: [
+                {
+                    name: 'layout-change',
+                    _ui5privacy: 'public',
+                    type: { text: 'CustomEvent' },
+                    _ui5parameters: [{ name: 'startColumnVisible', type: { text: 'boolean' }, _ui5privacy: 'public' }]
+                } as any
+            ]
+        };
+
+        it('keeps false values instead of replacing them with the default', () => {
+            const output = componentTemplate(booleanReadonlyDeclaration, [], PACKAGE);
+            expect(output).toContain('customEvent.detail?.startColumnVisible ?? wcElement.startColumnVisible ?? true');
+            expect(output).toContain('this._startColumnVisibleSignal.set(wcElement.startColumnVisible ?? true);');
+            expect(output).not.toContain('|| true');
+        });
+    });
+
+    describe('readonly member — array signal', () => {
+        const arrayReadonlyDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'SegmentedButton',
+            tagName: 'ui5-segmented-button',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'selectedItems',
+                    privacy: 'public',
+                    readonly: true,
+                    type: { text: 'Array<ISegmentedButtonItem>' },
+                    default: '[]'
+                } as CEM.ClassField
+            ],
+            events: [
+                {
+                    name: 'selection-change',
+                    _ui5privacy: 'public',
+                    type: { text: 'CustomEvent' },
+                    _ui5parameters: [
+                        { name: 'selectedItems', type: { text: 'Array<ISegmentedButtonItem>' }, _ui5privacy: 'public' }
+                    ]
+                } as any
+            ]
+        };
+
+        it('compares arrays item by item so re-renders without selection changes do not notify', () => {
+            const output = componentTemplate(arrayReadonlyDeclaration, [], PACKAGE);
+            expect(output).toContain(
+                'signal<Array<ISegmentedButtonItem>>([], { equal: (a, b): boolean => a.length === b.length && a.every((item, i): boolean => item === b[i]) })'
+            );
+        });
     });
 
     describe('CVA — boolean form property (non-radio)', () => {
