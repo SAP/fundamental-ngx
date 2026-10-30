@@ -60,7 +60,6 @@ fdp-search-field {
 }
 
 // Remove italic styling from shellbar search category select placeholder
-.fd-select__control.fdp-search-field__category-select--shellbar.is-placeholder .fd-select__text-content,
-.fd-select__control.is-placeholder.fdp-search-field__category-select--shellbar .fd-select__text-content {
+.fd-select__control.fdp-search-field__category-select--shellbar.is-placeholder .fd-select__text-content {
     font-style: normal !important;
 }
