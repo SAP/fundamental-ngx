@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'Može se izbrisati'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'još {count}',
         tokenizerLabel: 'Generator tokena'
     },

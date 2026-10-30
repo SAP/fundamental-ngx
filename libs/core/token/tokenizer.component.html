@@ -29,19 +29,20 @@
                     tabindex="0"
                 >
                     @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
+                        @let compactCount = moreTokensLeft.length + moreTokensRight.length + externalHiddenCount();
                         {{
                             (
-                                'coreTokenizer.moreLabel'
-                                | fdTranslate
-                                    : { count: moreTokensLeft.length + moreTokensRight.length + externalHiddenCount() }
+                                (compactCount === 1 ? 'coreTokenizer.overflowingItemLabel' : 'coreTokenizer.moreLabel')
+                                | fdTranslate: { count: compactCount }
                             )()
                         }}
                     }
                     @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
+                        @let cozyCount = hiddenCozyTokenCount + externalHiddenCount();
                         {{
                             (
-                                'coreTokenizer.moreLabel'
-                                | fdTranslate: { count: hiddenCozyTokenCount + externalHiddenCount() }
+                                (cozyCount === 1 ? 'coreTokenizer.overflowingItemLabel' : 'coreTokenizer.moreLabel')
+                                | fdTranslate: { count: cozyCount }
                             )()
                         }}
                     }
@@ -103,16 +104,21 @@
             tabindex="0"
         >
             @if (_contentDensityObserver.isCompactSignal() || compactCollapse) {
+                @let compactCount = moreTokensLeft.length + moreTokensRight.length + externalHiddenCount();
                 {{
                     (
-                        'coreTokenizer.moreLabel'
-                        | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length + externalHiddenCount() }
+                        (compactCount === 1 ? 'coreTokenizer.overflowingItemLabel' : 'coreTokenizer.moreLabel')
+                        | fdTranslate: { count: compactCount }
                     )()
                 }}
             }
             @if (!_contentDensityObserver.isCompactSignal() && !compactCollapse) {
+                @let cozyCount = hiddenCozyTokenCount + externalHiddenCount();
                 {{
-                    ('coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount + externalHiddenCount() })()
+                    (
+                        (cozyCount === 1 ? 'coreTokenizer.overflowingItemLabel' : 'coreTokenizer.moreLabel')
+                        | fdTranslate: { count: cozyCount }
+                    )()
                 }}
             }
         </span>

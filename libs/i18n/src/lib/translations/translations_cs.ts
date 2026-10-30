@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'Lze odstranit'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'o {count} více',
         tokenizerLabel: 'Tokenizér'
     },

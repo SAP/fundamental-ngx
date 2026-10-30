@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'Boleh Padam'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} lagi',
         tokenizerLabel: 'Pengawal Token'
     },

@@ -95,7 +95,8 @@ describe('TokenizerComponent', () => {
 
             const moreIndicator = singleTokenFixture.nativeElement.querySelector('.fd-tokenizer-more');
             expect(moreIndicator).toBeTruthy();
-            expect(moreIndicator.textContent?.trim()).toContain('1');
+            // A single hidden token shows the "1 item" label, not "1 more".
+            expect(moreIndicator.textContent?.trim()).toBe('1 item');
         });
 
         it('opens the overflow popover for a single overlong token', async () => {
