@@ -1,3 +1,13 @@
+## 0.66.1-rc.7 (2026-10-30)
+
+### 🩹 Fixes
+
+- **core:** drop am/pm when adding day period to a time-only format ([#14624](https://github.com/SAP/fundamental-ngx/pull/14624))
+
+### ❤️ Thank You
+
+- Vitor Coelho @VitorCoelho
+
 ## 0.66.1-rc.6 (2026-10-30)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
