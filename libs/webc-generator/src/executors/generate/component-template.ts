@@ -1,4 +1,4 @@
-import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
+import type * as CEM from './cem-types';
 
 function kebabToCamelCase(s: string): string {
     return s.replace(/-./g, (x) => x[1].toUpperCase());

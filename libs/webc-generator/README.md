@@ -4,11 +4,13 @@ Code generator that produces Angular wrapper libraries from UI5 Web Components C
 
 ## How it works
 
-The generator reads the Custom Elements Manifest produced by `@ui5/webcomponents-tools` and emits Angular wrapper components for each UI5 Web Component:
+The generator reads the Custom Elements Manifest published by the UI5 component packages and emits Angular wrapper components for each UI5 Web Component:
 
 1. **Input:** CEM JSON from `@ui5/webcomponents` / `@ui5/webcomponents-fiori` / `@ui5/webcomponents-ai`
 2. **Processing:** `executor.ts` maps each component's properties, events, and slots to Angular `input()` signals, `output()` emitters, and content-projection directives
 3. **Output:** Angular component + type files in `libs/ui5-webcomponents*`
+
+The generator defines the CEM fields it uses, including UI5-specific fields, in `src/executors/generate/cem-types.ts`. It does not need `@ui5/webcomponents-tools` installed to read the published manifests.
 
 Generated files include:
 

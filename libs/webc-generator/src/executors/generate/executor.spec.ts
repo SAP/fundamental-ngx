@@ -1,5 +1,5 @@
 import type { ExecutorContext } from '@nx/devkit';
-import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
+import type * as CEM from './cem-types';
 import runExecutor, {
     extractCemData,
     generateThemingBridgeContent,
@@ -22,7 +22,9 @@ const makeContext = (projectName = 'ui5-webcomponents'): ExecutorContext => ({
     root: PROJECT_ROOT,
     cwd: PROJECT_ROOT,
     isVerbose: false,
-    projectsConfigurations: { version: 2, projects: {} }
+    projectsConfigurations: { version: 2, projects: {} },
+    nxJsonConfiguration: {},
+    projectGraph: { nodes: {}, dependencies: {} }
 });
 
 const minimalCem: CEM.Package = {

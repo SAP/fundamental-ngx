@@ -22,27 +22,37 @@ Release a new version of the library with updated UI5 Web Components.
 1. Create a branch from the latest `main`:
 
     ```bash
-    git checkout main
-    git pull
-    git checkout -b chore/ui5wc-{{WCVersion}}
+    git fetch origin
+    git switch -c chore/ui5wc-{{WCVersion}} origin/main
     ```
 
-2. Bump the UI5 core components to the latest version.
+2. Bump the eight direct UI5 Web Components dependencies together, preserving their `~` version prefix: `@ui5/webcomponents`, `@ui5/webcomponents-ai`, `@ui5/webcomponents-base`, `@ui5/webcomponents-fiori`, `@ui5/webcomponents-icons`, `@ui5/webcomponents-icons-business-suite`, `@ui5/webcomponents-icons-tnt`, and `@ui5/webcomponents-theming`. `@ui5/tooling-webc` has a separate version series.
 
     **Check [UI5/webcomponents#10568](https://github.com/UI5/webcomponents/issues/10568) for the latest release** — they usually release around the **5th of each month**, and we release afterwards.
 
-3. Update `package.json` with the new version, then reinstall dependencies:
+3. Update `package.json` with the new version, then refresh and verify the lockfile:
+
     ```bash
-    rm -rf node_modules && yarn
+    yarn install
+    yarn install --immutable
     ```
+
+4. Review the new `@ui5/webcomponents*/dist/custom-elements-internal.json` manifests against the CEM fields consumed by [`libs/webc-generator/src/executors/generate/cem-types.ts`](../../libs/webc-generator/src/executors/generate/cem-types.ts). Check UI5-specific fields such as `_ui5formProperty`, `_ui5formEvents`, `_ui5parameters`, and `_ui5since`. The generator casts parsed JSON to these local types; TypeScript does **not** validate the manifest at runtime. Update the local types and generator tests when consumed fields change.
+
+5. Check published `@ui5/webcomponents-tools` versions and release notes separately (for example, `npm view @ui5/webcomponents-tools versions --json`), including whether a version drops the legacy WDIO dependencies. The package is **not installed in this repository**: the generator only needed its internal CEM declarations as types, now represented locally. An update to tools will not appear in our dependency-update PRs; do not re-add it solely for type imports. Check explicit published versions rather than relying only on the `latest` dist-tag.
+
+    > **Before using the `ui5-wrapper-updater` agent:** check that its instructions no longer add `@ui5/webcomponents-tools` as a direct dependency. The agent instructions reviewed with this change still list it; HERMES must update them. Follow this release guide until then.
 
 ---
 
 ### Step 2 — Regenerate UI5 Web Component Wrappers
 
-Run the following commands in order:
+Build and test the generator before regenerating. `yarn cleanup` removes ignored generated files and can discard local wrapper work; preserve unrelated changes before running it. Run the following commands in order:
 
 ```bash
+nx run webc-generator:build --skip-nx-cache
+nx run webc-generator:test --skip-nx-cache
+
 # Remove existing generated wrapper components
 yarn cleanup
 
@@ -58,6 +68,8 @@ nx run ui5-webcomponents:build --skip-nx-cache
 nx run ui5-webcomponents-ai:build --skip-nx-cache
 nx run ui5-webcomponents-fiori:build --skip-nx-cache
 ```
+
+Run all four `generate` targets a second time without Nx cache and compare output file counts and hashes between the two runs. A new UI5 release can intentionally change the output compared with the previous release, but two runs against the **same** release must match. Review any changed wrappers and their source CEM fields before committing.
 
 ---
 
