@@ -417,18 +417,19 @@ export function componentTemplate(
 
       // Use the Injector to run the effect in the correct context
       if (this[signalName] && typeof this[signalName] === 'function') {
+        let lastWritten: unknown;
         runInInjectionContext(this.injector, (): void => {
           effect((): void => {
             // Read the signal value
             const value = this[signalName]();
             if (wcElement) {
-              // Skip writes when the signal is undefined and the property is already truthy
-              // This prevents clobbering imperatively-set values (e.g., from RouterLink)
-              if (value === undefined && wcElement[inputName]) {
+              // Don't clobber externally-set values (e.g. RouterLink href) unless we wrote a value before
+              if (value === undefined && lastWritten === undefined && wcElement[inputName]) {
                 return;
               }
               // Write the value to the Web Component's property
               wcElement[inputName] = value;
+              lastWritten = value;
             }
           });
         });
