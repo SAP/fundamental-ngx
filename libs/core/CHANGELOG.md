@@ -1,3 +1,7 @@
+## 0.66.1-rc.8 (2026-11-02)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.7 (2026-10-30)
 
 ### 🩹 Fixes
