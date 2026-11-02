@@ -322,6 +322,12 @@ describe('componentTemplate', () => {
             const output = componentTemplate(readonlyGetterDeclaration, [], PACKAGE);
             expect(output).not.toContain('_colorSchemeSignal');
         });
+
+        it('does not generate readonly sync code for getter-style readonly', () => {
+            const output = componentTemplate(readonlyGetterDeclaration, [], PACKAGE);
+            expect(output).not.toContain('_syncReadonlySignals');
+            expect(output).not.toContain('attachInvalidate');
+        });
     });
 
     describe('readonly member — signal (matching event parameter)', () => {
@@ -371,12 +377,6 @@ describe('componentTemplate', () => {
             expect(output).toContain('wcElement.detachInvalidate?.(onInvalidate)');
             expect(output).toContain('private _syncReadonlySignals(): void {');
             expect(output).toContain('this._filesSignal.set(wcElement.files ?? undefined);');
-        });
-
-        it('does not generate readonly sync code for getter-style readonly', () => {
-            const output = componentTemplate(minimalDeclaration, [], PACKAGE);
-            expect(output).not.toContain('_syncReadonlySignals');
-            expect(output).not.toContain('attachInvalidate');
         });
     });
 
