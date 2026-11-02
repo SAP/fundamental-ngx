@@ -5,7 +5,8 @@ import {
     ElementRef,
     forwardRef,
     inject,
-    InjectionToken
+    InjectionToken,
+    OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -42,7 +43,7 @@ export const CVA_CONFIG = new InjectionToken<CvaConfig>('CVA_CONFIG');
         }
     ]
 })
-export class GenericControlValueAccessor<ValueType = any> implements ControlValueAccessor, AfterViewInit {
+export class GenericControlValueAccessor<ValueType = any> implements ControlValueAccessor, AfterViewInit, OnDestroy {
     onChange!: (val: ValueType) => void;
     onTouched!: () => void;
 
@@ -54,6 +55,8 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
     private _valueSet = false;
     private _initialized = false;
     private _disabled = false;
+    private _rafId: number | null = null;
+    private readonly _listenerAbort = new AbortController();
 
     // Default config if none provided
     private get effectiveConfig(): CvaConfig {
@@ -69,9 +72,18 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
     ngAfterViewInit(): void {
         // Initialize after the UI5 web component is ready
         // Use requestAnimationFrame for zoneless compatibility instead of setTimeout
-        requestAnimationFrame(() => {
+        this._rafId = requestAnimationFrame(() => {
+            this._rafId = null;
             this.initializeComponent();
         });
+    }
+
+    ngOnDestroy(): void {
+        if (this._rafId !== null) {
+            cancelAnimationFrame(this._rafId);
+            this._rafId = null;
+        }
+        this._listenerAbort.abort();
     }
 
     setDisabledState(isDisabled: boolean): void {
@@ -108,31 +120,41 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
         // Set up event listeners on the UI5 web component
 
         if (element && element.addEventListener) {
+            const listenerOptions: AddEventListenerOptions = { signal: this._listenerAbort.signal };
+
             // Listen to all configured events
             for (const eventName of config.events) {
-                element.addEventListener(eventName, (e: any) => {
-                    if (this.onChange) {
-                        const valueToEmit = this.getValueToEmit(config, e);
-                        if (valueToEmit !== undefined) {
-                            const transformedValue = config.transformValue
-                                ? config.transformValue(valueToEmit)
-                                : valueToEmit;
-                            this.onChange(transformedValue);
-                            // Manually trigger change detection for zoneless compatibility
-                            this.cdr.markForCheck();
+                element.addEventListener(
+                    eventName,
+                    (e: any) => {
+                        if (this.onChange) {
+                            const valueToEmit = this.getValueToEmit(config, e);
+                            if (valueToEmit !== undefined) {
+                                const transformedValue = config.transformValue
+                                    ? config.transformValue(valueToEmit)
+                                    : valueToEmit;
+                                this.onChange(transformedValue);
+                                // Manually trigger change detection for zoneless compatibility
+                                this.cdr.markForCheck();
+                            }
                         }
-                    }
-                });
+                    },
+                    listenerOptions
+                );
             }
 
             // Listen to focusout for touched state
-            element.addEventListener('focusout', () => {
-                if (this.onTouched) {
-                    this.onTouched();
-                    // Manually trigger change detection for zoneless compatibility
-                    this.cdr.markForCheck();
-                }
-            });
+            element.addEventListener(
+                'focusout',
+                () => {
+                    if (this.onTouched) {
+                        this.onTouched();
+                        // Manually trigger change detection for zoneless compatibility
+                        this.cdr.markForCheck();
+                    }
+                },
+                listenerOptions
+            );
         }
 
         // Only apply stored value if writeValue was called (form control exists).

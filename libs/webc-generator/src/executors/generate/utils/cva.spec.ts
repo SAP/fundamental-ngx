@@ -20,6 +20,7 @@ global.requestAnimationFrame = (cb: FrameRequestCallback): number => {
     cb(0);
     return 0;
 };
+global.cancelAnimationFrame = (): void => undefined;
 
 function makeDirective(config?: CvaConfig, elementOverrides: Record<string, any> = {}): GenericControlValueAccessor {
     const mockElement = {
@@ -39,6 +40,8 @@ function makeDirective(config?: CvaConfig, elementOverrides: Record<string, any>
     (directive as any)['_valueSet'] = false;
     (directive as any)['_initialized'] = false;
     (directive as any)['_disabled'] = false;
+    (directive as any)['_rafId'] = null;
+    (directive as any)['_listenerAbort'] = new AbortController();
     return directive;
 }
 
@@ -191,6 +194,60 @@ describe('GenericControlValueAccessor', () => {
             const directive = makeDirective(defaultConfig, { value: 'native-value' });
             directive.ngAfterViewInit();
             expect(getElement(directive).value).toBe('native-value');
+        });
+    });
+
+    describe('ngOnDestroy', () => {
+        it('cancels pending initialization when destroyed before the animation frame', () => {
+            const syncRaf = global.requestAnimationFrame;
+            const syncCancelRaf = global.cancelAnimationFrame;
+            const pendingFrames = new Map<number, FrameRequestCallback>();
+            let nextFrameId = 1;
+            global.requestAnimationFrame = (cb: FrameRequestCallback): number => {
+                pendingFrames.set(nextFrameId, cb);
+                return nextFrameId++;
+            };
+            global.cancelAnimationFrame = (id: number): void => {
+                pendingFrames.delete(id);
+            };
+
+            try {
+                const directive = makeDirective(defaultConfig);
+                directive.writeValue('hello');
+                directive.ngAfterViewInit();
+                directive.ngOnDestroy();
+                pendingFrames.forEach((cb) => cb(0));
+
+                const el = getElement(directive);
+                expect(el.addEventListener).not.toHaveBeenCalled();
+                expect(el.value).toBe('A');
+                expect(getCdr(directive).markForCheck).not.toHaveBeenCalled();
+            } finally {
+                global.requestAnimationFrame = syncRaf;
+                global.cancelAnimationFrame = syncCancelRaf;
+            }
+        });
+
+        it('removes CVA listeners from the element', () => {
+            const element = Object.assign(new EventTarget(), { value: 'hello', disabled: false });
+            const onChange = jest.fn();
+            const onTouched = jest.fn();
+            const directive = makeDirective(defaultConfig);
+            (directive as any)['elementRef'] = { nativeElement: element };
+            directive.registerOnChange(onChange);
+            directive.registerOnTouched(onTouched);
+            directive.ngAfterViewInit();
+
+            element.dispatchEvent(new Event('change'));
+            element.dispatchEvent(new Event('focusout'));
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onTouched).toHaveBeenCalledTimes(1);
+
+            directive.ngOnDestroy();
+            element.dispatchEvent(new Event('change'));
+            element.dispatchEvent(new Event('focusout'));
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onTouched).toHaveBeenCalledTimes(1);
         });
     });
 });
