@@ -1,7 +1,7 @@
 import { ExecutorContext, PromiseExecutor } from '@nx/devkit';
-import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
 import { mkdir, readFile, writeFile } from 'fs/promises';
 import * as path from 'path';
+import type * as CEM from './cem-types';
 import { componentTemplate } from './component-template';
 import { GenerateExecutorSchema } from './schema';
 
