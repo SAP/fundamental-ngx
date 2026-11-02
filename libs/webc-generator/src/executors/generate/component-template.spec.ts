@@ -1,4 +1,5 @@
 import type * as CEM from '@ui5/webcomponents-tools/lib/cem/types-internal.d.ts';
+import * as ts from 'typescript';
 import { componentTemplate } from './component-template';
 
 const PACKAGE = '@ui5/webcomponents';
@@ -600,18 +601,93 @@ describe('componentTemplate', () => {
 
         it('generates guard code to prevent clobbering imperatively-set properties', () => {
             const output = componentTemplate(linkDeclaration, [], PACKAGE);
-            // This test verifies the GENERATOR produces the guard code.
-            // The guard prevents the effect from writing undefined when a property
-            // (like href) has been set imperatively by RouterLink or other code.
-            expect(output).toContain('// Skip writes when the signal is undefined and the property is already truthy');
-            expect(output).toContain('if (value === undefined && wcElement[inputName]) {');
-            expect(output).toContain('return;');
+            expect(output).toContain('if (value === undefined && lastWritten === undefined && wcElement[inputName]) {');
+            expect(output).toContain('lastWritten = value;');
         });
 
         it('generates code that still writes non-undefined values', () => {
             const output = componentTemplate(linkDeclaration, [], PACKAGE);
             // After the guard, the effect should still write when value is not undefined
             expect(output).toContain('wcElement[inputName] = value;');
+        });
+
+        describe('runtime behavior', () => {
+            /** Runs the generated ngAfterViewInit body against a fake element and a manually re-runnable effect. */
+            function setup(
+                declaration: CEM.CustomElementDeclaration,
+                wcElement: Record<string, unknown>
+            ): { set: (name: string, value: unknown) => void } {
+                const output = componentTemplate(declaration, [], PACKAGE);
+                const start = output.indexOf('ngAfterViewInit(): void {') + 'ngAfterViewInit(): void {'.length;
+                const body = output.slice(start, output.lastIndexOf('}', output.lastIndexOf('}') - 1));
+                const js = ts.transpileModule(body, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
+
+                const values: Record<string, unknown> = {};
+                const effects: Array<() => void> = [];
+                const host: Record<string, unknown> = { injector: {} };
+                for (const member of declaration.members ?? []) {
+                    host[member.name] = (): unknown => values[member.name];
+                }
+
+                new Function(
+                    'runInInjectionContext',
+                    'effect',
+                    'wcElement',
+                    js.replace('const wcElement = this.element;', '')
+                ).call(
+                    host,
+                    (_: unknown, fn: () => void) => fn(),
+                    (fn: () => void) => {
+                        effects.push(fn);
+                        fn();
+                    },
+                    wcElement
+                );
+
+                return {
+                    set: (name, value): void => {
+                        values[name] = value;
+                        effects.forEach((fn) => fn());
+                    }
+                };
+            }
+
+            const inputDeclaration: CEM.CustomElementDeclaration = {
+                kind: 'class',
+                name: 'Input',
+                tagName: 'ui5-input',
+                customElement: true,
+                members: [
+                    {
+                        kind: 'field',
+                        name: 'maxlength',
+                        privacy: 'public',
+                        type: { text: 'number | undefined' },
+                        default: 'undefined'
+                    } as CEM.ClassField
+                ]
+            };
+
+            it('resets a previously bound property when the input becomes undefined', () => {
+                const element: Record<string, unknown> = {};
+                const { set } = setup(inputDeclaration, element);
+
+                set('maxlength', 5);
+                expect(element['maxlength']).toBe(5);
+
+                set('maxlength', undefined);
+                expect(element['maxlength']).toBeUndefined();
+            });
+
+            it('does not clobber an externally-set property while the input was never bound', () => {
+                const element: Record<string, unknown> = { href: '/external' };
+                const { set } = setup(linkDeclaration, element);
+
+                expect(element['href']).toBe('/external');
+
+                set('href', undefined);
+                expect(element['href']).toBe('/external');
+            });
         });
     });
 });
