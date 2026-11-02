@@ -1,6 +1,5 @@
 import {
     afterNextRender,
-    Attribute,
     ChangeDetectionStrategy,
     Component,
     computed,
@@ -38,8 +37,8 @@ import { NumberInputService } from './number-input.service';
     host: {
         '[class]': 'cssClass()',
         '[attr.type]': 'internalType()',
-        '[attr.aria-label]': 'ariaLabelAttr || ariaLabel() || null',
-        '[attr.aria-labelledby]': 'ariaLabelledByAttr || ariaLabelledBy() || null',
+        '[attr.aria-label]': 'ariaLabelAttr() || ariaLabel() || null',
+        '[attr.aria-labelledby]': 'ariaLabelledByAttr() || ariaLabelledBy() || null',
         '[attr.aria-invalid]': 'state() === "error" ? true : null',
         '[style.text-align]': 'isEnhancedNumberMode() ? textAlign() : null',
         '(keydown)': 'handleKeydown($any($event))',
@@ -77,6 +76,20 @@ export class FormControlComponent implements FormItemControl {
      * Writable so sibling directives (e.g. `fd-form-item`) can associate the control with a label.
      */
     readonly ariaLabelledBy = model<string | undefined | null>();
+
+    /**
+     * Value of the `aria-label` attribute or `[aria-label]` binding.
+     * Takes precedence over `ariaLabel`.
+     */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly ariaLabelAttr = input<string | null>(null, { alias: 'aria-label' });
+
+    /**
+     * Value of the `aria-labelledby` attribute or `[aria-labelledby]` binding.
+     * Takes precedence over `ariaLabelledBy`.
+     */
+    // eslint-disable-next-line @angular-eslint/no-input-rename
+    readonly ariaLabelledByAttr = input<string | null>(null, { alias: 'aria-labelledby' });
 
     // ===== Number Input Signal Inputs =====
 
@@ -193,12 +206,6 @@ export class FormControlComponent implements FormItemControl {
     /** @hidden */
     protected readonly localeId = inject(LOCALE_ID);
 
-    /** @hidden */
-    protected readonly ariaLabelAttr: string;
-
-    /** @hidden */
-    protected readonly ariaLabelledByAttr: string;
-
     /** @hidden Computed CSS classes */
     protected readonly cssClass = computed(() => {
         const tagName = this.elementRef.nativeElement.tagName.toLowerCase();
@@ -284,12 +291,7 @@ export class FormControlComponent implements FormItemControl {
     private _groupingSeparatorCache = new Map<string, string>();
 
     /** @hidden */
-    constructor(
-        @Attribute('aria-label') ariaLabelAttr: string,
-        @Attribute('aria-labelledby') ariaLabelledByAttr: string
-    ) {
-        this.ariaLabelAttr = ariaLabelAttr;
-        this.ariaLabelledByAttr = ariaLabelledByAttr;
+    constructor() {
         this.contentDensityObserver.subscribe();
 
         // Format initial value if enhanced number mode needs formatting.

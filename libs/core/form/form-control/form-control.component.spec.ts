@@ -1,4 +1,4 @@
-import { Component, DebugElement, QueryList, ViewChildren } from '@angular/core';
+import { Component, DebugElement, QueryList, signal, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -7,6 +7,8 @@ import {
     ContentDensityModule,
     mockedLocalContentDensityDirective
 } from '@fundamental-ngx/core/content-density';
+import { FormItemComponent } from '../form-item/form-item.component';
+import { FormLabelComponent } from '../form-label/form-label.component';
 import { FormControlComponent } from './form-control.component';
 
 const { contentDensityDirectiveProvider, setContentDensity } = mockedLocalContentDensityDirective(
@@ -88,6 +90,29 @@ export class NumberLivePrecisionTestComponent {
     value: number | null = null;
 }
 
+@Component({
+    selector: 'fd-form-control-aria-test',
+    template: `
+        <input id="staticLabel" fd-form-control aria-label="Static label" [ariaLabel]="label()" />
+        <input id="ariaLabelBinding" fd-form-control [aria-label]="label()" />
+        <input id="ariaLabelInput" fd-form-control [ariaLabel]="label()" />
+        <input id="ariaLabelledByBinding" fd-form-control [aria-labelledby]="labelledBy()" />
+        <div fd-form-item>
+            <label fd-form-label>Label</label>
+            <input id="staticLabelledBy" fd-form-control aria-labelledby="custom-label" />
+        </div>
+        <div fd-form-item>
+            <label id="item-label" fd-form-label>Label</label>
+            <input id="itemLabelledBy" fd-form-control />
+        </div>
+    `,
+    imports: [FormControlComponent, FormItemComponent, FormLabelComponent]
+})
+export class FormControlAriaTestComponent {
+    readonly label = signal('First label');
+    readonly labelledBy = signal('first-label-id');
+}
+
 describe('FormControlComponent', () => {
     let fixture: ComponentFixture<TestComponent>, testComponent: TestComponent, debugElement: DebugElement;
 
@@ -150,6 +175,59 @@ describe('FormControlComponent', () => {
         const input: HTMLInputElement = debugElement.query(By.css('input')).nativeElement;
 
         expect(input.getAttribute('type')).toBe('text');
+    });
+});
+
+describe('FormControlComponent - ARIA labelling', () => {
+    let fixture: ComponentFixture<FormControlAriaTestComponent>;
+
+    const getElement = (id: string): HTMLElement => fixture.nativeElement.querySelector(`#${id}`);
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [FormControlAriaTestComponent]
+        });
+        fixture = TestBed.createComponent(FormControlAriaTestComponent);
+        fixture.detectChanges();
+    });
+
+    it('should give a static aria-label precedence over the ariaLabel input', () => {
+        expect(getElement('staticLabel').getAttribute('aria-label')).toBe('Static label');
+    });
+
+    it('should render and update an [aria-label] binding', () => {
+        expect(getElement('ariaLabelBinding').getAttribute('aria-label')).toBe('First label');
+
+        fixture.componentInstance.label.set('Second label');
+        fixture.detectChanges();
+
+        expect(getElement('ariaLabelBinding').getAttribute('aria-label')).toBe('Second label');
+    });
+
+    it('should render and update an [ariaLabel] binding', () => {
+        expect(getElement('ariaLabelInput').getAttribute('aria-label')).toBe('First label');
+
+        fixture.componentInstance.label.set('Second label');
+        fixture.detectChanges();
+
+        expect(getElement('ariaLabelInput').getAttribute('aria-label')).toBe('Second label');
+    });
+
+    it('should render and update an [aria-labelledby] binding', () => {
+        expect(getElement('ariaLabelledByBinding').getAttribute('aria-labelledby')).toBe('first-label-id');
+
+        fixture.componentInstance.labelledBy.set('second-label-id');
+        fixture.detectChanges();
+
+        expect(getElement('ariaLabelledByBinding').getAttribute('aria-labelledby')).toBe('second-label-id');
+    });
+
+    it('should keep a static aria-labelledby inside fd-form-item', () => {
+        expect(getElement('staticLabelledBy').getAttribute('aria-labelledby')).toBe('custom-label');
+    });
+
+    it('should link the fd-form-item label when no aria-labelledby is provided', () => {
+        expect(getElement('itemLabelledBy').getAttribute('aria-labelledby')).toBe('item-label');
     });
 });
 
@@ -497,7 +575,8 @@ describe('FormControlComponent - Number Input', () => {
             fixture.detectChanges();
             tick();
 
-            expect(testComponent.value).toBe(0);
+            // Read via fixture: `testComponent.value` is narrowed to `null` by the assignment above.
+            expect(fixture.componentInstance.value).toBe(0);
         }));
 
         it('should validate and sync the number on Enter without re-focusing', fakeAsync(() => {
