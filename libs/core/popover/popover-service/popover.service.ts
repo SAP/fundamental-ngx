@@ -416,6 +416,12 @@ export class PopoverService {
             this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
 
+            if (!this._overlayRef.hasAttached()) {
+                return;
+            }
+
+            this._getPopoverBody()._commitView();
+
             // Update position - this will trigger the positionChanges observable
             this._overlayRef.updatePosition();
             this._startLayoutShiftObserver();

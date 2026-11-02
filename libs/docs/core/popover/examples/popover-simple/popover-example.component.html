@@ -1,4 +1,15 @@
 <div class="fd-docs-flex-display-helper">
+    <fd-popover [maxWidth]="320">
+        <fd-popover-control>
+            <button fd-button label="Max width regression"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div data-testid="popover-max-width-regression-content" style="width: 480px; white-space: nowrap">
+                Popover max-width regression content
+            </div>
+        </fd-popover-body>
+    </fd-popover>
+
     <fd-popover title="photo 1 in circle">
         <fd-popover-control>
             <fd-avatar

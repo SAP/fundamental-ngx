@@ -24,6 +24,11 @@ import { Placement } from '@fundamental-ngx/core/shared';
     imports: [IconComponent, InlineHelpModule, FormControlComponent]
 })
 export class InlineHelpExampleComponent {
+    readonly popoverConfig = {
+        maxWidth: 320,
+        triggers: ['click']
+    };
+
     protected readonly rtlDirection = computed<Placement>(() => (this._rtlService?.rtl() ? 'left' : 'right'));
 
     private readonly _rtlService = inject(RtlService, { optional: true });

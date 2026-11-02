@@ -4,6 +4,20 @@
 </div>
 
 <div class="fd-inline-help-example">
+    <span>Max width regression</span>
+    <fd-icon
+        data-testid="inline-help-max-width-regression-trigger"
+        glyph="question-mark"
+        [fd-inline-help]="
+            'inline-help-max-width-regression-content-inline-help-max-width-regression-content-inline-help-max-width-regression-content-inline-help-max-width-regression-content'
+        "
+        [maxWidth]="popoverConfig.maxWidth"
+        [triggers]="popoverConfig.triggers"
+        tabindex="0"
+    ></fd-icon>
+</div>
+
+<div class="fd-inline-help-example">
     <span>Left Position</span>
     <fd-icon glyph="question-mark" fd-inline-help="Inline Help Tooltip" placement="left" tabindex="0"></fd-icon>
 </div>
