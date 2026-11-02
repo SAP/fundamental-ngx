@@ -365,6 +365,47 @@ describe('componentTemplate', () => {
         });
     });
 
+    describe('readonly member — signal initialization (DOM element values)', () => {
+        // Mirrors ui5-select, whose selectedOption is a DOM element that cannot be JSON-serialized.
+        const selectDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'Select',
+            tagName: 'ui5-select',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'selectedOption',
+                    privacy: 'public',
+                    readonly: true,
+                    type: { text: 'IOption | undefined' }
+                } as CEM.ClassField
+            ],
+            events: [
+                {
+                    name: 'change',
+                    _ui5privacy: 'public',
+                    type: { text: 'CustomEvent' },
+                    _ui5parameters: [
+                        { name: 'selectedOption', type: { text: 'IOption | undefined' }, _ui5privacy: 'public' }
+                    ]
+                } as any
+            ]
+        };
+
+        it('initializes the signal by assigning the current value directly with .set()', () => {
+            const output = componentTemplate(selectDeclaration, [], PACKAGE);
+            expect(output).toContain('const currentValue = wcElement.selectedOption! || undefined;');
+            expect(output).toContain('this._selectedOptionSignal.set(currentValue);');
+        });
+
+        it('does not emit a JSON.stringify equality guard around the signal initialization', () => {
+            const output = componentTemplate(selectDeclaration, [], PACKAGE);
+            expect(output).not.toContain('JSON.stringify(currentValue)');
+            expect(output).not.toContain('JSON.stringify(this._selectedOptionSignal())');
+        });
+    });
+
     describe('CVA — boolean form property (non-radio)', () => {
         const cvaCheckedDeclaration: CEM.CustomElementDeclaration = {
             kind: 'class',
