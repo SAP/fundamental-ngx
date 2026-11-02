@@ -322,6 +322,13 @@ describe('componentTemplate', () => {
             const output = componentTemplate(readonlyGetterDeclaration, [], PACKAGE);
             expect(output).not.toContain('_colorSchemeSignal');
         });
+
+        it('does not subscribe to web component renders', () => {
+            const output = componentTemplate(readonlyGetterDeclaration, [], PACKAGE);
+            expect(output).not.toContain('_renderVersion');
+            expect(output).not.toContain('attachComponentStateFinalized');
+            expect(output).not.toContain('linkedSignal');
+        });
     });
 
     describe('readonly member — signal (matching event parameter)', () => {
@@ -350,9 +357,19 @@ describe('componentTemplate', () => {
             ]
         };
 
-        it('generates a private signal for readonly member with matching event parameter', () => {
+        it('generates a private signal re-derived from the web component on every render', () => {
             const output = componentTemplate(readonlySignalDeclaration, [], PACKAGE);
-            expect(output).toContain('_filesSignal = signal<');
+            expect(output).toContain('private readonly _filesSignal = linkedSignal((): FileList | null => {');
+            expect(output).toContain('this._renderVersion();');
+            expect(output).toContain('return this.element.files ?? undefined;');
+            expect(output).toContain("linkedSignal\n} from '@angular/core';");
+        });
+
+        it('bumps the render version whenever the web component finalizes a render', () => {
+            const output = componentTemplate(readonlySignalDeclaration, [], PACKAGE);
+            expect(output).toContain('private readonly _renderVersion = signal(0);');
+            expect(output).toContain('wcElement.attachComponentStateFinalized?.(onRender);');
+            expect(output).toContain('wcElement.detachComponentStateFinalized?.(onRender)');
         });
 
         it('generates a computed property backed by the signal', () => {
@@ -394,16 +411,196 @@ describe('componentTemplate', () => {
             ]
         };
 
-        it('initializes the signal by assigning the current value directly with .set()', () => {
+        it('reads the current value from the web component without an eager copy', () => {
             const output = componentTemplate(selectDeclaration, [], PACKAGE);
-            expect(output).toContain('const currentValue = wcElement.selectedOption! || undefined;');
-            expect(output).toContain('this._selectedOptionSignal.set(currentValue);');
+            expect(output).toContain('return this.element.selectedOption ?? undefined;');
+            expect(output).not.toContain('requestAnimationFrame');
         });
 
-        it('does not emit a JSON.stringify equality guard around the signal initialization', () => {
+        it('does not emit a JSON.stringify equality guard', () => {
             const output = componentTemplate(selectDeclaration, [], PACKAGE);
-            expect(output).not.toContain('JSON.stringify(currentValue)');
-            expect(output).not.toContain('JSON.stringify(this._selectedOptionSignal())');
+            expect(output).not.toContain('JSON.stringify');
+        });
+    });
+
+    describe('readonly member — falsy event values', () => {
+        const booleanReadonlyDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'FlexibleColumnLayout',
+            tagName: 'ui5-flexible-column-layout',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'startColumnVisible',
+                    privacy: 'public',
+                    readonly: true,
+                    type: { text: 'boolean' },
+                    default: 'true'
+                } as CEM.ClassField
+            ],
+            events: [
+                {
+                    name: 'layout-change',
+                    _ui5privacy: 'public',
+                    type: { text: 'CustomEvent' },
+                    _ui5parameters: [{ name: 'startColumnVisible', type: { text: 'boolean' }, _ui5privacy: 'public' }]
+                } as any
+            ]
+        };
+
+        it('keeps false instead of replacing it with the default', () => {
+            const output = componentTemplate(booleanReadonlyDeclaration, [], PACKAGE);
+            expect(output).toContain('customEvent.detail?.startColumnVisible ?? wcElement.startColumnVisible ?? true');
+            expect(output).toContain('return this.element.startColumnVisible ?? true;');
+            expect(output).not.toContain('|| true');
+        });
+    });
+
+    describe('readonly member — array signal', () => {
+        const arrayReadonlyDeclaration: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'SegmentedButton',
+            tagName: 'ui5-segmented-button',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'selectedItems',
+                    privacy: 'public',
+                    readonly: true,
+                    type: { text: 'Array<ISegmentedButtonItem>' },
+                    default: '[]'
+                } as CEM.ClassField
+            ],
+            events: [
+                {
+                    name: 'selection-change',
+                    _ui5privacy: 'public',
+                    type: { text: 'CustomEvent' },
+                    _ui5parameters: [
+                        { name: 'selectedItems', type: { text: 'Array<ISegmentedButtonItem>' }, _ui5privacy: 'public' }
+                    ]
+                } as any
+            ]
+        };
+
+        it('compares items so renders without a selection change do not notify consumers', () => {
+            const output = componentTemplate(arrayReadonlyDeclaration, [], PACKAGE);
+            expect(output).toContain(
+                '}, { equal: (a, b): boolean => a.length === b.length && a.every((item, i): boolean => item === b[i]) });'
+            );
+        });
+    });
+
+    describe('readonly member — runtime behavior', () => {
+        const selectWithLiveChange: CEM.CustomElementDeclaration = {
+            kind: 'class',
+            name: 'Select',
+            tagName: 'ui5-select',
+            customElement: true,
+            members: [
+                {
+                    kind: 'field',
+                    name: 'selectedOption',
+                    privacy: 'public',
+                    readonly: true,
+                    type: { text: 'IOption | undefined' }
+                } as CEM.ClassField
+            ],
+            events: ['change', 'live-change'].map(
+                (name) =>
+                    ({
+                        name,
+                        _ui5privacy: 'public',
+                        type: { text: 'CustomEvent' },
+                        _ui5parameters: [
+                            { name: 'selectedOption', type: { text: 'IOption | undefined' }, _ui5privacy: 'public' }
+                        ]
+                    }) as any
+            )
+        };
+
+        /** Minimal stand-in for a UI5 element: renders on demand and notifies state-finalized listeners. */
+        class FakeSelectElement extends EventTarget {
+            selectedOption: unknown;
+            readonly renderListeners = new Set<() => void>();
+
+            attachComponentStateFinalized(fn: () => void): void {
+                this.renderListeners.add(fn);
+            }
+
+            detachComponentStateFinalized(fn: () => void): void {
+                this.renderListeners.delete(fn);
+            }
+
+            render(): void {
+                this.renderListeners.forEach((fn) => fn());
+            }
+        }
+
+        /** Runs the generated ngAfterViewInit body against the fake element and records signal writes. */
+        function setup(element: FakeSelectElement): {
+            renderVersion: () => number;
+            selectedOption: () => unknown;
+            destroy: () => void;
+        } {
+            const output = componentTemplate(selectWithLiveChange, [], PACKAGE);
+            const start = output.indexOf('ngAfterViewInit(): void {') + 'ngAfterViewInit(): void {'.length;
+            const body = output.slice(start, output.lastIndexOf('}', output.lastIndexOf('}') - 1));
+            const js = ts.transpileModule(body, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
+
+            let version = 0;
+            let selectedOption: unknown;
+            const destroyCallbacks: Array<() => void> = [];
+            const host = {
+                ui5Change: { emit: jest.fn() },
+                ui5LiveChange: { emit: jest.fn() },
+                _destroyRef: { onDestroy: (fn: () => void): number => destroyCallbacks.push(fn) },
+                _renderVersion: { update: (fn: (v: number) => number): number => (version = fn(version)) },
+                _selectedOptionSignal: { set: (value: unknown): unknown => (selectedOption = value) }
+            };
+
+            new Function('wcElement', js.replace('const wcElement = this.element;', '')).call(host, element);
+
+            return {
+                renderVersion: () => version,
+                selectedOption: () => selectedOption,
+                destroy: () => destroyCallbacks.forEach((fn) => fn())
+            };
+        }
+
+        it('invalidates readonly state each time the web component renders', () => {
+            const element = new FakeSelectElement();
+            const wrapper = setup(element);
+
+            element.render();
+            element.render();
+
+            expect(wrapper.renderVersion()).toBe(2);
+        });
+
+        it('stops listening for renders on destroy', () => {
+            const element = new FakeSelectElement();
+            const wrapper = setup(element);
+
+            wrapper.destroy();
+            element.render();
+
+            expect(element.renderListeners.size).toBe(0);
+            expect(wrapper.renderVersion()).toBe(0);
+        });
+
+        it('takes the value from the event detail while the element is still mid-update', () => {
+            const element = new FakeSelectElement();
+            const wrapper = setup(element);
+            const nextOption = { value: 'mouse' };
+
+            // ui5-select fires live-change after deselecting the old option but before selecting the new one
+            element.selectedOption = undefined;
+            element.dispatchEvent(new CustomEvent('live-change', { detail: { selectedOption: nextOption } }));
+
+            expect(wrapper.selectedOption()).toBe(nextOption);
         });
     });
 
