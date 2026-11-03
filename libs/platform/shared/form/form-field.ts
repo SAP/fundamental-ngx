@@ -1,6 +1,6 @@
-import { ElementRef, QueryList, TemplateRef } from '@angular/core';
+import { ElementRef, ModelSignal, QueryList, TemplateRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, NgControl } from '@angular/forms';
-import { FormField, FormFieldControl } from '@fundamental-ngx/cdk/forms';
+import { FormField } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { Column, ColumnLayout } from './form-options';
  * This class is used to create form field components.
  *
  */
-export abstract class PlatformFormField extends FormField {
+export abstract class PlatformFormField extends FormField<PlatformFormFieldControl> {
     /**
      * Form field id
      */
@@ -115,9 +115,9 @@ export abstract class FormFieldGroup {
     gapColumnLayout: ColumnLayout;
 }
 
-export type FdpFormFieldControl<T = any> = FormFieldControl<T>;
+export type FdpFormFieldControl<T = any> = PlatformFormFieldControl<T>;
 
-export abstract class PlatformFormFieldControl<T = any> implements FormFieldControl<T> {
+export abstract class PlatformFormFieldControl<T = any> {
     /**
      * To allow user to determine what event he wants to trigger the messages to show
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
@@ -140,20 +140,20 @@ export abstract class PlatformFormFieldControl<T = any> implements FormFieldCont
     formMessage: Nullable<FormInputMessageGroupComponent>;
 
     /**
-     * Each input control has always a value. Need to make sure we keep a convention for
-     * input fields
+     * Each input control has always a value, exposed as a Signal Forms `model()`.
      */
-    value: T | null;
+    value: ModelSignal<T>;
+
+    /** Control name, exposed as a `model()`. */
+    name: ModelSignal<string>;
 
     /**
      * Need to have a way to set placeholder to the input
      */
     placeholder: string;
 
-    /**
-     * Need to have a way to set Mandatory to the input field
-     */
-    required: boolean;
+    /** Whether the input field is mandatory, exposed as a `model()`. */
+    required: ModelSignal<boolean>;
 
     /**
      * Sets id from FF to Input
@@ -182,8 +182,11 @@ export abstract class PlatformFormFieldControl<T = any> implements FormFieldCont
      */
     readonly ngControl: NgControl | null;
 
-    /** Whether the control is disabled. */
-    readonly disabled: boolean;
+    /** Whether the control is disabled, exposed as a `model()`. */
+    readonly disabled: ModelSignal<boolean>;
+
+    /** readOnly value to mark the component read only, exposed as a `model()`. */
+    readonly readonly: ModelSignal<boolean>;
 
     /**
      * Keeps track if the form element is in focus

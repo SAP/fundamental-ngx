@@ -4,7 +4,7 @@
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledBy"
     [attr.aria-orientation]="isInline ? 'horizontal' : 'vertical'"
-    [attr.aria-required]="required"
+    [attr.aria-required]="required()"
 >
     @if (!list) {
         @for (radio of contentRadioButtons; track radio) {
@@ -12,10 +12,10 @@
                 <ng-template
                     [ngTemplateOutlet]="radio?.renderer || null"
                     [ngTemplateOutletContext]="{
-                        name: name,
-                        value: radio.value,
+                        name: name(),
+                        value: radio.value(),
                         state: state,
-                        disabled: disabled || radio.disabled,
+                        disabled: disabled() || radio.disabled(),
                         ariaLabel: radio.ariaLabel,
                         ariaLabelledBy: radio.ariaLabelledBy,
                         ariaDescribedBy: radio.ariaDescribedBy,
@@ -31,7 +31,7 @@
 <ng-template #listvalues>
     @if (hasNoValue) {
         <div fd-form-item>
-            <fdp-radio-button [name]="name" value="None" [state]="state" [disabled]="disabled" [forceRender]="true">
+            <fdp-radio-button [name]="name()" value="None" [state]="state" [disabled]="disabled()" [forceRender]="true">
                 {{ noValueLabel }}
             </fdp-radio-button>
         </div>
@@ -39,7 +39,7 @@
     @for (item of list; track item) {
         <div fd-form-item>
             <fdp-radio-button
-                [name]="name"
+                [name]="name()"
                 [value]="lookupValue(item)"
                 [state]="state"
                 [disabled]="_getListItemDisabledValue(item)"

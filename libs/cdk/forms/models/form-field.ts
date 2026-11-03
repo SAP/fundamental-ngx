@@ -10,16 +10,18 @@ import { FormStates } from './form-state';
  *
  * This class is used to create form field components.
  *
+ * @typeParam TControl the control contract this form field registers. Defaults to the plain
+ * `FormFieldControl`; platform specializes it with its signal-aware control type.
  */
-export abstract class FormField {
+export abstract class FormField<TControl = FormFieldControl> {
     /**
      * Register underlying form control
      */
-    registerFormFieldControl: (control: FormFieldControl) => void;
+    registerFormFieldControl: (control: TControl) => void;
     /**
      * Unregister underlying form control
      */
-    unregisterFormFieldControl: (control: FormFieldControl) => void;
+    unregisterFormFieldControl: (control: TControl) => void;
 
     /**
      * Set default columns layout

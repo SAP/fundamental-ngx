@@ -5,11 +5,11 @@
     [attr.ariaDescribedBy]="ariaDescribedBy"
     [inputId]="id"
     [placeholder]="placeholder"
-    [required]="required"
+    [required]="required()"
     [placement]="placement"
     [appendTo]="appendTo"
     [meridian]="meridian"
-    [disabled]="disabled"
+    [disabled]="disabled()"
     [displaySeconds]="displaySeconds"
     [displayMinutes]="displayMinutes"
     [displayHours]="displayHours"
@@ -38,11 +38,11 @@
     [mobileLandscape]="mobileLandscape"
     [mobilePortrait]="mobilePortrait"
     [ngModelOptions]="{ standalone: true }"
-    [(ngModel)]="value"
+    [ngModel]="value()"
     (ngModelChange)="handleDatetimeInputChange($event)"
     (activeViewChange)="handleActiveViewChange($event)"
     (isOpenChange)="handleOpenChange($event)"
-    (touched)="onTouched()"
+    (touched)="touch.emit()"
 >
     <ng-content></ng-content>
 </fd-datetime-picker>

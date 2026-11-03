@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { PlatformDatetimePickerComponent } from './datetime-picker.component';
@@ -119,19 +118,19 @@ describe('PlatformDatetimePickerComponent', () => {
         expect(host.result.datetimePicker.year).toEqual(2008);
     });
 
-    it('should call handleDatetime method', async () => {
+    it('should route an external value set through the apply hook', async () => {
         const datetimePicker = host.datetimePickerComponent;
-        jest.spyOn(datetimePicker, 'writeValue');
+        const applySpy = jest.spyOn(datetimePicker as any, '_applyValue');
 
-        datetimePicker.value = new FdDate();
+        datetimePicker.value.set(new FdDate());
         await wait(fixture);
 
-        expect(datetimePicker.writeValue).toHaveBeenCalled();
+        expect(applySpy).toHaveBeenCalled();
     });
 
     it('should call disabled state method', async () => {
         const datetimePicker = host.datetimePickerComponent;
-        datetimePicker.disabled = true;
+        datetimePicker.disabled.set(true);
         host.datetimePickerForm.get('datetimePicker')?.disable();
 
         await wait(fixture);
@@ -148,7 +147,7 @@ describe('PlatformDatetimePickerComponent', () => {
 
         // @ts-expect-error fault tolerance test
         const invalidDate = new FdDate(null);
-        datetimePicker.value = invalidDate;
+        datetimePicker.value.set(invalidDate);
         await wait(fixture);
         datetimePicker.handleDatetimeInputChange(invalidDate);
         await wait(fixture);
@@ -160,26 +159,4 @@ describe('PlatformDatetimePickerComponent', () => {
         const customPopoverEl = fixture.debugElement.query(By.css('.fd-datetime .fd-popover-custom'));
         expect(customPopoverEl.nativeElement.style.display).toBe('inline');
     });
-});
-
-const DATE_TIME_PICKER_IDENTIFIER = 'platform-date-time-picker-unit-test';
-
-runValueAccessorTests({
-    component: PlatformDatetimePickerComponent,
-    name: 'Datetime picker',
-    testModuleMetadata: {
-        imports: [PlatformDatetimePickerModule, FdDatetimeModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = DATE_TIME_PICKER_IDENTIFIER;
-        fixture.componentInstance.name = DATE_TIME_PICKER_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: true,
-    nativeControlSelector: `input[id="${DATE_TIME_PICKER_IDENTIFIER}"]`,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.value = value;
-    },
-    getValues: () => [new FdDate(2021, 9, 5), new FdDate(2021, 10, 5), new FdDate(2021, 11, 5)],
-    getComponentValue: (fixture) => fixture.componentInstance.value
 });

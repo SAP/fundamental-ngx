@@ -31,17 +31,6 @@ import { createMissingDateImplementationError } from './errors';
 })
 export class PlatformDatetimePickerComponent<D> extends BaseInput implements AfterViewInit {
     /**
-     * value for datetime
-     */
-    @Input()
-    set value(value: D) {
-        super.setValue(value);
-    }
-    get value(): D {
-        return super.getValue();
-    }
-
-    /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
      *  bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.
      */
@@ -283,7 +272,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         }
 
         // default model value
-        this.value = this._dateTimeAdapter.now();
+        this.setValue(this._dateTimeAdapter.now());
     }
 
     /**
@@ -301,21 +290,6 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         if (this.formField) {
             this._adjustPickerWidth();
         }
-    }
-
-    /** @hidden */
-    writeValue(value: D): void {
-        super.writeValue(value);
-        this.markForCheck();
-    }
-
-    /**
-     * @hidden
-     * override base functionality to catch new disabled state
-     */
-    setDisabledState(disabled: boolean): void {
-        super.setDisabledState(disabled);
-        this.dateTimePickerComponent?.setDisabledState(disabled);
     }
 
     /**
@@ -339,7 +313,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
             }
             // only set the value if it is a valid datetime object
             if (this.dateTimePickerComponent._inputFieldDate) {
-                this.value = datetime;
+                this.setValue(datetime);
             }
 
             this.stateChanges.next('datetime picker: handleDatetimeInputChange');
@@ -347,7 +321,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
 
         this.datetimeChange.emit(datetime);
 
-        this.onTouched();
+        this.touch.emit();
     }
 
     /**
@@ -362,6 +336,12 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
     };
+
+    /** @hidden */
+    protected _applyValue(value: D): void {
+        super._applyValue(value);
+        this.markForCheck();
+    }
 
     /**
      * @hidden

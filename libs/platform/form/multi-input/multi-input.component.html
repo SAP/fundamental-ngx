@@ -9,7 +9,7 @@
         [fillControlMode]="fillControlMode"
         [focusTrapped]="true"
         [triggers]="triggers"
-        [disabled]="disabled || readonly"
+        [disabled]="disabled() || readonly()"
         [maxWidth]="autoResize ? maxWidth() : minWidth()"
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
@@ -29,7 +29,7 @@
         [isControl]="true"
         glyph="value-help"
         [state]="state"
-        [disabled]="disabled"
+        [disabled]="disabled()"
         (keydown)="removeSelectedTokens($event)"
         (addOnButtonClicked)="addOnButtonClick($event)"
         (click)="onInputGroupClicked()"
@@ -50,7 +50,7 @@
         >
             @for (token of selected; track token; let i = $index) {
                 <fd-token
-                    [readOnly]="disabled"
+                    [readOnly]="disabled()"
                     (onCloseClick)="removeToken(token)"
                     [attr.aria-posinset]="i"
                     [attr.aria-setsize]="selected.length"
@@ -72,20 +72,20 @@
                 fd-input-group-input
                 fd-form-control
                 [attr.id]="id"
-                [disabled]="disabled"
+                [disabled]="disabled()"
                 [(ngModel)]="inputText"
                 (ngModelChange)="searchTermChanged()"
                 [ngModelOptions]="{ standalone: true }"
                 [attr.placeholder]="selected.length ? null : placeholder"
-                (focus)="onTouched(); tokenizer._showAllTokens()"
+                (focus)="touch.emit(); tokenizer._showAllTokens()"
                 (blur)="tokenizer._hideTokens()"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
-                [readonly]="readonly"
+                [readonly]="readonly()"
                 aria-haspopup="listbox"
-                [attr.aria-readonly]="readonly"
+                [attr.aria-readonly]="readonly()"
                 [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)()"
                 [ariaLabelledBy]="ariaLabelledBy"
-                [attr.aria-required]="required"
+                [attr.aria-required]="required()"
                 aria-roledescription="Multi Value Input"
                 fdkInitialFocus
                 [enabled]="autofocus"

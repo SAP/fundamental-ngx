@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxModule } from '../checkbox/checkbox.module';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
@@ -771,23 +770,3 @@ class Item {
         public rate: number
     ) {}
 }
-
-const CHECKBOX_GROUP_IDENTIFIER = 'platform-checkbox-group-unit-test';
-
-runValueAccessorTests({
-    component: CheckboxGroupComponent,
-    name: 'Checkbox group',
-    testModuleMetadata: {
-        imports: [PlatformCheckboxGroupModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = CHECKBOX_GROUP_IDENTIFIER;
-        fixture.componentInstance.name = CHECKBOX_GROUP_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    internalValueChangeSetter: null,
-    getComponentValue: (fixture) => fixture.componentInstance.value,
-    getValues: () => [['1'], ['1', '2'], ['1']],
-    resetCustomValue: { value: [] }
-});
