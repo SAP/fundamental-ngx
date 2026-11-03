@@ -1009,6 +1009,9 @@ export class ComboboxComponent<T = any>
             this.searchInputElement.nativeElement.value = displayText;
             this.inputText = displayText;
             this._cdRef.detectChanges();
+            if (!this.mobile && shouldClosePopover) {
+                this.searchInputElement.nativeElement.setSelectionRange(displayText.length, displayText.length);
+            }
 
             if (this.mobile && !confirmationMode) {
                 this._propagateChange();

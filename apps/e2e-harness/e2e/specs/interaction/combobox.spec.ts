@@ -98,6 +98,16 @@ test.describe('core/combobox leave behavior', () => {
         await expect(input(page, 1)).toHaveValue('Kiwi');
         await expect(valueReadout(page, 1)).toContainText('Json Value: "Kiwi"');
         await expect(listbox).toBeHidden();
+        await expect(input(page, 1)).toBeFocused();
+        await expect
+            .poll(() =>
+                input(page, 1).evaluate((element: HTMLInputElement) => [
+                    element.selectionStart,
+                    element.selectionEnd,
+                    element.value.length
+                ])
+            )
+            .toEqual([4, 4, 4]);
         await expect.poll(() => cvaWrites(page, 1)).toEqual(['Kiwi']);
     });
 
