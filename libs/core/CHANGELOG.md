@@ -1,3 +1,13 @@
+## 0.66.1-rc.14 (2026-11-03)
+
+### 🩹 Fixes
+
+- **core:** collapse combobox caret after option selection ([#14652](https://github.com/SAP/fundamental-ngx/pull/14652))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1-rc.13 (2026-11-03)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
