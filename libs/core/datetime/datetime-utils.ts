@@ -12,13 +12,15 @@ export function convertToDesiredFormat(inputStr: string): string {
         night: 0
     };
 
-    const dayPeriodPattern = /\b(morning|afternoon|evening|night)\b/;
+    // Matches the English day period labels ("in the morning", "at night", ...) including their
+    // leading words, so that no leftover "in the" / "at" breaks the date parsing afterwards.
+    const dayPeriodPattern = /\b(?:in\s+the\s+|at\s+)?(morning|afternoon|evening|night)\b/i;
     const amPmPattern = /\b(AM|PM)\b/i;
 
     const convertDayPeriod = (input: string): string => {
         const match = input.match(dayPeriodPattern);
         if (match) {
-            const period = match[0].toLowerCase();
+            const period = match[1].toLowerCase();
             const timeShift = dayPeriodMapping[period];
             input = input.replace(dayPeriodPattern, '').trim();
             const timeMatch = input.match(/\d{1,2}:\d{2}/);
