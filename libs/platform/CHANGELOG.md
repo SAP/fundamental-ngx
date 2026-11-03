@@ -1,3 +1,13 @@
+## 0.66.1-rc.16 (2026-11-03)
+
+### 🚀 Features
+
+- **core:** introduce new features to number input ([#14626](https://github.com/SAP/fundamental-ngx/pull/14626))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.1-rc.15 (2026-11-03)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
