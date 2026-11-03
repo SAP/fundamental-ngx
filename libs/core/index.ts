@@ -75,6 +75,7 @@ export * from '@fundamental-ngx/core/settings';
 export * from '@fundamental-ngx/core/shared';
 export * from '@fundamental-ngx/core/shellbar';
 export * from '@fundamental-ngx/core/side-navigation';
+export * from '@fundamental-ngx/core/side-panel';
 export * from '@fundamental-ngx/core/skeleton';
 export * from '@fundamental-ngx/core/slider';
 export * from '@fundamental-ngx/core/split-button';

@@ -1,0 +1,29 @@
+<div
+    class="fd-side-panel__action-bar"
+    role="toolbar"
+    aria-orientation="vertical"
+    [attr.aria-label]="ariaLabel()"
+    (keydown)="_onKeydown($event)"
+>
+    @for (item of _items(); track item.id(); let i = $index) {
+        <div class="fd-side-panel__action-container">
+            <button
+                #actionButton
+                type="button"
+                class="fd-side-panel__action"
+                [class.is-active]="item.id() === activeItem()"
+                [class.is-disabled]="item.disabled()"
+                [attr.aria-pressed]="item.id() === activeItem()"
+                [attr.aria-label]="item.label()"
+                [attr.aria-disabled]="item.disabled() || null"
+                [attr.title]="item.label()"
+                [disabled]="item.disabled()"
+                [tabindex]="i === _focusedIndex() ? 0 : -1"
+                (click)="_activate(item, i)"
+            >
+                <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
+            </button>
+            <span class="fd-side-panel__action-tooltip" role="tooltip" aria-hidden="true">{{ item.label() }}</span>
+        </div>
+    }
+</div>

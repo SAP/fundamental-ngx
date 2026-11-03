@@ -1,0 +1,164 @@
+// ---------------------------------------------------------------------------
+// Side Panel — LOCAL/PLACEHOLDER styles
+//
+// `fundamental-styles` does not yet ship a `side-panel` block (tracked as issue 2
+// of the Side Panel series). The rules below are authored here so the Angular
+// component is usable and reviewable now; they follow the same BEM naming
+// (`fd-side-panel`, `__element`, `--modifier`, `is-state`) so they can be lifted
+// into `fundamental-styles` and this file reduced to an `@import` once that block
+// lands (via `/adopt-styles`).
+//
+// Scope for this issue: the icons-only vertical action bar, active state, and
+// hover/focus tooltips. Content panel, icons+label mode, overflow, splitter and
+// mobile styling arrive in later issues.
+// ---------------------------------------------------------------------------
+
+$fd-side-panel-bar-width: 3rem;
+$fd-side-panel-action-size: 3rem;
+$fd-side-panel-active-indicator-width: 0.1875rem;
+
+.fd-side-panel {
+    display: flex;
+    block-size: 100%;
+    color: var(--sapTextColor, #32363a);
+    font-family: var(--sapFontFamily, '72', '72full', Arial, Helvetica, sans-serif);
+
+    // Anchor the action bar to the requested edge.
+    &--right {
+        justify-content: flex-end;
+
+        .fd-side-panel__action-bar {
+            border-inline-start: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+        }
+
+        // Tooltip opens toward the page content (to the left of the bar).
+        .fd-side-panel__action-tooltip {
+            inset-inline-end: 100%;
+            margin-inline-end: 0.5rem;
+        }
+    }
+
+    &--left {
+        justify-content: flex-start;
+
+        .fd-side-panel__action-bar {
+            border-inline-end: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+        }
+
+        .fd-side-panel__action-tooltip {
+            inset-inline-start: 100%;
+            margin-inline-start: 0.5rem;
+        }
+    }
+
+    &__action-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 0 0 auto;
+        inline-size: $fd-side-panel-bar-width;
+        block-size: 100%;
+        padding-block: 0.25rem;
+        box-sizing: border-box;
+        background: var(--sapList_Background, #fff);
+    }
+
+    &__action-container {
+        position: relative;
+        display: flex;
+        inline-size: 100%;
+        justify-content: center;
+    }
+
+    &__action {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        inline-size: $fd-side-panel-action-size;
+        block-size: $fd-side-panel-action-size;
+        padding: 0;
+        border: none;
+        background: transparent;
+        color: var(--sapTextColor, #32363a);
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+
+        // Active accent indicator on the anchored edge.
+        &::before {
+            content: '';
+            position: absolute;
+            inset-block: 0.25rem;
+            inset-inline-start: 0;
+            inline-size: $fd-side-panel-active-indicator-width;
+            border-radius: 0 var(--sapElement_BorderCornerRadius, 0.25rem) var(--sapElement_BorderCornerRadius, 0.25rem)
+                0;
+            background: transparent;
+        }
+
+        &:hover {
+            background: var(--sapList_Hover_Background, #ebf5fe);
+        }
+
+        &:focus-visible {
+            outline: var(--sapContent_FocusWidth, 0.0625rem) var(--sapContent_FocusStyle, dotted)
+                var(--sapContent_FocusColor, #0070f2);
+            outline-offset: calc(-1 * var(--sapContent_FocusWidth, 0.0625rem) - 0.125rem);
+        }
+
+        &.is-active {
+            background: var(--sapList_SelectionBackgroundColor, #e5f0fa);
+            color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+
+            &::before {
+                background: var(--sapList_SelectionBorderColor, #0064d9);
+            }
+        }
+
+        &.is-disabled,
+        &:disabled {
+            cursor: default;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    }
+
+    &__action-icon {
+        font-size: 1rem;
+        line-height: 1;
+        color: inherit;
+    }
+
+    // CSS-only tooltip: revealed on pointer hover and on keyboard focus of the
+    // action button. The visible text is mirrored by `aria-label` on the button,
+    // so the tooltip element itself is `aria-hidden`.
+    &__action-tooltip {
+        position: absolute;
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        max-inline-size: 20rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
+        background: var(--sapGroup_ContentBackground, #fff);
+        color: var(--sapTextColor, #32363a);
+        border: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+        box-shadow: 0 0.125rem 0.5rem 0 rgba(0, 0, 0, 0.15);
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.1s ease-in,
+            visibility 0.1s ease-in;
+    }
+
+    &__action-container:hover .fd-side-panel__action-tooltip,
+    &__action:focus-visible + .fd-side-panel__action-tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+}

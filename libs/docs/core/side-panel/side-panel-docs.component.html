@@ -1,0 +1,14 @@
+<fd-docs-section-title id="basic" componentName="side-panel"> Basic usage </fd-docs-section-title>
+<description>
+    Use the <code>fd-side-panel</code> component with one <code>fd-side-panel-item</code> per content group. Each item
+    contributes one button to the vertical action bar in the default <strong>icons-only</strong> mode, where
+    <code>[icon]</code> is the button glyph and <code>[label]</code> is the group name shown as a tooltip on hover and
+    on keyboard focus. Use <code>[side]</code> (<code>'left' | 'right'</code>) to anchor the bar and bind
+    <code>[(activeItem)]</code> to track the selected group — clicking a button activates its group and clicking it
+    again clears the selection. Group content is projected through <code>*fdSidePanelContent</code>; opening the content
+    panel is added in a later release.
+</description>
+<component-example>
+    <fd-side-panel-basic-example></fd-side-panel-basic-example>
+</component-example>
+<code-example [exampleFiles]="basic"></code-example>
