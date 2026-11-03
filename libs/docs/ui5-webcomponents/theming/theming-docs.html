@@ -32,6 +32,11 @@ export const appConfig: ApplicationConfig = &#123;
     provideUi5ThemingBridge(),
   ]
 &#125;;</code></pre>
+    <p>
+        Because this is a direct import, add <code>&#64;fundamental-ngx/ui5-webcomponents-base</code> as a direct
+        dependency at the same version as your UI5 wrapper package. Strict resolvers such as Yarn Plug'n'Play require
+        every directly imported package to be declared by the application.
+    </p>
 
     <p><strong>Step 3:</strong> Instantiate the theming provider for each UI5 package you use:</p>
     <pre><code>// app.config.ts (continued)
