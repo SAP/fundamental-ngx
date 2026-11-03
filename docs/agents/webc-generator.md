@@ -131,7 +131,7 @@ Each public, writable CEM field becomes an Angular `input()`:
 Public readonly CEM fields become either:
 
 - A **simple getter** from the native element (no related events)
-- A `computed()` backed by an internal `signal()`, updated when related events fire with matching parameters
+- A `computed()` backed by an internal `linkedSignal()` that re-reads the native property after every web component render (`attachComponentStateFinalized`) and is set from the event detail when related events fire with matching parameters
 
 ### 3. Output Events
 
@@ -177,7 +177,7 @@ Generates a `ThemingService` provider that imports the correct theme package. Th
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | Properties       | `input()`, `model()` (Angular signals)                                                                                   |
 | Events           | `output()`                                                                                                               |
-| Derived state    | `computed()` / `signal()`                                                                                                |
+| Derived state    | `computed()` / `signal()` / `linkedSignal()`                                                                             |
 | Property sync    | `effect()` (side-effect only, writes to DOM)                                                                             |
 | Forms            | `GenericControlValueAccessor` host directive                                                                             |
 | Content density  | `contentDensityObserverProviders` + `ContentDensityObserver`                                                             |
