@@ -1,3 +1,13 @@
+## 0.66.1-rc.15 (2026-11-03)
+
+### 🩹 Fixes
+
+- **core:** parse datetime input with English day period labels ([#14625](https://github.com/SAP/fundamental-ngx/pull/14625))
+
+### ❤️ Thank You
+
+- Vitor Coelho @VitorCoelho
+
 ## 0.66.1-rc.14 (2026-11-03)
 
 ### 🩹 Fixes
