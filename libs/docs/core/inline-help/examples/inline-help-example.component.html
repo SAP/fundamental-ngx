@@ -4,15 +4,14 @@
 </div>
 
 <div class="fd-inline-help-example">
-    <span>Max width regression</span>
+    <span>Additional information</span>
     <fd-icon
-        data-testid="inline-help-max-width-regression-trigger"
         glyph="question-mark"
         [fd-inline-help]="
-            'inline-help-max-width-regression-content-inline-help-max-width-regression-content-inline-help-max-width-regression-content-inline-help-max-width-regression-content'
+            'Find product details, availability, and delivery information in the product overview before placing an order.'
         "
-        [maxWidth]="popoverConfig.maxWidth"
-        [triggers]="popoverConfig.triggers"
+        [maxWidth]="inlineHelpConfig.maxWidth"
+        [triggers]="inlineHelpConfig.triggers"
         tabindex="0"
     ></fd-icon>
 </div>

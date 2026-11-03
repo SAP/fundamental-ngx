@@ -17,14 +17,14 @@ test.describe('core/popover', () => {
     });
 
     test('opens popover on trigger click', async ({ page }) => {
-        const trigger = page.locator('fd-popover fd-popover-control button, [fdPopoverTrigger]').first();
+        const trigger = page.locator('fd-avatar[ariaLabel="photo 1 in circle"]');
         await trigger.click();
         const popoverBody = page.locator('.cdk-overlay-container fd-popover-body, fd-popover-body').first();
         await expect(popoverBody).toBeVisible();
     });
 
     test('closes popover on Escape', async ({ page }) => {
-        const trigger = page.locator('fd-popover fd-popover-control button, [fdPopoverTrigger]').first();
+        const trigger = page.locator('fd-avatar[ariaLabel="photo 1 in circle"]');
         await trigger.click();
         const popoverBody = page.locator('.cdk-overlay-container fd-popover-body, fd-popover-body').first();
         await expect(popoverBody).toBeVisible();
@@ -34,7 +34,7 @@ test.describe('core/popover', () => {
     });
 
     test('closes popover on trigger re-click', async ({ page }) => {
-        const trigger = page.locator('fd-popover fd-popover-control button, [fdPopoverTrigger]').first();
+        const trigger = page.locator('fd-avatar[ariaLabel="photo 1 in circle"]');
         await trigger.click();
         const popoverBody = page.locator('.cdk-overlay-container fd-popover-body, fd-popover-body').first();
         await expect(popoverBody).toBeVisible();
@@ -43,7 +43,7 @@ test.describe('core/popover', () => {
     });
 
     test('popover has correct positioning relative to trigger', async ({ page }) => {
-        const trigger = page.locator('fd-popover fd-popover-control button, [fdPopoverTrigger]').first();
+        const trigger = page.locator('fd-avatar[ariaLabel="photo 1 in circle"]');
         const triggerBox = await trigger.boundingBox();
         await trigger.click();
         const popoverBody = page.locator('.cdk-overlay-container fd-popover-body, fd-popover-body').first();
@@ -54,7 +54,7 @@ test.describe('core/popover', () => {
     });
 
     test('applies an initial max width before the first visible frame', async ({ page }) => {
-        const trigger = page.getByRole('button', { name: 'Max width regression' });
+        const trigger = page.getByRole('button', { name: 'Product details' });
 
         await page.evaluate(() => {
             type MaxWidthSnapshot = { inlineMaxWidth: string; computedMaxWidth: string; width: number };

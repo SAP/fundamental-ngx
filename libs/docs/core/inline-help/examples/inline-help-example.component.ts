@@ -24,7 +24,7 @@ import { Placement } from '@fundamental-ngx/core/shared';
     imports: [IconComponent, InlineHelpModule, FormControlComponent]
 })
 export class InlineHelpExampleComponent {
-    readonly popoverConfig = {
+    readonly inlineHelpConfig = {
         maxWidth: 320,
         triggers: ['click']
     };

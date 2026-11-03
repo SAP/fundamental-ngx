@@ -1,15 +1,4 @@
 <div class="fd-docs-flex-display-helper">
-    <fd-popover [maxWidth]="320">
-        <fd-popover-control>
-            <button fd-button label="Max width regression"></button>
-        </fd-popover-control>
-        <fd-popover-body>
-            <div data-testid="popover-max-width-regression-content" style="width: 480px; white-space: nowrap">
-                Popover max-width regression content
-            </div>
-        </fd-popover-body>
-    </fd-popover>
-
     <fd-popover title="photo 1 in circle">
         <fd-popover-control>
             <fd-avatar
@@ -123,6 +112,15 @@
             <div [style.padding.px]="12">
                 <p>This popover uses [config] input instead of individual properties.</p>
             </div>
+        </fd-popover-body>
+    </fd-popover>
+
+    <fd-popover [maxWidth]="320">
+        <fd-popover-control>
+            <button fd-button label="Product details"></button>
+        </fd-popover-control>
+        <fd-popover-body>
+            <div style="width: 480px; white-space: nowrap">Product information and availability</div>
         </fd-popover-body>
     </fd-popover>
 </div>

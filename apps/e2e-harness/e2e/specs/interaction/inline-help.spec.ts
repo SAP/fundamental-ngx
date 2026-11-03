@@ -40,7 +40,11 @@ test.describe('core/inline-help', () => {
             observer.observe(document.body, { attributes: true, childList: true, subtree: true });
         });
 
-        await page.getByTestId('inline-help-max-width-regression-trigger').click();
+        await page
+            .locator('.fd-inline-help-example')
+            .filter({ hasText: 'Additional information' })
+            .locator('fd-icon')
+            .click();
 
         const body = page.locator('.cdk-overlay-container .fd-inline-help__content').first();
         await expect(body).toBeVisible();

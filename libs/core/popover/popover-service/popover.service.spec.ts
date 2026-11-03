@@ -118,7 +118,7 @@ describe('PopoverService', () => {
             expect(emittedValues).toContain(false);
         });
 
-        it('should not commit or position a popover closed synchronously from onLoad', () => {
+        it('should not position a popover closed synchronously from onLoad', () => {
             const commitView = jest.spyOn(component.popoverBody, '_commitView');
             let updatePosition: jest.SpyInstance;
             const startLayoutShiftObserver = jest.spyOn(
@@ -133,7 +133,31 @@ describe('PopoverService', () => {
 
             expect(() => service.open()).not.toThrow();
             expect(service.isOpen()).toBe(false);
-            expect(commitView).not.toHaveBeenCalled();
+            expect(commitView).toHaveBeenCalledTimes(1);
+            if (!updatePosition) {
+                throw new Error('Expected onLoad to create an overlay before closing it.');
+            }
+            expect(updatePosition).not.toHaveBeenCalled();
+            expect(startLayoutShiftObserver).not.toHaveBeenCalled();
+        });
+
+        it('should not position a ComponentPortal popover closed synchronously from onLoad', () => {
+            service.initialise(component.triggerRef);
+            const commitView = jest.spyOn(PopoverBodyComponent.prototype, '_commitView');
+            let updatePosition: jest.SpyInstance;
+            const startLayoutShiftObserver = jest.spyOn(
+                service as unknown as { _startLayoutShiftObserver(): void },
+                '_startLayoutShiftObserver'
+            );
+
+            service._onLoad.subscribe(() => {
+                updatePosition = jest.spyOn(service['_overlayRef'], 'updatePosition');
+                service.close();
+            });
+
+            expect(() => service.open()).not.toThrow();
+            expect(service.isOpen()).toBe(false);
+            expect(commitView).toHaveBeenCalledTimes(1);
             if (!updatePosition) {
                 throw new Error('Expected onLoad to create an overlay before closing it.');
             }
