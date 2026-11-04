@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'За изтриване'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'още {count}',
         tokenizerLabel: 'Генератор за токени'
     },

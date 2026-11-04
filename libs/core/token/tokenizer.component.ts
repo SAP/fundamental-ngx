@@ -592,16 +592,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         this._cdRef.detectChanges();
         this._viewContainer.forEach((viewContainer) => viewContainer.clear());
 
-        const availableWidth = this._getTokensAreaWidthWithoutTokens();
-
-        if (this.tokenList.length === 1) {
-            const tokenWidth = this.tokenList.get(0)?.elementRef.nativeElement.getBoundingClientRect().width;
-            this._tokensContainerWidth = availableWidth < tokenWidth ? `calc(100% - ${availableWidth}px)` : 'auto';
-            return;
-        } else {
-            this._tokensContainerWidth = 'auto';
-        }
-
+        this._tokensContainerWidth = 'auto';
         this._checkMoreElementVisibility();
 
         this.tokenList.forEach((token) => token._viewContainer()!.createEmbeddedView(token._content()!));
@@ -637,12 +628,19 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         }
 
         this._cdRef.detectChanges();
-        if (this.showOverflowPopover) {
-            this._hiddenTokens.forEach((hiddenToken, index) => {
-                hiddenToken._viewContainer()?.clear();
-                this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content()!);
-            });
+        this._syncOverflowPopoverContent(this._hiddenTokens);
+    }
+
+    /** @hidden */
+    private _syncOverflowPopoverContent(hiddenTokens: TokenComponent[]): void {
+        if (!this.showOverflowPopover) {
+            return;
         }
+
+        hiddenTokens.forEach((hiddenToken, index) => {
+            hiddenToken._viewContainer()?.clear();
+            this._viewContainer.get(index)?.createEmbeddedView(hiddenToken._content()!);
+        });
     }
 
     /** @hidden */
@@ -905,8 +903,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
                 this.moreTokensRight.length > 0 ||
                 this.hiddenCozyTokenCount > 0 ||
                 this.externalHiddenCount() > 0) &&
-            !this.open &&
-            !this._tokenizerHasFocus;
+            !this.open;
 
         if (showMoreElement === this._showMoreElement()) {
             return;

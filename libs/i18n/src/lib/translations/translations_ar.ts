@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'قابل للحذف'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} أكبر',
         tokenizerLabel: 'أداة التقسيم إلى رموز مميزة'
     },

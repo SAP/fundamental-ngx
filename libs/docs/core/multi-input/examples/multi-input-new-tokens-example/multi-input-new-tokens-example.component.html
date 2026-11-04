@@ -9,6 +9,6 @@
 ></fd-multi-input>
 Selected: [
 @for (item of selected; track item; let i = $index) {
-    <span>{{ i === selected.length - 1 ? item.name : item.name + ',' }}</span>
+    <span>{{ i === selected.length - 1 ? item : item + ',' }}</span>
 }
 ]

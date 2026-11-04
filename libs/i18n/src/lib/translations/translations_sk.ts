@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'Vymazateľné'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} viac',
         tokenizerLabel: 'Tokenizér'
     },

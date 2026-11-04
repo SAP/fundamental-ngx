@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'Poistettavissa'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} lisää',
         tokenizerLabel: 'Jäsentäjä'
     },

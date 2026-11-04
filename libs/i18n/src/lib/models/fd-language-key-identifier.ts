@@ -210,6 +210,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreToken.ariaRoleDescription'
     | 'coreToken.deleteButtonLabel'
     | 'coreTokenizer.moreLabel'
+    | 'coreTokenizer.overflowingItemLabel'
     | 'coreTokenizer.tokenizerLabel'
     | 'coreToolbar.moreButton'
     | 'coreTree.collapse'
