@@ -115,3 +115,45 @@
     <fd-tooltip-dialog-example></fd-tooltip-dialog-example>
 </component-example>
 <code-example [exampleFiles]="dialogExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="click-trigger" componentName="tooltip"> Click Trigger </fd-docs-section-title>
+<description>
+    Set <code>fdTooltipTrigger="click"</code> to toggle the tooltip by clicking, tapping or pressing <kbd>Enter</kbd> /
+    <kbd>Space</kbd> on the element instead of hovering or focusing it. The tooltip opens immediately and stays open
+    until the element is clicked again, <kbd>Esc</kbd> is pressed, the user clicks elsewhere or moves focus to another
+    element. Use it only on elements without their own action, such as an information button next to a label; for all
+    other cases keep the default <code>hover</code> trigger.
+</description>
+<component-example>
+    <fd-tooltip-click-example></fd-tooltip-click-example>
+</component-example>
+<code-example [exampleFiles]="clickExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="template" componentName="tooltip"> Tooltip with Template </fd-docs-section-title>
+<description>
+    Instead of text, pass a <code>TemplateRef</code> to <code>[fdTooltip]</code> to format the content, e.g. with bold
+    text, line breaks or a non-interactive icon. The rendered template is also used as the screen reader description.
+    Keep the content short and never put interactive elements into a tooltip &mdash; use a <b>Popover</b> for that.
+</description>
+<component-example>
+    <fd-tooltip-template-example></fd-tooltip-template-example>
+</component-example>
+<code-example [exampleFiles]="templateExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="styled" componentName="tooltip"> Custom Styling </fd-docs-section-title>
+<description>
+    Add your own classes to the tooltip body with <code>fdTooltipBodyClass</code>. The tooltip is rendered in an
+    overlay, so define the styles globally or with <code>ViewEncapsulation.None</code>, and combine the class with
+    <code>.fd-popover__body</code> to override the default tooltip styles. To recolour the tooltip including its arrow,
+    set <code>--sapGroup_ContentBackground</code> and <code>--fdPopover_Border_Color</code>.
+</description>
+<component-example>
+    <fd-tooltip-styled-example></fd-tooltip-styled-example>
+</component-example>
+<code-example [exampleFiles]="styledExample"></code-example>

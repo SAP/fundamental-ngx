@@ -10,12 +10,15 @@ import {
     SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
 import { TooltipAccessibilityExampleComponent } from './examples/tooltip-accessibility-example.component';
+import { TooltipClickExampleComponent } from './examples/tooltip-click-example.component';
 import { TooltipDefaultExampleComponent } from './examples/tooltip-default-example.component';
 import { TooltipDelayExampleComponent } from './examples/tooltip-delay-example.component';
 import { TooltipDialogExampleComponent } from './examples/tooltip-dialog-example.component';
 import { TooltipDynamicExampleComponent } from './examples/tooltip-dynamic-example.component';
 import { TooltipPlacementExampleComponent } from './examples/tooltip-placement-example.component';
 import { TooltipProgrammaticExampleComponent } from './examples/tooltip-programmatic-example.component';
+import { TooltipStyledExampleComponent } from './examples/tooltip-styled-example.component';
+import { TooltipTemplateExampleComponent } from './examples/tooltip-template-example.component';
 import { TooltipTruncationExampleComponent } from './examples/tooltip-truncation-example.component';
 
 @Component({
@@ -29,7 +32,10 @@ import { TooltipTruncationExampleComponent } from './examples/tooltip-truncation
         SeparatorComponent,
         TooltipDefaultExampleComponent,
         TooltipPlacementExampleComponent,
+        TooltipClickExampleComponent,
         TooltipAccessibilityExampleComponent,
+        TooltipTemplateExampleComponent,
+        TooltipStyledExampleComponent,
         TooltipTruncationExampleComponent,
         TooltipDynamicExampleComponent,
         TooltipDelayExampleComponent,
@@ -48,11 +54,26 @@ export class TooltipDocsComponent {
         getExampleFile('tooltip-placement-example.component.ts', { component: 'TooltipPlacementExampleComponent' })
     ];
 
+    protected readonly clickExample: ExampleFile[] = [
+        getExampleFile('tooltip-click-example.component.html'),
+        getExampleFile('tooltip-click-example.component.ts', { component: 'TooltipClickExampleComponent' })
+    ];
+
     protected readonly accessibilityExample: ExampleFile[] = [
         getExampleFile('tooltip-accessibility-example.component.html'),
         getExampleFile('tooltip-accessibility-example.component.ts', {
             component: 'TooltipAccessibilityExampleComponent'
         })
+    ];
+
+    protected readonly templateExample: ExampleFile[] = [
+        getExampleFile('tooltip-template-example.component.html'),
+        getExampleFile('tooltip-template-example.component.ts', { component: 'TooltipTemplateExampleComponent' })
+    ];
+
+    protected readonly styledExample: ExampleFile[] = [
+        getExampleFile('tooltip-styled-example.component.html'),
+        getExampleFile('tooltip-styled-example.component.ts', { component: 'TooltipStyledExampleComponent' })
     ];
 
     protected readonly truncationExample: ExampleFile[] = [

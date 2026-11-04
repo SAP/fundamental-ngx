@@ -2,13 +2,15 @@
     <div class="fd-tooltip-placement-example">
         <span class="fd-tooltip-placement-example__label">{{ placement }}</span>
         @for (alignment of alignments; track alignment) {
-            <button
-                fd-button
-                [label]="alignment"
+            <div
+                class="fd-tooltip-placement-example__box"
+                tabindex="0"
                 [fdTooltip]="'Placement: ' + placement + ', alignment: ' + alignment"
                 [fdTooltipPlacement]="placement"
                 [fdTooltipAlignment]="alignment"
-            ></button>
+            >
+                {{ alignment }}
+            </div>
         }
     </div>
 }
