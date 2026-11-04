@@ -2,6 +2,7 @@ import { InputModalityDetector } from '@angular/cdk/a11y';
 import { ENTER } from '@angular/cdk/keycodes';
 import {
     afterRenderEffect,
+    ApplicationRef,
     booleanAttribute,
     computed,
     DestroyRef,
@@ -9,10 +10,12 @@ import {
     DOCUMENT,
     effect,
     ElementRef,
+    EmbeddedViewRef,
     inject,
     input,
     Renderer2,
     RendererStyleFlags2,
+    TemplateRef,
     untracked
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -27,6 +30,9 @@ export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
 
 /** Alignment along the chosen side: `start`/`end` align with the host's edge, `middle` centres the tooltip. */
 export type TooltipAlignment = 'start' | 'middle' | 'end';
+
+/** How the tooltip is opened: on hover and keyboard focus, or by clicking the host. */
+export type TooltipTrigger = 'hover' | 'click';
 
 /** Modifier class that applies the tooltip styling (dark surface, small font, max width) to the popover body. */
 const TOOLTIP_BODY_CLASS = 'fd-popover__body--tooltip';
@@ -53,17 +59,19 @@ const toPlacement = (side: TooltipPlacement, alignment: TooltipAlignment): Place
 const normalizeText = (value: string): string => value.replace(/\s+/g, ' ').trim().toLowerCase();
 
 /**
- * Shows a short, text-only tooltip for the host element.
+ * Shows a short tooltip for the host element.
  *
- * The tooltip opens after a delay on mouse hover or keyboard focus, and immediately on touch long-press
- * or `Ctrl+Alt+I`. It closes when the pointer or focus leaves, on `Escape`, when the host is activated,
- * on outside click, and when the window loses focus.
+ * By default, the tooltip opens after a delay on mouse hover or keyboard focus, and immediately on touch
+ * long-press or `Ctrl+Alt+I`. It closes when the pointer or focus leaves, on `Escape`, when the host is
+ * activated, on outside click, and when the window loses focus. With `fdTooltipTrigger="click"` it is
+ * toggled by clicking the host instead.
  *
  * The overlay is rendered by `PopoverService` (positioning, flipping, arrow), while `TooltipCoordinator`
  * decides when to show and hide, so only one tooltip is visible at a time. The host's DOM is never
  * changed; only ARIA attributes are added.
  *
- * The text is assembled by the caller, e.g. `Label - Description (Shortcut)`.
+ * The text is assembled by the caller, e.g. `Label - Description (Shortcut)`. A template can be passed
+ * instead of text for formatted, non-interactive content.
  *
  * ```html
  * <button fd-button glyph="save" aria-label="Save" fdTooltip="Save (Ctrl+S)" fdTooltipKeyShortcuts="Control+S"></button>
@@ -76,10 +84,11 @@ const normalizeText = (value: string): string => value.replace(/\s+/g, ' ').trim
 })
 export class TooltipDirective {
     /**
-     * Text shown in the tooltip, already assembled by the caller, e.g. `Save (Ctrl+S)`.
-     * An empty or whitespace-only value disables the tooltip, the same as `fdTooltipDisabled`.
+     * Content of the tooltip: text already assembled by the caller, e.g. `Save (Ctrl+S)`, or a template
+     * for formatted text. Templates must not contain interactive elements; use a popover for those.
+     * An empty or whitespace-only text disables the tooltip, the same as `fdTooltipDisabled`.
      */
-    readonly fdTooltip = input<string | null | undefined>('');
+    readonly fdTooltip = input<string | TemplateRef<unknown> | null | undefined>('');
 
     /**
      * Side of the host element the tooltip is shown on.
@@ -89,6 +98,17 @@ export class TooltipDirective {
 
     /** Alignment along the chosen side: `start`/`end` align with the host's edge, `middle` centres the tooltip. */
     readonly fdTooltipAlignment = input<TooltipAlignment>('middle');
+
+    /**
+     * How the tooltip is opened:
+     * - `hover` (default): after a delay on mouse hover or keyboard focus, immediately on touch long-press.
+     * - `click`: toggled immediately by clicking, tapping or activating the host with the keyboard. It stays
+     *   open until it is toggled again, `Escape` is pressed, the user clicks elsewhere or focus moves away.
+     *   Use it only on hosts without their own action, e.g. an information button next to a label.
+     *
+     * `Ctrl+Alt+I` toggles the tooltip in both modes.
+     */
+    readonly fdTooltipTrigger = input<TooltipTrigger>('hover');
 
     /**
      * Disables the tooltip. A disabled tooltip never shows and adds no ARIA attributes or event listeners,
@@ -111,16 +131,22 @@ export class TooltipDirective {
 
     /**
      * Keyboard shortcut of the host action in `aria-keyshortcuts` format, e.g. `Control+S`.
-     * It is set as `aria-keyshortcuts` on the host, and the trailing parenthesised shortcut,
-     * e.g. ` (Ctrl+S)`, is removed from the screen reader description so it is not announced twice.
+     * It is set as `aria-keyshortcuts` on the host, and for text content the trailing parenthesised
+     * shortcut, e.g. ` (Ctrl+S)`, is removed from the screen reader description so it is not announced twice.
      */
     readonly fdTooltipKeyShortcuts = input<string | null>(null);
+
+    /**
+     * Additional CSS class(es) for the tooltip body, e.g. to customise its styling.
+     * The tooltip is rendered in an overlay, so the styles must not be encapsulated in a component.
+     */
+    readonly fdTooltipBodyClass = input<string | null>(null);
 
     /**
      * Unique id of the rendered tooltip container (`role="tooltip"`).
      * The hidden screen reader description uses `<tooltipId>-description`.
      */
-    readonly tooltipId = `fd-tooltip-${tooltipUniqueId++}`;
+    readonly tooltipId = `fd-tooltip-${++tooltipUniqueId}`;
 
     /** @hidden Host element reference, passed to `PopoverService` as the overlay origin. */
     private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -166,26 +192,42 @@ export class TooltipDirective {
     /** @hidden Used to append and look up the hidden description element. */
     private readonly _document = inject(DOCUMENT);
 
+    /** @hidden Keeps the template rendered into the hidden description element up to date. */
+    private readonly _appRef = inject(ApplicationRef);
+
     /** @hidden Effective timing: the defaults overridden by the provided `TOOLTIP_CONFIG`. */
     private readonly _config = { ...DEFAULT_TOOLTIP_CONFIG, ...inject(TOOLTIP_CONFIG) };
 
     /** @hidden Id of the hidden description element referenced by the host's `aria-describedby`. */
     private readonly _descriptionId = `${this.tooltipId}-description`;
 
-    /**
-     * @hidden
-     * Whether the tooltip is active: not disabled and has non-empty text.
-     * Drives the host listeners, the ARIA attributes and the popover `disabled` state.
-     */
-    private readonly _enabled = computed(() => !this.fdTooltipDisabled() && !!this.fdTooltip()?.trim());
+    /** @hidden Text content, or an empty string when a template is used. */
+    private readonly _text = computed(() => {
+        const content = this.fdTooltip();
+        return typeof content === 'string' ? content.trim() : '';
+    });
+
+    /** @hidden Template content, or `null` when text is used. */
+    private readonly _template = computed(() => {
+        const content = this.fdTooltip();
+        return content instanceof TemplateRef ? content : null;
+    });
 
     /**
      * @hidden
-     * Text announced by screen readers. Equals the tooltip text, except that the trailing `(shortcut)`
-     * is removed when `fdTooltipKeyShortcuts` is set, because the shortcut is announced via `aria-keyshortcuts`.
+     * Whether the tooltip is active: not disabled and has a template or non-empty text.
+     * Drives the host listeners, the ARIA attributes and the popover `disabled` state.
+     */
+    private readonly _enabled = computed(() => !this.fdTooltipDisabled() && (!!this._text() || !!this._template()));
+
+    /**
+     * @hidden
+     * Text announced by screen readers for text content. Equals the tooltip text, except that the trailing
+     * `(shortcut)` is removed when `fdTooltipKeyShortcuts` is set, because the shortcut is announced via
+     * `aria-keyshortcuts`. Template content is announced as rendered.
      */
     private readonly _description = computed(() => {
-        const text = this.fdTooltip()?.trim() ?? '';
+        const text = this._text();
         return this.fdTooltipKeyShortcuts() ? text.replace(/\s*\([^()]*\)$/, '') : text;
     });
 
@@ -216,7 +258,7 @@ export class TooltipDirective {
         closeOnEscapeKey: () => false,
         closeOnOutsideClick: () => true,
         disableScrollbar: () => true,
-        additionalBodyClass: () => TOOLTIP_BODY_CLASS,
+        additionalBodyClass: () => [TOOLTIP_BODY_CLASS, this.fdTooltipBodyClass()].filter(Boolean).join(' '),
         bodyRole: () => 'tooltip',
         bodyId: () => this.tooltipId,
         disabled: () => !this._enabled()
@@ -225,9 +267,12 @@ export class TooltipDirective {
     /**
      * @hidden
      * Hidden element in `document.body` that holds the screen reader description.
-     * `null` while the tooltip is disabled or has no text.
+     * `null` while the tooltip is disabled or has no content.
      */
     private _descriptionElement: HTMLElement | null = null;
+
+    /** @hidden Template content rendered into the hidden description element. */
+    private _descriptionView: EmbeddedViewRef<unknown> | null = null;
 
     /** @hidden Whether this directive set `aria-keyshortcuts`, so it only removes an attribute it owns. */
     private _keyShortcutsApplied = false;
@@ -245,7 +290,7 @@ export class TooltipDirective {
      * @hidden
      * Wires the directive up reactively:
      * 1. Keeps the popover configuration in sync with the inputs.
-     * 2. Keeps the overlay text in sync with `fdTooltip`.
+     * 2. Keeps the overlay content in sync with `fdTooltip`.
      * 3. Attaches the host listeners only while the tooltip is enabled; disabling it removes them and closes the tooltip.
      * 4. After each render, updates the ARIA attributes and the hidden description element.
      * 5. Attaches hover listeners to the overlay each time it opens, so the tooltip stays open while hovered.
@@ -265,15 +310,17 @@ export class TooltipDirective {
         });
 
         effect(() => {
-            const text = this.fdTooltip()?.trim() ?? '';
-            untracked(() => this._popoverService.updateContent(text, null));
+            const text = this._text();
+            const template = this._template();
+            untracked(() => this._popoverService.updateContent(template ? null : text, template));
         });
 
         effect((onCleanup) => {
+            const trigger = this.fdTooltipTrigger();
             if (!this._enabled()) {
                 return;
             }
-            const listeners = untracked(() => this._listenToHost());
+            const listeners = untracked(() => this._listenToHost(trigger));
             onCleanup(() =>
                 untracked(() => {
                     listeners.forEach((unlisten) => unlisten());
@@ -286,8 +333,9 @@ export class TooltipDirective {
         afterRenderEffect(() => {
             const enabled = this._enabled();
             const description = this._description();
+            const template = this._template();
             const keyShortcuts = this.fdTooltipKeyShortcuts();
-            this._updateAria(enabled ? description : '', enabled ? keyShortcuts : null);
+            this._updateAria(enabled ? description : '', enabled ? template : null, enabled ? keyShortcuts : null);
         });
 
         this._popoverService._onLoad.pipe(takeUntilDestroyed()).subscribe(({ nativeElement }) => {
@@ -298,13 +346,13 @@ export class TooltipDirective {
         inject(DestroyRef).onDestroy(() => {
             this._coordinator.unregister(this._handle);
             this._removeBodyListeners();
-            this._updateAria('', null);
+            this._updateAria('', null, null);
         });
     }
 
     /**
      * Shows the tooltip immediately, without the show delay, and closes any other open tooltip.
-     * Does nothing while the tooltip is disabled or has no text.
+     * Does nothing while the tooltip is disabled or has no content.
      * Accessible from templates via `#ref="fdTooltip"`.
      */
     show(): void {
@@ -340,18 +388,43 @@ export class TooltipDirective {
 
     /**
      * @hidden
-     * Attaches all host listeners and returns their cleanup functions:
+     * Attaches the host listeners for the given trigger and returns their cleanup functions.
+     * Both triggers listen to `keydown` for `Ctrl+Alt+I`.
+     *
+     * `click` trigger:
+     * - `click`: toggles the tooltip immediately.
+     * - `focusout`: hides the tooltip when focus moves to another element.
+     *
+     * `hover` trigger:
      * - `pointerenter` / `pointerleave` (mouse and pen only): show / hide with delay.
      * - `focusin` / `focusout`: show on keyboard focus, hide when focus leaves the host.
-     * - `click`: hide immediately, because the host action was triggered.
-     * - `keydown`: `Ctrl+Alt+I` toggles, `Enter` hides immediately.
+     * - `click` and `Enter`: hide immediately, because the host action was triggered.
      * - `touchstart` / `touchmove` / `touchend` / `touchcancel`: detect a long-press.
      */
-    private _listenToHost(): (() => void)[] {
+    private _listenToHost(trigger: TooltipTrigger): (() => void)[] {
         const host = this._host;
+        const keydown = this._renderer.listen(host, 'keydown', (event: KeyboardEvent) =>
+            this._onKeydown(event, trigger)
+        );
+
+        if (trigger === 'click') {
+            return [
+                keydown,
+                this._renderer.listen(host, 'click', () => this._toggle()),
+                this._renderer.listen(host, 'focusout', (event: FocusEvent) => {
+                    const target = event.relatedTarget as Node | null;
+                    // Clicking the tooltip text moves focus nowhere, so the tooltip stays open for text selection.
+                    if (target && !host.contains(target)) {
+                        this.hide();
+                    }
+                })
+            ];
+        }
+
         const stopLongPress = (): void => this._clearLongPress();
 
         return [
+            keydown,
             this._renderer.listen(host, 'pointerenter', (event: PointerEvent) => {
                 if (event.pointerType !== 'touch') {
                     this._requestShow(this._showDelay());
@@ -369,7 +442,6 @@ export class TooltipDirective {
                 }
             }),
             this._renderer.listen(host, 'click', () => this.hide()),
-            this._renderer.listen(host, 'keydown', (event: KeyboardEvent) => this._onKeydown(event)),
             this._renderer.listen(host, 'touchstart', () => this._startLongPress(), { passive: true }),
             this._renderer.listen(host, 'touchmove', stopLongPress, { passive: true }),
             this._renderer.listen(host, 'touchend', stopLongPress),
@@ -395,21 +467,27 @@ export class TooltipDirective {
 
     /**
      * @hidden
-     * Handles keyboard input on the host: `Ctrl+Alt+I` toggles the tooltip without delay,
-     * and `Enter` hides it immediately because it triggers the host action.
+     * Handles keyboard input on the host: `Ctrl+Alt+I` toggles the tooltip without delay. With the `hover`
+     * trigger, `Enter` hides the tooltip because it triggers the host action; with the `click` trigger,
+     * `Enter` already toggles it through the resulting `click` event.
      */
-    private _onKeydown(event: KeyboardEvent): void {
+    private _onKeydown(event: KeyboardEvent, trigger: TooltipTrigger): void {
         if (event.ctrlKey && event.altKey && event.code === 'KeyI') {
             event.preventDefault();
-            if (this._popoverService.isOpen()) {
-                this.hide();
-            } else {
-                this.show();
-            }
+            this._toggle();
             return;
         }
-        if (KeyUtil.isKeyCode(event, ENTER)) {
+        if (trigger === 'hover' && KeyUtil.isKeyCode(event, ENTER)) {
             this.hide();
+        }
+    }
+
+    /** @hidden Shows the tooltip immediately if it is hidden, hides it otherwise. */
+    private _toggle(): void {
+        if (this._popoverService.isOpen()) {
+            this.hide();
+        } else {
+            this.show();
         }
     }
 
@@ -452,9 +530,13 @@ export class TooltipDirective {
      * @hidden
      * Attaches pointer listeners to the opened overlay, so the tooltip stays open while hovered
      * (e.g. to select its text) and hides after the hide delay when the pointer leaves it.
+     * Not used with the `click` trigger, where the pointer position does not close the tooltip.
      */
     private _listenToBody(body: HTMLElement): void {
         this._removeBodyListeners();
+        if (this.fdTooltipTrigger() === 'click') {
+            return;
+        }
         this._bodyListeners = [
             this._renderer.listen(body, 'pointerenter', () => this._coordinator.cancelHide(this._handle)),
             this._renderer.listen(body, 'pointerleave', () => this._coordinator.hide(this._handle, this._hideDelay()))
@@ -470,15 +552,21 @@ export class TooltipDirective {
     /**
      * @hidden
      * Applies the ARIA state to the host:
-     * - creates, updates or removes the hidden description element,
+     * - fills the hidden description element with the text or the rendered template, or removes it,
      * - adds or removes this tooltip's id in `aria-describedby`,
      * - sets or removes `aria-keyshortcuts`.
-     * An empty description and `null` shortcuts remove everything this directive added.
+     * Empty text, no template and `null` shortcuts remove everything this directive added.
      */
-    private _updateAria(description: string, keyShortcuts: string | null): void {
-        if (description) {
+    private _updateAria(text: string, template: TemplateRef<unknown> | null, keyShortcuts: string | null): void {
+        this._descriptionView?.destroy();
+        this._descriptionView = null;
+
+        if (text || template) {
             this._descriptionElement ??= this._createDescriptionElement();
-            this._descriptionElement.textContent = description;
+            this._descriptionElement.textContent = template ? '' : text;
+            if (template) {
+                this._renderDescriptionTemplate(this._descriptionElement, template);
+            }
         } else if (this._descriptionElement) {
             this._renderer.removeChild(this._document.body, this._descriptionElement);
             this._descriptionElement = null;
@@ -492,6 +580,19 @@ export class TooltipDirective {
             this._renderer.removeAttribute(this._host, 'aria-keyshortcuts');
         }
         this._keyShortcutsApplied = !!keyShortcuts;
+    }
+
+    /**
+     * @hidden
+     * Renders the template into the hidden description element, so screen readers announce the same
+     * content as shown in the tooltip. The view is attached to the application, so it stays up to date.
+     */
+    private _renderDescriptionTemplate(element: HTMLElement, template: TemplateRef<unknown>): void {
+        const view = template.createEmbeddedView(null);
+        this._appRef.attachView(view);
+        view.detectChanges();
+        view.rootNodes.forEach((node) => this._renderer.appendChild(element, node));
+        this._descriptionView = view;
     }
 
     /**

@@ -58,7 +58,8 @@ fd-popover-body {
             }
         }
 
-        &.#{$block}__body--tooltip {
+        // :where() keeps this at single-class specificity, so `.fd-popover__body.<fdTooltipBodyClass>` overrides it.
+        &:where(.#{$block}__body--tooltip) {
             // The body background and the arrow fill both read this token.
             --sapGroup_ContentBackground: var(--sapIndicationColor_9_Background);
             --fdPopover_Border_Color: var(--sapIndicationColor_9_BorderColor);
@@ -82,17 +83,18 @@ fd-popover-body {
                 100% - 0.375rem - var(--fdPopover_Arrow_Size)
             );
 
+            // Block layout so text and template content flow inline instead of becoming flex items.
+            display: block;
             box-sizing: border-box;
             min-height: 1.5rem;
             max-width: 17rem;
-            // Single-line height comes from min-height; the vertical padding only matters once the text wraps.
             padding-block: 0.25rem;
             padding-inline: 0.5rem;
-            align-items: center;
             color: var(--sapContent_ContrastTextColor);
             font-family: var(--sapFontFamily);
             font-size: var(--sapFontSmallSize);
             font-weight: normal;
+            line-height: 1rem;
             text-align: start;
             white-space: normal;
             overflow-wrap: break-word;
@@ -100,7 +102,9 @@ fd-popover-body {
             // The tooltip class is applied after the overlay is first measured; animating from the popover
             // styles would make the overlay be positioned with an intermediate size.
             transition: none;
+        }
 
+        &.#{$block}__body--tooltip {
             // ::after is the outer (border) triangle, ::before the inner (fill) one, inset by the border width.
             &.#{$block}__body--arrow-x-start {
                 &::after {
@@ -156,6 +160,10 @@ fd-popover-body {
                                 var(--fdPopover_Border_Width)
                         );
                 }
+            }
+
+            & > :last-child:not(.fd-popover__resize-handle) {
+                border-radius: 0;
             }
         }
 

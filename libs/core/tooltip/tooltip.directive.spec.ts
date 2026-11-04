@@ -65,6 +65,41 @@ class TooltipDelayTestComponent {
     readonly overridden = viewChild.required('overridden', { read: ElementRef });
 }
 
+@Component({
+    template: `
+        <button
+            #host
+            type="button"
+            aria-label="Warnings"
+            [fdTooltip]="warningTemplate"
+            fdTooltipBodyClass="custom-tooltip-body"
+        ></button>
+        <ng-template #warningTemplate><b>3 warnings</b> to review</ng-template>
+    `,
+    imports: [TooltipDirective]
+})
+class TooltipTemplateTestComponent {
+    readonly host = viewChild.required('host', { read: ElementRef });
+}
+
+@Component({
+    template: `
+        <button
+            #info
+            type="button"
+            aria-label="More information"
+            fdTooltip="Changes are saved automatically"
+            fdTooltipTrigger="click"
+        ></button>
+        <button #other type="button">Other</button>
+    `,
+    imports: [TooltipDirective]
+})
+class TooltipClickTestComponent {
+    readonly info = viewChild.required('info', { read: ElementRef });
+    readonly other = viewChild.required('other', { read: ElementRef });
+}
+
 describe('TooltipDirective', () => {
     let fixture: ComponentFixture<TooltipTestComponent>;
     let component: TooltipTestComponent;
@@ -272,5 +307,72 @@ describe('TooltipDirective delays', () => {
         expect(getTooltip()?.textContent?.trim()).toBe('Input delay');
         leave(overridden);
         tick(500);
+    }));
+});
+
+describe('TooltipDirective with a template', () => {
+    let host: HTMLButtonElement;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({ imports: [TooltipTemplateTestComponent] });
+        const fixture = TestBed.createComponent(TooltipTemplateTestComponent);
+        fixture.detectChanges();
+        host = fixture.componentInstance.host().nativeElement;
+    });
+
+    it('should render the template with the custom body class', fakeAsync(() => {
+        hover(host);
+        tick(500);
+
+        const tooltip = getTooltip() as HTMLElement;
+        expect(tooltip.querySelector('b')?.textContent).toBe('3 warnings');
+        expect(tooltip.classList).toContain('fd-popover__body--tooltip');
+        expect(tooltip.classList).toContain('custom-tooltip-body');
+
+        leave(host);
+        tick(500);
+    }));
+
+    it('should describe the host with the rendered template content', () => {
+        const descriptionId = host.getAttribute('aria-describedby') ?? '';
+        expect(document.getElementById(descriptionId)?.textContent).toBe('3 warnings to review');
+    });
+});
+
+describe('TooltipDirective with the click trigger', () => {
+    let info: HTMLButtonElement;
+    let other: HTMLButtonElement;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({ imports: [TooltipClickTestComponent] });
+        const fixture = TestBed.createComponent(TooltipClickTestComponent);
+        fixture.detectChanges();
+        info = fixture.componentInstance.info().nativeElement;
+        other = fixture.componentInstance.other().nativeElement;
+    });
+
+    it('should toggle immediately on click and ignore hover', fakeAsync(() => {
+        hover(info);
+        tick(500);
+        expect(getTooltip()).toBeNull();
+
+        info.click();
+        expect(getTooltip()?.textContent?.trim()).toBe('Changes are saved automatically');
+
+        leave(info);
+        tick(1000);
+        expect(getTooltip()).not.toBeNull();
+
+        info.click();
+        expect(getTooltip()).toBeNull();
+    }));
+
+    it('should hide when focus moves to another element', fakeAsync(() => {
+        info.focus();
+        info.click();
+        expect(getTooltip()).not.toBeNull();
+
+        other.focus();
+        expect(getTooltip()).toBeNull();
     }));
 });

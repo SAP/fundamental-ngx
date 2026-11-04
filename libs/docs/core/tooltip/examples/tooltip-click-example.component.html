@@ -1,0 +1,30 @@
+<div class="fd-tooltip-click-example">
+    <span>Auto-Save</span>
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="hint"
+        aria-label="More information about Auto-Save"
+        fdTooltip="Your changes are saved automatically every 5 minutes."
+        fdTooltipTrigger="click"
+        fdTooltipPlacement="right"
+    ></button>
+</div>
+
+<div class="fd-tooltip-click-example">
+    <span>Delivery</span>
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="hint"
+        aria-label="More information about Delivery"
+        fdTooltipTrigger="click"
+        fdTooltipPlacement="right"
+        [fdTooltip]="deliveryTooltip"
+    ></button>
+</div>
+
+<ng-template #deliveryTooltip>
+    <b>Standard delivery</b><br />
+    Arrives within 3 to 5 business days.
+</ng-template>
