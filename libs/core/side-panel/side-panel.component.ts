@@ -10,7 +10,7 @@ import {
     viewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { SidePanelItemComponent } from './side-panel-item.component';
@@ -45,7 +45,7 @@ export type SidePanelSide = 'left' | 'right';
     imports: [IconComponent],
     providers: [contentDensityObserverProviders()],
     host: {
-        '[class]': '_hostClasses()'
+        '[class]': 'hostClasses()'
     }
 })
 export class SidePanelComponent {
@@ -53,7 +53,7 @@ export class SidePanelComponent {
     readonly side = input<SidePanelSide>('right');
 
     /** Accessible label for the action bar (`toolbar`). */
-    readonly ariaLabel = input<Nullable<string>>();
+    readonly ariaLabel = input<string>();
 
     /**
      * Identifier of the currently active group, or `null` when none is active.
@@ -65,10 +65,10 @@ export class SidePanelComponent {
     readonly open = model(false);
 
     /** @hidden Projected side panel items (content groups). */
-    protected readonly _items = contentChildren(SidePanelItemComponent);
+    protected readonly items = contentChildren(SidePanelItemComponent);
 
     /** @hidden */
-    protected readonly _hostClasses = computed(() => {
+    protected readonly hostClasses = computed(() => {
         const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`];
         if (this.open()) {
             classes.push('fd-side-panel--open');
@@ -77,7 +77,7 @@ export class SidePanelComponent {
     });
 
     /** @hidden Icon for the navigation arrow toggle button. */
-    protected readonly _navArrowIcon = computed(() => {
+    protected readonly navArrowIcon = computed(() => {
         const isRight = this.side() === 'right';
         const isRtl = this._isRtl();
         // isContentOnRight: content area is to the physical right of the panel bar.
@@ -91,14 +91,14 @@ export class SidePanelComponent {
     });
 
     /** @hidden Index of the roving-tabindex focus target; resets to the active item. */
-    protected readonly _focusedIndex = linkedSignal<number>(() => {
+    protected readonly focusedIndex = linkedSignal<number>(() => {
         const activeId = this.activeItem();
-        const index = this._items().findIndex((item) => item.id() === activeId);
+        const index = this.items().findIndex((item) => item.id() === activeId);
         return index > -1 ? index : 0;
     });
 
     /** @hidden */
-    protected readonly _contentDensityObserver = inject(ContentDensityObserver);
+    protected readonly contentDensityObserver = inject(ContentDensityObserver);
 
     /** @hidden Action button elements, in projection order. */
     private readonly _actionButtons = viewChildren<ElementRef<HTMLButtonElement>>('actionButton');
@@ -107,12 +107,12 @@ export class SidePanelComponent {
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden Toggle the content panel open/closed. */
-    protected _toggleOpen(): void {
+    protected toggleOpen(): void {
         this.open.update((v) => !v);
     }
 
     /** @hidden Activate (or toggle off) the group behind an action button. */
-    protected _activate(item: SidePanelItemComponent, index: number): void {
+    protected activate(item: SidePanelItemComponent, index: number): void {
         if (item.disabled()) {
             return;
         }
@@ -122,18 +122,18 @@ export class SidePanelComponent {
     }
 
     /** @hidden Vertical roving-tabindex navigation across the action bar. */
-    protected _onKeydown(event: KeyboardEvent): void {
-        const count = this._items().length;
+    protected onKeydown(event: KeyboardEvent): void {
+        const count = this.items().length;
         if (count === 0) {
             return;
         }
         let nextIndex: number;
         switch (event.key) {
             case 'ArrowDown':
-                nextIndex = this._nextEnabledIndex(this._focusedIndex(), 1);
+                nextIndex = this._nextEnabledIndex(this.focusedIndex(), 1);
                 break;
             case 'ArrowUp':
-                nextIndex = this._nextEnabledIndex(this._focusedIndex(), -1);
+                nextIndex = this._nextEnabledIndex(this.focusedIndex(), -1);
                 break;
             case 'Home':
                 nextIndex = this._nextEnabledIndex(-1, 1);
@@ -150,7 +150,7 @@ export class SidePanelComponent {
 
     /** @hidden Find the next non-disabled item index, wrapping around. */
     private _nextEnabledIndex(from: number, step: number): number {
-        const items = this._items();
+        const items = this.items();
         const count = items.length;
         let index = from;
         for (let i = 0; i < count; i++) {
@@ -164,7 +164,7 @@ export class SidePanelComponent {
 
     /** @hidden Move roving focus to the given index. */
     private _focusItem(index: number): void {
-        this._focusedIndex.set(index);
+        this.focusedIndex.set(index);
         this._actionButtons()[index]?.nativeElement.focus();
     }
 }

@@ -55,12 +55,6 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
             border-radius: 0 var(--sapElement_BorderCornerRadius, 0.25rem) var(--sapElement_BorderCornerRadius, 0.25rem)
                 0;
         }
-
-        // Tooltip opens toward the page content (left of the bar)
-        .fd-side-panel__action-tooltip {
-            inset-inline-end: 100%;
-            margin-inline-end: 0.5rem;
-        }
     }
 
     &--left {
@@ -78,11 +72,6 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
             inset-inline-start: auto;
             border-radius: var(--sapElement_BorderCornerRadius, 0.25rem) 0 0
                 var(--sapElement_BorderCornerRadius, 0.25rem);
-        }
-
-        .fd-side-panel__action-tooltip {
-            inset-inline-start: 100%;
-            margin-inline-start: 0.5rem;
         }
     }
 
@@ -140,7 +129,6 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         box-sizing: border-box;
         padding: 0.1875rem 0.75rem;
         justify-content: center;
-        cursor: pointer;
 
         // Selection bar (spec D) — invisible by default, positioned per-side in --right/--left
         // Height = icon height + 0.1875rem padding top & bottom (fills full container height)
@@ -191,6 +179,15 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         cursor: pointer;
         appearance: none;
         -webkit-appearance: none;
+
+        // Extend the interactive (click + hover) area to the full container row.
+        // Container padding is 0.1875rem block / 0.75rem inline.
+        &::after {
+            content: '';
+            position: absolute;
+            inset-block: -0.1875rem;
+            inset-inline: -0.75rem;
+        }
 
         &:focus {
             outline: none;

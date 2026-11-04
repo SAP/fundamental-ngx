@@ -2,8 +2,9 @@
     class="fd-side-panel__action-bar"
     role="toolbar"
     aria-orientation="vertical"
+    tabindex="-1"
     [attr.aria-label]="ariaLabel()"
-    (keydown)="_onKeydown($event)"
+    (keydown)="onKeydown($event)"
 >
     <div class="fd-side-panel__action-container">
         <button
@@ -12,14 +13,14 @@
             [attr.aria-expanded]="open()"
             [attr.aria-label]="open() ? 'Collapse side panel' : 'Expand side panel'"
             [attr.title]="open() ? 'Collapse side panel' : 'Expand side panel'"
-            (click)="_toggleOpen()"
+            (click)="toggleOpen()"
         >
-            <fd-icon [glyph]="_navArrowIcon()" [ariaHidden]="true" />
+            <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
         </button>
     </div>
 
-    @for (item of _items(); track item.id(); let i = $index) {
-        <div class="fd-side-panel__action-container" (click)="_activate(item, i)">
+    @for (item of items(); track item.id(); let i = $index) {
+        <div class="fd-side-panel__action-container">
             <button
                 #actionButton
                 type="button"
@@ -31,7 +32,8 @@
                 [attr.aria-disabled]="item.disabled() || null"
                 [attr.title]="item.label()"
                 [disabled]="item.disabled()"
-                [tabindex]="i === _focusedIndex() ? 0 : -1"
+                [tabindex]="i === focusedIndex() ? 0 : -1"
+                (click)="activate(item, i)"
             >
                 <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
             </button>

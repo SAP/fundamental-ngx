@@ -39,5 +39,5 @@ export class SidePanelItemComponent {
     readonly disabled = input(false, { transform: booleanAttribute });
 
     /** @hidden Captured content template, rendered by the parent while the item is active. */
-    protected readonly _content = contentChild(SidePanelContentDirective);
+    protected readonly content = contentChild(SidePanelContentDirective);
 }
