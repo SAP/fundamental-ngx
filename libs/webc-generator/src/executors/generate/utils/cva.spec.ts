@@ -41,7 +41,7 @@ function makeDirective(config?: CvaConfig, elementOverrides: Record<string, any>
     (directive as any)['_initialized'] = false;
     (directive as any)['_disabled'] = false;
     (directive as any)['_rafId'] = null;
-    (directive as any)['_listenerAbort'] = new AbortController();
+    (directive as any)['_listeners'] = [];
     return directive;
 }
 
