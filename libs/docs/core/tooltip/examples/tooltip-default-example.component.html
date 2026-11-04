@@ -1,0 +1,41 @@
+<div class="fd-tooltip-example">
+    <button fd-button fdType="transparent" glyph="edit" aria-label="Edit" fdTooltip="Edit"></button>
+    <button fd-button fdType="transparent" glyph="copy" aria-label="Copy" fdTooltip="Copy"></button>
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="delete"
+        aria-label="Delete"
+        fdTooltip="Delete - Removes the selected item"
+    ></button>
+    <button
+        fd-button
+        fdType="transparent"
+        glyph="bell"
+        aria-label="Notifications"
+        fdTooltip="Notifications - You have 3 unread messages"
+    ></button>
+</div>
+
+<div class="fd-tooltip-example">
+    <button fd-button label="Text Button" fdTooltip="Opens the details of the selected item"></button>
+    <fd-avatar
+        glyph="employee"
+        size="xs"
+        [circle]="true"
+        ariaLabel="Andy Smith"
+        fdTooltip="Andy Smith - Online"
+        tabindex="0"
+    ></fd-avatar>
+    <fd-icon glyph="alert" ariaLabel="Warning" fdTooltip="Status Critical" tabindex="0"></fd-icon>
+    <a
+        fd-link
+        href="https://www.sap.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        fdTooltip="Opens sap.com in a new tab"
+    >
+        Link
+    </a>
+    <input fd-form-control aria-label="Supplier" placeholder="Supplier" fdTooltip="Enter the supplier name or ID" />
+</div>

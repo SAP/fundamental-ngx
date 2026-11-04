@@ -1,0 +1,30 @@
+<fd-doc-page>
+    <header>Tooltip</header>
+    <description>
+        <p>
+            A tooltip is a short, non-disruptive text popup that describes the element it is attached to. Add the
+            <code>fdTooltip</code> directive to any existing element &mdash; no wrapper or DOM changes are needed. The
+            tooltip is rendered with the popover overlay, so it gets the same positioning, viewport flipping and arrow.
+        </p>
+        <ul>
+            <li>Shows after a delay on mouse hover or keyboard focus, and immediately on touch long-press.</li>
+            <li>
+                Only one tooltip is visible at a time. Moving to the next element shows its tooltip after a shorter
+                delay.
+            </li>
+            <li>The tooltip can be hovered and its text selected; focus always stays on the host element.</li>
+            <li>
+                <kbd>Esc</kbd> closes the tooltip without closing the surrounding dialog, <kbd>Ctrl</kbd> +
+                <kbd>Alt</kbd> + <kbd>I</kbd> toggles it on the focused element.
+            </li>
+        </ul>
+        <fd-message-strip [dismissible]="false" type="information">
+            Use tooltips for short, supplementary text only. For rich, interactive or long content use a
+            <b>Popover</b>; for help text next to form labels use <b>Inline Help</b>. Never put information that is
+            required to complete a task into a tooltip.
+        </fd-message-strip>
+    </description>
+    <import componentName="TooltipDirective" subPackage="tooltip"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

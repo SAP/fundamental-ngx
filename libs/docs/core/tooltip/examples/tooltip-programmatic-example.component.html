@@ -1,0 +1,12 @@
+<div class="fd-tooltip-programmatic-example">
+    <button
+        fd-button
+        glyph="favorite"
+        aria-label="Add to Favorites"
+        fdTooltip="Add to Favorites"
+        fdTooltipPlacement="right"
+        #favoriteTooltip="fdTooltip"
+    ></button>
+    <button fd-button label="Show" (click)="favoriteTooltip.show()"></button>
+    <button fd-button label="Hide" (click)="favoriteTooltip.hide()"></button>
+</div>

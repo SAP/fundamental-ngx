@@ -1,0 +1,9 @@
+{
+    "name": "docs-core-tooltip",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/docs/core/tooltip",
+    "projectType": "library",
+    "prefix": "fundamental-ngx",
+    "tags": ["type:lib", "scope:docs"],
+    "targets": {}
+}
