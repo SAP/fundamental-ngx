@@ -1,0 +1,13 @@
+<p>Drag the bottom-right corner of the box to resize it.</p>
+<div class="fd-tooltip-truncation-example">
+    <span
+        #text
+        class="fd-tooltip-truncation-example__text"
+        fdTooltip="Risk and Criticality AT AlphaNumeric"
+        [fdTooltipDisabled]="!truncated()"
+        [attr.tabindex]="truncated() ? 0 : null"
+    >
+        Risk and Criticality AT AlphaNumeric
+    </span>
+</div>
+<p>Text is {{ truncated() ? 'truncated: the tooltip is enabled.' : 'fully visible: the tooltip is disabled.' }}</p>

@@ -1,0 +1,117 @@
+<fd-docs-section-title id="default" componentName="tooltip"> Default Tooltip </fd-docs-section-title>
+<description>
+    Add <code>fdTooltip="..."</code> to any element. The tooltip shows after <b>500 ms</b> on mouse hover or keyboard
+    focus and hides <b>500 ms</b> after the pointer or focus leaves. Clicking an element moves focus to it without
+    showing the tooltip; activating the element (click or <kbd>Enter</kbd>) or clicking anywhere else hides it
+    immediately. Only one tooltip is visible at a time: move between the icon buttons to see the previous tooltip close
+    at once and the next one open after <b>200 ms</b>. On touch devices, a long-press shows the tooltip; on links it is
+    disabled so the native context menu still works.
+</description>
+<component-example>
+    <fd-tooltip-default-example></fd-tooltip-default-example>
+</component-example>
+<code-example [exampleFiles]="defaultExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="placement" componentName="tooltip"> Placement and Alignment </fd-docs-section-title>
+<description>
+    Use <code>fdTooltipPlacement</code> (<code>top</code> by default, <code>bottom</code>, <code>left</code>,
+    <code>right</code>) and <code>fdTooltipAlignment</code> (<code>start</code>, <code>middle</code> by default,
+    <code>end</code>). When there is not enough room, the tooltip flips to the opposite side &mdash; scroll the page so
+    a button is at the top edge of the viewport to see it.
+</description>
+<component-example>
+    <fd-tooltip-placement-example></fd-tooltip-placement-example>
+</component-example>
+<code-example [exampleFiles]="placementExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="accessibility" componentName="tooltip">
+    Keyboard Shortcuts and Accessibility
+</fd-docs-section-title>
+<description>
+    <p>
+        The tooltip text is exposed to screen readers through <code>aria-describedby</code>, but only when it adds
+        information to the element's accessible name. Existing <code>aria-describedby</code> references are kept.
+    </p>
+    <p>
+        Put the shortcut at the end of the text in parentheses, e.g. <code>Save (Ctrl+S)</code>, and pass it in
+        <code>aria-keyshortcuts</code> format via <code>fdTooltipKeyShortcuts="Control+S"</code>. The shortcut is then
+        announced through <code>aria-keyshortcuts</code> and left out of the description.
+    </p>
+    <p>
+        With a button focused, press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd> to toggle its tooltip without delay
+        and <kbd>Esc</kbd> to close it. The table shows the resulting attributes.
+    </p>
+</description>
+<component-example>
+    <fd-tooltip-accessibility-example></fd-tooltip-accessibility-example>
+</component-example>
+<code-example [exampleFiles]="accessibilityExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="truncation" componentName="tooltip"> Truncated Text </fd-docs-section-title>
+<description>
+    Use a tooltip to reveal truncated text only when other patterns, like wrapping, cannot be applied. Enable it only
+    while the text is actually truncated by binding <code>[fdTooltipDisabled]</code>. In this example, the text also
+    becomes focusable only while truncated, so keyboard users can reach the tooltip.
+</description>
+<component-example>
+    <fd-tooltip-truncation-example></fd-tooltip-truncation-example>
+</component-example>
+<code-example [exampleFiles]="truncationExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dynamic" componentName="tooltip"> Dynamic Text and Disabled State </fd-docs-section-title>
+<description>
+    The tooltip text can change at any time. Set <code>[fdTooltipDisabled]="true"</code> or pass an empty text to
+    disable the tooltip. A disabled tooltip adds no attributes or event listeners to the host element.
+</description>
+<component-example>
+    <fd-tooltip-dynamic-example></fd-tooltip-dynamic-example>
+</component-example>
+<code-example [exampleFiles]="dynamicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="delays" componentName="tooltip"> Custom Delays </fd-docs-section-title>
+<description>
+    Override the delays for a single tooltip with <code>[fdTooltipShowDelay]</code> and
+    <code>[fdTooltipHideDelay]</code> (in milliseconds), or for a whole application or component by providing
+    <code>TOOLTIP_CONFIG</code> with any of <code>showDelay</code>, <code>hideDelay</code> and
+    <code>sequenceDelay</code>. This example provides <code>{{ '{' }} showDelay: 1000 {{ '}' }}</code
+    >.
+</description>
+<component-example>
+    <fd-tooltip-delay-example></fd-tooltip-delay-example>
+</component-example>
+<code-example [exampleFiles]="delayExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="programmatic" componentName="tooltip"> Programmatic Control </fd-docs-section-title>
+<description>
+    Get the directive instance with <code>#ref="fdTooltip"</code> and call <code>show()</code> or <code>hide()</code>
+    to open or close the tooltip immediately.
+</description>
+<component-example>
+    <fd-tooltip-programmatic-example></fd-tooltip-programmatic-example>
+</component-example>
+<code-example [exampleFiles]="programmaticExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dialog" componentName="tooltip"> Tooltip in a Dialog </fd-docs-section-title>
+<description>
+    When a tooltip is open, the first <kbd>Esc</kbd> only closes the tooltip; the dialog stays open and closes on the
+    next <kbd>Esc</kbd>. Switching to another browser tab or window also closes the tooltip, and it is not restored when
+    you come back.
+</description>
+<component-example>
+    <fd-tooltip-dialog-example></fd-tooltip-dialog-example>
+</component-example>
+<code-example [exampleFiles]="dialogExample"></code-example>

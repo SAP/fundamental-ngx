@@ -58,6 +58,107 @@ fd-popover-body {
             }
         }
 
+        &.#{$block}__body--tooltip {
+            // The body background and the arrow fill both read this token.
+            --sapGroup_ContentBackground: var(--sapIndicationColor_9_Background);
+            --fdPopover_Border_Color: var(--sapIndicationColor_9_BorderColor);
+            // Matches the outline of --sapContent_Lite_Shadow in high-contrast themes, so the arrow gets it too.
+            --fdPopover_Border_Width: 0.125rem;
+            --fdPopover_Body_Box_Shadow: var(--sapContent_Lite_Shadow);
+            --fdPopover_Body_Box_Shadow_No_Arrow: var(--sapContent_Lite_Shadow);
+            --fdPopover_Body_Border_Radius: 0.25rem;
+            // Isosceles arrow, 0.75rem wide and 0.375rem high.
+            --fdPopover_Arrow_Size: 0.375rem;
+            // Arrow centre for start/end alignment: the host centre (set by TooltipDirective),
+            // kept at least 0.5rem (horizontal) or 0.375rem (vertical) away from the tooltip edges.
+            --fdTooltip_Arrow_Inline_Offset: clamp(
+                0.5rem + var(--fdPopover_Arrow_Size),
+                var(--fdTooltip_Host_Width, 2.25rem) / 2,
+                100% - 0.5rem - var(--fdPopover_Arrow_Size)
+            );
+            --fdTooltip_Arrow_Block_Offset: clamp(
+                0.375rem + var(--fdPopover_Arrow_Size),
+                var(--fdTooltip_Host_Height, 2.25rem) / 2,
+                100% - 0.375rem - var(--fdPopover_Arrow_Size)
+            );
+
+            box-sizing: border-box;
+            min-height: 1.5rem;
+            max-width: 17rem;
+            // Single-line height comes from min-height; the vertical padding only matters once the text wraps.
+            padding-block: 0.25rem;
+            padding-inline: 0.5rem;
+            align-items: center;
+            color: var(--sapContent_ContrastTextColor);
+            font-family: var(--sapFontFamily);
+            font-size: var(--sapFontSmallSize);
+            font-weight: normal;
+            text-align: start;
+            white-space: normal;
+            overflow-wrap: break-word;
+            user-select: text;
+            // The tooltip class is applied after the overlay is first measured; animating from the popover
+            // styles would make the overlay be positioned with an intermediate size.
+            transition: none;
+
+            // ::after is the outer (border) triangle, ::before the inner (fill) one, inset by the border width.
+            &.#{$block}__body--arrow-x-start {
+                &::after {
+                    inset-inline: calc(var(--fdTooltip_Arrow_Inline_Offset) - var(--fdPopover_Arrow_Size)) auto;
+                }
+
+                &::before {
+                    inset-inline: calc(
+                            var(--fdTooltip_Arrow_Inline_Offset) - var(--fdPopover_Arrow_Size) +
+                                var(--fdPopover_Border_Width)
+                        )
+                        auto;
+                }
+            }
+
+            &.#{$block}__body--arrow-x-end {
+                &::after {
+                    inset-inline: auto calc(var(--fdTooltip_Arrow_Inline_Offset) - var(--fdPopover_Arrow_Size));
+                }
+
+                &::before {
+                    inset-inline: auto
+                        calc(
+                            var(--fdTooltip_Arrow_Inline_Offset) - var(--fdPopover_Arrow_Size) +
+                                var(--fdPopover_Border_Width)
+                        );
+                }
+            }
+
+            &.#{$block}__body--arrow-y-top {
+                &::after {
+                    inset-block: calc(var(--fdTooltip_Arrow_Block_Offset) - var(--fdPopover_Arrow_Size)) auto;
+                }
+
+                &::before {
+                    inset-block: calc(
+                            var(--fdTooltip_Arrow_Block_Offset) - var(--fdPopover_Arrow_Size) +
+                                var(--fdPopover_Border_Width)
+                        )
+                        auto;
+                }
+            }
+
+            &.#{$block}__body--arrow-y-bottom {
+                &::after {
+                    inset-block: auto calc(var(--fdTooltip_Arrow_Block_Offset) - var(--fdPopover_Arrow_Size));
+                }
+
+                &::before {
+                    inset-block: auto
+                        calc(
+                            var(--fdTooltip_Arrow_Block_Offset) - var(--fdPopover_Arrow_Size) +
+                                var(--fdPopover_Border_Width)
+                        );
+                }
+            }
+        }
+
         &.fd-form-message {
             &::before {
                 width: auto;

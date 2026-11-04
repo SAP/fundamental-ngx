@@ -1,0 +1,51 @@
+<div class="fd-tooltip-a11y-example">
+    <button
+        #target
+        fd-button
+        glyph="save"
+        aria-label="Save"
+        fdTooltip="Save (Ctrl+S)"
+        fdTooltipKeyShortcuts="Control+S"
+    ></button>
+    <button
+        #target
+        fd-button
+        glyph="print"
+        aria-label="Print"
+        fdTooltip="Print - Sends the document to the default printer (Ctrl+P)"
+        fdTooltipKeyShortcuts="Control+P"
+    ></button>
+    <button #target fd-button label="Copy" fdTooltip="Copy"></button>
+    <button #target fd-button label="Share" fdTooltip="Share - Send a link to this page"></button>
+    <button
+        #target
+        fd-button
+        label="Archive"
+        aria-describedby="fd-tooltip-archive-hint"
+        fdTooltip="Archive - Moves the item to the archive"
+    ></button>
+    <span id="fd-tooltip-archive-hint" hidden>Archived items are kept for 30 days.</span>
+</div>
+
+<button fd-button fdType="transparent" label="Refresh ARIA attributes" (click)="inspect()"></button>
+
+<table fd-table aria-label="ARIA attributes of the tooltip hosts">
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Accessible name</th>
+            <th fd-table-cell>aria-describedby</th>
+            <th fd-table-cell>Announced description</th>
+            <th fd-table-cell>aria-keyshortcuts</th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        @for (snapshot of snapshots(); track $index) {
+            <tr fd-table-row>
+                <td fd-table-cell>{{ snapshot.name }}</td>
+                <td fd-table-cell>{{ snapshot.describedBy }}</td>
+                <td fd-table-cell>{{ snapshot.description }}</td>
+                <td fd-table-cell>{{ snapshot.keyShortcuts }}</td>
+            </tr>
+        }
+    </tbody>
+</table>
