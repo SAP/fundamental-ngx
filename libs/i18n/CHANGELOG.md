@@ -1,3 +1,13 @@
+## 0.66.1-rc.17 (2026-11-04)
+
+### 🩹 Fixes
+
+- **core:** tokens disappear in compact fd-tokenizer when long tokens are present ([#14628](https://github.com/SAP/fundamental-ngx/pull/14628), [#14627](https://github.com/SAP/fundamental-ngx/issues/14627))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.66.1-rc.16 (2026-11-03)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.
