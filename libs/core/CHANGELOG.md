@@ -1,3 +1,63 @@
+## 0.66.1-rc.20 (2026-11-04)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.19 (2026-11-04)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.18 (2026-11-04)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.17 (2026-11-04)
+
+### 🩹 Fixes
+
+- **core:** tokens disappear in compact fd-tokenizer when long tokens are present ([#14628](https://github.com/SAP/fundamental-ngx/pull/14628), [#14627](https://github.com/SAP/fundamental-ngx/issues/14627))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.66.1-rc.16 (2026-11-03)
+
+### 🚀 Features
+
+- **core:** introduce new features to number input ([#14626](https://github.com/SAP/fundamental-ngx/pull/14626))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.1-rc.15 (2026-11-03)
+
+### 🩹 Fixes
+
+- **core:** parse datetime input with English day period labels ([#14625](https://github.com/SAP/fundamental-ngx/pull/14625))
+
+### ❤️ Thank You
+
+- Vitor Coelho @VitorCoelho
+
+## 0.66.1-rc.14 (2026-11-03)
+
+### 🩹 Fixes
+
+- **core:** collapse combobox caret after option selection ([#14652](https://github.com/SAP/fundamental-ngx/pull/14652))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.66.1-rc.13 (2026-11-03)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.12 (2026-11-03)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.11 (2026-11-02)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

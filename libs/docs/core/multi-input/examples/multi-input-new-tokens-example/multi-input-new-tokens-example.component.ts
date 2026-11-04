@@ -19,7 +19,7 @@ export class MultiInputNewTokensExampleComponent {
         { name: 'Orange' }
     ];
 
-    selected: Item[] = [];
+    selected: string[] = [];
 
     displayFunc(obj: Item): string {
         return obj.name;

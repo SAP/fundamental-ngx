@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: '削除可能'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'さらに表示 ({count})',
         tokenizerLabel: 'トークン化プログラム'
     },

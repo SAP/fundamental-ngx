@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'E fshishme'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} artikuj { count, plural, one {më shumë} other {të tjerë} }',
         tokenizerLabel: 'Tokenizer'
     },

@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'हटाने-योग्य'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} अधिक',
         tokenizerLabel: 'Tokenizer'
     },

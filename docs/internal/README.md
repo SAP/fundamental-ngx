@@ -18,3 +18,4 @@
 | [translations.md](translations.md)       | Managing i18n translation keys and `.properties` files                            |
 | [troubleshooting.md](troubleshooting.md) | Common issues and fixes: build failures, test flakiness, cache problems           |
 | [agents.md](agents.md)                   | Using the project's Claude Code subagents (`.claude/agents/`) and adding new ones |
+| [graphify.md](graphify.md)               | Installing and using the local Graphify knowledge graph with Claude Code or Codex |

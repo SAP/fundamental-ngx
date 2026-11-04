@@ -309,6 +309,7 @@ export default {
         deleteButtonLabel: 'Supprimable'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} de plus',
         tokenizerLabel: 'Générateur de jetons'
     },

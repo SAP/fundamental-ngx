@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'สามารถลบได้'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} เพิ่มขึ้น',
         tokenizerLabel: 'ตัวแปลงเป็น Token'
     },

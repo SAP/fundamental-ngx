@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'წაშლადი'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '{count} სხვა',
         tokenizerLabel: 'Tokenizer'
     },

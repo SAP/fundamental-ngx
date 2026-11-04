@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: '[[[Ďēĺēţąƃĺē∙∙∙∙∙]]]'
     },
     coreTokenizer: {
+        overflowingItemLabel: '[[[{count} įţēɱ]]]',
         moreLabel: '[[[{count} ɱŏŗē]]]',
         tokenizerLabel: '[[[Ţŏķēŋįžēŗ∙∙∙∙∙]]]'
     },

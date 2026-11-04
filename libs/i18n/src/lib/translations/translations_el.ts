@@ -307,6 +307,7 @@ export default {
         deleteButtonLabel: 'Διαγράψιμο'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'περισσότερες από {count}',
         tokenizerLabel: 'Δημιουργία διακριτικού'
     },

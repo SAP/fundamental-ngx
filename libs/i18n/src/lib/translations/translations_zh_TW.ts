@@ -306,6 +306,7 @@ export default {
         deleteButtonLabel: '可刪除'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: '超出 {count} 個字元',
         tokenizerLabel: '賦予器'
     },

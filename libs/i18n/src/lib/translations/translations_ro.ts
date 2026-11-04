@@ -308,6 +308,7 @@ export default {
         deleteButtonLabel: 'Poate fi șters'
     },
     coreTokenizer: {
+        overflowingItemLabel: '{count} item',
         moreLabel: 'și încă {count}',
         tokenizerLabel: 'Generator de tokenuri'
     },
