@@ -223,38 +223,6 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         color: inherit;
     }
 
-    // ── CSS-only tooltip ────────────────────────────────────────────────────
-
-    &__action-tooltip {
-        position: absolute;
-        inset-block-start: 50%;
-        transform: translateY(-50%);
-        z-index: 1;
-        max-inline-size: 20rem;
-        padding: 0.25rem 0.5rem;
-        border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
-        background: var(--sapGroup_ContentBackground, #fff);
-        color: var(--sapTextColor, #32363a);
-        border: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
-        box-shadow: 0 0.125rem 0.5rem 0 rgba(0, 0, 0, 0.15);
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-        white-space: nowrap;
-        pointer-events: none;
-        opacity: 0;
-        visibility: hidden;
-        transition:
-            opacity 0.1s ease-in,
-            visibility 0.1s ease-in;
-    }
-
-    &__action-container:hover .fd-side-panel__action-tooltip,
-    &__action:focus-visible + .fd-side-panel__action-tooltip,
-    &__nav-arrow:focus-visible + .fd-side-panel__action-tooltip {
-        opacity: 1;
-        visibility: visible;
-    }
-
     // ── Compact density (spec C: 4rem bar, B1/B2: 2rem button) ─────────────
 
     &.is-compact {

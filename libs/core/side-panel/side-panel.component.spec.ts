@@ -67,13 +67,10 @@ describe('SidePanelComponent', () => {
         expect(bar.getAttribute('aria-label')).toBe('Groups');
     });
 
-    it('should expose the group name through title, aria-label and the tooltip', () => {
+    it('should expose the group name through title and aria-label', () => {
         const [filterButton] = getButtons(fixture);
-        const tooltip: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__action-tooltip');
         expect(filterButton.getAttribute('aria-label')).toBe('Filter');
         expect(filterButton.getAttribute('title')).toBe('Filter');
-        expect(tooltip.textContent?.trim()).toBe('Expand side panel');
-        expect(tooltip.getAttribute('aria-hidden')).toBe('true');
     });
 
     it('should activate an item on click and emit activeItemChange via two-way binding', () => {
