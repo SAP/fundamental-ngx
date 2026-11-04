@@ -5,20 +5,17 @@
         [activeItem]="activeItem()"
         (activeItemChange)="activeItem.set($event)"
     >
-        <fd-side-panel-item id="filter" icon="filter" label="Filter">
-            <ng-template fdSidePanelContent>Filter group content</ng-template>
+        <fd-side-panel-item id="run" icon="physical-activity" label="Run">
+            <ng-template fdSidePanelContent>Run group content</ng-template>
         </fd-side-panel-item>
-        <fd-side-panel-item id="layout" icon="menu2" label="Layout">
-            <ng-template fdSidePanelContent>Layout group content</ng-template>
+        <fd-side-panel-item id="home" icon="addresses" label="Go home">
+            <ng-template fdSidePanelContent>Go home group content</ng-template>
         </fd-side-panel-item>
-        <fd-side-panel-item id="attachments" icon="attachment" label="Attachments">
-            <ng-template fdSidePanelContent>Attachments group content</ng-template>
+        <fd-side-panel-item id="office" icon="building" label="Go to office">
+            <ng-template fdSidePanelContent>Office group content</ng-template>
         </fd-side-panel-item>
-        <fd-side-panel-item id="comments" icon="comment" label="Comments">
-            <ng-template fdSidePanelContent>Comments group content</ng-template>
-        </fd-side-panel-item>
-        <fd-side-panel-item id="activity" icon="activity-items" label="Activity" [disabled]="true">
-            <ng-template fdSidePanelContent>Activity group content</ng-template>
+        <fd-side-panel-item id="travel" icon="flight" label="Fly abroad" [disabled]="true">
+            <ng-template fdSidePanelContent>Travel group content</ng-template>
         </fd-side-panel-item>
     </fd-side-panel>
 </div>

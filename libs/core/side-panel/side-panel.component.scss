@@ -4,34 +4,59 @@
 // `fundamental-styles` does not yet ship a `side-panel` block (tracked as issue 2
 // of the Side Panel series). The rules below are authored here so the Angular
 // component is usable and reviewable now; they follow the same BEM naming
-// (`fd-side-panel`, `__element`, `--modifier`, `is-state`) so they can be lifted
-// into `fundamental-styles` and this file reduced to an `@import` once that block
-// lands (via `/adopt-styles`).
+// (`fd-side-panel`, `__element`, `--modifier`, `is-state`) and SAP design tokens
+// so they can be lifted into `fundamental-styles` and this file reduced to an
+// `@import` once that block lands (via `/adopt-styles`).
 //
-// Scope for this issue: the icons-only vertical action bar, active state, and
-// hover/focus tooltips. Content panel, icons+label mode, overflow, splitter and
-// mobile styling arrive in later issues.
+// Visual spec reference sections:
+//   A  — Navigation Arrow (transparent button, slim-arrow / navigation-arrow icon)
+//   B1 — Active item: sapSelectedColor bg, ContrastIconColor icon, matching border
+//   B2 — Inactive item: sapGroup_ContentBackground bg, sapContent_Selected_ForegroundColor icon,
+//         0.125rem border, border-radius: 50% (circular)
+//   C  — Container: sapGroup_ContentBackground, sapContent_Shadow1, sapTile_BorderCornerRadius
+//        Cozy 4.25rem wide | Compact 4rem wide
+//   D  — Selection bar: 0.1875rem wide on the content-facing edge of the action-container
+//
+// Padding & spacing spec:
+//   Cozy:    0.5rem top padding | 2rem gap between all items
+//   Compact: 0.5rem top padding | 2rem gap between all items
 // ---------------------------------------------------------------------------
 
-$fd-side-panel-bar-width: 3rem;
-$fd-side-panel-action-size: 3rem;
+// Cozy button size (B1/B2 sizing)
+$fd-side-panel-action-size-cozy: 2.75rem;
+// Compact button size
+$fd-side-panel-action-size-compact: 2rem;
+// Cozy bar width (C) — 2.75rem button + 0.75rem padding each side = 4.25rem
+$fd-side-panel-bar-width-cozy: 4.25rem;
+// Compact bar width (C) — 2rem button + 1rem padding each side = 4rem
+$fd-side-panel-bar-width-compact: 4rem;
+// Active selection indicator width (D) — 0.1875rem (3px) per padding & spacing spec
 $fd-side-panel-active-indicator-width: 0.1875rem;
 
 .fd-side-panel {
     display: flex;
     block-size: 100%;
-    color: var(--sapTextColor, #32363a);
-    font-family: var(--sapFontFamily, '72', '72full', Arial, Helvetica, sans-serif);
 
-    // Anchor the action bar to the requested edge.
+    // ── Edge anchoring ──────────────────────────────────────────────────────
+
     &--right {
         justify-content: flex-end;
 
+        // Rounded corners only on the content-facing (left/start) side
         .fd-side-panel__action-bar {
-            border-inline-start: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+            border-start-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+            border-end-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
         }
 
-        // Tooltip opens toward the page content (to the left of the bar).
+        // Selection indicator on the start (content-facing) edge of the container
+        .fd-side-panel__action-container::before {
+            inset-inline-start: 0;
+            inset-inline-end: auto;
+            border-radius: 0 var(--sapElement_BorderCornerRadius, 0.25rem) var(--sapElement_BorderCornerRadius, 0.25rem)
+                0;
+        }
+
+        // Tooltip opens toward the page content (left of the bar)
         .fd-side-panel__action-tooltip {
             inset-inline-end: 100%;
             margin-inline-end: 0.5rem;
@@ -41,8 +66,18 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
     &--left {
         justify-content: flex-start;
 
+        // Rounded corners only on the content-facing (right/end) side
         .fd-side-panel__action-bar {
-            border-inline-end: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+            border-start-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+            border-end-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+        }
+
+        // Selection indicator on the end (content-facing) edge of the container
+        .fd-side-panel__action-container::before {
+            inset-inline-end: 0;
+            inset-inline-start: auto;
+            border-radius: var(--sapElement_BorderCornerRadius, 0.25rem) 0 0
+                var(--sapElement_BorderCornerRadius, 0.25rem);
         }
 
         .fd-side-panel__action-tooltip {
@@ -51,88 +86,145 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         }
     }
 
+    // ── Container (spec C) ──────────────────────────────────────────────────
+
     &__action-bar {
         display: flex;
         flex-direction: column;
         align-items: center;
         flex: 0 0 auto;
-        inline-size: $fd-side-panel-bar-width;
+        inline-size: $fd-side-panel-bar-width-cozy;
         block-size: 100%;
-        padding-block: 0.25rem;
+        padding-block-start: 0.5rem;
+        gap: 2rem;
         box-sizing: border-box;
-        background: var(--sapList_Background, #fff);
+        overflow-y: auto;
+        background: var(--sapGroup_ContentBackground, #fff);
+        box-shadow: var(--sapContent_Shadow1, 0 0 0.125rem 0 rgba(0, 0, 0, 0.12), 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.14));
+        // border-radius applied per-side in --right / --left modifiers above
     }
+
+    // ── Navigation arrow (spec A) ───────────────────────────────────────────
+
+    &__nav-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        inline-size: $fd-side-panel-action-size-cozy;
+        block-size: $fd-side-panel-action-size-cozy;
+        flex-shrink: 0;
+        padding: 0;
+        border: none;
+        border-radius: var(--sapButton_BorderCornerRadius, 0.5rem);
+        background: transparent;
+        color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+
+        &:hover {
+            background: var(--sapList_Hover_Background, #eaecee);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    // ── Action container ────────────────────────────────────────────────────
 
     &__action-container {
         position: relative;
         display: flex;
         inline-size: 100%;
+        box-sizing: border-box;
+        padding: 0.1875rem 0.75rem;
         justify-content: center;
+        cursor: pointer;
+
+        // Selection bar (spec D) — invisible by default, positioned per-side in --right/--left
+        // Height = icon height + 0.1875rem padding top & bottom (fills full container height)
+        &::before {
+            content: '';
+            position: absolute;
+            inset-block: 0;
+            inline-size: $fd-side-panel-active-indicator-width;
+            background: transparent;
+        }
+
+        &:has(.fd-side-panel__action.is-active)::before {
+            background: var(--sapList_SelectionBorderColor, #0064d9);
+        }
+
+        // Full-width row hover for item containers (not the nav-arrow container)
+        &:has(.fd-side-panel__action):hover {
+            background: var(--sapList_Hover_Background, #eaecee);
+        }
+
+        // Full-width rectangular focus ring — solid brand border spanning the entire bar row
+        &:has(button:focus)::after {
+            content: '';
+            position: absolute;
+            box-sizing: border-box;
+            inset: 0;
+            border: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
+            pointer-events: none;
+        }
     }
+
+    // ── Action button — inactive (spec B2) ──────────────────────────────────
 
     &__action {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        inline-size: $fd-side-panel-action-size;
-        block-size: $fd-side-panel-action-size;
+        inline-size: $fd-side-panel-action-size-cozy;
+        block-size: $fd-side-panel-action-size-cozy;
+        flex-shrink: 0;
         padding: 0;
-        border: none;
-        background: transparent;
-        color: var(--sapTextColor, #32363a);
+        box-sizing: border-box;
+        border: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9); // spec B2: circular outline
+        border-radius: 50%; // spec B2: circular shape
+        background: var(--sapGroup_ContentBackground, #fff);
+        color: var(--sapContent_Selected_ForegroundColor, #0064d9);
         cursor: pointer;
         appearance: none;
         -webkit-appearance: none;
 
-        // Active accent indicator on the anchored edge.
-        &::before {
-            content: '';
-            position: absolute;
-            inset-block: 0.25rem;
-            inset-inline-start: 0;
-            inline-size: $fd-side-panel-active-indicator-width;
-            border-radius: 0 var(--sapElement_BorderCornerRadius, 0.25rem) var(--sapElement_BorderCornerRadius, 0.25rem)
-                0;
-            background: transparent;
+        &:focus {
+            outline: none;
         }
 
-        &:hover {
-            background: var(--sapList_Hover_Background, #ebf5fe);
-        }
-
-        &:focus-visible {
-            outline: var(--sapContent_FocusWidth, 0.0625rem) var(--sapContent_FocusStyle, dotted)
-                var(--sapContent_FocusColor, #0070f2);
-            outline-offset: calc(-1 * var(--sapContent_FocusWidth, 0.0625rem) - 0.125rem);
-        }
-
+        // Active state (spec B1): filled circle — brand bg, contrast icon, matching border
+        // sapSelectedColor is the correct token: #0064d9 Horizon, #0854a0 Quartz,
+        // #0f5c93 HC Black, #5c93ff HC White — always the right filled-circle color.
+        // sapContent_ContrastIconColor flips to #000 in HC White automatically.
         &.is-active {
-            background: var(--sapList_SelectionBackgroundColor, #e5f0fa);
-            color: var(--sapContent_Selected_ForegroundColor, #0064d9);
-
-            &::before {
-                background: var(--sapList_SelectionBorderColor, #0064d9);
-            }
+            background: var(--sapSelectedColor, #0064d9);
+            color: var(--sapContent_ContrastIconColor, #fff);
+            // keep border but match bg so layout stays stable with box-sizing:border-box
+            border-color: var(--sapSelectedColor, #0064d9);
         }
 
         &.is-disabled,
         &:disabled {
             cursor: default;
-            opacity: 0.4;
+            opacity: var(--sapContent_DisabledOpacity, 0.4);
             pointer-events: none;
         }
     }
 
+    // ── Icon (spec B1/B2: sapFontHeader4Size) ───────────────────────────────
+
     &__action-icon {
-        font-size: 1rem;
+        font-size: var(--sapFontHeader4Size, 1.25rem);
         line-height: 1;
         color: inherit;
     }
 
-    // CSS-only tooltip: revealed on pointer hover and on keyboard focus of the
-    // action button. The visible text is mirrored by `aria-label` on the button,
-    // so the tooltip element itself is `aria-hidden`.
+    // ── CSS-only tooltip ────────────────────────────────────────────────────
+
     &__action-tooltip {
         position: absolute;
         inset-block-start: 50%;
@@ -157,8 +249,27 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
     }
 
     &__action-container:hover .fd-side-panel__action-tooltip,
-    &__action:focus-visible + .fd-side-panel__action-tooltip {
+    &__action:focus-visible + .fd-side-panel__action-tooltip,
+    &__nav-arrow:focus-visible + .fd-side-panel__action-tooltip {
         opacity: 1;
         visibility: visible;
+    }
+
+    // ── Compact density (spec C: 4rem bar, B1/B2: 2rem button) ─────────────
+
+    &.is-compact {
+        .fd-side-panel__action-bar {
+            inline-size: $fd-side-panel-bar-width-compact;
+        }
+
+        .fd-side-panel__nav-arrow,
+        .fd-side-panel__action {
+            inline-size: $fd-side-panel-action-size-compact;
+            block-size: $fd-side-panel-action-size-compact;
+        }
+
+        .fd-side-panel__action-icon {
+            font-size: var(--sapFontHeader5Size, 1rem);
+        }
     }
 }

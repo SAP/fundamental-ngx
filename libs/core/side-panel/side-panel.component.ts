@@ -3,13 +3,15 @@ import {
     computed,
     contentChildren,
     ElementRef,
+    inject,
     input,
     linkedSignal,
     model,
     viewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { SidePanelItemComponent } from './side-panel-item.component';
 
@@ -41,6 +43,7 @@ export type SidePanelSide = 'left' | 'right';
     styleUrl: './side-panel.component.scss',
     encapsulation: ViewEncapsulation.None,
     imports: [IconComponent],
+    providers: [contentDensityObserverProviders()],
     host: {
         '[class]': '_hostClasses()'
     }
@@ -58,11 +61,34 @@ export class SidePanelComponent {
      */
     readonly activeItem = model<string | null>(null);
 
+    /** Whether the content panel is open. Two-way bindable. */
+    readonly open = model(false);
+
     /** @hidden Projected side panel items (content groups). */
     protected readonly _items = contentChildren(SidePanelItemComponent);
 
     /** @hidden */
-    protected readonly _hostClasses = computed(() => `fd-side-panel fd-side-panel--${this.side()}`);
+    protected readonly _hostClasses = computed(() => {
+        const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`];
+        if (this.open()) {
+            classes.push('fd-side-panel--open');
+        }
+        return classes.join(' ');
+    });
+
+    /** @hidden Icon for the navigation arrow toggle button. */
+    protected readonly _navArrowIcon = computed(() => {
+        const isRight = this.side() === 'right';
+        const isRtl = this._isRtl();
+        // isContentOnRight: content area is to the physical right of the panel bar.
+        // right+LTR → content left (false) | right+RTL → content right (true)
+        // left+LTR  → content right (true)  | left+RTL  → content left  (false)
+        const isContentOnRight = isRight === isRtl;
+        if (this.open()) {
+            return isContentOnRight ? 'navigation-left-arrow' : 'navigation-right-arrow';
+        }
+        return isContentOnRight ? 'slim-arrow-right' : 'slim-arrow-left';
+    });
 
     /** @hidden Index of the roving-tabindex focus target; resets to the active item. */
     protected readonly _focusedIndex = linkedSignal<number>(() => {
@@ -71,15 +97,26 @@ export class SidePanelComponent {
         return index > -1 ? index : 0;
     });
 
+    /** @hidden */
+    protected readonly _contentDensityObserver = inject(ContentDensityObserver);
+
     /** @hidden Action button elements, in projection order. */
     private readonly _actionButtons = viewChildren<ElementRef<HTMLButtonElement>>('actionButton');
+
+    private readonly _rtlService = inject(RtlService, { optional: true });
+    private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
+
+    /** @hidden Toggle the content panel open/closed. */
+    protected _toggleOpen(): void {
+        this.open.update((v) => !v);
+    }
 
     /** @hidden Activate (or toggle off) the group behind an action button. */
     protected _activate(item: SidePanelItemComponent, index: number): void {
         if (item.disabled()) {
             return;
         }
-        this._focusedIndex.set(index);
+        this._focusItem(index);
         const id = item.id();
         this.activeItem.set(this.activeItem() === id ? null : id);
     }

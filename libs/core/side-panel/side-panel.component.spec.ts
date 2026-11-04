@@ -72,7 +72,7 @@ describe('SidePanelComponent', () => {
         const tooltip: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__action-tooltip');
         expect(filterButton.getAttribute('aria-label')).toBe('Filter');
         expect(filterButton.getAttribute('title')).toBe('Filter');
-        expect(tooltip.textContent?.trim()).toBe('Filter');
+        expect(tooltip.textContent?.trim()).toBe('Expand side panel');
         expect(tooltip.getAttribute('aria-hidden')).toBe('true');
     });
 

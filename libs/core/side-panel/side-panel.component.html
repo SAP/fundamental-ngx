@@ -5,8 +5,23 @@
     [attr.aria-label]="ariaLabel()"
     (keydown)="_onKeydown($event)"
 >
+    <div class="fd-side-panel__action-container">
+        <button
+            type="button"
+            class="fd-side-panel__nav-arrow"
+            [attr.aria-expanded]="open()"
+            [attr.aria-label]="open() ? 'Collapse side panel' : 'Expand side panel'"
+            (click)="_toggleOpen()"
+        >
+            <fd-icon [glyph]="_navArrowIcon()" [ariaHidden]="true" />
+        </button>
+        <span class="fd-side-panel__action-tooltip" role="tooltip" aria-hidden="true">{{
+            open() ? 'Collapse side panel' : 'Expand side panel'
+        }}</span>
+    </div>
+
     @for (item of _items(); track item.id(); let i = $index) {
-        <div class="fd-side-panel__action-container">
+        <div class="fd-side-panel__action-container" (click)="_activate(item, i)">
             <button
                 #actionButton
                 type="button"
@@ -19,7 +34,6 @@
                 [attr.title]="item.label()"
                 [disabled]="item.disabled()"
                 [tabindex]="i === _focusedIndex() ? 0 : -1"
-                (click)="_activate(item, i)"
             >
                 <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
             </button>
