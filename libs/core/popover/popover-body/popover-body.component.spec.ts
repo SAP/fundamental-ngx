@@ -52,6 +52,12 @@ describe('PopoverBodyComponent', () => {
         expect(popoverBody).toBeTruthy();
     });
 
+    it('should not throw when committing a destroyed body view', () => {
+        fixture.destroy();
+
+        expect(() => popoverBody._commitView()).not.toThrow();
+    });
+
     describe('content projection', () => {
         it('should project header content', () => {
             const headerContent = fixture.debugElement.query(By.css('[fd-popover-body-header]'));

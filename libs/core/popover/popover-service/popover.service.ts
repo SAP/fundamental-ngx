@@ -416,6 +416,12 @@ export class PopoverService {
             this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
 
+            if (!this._overlayRef.hasAttached()) {
+                return;
+            }
+
+            this._getPopoverBody()._commitView();
+
             // Update position - this will trigger the positionChanges observable
             this._overlayRef.updatePosition();
             this._startLayoutShiftObserver();
@@ -827,6 +833,7 @@ export class PopoverService {
         }
         // Pass variables AFTER attaching to ensure CDK directives are properly initialized
         this._passVariablesToBody();
+        this._getPopoverBody()._commitView();
     }
 
     /** Create PopoverBodyComponent and attach it into overlay */
@@ -834,6 +841,7 @@ export class PopoverService {
         const overlay = this._overlayRef.attach(new ComponentPortal(PopoverBodyComponent, null, this._injector));
         this._popoverBody = overlay.instance;
         this._passVariablesToBody();
+        this._getPopoverBody()._commitView();
     }
 
     /** @hidden */
