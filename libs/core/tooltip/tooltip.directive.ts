@@ -62,7 +62,7 @@ const normalizeText = (value: string): string => value.replace(/\s+/g, ' ').trim
  * Shows a short tooltip for the host element.
  *
  * By default, the tooltip opens after a delay on mouse hover or keyboard focus, and immediately on touch
- * long-press or `Ctrl+Alt+I`. It closes when the pointer or focus leaves, on `Escape`, when the host is
+ * long-press or `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac). It closes when the pointer or focus leaves, on `Escape`, when the host is
  * activated, on outside click, and when the window loses focus. With `fdTooltipTrigger="click"` it is
  * toggled by clicking the host instead.
  *
@@ -94,7 +94,7 @@ export class TooltipDirective {
      * Side of the host element the tooltip is shown on.
      * When there is not enough room, the tooltip flips to the opposite side automatically.
      */
-    readonly fdTooltipPlacement = input<TooltipPlacement>('top');
+    readonly fdTooltipPlacement = input<TooltipPlacement>('bottom');
 
     /** Alignment along the chosen side: `start`/`end` align with the host's edge, `middle` centres the tooltip. */
     readonly fdTooltipAlignment = input<TooltipAlignment>('middle');
@@ -106,7 +106,7 @@ export class TooltipDirective {
      *   open until it is toggled again, `Escape` is pressed, the user clicks elsewhere or focus moves away.
      *   Use it only on hosts without their own action, e.g. an information button next to a label.
      *
-     * `Ctrl+Alt+I` toggles the tooltip in both modes.
+     * `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac) toggles the tooltip in both modes.
      */
     readonly fdTooltipTrigger = input<TooltipTrigger>('hover');
 
@@ -389,7 +389,7 @@ export class TooltipDirective {
     /**
      * @hidden
      * Attaches the host listeners for the given trigger and returns their cleanup functions.
-     * Both triggers listen to `keydown` for `Ctrl+Alt+I`.
+     * Both triggers listen to `keydown` for `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac).
      *
      * `click` trigger:
      * - `click`: toggles the tooltip immediately.
@@ -467,7 +467,7 @@ export class TooltipDirective {
 
     /**
      * @hidden
-     * Handles keyboard input on the host: `Ctrl+Alt+I` toggles the tooltip without delay. With the `hover`
+     * Handles keyboard input on the host: `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac) toggles the tooltip without delay. With the `hover`
      * trigger, `Enter` hides the tooltip because it triggers the host action; with the `click` trigger,
      * `Enter` already toggles it through the resulting `click` event.
      */
