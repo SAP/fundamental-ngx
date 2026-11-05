@@ -56,7 +56,7 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
     private _initialized = false;
     private _disabled = false;
     private _rafId: number | null = null;
-    private readonly _listenerAbort = new AbortController();
+    private _listeners: Array<() => void> = [];
 
     // Default config if none provided
     private get effectiveConfig(): CvaConfig {
@@ -83,7 +83,8 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
             cancelAnimationFrame(this._rafId);
             this._rafId = null;
         }
-        this._listenerAbort.abort();
+        this._listeners.forEach((removeListener) => removeListener());
+        this._listeners = [];
     }
 
     setDisabledState(isDisabled: boolean): void {
@@ -120,41 +121,35 @@ export class GenericControlValueAccessor<ValueType = any> implements ControlValu
         // Set up event listeners on the UI5 web component
 
         if (element && element.addEventListener) {
-            const listenerOptions: AddEventListenerOptions = { signal: this._listenerAbort.signal };
-
             // Listen to all configured events
             for (const eventName of config.events) {
-                element.addEventListener(
-                    eventName,
-                    (e: any) => {
-                        if (this.onChange) {
-                            const valueToEmit = this.getValueToEmit(config, e);
-                            if (valueToEmit !== undefined) {
-                                const transformedValue = config.transformValue
-                                    ? config.transformValue(valueToEmit)
-                                    : valueToEmit;
-                                this.onChange(transformedValue);
-                                // Manually trigger change detection for zoneless compatibility
-                                this.cdr.markForCheck();
-                            }
+                const listener = (e: any): void => {
+                    if (this.onChange) {
+                        const valueToEmit = this.getValueToEmit(config, e);
+                        if (valueToEmit !== undefined) {
+                            const transformedValue = config.transformValue
+                                ? config.transformValue(valueToEmit)
+                                : valueToEmit;
+                            this.onChange(transformedValue);
+                            // Manually trigger change detection for zoneless compatibility
+                            this.cdr.markForCheck();
                         }
-                    },
-                    listenerOptions
-                );
+                    }
+                };
+                element.addEventListener(eventName, listener);
+                this._listeners.push((): void => element.removeEventListener(eventName, listener));
             }
 
             // Listen to focusout for touched state
-            element.addEventListener(
-                'focusout',
-                () => {
-                    if (this.onTouched) {
-                        this.onTouched();
-                        // Manually trigger change detection for zoneless compatibility
-                        this.cdr.markForCheck();
-                    }
-                },
-                listenerOptions
-            );
+            const focusoutListener = (): void => {
+                if (this.onTouched) {
+                    this.onTouched();
+                    // Manually trigger change detection for zoneless compatibility
+                    this.cdr.markForCheck();
+                }
+            };
+            element.addEventListener('focusout', focusoutListener);
+            this._listeners.push((): void => element.removeEventListener('focusout', focusoutListener));
         }
 
         // Only apply stored value if writeValue was called (form control exists).
