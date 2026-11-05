@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
@@ -52,7 +51,6 @@ import {
         ShellbarComponent,
         ShellbarLogoComponent,
         PlatformSearchFieldModule,
-        ContentDensityDirective,
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ShellbarBrandingComponent,

@@ -17,7 +17,6 @@ import { UserSettingsNotificationsViewItem } from '@fundamental-ngx/ui5-webcompo
 import { UserSettingsView } from '@fundamental-ngx/ui5-webcomponents-fiori/user-settings-view';
 import { Avatar } from '@fundamental-ngx/ui5-webcomponents/avatar';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
-import { CheckBox } from '@fundamental-ngx/ui5-webcomponents/check-box';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { Link } from '@fundamental-ngx/ui5-webcomponents/link';
@@ -58,7 +57,6 @@ import '@ui5/webcomponents-icons/dist/user-settings.js';
         UserSettingsView,
         Avatar,
         Button,
-        CheckBox,
         Icon,
         Label,
         Link,

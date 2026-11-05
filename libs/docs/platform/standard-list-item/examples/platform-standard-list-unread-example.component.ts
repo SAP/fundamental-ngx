@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 @Component({
@@ -7,6 +6,6 @@ import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/pla
     templateUrl: './platform-standard-list-unread-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
+    imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformStandardListUnreadExampleComponent {}

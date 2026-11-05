@@ -1,4 +1,3 @@
-import { CdkPortalOutlet } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -11,14 +10,7 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
     selector: 'fd-avatar-group-default-example',
     templateUrl: './avatar-group-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        AvatarGroupComponent,
-        AvatarComponent,
-        QuickViewModule,
-        LinkComponent,
-        AvatarGroupItemDirective,
-        CdkPortalOutlet
-    ]
+    imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective]
 })
 export class AvatarGroupDefaultExampleComponent {
     readonly avatarGroupDataExampleService: AvatarGroupDataExampleService = inject(AvatarGroupDataExampleService);

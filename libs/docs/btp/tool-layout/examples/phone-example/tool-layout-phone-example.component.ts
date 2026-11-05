@@ -3,8 +3,7 @@ import {
     ToolLayoutComponent,
     ToolLayoutContainerDirective,
     ToolLayoutContentContainerDirective,
-    ToolLayoutHeaderContainerDirective,
-    ToolLayoutNavigationContainerDirective
+    ToolLayoutHeaderContainerDirective
 } from '@fundamental-ngx/btp/tool-layout';
 
 @Component({
@@ -14,8 +13,7 @@ import {
         ToolLayoutComponent,
         ToolLayoutContainerDirective,
         ToolLayoutContentContainerDirective,
-        ToolLayoutHeaderContainerDirective,
-        ToolLayoutNavigationContainerDirective
+        ToolLayoutHeaderContainerDirective
     ]
 })
 export class ToolLayoutPhoneExampleComponent {}

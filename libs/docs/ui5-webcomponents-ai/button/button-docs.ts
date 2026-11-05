@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
-    DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
     getAssetFromModuleAssets
@@ -15,13 +14,7 @@ const basicSampleTs = 'basic-sample.ts';
 @Component({
     selector: 'ui5-ai-button-docs',
     templateUrl: './button-docs.html',
-    imports: [
-        DocsSectionTitleComponent,
-        ComponentExampleComponent,
-        CodeExampleComponent,
-        DescriptionComponent,
-        BasicAiButtonSample
-    ]
+    imports: [DocsSectionTitleComponent, ComponentExampleComponent, CodeExampleComponent, BasicAiButtonSample]
 })
 export class ButtonDocs {
     basicButtonSamples: ExampleFile[] = [

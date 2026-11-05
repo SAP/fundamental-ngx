@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TableModule } from '@fundamental-ngx/core/table';
 import {
@@ -24,7 +23,6 @@ import { UsageWithLayoutExampleComponent } from './examples/usage-with-layout-ex
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        FocusableGridDirective,
         TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,

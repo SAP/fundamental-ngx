@@ -6,8 +6,7 @@ import {
     DocsSectionTitleComponent,
     ExampleFile,
     getAssetFromModuleAssets,
-    getExampleFile,
-    SeparatorComponent
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { AvatarGroupDefaultExampleComponent } from './examples/default/avatar-group-default-example.component';
 import { GroupTypeExampleComponent } from './examples/group-type/group-type-example.component';
@@ -33,7 +32,6 @@ const service = () => ({
         DocsSectionTitleComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
-        SeparatorComponent,
         DescriptionComponent,
         AvatarGroupDefaultExampleComponent,
         AvatarGroupVerticalExampleComponent,

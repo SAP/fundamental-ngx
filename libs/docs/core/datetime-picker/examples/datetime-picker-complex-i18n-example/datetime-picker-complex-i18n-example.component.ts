@@ -1,6 +1,5 @@
 import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -45,7 +44,7 @@ const placeholders = new Map([
             useClass: DayjsDatetimeAdapter
         }
     ],
-    imports: [FormLabelComponent, SelectModule, DatetimePickerComponent, DatePickerComponent, FormsModule]
+    imports: [FormLabelComponent, SelectModule, DatetimePickerComponent, FormsModule]
 })
 export class DatetimePickerComplexI18nExampleComponent {
     @ViewChild(DatetimePickerComponent) datetimePickerComponent: DatetimePickerComponent<Dayjs>;
