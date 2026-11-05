@@ -6,6 +6,7 @@
         aria-label="Save"
         fdTooltip="Save (Ctrl+S)"
         fdTooltipKeyShortcuts="Control+S"
+        fdTooltipPlacement="top"
     ></button>
     <button
         #target
@@ -14,15 +15,23 @@
         aria-label="Print"
         fdTooltip="Print - Sends the document to the default printer (Ctrl+P)"
         fdTooltipKeyShortcuts="Control+P"
+        fdTooltipPlacement="top"
     ></button>
-    <button #target fd-button label="Copy" fdTooltip="Copy"></button>
-    <button #target fd-button label="Share" fdTooltip="Share - Send a link to this page"></button>
+    <button #target fd-button label="Copy" fdTooltip="Copy" fdTooltipPlacement="top"></button>
+    <button
+        #target
+        fd-button
+        label="Share"
+        fdTooltip="Share - Send a link to this page"
+        fdTooltipPlacement="top"
+    ></button>
     <button
         #target
         fd-button
         label="Archive"
         aria-describedby="fd-tooltip-archive-hint"
         fdTooltip="Archive - Moves the item to the archive"
+        fdTooltipPlacement="top"
     ></button>
     <span id="fd-tooltip-archive-hint" hidden>Archived items are kept for 30 days.</span>
 </div>
