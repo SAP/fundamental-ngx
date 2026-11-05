@@ -5,6 +5,8 @@ import { TooltipDirective } from './tooltip.directive';
 
 const getTooltip = (): HTMLElement | null => document.body.querySelector('[role="tooltip"]');
 
+const getDescriptionElement = (id: string): HTMLElement | null => document.getElementById(id);
+
 const hover = (element: Element): void => {
     element.dispatchEvent(new MouseEvent('pointerenter'));
 };
@@ -20,6 +22,10 @@ const focusWithKeyboard = (element: HTMLElement): void => {
 
 const pressEscape = (element: HTMLElement): void => {
     element.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+};
+
+const pressEnter = (element: HTMLElement): void => {
+    element.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
 };
 
 @Component({
@@ -98,6 +104,36 @@ class TooltipTemplateTestComponent {
 class TooltipClickTestComponent {
     readonly info = viewChild.required('info', { read: ElementRef });
     readonly other = viewChild.required('other', { read: ElementRef });
+}
+
+@Component({
+    template: `
+        <button
+            #host
+            type="button"
+            [fdTooltip]="content()"
+            [fdTooltipPlacement]="placement()"
+            [fdTooltipAlignment]="alignment()"
+        >
+            Dynamic
+        </button>
+    `,
+    imports: [TooltipDirective]
+})
+class TooltipPlacementTestComponent {
+    readonly host = viewChild.required('host', { read: ElementRef });
+    readonly content = signal('Tooltip content');
+    readonly placement = signal<'top' | 'bottom' | 'left' | 'right'>('top');
+    readonly alignment = signal<'start' | 'middle' | 'end'>('middle');
+}
+
+@Component({
+    template: ` <button #programmatic type="button" fdTooltip="Programmatic control">Show</button> `,
+    imports: [TooltipDirective]
+})
+class TooltipProgrammaticTestComponent {
+    readonly programmatic = viewChild.required('programmatic', { read: ElementRef });
+    readonly programmaticDirective = viewChild.required(TooltipDirective);
 }
 
 describe('TooltipDirective', () => {
@@ -231,6 +267,15 @@ describe('TooltipDirective', () => {
         expect(getTooltip()).toBeNull();
     }));
 
+    it('should hide immediately when Enter is pressed on the host', fakeAsync(() => {
+        hover(save);
+        tick(500);
+        expect(getTooltip()).not.toBeNull();
+
+        pressEnter(save);
+        expect(getTooltip()).toBeNull();
+    }));
+
     it('should toggle immediately with Ctrl+Alt+I', fakeAsync(() => {
         const shortcut = (): boolean =>
             copy.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyI', ctrlKey: true, altKey: true }));
@@ -252,14 +297,42 @@ describe('TooltipDirective', () => {
         expect(getTooltip()).toBeNull();
     }));
 
+    it('should cancel long-press on touchmove', fakeAsync(() => {
+        remove.dispatchEvent(new Event('touchstart'));
+        tick(250);
+        remove.dispatchEvent(new Event('touchmove'));
+        tick(250);
+        expect(getTooltip()).toBeNull();
+    }));
+
+    it('should cancel long-press on touchend', fakeAsync(() => {
+        remove.dispatchEvent(new Event('touchstart'));
+        tick(250);
+        remove.dispatchEvent(new Event('touchend'));
+        tick(250);
+        expect(getTooltip()).toBeNull();
+    }));
+
+    it('should cancel long-press on touchcancel', fakeAsync(() => {
+        remove.dispatchEvent(new Event('touchstart'));
+        tick(250);
+        remove.dispatchEvent(new Event('touchcancel'));
+        tick(250);
+        expect(getTooltip()).toBeNull();
+    }));
+
     it('should describe the host only when the tooltip adds information to its accessible name', () => {
         const saveDescriptionId = save.getAttribute('aria-describedby') ?? '';
-        expect(document.getElementById(saveDescriptionId)?.textContent).toBe('Save document');
+        const saveDescription = getDescriptionElement(saveDescriptionId);
+        expect(saveDescription?.textContent).toBe('Save document');
+        expect(saveDescription?.hasAttribute('hidden')).toBe(true);
         expect(save.getAttribute('aria-keyshortcuts')).toBe('Control+S');
 
         const removeIds = (remove.getAttribute('aria-describedby') ?? '').split(' ');
         expect(removeIds[0]).toBe('external-hint');
-        expect(document.getElementById(removeIds[1])?.textContent).toBe('Delete the selected item');
+        const removeDescription = getDescriptionElement(removeIds[1]);
+        expect(removeDescription?.textContent).toBe('Delete the selected item');
+        expect(removeDescription?.hasAttribute('hidden')).toBe(true);
         expect(remove.childElementCount).toBe(0);
 
         expect(copy.hasAttribute('aria-describedby')).toBe(false);
@@ -275,6 +348,30 @@ describe('TooltipDirective', () => {
         hover(save);
         tick(500);
         expect(getTooltip()).toBeNull();
+    }));
+
+    it('should clean up description element and ARIA attributes on destroy', () => {
+        const descriptionId = save.getAttribute('aria-describedby') ?? '';
+        expect(getDescriptionElement(descriptionId)).not.toBeNull();
+        expect(save.getAttribute('aria-keyshortcuts')).toBe('Control+S');
+
+        fixture.destroy();
+
+        expect(getDescriptionElement(descriptionId)).toBeNull();
+    });
+
+    it('should preserve external aria-describedby ids when enabled or disabled', fakeAsync(() => {
+        const initialIds = remove.getAttribute('aria-describedby') ?? '';
+        expect(initialIds).toContain('external-hint');
+
+        hover(remove);
+        tick(500);
+        const withTooltip = remove.getAttribute('aria-describedby') ?? '';
+        expect(withTooltip).toContain('external-hint');
+        expect(withTooltip.split(' ').length).toBeGreaterThan(1);
+
+        leave(remove);
+        tick(500);
     }));
 });
 
@@ -335,7 +432,10 @@ describe('TooltipDirective with a template', () => {
 
     it('should describe the host with the rendered template content', () => {
         const descriptionId = host.getAttribute('aria-describedby') ?? '';
-        expect(document.getElementById(descriptionId)?.textContent).toBe('3 warnings to review');
+        const description = getDescriptionElement(descriptionId);
+        expect(description?.textContent).toBe('3 warnings to review');
+        expect(description?.hasAttribute('hidden')).toBe(true);
+        expect(description?.querySelector('b')?.textContent).toBe('3 warnings');
     });
 });
 
@@ -374,5 +474,141 @@ describe('TooltipDirective with the click trigger', () => {
 
         other.focus();
         expect(getTooltip()).toBeNull();
+    }));
+
+    it('should keep the tooltip open when clicking inside it for text selection', fakeAsync(() => {
+        info.click();
+        expect(getTooltip()).not.toBeNull();
+
+        const tooltip = getTooltip() as HTMLElement;
+        tooltip.click();
+        tick(100);
+        expect(getTooltip()).not.toBeNull();
+    }));
+});
+
+describe('TooltipDirective with dynamic placement and alignment', () => {
+    let fixture: ComponentFixture<TooltipPlacementTestComponent>;
+    let component: TooltipPlacementTestComponent;
+    let host: HTMLButtonElement;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({ imports: [TooltipPlacementTestComponent] });
+        fixture = TestBed.createComponent(TooltipPlacementTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        host = component.host().nativeElement;
+    });
+
+    it('should update tooltip content reactively', fakeAsync(() => {
+        hover(host);
+        tick(500);
+        expect(getTooltip()?.textContent?.trim()).toBe('Tooltip content');
+
+        component.content.set('Updated content');
+        fixture.detectChanges();
+        expect(getTooltip()?.textContent?.trim()).toBe('Updated content');
+
+        leave(host);
+        tick(500);
+    }));
+
+    it('should support all placement options', fakeAsync(() => {
+        const placements: Array<'top' | 'bottom' | 'left' | 'right'> = ['top', 'bottom', 'left', 'right'];
+
+        placements.forEach((placement) => {
+            component.placement.set(placement);
+            fixture.detectChanges();
+
+            hover(host);
+            tick(500);
+            expect(getTooltip()).not.toBeNull();
+
+            leave(host);
+            tick(500);
+        });
+    }));
+
+    it('should support all alignment options', fakeAsync(() => {
+        const alignments: Array<'start' | 'middle' | 'end'> = ['start', 'middle', 'end'];
+
+        alignments.forEach((alignment) => {
+            component.alignment.set(alignment);
+            fixture.detectChanges();
+
+            hover(host);
+            tick(500);
+            expect(getTooltip()).not.toBeNull();
+
+            leave(host);
+            tick(500);
+        });
+    }));
+
+    it('should hide the tooltip when content becomes empty', fakeAsync(() => {
+        hover(host);
+        tick(500);
+        expect(getTooltip()).not.toBeNull();
+
+        component.content.set('');
+        fixture.detectChanges();
+        expect(getTooltip()).toBeNull();
+    }));
+});
+
+describe('TooltipDirective programmatic control', () => {
+    let fixture: ComponentFixture<TooltipProgrammaticTestComponent>;
+    let component: TooltipProgrammaticTestComponent;
+    let directive: TooltipDirective;
+    let host: HTMLButtonElement;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({ imports: [TooltipProgrammaticTestComponent] });
+        fixture = TestBed.createComponent(TooltipProgrammaticTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        directive = component.programmaticDirective();
+        host = component.programmatic().nativeElement;
+    });
+
+    it('should show the tooltip immediately with show()', fakeAsync(() => {
+        directive.show();
+        tick(1);
+        expect(getTooltip()?.textContent?.trim()).toBe('Programmatic control');
+
+        directive.hide();
+        tick(1);
+        expect(getTooltip()).toBeNull();
+    }));
+
+    it('should hide a pending show with hide()', fakeAsync(() => {
+        hover(host);
+        tick(100);
+        expect(getTooltip()).toBeNull();
+
+        directive.hide();
+        tick(500);
+        expect(getTooltip()).toBeNull();
+    }));
+
+    it('should expose the tooltip id for external references', () => {
+        expect(directive.tooltipId).toMatch(/^fd-tooltip-\d+$/);
+    });
+
+    it('should set host size CSS variables on the tooltip body', fakeAsync(() => {
+        directive.show();
+        tick(1);
+
+        const body = document.body.querySelector('fd-popover-body') as HTMLElement;
+        expect(body).not.toBeNull();
+
+        const style = body.getAttribute('style') ?? '';
+        expect(style).toContain('--fdTooltip_Host_Width');
+        expect(style).toContain('--fdTooltip_Host_Height');
+        expect(style).toMatch(/--fdTooltip_Host_Width:\s*\d+(\.\d+)?px/);
+        expect(style).toMatch(/--fdTooltip_Host_Height:\s*\d+(\.\d+)?px/);
+
+        directive.hide();
+        tick(1);
     }));
 });
