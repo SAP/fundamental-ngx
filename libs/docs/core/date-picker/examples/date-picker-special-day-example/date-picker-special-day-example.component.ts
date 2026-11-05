@@ -1,13 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, WritableSignal, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-    CalendarComponent,
-    DatePickerComponent,
-    FdDate,
-    FdDatetimeModule,
-    SpecialDayRule
-} from '@fundamental-ngx/core';
+import { DatePickerComponent, FdDate, FdDatetimeModule, SpecialDayRule } from '@fundamental-ngx/core';
 
 interface ICustomData {
     date: string;
@@ -28,7 +22,7 @@ export class DateUtil {
 
 @Component({
     selector: 'fd-ngx-date-picker-special-day-example',
-    imports: [DatePickerComponent, ReactiveFormsModule, FormsModule, FdDatetimeModule, CalendarComponent],
+    imports: [DatePickerComponent, ReactiveFormsModule, FormsModule, FdDatetimeModule],
     templateUrl: './date-picker-special-day-example.component.html',
     styleUrl: './date-picker-special-day-example.component.scss'
 })

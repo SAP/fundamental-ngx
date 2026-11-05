@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -45,7 +44,7 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
             useValue: CUSTOM_FD_DATETIME_FORMATS
         }
     ],
-    imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule, DatePipe],
+    imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule],
     styles: [
         `
             .container-md {

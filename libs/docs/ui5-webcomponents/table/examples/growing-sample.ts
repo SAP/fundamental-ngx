@@ -1,5 +1,4 @@
 import { Component, computed, signal } from '@angular/core';
-import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Table } from '@fundamental-ngx/ui5-webcomponents/table';
 import { TableCell } from '@fundamental-ngx/ui5-webcomponents/table-cell';
 import { TableGrowing } from '@fundamental-ngx/ui5-webcomponents/table-growing';
@@ -20,7 +19,7 @@ interface Product {
     selector: 'ui5-doc-growing-table-sample',
     templateUrl: './growing-sample.html',
     standalone: true,
-    imports: [Table, TableGrowing, TableHeaderRow, TableHeaderCell, TableRow, TableCell, Button]
+    imports: [Table, TableGrowing, TableHeaderRow, TableHeaderCell, TableRow, TableCell]
 })
 export class GrowingTableSample {
     // Button growing table data

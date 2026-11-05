@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { JsonPipe } from '@angular/common';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     ComboboxSelectionChangeEvent,
@@ -24,7 +23,7 @@ interface ComboboxTemplateItem {
         '.fd-template-text { margin-right: 12px; margin-left: 12px; }'
     ],
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    imports: [FdpFormGroupModule, PlatformComboboxModule, TemplateDirective, IconComponent, JsonPipe]
+    imports: [FdpFormGroupModule, PlatformComboboxModule, IconComponent, JsonPipe]
 })
 export class ComboboxTemplatesExampleComponent {
     dataSource: ComboboxTemplateItem[] = [

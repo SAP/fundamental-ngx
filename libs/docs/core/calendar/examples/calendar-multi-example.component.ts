@@ -1,7 +1,6 @@
-import { DatePipe, JsonPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
@@ -47,7 +46,7 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    imports: [CalendarComponent, FormsModule, ButtonComponent, DatePipe, FdDatetimeModule, JsonPipe]
+    imports: [CalendarComponent, FormsModule, DatePipe, FdDatetimeModule]
 })
 export class CalendarMultiExampleComponent {
     dates: FdDate[] = this.generateDateArray();

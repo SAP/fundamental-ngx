@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     PopoverBodyComponent,
     PopoverBodyFooterDirective,
@@ -22,8 +21,7 @@ import {
         PopoverBodyHeaderDirective,
         BarModule,
         AvatarComponent,
-        PopoverBodyFooterDirective,
-        ContentDensityDirective
+        PopoverBodyFooterDirective
     ]
 })
 export class PopoverFocusExampleComponent {}

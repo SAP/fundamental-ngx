@@ -11,8 +11,6 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-
-import { TemplateBasedSettingsDialogBylineExampleComponent } from './examples/template-based-settings-byline/template-based-settings-dialog-byline-example.component';
 import { TemplateBasedSettingsDialogExampleComponent } from './examples/template-based-settings/template-based-settings-dialog-example.component';
 
 const templateBasedSettingsDialogTs = 'template-based-settings/template-based-settings-dialog-example.component.ts';
@@ -31,7 +29,6 @@ const templateBasedSettingsDialogBylineHtml =
         DescriptionComponent,
         ComponentExampleComponent,
         TemplateBasedSettingsDialogExampleComponent,
-        TemplateBasedSettingsDialogBylineExampleComponent,
         CodeExampleComponent,
         BarModule
     ]

@@ -1,12 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
-
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
-import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
 import {
     PlatformValueHelpDialogModule,
     ValueHelpDialogDataSource,
@@ -73,13 +71,11 @@ const data = exampleDataSource();
         ButtonComponent,
         TokenComponent,
         TokenizerComponent,
-        TokenizerInputDirective,
         ContentDensityDirective,
         PlatformValueHelpDialogModule,
         ComboboxComponent,
         ValueHelpFilterDefDirective,
         FormsModule,
-        FormControlComponent,
         MessageBoxModule
     ]
 })

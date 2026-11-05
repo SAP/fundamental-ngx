@@ -15,18 +15,13 @@ import {
 import {
     NestedItemComponent,
     NestedLinkComponent,
-    NestedListButtonDirective,
     NestedListComponent,
-    NestedListContentDirective,
     NestedListExpandIconComponent,
-    NestedListHeaderDirective,
     NestedListIconComponent,
     NestedListPopoverComponent,
-    NestedListTitleDirective,
-    PreparedNestedListComponent
+    NestedListTitleDirective
 } from '@fundamental-ngx/cx/nested-list';
 import {
-    SideNavigationButtonDirective,
     SideNavigationComponent,
     SideNavigationMainComponent,
     SideNavigationUtilityDirective
@@ -50,19 +45,14 @@ import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-fiel
         ScrollbarDirective,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,
-        SideNavigationButtonDirective,
         SideNavigationComponent,
         NestedListComponent,
         NestedLinkComponent,
         NestedItemComponent,
         NestedListIconComponent,
         NestedListTitleDirective,
-        NestedListHeaderDirective,
         NestedListPopoverComponent,
-        PreparedNestedListComponent,
         NestedListExpandIconComponent,
-        NestedListContentDirective,
-        NestedListButtonDirective,
         ContentDensityModule
     ]
 })

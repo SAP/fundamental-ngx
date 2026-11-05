@@ -8,13 +8,11 @@ import {
     untracked,
     ViewEncapsulation
 } from '@angular/core';
-import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
-
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { PanelComponent, PanelContentDirective, PanelTitleDirective } from '@fundamental-ngx/core/panel';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
 import { FilterRuleComponent } from '../../table-p13-dialog/filtering/filter-rule.component';
 import { FilterableColumn, FilterRule } from '../../table-p13-dialog/filtering/filtering.model';
 
@@ -41,7 +39,6 @@ export interface IncludeExcludeFiltersResultData {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        TemplateDirective,
         PanelComponent,
         PanelTitleDirective,
         PanelContentDirective,

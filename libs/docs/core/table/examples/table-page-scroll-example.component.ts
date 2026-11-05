@@ -3,8 +3,7 @@ import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { ToolbarComponent, ToolbarItemDirective, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-table-page-scroll-example',
@@ -15,8 +14,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarLabelDirective } from '@
         LinkComponent,
         IconComponent,
         ToolbarComponent,
-        TitleComponent,
-        ToolbarItemDirective,
         ToolbarLabelDirective
     ]
 })

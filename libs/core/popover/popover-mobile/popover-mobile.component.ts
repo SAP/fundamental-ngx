@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     DialogBodyComponent,
     DialogCloseButtonComponent,
@@ -32,7 +31,6 @@ let mobilePopoverUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
-        TemplateDirective,
         TitleComponent,
         NgTemplateOutlet,
         DialogComponent,
