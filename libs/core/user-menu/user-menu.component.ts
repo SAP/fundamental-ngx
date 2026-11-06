@@ -260,6 +260,12 @@ export class UserMenuComponent implements AfterViewInit {
         this.isOpen.set(isOpen);
         this.isOpenChange.emit(isOpen);
 
+        // Update control's expanded state to match menu state
+        const control = this.userMenuControl();
+        if (control) {
+            control.isExpanded.set(isOpen);
+        }
+
         if (!isOpen && !this.mobile()) {
             this.userMenuControl()?.focus();
             // Close all nested submenus when the menu closes
@@ -295,8 +301,8 @@ export class UserMenuComponent implements AfterViewInit {
     private _setupMobileControlSubscription(): void {
         toObservable(this.userMenuControl, { injector: this._injector })
             .pipe(
-                filter((control) => !!control && this.mobile()),
-                switchMap((control) => control!.clicked),
+                filter((control): control is NonNullable<typeof control> => !!control && this.mobile()),
+                switchMap((control) => control.clicked),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {

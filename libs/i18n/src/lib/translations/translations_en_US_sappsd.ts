@@ -242,7 +242,9 @@ export default {
         cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         collapsedItemMenuLabel: '[[[Ĉŏĺĺąρşēƌ Ĭţēɱ Μēŋű∙∙∙∙∙]]]',
         navigationButtonLabel: '[[[Ńąʋįğąţįŏŋ∙∙∙∙]]]',
-        search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
+        openSearch: 'Open Search',
+        search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: '[[[Ŝĺįƌēŗ Ĥąŋƌĺē∙∙∙∙∙∙]]]'
@@ -329,6 +331,7 @@ export default {
         menuOkText: '[[[Ŏķ∙∙]]]'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: '[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]',
         previousButton: '[[[Ƥŗēʋįŏűş∙∙∙∙∙∙]]]'
     },

@@ -202,6 +202,8 @@
                 [attr.title]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)()"
                 [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)()"
                 [attr.aria-labelledby]="ariaLabel ? null : ariaLabelledBy"
+                [attr.aria-describedby]="ariaDescribedBy"
+                [attr.aria-description]="ariaDescription()"
                 [attr.aria-controls]="!!_popoverBodyId() ? _popoverBodyId() : null"
                 [attr.aria-expanded]="
                     dropdownValues().length !== 0 ? (_isSuggestionMenuOpen() ? 'true' : 'false') : null

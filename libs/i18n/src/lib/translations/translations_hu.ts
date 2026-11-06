@@ -242,7 +242,9 @@ export default {
         cancel: 'Mégse',
         collapsedItemMenuLabel: 'Visszazárt menüelem',
         navigationButtonLabel: 'Navigáció',
-        search: 'Keresés'
+        openSearch: 'Open Search',
+        search: 'Keresés',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Csúszka fogantyúja'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Bezárás',
         previousButton: 'Előző'
     },

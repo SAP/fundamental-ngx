@@ -240,7 +240,9 @@ export default {
         cancel: '取消',
         collapsedItemMenuLabel: '摺疊項目功能表',
         navigationButtonLabel: '瀏覽',
-        search: '搜尋'
+        openSearch: 'Open Search',
+        search: '搜尋',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: '滑動軸控制器'
@@ -327,6 +329,7 @@ export default {
         menuOkText: '確定'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: '關閉',
         previousButton: '上一步'
     },

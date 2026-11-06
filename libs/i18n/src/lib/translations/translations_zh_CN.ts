@@ -239,7 +239,9 @@ export default {
         cancel: '取消',
         collapsedItemMenuLabel: '已折叠项目菜单',
         navigationButtonLabel: '导航',
-        search: '搜索'
+        openSearch: 'Open Search',
+        search: '搜索',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: '滑块手柄'
@@ -326,6 +328,7 @@ export default {
         menuOkText: '确定'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: '关闭',
         previousButton: '上一步'
     },

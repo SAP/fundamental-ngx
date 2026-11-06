@@ -68,6 +68,7 @@ fdp-search-field {
     &--initial-suggestion-title,
     &--initial-suggestion-subline {
         height: auto !important;
+        min-height: 1.625rem !important;
     }
 
     &--initial-suggestion-title {
