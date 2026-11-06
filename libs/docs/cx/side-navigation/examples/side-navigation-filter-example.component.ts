@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -8,22 +7,11 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     NestedItemComponent,
     NestedLinkComponent,
-    NestedListButtonDirective,
     NestedListComponent,
-    NestedListContentDirective,
-    NestedListExpandIconComponent,
-    NestedListHeaderDirective,
     NestedListIconComponent,
-    NestedListPopoverComponent,
-    NestedListTitleDirective,
-    PreparedNestedListComponent
+    NestedListTitleDirective
 } from '@fundamental-ngx/cx/nested-list';
-import {
-    SideNavigationButtonDirective,
-    SideNavigationComponent,
-    SideNavigationMainComponent,
-    SideNavigationUtilityDirective
-} from '@fundamental-ngx/cx/side-navigation';
+import { SideNavigationComponent, SideNavigationMainComponent } from '@fundamental-ngx/cx/side-navigation';
 
 @Component({
     selector: 'fdx-side-navigation-filter-example',
@@ -33,23 +21,14 @@ import {
         FormItemComponent,
         InputGroupModule,
         FormsModule,
-        ButtonComponent,
         ScrollbarDirective,
         SideNavigationMainComponent,
-        SideNavigationUtilityDirective,
-        SideNavigationButtonDirective,
         SideNavigationComponent,
         NestedListComponent,
         NestedLinkComponent,
         NestedItemComponent,
         NestedListIconComponent,
         NestedListTitleDirective,
-        NestedListHeaderDirective,
-        NestedListPopoverComponent,
-        PreparedNestedListComponent,
-        NestedListExpandIconComponent,
-        NestedListContentDirective,
-        NestedListButtonDirective,
         ContentDensityModule
     ]
 })

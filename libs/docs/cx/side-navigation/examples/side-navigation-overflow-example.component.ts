@@ -1,22 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import {
     NestedItemComponent,
     NestedLinkComponent,
-    NestedListButtonDirective,
     NestedListComponent,
-    NestedListContentDirective,
     NestedListExpandIconComponent,
-    NestedListHeaderDirective,
     NestedListIconComponent,
     NestedListPopoverComponent,
-    NestedListTitleDirective,
-    PreparedNestedListComponent
+    NestedListTitleDirective
 } from '@fundamental-ngx/cx/nested-list';
 import {
-    SideNavigationButtonDirective,
     SideNavigationComponent,
     SideNavigationMainComponent,
     SideNavigationUtilityDirective
@@ -28,23 +22,17 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonComponent,
         ScrollbarDirective,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective,
-        SideNavigationButtonDirective,
         SideNavigationComponent,
         NestedListComponent,
         NestedLinkComponent,
         NestedItemComponent,
         NestedListIconComponent,
         NestedListTitleDirective,
-        NestedListHeaderDirective,
         NestedListPopoverComponent,
-        PreparedNestedListComponent,
         NestedListExpandIconComponent,
-        NestedListContentDirective,
-        NestedListButtonDirective,
         ContentDensityModule
     ]
 })

@@ -1,6 +1,5 @@
 import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { FD_LANGUAGE_SIGNAL, FdLanguage, FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { FD_LANGUAGE_GERMAN } from '@fundamental-ngx/i18n/de';
@@ -69,7 +68,7 @@ import { FD_LANGUAGE_FRENCH } from '@fundamental-ngx/i18n/fr';
         </fd-message-strip>
     `,
     styleUrl: './getting-started-example.component.scss',
-    imports: [ButtonComponent, FormLabelComponent, FdTranslatePipe, MessageStripComponent],
+    imports: [ButtonComponent, FdTranslatePipe, MessageStripComponent],
     providers: [
         {
             provide: FD_LANGUAGE_SIGNAL,

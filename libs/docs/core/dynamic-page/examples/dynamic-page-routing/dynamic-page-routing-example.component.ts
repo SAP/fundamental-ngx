@@ -1,8 +1,6 @@
-import { CdkScrollable } from '@angular/cdk/scrolling';
 import { AsyncPipe } from '@angular/common';
-
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -51,10 +49,8 @@ export class DummyComponent {
         ContentDensityDirective,
         ToolbarSeparatorComponent,
         FDP_ICON_TAB_BAR,
-        CdkScrollable,
         BarModule,
         MessageToastModule,
-        RouterLink,
         RouterOutlet,
         MessageStripModule
     ],

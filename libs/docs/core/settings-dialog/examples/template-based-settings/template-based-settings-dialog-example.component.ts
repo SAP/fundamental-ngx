@@ -2,7 +2,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, TemplateRef, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonBarComponent, CheckboxComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core';
+import { ButtonBarComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarComponent, BarElementDirective, BarLeftDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -53,7 +53,6 @@ import { IconTabBarComponent, IconTabBarTabComponent } from '@fundamental-ngx/pl
         BarLeftDirective,
         ButtonComponent,
         ButtonBarComponent,
-        CheckboxComponent,
         ComboboxComponent,
         CommonModule,
         CdkScrollable,

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { BarComponent, BarElementDirective, BarLeftDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
+import { BarComponent, BarLeftDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
@@ -19,10 +18,8 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         BarComponent,
         BarLeftDirective,
         BarMiddleDirective,
-        BarElementDirective,
         TitleComponent,
         TextComponent,
-        IconComponent,
         InfoLabelComponent,
         AvatarComponent
     ]

@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -13,14 +11,6 @@ import {
     selector: 'app-message-view-header',
     templateUrl: './message-view-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        DocPageComponent,
-        HeaderComponent,
-        DescriptionComponent,
-        LinkComponent,
-        RouterLink,
-        ImportComponent,
-        HeaderTabsComponent
-    ]
+    imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class MessageViewHeaderComponent {}

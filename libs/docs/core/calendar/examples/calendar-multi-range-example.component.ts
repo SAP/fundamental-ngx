@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk';
@@ -41,7 +40,7 @@ import {
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    imports: [CalendarComponent, FormsModule, DatePipe, FdDatetimeModule]
+    imports: [CalendarComponent, FormsModule, FdDatetimeModule]
 })
 export class CalendarMultiRangeExampleComponent {
     selectedRanges: Nullable<Array<DateRange<FdDate>>>;

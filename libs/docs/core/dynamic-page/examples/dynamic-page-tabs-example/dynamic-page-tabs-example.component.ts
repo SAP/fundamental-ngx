@@ -6,7 +6,6 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
@@ -34,7 +33,6 @@ import { FDP_ICON_TAB_BAR } from '@fundamental-ngx/platform/icon-tab-bar';
         ButtonComponent,
         DynamicPageModule,
         BreadcrumbModule,
-        LinkComponent,
         ToolbarComponent,
         ToolbarItemDirective,
         ContentDensityDirective,

@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
-import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 
 // Import Fundamental Styles
 import 'fundamental-styles/dist/paddings.css';
@@ -16,7 +15,7 @@ import '@ui5/webcomponents-icons-business-suite/dist/add-polygon.js';
     selector: 'ui5-icon-business-suite-example',
     templateUrl: './business-suite-icons.html',
     standalone: true,
-    imports: [Icon, Label]
+    imports: [Icon]
 })
 export class IconBusinessSuiteExample {
     readonly businessSuiteIcons = signal([

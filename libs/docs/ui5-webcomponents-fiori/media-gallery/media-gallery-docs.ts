@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
-    DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
     getAssetFromModuleAssets
@@ -15,13 +14,7 @@ const mediaGallerySampleTs = 'media-gallery-sample.ts';
 @Component({
     selector: 'ui5-fiori-media-gallery-docs',
     templateUrl: './media-gallery-docs.html',
-    imports: [
-        DocsSectionTitleComponent,
-        ComponentExampleComponent,
-        CodeExampleComponent,
-        DescriptionComponent,
-        MediaGallerySample
-    ]
+    imports: [DocsSectionTitleComponent, ComponentExampleComponent, CodeExampleComponent, MediaGallerySample]
 })
 export class MediaGalleryDocs {
     mediaGallerySample: ExampleFile[] = [

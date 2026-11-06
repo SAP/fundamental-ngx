@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { ToolbarComponent, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
@@ -27,7 +26,6 @@ import {
         SmartFilterBarComponent,
         SmartFilterBarFieldDefinitionDirective,
         SmartFilterBarSubjectDirective,
-        ContentDensityDirective,
         TitleComponent,
         TableDataSourceDirective,
         TableHeaderResizerDirective,

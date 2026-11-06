@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import {
@@ -57,7 +56,6 @@ import {
         ShellbarBrandingComponent,
         ShellbarTitleComponent,
         PlatformSearchFieldModule,
-        ContentDensityDirective,
         ShellbarActionsComponent,
         ShellbarActionComponent,
         ProductSwitchModule,

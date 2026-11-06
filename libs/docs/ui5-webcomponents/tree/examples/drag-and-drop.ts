@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { Label, Title } from '@fundamental-ngx/ui5-webcomponents';
 import { MovePlacement } from '@fundamental-ngx/ui5-webcomponents-base/types';
 import { Tree } from '@fundamental-ngx/ui5-webcomponents/tree';
 import { TreeItem } from '@fundamental-ngx/ui5-webcomponents/tree-item';
@@ -8,7 +7,7 @@ import { TreeItem } from '@fundamental-ngx/ui5-webcomponents/tree-item';
     selector: 'ui5-tree-drag-and-drop-sample',
     templateUrl: './drag-and-drop.html',
     standalone: true,
-    imports: [Tree, TreeItem, Title, Label]
+    imports: [Tree, TreeItem]
 })
 export class TreeDragAndDropSample {
     logMessage = signal<string>('');

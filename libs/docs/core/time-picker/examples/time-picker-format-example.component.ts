@@ -1,9 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatetimePickerComponent } from '@fundamental-ngx/core';
 import {
-    DateTimeFormatPipe,
     DayPeriodFormatPipe,
     FdDate,
     provideDateTimeFormats,
@@ -15,15 +13,7 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
     selector: 'fd-time-picker-format-example',
     templateUrl: './time-picker-format-example.component.html',
     providers: [provideDateTimeFormats()],
-    imports: [
-        TimePickerModule,
-        FormsModule,
-        DatePipe,
-        DayPeriodFormatPipe,
-        DateTimeFormatPipe,
-        DatetimePickerComponent,
-        TranslateDayPeriodPipe
-    ]
+    imports: [TimePickerModule, FormsModule, DatePipe, DayPeriodFormatPipe, TranslateDayPeriodPipe]
 })
 export class TimePickerFormatExampleComponent {
     time = FdDate.getNow();

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     CodeExampleComponent,
-    CodeSnippetComponent,
     ComponentExampleComponent,
     DescriptionComponent,
     DocsSectionTitleComponent,
@@ -18,7 +17,6 @@ import { PlatformI18nTranslationCustomizationExampleComponent } from './examples
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        CodeSnippetComponent,
         SeparatorComponent,
         ComponentExampleComponent,
         CodeExampleComponent,
