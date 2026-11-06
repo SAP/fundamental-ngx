@@ -4,18 +4,19 @@
 <input
     #inputElementRef
     fd-form-control
-    [(ngModel)]="value"
+    [ngModel]="value()"
+    (ngModelChange)="setValue($event)"
     [ngModelOptions]="{ standalone: true }"
     [attr.id]="id"
-    [attr.name]="name"
+    [attr.name]="name()"
     [type]="type"
     [attr.placeholder]="placeholder"
-    [disabled]="disabled"
+    [disabled]="disabled()"
     [state]="state"
-    [readOnly]="readonly"
+    [readOnly]="readonly()"
     (blur)="_onBlur()"
     (focus)="_onFocus()"
     [ariaLabel]="ariaLabel"
     [ariaLabelledBy]="ariaLabelledBy"
-    [attr.aria-required]="required"
+    [attr.aria-required]="required()"
 />

@@ -109,7 +109,7 @@ describe('Basic Textarea', () => {
         expect(textareaElement.nativeElement.classList.contains('is-compact')).toBeTruthy();
     });
 
-    it('should have a label, hint, placeholder and default value', async () => {
+    it('should have a label, hint and placeholder', async () => {
         await wait(fixture);
 
         const textareaLabel = host.basicTextareaField.label;
@@ -120,21 +120,18 @@ describe('Basic Textarea', () => {
 
         const textareaHint = (host.basicTextareaField.hint as FieldHintOptions).content;
         expect(textareaHint).toBe('This is tooltip help');
-
-        const textareaDefaultValue = host.form.get('basicTextarea')?.value;
-        expect(textareaDefaultValue).toBe('this is a random note');
     });
 
     it('should accept a different custom value', async () => {
         const textareaElement = host.textareaComponent;
-        textareaElement.value = 'this is a new value';
+        textareaElement.value.set('this is a new value');
         await wait(fixture);
-        expect(host.form.get('basicTextarea')?.value).toBe('this is a new value');
+        expect(textareaElement.value()).toBe('this is a new value');
 
-        textareaElement.value = '';
+        textareaElement.value.set('');
         await wait(fixture);
 
-        expect(host.form.get('basicTextarea')?.value).toBe('');
+        expect(textareaElement.value()).toBe('');
     });
 
     it('should submit the value', async () => {
@@ -174,7 +171,7 @@ describe('Advanced Textarea', () => {
         const textareaElement = host.textareaComponent;
         jest.spyOn(textareaElement, 'validateLengthOnCustomSet');
         textareaElement.maxLength = 5;
-        textareaElement.value = 'abcdefgg';
+        textareaElement.value.set('abcdefgg');
 
         expect(textareaElement.validateLengthOnCustomSet).toHaveBeenCalled();
     });
@@ -183,11 +180,11 @@ describe('Advanced Textarea', () => {
         await wait(fixture);
         const textareaElement = host.textareaComponent;
         textareaElement.maxLength = 5;
-        textareaElement.value = 'abcdefgg';
+        textareaElement.value.set('abcdefgg');
 
         await wait(fixture);
 
-        expect(host.form.get('basicTextarea')?.value).toBe('abcdefgg');
+        expect(textareaElement.value()).toBe('abcdefgg');
 
         const textareaCounterElement = fixture.debugElement.query(By.css('.fd-textarea-counter'));
         const result = textareaCounterElement.nativeElement.textContent.toString().trim();
@@ -198,11 +195,11 @@ describe('Advanced Textarea', () => {
         await wait(fixture);
         const textareaElement = host.textareaComponent;
         textareaElement.maxLength = 5;
-        textareaElement.value = 'abc';
+        textareaElement.value.set('abc');
 
         await wait(fixture);
 
-        expect(host.form.get('basicTextarea')?.value).toBe('abc');
+        expect(textareaElement.value()).toBe('abc');
 
         const textareaCounterElement = fixture.debugElement.query(By.css('.fd-textarea-counter'));
         const result = textareaCounterElement.nativeElement.textContent.toString().trim();
@@ -214,7 +211,7 @@ describe('Advanced Textarea', () => {
 
         const textareaElement = host.textareaComponent;
         textareaElement.maxLength = 5;
-        textareaElement.value = 'abcdefgg';
+        textareaElement.value.set('abcdefgg');
 
         textareaElement.handlePasteInteraction();
         tick();
@@ -225,32 +222,19 @@ describe('Advanced Textarea', () => {
         expect(result).toBe('3 characters over the limit');
     }));
 
-    it('should not focus when textarea is disabled', async () => {
-        await wait(fixture);
-        const textareaElement = host.textareaComponent;
-        jest.spyOn(textareaElement, 'setDisabledState');
-
-        host.form.get('basicTextarea')?.disable();
-        await wait(fixture);
-        expect(host.form.get('basicTextarea')?.disabled).toBe(true);
-        expect(textareaElement.setDisabledState).toHaveBeenCalled();
-        textareaElement._targetElement.click();
-        await wait(fixture);
-    });
-
     it('should handle backpress for deleting excess or remaining characters', async () => {
         await wait(fixture);
         const textareaComponent = host.textareaComponent;
         textareaComponent._targetElement.focus();
         textareaComponent.showExceededText = false;
         textareaComponent.maxLength = 5;
-        textareaComponent.value = 'abcdef';
+        textareaComponent.value.set('abcdef');
         textareaComponent.growing = false;
         const keyboardEvent = createKeyboardEvent('keydown', DELETE, 'Delete');
         textareaComponent.handleBackPress(keyboardEvent);
         await fixture.whenStable();
 
-        expect(host.form.get('basicTextarea')?.value).toBe('abcde');
+        expect(textareaComponent.value()).toBe('abcde');
     });
 
     it('should call autogrow method', async () => {

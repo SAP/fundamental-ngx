@@ -54,10 +54,10 @@ export class RadioGroupComponent
     /** Value of selected radio button */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('selected')
-    set value(newValue: any) {
+    set selectedValue(newValue: any) {
         super.setValue(newValue);
     }
-    get value(): any {
+    get selectedValue(): any {
         return super.getValue();
     }
 
@@ -128,13 +128,6 @@ export class RadioGroupComponent
         }
     }
 
-    /** Control Value Accessor */
-    writeValue(value: any): void {
-        super.writeValue(value);
-        this.contentRadioButtons?.forEach((b) => this._selectUnselect(b));
-        this.viewRadioButtons?.forEach((b) => this._selectUnselect(b));
-    }
-
     /** Access display value for objects, acts as checkbox label. */
     getDisplayValue(item: any): string {
         return this.displayValue(item);
@@ -177,7 +170,14 @@ export class RadioGroupComponent
 
     /** @hidden */
     _getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
-        return this.disabled || (typeof item === 'object' && !!(<SelectItem>item).disabled);
+        return this.disabled() || (typeof item === 'object' && !!(<SelectItem>item).disabled);
+    }
+
+    /** @hidden */
+    protected _applyValue(value: any): void {
+        super._applyValue(value);
+        this.contentRadioButtons?.forEach((b) => this._selectUnselect(b));
+        this.viewRadioButtons?.forEach((b) => this._selectUnselect(b));
     }
 
     /** @hidden */
@@ -187,7 +187,13 @@ export class RadioGroupComponent
         }
 
         this._keyboardEventsManager?.destroy();
-        this._keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
+        // `RadioButtonComponent.disabled` is a `ModelSignal`, so it does not structurally satisfy
+        // CDK's `FocusableOption` (optional plain `disabled?: boolean`). Cast at construction and
+        // supply a `skipPredicate` that reads the signal so disabled buttons are still skipped.
+        this._keyboardEventsManager = new FocusKeyManager(radioButtons as QueryList<any>)
+            .skipPredicate((item: RadioButtonComponent) => item.disabled())
+            .withWrap()
+            .withHorizontalOrientation('ltr');
 
         radioButtons.changes
             .pipe(
@@ -204,7 +210,7 @@ export class RadioGroupComponent
                         this._selectUnselect(button);
 
                         // finding first enabled button to set tabIndex=0
-                        if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
+                        if (!button.disabled() && !this._isDisabled && firstEnabledButtonIndex < 0) {
                             firstEnabledButtonIndex = i;
                         }
 
@@ -228,7 +234,7 @@ export class RadioGroupComponent
      * @param button
      */
     private _selectUnselect(button: RadioButtonComponent): void {
-        if (button.value !== this.value) {
+        if (button.value() !== this.value()) {
             button.unselect();
 
             return;
@@ -257,9 +263,9 @@ export class RadioGroupComponent
             button.select();
         }
 
-        this.value = button.value;
+        this.setValue(button.value());
         this.change.emit(button);
-        this.onTouched();
+        this.touch.emit();
     }
 
     /** @hidden resets tabIndex for first radio in radio group. for accessibility tabIndex was set */
@@ -280,9 +286,9 @@ export class RadioGroupComponent
      */
     private _setProperties(button: RadioButtonComponent): void {
         if (button) {
-            button.name = this.name;
+            button.name.set(this.name());
             button.state = this.state;
-            button.disabled = button.disabled ? button.disabled : this._disabled;
+            button.disabled.set(button.disabled() ? button.disabled() : this._isDisabled);
         }
     }
 

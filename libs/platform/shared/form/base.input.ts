@@ -1,23 +1,29 @@
-import { BooleanInput } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
+    ChangeDetectorRef,
     DestroyRef,
     Directive,
     DoCheck,
     ElementRef,
     InjectionToken,
     Input,
+    ModelSignal,
     OnDestroy,
     OnInit,
     TemplateRef,
     ViewChild,
     booleanAttribute,
+    effect,
     inject,
-    isDevMode
+    input,
+    isDevMode,
+    model,
+    output
 } from '@angular/core';
-import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, FormControl, NgControl, NgForm } from '@angular/forms';
+import { FormValueControl, ValidationError } from '@angular/forms/signals';
 import { HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
-import { Observable, Subject, filter } from 'rxjs';
+import { Observable, Subject, Subscription, filter } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -29,7 +35,6 @@ import {
 } from '@fundamental-ngx/cdk/forms';
 import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
-import { BaseComponent } from '../base';
 import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 
 export const FDP_DO_CHECK = new InjectionToken<Observable<void>>('FdpInputDoCheckTrigger');
@@ -38,21 +43,49 @@ export const FDP_FORM_SUBMIT = new InjectionToken<Observable<void>>('FdpFormSubm
 let randomId = 0;
 
 /**
- * All form components share the same information (value, name, placeholder,.. ) as well as
- * the same behavior given by ControlValueAccessor.
+ * Self-contained abstract base for all platform form controls.
  *
- * Even this is not ideal solution there is no other way then use inheritance to reuse some of the
- * common logic. It should be possible to use some kind of compositions with Proxies but something
- * similar that exists in Aspect Oriented Programing.
+ * It is Signal-Forms-native: `value`, `name`, `disabled`, `readonly` and `required` are exposed as
+ * signals so the class fully implements Angular's `FormValueControl<any>` contract. It intentionally
+ * does NOT extend `BaseComponent` (so those members can be signals without clashing with the plain
+ * members `BaseComponent` shares with non-form components).
  *
  * Usually try to fire stateChange only for things that can change dynamically in runtime. We don't expect
  * that e.g. placeholder will change after component is created
  */
 @Directive()
-export abstract class BaseInput
-    extends BaseComponent
-    implements PlatformFormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy, HasElementRef
+export abstract class BaseInput<T = any>
+    implements PlatformFormFieldControl, FormValueControl<T>, OnInit, DoCheck, AfterViewInit, OnDestroy, HasElementRef
 {
+    /** Sets the `aria-label` attribute to the element. */
+    @Input()
+    ariaLabel: Nullable<string>;
+
+    /** Sets the `aria-labelledby` attribute to the element. */
+    @Input()
+    ariaLabelledBy: Nullable<string>;
+
+    /**
+     * @deprecated
+     * Use `ariaLabelledBy` instead.
+     */
+    @Input()
+    set ariaLabelledby(value: Nullable<string>) {
+        this.ariaDescribedBy = value;
+    }
+
+    /** Sets the `aria-describedby` attribute to the element. */
+    @Input()
+    ariaDescribedBy: Nullable<string>;
+
+    /** id for the Element */
+    @Input()
+    id = `fdp-id-${randomId++}`;
+
+    /** width of the element */
+    @Input()
+    width: string;
+
     /** Input placeholder */
     @Input()
     placeholder: string;
@@ -109,28 +142,6 @@ export abstract class BaseInput
     @Input()
     stateMessageConfig: Nullable<TemplateRef<any>>;
 
-    /** Whether the input is disabled */
-    @Input()
-    set disabled(value: boolean) {
-        this.setDisabledState(value);
-    }
-    get disabled(): boolean {
-        if (this.ngControl && this.ngControl.disabled !== null) {
-            return this.ngControl.disabled;
-        }
-        return this._disabled;
-    }
-
-    /**
-     * readOnly Value to Mark component read only
-     */
-    @Input()
-    readonly: boolean;
-
-    /** Whether the input is required. */
-    @Input({ transform: booleanAttribute })
-    required = false;
-
     /**
      * Tell the component if we are in editing mode.
      */
@@ -158,14 +169,45 @@ export abstract class BaseInput
     protected _elementRef: ElementRef;
 
     /**
-     * need to make  these value accessor as abstract to be implemented by subclasses. Having them
-     * in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
-     * which we need to programmatically wraps components set/get value
+     * The value of the control, exposed as a `model()` to satisfy the Signal Forms
+     * `FormValueControl` contract. It is the single source of truth, kept in sync with the internal
+     * `_value` via the apply/push bridge below so `[field]`, `[(value)]`, and programmatic
+     * `value.set()` all drive the same state.
      *
+     * Subclasses MUST NOT override this as a getter/setter (TS2611); they adapt behavior by overriding
+     * the protected `_applyValue()` / `_applyModelValue()` hooks instead.
      */
-    abstract get value(): any;
+    readonly value: ModelSignal<any> = model<any>(undefined);
 
-    abstract set value(value: any);
+    /** Control name (two-way `model()` so controls like radio/checkbox can assign a generated name). */
+    readonly name = model<string>('');
+
+    /**
+     * Whether the input is disabled, exposed as a `model()` so `[field]` / `[(disabled)]` can drive it.
+     * Internal reads should use `_isDisabled()` which also folds in a reactive-forms `NgControl` state.
+     */
+    readonly disabled = model<boolean>(false);
+
+    /** readOnly value to mark the component read only. */
+    readonly readonly = model<boolean>(false);
+
+    /** Whether the input is required. */
+    readonly required = model<boolean>(false);
+
+    /**
+     * Signal Forms `FormUiControl` state inputs. The `[formField]` directive writes these from the
+     * bound field; we consume them in the error-state machinery. All optional in the contract.
+     */
+    readonly errors = input<readonly ValidationError.WithOptionalFieldTree[]>([]);
+
+    /** Whether the bound Signal Forms field is touched. */
+    readonly touched = input<boolean>(false);
+
+    /** Whether the bound Signal Forms field is dirty. */
+    readonly dirty = input<boolean>(false);
+
+    /** Emits on blur so a Signal Forms field can mark itself touched. */
+    readonly touch = output<void>();
 
     /** @hidden */
     formMessage: Nullable<FormInputMessageGroupComponent>;
@@ -235,6 +277,26 @@ export abstract class BaseInput
     /** @hidden */
     protected _destroyed = inject(DestroyRef);
 
+    /** @hidden Change detector, used for the imperative (non-signal) state in the form-control chain. */
+    protected readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden Subscriptions bag, torn down in `ngOnDestroy`. */
+    protected _subscriptions = new Subscription();
+
+    /**
+     * @hidden
+     * Resolved disabled state: a reactive-forms `NgControl` disabled state when present (preserving
+     * the historical delegation), otherwise the `disabled` model. Use this for internal reads/bindings.
+     * A getter (not a `computed`) because `NgControl.disabled` is not signal-tracked.
+     */
+    protected get _isDisabled(): boolean {
+        const ngControlDisabled = this.ngControl?.disabled;
+        if (ngControlDisabled !== null && ngControlDisabled !== undefined) {
+            return ngControlDisabled;
+        }
+        return this.disabled();
+    }
+
     /** @hidden */
     private readonly _externalSubmit = inject(FDP_FORM_SUBMIT, { optional: true });
 
@@ -246,20 +308,15 @@ export abstract class BaseInput
      */
     private _controlInvalid = false;
 
+    /**
+     * @hidden
+     * Re-entrancy guard for the model <-> ControlValueAccessor bridge: set while a model-originated
+     * value is being applied, so `_pushToModel()` doesn't rewrite the model mid-apply.
+     */
+    private _syncingFromModel = false;
+
     /** @hidden */
     constructor() {
-        /**
-         * We do not use Injector.get() approach here because there is a bug
-         * with this signature https://github.com/angular/angular/issues/31776
-         * where "get()" method doesn't take into account "flag" option"
-         *
-         */
-        super();
-
-        if (this.ngControl) {
-            this.ngControl.valueAccessor = this;
-        }
-
         const formField = inject<PlatformFormField>(FD_FORM_FIELD, {
             optional: true,
             skipSelf: true,
@@ -281,13 +338,23 @@ export abstract class BaseInput
         this._externalSubmit?.pipe(takeUntilDestroyed(this._destroyed)).subscribe(() => {
             this._externalFormSubmitted = true;
         });
+
+        // Bridge: `value` model -> component state. Two triggers feed one guarded handler:
+        //   1. `effect()` — observes parent `[value]` / `[field]` INPUT writes, which update the model
+        //      without emitting its output. Runs deferred.
+        //   2. model output `subscribe()` — fires SYNCHRONOUSLY on internal `value.set()` (e.g. a
+        //      `[(value)]` two-way write or programmatic set).
+        //
+        // Feedback/double-processing is prevented by VALUE EQUALITY: once a value is applied `_value`
+        // equals the model, so whichever trigger fires second (or a `_pushToModel` echo) no-ops. Only a
+        // genuinely different (externally-originated) value is applied.
+        effect(() => {
+            this._syncModelToComponent(this.value());
+        });
+        this.value.subscribe((modelValue) => {
+            this._syncModelToComponent(modelValue);
+        });
     }
-
-    /** @hidden */
-    onChange: (value: any) => void = () => {};
-
-    /** @hidden */
-    onTouched = (): void => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -301,7 +368,7 @@ export abstract class BaseInput
      * that we can't subscribe to.
      */
     ngDoCheck(): void {
-        if (this.ngControl) {
+        if (this.ngControl || this.errors().length > 0) {
             this.updateErrorState();
         }
     }
@@ -346,41 +413,29 @@ export abstract class BaseInput
     }
 
     /** @hidden */
-    registerOnChange(fn: (_: any) => void): void {
-        this.onChange = fn;
-    }
-
-    /** @hidden */
-    registerOnTouched(fn: () => void): void {
-        this.onTouched = fn;
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
-        super.ngOnDestroy();
+        this._subscriptions.unsubscribe();
         this.stateChanges.complete();
         if (this.formField) {
             this.formField.unregisterFormFieldControl(this);
         }
     }
 
-    /** @hidden */
-    setDisabledState(isDisabled: BooleanInput): void {
-        const newState = booleanAttribute(isDisabled);
-        this.markForCheck();
-        if (newState !== this._disabled) {
-            this._disabled = newState;
-            this.stateChanges.next('setDisabledState');
-        }
+    /**
+     * @hidden
+     * For internal usage only. Marks the component (and ancestors) for check — still required for the
+     * imperative, non-signal state that the form-control chain mutates (RxJS, DOM, plain properties).
+     */
+    markForCheck(): void {
+        this._cdr.markForCheck();
     }
 
     /**
-     * Each sub class must override this method as inheritance does not work
+     * @hidden
+     * For internal usage only. Forces change detection for imperative (non-signal) updates.
      */
-    writeValue(value: any): void {
-        this._value = value;
-        this.stateChanges.next('writeValue');
-        this.markForCheck();
+    detectChanges(): void {
+        this._cdr.detectChanges();
     }
 
     /**
@@ -388,13 +443,13 @@ export abstract class BaseInput
      * Keeps track of element focus
      */
     _onFocusChanged(isFocused: boolean): void {
-        if (isFocused !== this.focused && (!this.disabled || !isFocused)) {
+        if (isFocused !== this.focused && (!this._isDisabled || !isFocused)) {
             this.focused = isFocused;
             this.stateChanges.next('_onFocusChanged');
         }
 
         if (!isFocused) {
-            this.onTouched();
+            this.touch.emit();
         }
     }
 
@@ -417,9 +472,11 @@ export abstract class BaseInput
      * and this default behavior used. For other cases implement focus.
      *
      */
-    focus(event?: MouseEvent): void {
+    focus(event?: FocusOptions | MouseEvent): void {
         if (this._elementRef && !this.focused) {
-            this._elementRef.nativeElement.focus(event);
+            // `HTMLElement.focus` only reads `FocusOptions` (e.g. `preventScroll`); a `MouseEvent`
+            // argument is ignored harmlessly, preserving the historical `onContainerClick` call.
+            this._elementRef.nativeElement.focus(event as FocusOptions);
         }
     }
 
@@ -431,7 +488,7 @@ export abstract class BaseInput
         const parent = this.ngForm;
         const parentControlContainer = this.controlContainer;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
-        const newStatusIsError = !!(
+        const reactiveFormsError = !!(
             control?.invalid &&
             ((this.validationStrategy.includes('dirty') && control.dirty) ||
                 (this.validationStrategy.includes('touched') && control.touched) ||
@@ -439,6 +496,19 @@ export abstract class BaseInput
                 (parentControlContainer as any)?.submitted ||
                 this._externalFormSubmitted)
         );
+
+        // Signal Forms: when driven by a `[formField]`, validation comes in via the `errors`/`touched`/
+        // `dirty` inputs rather than the reactive-forms `NgControl`.
+        const signalFormsError = !!(
+            this.errors().length > 0 &&
+            ((this.validationStrategy.includes('dirty') && this.dirty()) ||
+                (this.validationStrategy.includes('touched') && this.touched()) ||
+                (this.validationStrategy.includes('submitted') && parent?.submitted) ||
+                (parentControlContainer as any)?.submitted ||
+                this._externalFormSubmitted)
+        );
+
+        const newStatusIsError = reactiveFormsError || signalFormsError;
 
         if (newStatusIsError !== this.controlInvalid) {
             this._controlInvalid = newStatusIsError;
@@ -450,14 +520,15 @@ export abstract class BaseInput
     /**
      * Used to change the value of a control.
      * @param value the value to be applied
-     * @param emitOnChange whether to emit "onChange" event.
-     * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
+     * @param emitModelChange whether to propagate the change to the `value` model (and thus to a bound
+     * Signal Forms field / `[(value)]`). Should be `false` for a purely internal apply that must not
+     * re-notify bindings; `true` otherwise.
      */
-    protected setValue(value: any, emitOnChange = true): void {
+    protected setValue(value: any, emitModelChange = true): void {
         if (value !== this._value) {
-            this.writeValue(value);
-            if (emitOnChange) {
-                this.onChange(value);
+            this._applyValue(value);
+            if (emitModelChange) {
+                this._pushToModel(value);
             }
             this.markForCheck();
         }
@@ -466,5 +537,66 @@ export abstract class BaseInput
     /** @hidden */
     protected getValue(): any {
         return this._value;
+    }
+
+    /**
+     * @hidden
+     * Canonical value-apply hook. Stores `_value` and fires `stateChanges`. Subclasses override this
+     * to run value-dependent side effects (counters, view updates, selection, etc.) — it replaces the
+     * former `writeValue()` override point now that the component is Signal-Forms-native.
+     */
+    protected _applyValue(value: any): void {
+        this._value = value;
+        this.stateChanges.next('applyValue');
+        this.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Applies a value coming FROM the `value` model (`[field]`, `[(value)]`, or a programmatic
+     * `value.set()`). Routes through `_applyValue()` so subclass side effects run. Subclasses whose
+     * value needs special treatment (e.g. radio, whose model value is its identity) override this.
+     */
+    protected _applyModelValue(modelValue: any): void {
+        this._applyValue(modelValue);
+    }
+
+    /**
+     * @hidden
+     * Syncs a model-originated value into the component. Guarded by value equality so a value we just
+     * pushed (`_pushToModel`) or an equal re-emit no-ops, preventing feedback loops.
+     */
+    private _syncModelToComponent(modelValue: any): void {
+        if (this._syncingFromModel || this._valuesEqual(modelValue, this._value)) {
+            return;
+        }
+        this._syncingFromModel = true;
+        try {
+            this._applyModelValue(modelValue);
+        } finally {
+            this._syncingFromModel = false;
+        }
+    }
+
+    /**
+     * @hidden
+     * Pushes a value from the component INTO the `value` model (notifying bound fields / two-way
+     * bindings). Skipped while applying a model-originated value so the model isn't rewritten mid-apply.
+     */
+    private _pushToModel(value: any): void {
+        if (this._syncingFromModel) {
+            return;
+        }
+        this.value.set(value);
+    }
+
+    /**
+     * @hidden
+     * Equality used by the model <-> CVA bridge to decide whether a model value differs from the
+     * current CVA value. Uses reference/`Object.is` equality, matching signal semantics and the
+     * historical `value !== this._value` guard in `setValue`.
+     */
+    private _valuesEqual(a: any, b: any): boolean {
+        return Object.is(a, b);
     }
 }

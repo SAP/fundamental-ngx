@@ -48,7 +48,6 @@ import { debounceTime } from 'rxjs/operators';
 
 import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormField } from '@fundamental-ngx/cdk/forms';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityModule,
@@ -89,7 +88,7 @@ export const formGroupProvider: Provider = {
     useExisting: forwardRef(() => FormGroupComponent)
 };
 
-type FormGroupField = (FormField | FormFieldGroup) & { hintOptions?: HintOptions };
+type FormGroupField = (PlatformFormField | FormFieldGroup) & { hintOptions?: HintOptions };
 
 let formGroupUniqueId = 0;
 

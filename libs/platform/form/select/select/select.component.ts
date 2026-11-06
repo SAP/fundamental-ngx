@@ -27,18 +27,6 @@ import { BaseSelect } from '../commons/base-select';
     imports: [SelectModule, FormsModule, IconComponent, NgTemplateOutlet, NgClass, ListSecondaryDirective]
 })
 export class SelectComponent extends BaseSelect implements AfterViewInit, AfterViewChecked {
-    /**
-     * Directly sets value to the component that at the ends up at writeValue as well fires
-     * change detections
-     */
-    @Input()
-    set value(newValue: any) {
-        this.setValue(newValue);
-    }
-    get value(): any {
-        return this._value;
-    }
-
     /** Should select be inlined. */
     @Input()
     inline = true;
@@ -93,7 +81,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
      * @hidden
      */
     _isSelectedOptionItem(selectedItem: any): boolean {
-        return this.lookupValue(this.value) === this.lookupValue(selectedItem);
+        return this.lookupValue(this.value()) === this.lookupValue(selectedItem);
     }
 
     /** @hidden */

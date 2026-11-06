@@ -7,7 +7,6 @@ import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils'
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { DATA_PROVIDERS, DataProvider } from '@fundamental-ngx/platform/shared';
-import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
@@ -118,28 +117,4 @@ describe('PlatformMultiInputComponent', () => {
         expect(component.platformMultiInputComponent.maxWidth()).toBe(800);
         expect(component.platformMultiInputComponent.minWidth()).toBe(298);
     });
-});
-
-const MULTI_INPUT_IDENTIFIER = 'platform-multi-input-unit-test';
-
-runValueAccessorTests({
-    component: PlatformMultiInputComponent,
-    name: 'Multi input',
-    testModuleMetadata: {
-        imports: [PlatformMultiInputModule],
-        providers: [DynamicComponentService]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = MULTI_INPUT_IDENTIFIER;
-        fixture.componentInstance.name = MULTI_INPUT_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    nativeControlSelector: `input[id="${MULTI_INPUT_IDENTIFIER}"]`,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.value = value;
-    },
-    getComponentValue: (fixture) => fixture.componentInstance.value,
-    getValues: () => [['a'], ['b'], ['c']],
-    excludeSteps: [CVATestSteps.ValueChangedInternally]
 });

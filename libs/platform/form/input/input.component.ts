@@ -54,15 +54,6 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Input()
     type: InputType = 'text';
 
-    /** return the value in the text box */
-    @Input()
-    set value(value: any) {
-        super.setValue(value);
-    }
-    get value(): any {
-        return super.getValue();
-    }
-
     /** Emits event on focus change */
     @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

@@ -3,7 +3,7 @@
         class="fd-step-input"
         [class.is-focus]="focused"
         [class.is-readonly]="!editable"
-        [class.is-disabled]="disabled"
+        [class.is-disabled]="disabled()"
         [class.fd-step-input--without-buttons]="showLabels"
         [class]="state ? 'is-' + state : ''"
     >
@@ -15,7 +15,7 @@
             fdType="transparent"
             [glyph]="showLabels ? null : 'less'"
             fdpStepInputDecrement
-            [attr.aria-disabled]="disabled || !canDecrement"
+            [attr.aria-disabled]="disabled() || !canDecrement"
             [attr.title]="decrementLabel"
             [attr.aria-label]="decrementLabel"
             [attr.aria-controls]="id"
@@ -26,14 +26,14 @@
             #inputElementRef
             class="fd-input fd-input--no-number-spinner fd-step-input__input"
             [id]="id"
-            [name]="name"
-            [disabled]="disabled"
+            [name]="name()"
+            [disabled]="disabled()"
             [readonly]="!editable"
             [attr.placeholder]="placeholder || ''"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-describedby]="description ? id + '__description' : ''"
-            [attr.aria-required]="required"
+            [attr.aria-required]="required()"
             [style.textAlign]="_textAlign$()"
             fdpStepInputControl
             type="text"
@@ -49,7 +49,7 @@
             fdType="transparent"
             [glyph]="showLabels ? null : 'add'"
             fdpStepInputIncrement
-            [attr.aria-disabled]="disabled || !canIncrement"
+            [attr.aria-disabled]="disabled() || !canIncrement"
             [attr.title]="incrementLabel"
             [attr.aria-label]="incrementLabel"
             [attr.aria-controls]="id"

@@ -8,7 +8,6 @@ import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/
 import { FormModule } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { OptionItem, isOptionItem } from '@fundamental-ngx/platform/shared';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { FdpSelectionChangeEvent } from '../commons/base-select';
 import { PlatformSelectModule } from '../select.module';
@@ -621,24 +620,4 @@ describe('Select Component with lookupKey — selection changes', () => {
         const triggerText = fixture.nativeElement.querySelector('.fd-select__text-content')?.textContent?.trim();
         expect(triggerText).toBe('Brazil');
     });
-});
-
-const SELECT_IDENTIFIER = 'platform-select-unit-test';
-
-runValueAccessorTests({
-    component: SelectComponent,
-    name: 'Select',
-    testModuleMetadata: {
-        imports: [PlatformSelectModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = SELECT_IDENTIFIER;
-        fixture.componentInstance.name = SELECT_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.value = value;
-    },
-    getComponentValue: (fixture) => fixture.componentInstance.value
 });
