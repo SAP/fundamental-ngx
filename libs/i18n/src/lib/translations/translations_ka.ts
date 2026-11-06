@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'დრო'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Resizable'
     },
     coreDynamicPage: {

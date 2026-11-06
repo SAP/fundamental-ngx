@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: '時間'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: '可調整大小'
     },
     coreDynamicPage: {
