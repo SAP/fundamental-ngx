@@ -20,7 +20,7 @@ const PADDING_VALUES: Record<CardContentPaddingSize, string> = {
         '[style.padding]': 'paddingStyle()',
         '[style.padding-inline]': 'paddingInlineStyle()',
         '[style.padding-block]': 'paddingBlockStyle()',
-        '[style.padding-block-end]': 'paddingBottomStyle()'
+        '[style.padding-block-end]': 'paddingBlockEndStyle()'
     }
 })
 export class CardContentComponent implements HasElementRef {
@@ -48,11 +48,11 @@ export class CardContentComponent implements HasElementRef {
     readonly paddingBlock = input<CardContentPaddingSize>();
 
     /**
-     * Sets padding-bottom specifically.
+     * Sets padding-block-end specifically.
      * Options: 'tiny' (0.5rem), 'sm' (1rem), 'md' (2rem), 'lg' (3rem)
-     * Takes precedence over paddingBlock and general padding input for bottom spacing.
+     * Takes precedence over paddingBlock and general padding input for block-end spacing.
      */
-    readonly paddingBottom = input<CardContentPaddingSize>();
+    readonly paddingBlockEnd = input<CardContentPaddingSize>();
 
     /** @hidden */
     protected readonly paddingStyle = computed(() => this._toPaddingValue(this.padding()));
@@ -64,7 +64,7 @@ export class CardContentComponent implements HasElementRef {
     protected readonly paddingBlockStyle = computed(() => this._toPaddingValue(this.paddingBlock()));
 
     /** @hidden */
-    protected readonly paddingBottomStyle = computed(() => this._toPaddingValue(this.paddingBottom()));
+    protected readonly paddingBlockEndStyle = computed(() => this._toPaddingValue(this.paddingBlockEnd()));
 
     private _toPaddingValue(size: CardContentPaddingSize | undefined): string | null {
         return size ? PADDING_VALUES[size] : null;
