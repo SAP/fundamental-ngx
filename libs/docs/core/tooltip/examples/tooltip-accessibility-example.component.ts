@@ -47,11 +47,16 @@ export class TooltipAccessibilityExampleComponent {
                     .filter(Boolean)
                     .join(' ');
 
+                const rawShortcuts = nativeElement.getAttribute('aria-keyshortcuts');
+                const formattedShortcuts = rawShortcuts
+                    ? rawShortcuts.replace(/Control\+(\w) Meta\+\1/g, 'Ctrl+$1 / Cmd+$1')
+                    : '—';
+
                 return {
                     name: nativeElement.getAttribute('aria-label') ?? nativeElement.textContent?.trim() ?? '',
                     describedBy: describedBy ?? '—',
                     description: description || '—',
-                    keyShortcuts: nativeElement.getAttribute('aria-keyshortcuts') ?? '—'
+                    keyShortcuts: formattedShortcuts
                 };
             })
         );
