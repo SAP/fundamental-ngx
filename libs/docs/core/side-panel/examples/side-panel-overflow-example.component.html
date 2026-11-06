@@ -1,0 +1,40 @@
+<div class="side-panel-example">
+    <fd-side-panel
+        side="right"
+        ariaLabel="Content groups"
+        [activeItem]="activeItem()"
+        (activeItemChange)="activeItem.set($event)"
+    >
+        <fd-side-panel-item id="filter" icon="filter" label="Filter">
+            <ng-template fdSidePanelContent>Filter group content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="sort" icon="sort" label="Sort">
+            <ng-template fdSidePanelContent>Sort group content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="group" icon="group-2" label="Group">
+            <ng-template fdSidePanelContent>Group group content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="table" icon="table-view" label="Table view">
+            <ng-template fdSidePanelContent>Table view content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="columns" icon="customize" label="Columns">
+            <ng-template fdSidePanelContent>Columns content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="settings" icon="action-settings" label="Settings">
+            <ng-template fdSidePanelContent>Settings content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="tasks" icon="task" label="Tasks">
+            <ng-template fdSidePanelContent>Tasks content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="notes" icon="notes" label="Notes">
+            <ng-template fdSidePanelContent>Notes content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="calendar" icon="appointment-2" label="Calendar">
+            <ng-template fdSidePanelContent>Calendar content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="attachments" icon="attachment" label="Attachments">
+            <ng-template fdSidePanelContent>Attachments content</ng-template>
+        </fd-side-panel-item>
+    </fd-side-panel>
+</div>
+<p>Active group: {{ activeItem() ?? 'none' }}</p>

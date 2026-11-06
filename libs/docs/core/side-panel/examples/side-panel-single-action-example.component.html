@@ -1,0 +1,8 @@
+<div class="side-panel-example">
+    <fd-side-panel side="right" ariaLabel="Navigation" [open]="open()" (openChange)="open.set($event)">
+        <fd-side-panel-item id="map" icon="map" label="Map view">
+            <ng-template fdSidePanelContent>Map view content</ng-template>
+        </fd-side-panel-item>
+    </fd-side-panel>
+</div>
+<p>Panel open: {{ open() }}</p>

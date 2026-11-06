@@ -304,6 +304,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/core/side-navigation').then(configureLibRoutes)
     },
     {
+        path: 'side-panel',
+        loadChildren: () => import('@fundamental-ngx/docs/core/side-panel').then(configureLibRoutes)
+    },
+    {
         path: 'select',
         loadChildren: () => import('@fundamental-ngx/docs/core/select').then(configureLibRoutes)
     },

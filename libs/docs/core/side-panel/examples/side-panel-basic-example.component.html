@@ -1,0 +1,22 @@
+<div class="side-panel-example">
+    <fd-side-panel
+        side="right"
+        ariaLabel="Content groups"
+        [activeItem]="activeItem()"
+        (activeItemChange)="activeItem.set($event)"
+    >
+        <fd-side-panel-item id="run" icon="physical-activity" label="Run">
+            <ng-template fdSidePanelContent>Run group content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="home" icon="addresses" label="Go home">
+            <ng-template fdSidePanelContent>Go home group content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="office" icon="building" label="Go to office">
+            <ng-template fdSidePanelContent>Office group content</ng-template>
+        </fd-side-panel-item>
+        <fd-side-panel-item id="travel" icon="flight" label="Fly abroad" [disabled]="true">
+            <ng-template fdSidePanelContent>Travel group content</ng-template>
+        </fd-side-panel-item>
+    </fd-side-panel>
+</div>
+<p>Active group: {{ activeItem() ?? 'none' }}</p>
