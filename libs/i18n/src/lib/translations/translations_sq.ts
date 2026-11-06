@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Koha'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Resizable'
     },
     coreDynamicPage: {

@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Klokkeslett'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Størrelsen kan endres'
     },
     coreDynamicPage: {

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Type, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Type, viewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -29,11 +29,10 @@ import { DialogHeaderComponent } from './dialog-header.component';
             </ng-template>
         </fd-dialog-header>
     `,
-    standalone: true,
     imports: [DialogHeaderComponent, TemplateDirective, BarModule]
 })
 class CustomHeaderTestComponent {
-    @ViewChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
+    dialogHeaderRef = viewChild.required(DialogHeaderComponent);
 }
 
 @Component({
@@ -43,18 +42,37 @@ class CustomHeaderTestComponent {
             <button fd-dialog-close-button></button>
         </fd-dialog-header>
     `,
-    standalone: true,
     imports: [DialogHeaderComponent, DialogCloseButtonComponent, TitleComponent]
 })
 class DefaultHeaderTestComponent {
-    @ViewChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
+    dialogHeaderRef = viewChild.required(DialogHeaderComponent);
+}
+
+@Component({
+    template: `
+        <fd-dialog-header [role]="customRole" [ariaLabel]="customAriaLabel">
+            <h1 fd-title>Custom Attributes Title</h1>
+            <button fd-dialog-close-button></button>
+        </fd-dialog-header>
+    `,
+    imports: [DialogHeaderComponent, DialogCloseButtonComponent, TitleComponent]
+})
+class CustomAttributesHeaderTestComponent {
+    dialogHeaderRef = viewChild.required(DialogHeaderComponent);
+    customRole = 'banner';
+    customAriaLabel = 'Custom header label';
 }
 
 describe('DialogHeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [],
-            imports: [DialogHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
+            imports: [
+                DialogHeaderComponent,
+                CustomHeaderTestComponent,
+                DefaultHeaderTestComponent,
+                CustomAttributesHeaderTestComponent
+            ],
             providers: [DialogConfig]
         }).overrideComponent(DialogHeaderComponent, {
             set: {
@@ -81,7 +99,7 @@ describe('DialogHeaderComponent', () => {
         await wait(fixture);
 
         expect(component).toBeTruthy();
-        expect(component.dialogHeaderRef).toBeTruthy();
+        expect(component.dialogHeaderRef()).toBeTruthy();
     });
 
     it('should display in mobile mode', async () => {
@@ -89,8 +107,8 @@ describe('DialogHeaderComponent', () => {
 
         await wait(fixture);
 
-        component.dialogHeaderRef.dialogConfig.mobile = true;
-        component.dialogHeaderRef.dialogConfig.contentDensity = ContentDensityMode.COZY;
+        component.dialogHeaderRef().dialogConfig.mobile = true;
+        component.dialogHeaderRef().dialogConfig.contentDensity = ContentDensityMode.COZY;
 
         // Mark the OnPush DialogHeaderComponent view as dirty so it re-renders with new service values
         const headerCdr = fixture.debugElement
@@ -126,12 +144,44 @@ describe('DialogHeaderComponent', () => {
 
         expect(headerEl).toBeTruthy();
         expect(subheaderEl).toBeTruthy();
-        expect(component.dialogHeaderRef.customTemplates().length).toEqual(2);
+        expect(component.dialogHeaderRef().customTemplates().length).toEqual(2);
 
         const button = headerEl.querySelector('button');
         expect(button.textContent).toContain('Custom button');
 
         const input = subheaderEl.querySelector('input');
         expect(input.id).toContain('customInput');
+    });
+
+    it('should have default role attribute', async () => {
+        const { fixture } = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
+        await wait(fixture);
+
+        const headerElement = fixture.debugElement.query(By.directive(DialogHeaderComponent)).nativeElement;
+        expect(headerElement.getAttribute('role')).toBe('region');
+    });
+
+    it('should allow custom role attribute', async () => {
+        const { fixture } = setup<CustomAttributesHeaderTestComponent>(CustomAttributesHeaderTestComponent);
+        await wait(fixture);
+
+        const headerElement = fixture.debugElement.query(By.directive(DialogHeaderComponent)).nativeElement;
+        expect(headerElement.getAttribute('role')).toBe('banner');
+    });
+
+    it('should have default aria-label from translation', async () => {
+        const { fixture } = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
+        await wait(fixture);
+
+        const headerElement = fixture.debugElement.query(By.directive(DialogHeaderComponent)).nativeElement;
+        expect(headerElement.getAttribute('aria-label')).toBe('Header');
+    });
+
+    it('should allow custom aria-label', async () => {
+        const { fixture } = setup<CustomAttributesHeaderTestComponent>(CustomAttributesHeaderTestComponent);
+        await wait(fixture);
+
+        const headerElement = fixture.debugElement.query(By.directive(DialogHeaderComponent)).nativeElement;
+        expect(headerElement.getAttribute('aria-label')).toBe('Custom header label');
     });
 });

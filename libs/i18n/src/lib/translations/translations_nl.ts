@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Tijd'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Grootte aanpasbaar'
     },
     coreDynamicPage: {
