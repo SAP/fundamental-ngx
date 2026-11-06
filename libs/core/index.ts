@@ -92,6 +92,7 @@ export * from '@fundamental-ngx/core/timeline';
 export * from '@fundamental-ngx/core/title';
 export * from '@fundamental-ngx/core/token';
 export * from '@fundamental-ngx/core/toolbar';
+export * from '@fundamental-ngx/core/tooltip';
 export * from '@fundamental-ngx/core/tree';
 export * from '@fundamental-ngx/core/upload-collection';
 export * from '@fundamental-ngx/core/vertical-navigation';

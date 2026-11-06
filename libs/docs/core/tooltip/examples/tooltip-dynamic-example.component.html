@@ -1,0 +1,22 @@
+<div class="fd-tooltip-dynamic-example">
+    <button
+        fd-button
+        glyph="refresh"
+        aria-label="Refresh"
+        [fdTooltip]="text()"
+        [fdTooltipDisabled]="disabled()"
+    ></button>
+    <input
+        fd-form-control
+        aria-label="Tooltip text"
+        placeholder="Tooltip text (empty disables it)"
+        [value]="text()"
+        (input)="onTextInput($event)"
+    />
+    <button
+        fd-button
+        [label]="disabled() ? 'Enable Tooltip' : 'Disable Tooltip'"
+        [toggled]="disabled()"
+        (click)="disabled.set(!disabled())"
+    ></button>
+</div>
