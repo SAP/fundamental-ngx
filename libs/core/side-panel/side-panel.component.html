@@ -58,3 +58,34 @@
         }
     }
 </div>
+
+@if (open()) {
+    <div
+        class="fd-side-panel__content-panel"
+        [style.--fd-side-panel-content-width]="defaultWidth()"
+        [style.--fd-side-panel-content-min-width]="minWidth()"
+        [style.--fd-side-panel-content-max-width]="maxWidth()"
+        role="region"
+        [attr.aria-label]="activeGroupLabel()"
+    >
+        <div class="fd-side-panel__content-panel-header">
+            <fd-icon class="fd-side-panel__content-panel-icon" [glyph]="activeGroupIcon()" [ariaHidden]="true" />
+            <span class="fd-side-panel__content-panel-title">{{ activeGroupLabel() }}</span>
+            <button
+                type="button"
+                class="fd-side-panel__content-panel-close"
+                aria-label="Close"
+                (click)="closeContentPanel()"
+            >
+                <fd-icon glyph="decline" [ariaHidden]="true" />
+            </button>
+        </div>
+        <div class="fd-side-panel__content-panel-body">
+            @for (item of items(); track item.id()) {
+                @if (item.id() === activeItem() && item.content()) {
+                    <ng-container [ngTemplateOutlet]="item.content()!.templateRef" />
+                }
+            }
+        </div>
+    </div>
+}

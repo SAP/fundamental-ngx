@@ -46,5 +46,5 @@ export class SidePanelItemComponent {
     readonly counter = input<number>();
 
     /** @hidden Captured content template, rendered by the parent while the item is active. */
-    protected readonly content = contentChild(SidePanelContentDirective);
+    readonly content = contentChild(SidePanelContentDirective);
 }

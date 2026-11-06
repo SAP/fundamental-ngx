@@ -211,6 +211,23 @@ describe('SidePanelComponent', () => {
             fixture.detectChanges();
             expect(navArrow.getAttribute('aria-expanded')).toBe('true');
         });
+
+        it('should collapse the bar and open content when an item is clicked in expanded mode', () => {
+            const navArrow = getNavArrow(fixture);
+            navArrow.click();
+            fixture.detectChanges();
+            expect(host.mode).toBe('expanded');
+
+            const [filterButton] = getButtons(fixture);
+            filterButton.click();
+            fixture.detectChanges();
+
+            expect(host.mode).toBe('collapsed');
+            expect(host.activeItem).toBe('filter');
+
+            const panel: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel');
+            expect(panel.classList).not.toContain('fd-side-panel--expanded');
+        });
     });
 });
 
@@ -315,5 +332,163 @@ describe('SidePanelComponent — counter', () => {
 
         const counter = fixture.nativeElement.querySelector('.fd-side-panel__action-counter');
         expect(counter.textContent.trim()).toBe('99');
+    });
+});
+
+@Component({
+    selector: 'fd-content-panel-test-host',
+    template: `
+        <fd-side-panel [(open)]="open" [(activeItem)]="activeItem" ariaLabel="Groups">
+            <fd-side-panel-item id="filter" icon="filter" label="Filter">
+                <ng-template fdSidePanelContent>Filter content</ng-template>
+            </fd-side-panel-item>
+            <fd-side-panel-item id="layout" icon="menu2" label="Layout">
+                <ng-template fdSidePanelContent>Layout content</ng-template>
+            </fd-side-panel-item>
+        </fd-side-panel>
+    `,
+    imports: [SidePanelComponent, SidePanelItemComponent, SidePanelContentDirective]
+})
+class ContentPanelTestHostComponent {
+    open = false;
+    activeItem: string | null = null;
+}
+
+describe('SidePanelComponent — content panel', () => {
+    let host: ContentPanelTestHostComponent;
+    let fixture: ComponentFixture<ContentPanelTestHostComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ContentPanelTestHostComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(ContentPanelTestHostComponent);
+        host = fixture.componentInstance;
+        fixture.detectChanges();
+        await fixture.whenStable();
+    });
+
+    it('should not render content panel when open is false', () => {
+        const panel = fixture.nativeElement.querySelector('.fd-side-panel__content-panel');
+        expect(panel).toBeNull();
+    });
+
+    it('should render content panel when an action is clicked', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+
+        expect(host.open).toBe(true);
+        expect(host.activeItem).toBe('filter');
+
+        const panel = fixture.nativeElement.querySelector('.fd-side-panel__content-panel');
+        expect(panel).not.toBeNull();
+    });
+
+    it('should render the active group content inside the panel body', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+
+        const body = fixture.nativeElement.querySelector('.fd-side-panel__content-panel-body');
+        expect(body.textContent).toContain('Filter content');
+    });
+
+    it('should show the active group name in the panel header', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+
+        const title = fixture.nativeElement.querySelector('.fd-side-panel__content-panel-title');
+        expect(title.textContent.trim()).toBe('Filter');
+    });
+
+    it('should close the content panel when clicking the active action button again', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+        expect(host.open).toBe(true);
+
+        filterButton.click();
+        fixture.detectChanges();
+        expect(host.open).toBe(false);
+        expect(host.activeItem).toBeNull();
+
+        const panel = fixture.nativeElement.querySelector('.fd-side-panel__content-panel');
+        expect(panel).toBeNull();
+    });
+
+    it('should close the content panel via the close button', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+
+        const closeButton: HTMLButtonElement = fixture.nativeElement.querySelector(
+            '.fd-side-panel__content-panel-close'
+        );
+        closeButton.click();
+        fixture.detectChanges();
+
+        expect(host.open).toBe(false);
+        expect(host.activeItem).toBeNull();
+        expect(fixture.nativeElement.querySelector('.fd-side-panel__content-panel')).toBeNull();
+    });
+
+    it('should return focus to the action button when the close button is clicked', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+
+        const closeButton: HTMLButtonElement = fixture.nativeElement.querySelector(
+            '.fd-side-panel__content-panel-close'
+        );
+        closeButton.click();
+        fixture.detectChanges();
+
+        expect(document.activeElement).toBe(filterButton);
+    });
+
+    it('should switch active group without closing when another action is clicked', () => {
+        const [filterButton, layoutButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+        expect(host.activeItem).toBe('filter');
+
+        layoutButton.click();
+        fixture.detectChanges();
+        expect(host.open).toBe(true);
+        expect(host.activeItem).toBe('layout');
+
+        const body = fixture.nativeElement.querySelector('.fd-side-panel__content-panel-body');
+        expect(body.textContent).toContain('Layout content');
+    });
+
+    it('should set role="region" and aria-label on the content panel', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+
+        const panel: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__content-panel');
+        expect(panel.getAttribute('role')).toBe('region');
+        expect(panel.getAttribute('aria-label')).toBe('Filter');
     });
 });

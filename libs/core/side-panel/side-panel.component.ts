@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
     Component,
     computed,
@@ -46,7 +47,7 @@ export type SidePanelMode = 'collapsed' | 'expanded';
     templateUrl: './side-panel.component.html',
     styleUrl: './side-panel.component.scss',
     encapsulation: ViewEncapsulation.None,
-    imports: [IconComponent],
+    imports: [IconComponent, NgTemplateOutlet],
     providers: [contentDensityObserverProviders()],
     host: {
         '[class]': 'hostClasses()'
@@ -67,6 +68,24 @@ export class SidePanelComponent {
 
     /** Whether the content panel is open. Two-way bindable. */
     readonly open = model(false);
+
+    /**
+     * Default width of the content panel (CSS value, e.g. `'20rem'` or `'300px'`).
+     * Effective when the viewport is ≥ 561px.
+     */
+    readonly defaultWidth = input<string>('20rem');
+
+    /**
+     * Minimum width of the content panel (CSS value, e.g. `'15rem'`).
+     * The user cannot resize the panel narrower than this.
+     */
+    readonly minWidth = input<string>('15rem');
+
+    /**
+     * Maximum width of the content panel (CSS value, e.g. `'90%'`).
+     * The user cannot resize the panel wider than this.
+     */
+    readonly maxWidth = input<string>('90%');
 
     /**
      * Display mode of the action bar.
@@ -130,15 +149,36 @@ export class SidePanelComponent {
     /** @hidden Index of the action-container that currently shows a focus ring, or -1. */
     protected readonly focusedContainerIndex = signal(-1);
 
+    /** @hidden Label of the currently active group, used as the content panel's accessible name. */
+    protected readonly activeGroupLabel = computed(
+        () =>
+            this.items()
+                .find((item) => item.id() === this.activeItem())
+                ?.label() ?? ''
+    );
+
+    /** @hidden Icon glyph of the currently active group, shown in the content panel header. */
+    protected readonly activeGroupIcon = computed(
+        () =>
+            this.items()
+                .find((item) => item.id() === this.activeItem())
+                ?.icon() ?? ''
+    );
+
     /** @hidden Action button elements, in projection order. */
     private readonly _actionButtons = viewChildren<ElementRef<HTMLButtonElement>>('actionButton');
 
     private readonly _rtlService = inject(RtlService, { optional: true });
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
+    /** @hidden Whether the content panel was open when the action bar was expanded. */
+    private _contentWasOpen = false;
+
     /**
      * @hidden Handle nav arrow click.
-     * - Multi-action: toggles `mode` between `'icons'` and `'icons-label'`.
+     * - Multi-action: toggles `mode` between `'collapsed'` and `'expanded'`.
+     *   When expanding, the content panel is closed (and its open state is saved);
+     *   when collapsing, the content panel is restored if it was open before expanding.
      * - Single-action: toggles `open` and sets `activeItem` to the single item (or clears it).
      */
     protected toggleNavArrow(): void {
@@ -151,7 +191,17 @@ export class SidePanelComponent {
             this.open.set(newOpen);
             this.activeItem.set(newOpen ? item.id() : null);
         } else {
-            this.mode.update((m) => (m === 'collapsed' ? 'expanded' : 'collapsed'));
+            if (this.mode() === 'collapsed') {
+                this._contentWasOpen = this.open();
+                this.open.set(false);
+                this.mode.set('expanded');
+            } else {
+                this.mode.set('collapsed');
+                if (this._contentWasOpen) {
+                    this.open.set(true);
+                    this._contentWasOpen = false;
+                }
+            }
         }
     }
 
@@ -162,7 +212,25 @@ export class SidePanelComponent {
         }
         this._focusItem(index);
         const id = item.id();
-        this.activeItem.set(this.activeItem() === id ? null : id);
+        const newActiveId = this.activeItem() === id ? null : id;
+        this.activeItem.set(newActiveId);
+        this.open.set(newActiveId !== null);
+        // Selecting an item while expanded collapses the action bar so the
+        // content panel and the bar together occupy the same footprint as
+        // the expanded bar.
+        if (this.mode() === 'expanded' && newActiveId !== null) {
+            this.mode.set('collapsed');
+        }
+    }
+
+    /** @hidden Close the content panel and return focus to the item's action button. */
+    protected closeContentPanel(): void {
+        const index = this.items().findIndex((item) => item.id() === this.activeItem());
+        this.open.set(false);
+        this.activeItem.set(null);
+        if (index > -1) {
+            this._focusItem(index);
+        }
     }
 
     /** @hidden Track focus for the full-row focus ring. */
