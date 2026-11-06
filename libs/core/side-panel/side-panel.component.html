@@ -1,4 +1,5 @@
 <div
+    #actionBar
     class="fd-side-panel__action-bar"
     role="toolbar"
     aria-orientation="vertical"
@@ -26,6 +27,7 @@
         @for (item of items(); track item.id(); let i = $index) {
             <div
                 class="fd-side-panel__action-container"
+                [class.fd-side-panel__action-container--overflow-hidden]="i >= visibleItemCount()"
                 [class.is-focused]="focusedContainerIndex() === i"
                 (click)="activate(item, i)"
             >
@@ -53,6 +55,60 @@
                 </button>
                 @if (mode() === 'expanded') {
                     <span class="fd-side-panel__action-label" aria-hidden="true">{{ item.label() }}</span>
+                }
+            </div>
+        }
+        @if (overflowItems().length) {
+            <div
+                class="fd-side-panel__action-container"
+                [class.is-focused]="overflowToggleFocused()"
+                (click)="toggleOverflowOpen()"
+            >
+                <fd-popover
+                    [isOpen]="overflowOpen()"
+                    (isOpenChange)="overflowOpen.set($event)"
+                    [placement]="overflowPlacement()"
+                    [triggers]="[]"
+                    [closeOnEscapeKey]="false"
+                >
+                    <fd-popover-control>
+                        <button
+                            #overflowToggle
+                            type="button"
+                            class="fd-side-panel__overflow-toggle"
+                            [class.is-open]="overflowOpen()"
+                            tabindex="-1"
+                            aria-haspopup="menu"
+                            [attr.aria-expanded]="overflowOpen()"
+                            [attr.aria-label]="overflowOpen() ? 'Show Less' : 'More Actions'"
+                            (focus)="overflowToggleFocused.set(true)"
+                            (blur)="overflowToggleFocused.set(false)"
+                        >
+                            <fd-icon glyph="overflow" [ariaHidden]="true" />
+                        </button>
+                    </fd-popover-control>
+                    <fd-popover-body>
+                        <ul role="menu" class="fd-side-panel__overflow-list" (keydown)="onOverflowKeydown($event)">
+                            @for (item of overflowItems(); track item.id(); let i = $index) {
+                                <li
+                                    role="menuitem"
+                                    tabindex="-1"
+                                    class="fd-side-panel__overflow-item"
+                                    [attr.aria-posinset]="i + 1"
+                                    [attr.aria-setsize]="overflowItems().length"
+                                    (click)="activateOverflowItem(item)"
+                                >
+                                    <fd-icon [glyph]="item.icon()" [ariaHidden]="true" />
+                                    <span>{{ item.label() }}</span>
+                                </li>
+                            }
+                        </ul>
+                    </fd-popover-body>
+                </fd-popover>
+                @if (mode() === 'expanded') {
+                    <span class="fd-side-panel__action-label" aria-hidden="true">{{
+                        overflowOpen() ? 'Show Less' : 'More Actions'
+                    }}</span>
                 }
             </div>
         }

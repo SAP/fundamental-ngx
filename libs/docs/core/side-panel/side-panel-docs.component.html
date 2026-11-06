@@ -35,3 +35,18 @@
     <fd-side-panel-single-action-example></fd-side-panel-single-action-example>
 </component-example>
 <code-example [exampleFiles]="singleAction"></code-example>
+
+<fd-docs-section-title id="overflow" componentName="side-panel"> Overflow </fd-docs-section-title>
+<description>
+    When more <code>fd-side-panel-item</code> elements are projected than the action bar can display at its current
+    height, a <code>•••</code> overflow toggle button appears automatically at the bottom of the visible items. No
+    inputs or configuration are required — overflow is detected via a <code>ResizeObserver</code> and is entirely
+    automatic. Clicking the toggle opens a floating list showing the hidden items with their icon and label. Clicking an
+    item from the list activates it and closes the list. The overflow list supports keyboard navigation: use
+    <code>ArrowDown</code> / <code>ArrowUp</code> to move between items, <code>Enter</code> or <code>Space</code> to
+    activate, and <code>Escape</code> to close and return focus to the <code>•••</code> button.
+</description>
+<component-example>
+    <fd-side-panel-overflow-example></fd-side-panel-overflow-example>
+</component-example>
+<code-example [exampleFiles]="overflow"></code-example>

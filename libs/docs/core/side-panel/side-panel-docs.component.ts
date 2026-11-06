@@ -9,6 +9,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { SidePanelBadgesExampleComponent } from './examples/side-panel-badges-example.component';
 import { SidePanelBasicExampleComponent } from './examples/side-panel-basic-example.component';
+import { SidePanelOverflowExampleComponent } from './examples/side-panel-overflow-example.component';
 import { SidePanelSingleActionExampleComponent } from './examples/side-panel-single-action-example.component';
 
 const exampleScssCode = 'side-panel.component.scss';
@@ -22,6 +23,9 @@ const badgesExampleTsCode = 'side-panel-badges-example.component.ts';
 const singleActionExampleHtmlCode = 'side-panel-single-action-example.component.html';
 const singleActionExampleTsCode = 'side-panel-single-action-example.component.ts';
 
+const overflowExampleHtmlCode = 'side-panel-overflow-example.component.html';
+const overflowExampleTsCode = 'side-panel-overflow-example.component.ts';
+
 @Component({
     templateUrl: './side-panel-docs.component.html',
     imports: [
@@ -31,7 +35,8 @@ const singleActionExampleTsCode = 'side-panel-single-action-example.component.ts
         CodeExampleComponent,
         SidePanelBasicExampleComponent,
         SidePanelBadgesExampleComponent,
-        SidePanelSingleActionExampleComponent
+        SidePanelSingleActionExampleComponent,
+        SidePanelOverflowExampleComponent
     ]
 })
 export class SidePanelDocsComponent {
@@ -71,6 +76,17 @@ export class SidePanelDocsComponent {
             fileName: 'side-panel-single-action-example',
             component: 'SidePanelSingleActionExampleComponent',
             typescriptFileCode: getAssetFromModuleAssets(singleActionExampleTsCode),
+            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
+        }
+    ];
+
+    overflow: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(overflowExampleHtmlCode),
+            fileName: 'side-panel-overflow-example',
+            component: 'SidePanelOverflowExampleComponent',
+            typescriptFileCode: getAssetFromModuleAssets(overflowExampleTsCode),
             scssFileCode: getAssetFromModuleAssets(exampleScssCode)
         }
     ];

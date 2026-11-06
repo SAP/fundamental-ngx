@@ -119,7 +119,7 @@ $fd-side-panel-expanded-width: 20rem;
         padding-block-start: 0.5rem;
         gap: 2rem;
         box-sizing: border-box;
-        overflow-y: auto;
+        overflow: hidden;
         background: var(--sapGroup_ContentBackground, #fff);
         box-shadow: var(--sapContent_Shadow0, 0 0 1rem rgba(34, 53, 72, 0.1));
         // border-radius applied per-side in --right / --left modifiers above
@@ -171,7 +171,6 @@ $fd-side-panel-expanded-width: 20rem;
             inset-block: 0;
             inline-size: $fd-side-panel-active-indicator-width;
             background: transparent;
-            width: 0.25rem;
         }
 
         &:has(.fd-side-panel__action.is-active)::before {
@@ -179,12 +178,14 @@ $fd-side-panel-expanded-width: 20rem;
         }
 
         // Full-width row hover for item containers (not the nav-arrow container)
-        &:has(.fd-side-panel__action):hover {
+        &:has(.fd-side-panel__action):hover,
+        &:has(.fd-side-panel__overflow-toggle):hover {
             background: var(--sapList_Hover_Background, #eaecee);
         }
 
         // Pointer cursor for enabled item containers; default for disabled
-        &:has(.fd-side-panel__action:not(.is-disabled)) {
+        &:has(.fd-side-panel__action:not(.is-disabled)),
+        &:has(.fd-side-panel__overflow-toggle) {
             cursor: pointer;
         }
 
@@ -197,6 +198,11 @@ $fd-side-panel-expanded-width: 20rem;
             border: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
             pointer-events: none;
         }
+    }
+
+    // Hidden via CSS (not @if) so DOM nodes persist between overflow recalculations
+    &__action-container--overflow-hidden {
+        display: none;
     }
 
     // ── Action button — inactive (spec B2) ──────────────────────────────────
@@ -296,6 +302,73 @@ $fd-side-panel-expanded-width: 20rem;
         z-index: 2;
     }
 
+    // ── Overflow toggle (•••) ───────────────────────────────────────────────
+
+    &__overflow-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        inline-size: $fd-side-panel-action-size-cozy;
+        block-size: $fd-side-panel-action-size-cozy;
+        flex-shrink: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: 0.125rem solid transparent;
+        border-radius: 50%;
+        background: var(--sapGroup_ContentBackground, #fff);
+        color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+
+        &:hover {
+            border-color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &.is-open {
+            background: var(--sapList_SelectionBackground, #e8f2ff);
+            border-color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+        }
+    }
+
+    // ── Overflow list (inside fd-popover-body) ─────────────────────────────
+
+    &__overflow-list {
+        list-style: none;
+        margin: 0;
+        padding: 0.25rem 0;
+        min-inline-size: 8rem;
+    }
+
+    // ── Overflow menu item ─────────────────────────────────────────────────
+
+    &__overflow-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        color: var(--sapTextColor, #32363a);
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+            background: var(--sapList_Hover_Background, #eaecee);
+        }
+
+        &:focus-visible {
+            outline: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
+            outline-offset: -0.125rem;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
     // ── Expanded mode (fd-side-panel--expanded) ──────────────────────────────
     // 320px wide rail; icon circles stay circular, labels appear beside them.
     // The nav arrow shifts to the top-right corner; item rows align left.
@@ -347,7 +420,8 @@ $fd-side-panel-expanded-width: 20rem;
         }
 
         .fd-side-panel__nav-arrow,
-        .fd-side-panel__action {
+        .fd-side-panel__action,
+        .fd-side-panel__overflow-toggle {
             inline-size: $fd-side-panel-action-size-compact;
             block-size: $fd-side-panel-action-size-compact;
         }
