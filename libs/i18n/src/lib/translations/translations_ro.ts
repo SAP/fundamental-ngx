@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Ora'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Redimensionabil'
     },
     coreDynamicPage: {

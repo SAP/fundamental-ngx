@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Időpont'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Átméretezhető'
     },
     coreDynamicPage: {
