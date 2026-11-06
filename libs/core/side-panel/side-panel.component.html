@@ -10,33 +10,51 @@
         <button
             type="button"
             class="fd-side-panel__nav-arrow"
-            [attr.aria-expanded]="open()"
-            [attr.aria-label]="open() ? 'Collapse side panel' : 'Expand side panel'"
-            [attr.title]="open() ? 'Collapse side panel' : 'Expand side panel'"
-            (click)="toggleOpen()"
+            [attr.aria-expanded]="isNavArrowExpanded()"
+            [attr.aria-label]="isNavArrowExpanded() ? 'Collapse side panel' : 'Expand side panel'"
+            [attr.title]="isNavArrowExpanded() ? 'Collapse side panel' : 'Expand side panel'"
+            (click)="toggleNavArrow()"
         >
             <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
         </button>
+        @if (isSingleAction() && mode() === 'expanded') {
+            <span class="fd-side-panel__action-label">{{ items()[0]?.label() }}</span>
+        }
     </div>
 
-    @for (item of items(); track item.id(); let i = $index) {
-        <div class="fd-side-panel__action-container">
-            <button
-                #actionButton
-                type="button"
-                class="fd-side-panel__action"
-                [class.is-active]="item.id() === activeItem()"
-                [class.is-disabled]="item.disabled()"
-                [attr.aria-pressed]="item.id() === activeItem()"
-                [attr.aria-label]="item.label()"
-                [attr.aria-disabled]="item.disabled() || null"
-                [attr.title]="item.label()"
-                [disabled]="item.disabled()"
-                [tabindex]="i === focusedIndex() ? 0 : -1"
+    @if (!isSingleAction()) {
+        @for (item of items(); track item.id(); let i = $index) {
+            <div
+                class="fd-side-panel__action-container"
+                [class.is-focused]="focusedContainerIndex() === i"
                 (click)="activate(item, i)"
             >
-                <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
-            </button>
-        </div>
+                <button
+                    #actionButton
+                    type="button"
+                    class="fd-side-panel__action"
+                    [class.is-active]="item.id() === activeItem()"
+                    [class.is-disabled]="item.disabled()"
+                    [attr.aria-pressed]="item.id() === activeItem()"
+                    [attr.aria-label]="item.label()"
+                    [attr.aria-disabled]="item.disabled() || null"
+                    [attr.title]="item.label()"
+                    [disabled]="item.disabled()"
+                    [tabindex]="i === focusedIndex() ? 0 : -1"
+                    (focus)="onActionFocus(i)"
+                    (blur)="onActionBlur()"
+                >
+                    <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
+                    @if (item.counter() !== undefined) {
+                        <span class="fd-side-panel__action-counter" aria-hidden="true">{{
+                            item.counter()! > 99 ? '99+' : item.counter()
+                        }}</span>
+                    }
+                </button>
+                @if (mode() === 'expanded') {
+                    <span class="fd-side-panel__action-label" aria-hidden="true">{{ item.label() }}</span>
+                }
+            </div>
+        }
     }
 </div>

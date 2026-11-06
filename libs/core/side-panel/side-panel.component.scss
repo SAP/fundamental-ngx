@@ -116,7 +116,8 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         }
 
         &:focus {
-            outline: none;
+            outline: 0.125rem solid var(--sapContent_FocusColor, #0064d9);
+            outline-offset: 0.0625rem;
         }
     }
 
@@ -149,13 +150,18 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
             background: var(--sapList_Hover_Background, #eaecee);
         }
 
+        // Pointer cursor for enabled item containers; default for disabled
+        &:has(.fd-side-panel__action:not(.is-disabled)) {
+            cursor: pointer;
+        }
+
         // Full-width rectangular focus ring — solid brand border spanning the entire bar row
-        &:has(button:focus)::after {
+        &.is-focused::after {
             content: '';
             position: absolute;
             box-sizing: border-box;
             inset: 0;
-            border: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
+            border: 0.125rem solid var(--sapContent_FocusColor, #0064d9);
             pointer-events: none;
         }
     }
@@ -181,7 +187,7 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         -webkit-appearance: none;
 
         // Extend the interactive (click + hover) area to the full container row.
-        // Container padding is 0.1875rem block / 0.75rem inline.
+        // Container padding: 0.1875rem block / 0.75rem inline (cozy); compact overrides inline to 1rem below.
         &::after {
             content: '';
             position: absolute;
@@ -220,6 +226,86 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         color: inherit;
     }
 
+    // ── Action label (icons+label mode) ────────────────────────────────────────
+
+    &__action-label {
+        font-size: var(--sapFontMediumSize, 0.875rem);
+        color: inherit;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    // ── Counter (numeric badge, top-right corner of the icon circle) ────────────
+    // Lives inside the action button so `position: absolute` is relative to the circle.
+    // Positioned to overlap the top-right border of the icon circle, matching the
+    // SAP Horizon notification badge pattern.
+
+    &__action-counter {
+        position: absolute;
+        top: -0.25rem;
+        inset-inline-end: -0.375rem;
+        padding: 0.0625rem 0.25rem;
+        min-inline-size: 1rem;
+        border-radius: 0.5rem;
+        background: var(--sapContent_BadgeBackground, #aa0808);
+        color: var(--sapContent_BadgeTextColor, #fff);
+        border: 0.125rem solid var(--sapContent_BadgeBorderColor, #fff);
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontSmallSize, 0.75rem);
+        font-weight: bold;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    // ── Expanded mode (fd-side-panel--expanded) ──────────────────────────────
+    // 320px wide rail; icon circles stay circular, labels appear beside them.
+    // The nav arrow shifts to the top-right corner; item rows align left.
+
+    &--expanded {
+        .fd-side-panel__action-bar {
+            inline-size: 20rem; // 320px
+        }
+
+        // Nav arrow container: push the arrow to the inline-end (top-right for LTR)
+        .fd-side-panel__action-container:first-child {
+            justify-content: flex-end;
+        }
+
+        // Item containers: icon circle on the left, label text to the right
+        .fd-side-panel__action-container:not(:first-child) {
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        // Buttons remain as circles — no size or border-radius overrides.
+        // Only remove the click-area ::after (the full-row hover on the container suffices).
+        .fd-side-panel__action {
+            flex-shrink: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        // Label acts as a secondary click target; cursor mirrors the button.
+        .fd-side-panel__action-label {
+            cursor: pointer;
+        }
+
+        // Label inherits disabled opacity from the sibling button via :has()
+        .fd-side-panel__action-container:has(.fd-side-panel__action.is-disabled) .fd-side-panel__action-label {
+            opacity: var(--sapContent_DisabledOpacity, 0.4);
+            pointer-events: none;
+        }
+    }
+
     // ── Compact density (spec C: 4rem bar, B1/B2: 2rem button) ─────────────
 
     &.is-compact {
@@ -233,8 +319,23 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
             block-size: $fd-side-panel-action-size-compact;
         }
 
+        // Compact padding-inline: 2rem button + 2 × 1rem = 4rem bar width.
+        // Cozy default is 0.75rem; compact needs 1rem per spec.
+        .fd-side-panel__action-container {
+            padding-inline: 1rem;
+        }
+
+        // Extend click/hover area to full compact container row (1rem inline padding).
+        .fd-side-panel__action::after {
+            inset-inline: -1rem;
+        }
+
         .fd-side-panel__action-icon {
             font-size: var(--sapFontHeader5Size, 1rem);
+        }
+
+        .fd-side-panel__action-label {
+            font-size: var(--sapFontSmallSize, 0.75rem);
         }
     }
 }

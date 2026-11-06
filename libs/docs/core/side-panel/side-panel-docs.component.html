@@ -1,14 +1,37 @@
 <fd-docs-section-title id="basic" componentName="side-panel"> Basic usage </fd-docs-section-title>
 <description>
     Use the <code>fd-side-panel</code> component with one <code>fd-side-panel-item</code> per content group. Each item
-    contributes one button to the vertical action bar in the default <strong>icons-only</strong> mode, where
+    contributes one button to the vertical action bar in the default <strong>collapsed</strong> mode, where
     <code>[icon]</code> is the button glyph and <code>[label]</code> is the group name shown as a tooltip on hover and
     on keyboard focus. Use <code>[side]</code> (<code>'left' | 'right'</code>) to anchor the bar and bind
     <code>[(activeItem)]</code> to track the selected group — clicking a button activates its group and clicking it
-    again clears the selection. Group content is projected through <code>*fdSidePanelContent</code>; opening the content
-    panel is added in a later release.
+    again clears the selection. The nav arrow toggles the bar between <code>'collapsed'</code> (icons only) and
+    <code>'expanded'</code> (320px wide with labels). Group content is projected through
+    <code>*fdSidePanelContent</code>; opening the content panel is added in a later release.
 </description>
 <component-example>
     <fd-side-panel-basic-example></fd-side-panel-basic-example>
 </component-example>
 <code-example [exampleFiles]="basic"></code-example>
+
+<fd-docs-section-title id="badges" componentName="side-panel"> Counters </fd-docs-section-title>
+<description>
+    Use <code>[counter]</code> to show a numeric badge at the top-right corner of the action button. Values above 99 are
+    automatically capped and displayed as <code>99+</code>. The badge works in both collapsed and expanded mode.
+</description>
+<component-example>
+    <fd-side-panel-badges-example></fd-side-panel-badges-example>
+</component-example>
+<code-example [exampleFiles]="badges"></code-example>
+
+<fd-docs-section-title id="single-action" componentName="side-panel"> Single action </fd-docs-section-title>
+<description>
+    When the side panel contains exactly one <code>fd-side-panel-item</code>, it enters
+    <strong>single-action</strong> mode automatically. In this mode no action button is shown — only the nav arrow,
+    which directly opens and closes the content panel. Bind <code>[(open)]</code> to track the panel state. The single
+    item's label is displayed next to the nav arrow when the bar is in <code>'expanded'</code> mode.
+</description>
+<component-example>
+    <fd-side-panel-single-action-example></fd-side-panel-single-action-example>
+</component-example>
+<code-example [exampleFiles]="singleAction"></code-example>

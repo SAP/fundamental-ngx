@@ -7,6 +7,7 @@ import {
     input,
     linkedSignal,
     model,
+    signal,
     viewChildren,
     ViewEncapsulation
 } from '@angular/core';
@@ -17,6 +18,9 @@ import { SidePanelItemComponent } from './side-panel-item.component';
 
 /** Edge the side panel is anchored to. */
 export type SidePanelSide = 'left' | 'right';
+
+/** Display mode of the side panel action bar. */
+export type SidePanelMode = 'collapsed' | 'expanded';
 
 /**
  * The Side Panel is a container anchored to an edge of the page. It is reached through a
@@ -64,6 +68,14 @@ export class SidePanelComponent {
     /** Whether the content panel is open. Two-way bindable. */
     readonly open = model(false);
 
+    /**
+     * Display mode of the action bar.
+     * - `'collapsed'` (default): icons-only, compact rail.
+     * - `'expanded'`: 320px wide rail with labels beside each icon.
+     * Two-way bindable; the nav arrow toggles this in multi-action mode.
+     */
+    readonly mode = model<SidePanelMode>('collapsed');
+
     /** @hidden Projected side panel items (content groups). */
     protected readonly items = contentChildren(SidePanelItemComponent);
 
@@ -72,6 +84,9 @@ export class SidePanelComponent {
         const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`];
         if (this.open()) {
             classes.push('fd-side-panel--open');
+        }
+        if (this.mode() === 'expanded') {
+            classes.push('fd-side-panel--expanded');
         }
         return classes.join(' ');
     });
@@ -84,7 +99,7 @@ export class SidePanelComponent {
         // right+LTR → content left (false) | right+RTL → content right (true)
         // left+LTR  → content right (true)  | left+RTL  → content left  (false)
         const isContentOnRight = isRight === isRtl;
-        if (this.open()) {
+        if (this.isNavArrowExpanded()) {
             return isContentOnRight ? 'navigation-left-arrow' : 'navigation-right-arrow';
         }
         return isContentOnRight ? 'slim-arrow-right' : 'slim-arrow-left';
@@ -100,15 +115,44 @@ export class SidePanelComponent {
     /** @hidden */
     protected readonly contentDensityObserver = inject(ContentDensityObserver);
 
+    /** @hidden True when only one item is projected; changes the nav arrow behaviour. */
+    protected readonly isSingleAction = computed(() => this.items().length === 1);
+
+    /**
+     * @hidden Whether the nav arrow should render in its "expanded" state.
+     * - Single-action: expanded = content panel open.
+     * - Multi-action: expanded = icons+label mode active.
+     */
+    protected readonly isNavArrowExpanded = computed(() =>
+        this.isSingleAction() ? this.open() : this.mode() === 'expanded'
+    );
+
+    /** @hidden Index of the action-container that currently shows a focus ring, or -1. */
+    protected readonly focusedContainerIndex = signal(-1);
+
     /** @hidden Action button elements, in projection order. */
     private readonly _actionButtons = viewChildren<ElementRef<HTMLButtonElement>>('actionButton');
 
     private readonly _rtlService = inject(RtlService, { optional: true });
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
-    /** @hidden Toggle the content panel open/closed. */
-    protected toggleOpen(): void {
-        this.open.update((v) => !v);
+    /**
+     * @hidden Handle nav arrow click.
+     * - Multi-action: toggles `mode` between `'icons'` and `'icons-label'`.
+     * - Single-action: toggles `open` and sets `activeItem` to the single item (or clears it).
+     */
+    protected toggleNavArrow(): void {
+        if (this.isSingleAction()) {
+            const item = this.items()[0];
+            if (!item || item.disabled()) {
+                return;
+            }
+            const newOpen = !this.open();
+            this.open.set(newOpen);
+            this.activeItem.set(newOpen ? item.id() : null);
+        } else {
+            this.mode.update((m) => (m === 'collapsed' ? 'expanded' : 'collapsed'));
+        }
     }
 
     /** @hidden Activate (or toggle off) the group behind an action button. */
@@ -121,8 +165,21 @@ export class SidePanelComponent {
         this.activeItem.set(this.activeItem() === id ? null : id);
     }
 
+    /** @hidden Track focus for the full-row focus ring. */
+    protected onActionFocus(index: number): void {
+        this.focusedContainerIndex.set(index);
+    }
+
+    /** @hidden Clear the full-row focus ring on blur. */
+    protected onActionBlur(): void {
+        this.focusedContainerIndex.set(-1);
+    }
+
     /** @hidden Vertical roving-tabindex navigation across the action bar. */
     protected onKeydown(event: KeyboardEvent): void {
+        if (this.isSingleAction()) {
+            return;
+        }
         const count = this.items().length;
         if (count === 0) {
             return;
