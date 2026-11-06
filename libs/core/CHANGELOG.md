@@ -1,3 +1,13 @@
+## 0.66.1-rc.23 (2026-11-06)
+
+### 🩹 Fixes
+
+- **core,platform:** various shell search results improvements ([#14641](https://github.com/SAP/fundamental-ngx/pull/14641))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.66.1-rc.22 (2026-11-05)
 
 ### 🩹 Fixes
