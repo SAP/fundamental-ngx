@@ -84,4 +84,12 @@ export class ShellbarContextAreaOverflowExampleComponent {
             this.isOverflowOpen.set(false);
         }
     }
+
+    onElementHidden(element: HTMLElement): void {
+        console.log('Element hidden:', element);
+    }
+
+    onElementShown(element: HTMLElement): void {
+        console.log('Element shown:', element);
+    }
 }
