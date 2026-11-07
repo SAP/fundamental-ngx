@@ -206,6 +206,9 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /** Placeholder text for search input field. */
     readonly placeholder = input<string>('');
 
+    /** Sets the `aria-description` attribute on the search input field. */
+    readonly ariaDescription = input<string>('');
+
     /** Set Mobile Mode */
     readonly mobile = input(false, { transform: booleanAttribute });
 

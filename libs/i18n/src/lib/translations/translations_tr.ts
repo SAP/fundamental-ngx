@@ -241,7 +241,9 @@ export default {
         cancel: 'İptal',
         collapsedItemMenuLabel: 'Daraltılmış Öğe Menüsü',
         navigationButtonLabel: 'Dolaşma',
-        search: 'Ara'
+        openSearch: 'Open Search',
+        search: 'Ara',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Kaydırıcı Tutamacı'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'Tamam'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Kapat',
         previousButton: 'Önceki'
     },
