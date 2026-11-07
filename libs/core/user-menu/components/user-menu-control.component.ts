@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Output,
+    signal,
+    ViewEncapsulation
+} from '@angular/core';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-user-menu-control',
@@ -7,6 +16,9 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, V
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         tabindex: '0',
+        'aria-haspopup': 'dialog',
+        '[attr.aria-expanded]': 'isExpanded()',
+        '[attr.aria-label]': '_ariaLabel()',
         '(click)': 'onClick()',
         '(keydown)': 'onKeydown($event)'
     },
@@ -16,6 +28,12 @@ export class UserMenuControlComponent {
     /** Event emitted when control element is clicked */
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Whether the user menu is expanded */
+    readonly isExpanded = signal(false);
+
+    /** @hidden */
+    protected readonly _ariaLabel = resolveTranslationSignal('coreUserMenu.ariaLabel');
 
     /** @hidden */
     constructor(private el: ElementRef<HTMLElement>) {}
