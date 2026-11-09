@@ -160,7 +160,7 @@ export class WizardBodyComponent implements OnInit {
     /**
      * @description Emits when "Finish" button has been clicked
      */
-    // eslint-disable-next-line @angular-eslint/no-output-native
+
     @Output() finish = new EventEmitter<void>();
 
     /**
