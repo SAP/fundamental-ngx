@@ -1,3 +1,13 @@
+## 0.66.1-rc.24 (2026-11-09)
+
+### 🩹 Fixes
+
+- **platform:** settings dialog title should stay Settings in combined dialog ([#14672](https://github.com/SAP/fundamental-ngx/pull/14672))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.1-rc.23 (2026-11-06)
 
 ### 🩹 Fixes
