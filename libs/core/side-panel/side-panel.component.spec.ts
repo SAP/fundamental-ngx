@@ -620,21 +620,12 @@ describe('SidePanelComponent — overflow', () => {
         (comp as any)['overflowOpen'].set(true);
         fixture.detectChanges();
 
-        // onOverflowKeydown guards on items within _elRef.nativeElement, but CDK places
-        // the overlay outside that element. Add a stub to satisfy the guard, verify
-        // the Escape case closes the overflow, then clean up.
-        const fakeItem = document.createElement('li');
-        fakeItem.className = 'fd-side-panel__overflow-item';
-        fakeItem.tabIndex = -1;
-        (comp as any)['_elRef'].nativeElement.appendChild(fakeItem);
-
         (comp as any)['onOverflowKeydown'](
             new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })
         );
         fixture.detectChanges();
 
         expect((comp as any)['overflowOpen']()).toBe(false);
-        fakeItem.parentNode?.removeChild(fakeItem);
     });
 
     it('should have aria-haspopup="menu" and aria-expanded on the overflow toggle', () => {

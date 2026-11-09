@@ -9,6 +9,7 @@
 >
     <div class="fd-side-panel__action-container">
         <button
+            #navArrow
             type="button"
             class="fd-side-panel__nav-arrow"
             [attr.aria-expanded]="isNavArrowExpanded()"
@@ -66,10 +67,11 @@
             >
                 <fd-popover
                     [isOpen]="overflowOpen()"
-                    (isOpenChange)="overflowOpen.set($event)"
+                    (isOpenChange)="onOverflowOpenChange($event)"
                     [placement]="overflowPlacement()"
                     [triggers]="[]"
                     [closeOnEscapeKey]="false"
+                    [focusAutoCapture]="false"
                 >
                     <fd-popover-control>
                         <button
@@ -127,14 +129,27 @@
         <div class="fd-side-panel__content-panel-header">
             <fd-icon class="fd-side-panel__content-panel-icon" [glyph]="activeGroupIcon()" [ariaHidden]="true" />
             <span class="fd-side-panel__content-panel-title">{{ activeGroupLabel() }}</span>
-            <button
-                type="button"
-                class="fd-side-panel__content-panel-close"
-                aria-label="Close"
-                (click)="closeContentPanel()"
-            >
-                <fd-icon glyph="decline" [ariaHidden]="true" />
-            </button>
+            @if (isSingleAction()) {
+                <button
+                    #contentPanelClose
+                    type="button"
+                    class="fd-side-panel__content-panel-close"
+                    aria-label="Close panel"
+                    (click)="toggleNavArrow()"
+                >
+                    <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
+                </button>
+            } @else {
+                <button
+                    #contentPanelClose
+                    type="button"
+                    class="fd-side-panel__content-panel-close"
+                    aria-label="Close"
+                    (click)="closeContentPanel()"
+                >
+                    <fd-icon glyph="decline" [ariaHidden]="true" />
+                </button>
+            }
         </div>
         <div class="fd-side-panel__content-panel-body">
             @for (item of items(); track item.id()) {

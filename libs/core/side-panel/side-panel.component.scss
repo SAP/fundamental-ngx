@@ -61,6 +61,11 @@ $fd-side-panel-expanded-width: 20rem;
             clip-path: inset(-100rem -100rem -100rem 0); // LTR: clip left shadow
         }
 
+        // Single-action: the action bar IS the full panel — no dividing line needed.
+        &.fd-side-panel--single-action.fd-side-panel--open .fd-side-panel__action-bar {
+            border-inline-start: none;
+        }
+
         // RTL: for --right the junction is on the physical right side.
         [dir='rtl'] &.fd-side-panel--open .fd-side-panel__action-bar {
             clip-path: inset(-100rem 0 -100rem -100rem); // RTL: clip right shadow
@@ -91,6 +96,11 @@ $fd-side-panel-expanded-width: 20rem;
             border-end-end-radius: 0;
             border-inline-end: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
             clip-path: inset(-100rem 0 -100rem -100rem); // LTR: clip right shadow
+        }
+
+        // Single-action: no dividing line.
+        &.fd-side-panel--single-action.fd-side-panel--open .fd-side-panel__action-bar {
+            border-inline-end: none;
         }
 
         // RTL: for --left the junction is on the physical left side.
@@ -160,7 +170,7 @@ $fd-side-panel-expanded-width: 20rem;
         display: flex;
         inline-size: 100%;
         box-sizing: border-box;
-        padding: 0.1875rem 0.75rem;
+        padding: 0.25rem 0.75rem;
         justify-content: center;
 
         // Selection bar (spec D) — invisible by default, positioned per-side in --right/--left
@@ -354,18 +364,14 @@ $fd-side-panel-expanded-width: 20rem;
         color: var(--sapTextColor, #32363a);
         cursor: pointer;
 
-        &:hover,
-        &:focus-visible {
+        &:hover {
             background: var(--sapList_Hover_Background, #eaecee);
         }
 
-        &:focus-visible {
+        &:focus {
             outline: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
             outline-offset: -0.125rem;
-        }
-
-        &:focus {
-            outline: none;
+            background: var(--sapList_Hover_Background, #eaecee);
         }
     }
 
@@ -483,16 +489,21 @@ $fd-side-panel-expanded-width: 20rem;
     // reset to auto in push mode — the flex layout already places it correctly there,
     // and a non-auto value on position:relative creates the layout gap the user sees.
     // clip-path: clip the action-bar-facing shadow so the two box-shadows don't overlap.
+    // Single-action mode is excluded via :not() — the action bar is hidden there, so
+    // all four content-panel corners must remain rounded with no clipping.
     &--right &__content-panel {
         order: -1;
         inset-inline-end: $fd-side-panel-bar-width-cozy;
         border-start-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
         border-end-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
-        clip-path: inset(-100rem 0 -100rem -100rem); // LTR: clip right (action-bar-facing) shadow
 
         @media (min-width: 90rem) {
             inset-inline-end: auto;
         }
+    }
+
+    &--right:not(.fd-side-panel--single-action) &__content-panel {
+        clip-path: inset(-100rem 0 -100rem -100rem); // LTR: clip right (action-bar-facing) shadow
 
         [dir='rtl'] & {
             clip-path: inset(-100rem -100rem -100rem 0); // RTL: junction on left side
@@ -503,14 +514,45 @@ $fd-side-panel-expanded-width: 20rem;
         inset-inline-start: $fd-side-panel-bar-width-cozy;
         border-start-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
         border-end-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
-        clip-path: inset(-100rem -100rem -100rem 0); // LTR: clip left (action-bar-facing) shadow
 
         @media (min-width: 90rem) {
             inset-inline-start: auto;
         }
+    }
+
+    &--left:not(.fd-side-panel--single-action) &__content-panel {
+        clip-path: inset(-100rem -100rem -100rem 0); // LTR: clip left (action-bar-facing) shadow
 
         [dir='rtl'] & {
             clip-path: inset(-100rem 0 -100rem -100rem); // RTL: junction on right side
+        }
+    }
+
+    // ── Single-action mode ──────────────────────────────────────────────────
+    // When there is exactly one item the panel behaves as a simple side-drawer.
+    // The narrow action bar is hidden while the panel is open; the nav arrow
+    // moves into the content panel header as the close control; the content panel
+    // expands to the full $fd-side-panel-expanded-width with all four corners rounded.
+
+    &--single-action.fd-side-panel--open .fd-side-panel__action-bar {
+        display: none;
+    }
+
+    &--single-action.fd-side-panel--right .fd-side-panel__content-panel {
+        inline-size: $fd-side-panel-expanded-width;
+        inset-inline-end: 0;
+
+        @media (min-width: 90rem) {
+            inset-inline-end: auto;
+        }
+    }
+
+    &--single-action.fd-side-panel--left .fd-side-panel__content-panel {
+        inline-size: $fd-side-panel-expanded-width;
+        inset-inline-start: 0;
+
+        @media (min-width: 90rem) {
+            inset-inline-start: auto;
         }
     }
 
@@ -519,7 +561,6 @@ $fd-side-panel-expanded-width: 20rem;
         align-items: center;
         padding: 0.75rem 1rem;
         gap: 0.5rem;
-        border-block-end: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
         flex-shrink: 0;
     }
 
