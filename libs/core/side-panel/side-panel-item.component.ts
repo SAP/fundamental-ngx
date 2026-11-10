@@ -8,8 +8,7 @@ let sidePanelItemId = 0;
  *
  * Each item contributes one action button to the vertical action bar (rendered by the
  * parent `fd-side-panel`) and carries the group's content template, projected via
- * `*fdSidePanelContent`. Opening/closing the content panel is wired in a later issue;
- * here the item only supplies the action-button metadata and captures its content.
+ * `*fdSidePanelContent`. The parent activates this item's content panel when the button is clicked.
  *
  * ```html
  * <fd-side-panel-item icon="filter" label="Filter">

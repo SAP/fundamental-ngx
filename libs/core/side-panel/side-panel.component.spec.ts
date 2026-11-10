@@ -492,6 +492,23 @@ describe('SidePanelComponent — content panel', () => {
         expect(panel.getAttribute('role')).toBe('region');
         expect(panel.getAttribute('aria-label')).toBe('Filter');
     });
+
+    it('should close the content panel when Escape is pressed on the host', () => {
+        const [filterButton] = Array.from<HTMLButtonElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+        );
+        filterButton.click();
+        fixture.detectChanges();
+        expect(host.open).toBe(true);
+
+        const sidePanelEl: HTMLElement = fixture.nativeElement.querySelector('fd-side-panel');
+        sidePanelEl.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+        fixture.detectChanges();
+
+        expect(host.open).toBe(false);
+        expect(host.activeItem).toBeNull();
+        expect(fixture.nativeElement.querySelector('.fd-side-panel__content-panel')).toBeNull();
+    });
 });
 
 @Component({

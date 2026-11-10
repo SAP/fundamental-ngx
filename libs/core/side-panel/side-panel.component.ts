@@ -25,6 +25,8 @@ import { SidePanelItemComponent } from './side-panel-item.component';
 /** Edge the side panel is anchored to. */
 export type SidePanelSide = 'left' | 'right';
 
+let _overflowListIdCounter = 0;
+
 /** Display mode of the side panel action bar. */
 export type SidePanelMode = 'collapsed' | 'expanded';
 
@@ -32,9 +34,8 @@ export type SidePanelMode = 'collapsed' | 'expanded';
  * The Side Panel is a container anchored to an edge of the page. It is reached through a
  * vertical action-button bar where each button represents a content group.
  *
- * This component renders the **icons-only** action bar (the default display mode) and tracks
- * the active group. Opening the content panel, icons+label mode, overflow, resizing and mobile
- * behaviour are added in later issues.
+ * Supports collapsed (icons-only) and expanded (icons + labels) action bar modes, a
+ * slide-in content panel, automatic overflow into a popover, and full keyboard navigation.
  *
  * ```html
  * <fd-side-panel side="right" [(activeItem)]="activeGroup">
@@ -184,6 +185,9 @@ export class SidePanelComponent {
     /** @hidden Preferred placement of the overflow popover relative to the action bar side. */
     protected readonly overflowPlacement = computed(() => (this.side() === 'right' ? 'left-end' : 'right-end'));
 
+    /** @hidden Unique id for the overflow `<ul>` so the open effect can scope its focus query. */
+    protected readonly overflowListId = `fd-side-panel-overflow-${++_overflowListIdCounter}`;
+
     /**
      * @hidden Number of items that fit in the visible action bar without overflowing.
      * Computed from measured heights; returns the total item count when measurements are unavailable.
@@ -241,7 +245,10 @@ export class SidePanelComponent {
             if (this.overflowOpen()) {
                 requestAnimationFrame(() => {
                     if (this.overflowOpen()) {
-                        document.querySelector<HTMLElement>('.fd-side-panel__overflow-item')?.focus();
+                        document
+                            .getElementById(this.overflowListId)
+                            ?.querySelector<HTMLElement>('.fd-side-panel__overflow-item')
+                            ?.focus();
                     }
                 });
             }

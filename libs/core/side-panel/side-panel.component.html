@@ -90,7 +90,12 @@
                         </button>
                     </fd-popover-control>
                     <fd-popover-body>
-                        <ul role="menu" class="fd-side-panel__overflow-list" (keydown)="onOverflowKeydown($event)">
+                        <ul
+                            [id]="overflowListId"
+                            role="menu"
+                            class="fd-side-panel__overflow-list"
+                            (keydown)="onOverflowKeydown($event)"
+                        >
                             @for (item of overflowItems(); track item.id(); let i = $index) {
                                 <li
                                     role="menuitem"
