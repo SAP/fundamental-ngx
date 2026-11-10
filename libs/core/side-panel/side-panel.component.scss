@@ -30,12 +30,16 @@ $fd-side-panel-action-size-compact: 2rem;
 $fd-side-panel-bar-width-cozy: 4.25rem;
 // Compact bar width (C) — 2rem button + 1rem padding each side = 4rem
 $fd-side-panel-bar-width-compact: 4rem;
-// Active selection indicator width (D) — 0.1875rem (3px) per padding & spacing spec
-$fd-side-panel-active-indicator-width: 0.1875rem;
+// Active selection indicator width (D) — 0.25rem (4px) per spec
+$fd-side-panel-active-indicator-width: 0.25rem;
+// Total panel footprint in any "active" state (expanded bar or collapsed bar + content panel).
+// Keep this equal to the expanded action bar inline-size so both states occupy the same space.
+$fd-side-panel-expanded-width: 20rem;
 
 .fd-side-panel {
     display: flex;
     block-size: 100%;
+    position: relative;
 
     // ── Edge anchoring ──────────────────────────────────────────────────────
 
@@ -46,6 +50,25 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         .fd-side-panel__action-bar {
             border-start-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
             border-end-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+        }
+
+        // When content panel is open it sits flush: remove content-facing radius,
+        // add a separator border, and clip the left shadow so it doesn't overlap the panel.
+        &.fd-side-panel--open .fd-side-panel__action-bar {
+            border-start-start-radius: 0;
+            border-end-start-radius: 0;
+            border-inline-start: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+            clip-path: inset(-100rem -100rem -100rem 0); // LTR: clip left shadow
+        }
+
+        // Single-action: the action bar IS the full panel — no dividing line needed.
+        &.fd-side-panel--single-action.fd-side-panel--open .fd-side-panel__action-bar {
+            border-inline-start: none;
+        }
+
+        // RTL: for --right the junction is on the physical right side.
+        [dir='rtl'] &.fd-side-panel--open .fd-side-panel__action-bar {
+            clip-path: inset(-100rem 0 -100rem -100rem); // RTL: clip right shadow
         }
 
         // Selection indicator on the start (content-facing) edge of the container
@@ -64,6 +87,25 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         .fd-side-panel__action-bar {
             border-start-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
             border-end-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+        }
+
+        // When content panel is open it sits flush: remove content-facing radius,
+        // add a separator border, and clip the right shadow so it doesn't overlap the panel.
+        &.fd-side-panel--open .fd-side-panel__action-bar {
+            border-start-end-radius: 0;
+            border-end-end-radius: 0;
+            border-inline-end: 0.0625rem solid var(--sapGroup_ContentBorderColor, #d9d9d9);
+            clip-path: inset(-100rem 0 -100rem -100rem); // LTR: clip right shadow
+        }
+
+        // Single-action: no dividing line.
+        &.fd-side-panel--single-action.fd-side-panel--open .fd-side-panel__action-bar {
+            border-inline-end: none;
+        }
+
+        // RTL: for --left the junction is on the physical left side.
+        [dir='rtl'] &.fd-side-panel--open .fd-side-panel__action-bar {
+            clip-path: inset(-100rem -100rem -100rem 0); // RTL: clip left shadow
         }
 
         // Selection indicator on the end (content-facing) edge of the container
@@ -87,9 +129,9 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         padding-block-start: 0.5rem;
         gap: 2rem;
         box-sizing: border-box;
-        overflow-y: auto;
+        overflow: hidden;
         background: var(--sapGroup_ContentBackground, #fff);
-        box-shadow: var(--sapContent_Shadow1, 0 0 0.125rem 0 rgba(0, 0, 0, 0.12), 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.14));
+        box-shadow: var(--sapContent_Shadow0, 0 0 1rem rgba(34, 53, 72, 0.1));
         // border-radius applied per-side in --right / --left modifiers above
     }
 
@@ -116,7 +158,8 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         }
 
         &:focus {
-            outline: none;
+            outline: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
+            outline-offset: 0.0625rem;
         }
     }
 
@@ -127,7 +170,7 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         display: flex;
         inline-size: 100%;
         box-sizing: border-box;
-        padding: 0.1875rem 0.75rem;
+        padding: 0.25rem 0.75rem;
         justify-content: center;
 
         // Selection bar (spec D) — invisible by default, positioned per-side in --right/--left
@@ -141,16 +184,23 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         }
 
         &:has(.fd-side-panel__action.is-active)::before {
-            background: var(--sapList_SelectionBorderColor, #0064d9);
+            background: var(--sapContent_Selected_ForegroundColor, #0064d9);
         }
 
         // Full-width row hover for item containers (not the nav-arrow container)
-        &:has(.fd-side-panel__action):hover {
+        &:has(.fd-side-panel__action):hover,
+        &:has(.fd-side-panel__overflow-toggle):hover {
             background: var(--sapList_Hover_Background, #eaecee);
         }
 
+        // Pointer cursor for enabled item containers; default for disabled
+        &:has(.fd-side-panel__action:not(.is-disabled)),
+        &:has(.fd-side-panel__overflow-toggle) {
+            cursor: pointer;
+        }
+
         // Full-width rectangular focus ring — solid brand border spanning the entire bar row
-        &:has(button:focus)::after {
+        &.is-focused::after {
             content: '';
             position: absolute;
             box-sizing: border-box;
@@ -158,6 +208,11 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
             border: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
             pointer-events: none;
         }
+    }
+
+    // Hidden via CSS (not @if) so DOM nodes persist between overflow recalculations
+    &__action-container--overflow-hidden {
+        display: none;
     }
 
     // ── Action button — inactive (spec B2) ──────────────────────────────────
@@ -181,7 +236,7 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         -webkit-appearance: none;
 
         // Extend the interactive (click + hover) area to the full container row.
-        // Container padding is 0.1875rem block / 0.75rem inline.
+        // Container padding: 0.1875rem block / 0.75rem inline (cozy); compact overrides inline to 1rem below.
         &::after {
             content: '';
             position: absolute;
@@ -220,6 +275,149 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         color: inherit;
     }
 
+    // ── Action label (icons+label mode) ────────────────────────────────────────
+
+    &__action-label {
+        font-size: var(--sapFontMediumSize, 0.875rem);
+        color: inherit;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    // ── Counter (numeric badge, top-right corner of the icon circle) ────────────
+    // Lives inside the action button so `position: absolute` is relative to the circle.
+    // Positioned to overlap the top-right border of the icon circle, matching the
+    // SAP Horizon notification badge pattern.
+
+    &__action-counter {
+        position: absolute;
+        top: -0.25rem;
+        inset-inline-end: -0.375rem;
+        padding: 0.0625rem 0.25rem;
+        min-inline-size: 1rem;
+        border-radius: 0.5rem;
+        background: var(--sapContent_BadgeBackground, #aa0808);
+        color: var(--sapContent_BadgeTextColor, #fff);
+        border: 0.125rem solid var(--sapContent_BadgeBorderColor, #fff);
+        font-family: var(--sapFontFamily);
+        font-size: var(--sapFontSmallSize, 0.75rem);
+        font-weight: bold;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    // ── Overflow toggle (•••) ───────────────────────────────────────────────
+
+    &__overflow-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        inline-size: $fd-side-panel-action-size-cozy;
+        block-size: $fd-side-panel-action-size-cozy;
+        flex-shrink: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: 0.125rem solid transparent;
+        border-radius: 50%;
+        background: var(--sapGroup_ContentBackground, #fff);
+        color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+
+        &:hover {
+            border-color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &.is-open {
+            background: var(--sapList_SelectionBackground, #e8f2ff);
+            border-color: var(--sapContent_Selected_ForegroundColor, #0064d9);
+        }
+    }
+
+    // ── Overflow list (inside fd-popover-body) ─────────────────────────────
+
+    &__overflow-list {
+        list-style: none;
+        margin: 0;
+        padding: 0.25rem 0;
+        min-inline-size: 8rem;
+    }
+
+    // ── Overflow menu item ─────────────────────────────────────────────────
+
+    &__overflow-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        color: var(--sapTextColor, #32363a);
+        cursor: pointer;
+
+        &:hover {
+            background: var(--sapList_Hover_Background, #eaecee);
+        }
+
+        &:focus {
+            outline: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
+            outline-offset: -0.125rem;
+            background: var(--sapList_Hover_Background, #eaecee);
+        }
+    }
+
+    // ── Expanded mode (fd-side-panel--expanded) ──────────────────────────────
+    // 320px wide rail; icon circles stay circular, labels appear beside them.
+    // The nav arrow shifts to the top-right corner; item rows align left.
+
+    &--expanded {
+        .fd-side-panel__action-bar {
+            inline-size: $fd-side-panel-expanded-width;
+        }
+
+        // Nav arrow container: push the arrow to the inline-end (top-right for LTR)
+        .fd-side-panel__action-container:first-child {
+            justify-content: flex-end;
+        }
+
+        // Item containers: icon circle on the left, label text to the right
+        .fd-side-panel__action-container:not(:first-child) {
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        // Buttons remain as circles — no size or border-radius overrides.
+        // Only remove the click-area ::after (the full-row hover on the container suffices).
+        .fd-side-panel__action {
+            flex-shrink: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        // Label acts as a secondary click target; cursor mirrors the button.
+        .fd-side-panel__action-label {
+            cursor: pointer;
+        }
+
+        // Label inherits disabled opacity from the sibling button via :has()
+        .fd-side-panel__action-container:has(.fd-side-panel__action.is-disabled) .fd-side-panel__action-label {
+            opacity: var(--sapContent_DisabledOpacity, 0.4);
+            pointer-events: none;
+        }
+    }
+
     // ── Compact density (spec C: 4rem bar, B1/B2: 2rem button) ─────────────
 
     &.is-compact {
@@ -228,13 +426,189 @@ $fd-side-panel-active-indicator-width: 0.1875rem;
         }
 
         .fd-side-panel__nav-arrow,
-        .fd-side-panel__action {
+        .fd-side-panel__action,
+        .fd-side-panel__overflow-toggle {
             inline-size: $fd-side-panel-action-size-compact;
             block-size: $fd-side-panel-action-size-compact;
+        }
+
+        // Compact padding-inline: 2rem button + 2 × 1rem = 4rem bar width.
+        // Cozy default is 0.75rem; compact needs 1rem per spec.
+        .fd-side-panel__action-container {
+            padding-inline: 1rem;
+        }
+
+        // Extend click/hover area to full compact container row (1rem inline padding).
+        .fd-side-panel__action::after {
+            inset-inline: -1rem;
         }
 
         .fd-side-panel__action-icon {
             font-size: var(--sapFontHeader5Size, 1rem);
         }
+
+        .fd-side-panel__action-label {
+            font-size: var(--sapFontSmallSize, 0.75rem);
+        }
+    }
+
+    // ── Content panel ────────────────────────────────────────────────────────
+    // Overlay by default (< 1440px viewport).
+    // At ≥ 1440px the panel becomes a flex sibling and pushes the main content.
+    // Width = expanded bar width − collapsed bar width so the total footprint
+    // (action bar + content panel) always equals $fd-side-panel-expanded-width.
+
+    &__content-panel {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        block-size: 100%;
+        inline-size: calc(#{$fd-side-panel-expanded-width} - #{$fd-side-panel-bar-width-cozy});
+        background: var(--sapGroup_ContentBackground, #fff);
+        box-shadow: var(--sapContent_Shadow0, 0 0 1rem rgba(34, 53, 72, 0.1));
+        box-sizing: border-box;
+        overflow: hidden;
+
+        // Overlay: float over main content below 1440px.
+        // Anchored relative to the fd-side-panel host (which has position: relative).
+        position: absolute;
+        inset-block: 0;
+        z-index: 5;
+
+        // Large viewports (≥ 1440px): push content; revert to in-flow flex child.
+        @media (min-width: 90rem) {
+            position: relative;
+            z-index: auto;
+        }
+    }
+
+    // Content panel side-positioning.
+    // order: -1 keeps the action-bar at the inline-end (right) in push mode (≥1440px),
+    // where both are in flex flow; has no effect in overlay mode (position: absolute).
+    // inset-inline-end positions the panel flush with the action bar in overlay mode;
+    // reset to auto in push mode — the flex layout already places it correctly there,
+    // and a non-auto value on position:relative creates the layout gap the user sees.
+    // clip-path: clip the action-bar-facing shadow so the two box-shadows don't overlap.
+    // Single-action mode is excluded via :not() — the action bar is hidden there, so
+    // all four content-panel corners must remain rounded with no clipping.
+    &--right &__content-panel {
+        order: -1;
+        inset-inline-end: $fd-side-panel-bar-width-cozy;
+        border-start-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+        border-end-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+
+        @media (min-width: 90rem) {
+            inset-inline-end: auto;
+        }
+    }
+
+    &--right:not(.fd-side-panel--single-action) &__content-panel {
+        clip-path: inset(-100rem 0 -100rem -100rem); // LTR: clip right (action-bar-facing) shadow
+
+        [dir='rtl'] & {
+            clip-path: inset(-100rem -100rem -100rem 0); // RTL: junction on left side
+        }
+    }
+
+    &--left &__content-panel {
+        inset-inline-start: $fd-side-panel-bar-width-cozy;
+        border-start-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+        border-end-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
+
+        @media (min-width: 90rem) {
+            inset-inline-start: auto;
+        }
+    }
+
+    &--left:not(.fd-side-panel--single-action) &__content-panel {
+        clip-path: inset(-100rem -100rem -100rem 0); // LTR: clip left (action-bar-facing) shadow
+
+        [dir='rtl'] & {
+            clip-path: inset(-100rem 0 -100rem -100rem); // RTL: junction on right side
+        }
+    }
+
+    // ── Single-action mode ──────────────────────────────────────────────────
+    // When there is exactly one item the panel behaves as a simple side-drawer.
+    // The narrow action bar is hidden while the panel is open; the nav arrow
+    // moves into the content panel header as the close control; the content panel
+    // expands to the full $fd-side-panel-expanded-width with all four corners rounded.
+
+    &--single-action.fd-side-panel--open .fd-side-panel__action-bar {
+        display: none;
+    }
+
+    &--single-action.fd-side-panel--right .fd-side-panel__content-panel {
+        inline-size: $fd-side-panel-expanded-width;
+        inset-inline-end: 0;
+
+        @media (min-width: 90rem) {
+            inset-inline-end: auto;
+        }
+    }
+
+    &--single-action.fd-side-panel--left .fd-side-panel__content-panel {
+        inline-size: $fd-side-panel-expanded-width;
+        inset-inline-start: 0;
+
+        @media (min-width: 90rem) {
+            inset-inline-start: auto;
+        }
+    }
+
+    &__content-panel-header {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+        flex-shrink: 0;
+    }
+
+    &__content-panel-icon {
+        flex-shrink: 0;
+        font-size: var(--sapFontHeader5Size, 1rem);
+        color: var(--sapTextColor, #32363a);
+    }
+
+    &__content-panel-title {
+        flex: 1 1 auto;
+        font-size: var(--sapFontHeader5Size, 1rem);
+        font-weight: bold;
+        color: var(--sapTextColor, #32363a);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__content-panel-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        inline-size: 2rem;
+        block-size: 2rem;
+        padding: 0;
+        border: none;
+        border-radius: var(--sapButton_BorderCornerRadius, 0.5rem);
+        background: transparent;
+        color: var(--sapContent_IconColor, #0064d9);
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+
+        &:hover {
+            background: var(--sapList_Hover_Background, #eaecee);
+        }
+
+        &:focus {
+            outline: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
+            outline-offset: 0.0625rem;
+        }
+    }
+
+    &__content-panel-body {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding: 1rem;
     }
 }

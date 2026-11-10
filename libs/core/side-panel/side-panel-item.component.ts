@@ -8,8 +8,7 @@ let sidePanelItemId = 0;
  *
  * Each item contributes one action button to the vertical action bar (rendered by the
  * parent `fd-side-panel`) and carries the group's content template, projected via
- * `*fdSidePanelContent`. Opening/closing the content panel is wired in a later issue;
- * here the item only supplies the action-button metadata and captures its content.
+ * `*fdSidePanelContent`. The parent activates this item's content panel when the button is clicked.
  *
  * ```html
  * <fd-side-panel-item icon="filter" label="Filter">
@@ -38,6 +37,13 @@ export class SidePanelItemComponent {
     /** Whether the item is disabled. Disabled items cannot be activated. */
     readonly disabled = input(false, { transform: booleanAttribute });
 
+    /**
+     * Numeric count shown on the action button (e.g. unread message count).
+     * Values above 99 are capped and displayed as `99+`.
+     * When not set, no counter is shown.
+     */
+    readonly counter = input<number>();
+
     /** @hidden Captured content template, rendered by the parent while the item is active. */
-    protected readonly content = contentChild(SidePanelContentDirective);
+    readonly content = contentChild(SidePanelContentDirective);
 }
