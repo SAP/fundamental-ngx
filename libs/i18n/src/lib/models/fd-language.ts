@@ -948,5 +948,11 @@ export interface FdLanguage {
         closePanel: FdLanguageKey;
         /** Aria label on the close button in the content panel header in multi-action mode */
         close: FdLanguageKey;
+        /** Aria label for the side panel region landmark */
+        sidePanelLabel: FdLanguageKey;
+        /** Live announcement when the side panel action bar is expanded */
+        expandedAnnouncement: FdLanguageKey;
+        /** Live announcement when the side panel action bar is collapsed */
+        collapsedAnnouncement: FdLanguageKey;
     };
 }
