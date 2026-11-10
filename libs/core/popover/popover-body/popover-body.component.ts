@@ -1,7 +1,9 @@
 import {
     afterNextRender,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     inject,
     input,
@@ -142,6 +144,12 @@ export class PopoverBodyComponent {
     private readonly _renderer = inject(Renderer2);
 
     /** @hidden */
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     private _bodyComponentClasses: string | null = null;
 
     /** @hidden */
@@ -223,6 +231,15 @@ export class PopoverBodyComponent {
         }
 
         this._arrowClasses.set(arrowClasses.join(' '));
+    }
+
+    /** @hidden */
+    _commitView(): void {
+        if (this._destroyRef.destroyed) {
+            return;
+        }
+
+        this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */

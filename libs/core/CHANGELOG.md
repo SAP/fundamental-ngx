@@ -1,3 +1,31 @@
+## 0.66.1-rc.24 (2026-11-09)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.23 (2026-11-06)
+
+### 🩹 Fixes
+
+- **core,platform:** various shell search results improvements ([#14641](https://github.com/SAP/fundamental-ngx/pull/14641))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.66.1-rc.22 (2026-11-05)
+
+### 🩹 Fixes
+
+- **core:** prevent initial popover max width transition ([#14655](https://github.com/SAP/fundamental-ngx/pull/14655))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.66.1-rc.21 (2026-11-05)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.20 (2026-11-04)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

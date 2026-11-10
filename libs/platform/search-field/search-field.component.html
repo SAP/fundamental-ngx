@@ -127,8 +127,11 @@
 <ng-template #searchCategorySelect>
     <fd-select
         #categorySelectComponent
-        [placeholder]="categoryLabel()"
-        [selectControlClass]="appearance()?.categoryButtonClass"
+        [placeholder]="_shellbar ? ('platformSearchField.allButtonLabel' | fdTranslate)() : categoryLabel()"
+        [selectControlClass]="
+            (appearance()?.categoryButtonClass || '') +
+            (_shellbar ? ' fdp-search-field__category-select--shellbar' : '')
+        "
         [selectDropdownButtonClass]="
             appearance()?.categoryDropdownButtonClass + (!!_currentCategory()?.value ? ' is-selected' : '')
         "

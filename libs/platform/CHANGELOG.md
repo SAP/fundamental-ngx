@@ -1,3 +1,31 @@
+## 0.66.1-rc.24 (2026-11-09)
+
+### 🩹 Fixes
+
+- **platform:** settings dialog title should stay Settings in combined dialog ([#14672](https://github.com/SAP/fundamental-ngx/pull/14672))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.1-rc.23 (2026-11-06)
+
+### 🩹 Fixes
+
+- **core,platform:** various shell search results improvements ([#14641](https://github.com/SAP/fundamental-ngx/pull/14641))
+
+### ❤️ Thank You
+
+- Mike O'Donnell @mikerodonnell89
+
+## 0.66.1-rc.22 (2026-11-05)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.21 (2026-11-05)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.20 (2026-11-04)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
