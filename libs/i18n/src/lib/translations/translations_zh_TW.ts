@@ -242,6 +242,14 @@ export default {
         navigationButtonLabel: '瀏覽',
         search: '搜尋'
     },
+    coreSidePanel: {
+        close: 'Close',
+        closePanel: 'Close panel',
+        navArrowCollapse: 'Collapse side panel',
+        navArrowExpand: 'Expand side panel',
+        overflowShowLess: 'Show Less',
+        overflowShowMore: 'More Actions'
+    },
     coreSlider: {
         ariaLabel: '滑動軸控制器'
     },

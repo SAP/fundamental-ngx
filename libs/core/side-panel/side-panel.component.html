@@ -13,8 +13,8 @@
             type="button"
             class="fd-side-panel__nav-arrow"
             [attr.aria-expanded]="isNavArrowExpanded()"
-            [attr.aria-label]="isNavArrowExpanded() ? 'Collapse side panel' : 'Expand side panel'"
-            [attr.title]="isNavArrowExpanded() ? 'Collapse side panel' : 'Expand side panel'"
+            [attr.aria-label]="isNavArrowExpanded() ? navArrowCollapseLabel() : navArrowExpandLabel()"
+            [attr.title]="isNavArrowExpanded() ? navArrowCollapseLabel() : navArrowExpandLabel()"
             (click)="toggleNavArrow()"
         >
             <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
@@ -82,7 +82,7 @@
                             tabindex="-1"
                             aria-haspopup="menu"
                             [attr.aria-expanded]="overflowOpen()"
-                            [attr.aria-label]="overflowOpen() ? 'Show Less' : 'More Actions'"
+                            [attr.aria-label]="overflowOpen() ? overflowShowLessLabel() : overflowShowMoreLabel()"
                             (focus)="overflowToggleFocused.set(true)"
                             (blur)="overflowToggleFocused.set(false)"
                         >
@@ -114,7 +114,7 @@
                 </fd-popover>
                 @if (mode() === 'expanded') {
                     <span class="fd-side-panel__action-label" aria-hidden="true">{{
-                        overflowOpen() ? 'Show Less' : 'More Actions'
+                        overflowOpen() ? overflowShowLessLabel() : overflowShowMoreLabel()
                     }}</span>
                 }
             </div>
@@ -139,7 +139,7 @@
                     #contentPanelClose
                     type="button"
                     class="fd-side-panel__content-panel-close"
-                    aria-label="Close panel"
+                    [attr.aria-label]="closePanelLabel()"
                     (click)="toggleNavArrow()"
                 >
                     <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
@@ -149,7 +149,7 @@
                     #contentPanelClose
                     type="button"
                     class="fd-side-panel__content-panel-close"
-                    aria-label="Close"
+                    [attr.aria-label]="closeLabel()"
                     (click)="closeContentPanel()"
                 >
                     <fd-icon glyph="decline" [ariaHidden]="true" />

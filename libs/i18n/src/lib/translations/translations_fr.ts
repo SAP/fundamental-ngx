@@ -245,6 +245,14 @@ export default {
         navigationButtonLabel: 'Navigation',
         search: 'Rechercher'
     },
+    coreSidePanel: {
+        close: 'Close',
+        closePanel: 'Close panel',
+        navArrowCollapse: 'Collapse side panel',
+        navArrowExpand: 'Expand side panel',
+        overflowShowLess: 'Show Less',
+        overflowShowMore: 'More Actions'
+    },
     coreSlider: {
         ariaLabel: 'Poignée du curseur'
     },

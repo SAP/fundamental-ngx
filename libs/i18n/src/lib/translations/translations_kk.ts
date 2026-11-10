@@ -244,6 +244,14 @@ export default {
         navigationButtonLabel: 'Навигация',
         search: 'Іздеу'
     },
+    coreSidePanel: {
+        close: 'Close',
+        closePanel: 'Close panel',
+        navArrowCollapse: 'Collapse side panel',
+        navArrowExpand: 'Expand side panel',
+        overflowShowLess: 'Show Less',
+        overflowShowMore: 'More Actions'
+    },
     coreSlider: {
         ariaLabel: 'Жүгірткі'
     },

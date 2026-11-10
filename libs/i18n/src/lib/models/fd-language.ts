@@ -935,4 +935,18 @@ export interface FdLanguage {
         /** Text for the information button in the segmented button */
         informationButton: FdLanguageKey;
     };
+    coreSidePanel: {
+        /** Aria label on the nav-arrow button when the action bar is in collapsed mode */
+        navArrowExpand: FdLanguageKey;
+        /** Aria label on the nav-arrow button when the action bar is in expanded mode */
+        navArrowCollapse: FdLanguageKey;
+        /** Aria label and visible label on the overflow toggle button when the popover is closed */
+        overflowShowMore: FdLanguageKey;
+        /** Aria label and visible label on the overflow toggle button when the popover is open */
+        overflowShowLess: FdLanguageKey;
+        /** Aria label on the close button in the content panel header in single-action mode */
+        closePanel: FdLanguageKey;
+        /** Aria label on the close button in the content panel header in multi-action mode */
+        close: FdLanguageKey;
+    };
 }

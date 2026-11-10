@@ -243,6 +243,14 @@ export default {
         navigationButtonLabel: 'ניווט',
         search: 'חפש'
     },
+    coreSidePanel: {
+        close: 'Close',
+        closePanel: 'Close panel',
+        navArrowCollapse: 'Collapse side panel',
+        navArrowExpand: 'Expand side panel',
+        overflowShowLess: 'Show Less',
+        overflowShowMore: 'More Actions'
+    },
     coreSlider: {
         ariaLabel: 'נקודת אחיזה של מחוון'
     },

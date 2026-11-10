@@ -20,6 +20,7 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { SidePanelItemComponent } from './side-panel-item.component';
 
 /** Edge the side panel is anchored to. */
@@ -187,6 +188,19 @@ export class SidePanelComponent {
 
     /** @hidden Unique id for the overflow `<ul>` so the open effect can scope its focus query. */
     protected readonly overflowListId = `fd-side-panel-overflow-${++_overflowListIdCounter}`;
+
+    /** @hidden */
+    protected readonly navArrowExpandLabel = resolveTranslationSignal('coreSidePanel.navArrowExpand');
+    /** @hidden */
+    protected readonly navArrowCollapseLabel = resolveTranslationSignal('coreSidePanel.navArrowCollapse');
+    /** @hidden */
+    protected readonly overflowShowMoreLabel = resolveTranslationSignal('coreSidePanel.overflowShowMore');
+    /** @hidden */
+    protected readonly overflowShowLessLabel = resolveTranslationSignal('coreSidePanel.overflowShowLess');
+    /** @hidden */
+    protected readonly closePanelLabel = resolveTranslationSignal('coreSidePanel.closePanel');
+    /** @hidden */
+    protected readonly closeLabel = resolveTranslationSignal('coreSidePanel.close');
 
     /**
      * @hidden Number of items that fit in the visible action bar without overflowing.
