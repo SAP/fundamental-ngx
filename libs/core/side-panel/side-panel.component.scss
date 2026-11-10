@@ -361,36 +361,6 @@ $fd-side-panel-expanded-width: 20rem;
         }
     }
 
-    // ── Overflow list (inside fd-popover-body) ─────────────────────────────
-
-    &__overflow-list {
-        list-style: none;
-        margin: 0;
-        padding: 0.25rem 0;
-        min-inline-size: 8rem;
-    }
-
-    // ── Overflow menu item ─────────────────────────────────────────────────
-
-    &__overflow-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        color: var(--sapTextColor, #32363a);
-        cursor: pointer;
-
-        &:hover {
-            background: var(--sapList_Hover_Background, #eaecee);
-        }
-
-        &:focus {
-            outline: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
-            outline-offset: -0.125rem;
-            background: var(--sapList_Hover_Background, #eaecee);
-        }
-    }
-
     // ── Expanded mode (fd-side-panel--expanded) ──────────────────────────────
     // 320px wide rail; icon circles stay circular, labels appear beside them.
     // The nav arrow shifts to the top-right corner; item rows align left.
@@ -602,5 +572,56 @@ $fd-side-panel-expanded-width: 20rem;
         flex: 1 1 auto;
         overflow-y: auto;
         padding: 1rem;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Overflow menu body — separator alignment (portalled, outside .fd-side-panel)
+//
+// The overflow trigger sits centred inside a full-width action-container row that
+// has 0.75rem padding on each side (cozy) or 1rem (compact). CDK positions the
+// fd-menu body relative to the trigger button's edge, so the body is inset from
+// the action bar's content-facing edge (the separator) by one padding unit.
+// transform: translateX compensates by shifting the body flush with that edge.
+//
+// In RTL the bar's physical side is flipped (flex-end = left), so the menu opens
+// in the opposite direction and the translateX must be negated.
+// ---------------------------------------------------------------------------
+
+.fd-side-panel__overflow-menu-body {
+    &--right {
+        &.fd-side-panel__overflow-menu-body--cozy {
+            transform: translateX(-0.75rem);
+
+            [dir='rtl'] & {
+                transform: translateX(0.75rem);
+            }
+        }
+
+        &.fd-side-panel__overflow-menu-body--compact {
+            transform: translateX(-1rem);
+
+            [dir='rtl'] & {
+                transform: translateX(1rem);
+            }
+        }
+    }
+
+    &--left {
+        &.fd-side-panel__overflow-menu-body--cozy {
+            transform: translateX(0.75rem);
+
+            [dir='rtl'] & {
+                transform: translateX(-0.75rem);
+            }
+        }
+
+        &.fd-side-panel__overflow-menu-body--compact {
+            transform: translateX(1rem);
+
+            [dir='rtl'] & {
+                transform: translateX(-1rem);
+            }
+        }
     }
 }
