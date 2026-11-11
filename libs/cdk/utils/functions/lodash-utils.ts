@@ -142,6 +142,7 @@ export function cloneDeep<T>(obj: T, seen = new WeakSet()): T {
 
 /**
  * Deep merges two or more objects, with properties from source objects overwriting those in the target.
+ * Like lodash `merge`, source properties that resolve to `undefined` are skipped if the target already has the key.
  * @param target The target object
  * @param sources The source objects
  * @returns The merged object
@@ -177,6 +178,11 @@ function deepMergeInto<T>(target: T, source: Partial<T>): void {
             const sourceValue = source[key];
             const targetValue = target[key];
 
+            // Like lodash, `undefined` in the source does not overwrite an existing target value
+            if (sourceValue === undefined && key in (target as object)) {
+                continue;
+            }
+
             // Handle functions and primitives - copy by reference
             if (typeof sourceValue === 'function' || typeof sourceValue !== 'object' || sourceValue === null) {
                 (target as any)[key] = sourceValue;
@@ -204,6 +210,8 @@ function deepMergeInto<T>(target: T, source: Partial<T>): void {
 
 /**
  * Merges two objects with a customizer function.
+ * When the customizer returns `undefined`, merging is handled like `merge`, so source properties
+ * that resolve to `undefined` are skipped if the target already has the key.
  * @param target The target object
  * @param source The source object
  * @param customizer The function to customize assigned values
@@ -229,6 +237,9 @@ export function mergeWith<T>(
 
             if (customValue !== undefined) {
                 (result as any)[key] = customValue;
+            } else if (sourceValue === undefined && key in (result as object)) {
+                // Like lodash, `undefined` in the source does not overwrite an existing target value
+                continue;
             } else if (sourceValue && typeof sourceValue === 'object' && !Array.isArray(sourceValue)) {
                 if (targetValue && typeof targetValue === 'object' && !Array.isArray(targetValue)) {
                     (result as any)[key] = mergeWith(targetValue, sourceValue as any, customizer);
