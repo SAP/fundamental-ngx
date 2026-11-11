@@ -1,3 +1,13 @@
+## 0.66.1-rc.25 (2026-11-11)
+
+### 🚀 Features
+
+- **platform:** add Message View close event and demo examples ([#14674](https://github.com/SAP/fundamental-ngx/pull/14674))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1-rc.24 (2026-11-09)
 
 ### 🩹 Fixes

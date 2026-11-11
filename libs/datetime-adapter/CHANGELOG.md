@@ -1,3 +1,7 @@
+## 0.66.1-rc.25 (2026-11-11)
+
+This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.24 (2026-11-09)
 
 This was a version bump only for datetime-adapter to align it with other projects, there were no code changes.
