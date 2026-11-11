@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { RadioGroupComponent } from './radio-group.component';
 import { PlatformRadioGroupModule } from './radio-group.module';
@@ -496,26 +495,3 @@ class Payment {
         public bank: string
     ) {}
 }
-
-const RADIO_GROUP_IDENTIFIER = 'platform-radio-group-unit-test';
-
-runValueAccessorTests({
-    component: RadioGroupComponent,
-    name: 'Radio group',
-    testModuleMetadata: {
-        imports: [PlatformRadioGroupModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.list = ['a', 'b', 'c'];
-        fixture.componentInstance.id = RADIO_GROUP_IDENTIFIER;
-        fixture.componentInstance.name = RADIO_GROUP_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    // internalValueChangeSetter: null,
-    // TODO: uncomment internalValueChangeSetter after ngx-cva-test-suite@1.1.0 is released
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.viewRadioButtons.find((b) => b.value === value)?._valueChange(value, true);
-    },
-    getComponentValue: (fixture) => fixture.componentInstance.value
-});

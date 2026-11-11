@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformDatePickerComponent } from './date-picker.component';
 import { PlatformDatePickerModule } from './date-picker.module';
@@ -127,7 +126,6 @@ describe('TestDatePickerComponent', () => {
 
     it('Should handle single date change and update input', async () => {
         await wait(fixture);
-        jest.spyOn(host.datepicker.toArray()[0], 'onChange');
 
         const datepicker = host.datepicker.toArray()[0];
         expect(datepicker.fdDatePickerComponent._inputFieldDate).toEqual('1/2/1990');
@@ -138,14 +136,12 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent._inputFieldDate = '';
         datepicker.fdDatePickerComponent.handleSingleDateChange(date);
         expect(datepicker.fdDatePickerComponent._inputFieldDate).toEqual(dateStr);
-        expect(datepicker.onChange).toHaveBeenCalledWith(date);
+        expect(datepicker.value()).toEqual(date);
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
 
     it('Should handle range date change and update input', async () => {
         await wait(fixture);
-
-        jest.spyOn(host.datepicker.toArray()[1], 'onChange');
 
         const datepicker = host.datepicker.toArray()[1];
 
@@ -164,7 +160,7 @@ describe('TestDatePickerComponent', () => {
             dateStrStart + datepicker.fdDatePickerComponent._rangeDelimiter + dateStrLast
         );
 
-        expect(datepicker.onChange).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
+        expect(datepicker.value()).toEqual({ start: dateStart, end: dateLast });
         expect(datepicker.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
     });
 
@@ -176,7 +172,7 @@ describe('TestDatePickerComponent', () => {
         const datepicker = host.datepicker.toArray()[0];
         const dateStr = (<any>datepicker.fdDatePickerComponent)._formatDate(date);
 
-        datepicker.writeValue(date);
+        datepicker.value.set(date);
         await wait(fixture);
         fixture.detectChanges();
 
@@ -188,7 +184,7 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[0];
-        datepicker.writeValue(null);
+        datepicker.value.set(null);
 
         // prevous input date
         expect(datepicker.fdDatePickerComponent.selectedDate).toEqual(new FdDate(1990, 1, 2));
@@ -206,7 +202,7 @@ describe('TestDatePickerComponent', () => {
         const dateEnd = FdDate.getToday();
         dateEnd.month = 12;
         const dateStrEnd = (<any>datepicker.fdDatePickerComponent)._formatDate(dateEnd);
-        datepicker.writeValue({ start: dateStart, end: dateEnd });
+        datepicker.value.set({ start: dateStart, end: dateEnd });
 
         await wait(fixture);
         fixture.detectChanges();
@@ -222,14 +218,14 @@ describe('TestDatePickerComponent', () => {
         const datepicker = host.datepicker.toArray()[1];
         const dateStart = null;
         const dateEnd = null;
-        datepicker.writeValue({ start: dateStart, end: dateEnd });
+        datepicker.value.set({ start: dateStart, end: dateEnd });
 
         // previous input date
         expect(datepicker.fdDatePickerComponent.selectedRangeDate).toEqual({
             start: null,
             end: null
         });
-        datepicker.writeValue({
+        datepicker.value.set({
             start: new FdDate(2020, 5, 10),
             end: new FdDate(2020, 5, 24)
         });
@@ -297,7 +293,7 @@ describe('TestDatePickerComponent', () => {
         const datepicker = host.datepicker.toArray()[0];
         jest.spyOn(datepicker.selectedDateChange, 'emit');
 
-        datepicker.writeValue(new FdDate(2018, 10, 10));
+        datepicker.value.set(new FdDate(2018, 10, 10));
 
         await wait(fixture);
         fixture.detectChanges();
@@ -319,7 +315,7 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent.allowMultipleSelection = true;
         jest.spyOn(datepicker.selectedMultipleDatesChange, 'emit');
 
-        datepicker.writeValue([new FdDate(2018, 10, 10)]);
+        datepicker.value.set([new FdDate(2018, 10, 10)]);
 
         await wait(fixture);
         fixture.detectChanges();
@@ -343,7 +339,6 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent._showPopoverContents = true;
         fixture.detectChanges();
         jest.spyOn(datepicker.selectedDateChange, 'emit');
-        jest.spyOn(datepicker, 'onChange');
 
         const date = new FdDate(2000, 10, 10);
         const strDate = (<any>datepicker.fdDatePickerComponent)._formatDate(date);
@@ -356,7 +351,7 @@ describe('TestDatePickerComponent', () => {
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.month).toBe(date.month);
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.year).toBe(date.year);
         expect(datepicker.selectedDateChange.emit).toHaveBeenCalledWith(date);
-        expect(datepicker.onChange).toHaveBeenCalledWith(date);
+        expect(datepicker.value()).toEqual(date);
     });
 
     it('Should handle calendar with valid string date for multiple dates mode', async () => {
@@ -368,7 +363,6 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent.allowMultipleSelection = true;
         fixture.detectChanges();
         jest.spyOn(datepicker.selectedMultipleDatesChange, 'emit');
-        jest.spyOn(datepicker, 'onChange');
 
         const dates = [new FdDate(2000, 10, 10), new FdDate(2000, 10, 11)];
         const strDates = (<any>datepicker.fdDatePickerComponent).formatDateArray(dates);
@@ -379,7 +373,7 @@ describe('TestDatePickerComponent', () => {
 
         expect(datepicker.fdDatePickerComponent._isInvalidDateInput).toBe(false);
         expect(datepicker.selectedMultipleDatesChange.emit).toHaveBeenCalledWith(dates);
-        expect(datepicker.onChange).toHaveBeenCalledWith(dates);
+        expect(datepicker.value()).toEqual(dates);
     });
 
     it('Should handle valid range string date', async () => {
@@ -390,7 +384,6 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent._showPopoverContents = true;
         fixture.detectChanges();
         jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
-        jest.spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
 
@@ -403,7 +396,7 @@ describe('TestDatePickerComponent', () => {
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.month).toBe(date1.month);
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.year).toBe(date1.year);
         expect(datepicker.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date1, end: date2 });
-        expect(datepicker.onChange).toHaveBeenCalledWith({ start: date1, end: date2 });
+        expect(datepicker.value()).toEqual({ start: date1, end: date2 });
     });
 
     it('Should handle valid reversed range string date', async () => {
@@ -414,7 +407,6 @@ describe('TestDatePickerComponent', () => {
         datepicker.fdDatePickerComponent._showPopoverContents = true;
         fixture.detectChanges();
         jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
-        jest.spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);
         const strDate1 = (<any>datepicker.fdDatePickerComponent)._formatDate(date1);
@@ -427,50 +419,35 @@ describe('TestDatePickerComponent', () => {
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.month).toBe(date2.month);
         expect(datepicker.fdDatePickerComponent._calendarComponent._currentlyDisplayed.year).toBe(date2.year);
         expect(datepicker.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
-        expect(datepicker.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
+        expect(datepicker.value()).toEqual({ start: date2, end: date1 });
     });
 
-    it('should set form control value on datepicker value change', async () => {
+    it('should apply value set on the date picker component', async () => {
         await wait(fixture);
 
-        const datePickerFormGroup = host.datePickerForm;
         // for single type date picker
-        expect(datePickerFormGroup.controls.birthday.valid).toBeTruthy();
-
         const date = adapter.today();
         const datepicker = host.datepicker.toArray()[0];
 
-        datepicker.value = date;
+        datepicker.value.set(date);
         fixture.detectChanges();
 
-        expect(datePickerFormGroup.controls.birthday.valid).toBeTruthy();
-        expect(datePickerFormGroup.controls.birthday.value).toEqual(date);
+        expect(datepicker.value()).toEqual(date);
 
-        // for single type date picker, set value using control.
+        // for single type date picker, set a different value.
         const d1 = new FdDate(2020, 12, 14);
-        datePickerFormGroup.controls.birthday.setValue(d1);
+        datepicker.value.set(d1);
         fixture.detectChanges();
-        expect(datePickerFormGroup.controls.birthday.valid).toBeTruthy();
-        expect(datepicker.value).toEqual(d1);
+        expect(datepicker.value()).toEqual(d1);
 
         // for range type date picker
-
-        expect(datePickerFormGroup.controls.journeydate.valid).toBeFalsy();
-
         const rangeDate = { start: FdDate.getToday(), end: FdDate.getToday() };
         const rangeDatepicker = host.datepicker.toArray()[1];
 
-        rangeDatepicker.value = rangeDate;
+        rangeDatepicker.value.set(rangeDate);
         fixture.detectChanges();
 
-        expect(datePickerFormGroup.controls.journeydate.valid).toBeTruthy();
-        expect(datePickerFormGroup.controls.journeydate.value).toEqual(rangeDate);
-
-        // for range type date picker, set value using control.
-        datePickerFormGroup.controls.journeydate.setValue(rangeDate);
-        fixture.detectChanges();
-        expect(datePickerFormGroup.controls.journeydate.valid).toBeTruthy();
-        expect(rangeDatepicker.value).toEqual(rangeDate);
+        expect(rangeDatepicker.value()).toEqual(rangeDate);
     });
 });
 
@@ -563,35 +540,4 @@ describe('TestDatePickerLegendComponent', () => {
             expect(component.datepicker.legendCol()).toBe(false);
         });
     });
-});
-
-const DATE_PICKER_IDENTIFIER = 'platform-date-picker-unit-test';
-
-@Component({
-    template: `<fdp-date-picker id="${DATE_PICKER_IDENTIFIER}" name="${DATE_PICKER_IDENTIFIER}"></fdp-date-picker>`,
-    standalone: true,
-    imports: [PlatformDatePickerModule, FdDatetimeModule]
-})
-class PlatformDatePickerHostComponent {
-    @ViewChild(PlatformDatePickerComponent) picker: PlatformDatePickerComponent<FdDate>;
-}
-
-runValueAccessorTests<PlatformDatePickerComponent<FdDate>, PlatformDatePickerHostComponent>({
-    component: PlatformDatePickerComponent,
-    name: 'Date Picker',
-    testModuleMetadata: {
-        imports: [PlatformDatePickerHostComponent]
-    },
-    hostTemplate: {
-        getTestingComponent: (fixture) => fixture.componentInstance.picker,
-        hostComponent: PlatformDatePickerHostComponent
-    },
-    nativeControlSelector: `fdp-date-picker[id="${DATE_PICKER_IDENTIFIER}"]`,
-    supportsOnBlur: true,
-    internalValueChangeSetter: (fixture, value: FdDate) => {
-        fixture.componentInstance.picker.handleDateChange(value);
-    },
-    resetCustomValue: { value: null },
-    getValues: () => [new FdDate(2021, 9, 5), new FdDate(2021, 10, 5), new FdDate(2021, 11, 5)],
-    getComponentValue: (fixture) => fixture.componentInstance.picker.value
 });

@@ -117,10 +117,6 @@ export abstract class BaseSelect
     @Input()
     declare width: string;
 
-    /** Whether the select component is readonly. */
-    @Input()
-    readonly = false;
-
     /** Placeholder for the select. Appears in the
      * triggerbox if no option is selected. */
     @Input()
@@ -300,7 +296,7 @@ export abstract class BaseSelect
 
     /** Is empty search field */
     get isEmptyValue(): boolean {
-        return this.value.trim().length === 0;
+        return this.value().trim().length === 0;
     }
 
     /** @hidden
@@ -317,7 +313,7 @@ export abstract class BaseSelect
             this._isOpen = false;
             this._openChange.next(this._isOpen);
             this.markForCheck();
-            this.onTouched();
+            this.touch.emit();
         }
     }
 
@@ -325,7 +321,7 @@ export abstract class BaseSelect
     showList(isOpen: boolean): void {
         if (this._isOpen !== isOpen) {
             this._isOpen = isOpen;
-            this.onTouched();
+            this.touch.emit();
             this._openChange.next(isOpen);
         }
 
@@ -351,11 +347,10 @@ export abstract class BaseSelect
     /** @hidden */
     protected setValue(newValue: any, emitOnChange = true): void {
         if (newValue !== this._value) {
-            this.writeValue(newValue);
+            super.setValue(newValue, true);
             if (emitOnChange) {
-                this.onChange(this.value);
-                this.onTouched();
-                this.selectionChange.emit({ payload: this.value });
+                this.touch.emit();
+                this.selectionChange.emit({ payload: this.value() });
             }
             this.markForCheck();
         }

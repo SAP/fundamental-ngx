@@ -48,22 +48,11 @@ import { BaseInput } from '@fundamental-ngx/platform/shared';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformDatePickerComponent, multi: true }],
     host: {
-        '(blur)': 'onTouched()'
+        '(blur)': 'touch.emit()'
     },
     imports: [DatePickerComponent, FormsModule]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
-    /**
-     * date-picker value set as controller value
-     */
-    @Input()
-    set value(value: D | Array<D> | DateRange<D> | Array<DateRange<D>>) {
-        super.setValue(value);
-    }
-    get value(): DateRange<D> | D {
-        return super.getValue();
-    }
-
     /** below code taken from core/date-picker */
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -336,23 +325,22 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     disableRangeEndFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
-    writeValue(value: D | Array<D> | DateRange<D> | Array<DateRange<D>> | null): void {
-        super.writeValue(value);
-        this.detectChanges();
-    }
+    handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
+        this.activeViewChange.emit(fdCalendarView);
+    };
 
     /**
      * validates date on date change.
      * @param value D | DateRange<D>
      */
     handleDateChange(value: D | Array<D> | DateRange<D> | Array<DateRange<D>>): void {
-        this.value = value;
+        this.setValue(value);
 
         if (this.allowMultipleSelection) {
-            if (this.type === 'single' && !this.value && !this.allowNull) {
+            if (this.type === 'single' && !this.value() && !this.allowNull) {
                 this._datePickerValid = false;
             } else if (this.type === 'range' && !this.allowNull) {
-                const dateRanges = this.value as Array<DateRange<D>>;
+                const dateRanges = this.value() as Array<DateRange<D>>;
                 this._datePickerValid = dateRanges.every((range) => !!range.start);
             } else {
                 this._datePickerValid = true;
@@ -366,10 +354,10 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
                 this.handleSelectedMultipleDateRangesChange(this.selectedMultipleDateRanges);
             }
         } else {
-            if (this.type === 'single' && !this.value && !this.allowNull) {
+            if (this.type === 'single' && !this.value() && !this.allowNull) {
                 this._datePickerValid = false;
             } else if (this.type === 'range' && !this.allowNull) {
-                const dateRange = this.value as DateRange<D>;
+                const dateRange = this.value() as DateRange<D>;
                 this._datePickerValid = !!dateRange.start;
             } else {
                 this._datePickerValid = true;
@@ -414,9 +402,10 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     };
 
     /** @hidden */
-    handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
-        this.activeViewChange.emit(fdCalendarView);
-    };
+    protected _applyValue(value: D | Array<D> | DateRange<D> | Array<DateRange<D>> | null): void {
+        super._applyValue(value);
+        this.detectChanges();
+    }
 }
 
 /** @hidden */

@@ -35,18 +35,6 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
 })
 export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /**
-     * value for selected checkboxes.
-     */
-    @Input()
-    set value(selectedValue: any[]) {
-        this.setValue(selectedValue);
-        this._updateSelectionModelByValue();
-    }
-    get value(): any[] {
-        return this.getValue();
-    }
-
-    /**
      * To Display multiple checkboxes in a line
      */
     @Input()
@@ -88,8 +76,8 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
             this._selectionModel.deselect(checkboxTrueValue);
         }
         this._setValueBySelectionModel();
-        this.onTouched();
-        this.valueChange.emit(this.value);
+        this.touch.emit();
+        this.valueChange.emit(this.value());
     }
 
     /** @hidden */
@@ -108,7 +96,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
 
         this._rangeSelector.applyValueToEachInRange((idx) => {
             const checkbox = queryList.get(idx);
-            if (checkbox?.disabled) {
+            if (checkbox?.disabled()) {
                 return;
             }
             const checkboxValue = checkbox?.values.trueValue;
@@ -119,13 +107,12 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
             }
         });
         this._setValueBySelectionModel();
-        this.valueChange.emit(this.value);
+        this.valueChange.emit(this.value());
     }
 
     /** @hidden */
-    writeValue(selectedValue: any): void {
-        super.writeValue(coerceArraySafe(selectedValue));
-        this._updateSelectionModelByValue();
+    getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
+        return this.disabled() || !!(<SelectItem>item)?.disabled;
     }
 
     /**
@@ -143,8 +130,9 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     }
 
     /** @hidden */
-    getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
-        return this.disabled || !!(<SelectItem>item)?.disabled;
+    protected _applyValue(selectedValue: any): void {
+        super._applyValue(coerceArraySafe(selectedValue));
+        this._updateSelectionModelByValue();
     }
 
     /** @inheritdoc */
@@ -161,7 +149,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /** @hidden */
     private _updateSelectionModelByValue(): void {
         this._selectionModel.clear();
-        this.value.forEach((v) => this._selectionModel.select(v));
+        (this.getValue() ?? []).forEach((v: any) => this._selectionModel.select(v));
         this.markForCheck();
     }
 }

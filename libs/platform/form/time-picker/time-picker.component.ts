@@ -30,17 +30,6 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      * @Input date time object representation
      */
     @Input()
-    set value(value: D | null) {
-        super.setValue(value);
-    }
-    get value(): D | null {
-        return super.getValue();
-    }
-
-    /**
-     * @Input date time object representation
-     */
-    @Input()
     time: D;
 
     /** @Input Whether to show spinner buttons */
@@ -183,9 +172,6 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     /** @hidden */
     constructor() {
         super();
-        if (this.ngControl) {
-            this.ngControl.valueAccessor = this;
-        }
     }
 
     /**
@@ -206,9 +192,9 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
             } else {
                 this.state = !this.timePickerComponent.time && !this.allowNull ? 'error' : undefined;
             }
-            this.value = value;
+            this.setValue(value);
             this.stateChanges.next('time picker: handleTimeInputChange');
         }
-        this.onTouched();
+        this.touch.emit();
     }
 }
