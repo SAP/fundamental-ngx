@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { TableModule } from '@fundamental-ngx/core/table';
 import {
     CodeExampleComponent,
@@ -19,7 +18,6 @@ import { ToolLayoutTabletExampleComponent } from './examples/tablet-example/tool
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        FocusableGridDirective,
         TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,

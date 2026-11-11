@@ -1,7 +1,5 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
     DATE_TIME_FORMATS,
@@ -40,7 +38,7 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    imports: [FormLabelComponent, DatePickerComponent, FormsModule, ContentDensityDirective, FdDatetimeModule, JsonPipe]
+    imports: [FormLabelComponent, DatePickerComponent, FormsModule, FdDatetimeModule]
 })
 export class DatePickerMultiExampleComponent {
     dates: Array<FdDate> = [

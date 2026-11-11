@@ -1,16 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
-import { Observable, of } from 'rxjs';
-
-import { AsyncPipe } from '@angular/common';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
-    FdpCellDef,
-    FdpTableCell,
     TableDataSourceDirective,
     TableHeaderResizerDirective,
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
+import { Observable, of } from 'rxjs';
 
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
@@ -24,9 +20,6 @@ import { ButtonComponent } from '@fundamental-ngx/platform/button';
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        FdpCellDef,
-        FdpTableCell,
-        AsyncPipe,
         FdDatetimeModule,
         ButtonComponent
     ]

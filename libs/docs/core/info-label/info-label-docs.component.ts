@@ -5,7 +5,6 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
-    SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { InfoLabelExampleComponent } from './examples/info-label-example.component';
@@ -20,7 +19,6 @@ const InfoLableExample = 'info-label-example.component.html';
         ComponentExampleComponent,
         InfoLabelExampleComponent,
         CodeExampleComponent,
-        SeparatorComponent,
         DescriptionComponent
     ]
 })

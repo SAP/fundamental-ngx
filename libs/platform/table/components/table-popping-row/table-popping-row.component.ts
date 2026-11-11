@@ -12,7 +12,6 @@ import {
     inject
 } from '@angular/core';
 import {
-    DisabledBehaviorDirective,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItem,
@@ -53,7 +52,6 @@ import {
     },
     imports: [
         TableCellDirective,
-        DisabledBehaviorDirective,
         TableTextDirective,
         FormLabelComponent,
         NgTemplateOutlet,
