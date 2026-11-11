@@ -1,20 +1,12 @@
-<div
-    #actionBar
-    class="fd-side-panel__action-bar"
-    role="toolbar"
-    aria-orientation="vertical"
-    tabindex="-1"
-    [attr.aria-label]="ariaLabel()"
-    (keydown)="onKeydown($event)"
->
-    <div class="fd-side-panel__action-container">
+<div #actionBar class="fd-side-panel__action-bar">
+    <div class="fd-side-panel__action-container fd-side-panel__nav-container">
         <button
             #navArrow
             type="button"
             class="fd-side-panel__nav-arrow"
             [attr.aria-expanded]="isNavArrowExpanded()"
-            [attr.aria-label]="isNavArrowExpanded() ? 'Collapse side panel' : 'Expand side panel'"
-            [attr.title]="isNavArrowExpanded() ? 'Collapse side panel' : 'Expand side panel'"
+            [attr.aria-label]="isNavArrowExpanded() ? navArrowCollapseLabel() : navArrowExpandLabel()"
+            [attr.title]="isNavArrowExpanded() ? navArrowCollapseLabel() : navArrowExpandLabel()"
             (click)="toggleNavArrow()"
         >
             <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
@@ -25,106 +17,94 @@
     </div>
 
     @if (!isSingleAction()) {
-        @for (item of items(); track item.id(); let i = $index) {
-            <div
-                class="fd-side-panel__action-container"
-                [class.fd-side-panel__action-container--overflow-hidden]="i >= visibleItemCount()"
-                [class.is-focused]="focusedContainerIndex() === i"
-                (click)="activate(item, i)"
+        <div class="fd-side-panel__toolbar" role="toolbar" aria-orientation="vertical" (keydown)="onKeydown($event)">
+            <ul
+                class="fd-side-panel__list"
+                role="listbox"
+                aria-multiselectable="false"
+                tabindex="-1"
+                [attr.aria-label]="ariaLabel()"
             >
-                <button
-                    #actionButton
-                    type="button"
-                    class="fd-side-panel__action"
-                    [class.is-active]="item.id() === activeItem()"
-                    [class.is-disabled]="item.disabled()"
-                    [attr.aria-pressed]="item.id() === activeItem()"
-                    [attr.aria-label]="item.label()"
-                    [attr.aria-disabled]="item.disabled() || null"
-                    [attr.title]="item.label()"
-                    [disabled]="item.disabled()"
-                    [tabindex]="i === focusedIndex() ? 0 : -1"
-                    (focus)="onActionFocus(i)"
-                    (blur)="onActionBlur()"
-                >
-                    <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
-                    @if (item.counter() !== undefined) {
-                        <span class="fd-side-panel__action-counter" aria-hidden="true">{{
-                            item.counter()! > 99 ? '99+' : item.counter()
+                @for (item of items(); track item.id(); let i = $index) {
+                    <li
+                        #actionOption
+                        role="option"
+                        class="fd-side-panel__action-container"
+                        [class.fd-side-panel__action-container--overflow-hidden]="i >= visibleItemCount()"
+                        [class.is-active]="item.id() === activeItem()"
+                        [class.is-disabled]="item.disabled()"
+                        [class.is-focused]="focusedContainerIndex() === i"
+                        [attr.aria-selected]="item.id() === activeItem()"
+                        [attr.aria-label]="item.label()"
+                        [attr.aria-disabled]="item.disabled() || null"
+                        [attr.aria-posinset]="i + 1"
+                        [attr.aria-setsize]="items().length"
+                        [attr.title]="item.label()"
+                        [tabindex]="i === focusedIndex() ? 0 : -1"
+                        (click)="activate(item, i)"
+                        (focus)="onActionFocus(i)"
+                        (blur)="onActionBlur()"
+                    >
+                        <span class="fd-side-panel__action" [class.is-active]="item.id() === activeItem()">
+                            <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
+                            @if (item.counter() !== undefined) {
+                                <span class="fd-side-panel__action-counter" aria-hidden="true">{{
+                                    item.counter()! > 99 ? '99+' : item.counter()
+                                }}</span>
+                            }
+                        </span>
+                        @if (mode() === 'expanded') {
+                            <span class="fd-side-panel__action-label" aria-hidden="true">{{ item.label() }}</span>
+                        }
+                    </li>
+                }
+            </ul>
+            @if (overflowItems().length) {
+                <div class="fd-side-panel__action-container" [class.is-focused]="overflowToggleFocused()">
+                    <button
+                        #overflowToggle
+                        type="button"
+                        class="fd-side-panel__overflow-toggle"
+                        [class.is-open]="overflowMenu.isOpen()"
+                        [fdMenuTrigger]="overflowMenu"
+                        tabindex="-1"
+                        [attr.aria-label]="overflowMenu.isOpen() ? overflowShowLessLabel() : overflowShowMoreLabel()"
+                        (focus)="overflowToggleFocused.set(true)"
+                        (blur)="overflowToggleFocused.set(false)"
+                    >
+                        <fd-icon glyph="overflow" [ariaHidden]="true" />
+                    </button>
+                    <fd-menu
+                        #overflowMenu
+                        [placement]="overflowPlacement()"
+                        [ariaLabel]="ariaLabel() ?? null"
+                        [additionalBodyClass]="overflowMenuBodyClass()"
+                    >
+                        @for (item of overflowItems(); track item.id()) {
+                            <li fd-menu-item [disabled]="item.disabled()">
+                                <a fd-menu-interactive (click)="activateOverflowItem(item)">
+                                    <fd-menu-addon position="before" [glyph]="item.icon()" />
+                                    <span fd-menu-title>{{ item.label() }}</span>
+                                </a>
+                            </li>
+                        }
+                    </fd-menu>
+                    @if (mode() === 'expanded') {
+                        <span class="fd-side-panel__action-label" aria-hidden="true">{{
+                            overflowMenu.isOpen() ? overflowShowLessLabel() : overflowShowMoreLabel()
                         }}</span>
                     }
-                </button>
-                @if (mode() === 'expanded') {
-                    <span class="fd-side-panel__action-label" aria-hidden="true">{{ item.label() }}</span>
-                }
-            </div>
-        }
-        @if (overflowItems().length) {
-            <div
-                class="fd-side-panel__action-container"
-                [class.is-focused]="overflowToggleFocused()"
-                (click)="toggleOverflowOpen()"
-            >
-                <fd-popover
-                    [isOpen]="overflowOpen()"
-                    (isOpenChange)="onOverflowOpenChange($event)"
-                    [placement]="overflowPlacement()"
-                    [triggers]="[]"
-                    [closeOnEscapeKey]="false"
-                    [focusAutoCapture]="false"
-                >
-                    <fd-popover-control>
-                        <button
-                            #overflowToggle
-                            type="button"
-                            class="fd-side-panel__overflow-toggle"
-                            [class.is-open]="overflowOpen()"
-                            tabindex="-1"
-                            aria-haspopup="menu"
-                            [attr.aria-expanded]="overflowOpen()"
-                            [attr.aria-label]="overflowOpen() ? 'Show Less' : 'More Actions'"
-                            (focus)="overflowToggleFocused.set(true)"
-                            (blur)="overflowToggleFocused.set(false)"
-                        >
-                            <fd-icon glyph="overflow" [ariaHidden]="true" />
-                        </button>
-                    </fd-popover-control>
-                    <fd-popover-body>
-                        <ul
-                            [id]="overflowListId"
-                            role="menu"
-                            class="fd-side-panel__overflow-list"
-                            (keydown)="onOverflowKeydown($event)"
-                        >
-                            @for (item of overflowItems(); track item.id(); let i = $index) {
-                                <li
-                                    role="menuitem"
-                                    tabindex="-1"
-                                    class="fd-side-panel__overflow-item"
-                                    [attr.aria-posinset]="i + 1"
-                                    [attr.aria-setsize]="overflowItems().length"
-                                    (click)="activateOverflowItem(item)"
-                                >
-                                    <fd-icon [glyph]="item.icon()" [ariaHidden]="true" />
-                                    <span>{{ item.label() }}</span>
-                                </li>
-                            }
-                        </ul>
-                    </fd-popover-body>
-                </fd-popover>
-                @if (mode() === 'expanded') {
-                    <span class="fd-side-panel__action-label" aria-hidden="true">{{
-                        overflowOpen() ? 'Show Less' : 'More Actions'
-                    }}</span>
-                }
-            </div>
-        }
+                </div>
+            }
+        </div>
     }
 </div>
 
 @if (open()) {
     <div
+        #contentPanel
         class="fd-side-panel__content-panel"
+        tabindex="-1"
         [style.--fd-side-panel-content-width]="defaultWidth()"
         [style.--fd-side-panel-content-min-width]="minWidth()"
         [style.--fd-side-panel-content-max-width]="maxWidth()"
@@ -139,7 +119,7 @@
                     #contentPanelClose
                     type="button"
                     class="fd-side-panel__content-panel-close"
-                    aria-label="Close panel"
+                    [attr.aria-label]="closePanelLabel()"
                     (click)="toggleNavArrow()"
                 >
                     <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
@@ -149,7 +129,7 @@
                     #contentPanelClose
                     type="button"
                     class="fd-side-panel__content-panel-close"
-                    aria-label="Close"
+                    [attr.aria-label]="closeLabel()"
                     (click)="closeContentPanel()"
                 >
                     <fd-icon glyph="decline" [ariaHidden]="true" />

@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -62,8 +63,13 @@ class CounterBadgeTestHostComponent {
     readonly counter = signal<number | undefined>(undefined);
 }
 
-function getButtons(fixture: ComponentFixture<TestHostComponent>): HTMLButtonElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('.fd-side-panel__action'));
+// The interactive element per item is the <li role="option"> (UI5 listbox/option model).
+function getOptions(fixture: ComponentFixture<unknown>): HTMLElement[] {
+    return Array.from(fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]'));
+}
+
+function getToolbar(fixture: ComponentFixture<unknown>): HTMLElement {
+    return fixture.nativeElement.querySelector('.fd-side-panel__toolbar');
 }
 
 function getNavArrow(fixture: ComponentFixture<unknown>): HTMLButtonElement {
@@ -87,8 +93,8 @@ describe('SidePanelComponent', () => {
         await fixture.whenStable();
     });
 
-    it('should render one action button per projected item', () => {
-        expect(getButtons(fixture).length).toBe(3);
+    it('should render one option per projected item', () => {
+        expect(getOptions(fixture).length).toBe(3);
     });
 
     it('should position the action bar according to `side`', () => {
@@ -100,68 +106,98 @@ describe('SidePanelComponent', () => {
         expect(panel.classList).toContain('fd-side-panel--left');
     });
 
-    it('should render the action bar as a vertical toolbar with its aria-label', () => {
-        const bar: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__action-bar');
-        expect(bar.getAttribute('role')).toBe('toolbar');
-        expect(bar.getAttribute('aria-orientation')).toBe('vertical');
-        expect(bar.getAttribute('aria-label')).toBe('Groups');
+    it('should expose the whole panel as a region labelled "Side Panel"', () => {
+        const hostEl: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel');
+        expect(hostEl.getAttribute('role')).toBe('region');
+        expect(hostEl.getAttribute('aria-label')).toBe('Side Panel');
     });
 
-    it('should expose the group name through title and aria-label', () => {
-        const [filterButton] = getButtons(fixture);
-        expect(filterButton.getAttribute('aria-label')).toBe('Filter');
-        expect(filterButton.getAttribute('title')).toBe('Filter');
+    it('should render a vertical toolbar wrapping a single-select listbox with its aria-label', () => {
+        const toolbar = getToolbar(fixture);
+        expect(toolbar.getAttribute('role')).toBe('toolbar');
+        expect(toolbar.getAttribute('aria-orientation')).toBe('vertical');
+
+        const listbox: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__list');
+        expect(listbox.getAttribute('role')).toBe('listbox');
+        expect(listbox.getAttribute('aria-multiselectable')).toBe('false');
+        expect(listbox.getAttribute('aria-label')).toBe('Groups');
+    });
+
+    it('should expose options with posinset/setsize and the group name', () => {
+        const [filter, , tasks] = getOptions(fixture);
+        expect(filter.getAttribute('role')).toBe('option');
+        expect(filter.getAttribute('aria-label')).toBe('Filter');
+        expect(filter.getAttribute('title')).toBe('Filter');
+        expect(filter.getAttribute('aria-posinset')).toBe('1');
+        expect(filter.getAttribute('aria-setsize')).toBe('3');
+        expect(tasks.getAttribute('aria-disabled')).toBe('true');
     });
 
     it('should activate an item on click and emit activeItemChange via two-way binding', () => {
-        const [filterButton] = getButtons(fixture);
-        filterButton.click();
+        const [filter] = getOptions(fixture);
+        filter.click();
         fixture.detectChanges();
 
         expect(host.activeItem).toBe('filter');
-        expect(filterButton.classList).toContain('is-active');
-        expect(filterButton.getAttribute('aria-pressed')).toBe('true');
+        expect(filter.classList).toContain('is-active');
+        expect(filter.getAttribute('aria-selected')).toBe('true');
     });
 
-    it('should toggle the active item off when its button is clicked again', () => {
-        const [filterButton] = getButtons(fixture);
-        filterButton.click();
+    it('should toggle the active item off when its option is clicked again', () => {
+        const [filter] = getOptions(fixture);
+        filter.click();
         fixture.detectChanges();
         expect(host.activeItem).toBe('filter');
 
-        filterButton.click();
+        filter.click();
         fixture.detectChanges();
         expect(host.activeItem).toBeNull();
-        expect(filterButton.classList).not.toContain('is-active');
+        expect(filter.classList).not.toContain('is-active');
+        expect(filter.getAttribute('aria-selected')).toBe('false');
     });
 
     it('should not activate a disabled item', () => {
-        const disabledButton = getButtons(fixture)[2];
-        expect(disabledButton.disabled).toBe(true);
+        const disabled = getOptions(fixture)[2];
+        expect(disabled.getAttribute('aria-disabled')).toBe('true');
 
-        disabledButton.click();
+        disabled.click();
         fixture.detectChanges();
 
         expect(host.activeItem).toBeNull();
     });
 
+    it('should activate the focused option on Enter', () => {
+        const [, layout] = getOptions(fixture);
+        getToolbar(fixture).dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true })
+        );
+        fixture.detectChanges();
+        getToolbar(fixture).dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true })
+        );
+        fixture.detectChanges();
+
+        expect(host.activeItem).toBe('layout');
+        expect(layout.getAttribute('aria-selected')).toBe('true');
+    });
+
     it('should use a roving tabindex, defaulting the first item to tabindex 0', () => {
-        const [first, second] = getButtons(fixture);
+        const [first, second] = getOptions(fixture);
         expect(first.getAttribute('tabindex')).toBe('0');
         expect(second.getAttribute('tabindex')).toBe('-1');
     });
 
     it('should move roving focus with ArrowDown and skip disabled items', () => {
-        const [first, second, disabled] = getButtons(fixture);
-        const bar: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__action-bar');
+        const [first, second, disabled] = getOptions(fixture);
+        const toolbar = getToolbar(fixture);
 
-        bar.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
+        toolbar.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
         fixture.detectChanges();
         expect(second.getAttribute('tabindex')).toBe('0');
         expect(first.getAttribute('tabindex')).toBe('-1');
 
         // Wraps past the disabled third item back to the first.
-        bar.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
+        toolbar.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true }));
         fixture.detectChanges();
         expect(first.getAttribute('tabindex')).toBe('0');
         expect(disabled.getAttribute('tabindex')).toBe('-1');
@@ -219,8 +255,8 @@ describe('SidePanelComponent', () => {
             fixture.detectChanges();
             expect(host.mode).toBe('expanded');
 
-            const [filterButton] = getButtons(fixture);
-            filterButton.click();
+            const [filterOption] = getOptions(fixture);
+            filterOption.click();
             fixture.detectChanges();
 
             expect(host.mode).toBe('collapsed');
@@ -285,6 +321,33 @@ describe('SidePanelComponent — single-action', () => {
         navArrow.click();
         fixture.detectChanges();
         expect(navArrow.getAttribute('aria-expanded')).toBe('true');
+    });
+
+    it('should close the panel on Escape', () => {
+        const navArrow = getNavArrow(fixture);
+        navArrow.click();
+        fixture.detectChanges();
+        expect(host.open).toBe(true);
+
+        const sidePanelEl: HTMLElement = fixture.nativeElement.querySelector('fd-side-panel');
+        sidePanelEl.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+        fixture.detectChanges();
+
+        expect(host.open).toBe(false);
+        expect(host.activeItem).toBeNull();
+    });
+
+    it('should move focus to the close button when the panel opens', async () => {
+        const navArrow = getNavArrow(fixture);
+        navArrow.click();
+        fixture.detectChanges();
+        // Focus is moved into the content panel on the next animation frame so Esc keeps working
+        // (the action bar — and its nav arrow — is display:none while a single-action panel is open).
+        await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+        fixture.detectChanges();
+
+        const closeButton = fixture.nativeElement.querySelector('.fd-side-panel__content-panel-close');
+        expect(document.activeElement).toBe(closeButton);
     });
 });
 
@@ -448,11 +511,11 @@ describe('SidePanelComponent — content panel', () => {
         expect(fixture.nativeElement.querySelector('.fd-side-panel__content-panel')).toBeNull();
     });
 
-    it('should return focus to the action button when the close button is clicked', () => {
-        const [filterButton] = Array.from<HTMLButtonElement>(
-            fixture.nativeElement.querySelectorAll('.fd-side-panel__action')
+    it('should return focus to the option when the close button is clicked', () => {
+        const [filterOption] = Array.from<HTMLElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]')
         );
-        filterButton.click();
+        filterOption.click();
         fixture.detectChanges();
 
         const closeButton: HTMLButtonElement = fixture.nativeElement.querySelector(
@@ -461,7 +524,7 @@ describe('SidePanelComponent — content panel', () => {
         closeButton.click();
         fixture.detectChanges();
 
-        expect(document.activeElement).toBe(filterButton);
+        expect(document.activeElement).toBe(filterOption);
     });
 
     it('should switch active group without closing when another action is clicked', () => {
@@ -575,103 +638,127 @@ describe('SidePanelComponent — overflow', () => {
         expect(toggle).not.toBeNull();
     });
 
-    it('should hide item containers beyond visibleItemCount', () => {
-        // visible=1 → items at index 1, 2, 3 get overflow-hidden class
+    it('should hide option elements beyond visibleItemCount', () => {
+        // visible=1 → options at index 1, 2, 3 get overflow-hidden class
         setMeasurements(200, 60, 48, 4);
-        const containers = Array.from<HTMLElement>(
-            fixture.nativeElement.querySelectorAll('.fd-side-panel__action-container')
-        ).filter((el) => el.querySelector('.fd-side-panel__action'));
-
-        const hiddenContainers = containers.filter((el) =>
+        const options = Array.from<HTMLElement>(
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]')
+        );
+        const hidden = options.filter((el) =>
             el.classList.contains('fd-side-panel__action-container--overflow-hidden')
         );
-        expect(hiddenContainers.length).toBeGreaterThan(0);
+        expect(hidden.length).toBeGreaterThan(0);
     });
 
-    it('should open the overflow list when the toggle is clicked', () => {
-        setMeasurements(200, 60, 48, 4);
-        const toggle: HTMLButtonElement = fixture.nativeElement.querySelector('.fd-side-panel__overflow-toggle');
-        toggle.click();
-        fixture.detectChanges();
-
-        expect(toggle.getAttribute('aria-expanded')).toBe('true');
-    });
-
-    it('should show overflow items in the list when open', () => {
-        setMeasurements(200, 60, 48, 4);
-        const comp = getSidePanel();
-        (comp as any)['overflowOpen'].set(true);
-        fixture.detectChanges();
-
-        const list = document.querySelector('.fd-side-panel__overflow-list');
-        if (list) {
-            expect(list.getAttribute('role')).toBe('menu');
-        } else {
-            // Popover renders in CDK overlay outside the component element; check the signal
-            expect((comp as any)['overflowItems']().length).toBeGreaterThan(0);
-        }
-    });
-
-    it('should close the overflow list and activate the item when an overflow item is clicked', () => {
-        setMeasurements(200, 60, 48, 4);
-        const comp = getSidePanel();
-        (comp as any)['overflowOpen'].set(true);
-        fixture.detectChanges();
-
-        const firstItem: HTMLElement | null = document.querySelector('.fd-side-panel__overflow-item');
-        if (firstItem) {
-            firstItem.click();
-            fixture.detectChanges();
-            expect((comp as any)['overflowOpen']()).toBe(false);
-        } else {
-            // Overlay not rendered in JSDOM — verify close logic via method directly
-            (comp as any)['activateOverflowItem']((comp as any)['overflowItems']()[0]);
-            fixture.detectChanges();
-            expect((comp as any)['overflowOpen']()).toBe(false);
-        }
-    });
-
-    it('should close the overflow list on Escape', () => {
-        setMeasurements(200, 60, 48, 4);
-        const comp = getSidePanel();
-        (comp as any)['overflowOpen'].set(true);
-        fixture.detectChanges();
-
-        (comp as any)['onOverflowKeydown'](
-            new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })
-        );
-        fixture.detectChanges();
-
-        expect((comp as any)['overflowOpen']()).toBe(false);
-    });
-
-    it('should have aria-haspopup="menu" and aria-expanded on the overflow toggle', () => {
+    it('should wire the overflow toggle as an fd-menu trigger', () => {
         setMeasurements(200, 60, 48, 4);
         const toggle: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__overflow-toggle');
-        expect(toggle.getAttribute('aria-haspopup')).toBe('menu');
+        // [fdMenuTrigger] sets aria-haspopup; jsdom renders "true", real browsers "menu" — both are valid.
+        expect(['menu', 'true']).toContain(toggle.getAttribute('aria-haspopup') ?? '');
         expect(toggle.getAttribute('aria-expanded')).toBe('false');
-
-        (getSidePanel() as any)['overflowOpen'].set(true);
-        fixture.detectChanges();
-        expect(toggle.getAttribute('aria-expanded')).toBe('true');
     });
 
-    it('overflow items should have role="menuitem" and aria-posinset/aria-setsize', () => {
+    it('should activate an overflow item without focusing its hidden option', () => {
         setMeasurements(200, 60, 48, 4);
         const comp = getSidePanel();
-        (comp as any)['overflowOpen'].set(true);
+        const overflowItems = (comp as any)['overflowItems']();
+        expect(overflowItems.length).toBeGreaterThan(0);
+
+        (comp as any)['activateOverflowItem'](overflowItems[0]);
         fixture.detectChanges();
 
-        const items = Array.from<HTMLElement>(document.querySelectorAll('.fd-side-panel__overflow-item'));
-        if (items.length > 0) {
-            items.forEach((item, idx) => {
-                expect(item.getAttribute('role')).toBe('menuitem');
-                expect(item.getAttribute('aria-posinset')).toBe(String(idx + 1));
-                expect(item.getAttribute('aria-setsize')).toBe(String(items.length));
-            });
-        } else {
-            // Overlay not in JSDOM — verify the computed data instead
-            expect((comp as any)['overflowItems']().length).toBeGreaterThan(0);
-        }
+        expect(comp.activeItem()).toBe(overflowItems[0].id());
+        expect(comp.open()).toBe(true);
+    });
+
+    it('should toggle an overflow item off when activated twice', () => {
+        setMeasurements(200, 60, 48, 4);
+        const comp = getSidePanel();
+        const item = (comp as any)['overflowItems']()[0];
+
+        (comp as any)['activateOverflowItem'](item);
+        fixture.detectChanges();
+        expect(comp.activeItem()).toBe(item.id());
+
+        (comp as any)['activateOverflowItem'](item);
+        fixture.detectChanges();
+        expect(comp.activeItem()).toBeNull();
+        expect(comp.open()).toBe(false);
+    });
+});
+
+describe('SidePanelComponent — keyboard shortcuts & announcements', () => {
+    let fixture: ComponentFixture<TestHostComponent>;
+
+    function getHostEl(): HTMLElement {
+        return fixture.nativeElement.querySelector('fd-side-panel');
+    }
+
+    function getOptionEls(): HTMLElement[] {
+        return Array.from(fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]'));
+    }
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestHostComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(TestHostComponent);
+        fixture.detectChanges();
+        await fixture.whenStable();
+    });
+
+    it('should toggle expanded mode on a global Shift+Ctrl/Cmd+P (focus outside the panel)', () => {
+        const host = fixture.componentInstance;
+        expect(host.mode).toBe('collapsed');
+
+        // Dispatched from document.body — focus is NOT inside the panel — to prove the
+        // shortcut is global (handled by the document listener, not the host listener).
+        document.body.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'P', code: 'KeyP', shiftKey: true, ctrlKey: true, bubbles: true })
+        );
+        fixture.detectChanges();
+        expect(host.mode).toBe('expanded');
+
+        document.body.dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'P', code: 'KeyP', shiftKey: true, metaKey: true, bubbles: true })
+        );
+        fixture.detectChanges();
+        expect(host.mode).toBe('collapsed');
+    });
+
+    it('should announce the new state when toggling via the nav arrow', () => {
+        const announcer = TestBed.inject(LiveAnnouncer);
+        const spy = jest.spyOn(announcer, 'announce');
+
+        const navArrow: HTMLButtonElement = fixture.nativeElement.querySelector('.fd-side-panel__nav-arrow');
+        navArrow.click();
+        fixture.detectChanges();
+        expect(spy).toHaveBeenCalledWith('Side panel expanded');
+
+        navArrow.click();
+        fixture.detectChanges();
+        expect(spy).toHaveBeenCalledWith('Side panel collapsed');
+    });
+
+    it('should move focus between the active option and the open content panel with F6', () => {
+        const [, layout] = getOptionEls();
+        layout.click(); // activates "layout" and opens the content panel
+        fixture.detectChanges();
+
+        const contentPanel: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__content-panel');
+        expect(contentPanel).not.toBeNull();
+
+        // F6 → into the content panel
+        getHostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'F6', bubbles: true, cancelable: true }));
+        fixture.detectChanges();
+        expect(document.activeElement).toBe(contentPanel);
+
+        // F6 again → back to the active option
+        getHostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'F6', bubbles: true, cancelable: true }));
+        fixture.detectChanges();
+        expect(document.activeElement).toBe(layout);
     });
 });

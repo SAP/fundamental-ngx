@@ -135,6 +135,30 @@ $fd-side-panel-expanded-width: 20rem;
         // border-radius applied per-side in --right / --left modifiers above
     }
 
+    // ── Toolbar wrapper (role="toolbar") and listbox ─────────────────────────
+    // The toolbar groups the action-item listbox and the overflow toggle; the
+    // nav arrow sits outside it (a direct action-bar child). Both the toolbar
+    // and the listbox are flex columns carrying the same 2rem item gap.
+
+    &__toolbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        inline-size: 100%;
+        gap: 2rem;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        inline-size: 100%;
+        margin: 0;
+        padding: 0;
+        gap: 2rem;
+        list-style: none;
+    }
+
     // ── Navigation arrow (spec A) ───────────────────────────────────────────
 
     &__nav-arrow {
@@ -193,10 +217,24 @@ $fd-side-panel-expanded-width: 20rem;
             background: var(--sapList_Hover_Background, #eaecee);
         }
 
-        // Pointer cursor for enabled item containers; default for disabled
-        &:has(.fd-side-panel__action:not(.is-disabled)),
+        // Pointer cursor for interactive rows (options + overflow); nav-container excluded.
+        &:has(.fd-side-panel__action),
         &:has(.fd-side-panel__overflow-toggle) {
             cursor: pointer;
+        }
+
+        // The option <li> is now focusable — suppress the native outline; the
+        // full-row .is-focused ring below is the visible focus indicator.
+        &:focus,
+        &:focus-visible {
+            outline: none;
+        }
+
+        // Disabled option: dim the whole row (icon + label) and block interaction.
+        &.is-disabled {
+            cursor: default;
+            opacity: var(--sapContent_DisabledOpacity, 0.4);
+            pointer-events: none;
         }
 
         // Full-width rectangular focus ring — solid brand border spanning the entire bar row
@@ -215,7 +253,9 @@ $fd-side-panel-expanded-width: 20rem;
         display: none;
     }
 
-    // ── Action button — inactive (spec B2) ──────────────────────────────────
+    // ── Action visual circle — inactive (spec B2) ──────────────────────────
+    // Presentational <span> inside the <li role="option">; the <li> is the
+    // interactive/focusable element, so this element has no button resets.
 
     &__action {
         position: relative;
@@ -225,28 +265,11 @@ $fd-side-panel-expanded-width: 20rem;
         inline-size: $fd-side-panel-action-size-cozy;
         block-size: $fd-side-panel-action-size-cozy;
         flex-shrink: 0;
-        padding: 0;
         box-sizing: border-box;
         border: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9); // spec B2: circular outline
         border-radius: 50%; // spec B2: circular shape
         background: var(--sapGroup_ContentBackground, #fff);
         color: var(--sapContent_Selected_ForegroundColor, #0064d9);
-        cursor: pointer;
-        appearance: none;
-        -webkit-appearance: none;
-
-        // Extend the interactive (click + hover) area to the full container row.
-        // Container padding: 0.1875rem block / 0.75rem inline (cozy); compact overrides inline to 1rem below.
-        &::after {
-            content: '';
-            position: absolute;
-            inset-block: -0.1875rem;
-            inset-inline: -0.75rem;
-        }
-
-        &:focus {
-            outline: none;
-        }
 
         // Active state (spec B1): filled circle — brand bg, contrast icon, matching border
         // sapSelectedColor is the correct token: #0064d9 Horizon, #0854a0 Quartz,
@@ -257,13 +280,6 @@ $fd-side-panel-expanded-width: 20rem;
             color: var(--sapContent_ContrastIconColor, #fff);
             // keep border but match bg so layout stays stable with box-sizing:border-box
             border-color: var(--sapSelectedColor, #0064d9);
-        }
-
-        &.is-disabled,
-        &:disabled {
-            cursor: default;
-            opacity: var(--sapContent_DisabledOpacity, 0.4);
-            pointer-events: none;
         }
     }
 
@@ -345,36 +361,6 @@ $fd-side-panel-expanded-width: 20rem;
         }
     }
 
-    // ── Overflow list (inside fd-popover-body) ─────────────────────────────
-
-    &__overflow-list {
-        list-style: none;
-        margin: 0;
-        padding: 0.25rem 0;
-        min-inline-size: 8rem;
-    }
-
-    // ── Overflow menu item ─────────────────────────────────────────────────
-
-    &__overflow-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        color: var(--sapTextColor, #32363a);
-        cursor: pointer;
-
-        &:hover {
-            background: var(--sapList_Hover_Background, #eaecee);
-        }
-
-        &:focus {
-            outline: 0.125rem solid var(--sapContent_Selected_ForegroundColor, #0064d9);
-            outline-offset: -0.125rem;
-            background: var(--sapList_Hover_Background, #eaecee);
-        }
-    }
-
     // ── Expanded mode (fd-side-panel--expanded) ──────────────────────────────
     // 320px wide rail; icon circles stay circular, labels appear beside them.
     // The nav arrow shifts to the top-right corner; item rows align left.
@@ -385,37 +371,18 @@ $fd-side-panel-expanded-width: 20rem;
         }
 
         // Nav arrow container: push the arrow to the inline-end (top-right for LTR)
-        .fd-side-panel__action-container:first-child {
+        .fd-side-panel__nav-container {
             justify-content: flex-end;
         }
 
-        // Item containers: icon circle on the left, label text to the right
-        .fd-side-panel__action-container:not(:first-child) {
+        // Toolbar rows (option items + overflow): icon circle on the left, label to the right
+        .fd-side-panel__toolbar .fd-side-panel__action-container {
             justify-content: flex-start;
             align-items: center;
             gap: 0.75rem;
         }
 
-        // Buttons remain as circles — no size or border-radius overrides.
-        // Only remove the click-area ::after (the full-row hover on the container suffices).
-        .fd-side-panel__action {
-            flex-shrink: 0;
-
-            &::after {
-                display: none;
-            }
-        }
-
-        // Label acts as a secondary click target; cursor mirrors the button.
-        .fd-side-panel__action-label {
-            cursor: pointer;
-        }
-
-        // Label inherits disabled opacity from the sibling button via :has()
-        .fd-side-panel__action-container:has(.fd-side-panel__action.is-disabled) .fd-side-panel__action-label {
-            opacity: var(--sapContent_DisabledOpacity, 0.4);
-            pointer-events: none;
-        }
+        // Circles remain circular — no size or border-radius overrides needed.
     }
 
     // ── Compact density (spec C: 4rem bar, B1/B2: 2rem button) ─────────────
@@ -436,11 +403,6 @@ $fd-side-panel-expanded-width: 20rem;
         // Cozy default is 0.75rem; compact needs 1rem per spec.
         .fd-side-panel__action-container {
             padding-inline: 1rem;
-        }
-
-        // Extend click/hover area to full compact container row (1rem inline padding).
-        .fd-side-panel__action::after {
-            inset-inline: -1rem;
         }
 
         .fd-side-panel__action-icon {
@@ -610,5 +572,56 @@ $fd-side-panel-expanded-width: 20rem;
         flex: 1 1 auto;
         overflow-y: auto;
         padding: 1rem;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Overflow menu body — separator alignment (portalled, outside .fd-side-panel)
+//
+// The overflow trigger sits centred inside a full-width action-container row that
+// has 0.75rem padding on each side (cozy) or 1rem (compact). CDK positions the
+// fd-menu body relative to the trigger button's edge, so the body is inset from
+// the action bar's content-facing edge (the separator) by one padding unit.
+// transform: translateX compensates by shifting the body flush with that edge.
+//
+// In RTL the bar's physical side is flipped (flex-end = left), so the menu opens
+// in the opposite direction and the translateX must be negated.
+// ---------------------------------------------------------------------------
+
+.fd-side-panel__overflow-menu-body {
+    &--right {
+        &.fd-side-panel__overflow-menu-body--cozy {
+            transform: translateX(-0.75rem);
+
+            [dir='rtl'] & {
+                transform: translateX(0.75rem);
+            }
+        }
+
+        &.fd-side-panel__overflow-menu-body--compact {
+            transform: translateX(-1rem);
+
+            [dir='rtl'] & {
+                transform: translateX(1rem);
+            }
+        }
+    }
+
+    &--left {
+        &.fd-side-panel__overflow-menu-body--cozy {
+            transform: translateX(0.75rem);
+
+            [dir='rtl'] & {
+                transform: translateX(-0.75rem);
+            }
+        }
+
+        &.fd-side-panel__overflow-menu-body--compact {
+            transform: translateX(1rem);
+
+            [dir='rtl'] & {
+                transform: translateX(-1rem);
+            }
+        }
     }
 }

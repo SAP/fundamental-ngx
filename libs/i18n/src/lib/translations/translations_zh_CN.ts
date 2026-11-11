@@ -241,6 +241,17 @@ export default {
         navigationButtonLabel: '导航',
         search: '搜索'
     },
+    coreSidePanel: {
+        close: 'Close',
+        closePanel: 'Close panel',
+        collapsedAnnouncement: 'Side panel collapsed',
+        expandedAnnouncement: 'Side panel expanded',
+        navArrowCollapse: 'Collapse side panel',
+        navArrowExpand: 'Expand side panel',
+        overflowShowLess: 'Show Less',
+        overflowShowMore: 'More Actions',
+        sidePanelLabel: 'Side Panel'
+    },
     coreSlider: {
         ariaLabel: '滑块手柄'
     },

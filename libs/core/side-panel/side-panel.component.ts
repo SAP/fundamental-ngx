@@ -1,4 +1,5 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     afterNextRender,
     Component,
@@ -19,20 +20,26 @@ import {
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import {
+    MenuAddonDirective,
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { SidePanelItemComponent } from './side-panel-item.component';
 
 /** Edge the side panel is anchored to. */
 export type SidePanelSide = 'left' | 'right';
-
-let _overflowListIdCounter = 0;
 
 /** Display mode of the side panel action bar. */
 export type SidePanelMode = 'collapsed' | 'expanded';
 
 /**
  * The Side Panel is a container anchored to an edge of the page. It is reached through a
- * vertical action-button bar where each button represents a content group.
+ * vertical action bar — a `toolbar` wrapping a `listbox` of `option` items, one per content group.
  *
  * Supports collapsed (icons-only) and expanded (icons + labels) action bar modes, a
  * slide-in content panel, automatic overflow into a popover, and full keyboard navigation.
@@ -53,10 +60,22 @@ export type SidePanelMode = 'collapsed' | 'expanded';
     templateUrl: './side-panel.component.html',
     styleUrl: './side-panel.component.scss',
     encapsulation: ViewEncapsulation.None,
-    imports: [IconComponent, NgTemplateOutlet, PopoverBodyComponent, PopoverComponent, PopoverControlComponent],
+    imports: [
+        IconComponent,
+        NgTemplateOutlet,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuAddonDirective,
+        MenuTitleDirective,
+        MenuTriggerDirective
+    ],
     providers: [contentDensityObserverProviders()],
     host: {
         '[class]': 'hostClasses()',
+        '[attr.role]': "'region'",
+        '[attr.aria-label]': 'sidePanelLabel()',
+        '(keydown)': 'onHostKeydown($event)',
         '(keydown.escape)': 'onEscape($event)'
     }
 })
@@ -176,17 +195,48 @@ export class SidePanelComponent {
                 ?.icon() ?? ''
     );
 
-    /** @hidden Whether the overflow popover is open. */
-    protected readonly overflowOpen = signal(false);
-
     /** @hidden Tracks keyboard focus on the overflow toggle button — drives the is-focused container ring. */
     protected readonly overflowToggleFocused = signal(false);
 
-    /** @hidden Preferred placement of the overflow popover relative to the action bar side. */
-    protected readonly overflowPlacement = computed(() => (this.side() === 'right' ? 'left-end' : 'right-end'));
+    /** @hidden Preferred placement of the overflow menu relative to the action bar side. */
+    protected readonly overflowPlacement = computed(() => {
+        // In LTR, a right panel has content to its left; in RTL flex-end shifts the bar to
+        // the physical left, so content is to its right.  Mirror the navArrowIcon logic.
+        const isContentOnRight = (this.side() === 'right') === this._isRtl();
+        return isContentOnRight ? 'right-end' : 'left-end';
+    });
 
-    /** @hidden Unique id for the overflow `<ul>` so the open effect can scope its focus query. */
-    protected readonly overflowListId = `fd-side-panel-overflow-${++_overflowListIdCounter}`;
+    /**
+     * @hidden Extra CSS classes applied to the overflow menu body so its edge aligns with the
+     * separator line between the action bar and the content area.
+     * The trigger button sits centred inside the action-container row (0.75rem cozy / 1rem compact
+     * padding on each side); `fd-menu` places the menu body relative to the button's edge, so the
+     * body is inset from the separator by one padding unit. `transform: translateX` compensates.
+     */
+    protected readonly overflowMenuBodyClass = computed(() => {
+        const side = this.side();
+        const density = this.contentDensityObserver.isCompactSignal() ? 'compact' : 'cozy';
+        return `fd-side-panel__overflow-menu-body fd-side-panel__overflow-menu-body--${side} fd-side-panel__overflow-menu-body--${density}`;
+    });
+
+    /** @hidden */
+    protected readonly navArrowExpandLabel = resolveTranslationSignal('coreSidePanel.navArrowExpand');
+    /** @hidden */
+    protected readonly navArrowCollapseLabel = resolveTranslationSignal('coreSidePanel.navArrowCollapse');
+    /** @hidden */
+    protected readonly overflowShowMoreLabel = resolveTranslationSignal('coreSidePanel.overflowShowMore');
+    /** @hidden */
+    protected readonly overflowShowLessLabel = resolveTranslationSignal('coreSidePanel.overflowShowLess');
+    /** @hidden */
+    protected readonly closePanelLabel = resolveTranslationSignal('coreSidePanel.closePanel');
+    /** @hidden */
+    protected readonly closeLabel = resolveTranslationSignal('coreSidePanel.close');
+    /** @hidden Accessible name of the side panel region landmark (host). */
+    protected readonly sidePanelLabel = resolveTranslationSignal('coreSidePanel.sidePanelLabel');
+    /** @hidden */
+    protected readonly expandedAnnouncement = resolveTranslationSignal('coreSidePanel.expandedAnnouncement');
+    /** @hidden */
+    protected readonly collapsedAnnouncement = resolveTranslationSignal('coreSidePanel.collapsedAnnouncement');
 
     /**
      * @hidden Number of items that fit in the visible action bar without overflowing.
@@ -214,14 +264,18 @@ export class SidePanelComponent {
     /** @hidden Items that overflow the visible action bar area. */
     protected readonly overflowItems = computed(() => this.items().slice(this.visibleItemCount()));
 
-    /** @hidden Action button elements, in projection order. */
-    private readonly _actionButtons = viewChildren<ElementRef<HTMLButtonElement>>('actionButton');
+    /** @hidden Action option (`<li role="option">`) elements, in projection order. */
+    private readonly _actionOptions = viewChildren<ElementRef<HTMLLIElement>>('actionOption');
 
     private readonly _actionBar = viewChild<ElementRef<HTMLDivElement>>('actionBar');
+    private readonly _contentPanel = viewChild<ElementRef<HTMLDivElement>>('contentPanel');
     private readonly _contentPanelClose = viewChild<ElementRef<HTMLButtonElement>>('contentPanelClose');
     private readonly _navArrowRef = viewChild<ElementRef<HTMLButtonElement>>('navArrow');
     private readonly _overflowToggleRef = viewChild<ElementRef<HTMLButtonElement>>('overflowToggle');
+    private readonly _overflowMenuRef = viewChild<MenuComponent>('overflowMenu');
     private readonly _destroyRef = inject(DestroyRef);
+    private readonly _liveAnnouncer = inject(LiveAnnouncer);
+    private readonly _document = inject(DOCUMENT);
     private readonly _availBarHeight = signal(0);
     private readonly _navContainerH = signal(0);
     private readonly _itemContainerH = signal(0);
@@ -232,25 +286,37 @@ export class SidePanelComponent {
 
     /** @hidden Whether the content panel was open when the action bar was expanded. */
     private _contentWasOpen = false;
+    /**
+     * @hidden Guard against a stale keyup activating the first overflow item immediately
+     * after the menu opens via Enter.  Enter on the `<button>` fires the native click
+     * synchronously (opening the menu), then CDK moves focus to the first `<a>` via
+     * requestAnimationFrame before the keyup fires.  MenuService's WCAG
+     * activate-on-keyup handler then treats that keyup as a deliberate selection, closing
+     * the menu immediately.  This flag causes `activateOverflowItem` to discard the first
+     * call after an Enter-driven open.  It is also cleared by the cleanup effect below
+     * when the menu closes without a selection (e.g. Escape).
+     */
+    private _ignoreNextOverflowActivation = false;
 
     constructor() {
-        // Focus the first overflow item whenever the popover opens — regardless of trigger.
-        // Pressing Enter on the overflow toggle is intercepted by fd-popover's own keydown.enter
-        // host binding, which calls preventDefault() (suppressing the button's synthetic click)
-        // and opens the overlay directly via the service. That bypasses toggleOverflowOpen(), so
-        // overflowOpen stays false until the service's isOpenChange subscription propagates back
-        // and calls onOverflowOpenChange(true). By the time the effect sees overflowOpen=true the
-        // overlay is already attached, so a single rAF is enough to find the item in the DOM.
+        // Shift+Cmd/Ctrl+P is a global expand/collapse shortcut — it must work regardless of
+        // where focus is, so it listens on the document. A host-level listener would only fire
+        // when focus is already inside the panel, which is almost never the case for this shortcut.
+        const onDocumentKeydown = (event: KeyboardEvent): void => {
+            if (event.shiftKey && (event.metaKey || event.ctrlKey) && event.code === 'KeyP') {
+                event.preventDefault();
+                this.toggleNavArrow();
+            }
+        };
+        this._document.addEventListener('keydown', onDocumentKeydown);
+        this._destroyRef.onDestroy(() => this._document.removeEventListener('keydown', onDocumentKeydown));
+
+        // When the overflow menu closes without an item being selected (e.g. Escape or
+        // outside click) clear the stale-keyup guard so subsequent Enter presses work.
         effect(() => {
-            if (this.overflowOpen()) {
-                requestAnimationFrame(() => {
-                    if (this.overflowOpen()) {
-                        document
-                            .getElementById(this.overflowListId)
-                            ?.querySelector<HTMLElement>('.fd-side-panel__overflow-item')
-                            ?.focus();
-                    }
-                });
+            const menu = this._overflowMenuRef();
+            if (menu && !menu.isOpen()) {
+                this._ignoreNextOverflowActivation = false;
             }
         });
 
@@ -263,13 +329,19 @@ export class SidePanelComponent {
             const measure = (): void => {
                 const style = getComputedStyle(bar);
                 const paddingBlockStart = parseFloat(style.paddingBlockStart) || 0;
+                const barGap = parseFloat(style.gap) || 0;
                 this._availBarHeight.set(bar.clientHeight - paddingBlockStart);
-                this._itemGapPx.set(parseFloat(style.gap) || 0);
 
-                const navContainer = bar.querySelector<HTMLElement>('.fd-side-panel__action-container');
-                this._navContainerH.set(navContainer?.offsetHeight ?? 0);
+                // The nav arrow sits outside the toolbar; the space it consumes before the
+                // item list is its own height plus the action-bar gap that follows it.
+                const navContainer = bar.querySelector<HTMLElement>('.fd-side-panel__nav-container');
+                this._navContainerH.set((navContainer?.offsetHeight ?? 0) + barGap);
 
-                const firstItemContainer = bar.querySelectorAll<HTMLElement>('.fd-side-panel__action-container')[1];
+                // Item stride is driven by the listbox's own gap and first option height.
+                const list = bar.querySelector<HTMLElement>('.fd-side-panel__list');
+                this._itemGapPx.set(list ? parseFloat(getComputedStyle(list).gap) || 0 : 0);
+
+                const firstItemContainer = list?.querySelector<HTMLElement>('.fd-side-panel__action-container');
                 this._itemContainerH.set(firstItemContainer?.offsetHeight ?? 0);
             };
 
@@ -297,7 +369,14 @@ export class SidePanelComponent {
             const newOpen = !this.open();
             this.open.set(newOpen);
             this.activeItem.set(newOpen ? item.id() : null);
-            if (!newOpen) {
+            if (newOpen) {
+                // Opening hides the action bar (display:none), so the nav arrow would lose
+                // focus to <body> — moving it off the host and breaking Esc. Move focus into
+                // the content panel (its close button) so keyboard handling stays in the panel.
+                requestAnimationFrame(() => {
+                    this._contentPanelClose()?.nativeElement.focus();
+                });
+            } else {
                 // Focus returns to the action bar nav arrow after the panel closes.
                 // rAF waits for the CSS display:none on the action bar to be cleared.
                 requestAnimationFrame(() => {
@@ -317,6 +396,9 @@ export class SidePanelComponent {
                 }
             }
         }
+        this._liveAnnouncer.announce(
+            this.isNavArrowExpanded() ? this.expandedAnnouncement() : this.collapsedAnnouncement()
+        );
     }
 
     /** @hidden Activate (or toggle off) the group behind an action button. */
@@ -374,8 +456,8 @@ export class SidePanelComponent {
 
         // Derive current slot from DOM focus so stale focusedIndex() (reset by ResizeObserver)
         // never causes navigation to jump back to item 0 mid-sequence.
-        const buttons = this._actionButtons();
-        const domFocusedIndex = buttons.findIndex((b) => b.nativeElement === document.activeElement);
+        const options = this._actionOptions();
+        const domFocusedIndex = options.findIndex((o) => o.nativeElement === document.activeElement);
         const currentSlot =
             hasOverflow && document.activeElement === this._overflowToggleRef()?.nativeElement
                 ? visible
@@ -398,6 +480,22 @@ export class SidePanelComponent {
                 // Land on the overflow toggle (last slot) when it exists.
                 nextIndex = hasOverflow ? visible : this._nextEnabledIndex(visible, -1);
                 break;
+            case 'Enter':
+            case ' ':
+                // Options are <li>, not native buttons, so activate them explicitly.
+                if (currentSlot < visible) {
+                    event.preventDefault();
+                    this.activate(this.items()[currentSlot], currentSlot);
+                } else if (event.key === 'Enter' && !event.repeat) {
+                    // Enter on the overflow <button> fires the native click synchronously on
+                    // keydown.  The menu opens; CDK then moves focus to the first item via
+                    // requestAnimationFrame — before the keyup fires.  MenuService's
+                    // WCAG activate-on-keyup handler then treats that keyup as a deliberate
+                    // selection, immediately closing the menu.
+                    // Guard the next activateOverflowItem call to discard the stale keyup.
+                    this._ignoreNextOverflowActivation = true;
+                }
+                return;
             default:
                 return;
         }
@@ -405,71 +503,61 @@ export class SidePanelComponent {
         this._focusSlot(nextIndex);
     }
 
-    /** @hidden Open or close the overflow popover. */
-    protected toggleOverflowOpen(): void {
-        this.overflowOpen.set(!this.overflowOpen());
+    /**
+     * @hidden Host-level focus navigation (requires focus inside the panel):
+     * `F6` / `Shift`+`F6` / `Cmd`/`Ctrl`+`Arrow` move focus between the action bar and the
+     * open content panel (multi-action only — in single-action the bar is hidden while open).
+     * The global `Shift`+`Cmd`/`Ctrl`+`P` expand/collapse shortcut is handled by a document
+     * listener set up in the constructor.
+     */
+    protected onHostKeydown(event: KeyboardEvent): void {
+        const isF6 = event.key === 'F6';
+        const isModArrow =
+            (event.metaKey || event.ctrlKey) && (event.key === 'ArrowLeft' || event.key === 'ArrowRight');
+        if (this.isSingleAction() || !this.open() || (!isF6 && !isModArrow)) {
+            return;
+        }
+        const panel = this._contentPanel()?.nativeElement;
+        if (!panel) {
+            return;
+        }
+        event.preventDefault();
+        if (panel.contains(document.activeElement)) {
+            // Move focus back to the active option (or the overflow toggle when it's hidden).
+            const index = this.items().findIndex((item) => item.id() === this.activeItem());
+            if (index > -1 && index >= this.visibleItemCount()) {
+                this._overflowToggleRef()?.nativeElement.focus();
+            } else if (index > -1) {
+                this._focusItem(index);
+            } else {
+                this._navArrowRef()?.nativeElement.focus();
+            }
+        } else {
+            panel.focus();
+        }
     }
 
     /**
-     * @hidden Syncs the overflowOpen signal when the popover closes itself
-     * (click-outside, service-initiated close).
+     * @hidden Activate the group behind an overflow menu item.
+     * Closes the overflow menu and — when focusing the item's `<li>` would be wrong (it is
+     * hidden while overflowed) — leaves focus to be restored by the menu's restoreFocusOnClose.
      */
-    protected onOverflowOpenChange(isOpen: boolean): void {
-        this.overflowOpen.set(isOpen);
-    }
-
-    /** @hidden Close the overflow popover and activate the selected overflow item. */
     protected activateOverflowItem(item: SidePanelItemComponent): void {
-        this.overflowOpen.set(false);
-        const index = this.items().indexOf(item);
-        this.activate(item, index);
-        // After activation the @if(open()) block renders the content panel.
-        // One rAF is enough for Angular's CD to stamp it so the viewChild resolves.
-        requestAnimationFrame(() => {
-            this._contentPanelClose()?.nativeElement.focus();
-        });
-    }
-
-    /** @hidden Keyboard navigation inside the overflow popover. */
-    protected onOverflowKeydown(event: KeyboardEvent): void {
-        // Escape closes the overflow regardless of whether items are present.
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            event.stopPropagation();
-            this.overflowOpen.set(false);
-            this._overflowToggleRef()?.nativeElement.focus();
+        if (item.disabled()) {
             return;
         }
-
-        // event.currentTarget is the <ul> itself — scoped even when the popover body
-        // lives in the CDK overlay container outside this component's host element.
-        const list = event.currentTarget as HTMLElement;
-        const items = Array.from(list.querySelectorAll<HTMLElement>('.fd-side-panel__overflow-item'));
-        if (!items.length) {
+        if (this._ignoreNextOverflowActivation) {
+            this._ignoreNextOverflowActivation = false;
             return;
         }
-
-        const currentIndex = items.indexOf(document.activeElement as HTMLElement);
-        const safeIndex = currentIndex < 0 ? 0 : currentIndex;
-
-        switch (event.key) {
-            case 'ArrowDown': {
-                event.preventDefault();
-                items[(currentIndex + 1) % items.length].focus();
-                break;
-            }
-            case 'ArrowUp': {
-                event.preventDefault();
-                items[(safeIndex - 1 + items.length) % items.length].focus();
-                break;
-            }
-            case 'Enter':
-            case ' ': {
-                event.preventDefault();
-                items[currentIndex]?.click();
-                break;
-            }
+        const id = item.id();
+        const newActiveId = this.activeItem() === id ? null : id;
+        this.activeItem.set(newActiveId);
+        this.open.set(newActiveId !== null);
+        if (this.mode() === 'expanded' && newActiveId !== null) {
+            this.mode.set('collapsed');
         }
+        this._overflowMenuRef()?.close();
     }
 
     /** @hidden Escape key handler (host-level): close content panel when open, or collapse expanded mode. */
@@ -530,7 +618,7 @@ export class SidePanelComponent {
     /** @hidden Move roving focus to the given index. */
     private _focusItem(index: number): void {
         this.focusedIndex.set(index);
-        this._actionButtons()[index]?.nativeElement.focus();
+        this._actionOptions()[index]?.nativeElement.focus();
     }
 
     /**
