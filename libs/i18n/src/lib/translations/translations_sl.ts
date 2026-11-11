@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Čas'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Spremenljive velikosti'
     },
     coreDynamicPage: {

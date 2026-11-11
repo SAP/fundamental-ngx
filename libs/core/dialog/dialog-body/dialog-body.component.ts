@@ -14,6 +14,7 @@ import { AsyncPipe } from '@angular/common';
 import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
 
@@ -30,6 +31,8 @@ import { DialogRef } from '../utils/dialog-ref.class';
     selector: 'fd-dialog-body',
     templateUrl: 'dialog-body.component.html',
     host: {
+        '[attr.role]': 'role()',
+        '[attr.aria-label]': 'ariaLabel() || defaultAriaLabel()',
         '[class.fd-dialog__body]': 'true',
         '[class.fd-settings__dialog-body]': 'dialogConfig.settings',
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
@@ -56,7 +59,16 @@ export class DialogBodyComponent {
      * property to remove the horizontal and vertical paddings from the body
      * default is set to false
      */
-    disablePaddings = input(false, { transform: booleanAttribute });
+    readonly disablePaddings = input(false, { transform: booleanAttribute });
+
+    /** Role of the dialog body element Default is 'region' */
+    readonly role = input('region');
+
+    /** Aria label of the dialog body element */
+    readonly ariaLabel = input<string>();
+
+    /** @hidden */
+    protected readonly defaultAriaLabel = resolveTranslationSignal('coreDialog.bodyAriaLabel');
 
     /** @hidden */
     constructor(
