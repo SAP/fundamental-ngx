@@ -372,6 +372,10 @@ const componentRoutes = [
         loadChildren: () => import('@fundamental-ngx/docs/core/toolbar').then(configureLibRoutes)
     },
     {
+        path: 'tooltip',
+        loadChildren: () => import('@fundamental-ngx/docs/core/tooltip').then(configureLibRoutes)
+    },
+    {
         path: 'tree',
         loadChildren: () => import('@fundamental-ngx/docs/core/tree').then(configureLibRoutes)
     },

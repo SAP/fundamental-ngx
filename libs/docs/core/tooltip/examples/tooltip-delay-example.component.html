@@ -1,0 +1,10 @@
+<div class="fd-tooltip-delay-example">
+    <button fd-button label="Configured (1000 ms)" fdTooltip="Shown after the configured 1000 ms delay"></button>
+    <button fd-button label="No show delay" fdTooltip="Shown immediately" [fdTooltipShowDelay]="0"></button>
+    <button
+        fd-button
+        label="Long hide delay"
+        fdTooltip="Stays open for 2000 ms after leaving"
+        [fdTooltipHideDelay]="2000"
+    ></button>
+</div>

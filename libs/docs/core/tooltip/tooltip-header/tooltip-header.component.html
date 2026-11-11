@@ -1,0 +1,131 @@
+<fd-doc-page>
+    <header>Tooltip</header>
+    <description>
+        <p>
+            A tooltip is a short, non-disruptive text popup that describes the element it is attached to. Add the
+            <code>fdTooltip</code> directive to any existing element &mdash; no wrapper or DOM changes are needed. The
+            tooltip is rendered with the popover overlay, so it gets the same positioning, viewport flipping and arrow.
+        </p>
+
+        <h3>Behavior</h3>
+        <ul>
+            <li>
+                <strong>Show triggers:</strong> Appears after 500ms delay on mouse hover or keyboard focus, and
+                immediately on touch long-press or <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd> (Windows/Linux) or
+                <kbd>Control</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> (Mac).
+            </li>
+            <li>
+                <strong>Single tooltip invariant:</strong> Only one tooltip is visible at a time. Moving to the next
+                element shows its tooltip after a shorter delay (200ms).
+            </li>
+            <li>
+                <strong>Hover-able:</strong> The tooltip can be hovered and its text selected; focus always stays on the
+                host element (modeless).
+            </li>
+            <li>
+                <strong>Dismiss:</strong> Hides after 500ms when leaving the element, or immediately on <kbd>Esc</kbd>,
+                outside click, or element action. <kbd>Esc</kbd> closes only the tooltip without affecting the
+                surrounding dialog.
+            </li>
+            <li>
+                <strong>Keyboard shortcut:</strong> <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd> (Windows/Linux) or
+                <kbd>Control</kbd> + <kbd>Option</kbd> + <kbd>I</kbd> (Mac) toggles the tooltip on the focused element.
+            </li>
+        </ul>
+
+        <h3>Placement & Alignment</h3>
+        <p>
+            Tooltips support four placement options (<code>top</code>, <code>bottom</code>, <code>left</code>,
+            <code>right</code>) with three alignment options along the chosen side (<code>start</code>,
+            <code>middle</code>, <code>end</code>). The default is <code>bottom</code> placement with
+            <code>middle</code>
+            alignment. Tooltips automatically flip to the opposite side when they would overflow the viewport.
+        </p>
+
+        <h3>When to Use</h3>
+        <ul>
+            <li>
+                <strong>Interactive elements without labels:</strong> Icon buttons, avatars (e.g., "Save (Ctrl+S)").
+            </li>
+            <li>
+                <strong>Supplementary descriptions:</strong> Non-critical information that enriches understanding but is
+                not required to complete a task (e.g., "Notifications - You have 3 unread messages").
+            </li>
+            <li>
+                <strong>Truncated text:</strong> Show full text only when truncated and no other alternative exists
+                (e.g., dialog/toolbar titles, table column headers).
+            </li>
+            <li><strong>Keyboard shortcuts:</strong> Display available shortcuts for actions (e.g., "(Ctrl+S)").</li>
+        </ul>
+
+        <h3>When NOT to Use</h3>
+        <ul>
+            <li>
+                <strong>Essential information:</strong> Never put information required to complete a task into a
+                tooltip.
+            </li>
+            <li><strong>Labels:</strong> Use proper form labels, not tooltips.</li>
+            <li>
+                <strong>Rich/interactive content:</strong> Use a <b>Popover</b> for formatted, interactive, or long
+                content.
+            </li>
+            <li><strong>Form help text:</strong> Use <b>Inline Help</b> next to form labels.</li>
+            <li>
+                <strong>Disabled elements:</strong> Disabled controls are not focusable and cannot show tooltips (use
+                inline helper text instead).
+            </li>
+            <li><strong>Decorative elements:</strong> Icons or visuals that don't provide meaningful information.</li>
+        </ul>
+
+        <h3>Content Guidelines</h3>
+        <p>Tooltip content should be assembled by the caller in the following order:</p>
+        <ul>
+            <li><strong>Order:</strong> [Label/Truncated text] - [Supplementary description] (Keyboard shortcut)</li>
+            <li>
+                <strong>Separators:</strong> Use hyphen with spaces <code>" - "</code> for general content; keyboard
+                shortcuts in parentheses with leading space.
+            </li>
+            <li>
+                <strong>Length:</strong> Keep concise—a word, phrase, or single sentence. For longer content, use a
+                message strip or popover.
+            </li>
+            <li>
+                <strong>Examples:</strong> "Save (Ctrl+S)", "Warning - Status Critical", "Risk and Criticality AT
+                AlphaNumeric"
+            </li>
+        </ul>
+
+        <h3>Touch & Mobile</h3>
+        <p>
+            Long-press on the target shows the tooltip immediately (no delay). Tap outside to dismiss. Text selection
+            (double/triple-tap) is not blocked. For links that open new pages, tooltips are disabled on touch to
+            preserve the native context menu.
+        </p>
+
+        <h3>Accessibility</h3>
+        <ul>
+            <li>
+                <strong>ARIA:</strong> The tooltip has <code>role="tooltip"</code> and sets
+                <code>aria-describedby</code> on the target (only when tooltip text differs from the accessible name to
+                avoid duplicate announcements).
+            </li>
+            <li>
+                <strong>Keyboard shortcuts:</strong> Exposed via <code>aria-keyshortcuts</code> on the target element,
+                not announced as part of the tooltip text.
+            </li>
+            <li>
+                <strong>Screen readers:</strong> Target's accessible name is announced first, then the tooltip content.
+            </li>
+        </ul>
+
+        <fd-message-strip [dismissible]="false" type="information">
+            <strong>Best Practice:</strong> Use tooltips for short, supplementary text only. For rich, interactive or
+            long content use a <b>Popover</b>; for help text next to form labels use <b>Inline Help</b>. Never put
+            information that is required to complete a task into a tooltip. If an element supports wrapping, prefer
+            wrapping over truncation + tooltip.
+        </fd-message-strip>
+    </description>
+    <import componentName="TooltipDirective" subPackage="tooltip"></import>
+
+    <fd-header-tabs></fd-header-tabs>
+</fd-doc-page>

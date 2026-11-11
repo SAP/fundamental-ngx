@@ -1,0 +1,16 @@
+@for (placement of placements; track placement) {
+    <div class="fd-tooltip-placement-example">
+        <span class="fd-tooltip-placement-example__label">{{ placement }}</span>
+        @for (alignment of alignments; track alignment) {
+            <div
+                class="fd-tooltip-placement-example__box"
+                tabindex="0"
+                [fdTooltip]="'Placement: ' + placement + ', alignment: ' + alignment"
+                [fdTooltipPlacement]="placement"
+                [fdTooltipAlignment]="alignment"
+            >
+                {{ alignment }}
+            </div>
+        }
+    </div>
+}
