@@ -74,6 +74,8 @@ export class ExampleComponent {
 
 ### Outputs
 
+- closed emits when the dialog is closed or dismissed.
+
 - `focusItem: EventEmitter<MessagePopoverEntry>` - Emits when an item should be focused
 
 ### Methods

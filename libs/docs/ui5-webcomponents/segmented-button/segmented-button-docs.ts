@@ -7,10 +7,13 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { NotificationChannelsSample } from './examples/notification-channels-sample';
 import { SegmentedButtonExample } from './examples/segmented-button-sample';
 
 const basicSampleHtml = 'segmented-button-sample.html';
 const basicSampleTs = 'segmented-button-sample.ts';
+const notificationChannelsHtml = 'notification-channels-sample.html';
+const notificationChannelsTs = 'notification-channels-sample.ts';
 
 @Component({
     selector: 'ui5-segmented-button-docs',
@@ -21,7 +24,8 @@ const basicSampleTs = 'segmented-button-sample.ts';
         ComponentExampleComponent,
         CodeExampleComponent,
         DescriptionComponent,
-        SegmentedButtonExample
+        SegmentedButtonExample,
+        NotificationChannelsSample
     ]
 })
 export class SegmentedButtonDocs {
@@ -40,4 +44,18 @@ export class SegmentedButtonDocs {
     ]);
 
     readonly examples = computed(() => this.exampleFiles());
+
+    readonly notificationChannelsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(notificationChannelsHtml),
+            originalFileName: 'notification-channels-example'
+        },
+        {
+            language: 'typescript',
+            component: 'NotificationChannelsSample',
+            code: getAssetFromModuleAssets(notificationChannelsTs),
+            originalFileName: 'notification-channels-example'
+        }
+    ];
 }
