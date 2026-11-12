@@ -17,4 +17,25 @@
         line-height: 1.5;
         color: var(--sapTextColor, #32363a);
     }
+
+    // Resizable variant: fd-side-panel owns the full container (main content is inside it)
+    &--full {
+        fd-side-panel {
+            flex: 1 1 auto;
+            min-inline-size: 0;
+        }
+    }
+
+    // Main-content slot inside fd-side-panel-main
+    &__main-content {
+        padding: 1rem;
+        overflow-y: auto;
+        block-size: 100%;
+        box-sizing: border-box;
+    }
+
+    // Body padding for content projected into fd-side-panel-item panels
+    &__panel-body {
+        padding: 1rem;
+    }
 }
