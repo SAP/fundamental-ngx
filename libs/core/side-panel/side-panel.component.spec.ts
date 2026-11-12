@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SidePanelContentDirective } from './side-panel-content.directive';
 import { SidePanelItemComponent } from './side-panel-item.component';
+import { SidePanelMainComponent } from './side-panel-main.component';
 import { SidePanelComponent, SidePanelMode, SidePanelSide } from './side-panel.component';
 
 @Component({
@@ -760,5 +761,242 @@ describe('SidePanelComponent — keyboard shortcuts & announcements', () => {
         getHostEl().dispatchEvent(new KeyboardEvent('keydown', { key: 'F6', bubbles: true, cancelable: true }));
         fixture.detectChanges();
         expect(document.activeElement).toBe(layout);
+    });
+});
+
+describe('SidePanelComponent — resize state & splitter', () => {
+    let host: ContentPanelTestHostComponent;
+    let fixture: ComponentFixture<ContentPanelTestHostComponent>;
+    let component: SidePanelComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ContentPanelTestHostComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(async () => {
+        fixture = TestBed.createComponent(ContentPanelTestHostComponent);
+        host = fixture.componentInstance;
+        host.open = true;
+        host.activeItem = 'filter';
+        fixture.detectChanges();
+        await fixture.whenStable();
+        component = fixture.debugElement.query(By.directive(SidePanelComponent))
+            .componentInstance as SidePanelComponent;
+    });
+
+    describe('resize state', () => {
+        it('contentWidthStyle falls back to defaultWidth before any resize', () => {
+            expect(component['contentWidthStyle']()).toBe(component.defaultWidth());
+        });
+
+        it('contentWidthStyle returns px once resized', () => {
+            component['contentWidthPx'].set(260);
+            expect(component['contentWidthStyle']()).toBe('260px');
+        });
+    });
+
+    describe('splitter bar', () => {
+        beforeEach(() => {
+            // The splitter only renders in push mode (host ≥ 1024px); clientWidth is 0 in jsdom.
+            (component as any)._hostWidthPx.set(1600);
+            fixture.detectChanges();
+        });
+
+        it('renders a separator at the side panel edge (outside the content panel)', () => {
+            const bar = fixture.nativeElement.querySelector('.fd-side-panel > fd-resize-splitter');
+            expect(bar).toBeTruthy();
+            expect(bar.getAttribute('role')).toBe('separator');
+            // the splitter is a host-level sibling of the content panel, not a child of it
+            expect(fixture.nativeElement.querySelector('.fd-side-panel__content-panel fd-resize-splitter')).toBeNull();
+        });
+
+        it('updates contentWidthPx when the splitter emits a new size', () => {
+            const bar = fixture.nativeElement.querySelector('fd-resize-splitter') as HTMLElement;
+            component['measureBounds']();
+            bar.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+            fixture.detectChanges();
+            expect(component['contentWidthPx']()).not.toBeNull();
+        });
+    });
+
+    describe('width menu', () => {
+        beforeEach(() => {
+            // The splitter only renders in push mode (host ≥ 1024px); clientWidth is 0 in jsdom.
+            (component as any)._hostWidthPx.set(1600);
+            fixture.detectChanges();
+            component['measureBounds']();
+            component['resizeMinPx'].set(150);
+            component['resizeMaxPx'].set(500);
+        });
+
+        it('right-click opens the menu and suppresses the native menu', () => {
+            const bar = fixture.nativeElement.querySelector('fd-resize-splitter') as HTMLElement;
+            const evt = new MouseEvent('contextmenu', { bubbles: true, cancelable: true });
+            bar.dispatchEvent(evt);
+            fixture.detectChanges();
+            expect(evt.defaultPrevented).toBe(true);
+            expect(component['widthMenu']().isOpen()).toBe(true);
+        });
+
+        it('expandToMax sets width to the max bound', () => {
+            component['setWidthToMax']();
+            expect(component['contentWidthPx']()).toBe(500);
+        });
+
+        it('collapseToMin sets width to the min bound', () => {
+            component['setWidthToMin']();
+            expect(component['contentWidthPx']()).toBe(150);
+        });
+
+        it('resetToDefault reverts to the resolved default px value', () => {
+            component['contentWidthPx'].set(300);
+            component['resetWidthToDefault']();
+            const defaultPx = component['resizeDefaultPx']();
+            expect(component['contentWidthPx']()).toBe(defaultPx);
+            expect(component['contentWidthStyle']()).toBe(`${defaultPx}px`);
+        });
+
+        it('Shift+F10 on the bar opens the menu', () => {
+            const bar = fixture.nativeElement.querySelector('fd-resize-splitter') as HTMLElement;
+            bar.dispatchEvent(new KeyboardEvent('keydown', { key: 'F10', shiftKey: true, bubbles: true }));
+            fixture.detectChanges();
+            expect(component['widthMenu']().isOpen()).toBe(true);
+        });
+    });
+});
+
+@Component({
+    selector: 'fd-main-slot-test-host',
+    template: `
+        <fd-side-panel ariaLabel="Groups">
+            <fd-side-panel-main><p id="page">Page body</p></fd-side-panel-main>
+            <fd-side-panel-item id="filter" icon="filter" label="Filter">
+                <ng-template fdSidePanelContent>Filter content</ng-template>
+            </fd-side-panel-item>
+            <fd-side-panel-item id="layout" icon="menu2" label="Layout">
+                <ng-template fdSidePanelContent>Layout content</ng-template>
+            </fd-side-panel-item>
+        </fd-side-panel>
+    `,
+    imports: [SidePanelComponent, SidePanelItemComponent, SidePanelMainComponent, SidePanelContentDirective]
+})
+class MainSlotTestHostComponent {}
+
+describe('SidePanel main-content slot', () => {
+    it('projects fd-side-panel-main content and marks the host as having main content', () => {
+        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
+        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('#page')?.textContent).toBe('Page body');
+        expect(fixture.nativeElement.querySelector('.fd-side-panel--has-main')).toBeTruthy();
+    });
+
+    it('does not mark the host as having main content when no fd-side-panel-main is projected', () => {
+        TestBed.configureTestingModule({ imports: [TestHostComponent] });
+        const fixture = TestBed.createComponent(TestHostComponent);
+        fixture.detectChanges();
+        const panel: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel');
+        expect(panel.classList.contains('fd-side-panel--has-main')).toBe(false);
+    });
+
+    it('toggles the --push host class with host width (pushMode)', () => {
+        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
+        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
+        fixture.detectChanges();
+        const panel = fixture.debugElement.query(By.directive(SidePanelComponent))
+            .componentInstance as SidePanelComponent;
+        const hostEl = fixture.debugElement.query(By.directive(SidePanelComponent)).nativeElement as HTMLElement;
+
+        (panel as any)._hostWidthPx.set(1600);
+        fixture.detectChanges();
+        expect(hostEl.classList.contains('fd-side-panel--push')).toBe(true);
+
+        (panel as any)._hostWidthPx.set(1000);
+        fixture.detectChanges();
+        expect(hostEl.classList.contains('fd-side-panel--push')).toBe(false);
+    });
+});
+
+@Component({
+    selector: 'fd-main-slot-not-resizable-test-host',
+    template: `
+        <fd-side-panel ariaLabel="Groups" [resizable]="false">
+            <fd-side-panel-main><p>Page body</p></fd-side-panel-main>
+            <fd-side-panel-item id="filter" icon="filter" label="Filter">
+                <ng-template fdSidePanelContent>Filter content</ng-template>
+            </fd-side-panel-item>
+            <fd-side-panel-item id="layout" icon="menu2" label="Layout">
+                <ng-template fdSidePanelContent>Layout content</ng-template>
+            </fd-side-panel-item>
+        </fd-side-panel>
+    `,
+    imports: [SidePanelComponent, SidePanelItemComponent, SidePanelMainComponent, SidePanelContentDirective]
+})
+class MainSlotNotResizableTestHostComponent {}
+
+describe('SidePanel resizable splitter', () => {
+    function openPush(fixture: ComponentFixture<unknown>, width: number): SidePanelComponent {
+        const panel = fixture.debugElement.query(By.directive(SidePanelComponent))
+            .componentInstance as SidePanelComponent;
+        (panel as any)._hostWidthPx.set(width);
+        panel.activeItem.set('filter');
+        panel.open.set(true);
+        fixture.detectChanges();
+        return panel;
+    }
+
+    it('renders fd-resize-splitter when resizable, push mode, and open', () => {
+        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
+        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
+        fixture.detectChanges();
+        openPush(fixture, 1600);
+        expect(fixture.nativeElement.querySelector('fd-resize-splitter')).toBeTruthy();
+    });
+
+    it('does NOT render the splitter in overlay mode (<1024)', () => {
+        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
+        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
+        fixture.detectChanges();
+        openPush(fixture, 1000);
+        expect(fixture.nativeElement.querySelector('fd-resize-splitter')).toBeFalsy();
+    });
+
+    it('does NOT render the splitter when resizable=false', () => {
+        TestBed.configureTestingModule({ imports: [MainSlotNotResizableTestHostComponent] });
+        const fixture = TestBed.createComponent(MainSlotNotResizableTestHostComponent);
+        fixture.detectChanges();
+        openPush(fixture, 1600);
+        expect(fixture.nativeElement.querySelector('fd-resize-splitter')).toBeFalsy();
+    });
+
+    it('seeds separator ARIA as soon as the splitter appears (before any interaction)', () => {
+        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
+        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
+        fixture.detectChanges();
+        openPush(fixture, 1600);
+        const splitter = fixture.nativeElement.querySelector('fd-resize-splitter');
+        expect(splitter.getAttribute('aria-valuenow')).not.toBeNull();
+    });
+
+    it('double-click cycles default -> max -> min -> default', () => {
+        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
+        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
+        fixture.detectChanges();
+        const panel = openPush(fixture, 1600);
+        // cycleWidth() re-measures from the DOM; jsdom has no layout, so stub measureBounds
+        // to keep the bounds we set below. The cycle logic is what this test verifies.
+        jest.spyOn(panel as any, 'measureBounds').mockImplementation(() => {});
+        (panel as any).resizeDefaultPx.set(250);
+        (panel as any).resizeMaxPx.set(400);
+        (panel as any).resizeMinPx.set(100);
+
+        (panel as any).cycleWidth(); // 1st -> max
+        expect((panel as any).contentWidthPx()).toBe(400);
+        (panel as any).cycleWidth(); // 2nd -> min
+        expect((panel as any).contentWidthPx()).toBe(100);
+        (panel as any).cycleWidth(); // 3rd -> default
+        expect((panel as any).contentWidthPx()).toBe(250);
     });
 });

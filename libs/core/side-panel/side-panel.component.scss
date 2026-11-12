@@ -367,7 +367,9 @@ $fd-side-panel-expanded-width: 20rem;
 
     &--expanded {
         .fd-side-panel__action-bar {
-            inline-size: $fd-side-panel-expanded-width;
+            // Resizable in expanded mode: driven by the splitter (falls back to the fixed expanded
+            // width). Min/max clamping is enforced in JS against the outer container.
+            inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
         }
 
         // Nav arrow container: push the arrow to the inline-end (top-right for LTR)
@@ -383,6 +385,29 @@ $fd-side-panel-expanded-width: 20rem;
         }
 
         // Circles remain circular — no size or border-radius overrides needed.
+    }
+
+    // ── Expanded mode overlay ────────────────────────────────────────────────
+    // In push mode (--push present) the expanded action bar is an in-flow flex
+    // sibling and widens the panel footprint correctly. In overlay mode (no --push),
+    // the bar must float above the main content just like the content panel does
+    // (which is already `position: absolute` without --push). Without this rule,
+    // expanding to icons+labels on a narrow container pushes the main content aside
+    // instead of overlaying it.
+    &--expanded:not(.fd-side-panel--push) {
+        .fd-side-panel__action-bar {
+            position: absolute;
+            inset-block: 0;
+            z-index: 5;
+        }
+
+        &.fd-side-panel--right .fd-side-panel__action-bar {
+            inset-inline-end: 0;
+        }
+
+        &.fd-side-panel--left .fd-side-panel__action-bar {
+            inset-inline-start: 0;
+        }
     }
 
     // ── Compact density (spec C: 4rem bar, B1/B2: 2rem button) ─────────────
@@ -415,8 +440,9 @@ $fd-side-panel-expanded-width: 20rem;
     }
 
     // ── Content panel ────────────────────────────────────────────────────────
-    // Overlay by default (< 1440px viewport).
-    // At ≥ 1440px the panel becomes a flex sibling and pushes the main content.
+    // Overlay by default (host < 1440px).
+    // At host ≥ 1440px (the `pushMode` signal → `--push` host class) the panel becomes
+    // a flex sibling and pushes the main content — see the `&--push` rules below.
     // Width = expanded bar width − collapsed bar width so the total footprint
     // (action bar + content panel) always equals $fd-side-panel-expanded-width.
 
@@ -425,31 +451,29 @@ $fd-side-panel-expanded-width: 20rem;
         flex-direction: column;
         flex-shrink: 0;
         block-size: 100%;
-        inline-size: calc(#{$fd-side-panel-expanded-width} - #{$fd-side-panel-bar-width-cozy});
+        // Width is driven solely by the resize variable; min/max clamping is enforced in JS
+        // (SplitterDirective) against the outer container, since a CSS `%` max would resolve
+        // against this element's containing block, not the page container.
+        inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
         background: var(--sapGroup_ContentBackground, #fff);
         box-shadow: var(--sapContent_Shadow0, 0 0 1rem rgba(34, 53, 72, 0.1));
         box-sizing: border-box;
         overflow: hidden;
 
-        // Overlay: float over main content below 1440px.
+        // Overlay: float over main content below host width 1440px.
         // Anchored relative to the fd-side-panel host (which has position: relative).
+        // Push mode (host ≥ 1440px) reverts to an in-flow flex child via `&--push` below.
         position: absolute;
         inset-block: 0;
         z-index: 5;
-
-        // Large viewports (≥ 1440px): push content; revert to in-flow flex child.
-        @media (min-width: 90rem) {
-            position: relative;
-            z-index: auto;
-        }
     }
 
     // Content panel side-positioning.
-    // order: -1 keeps the action-bar at the inline-end (right) in push mode (≥1440px),
+    // order: -1 keeps the action-bar at the inline-end (right) in push mode (host ≥ 1440px),
     // where both are in flex flow; has no effect in overlay mode (position: absolute).
     // inset-inline-end positions the panel flush with the action bar in overlay mode;
-    // reset to auto in push mode — the flex layout already places it correctly there,
-    // and a non-auto value on position:relative creates the layout gap the user sees.
+    // reset to auto in push mode (via `&--push` below) — the flex layout already places it
+    // correctly there, and a non-auto value on position:relative creates a layout gap.
     // clip-path: clip the action-bar-facing shadow so the two box-shadows don't overlap.
     // Single-action mode is excluded via :not() — the action bar is hidden there, so
     // all four content-panel corners must remain rounded with no clipping.
@@ -458,10 +482,6 @@ $fd-side-panel-expanded-width: 20rem;
         inset-inline-end: $fd-side-panel-bar-width-cozy;
         border-start-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
         border-end-start-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
-
-        @media (min-width: 90rem) {
-            inset-inline-end: auto;
-        }
     }
 
     &--right:not(.fd-side-panel--single-action) &__content-panel {
@@ -473,13 +493,10 @@ $fd-side-panel-expanded-width: 20rem;
     }
 
     &--left &__content-panel {
+        order: 1;
         inset-inline-start: $fd-side-panel-bar-width-cozy;
         border-start-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
         border-end-end-radius: var(--sapTile_BorderCornerRadius, 0.5rem);
-
-        @media (min-width: 90rem) {
-            inset-inline-start: auto;
-        }
     }
 
     &--left:not(.fd-side-panel--single-action) &__content-panel {
@@ -501,19 +518,37 @@ $fd-side-panel-expanded-width: 20rem;
     }
 
     &--single-action.fd-side-panel--right .fd-side-panel__content-panel {
-        inline-size: $fd-side-panel-expanded-width;
+        inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
         inset-inline-end: 0;
-
-        @media (min-width: 90rem) {
-            inset-inline-end: auto;
-        }
     }
 
     &--single-action.fd-side-panel--left .fd-side-panel__content-panel {
-        inline-size: $fd-side-panel-expanded-width;
+        inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
         inset-inline-start: 0;
+    }
 
-        @media (min-width: 90rem) {
+    // Push mode (host ≥ 1440px, driven by the `pushMode` signal → `--push` host class):
+    // the content panel becomes an in-flow flex sibling that pushes the main content.
+    // Below that width it stays `position: absolute` (overlay), floating over the main slot.
+    &--push {
+        .fd-side-panel__content-panel {
+            position: relative;
+            z-index: auto;
+        }
+
+        &.fd-side-panel--right .fd-side-panel__content-panel {
+            inset-inline-end: auto;
+        }
+
+        &.fd-side-panel--left .fd-side-panel__content-panel {
+            inset-inline-start: auto;
+        }
+
+        &.fd-side-panel--single-action.fd-side-panel--right .fd-side-panel__content-panel {
+            inset-inline-end: auto;
+        }
+
+        &.fd-side-panel--single-action.fd-side-panel--left .fd-side-panel__content-panel {
             inset-inline-start: auto;
         }
     }
@@ -573,6 +608,35 @@ $fd-side-panel-expanded-width: 20rem;
         overflow-y: auto;
         padding: 1rem;
     }
+
+    // ── Main (page) content slot ──────────────────────────────────────────────
+    // Projected `fd-side-panel-main`. Hidden when no main content is projected so
+    // the panel-only layout is unchanged. In push mode the content panel is in-flow
+    // and the main slot is pushed; in overlay mode the content panel floats over it.
+
+    &__main-slot {
+        display: none; // no main projected → nothing to lay out (panel-only, unchanged)
+    }
+
+    &--has-main {
+        inline-size: 100%;
+
+        .fd-side-panel__main-slot {
+            display: block;
+            flex: 1 1 auto;
+            min-inline-size: 0;
+            block-size: 100%;
+            overflow: auto;
+        }
+    }
+
+    // Right-docked: main content sits at the inline-start (before the panel) in push mode.
+    &--right.fd-side-panel--has-main .fd-side-panel__main-slot {
+        order: -3; // right: main(-3) | resizer(-2) | content(-1) | bar(0)
+    }
+    &--left.fd-side-panel--has-main .fd-side-panel__main-slot {
+        order: 3; // left: bar(0) | content(1) | resizer(2) | main(3)
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -623,5 +687,32 @@ $fd-side-panel-expanded-width: 20rem;
                 transform: translateX(-1rem);
             }
         }
+    }
+}
+
+// ── Resizer (resize handle) positioning ──────────────────────────────────────
+// The splitter's visual bar (grip, fading lines, cursor, focus ring) lives in
+// `fd-resize-splitter`'s own SCSS. Here we only place the `.fd-side-panel__resizer`
+// element in the flex flow. It renders only when `showSplitter` is true, which requires
+// push mode, so it is an in-flow flex item sitting between the main content and the
+// content panel — right: main(-3) | resizer(-2) | content(-1) | bar(0);
+// left: bar(0) | content(1) | resizer(2) | main(3).
+.fd-side-panel {
+    // Disable the width animation during an active drag for 1:1 pointer tracking.
+    &__content-panel.is-resizing {
+        transition: none;
+    }
+
+    &--push &__resizer {
+        flex: 0 0 auto;
+        align-self: stretch;
+    }
+
+    &--push.fd-side-panel--right &__resizer {
+        order: -2; // right: main(-3) | resizer(-2) | content(-1) | bar(0)
+    }
+
+    &--push.fd-side-panel--left &__resizer {
+        order: 2; // left: bar(0) | content(1) | resizer(2) | main(3)
     }
 }

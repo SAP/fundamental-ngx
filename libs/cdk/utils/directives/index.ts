@@ -27,6 +27,7 @@ export * from './resize-observer';
 export * from './resize/resize-handle.directive';
 export * from './resize/resize.directive';
 export * from './resize/resize.module';
+export * from './resize/splitter.directive';
 export * from './selectable-list';
 export * from './template/template.directive';
 export * from './template/template.module';

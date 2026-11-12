@@ -253,6 +253,10 @@ export default {
         navArrowExpand: 'Expand side panel',
         overflowShowLess: 'Show Less',
         overflowShowMore: 'More Actions',
+        resizeCollapseToMin: 'Collapse to Minimum Width',
+        resizeExpandToMax: 'Expand to Maximum Width',
+        resizeResetToDefault: 'Reset to Default Width',
+        resizeSplitterLabel: 'Resize side panel',
         sidePanelLabel: 'Side Panel'
     },
     coreSlider: {
