@@ -6,13 +6,12 @@ describe('MessageViewComponent', () => {
     let component: MessageViewComponent;
     let fixture: ComponentFixture<MessageViewComponent>;
     let dialogService: DialogService;
-    let mockDialogRef: jest.Mocked<DialogRef>;
+    let mockDialogRef: DialogRef;
 
     beforeEach(async () => {
-        mockDialogRef = {
-            close: jest.fn(),
-            dismiss: jest.fn()
-        } as any;
+        mockDialogRef = new DialogRef();
+        jest.spyOn(mockDialogRef, 'close');
+        jest.spyOn(mockDialogRef, 'dismiss');
 
         await TestBed.configureTestingModule({
             imports: [MessageViewComponent],
@@ -273,6 +272,54 @@ describe('MessageViewComponent', () => {
             component.open();
             component.close();
             expect(mockDialogRef.close).toHaveBeenCalled();
+        });
+
+        it('should emit closed when the dialog is closed', () => {
+            const closedSpy = jest.fn();
+            component.closed.subscribe(closedSpy);
+
+            component.open();
+            fixture.detectChanges();
+            expect(closedSpy).not.toHaveBeenCalled();
+
+            mockDialogRef.close();
+            fixture.detectChanges();
+
+            expect(closedSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should emit closed when the dialog is dismissed', () => {
+            const closedSpy = jest.fn();
+            component.closed.subscribe(closedSpy);
+
+            component.open();
+            fixture.detectChanges();
+
+            mockDialogRef.dismiss();
+            fixture.detectChanges();
+
+            expect(closedSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should track the most recently opened dialog for the closed output', () => {
+            const firstDialogRef = new DialogRef();
+            const secondDialogRef = new DialogRef();
+            const closedSpy = jest.fn();
+            component.closed.subscribe(closedSpy);
+            jest.spyOn(dialogService, 'open').mockReturnValueOnce(firstDialogRef).mockReturnValueOnce(secondDialogRef);
+
+            component.open();
+            fixture.detectChanges();
+            component.open();
+            fixture.detectChanges();
+
+            firstDialogRef.close();
+            fixture.detectChanges();
+            expect(closedSpy).not.toHaveBeenCalled();
+
+            secondDialogRef.close();
+            fixture.detectChanges();
+            expect(closedSpy).toHaveBeenCalledTimes(1);
         });
 
         it('should pass mobile config to dialog when mobile input is true', () => {

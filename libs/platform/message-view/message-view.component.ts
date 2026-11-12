@@ -7,8 +7,11 @@ import {
     Output,
     ViewEncapsulation,
     booleanAttribute,
+    effect,
     inject,
-    input
+    input,
+    output,
+    signal
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
@@ -69,6 +72,9 @@ export class MessageViewComponent extends MessageListShared implements OnDestroy
      */
     readonly resizable = input(true, { transform: booleanAttribute });
 
+    /** Emits when the dialog is closed or dismissed. */
+    readonly closed = output<void>();
+
     /** @hidden */
     protected readonly dialogService = inject(DialogService);
 
@@ -80,6 +86,14 @@ export class MessageViewComponent extends MessageListShared implements OnDestroy
 
     /** @hidden */
     protected override readonly groupedErrors$ = this.messages;
+
+    private readonly _activeDialogRef = signal<DialogRef | null>(null);
+
+    private readonly _dialogClosedEffect = effect(() => {
+        if (this._activeDialogRef()?.isClosed()) {
+            this.closed.emit();
+        }
+    });
 
     /** Opens the dialog. */
     open(): void {
@@ -100,6 +114,7 @@ export class MessageViewComponent extends MessageListShared implements OnDestroy
                   resizable: this.resizable()
               };
         this.dialogRef = this.dialogService.open(MessageViewDialogComponent, dialogConfig, this.injector);
+        this._activeDialogRef.set(this.dialogRef);
     }
 
     /** Closes the dialog. */

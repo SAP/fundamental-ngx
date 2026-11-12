@@ -1,0 +1,14 @@
+<section aria-labelledby="notification-channels-title" class="fd-section fd-margin-bottom--md">
+    <div class="fd-section__header">
+        <h2 id="notification-channels-title" class="fd-section__title">Notification channels</h2>
+    </div>
+    <p class="sap-text fd-margin-bottom--sm">Choose the channels used for period-close notifications.</p>
+
+    <ui5-segmented-button #channelPicker selectionMode="Multiple" accessibleName="Notification channels">
+        <ui5-segmented-button-item selected>Email</ui5-segmented-button-item>
+        <ui5-segmented-button-item>In-app</ui5-segmented-button-item>
+        <ui5-segmented-button-item selected>SMS</ui5-segmented-button-item>
+    </ui5-segmented-button>
+
+    <p class="sap-text fd-margin-top--sm" aria-live="polite" aria-atomic="true">{{ selectedChannelsSummary() }}</p>
+</section>
