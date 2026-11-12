@@ -403,7 +403,7 @@ describe('SidePanelComponent — counter', () => {
 @Component({
     selector: 'fd-content-panel-test-host',
     template: `
-        <fd-side-panel [(open)]="open" [(activeItem)]="activeItem" ariaLabel="Groups">
+        <fd-side-panel [(open)]="open" [(activeItem)]="activeItem" ariaLabel="Groups" [resizable]="true">
             <fd-side-panel-item id="filter" icon="filter" label="Filter">
                 <ng-template fdSidePanelContent>Filter content</ng-template>
             </fd-side-panel-item>
@@ -870,7 +870,7 @@ describe('SidePanelComponent — resize state & splitter', () => {
 @Component({
     selector: 'fd-main-slot-test-host',
     template: `
-        <fd-side-panel ariaLabel="Groups">
+        <fd-side-panel ariaLabel="Groups" [resizable]="true">
             <fd-side-panel-main><p id="page">Page body</p></fd-side-panel-main>
             <fd-side-panel-item id="filter" icon="filter" label="Filter">
                 <ng-template fdSidePanelContent>Filter content</ng-template>
@@ -885,20 +885,12 @@ describe('SidePanelComponent — resize state & splitter', () => {
 class MainSlotTestHostComponent {}
 
 describe('SidePanel main-content slot', () => {
-    it('projects fd-side-panel-main content and marks the host as having main content', () => {
+    it('projects fd-side-panel-main content and marks the host with has-main class', () => {
         TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
         const fixture = TestBed.createComponent(MainSlotTestHostComponent);
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('#page')?.textContent).toBe('Page body');
         expect(fixture.nativeElement.querySelector('.fd-side-panel--has-main')).toBeTruthy();
-    });
-
-    it('does not mark the host as having main content when no fd-side-panel-main is projected', () => {
-        TestBed.configureTestingModule({ imports: [TestHostComponent] });
-        const fixture = TestBed.createComponent(TestHostComponent);
-        fixture.detectChanges();
-        const panel: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel');
-        expect(panel.classList.contains('fd-side-panel--has-main')).toBe(false);
     });
 
     it('toggles the --push host class with host width (pushMode)', () => {

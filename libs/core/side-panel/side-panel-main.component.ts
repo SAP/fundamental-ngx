@@ -1,12 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
- * The main (page) content region of a side panel. The parent `fd-side-panel` renders this
- * beside the content panel in push mode (≥1440px) and beneath the floating content panel in
- * overlay mode (<1440px). Optional — when absent, the side panel behaves as a panel only.
+ * The main (page) content region of a side panel. Required — wrap the page content that
+ * should sit beside the side panel in push mode (≥1024 px) or beneath the floating content
+ * panel in overlay mode (<1024 px).
  *
- * Exactly one `fd-side-panel-main` is supported per side panel; additional ones are ignored
- * by the panel's `mainContent` query and layout.
+ * Exactly one `fd-side-panel-main` per side panel is supported.
  *
  * ```html
  * <fd-side-panel side="right">

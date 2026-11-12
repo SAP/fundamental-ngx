@@ -610,16 +610,13 @@ $fd-side-panel-expanded-width: 20rem;
     }
 
     // ── Main (page) content slot ──────────────────────────────────────────────
-    // Projected `fd-side-panel-main`. Hidden when no main content is projected so
-    // the panel-only layout is unchanged. In push mode the content panel is in-flow
-    // and the main slot is pushed; in overlay mode the content panel floats over it.
-
-    &__main-slot {
-        display: none; // no main projected → nothing to lay out (panel-only, unchanged)
-    }
+    // Projected `fd-side-panel-main`. In push mode the content panel is in-flow
+    // and the main slot is pushed aside; in overlay mode the content panel floats
+    // over it.
 
     &--has-main {
-        inline-size: 100%;
+        flex: 1 1 auto;
+        min-inline-size: 0;
 
         .fd-side-panel__main-slot {
             display: block;

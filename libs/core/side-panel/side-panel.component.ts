@@ -5,7 +5,6 @@ import {
     booleanAttribute,
     Component,
     computed,
-    contentChild,
     contentChildren,
     DestroyRef,
     effect,
@@ -33,7 +32,6 @@ import {
 import { ResizeSplitterComponent } from '@fundamental-ngx/core/resize-splitter';
 import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { SidePanelItemComponent } from './side-panel-item.component';
-import { SidePanelMainComponent } from './side-panel-main.component';
 
 /** Edge the side panel is anchored to. */
 export type SidePanelSide = 'left' | 'right';
@@ -120,7 +118,7 @@ export class SidePanelComponent {
     readonly maxWidth = input<string>('90%');
 
     /** Whether the content panel can be resized by the user (drag / keyboard / width menu / double-click). */
-    readonly resizable = input(true, { transform: booleanAttribute });
+    readonly resizable = input(false, { transform: booleanAttribute });
 
     /** Arrow-key resize step in px. */
     readonly resizeStep = input<number>(10);
@@ -138,15 +136,12 @@ export class SidePanelComponent {
     /** @hidden Projected side panel items (content groups). */
     protected readonly items = contentChildren(SidePanelItemComponent);
 
-    /** @hidden Projected main (page) content region, if any. */
-    protected readonly mainContent = contentChild(SidePanelMainComponent);
-
     /** @hidden True at ≥1024px: main content and panel sit side-by-side (push); else overlay. */
     protected readonly pushMode = computed(() => this._hostWidthPx() >= 1024);
 
     /** @hidden */
     protected readonly hostClasses = computed(() => {
-        const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`];
+        const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`, 'fd-side-panel--has-main'];
         if (this.open()) {
             classes.push('fd-side-panel--open');
         }
@@ -155,9 +150,6 @@ export class SidePanelComponent {
         }
         if (this.isSingleAction()) {
             classes.push('fd-side-panel--single-action');
-        }
-        if (this.mainContent()) {
-            classes.push('fd-side-panel--has-main');
         }
         if (this.pushMode()) {
             classes.push('fd-side-panel--push');

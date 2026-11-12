@@ -176,15 +176,27 @@ export class SplitterDirective {
 
     /** @hidden +1 / -1 growth direction for a keyboard key, 0 for unrecognised keys. */
     private _keyGrowthDir(key: string): number {
-        if (key === 'PageUp') {return 1;}
-        if (key === 'PageDown') {return -1;}
+        if (key === 'PageUp') {
+            return 1;
+        }
+        if (key === 'PageDown') {
+            return -1;
+        }
         const s = this._pointerGrowthSign();
         if (this.orientation() === 'vertical') {
-            if (key === 'ArrowRight') {return s;}
-            if (key === 'ArrowLeft') {return -s;}
+            if (key === 'ArrowRight') {
+                return s;
+            }
+            if (key === 'ArrowLeft') {
+                return -s;
+            }
         } else {
-            if (key === 'ArrowDown') {return s;}
-            if (key === 'ArrowUp') {return -s;}
+            if (key === 'ArrowDown') {
+                return s;
+            }
+            if (key === 'ArrowUp') {
+                return -s;
+            }
         }
         return 0;
     }

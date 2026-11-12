@@ -5,27 +5,6 @@
     overflow: hidden;
     position: relative;
 
-    fd-side-panel {
-        flex-shrink: 0;
-    }
-
-    &__content {
-        flex: 1 1 auto;
-        padding: 1rem 1.5rem;
-        overflow-y: auto;
-        font-size: var(--sapFontSize, 0.875rem);
-        line-height: 1.5;
-        color: var(--sapTextColor, #32363a);
-    }
-
-    // Resizable variant: fd-side-panel owns the full container (main content is inside it)
-    &--full {
-        fd-side-panel {
-            flex: 1 1 auto;
-            min-inline-size: 0;
-        }
-    }
-
     // Main-content slot inside fd-side-panel-main
     &__main-content {
         padding: 1rem;
