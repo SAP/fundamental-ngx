@@ -78,7 +78,7 @@ export type SidePanelMode = 'collapsed' | 'expanded';
         '[class]': 'hostClasses()',
         '[attr.role]': "'region'",
         '[attr.aria-label]': 'sidePanelLabel()',
-        '[style.--fd-side-panel-content-width]': 'contentWidthStyle()',
+        '[style.--fd-side-panel-content-panel-width]': 'contentPanelWidthStyle()',
         '(keydown)': 'onHostKeydown($event)',
         '(keydown.escape)': 'onEscape($event)'
     }
@@ -141,7 +141,7 @@ export class SidePanelComponent {
 
     /** @hidden */
     protected readonly hostClasses = computed(() => {
-        const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`, 'fd-side-panel--has-main'];
+        const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`];
         if (this.open()) {
             classes.push('fd-side-panel--open');
         }
@@ -293,9 +293,7 @@ export class SidePanelComponent {
     /** @hidden Reference to the content panel element for bounds measurement. */
     protected readonly contentPanelRef = viewChild<ElementRef<HTMLElement>>('contentPanel');
     /** @hidden Reference to the width context menu (right-click / Shift+F10). */
-    protected readonly widthMenu = viewChild.required<MenuComponent>('widthMenu');
-    /** @hidden Live content-panel width in px; null = not yet resized (use defaultWidth string). */
-    protected readonly contentWidthPx = signal<number | null>(null);
+    protected readonly widthMenu = viewChild<MenuComponent>('widthMenuEl');
     /** @hidden Measured px min bound for the current drag/menu action. */
     protected readonly resizeMinPx = signal(0);
     /** @hidden Measured px max bound for the current drag/menu action. */
@@ -306,16 +304,29 @@ export class SidePanelComponent {
     protected readonly isResizing = signal(false);
     /** @hidden `grows` direction for the splitter, derived from the docked side. */
     protected readonly resizeGrows = computed<'start' | 'end'>(() => (this.side() === 'right' ? 'start' : 'end'));
-    /** @hidden CSS value for --fd-side-panel-content-width. */
-    protected readonly contentWidthStyle = computed(() => {
-        const px = this.contentWidthPx();
-        return px !== null ? `${px}px` : this.defaultWidth();
-    });
 
     /** @hidden Splitter shown in push mode when the panel occupies resizable horizontal space. */
     protected readonly showSplitter = computed(
         () => this.resizable() && this.pushMode() && (this.open() || this.mode() === 'expanded')
     );
+
+    /** @hidden Live content-panel width in px; null = not yet resized (use defaultWidth string). */
+    protected readonly contentPanelWidthPx = linkedSignal<boolean, number | null>({
+        source: this.showSplitter,
+        computation: (show, prev) => (show ? (prev?.value ?? null) : null)
+    });
+    /** @hidden CSS value for --fd-side-panel-content-panel-width. */
+    protected readonly contentPanelWidthStyle = computed(() => {
+        const px = this.contentPanelWidthPx();
+        if (px !== null) {
+            return `${px}px`;
+        }
+        // The same CSS variable drives two different elements depending on state:
+        // - Expanded action bar (mode='expanded', no content panel): full 20rem footprint.
+        // - Content panel alongside collapsed bar: 15.75rem = 20rem - 4.25rem cozy bar.
+        // These two are mutually exclusive, so we select the right default here.
+        return this.open() ? '15.75rem' : this.defaultWidth();
+    });
 
     /** @hidden Action option (`<li role="option">`) elements, in projection order. */
     private readonly _actionOptions = viewChildren<ElementRef<HTMLLIElement>>('actionOption');
@@ -344,7 +355,10 @@ export class SidePanelComponent {
     private _contentWasOpen = false;
 
     /** @hidden Position in the default→max→min cycle driven by double-click. */
-    private _widthCycle = 0;
+    private readonly _widthCycle = linkedSignal<boolean, number>({
+        source: this.showSplitter,
+        computation: (show, prev) => (show ? (prev?.value ?? 0) : 0)
+    });
     /**
      * @hidden Guard against a stale keyup activating the first overflow item immediately
      * after the menu opens via Enter.  Enter on the `<button>` fires the native click
@@ -379,21 +393,11 @@ export class SidePanelComponent {
             }
         });
 
-        // Reset the resized width only when the side panel returns to its base footprint
-        // (collapsed action bar, no content panel) — i.e. when the splitter is no longer shown —
-        // so a resize in expanded-bar or content-panel state isn't wiped by the other transitioning.
-        effect(() => {
-            if (!this.showSplitter()) {
-                this.contentWidthPx.set(null);
-                this._widthCycle = 0;
-            }
-        });
-
         // Seed resize bounds + current width as soon as the splitter first appears, so the
         // separator reports accurate ARIA and the first keyboard/menu interaction works
         // (rather than a dead first keystroke against an unmeasured 0).
         effect(() => {
-            if (this.showSplitter() && this.contentPanelRef() && this.contentWidthPx() === null) {
+            if (this.showSplitter() && this.contentPanelRef() && this.contentPanelWidthPx() === null) {
                 this.measureBounds();
             }
         });
@@ -693,8 +697,8 @@ export class SidePanelComponent {
         this.resizeMinPx.set(resolve(this.minWidth(), 0));
         this.resizeMaxPx.set(resolve(this.maxWidth(), Infinity));
         this.resizeDefaultPx.set(resolve(this.defaultWidth(), target.offsetWidth));
-        if (this.contentWidthPx() === null) {
-            this.contentWidthPx.set(target.offsetWidth);
+        if (this.contentPanelWidthPx() === null) {
+            this.contentPanelWidthPx.set(target.offsetWidth);
         }
     }
 
@@ -708,7 +712,7 @@ export class SidePanelComponent {
     protected openWidthMenu(event: Event): void {
         event.preventDefault();
         this.measureBounds();
-        this.widthMenu().open();
+        this.widthMenu()?.open();
     }
 
     /** @hidden Shift+F10 / ContextMenu key on the focused bar. */
@@ -722,34 +726,37 @@ export class SidePanelComponent {
     /** @hidden Set width to the measured max bound. Bounds are fresh (openWidthMenu measured on open). */
     protected setWidthToMax(): void {
         const max = this.resizeMaxPx();
-        this.contentWidthPx.set(Number.isFinite(max) ? max : this.contentPanelRef()!.nativeElement.offsetWidth);
-        this.widthMenu().close();
+        this.contentPanelWidthPx.set(Number.isFinite(max) ? max : this.contentPanelRef()!.nativeElement.offsetWidth);
+        this.widthMenu()?.close();
     }
 
     /** @hidden Set width to the measured min bound. */
     protected setWidthToMin(): void {
-        this.contentWidthPx.set(this.resizeMinPx());
-        this.widthMenu().close();
+        this.contentPanelWidthPx.set(this.resizeMinPx());
+        this.widthMenu()?.close();
     }
 
     /** @hidden Revert to the configured default width string. */
     protected resetWidthToDefault(): void {
         this.measureBounds();
-        this.contentWidthPx.set(this.resizeDefaultPx());
-        this.widthMenu().close();
+        this.contentPanelWidthPx.set(this.resizeDefaultPx());
+        this.widthMenu()?.close();
     }
 
     /** @hidden Double-click the splitter: cycle content width default → max → min → default. */
     protected cycleWidth(): void {
         this.measureBounds();
-        this._widthCycle = (this._widthCycle + 1) % 3;
+        const next = (this._widthCycle() + 1) % 3;
+        this._widthCycle.set(next);
         const max = this.resizeMaxPx();
-        if (this._widthCycle === 1) {
-            this.contentWidthPx.set(Number.isFinite(max) ? max : this.contentPanelRef()!.nativeElement.offsetWidth);
-        } else if (this._widthCycle === 2) {
-            this.contentWidthPx.set(this.resizeMinPx());
+        if (next === 1) {
+            this.contentPanelWidthPx.set(
+                Number.isFinite(max) ? max : this.contentPanelRef()!.nativeElement.offsetWidth
+            );
+        } else if (next === 2) {
+            this.contentPanelWidthPx.set(this.resizeMinPx());
         } else {
-            this.contentWidthPx.set(this.resizeDefaultPx());
+            this.contentPanelWidthPx.set(this.resizeDefaultPx());
         }
     }
 

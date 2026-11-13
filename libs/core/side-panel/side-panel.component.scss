@@ -35,6 +35,10 @@ $fd-side-panel-active-indicator-width: 0.25rem;
 // Total panel footprint in any "active" state (expanded bar or collapsed bar + content panel).
 // Keep this equal to the expanded action bar inline-size so both states occupy the same space.
 $fd-side-panel-expanded-width: 20rem;
+// Default content-panel width = expanded total − collapsed bar width (cozy).
+// This ensures opening the content panel does not widen the total beyond $fd-side-panel-expanded-width.
+// Compact equivalent: $fd-side-panel-expanded-width - $fd-side-panel-bar-width-compact = 16rem.
+$fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-side-panel-bar-width-cozy; // 15.75rem
 
 .fd-side-panel {
     display: flex;
@@ -369,7 +373,7 @@ $fd-side-panel-expanded-width: 20rem;
         .fd-side-panel__action-bar {
             // Resizable in expanded mode: driven by the splitter (falls back to the fixed expanded
             // width). Min/max clamping is enforced in JS against the outer container.
-            inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
+            inline-size: var(--fd-side-panel-content-panel-width, #{$fd-side-panel-expanded-width});
         }
 
         // Nav arrow container: push the arrow to the inline-end (top-right for LTR)
@@ -454,7 +458,9 @@ $fd-side-panel-expanded-width: 20rem;
         // Width is driven solely by the resize variable; min/max clamping is enforced in JS
         // (SplitterDirective) against the outer container, since a CSS `%` max would resolve
         // against this element's containing block, not the page container.
-        inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
+        // Default = $fd-side-panel-content-panel-default-width (expanded total − collapsed bar),
+        // so opening the content panel does not widen the total footprint beyond 20rem.
+        inline-size: var(--fd-side-panel-content-panel-width, #{$fd-side-panel-content-panel-default-width});
         background: var(--sapGroup_ContentBackground, #fff);
         box-shadow: var(--sapContent_Shadow0, 0 0 1rem rgba(34, 53, 72, 0.1));
         box-sizing: border-box;
@@ -518,12 +524,12 @@ $fd-side-panel-expanded-width: 20rem;
     }
 
     &--single-action.fd-side-panel--right .fd-side-panel__content-panel {
-        inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
+        inline-size: var(--fd-side-panel-content-panel-width, #{$fd-side-panel-expanded-width});
         inset-inline-end: 0;
     }
 
     &--single-action.fd-side-panel--left .fd-side-panel__content-panel {
-        inline-size: var(--fd-side-panel-content-width, #{$fd-side-panel-expanded-width});
+        inline-size: var(--fd-side-panel-content-panel-width, #{$fd-side-panel-expanded-width});
         inset-inline-start: 0;
     }
 
@@ -614,26 +620,24 @@ $fd-side-panel-expanded-width: 20rem;
     // and the main slot is pushed aside; in overlay mode the content panel floats
     // over it.
 
-    &--has-main {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+
+    .fd-side-panel__main-container {
+        display: block;
         flex: 1 1 auto;
         min-inline-size: 0;
+        block-size: 100%;
+        overflow: auto;
+    }
+}
 
-        .fd-side-panel__main-slot {
-            display: block;
-            flex: 1 1 auto;
-            min-inline-size: 0;
-            block-size: 100%;
-            overflow: auto;
-        }
-    }
-
-    // Right-docked: main content sits at the inline-start (before the panel) in push mode.
-    &--right.fd-side-panel--has-main .fd-side-panel__main-slot {
-        order: -3; // right: main(-3) | resizer(-2) | content(-1) | bar(0)
-    }
-    &--left.fd-side-panel--has-main .fd-side-panel__main-slot {
-        order: 3; // left: bar(0) | content(1) | resizer(2) | main(3)
-    }
+// Right-docked: main content sits at the inline-start (before the panel) in push mode.
+.fd-side-panel--right .fd-side-panel__main-container {
+    order: -3; // right: main(-3) | resizer(-2) | content(-1) | bar(0)
+}
+.fd-side-panel--left .fd-side-panel__main-container {
+    order: 3; // left: bar(0) | content(1) | resizer(2) | main(3)
 }
 
 // ---------------------------------------------------------------------------

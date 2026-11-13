@@ -787,13 +787,20 @@ describe('SidePanelComponent — resize state & splitter', () => {
     });
 
     describe('resize state', () => {
-        it('contentWidthStyle falls back to defaultWidth before any resize', () => {
-            expect(component['contentWidthStyle']()).toBe(component.defaultWidth());
+        it('contentPanelWidthStyle uses content-panel default (15.75rem) when panel is open, before any resize', () => {
+            // open = true is set in beforeEach; collapsed bar (4.25rem) + 15.75rem = 20rem total footprint.
+            expect(component['contentPanelWidthStyle']()).toBe('15.75rem');
         });
 
-        it('contentWidthStyle returns px once resized', () => {
-            component['contentWidthPx'].set(260);
-            expect(component['contentWidthStyle']()).toBe('260px');
+        it('contentPanelWidthStyle falls back to defaultWidth when panel is closed (expanded action bar mode)', () => {
+            component.open.set(false);
+            fixture.detectChanges();
+            expect(component['contentPanelWidthStyle']()).toBe(component.defaultWidth());
+        });
+
+        it('contentPanelWidthStyle returns px once resized', () => {
+            component['contentPanelWidthPx'].set(260);
+            expect(component['contentPanelWidthStyle']()).toBe('260px');
         });
     });
 
@@ -812,12 +819,12 @@ describe('SidePanelComponent — resize state & splitter', () => {
             expect(fixture.nativeElement.querySelector('.fd-side-panel__content-panel fd-resize-splitter')).toBeNull();
         });
 
-        it('updates contentWidthPx when the splitter emits a new size', () => {
+        it('updates contentPanelWidthPx when the splitter emits a new size', () => {
             const bar = fixture.nativeElement.querySelector('fd-resize-splitter') as HTMLElement;
             component['measureBounds']();
             bar.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
             fixture.detectChanges();
-            expect(component['contentWidthPx']()).not.toBeNull();
+            expect(component['contentPanelWidthPx']()).not.toBeNull();
         });
     });
 
@@ -837,32 +844,32 @@ describe('SidePanelComponent — resize state & splitter', () => {
             bar.dispatchEvent(evt);
             fixture.detectChanges();
             expect(evt.defaultPrevented).toBe(true);
-            expect(component['widthMenu']().isOpen()).toBe(true);
+            expect(component['widthMenu']()?.isOpen()).toBe(true);
         });
 
         it('expandToMax sets width to the max bound', () => {
             component['setWidthToMax']();
-            expect(component['contentWidthPx']()).toBe(500);
+            expect(component['contentPanelWidthPx']()).toBe(500);
         });
 
         it('collapseToMin sets width to the min bound', () => {
             component['setWidthToMin']();
-            expect(component['contentWidthPx']()).toBe(150);
+            expect(component['contentPanelWidthPx']()).toBe(150);
         });
 
         it('resetToDefault reverts to the resolved default px value', () => {
-            component['contentWidthPx'].set(300);
+            component['contentPanelWidthPx'].set(300);
             component['resetWidthToDefault']();
             const defaultPx = component['resizeDefaultPx']();
-            expect(component['contentWidthPx']()).toBe(defaultPx);
-            expect(component['contentWidthStyle']()).toBe(`${defaultPx}px`);
+            expect(component['contentPanelWidthPx']()).toBe(defaultPx);
+            expect(component['contentPanelWidthStyle']()).toBe(`${defaultPx}px`);
         });
 
         it('Shift+F10 on the bar opens the menu', () => {
             const bar = fixture.nativeElement.querySelector('fd-resize-splitter') as HTMLElement;
             bar.dispatchEvent(new KeyboardEvent('keydown', { key: 'F10', shiftKey: true, bubbles: true }));
             fixture.detectChanges();
-            expect(component['widthMenu']().isOpen()).toBe(true);
+            expect(component['widthMenu']()?.isOpen()).toBe(true);
         });
     });
 });
@@ -885,12 +892,12 @@ describe('SidePanelComponent — resize state & splitter', () => {
 class MainSlotTestHostComponent {}
 
 describe('SidePanel main-content slot', () => {
-    it('projects fd-side-panel-main content and marks the host with has-main class', () => {
+    it('projects fd-side-panel-main content', () => {
         TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
         const fixture = TestBed.createComponent(MainSlotTestHostComponent);
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('#page')?.textContent).toBe('Page body');
-        expect(fixture.nativeElement.querySelector('.fd-side-panel--has-main')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-side-panel__main-container')).toBeTruthy();
     });
 
     it('toggles the --push host class with host width (pushMode)', () => {
@@ -985,10 +992,10 @@ describe('SidePanel resizable splitter', () => {
         (panel as any).resizeMinPx.set(100);
 
         (panel as any).cycleWidth(); // 1st -> max
-        expect((panel as any).contentWidthPx()).toBe(400);
+        expect((panel as any).contentPanelWidthPx()).toBe(400);
         (panel as any).cycleWidth(); // 2nd -> min
-        expect((panel as any).contentWidthPx()).toBe(100);
+        expect((panel as any).contentPanelWidthPx()).toBe(100);
         (panel as any).cycleWidth(); // 3rd -> default
-        expect((panel as any).contentWidthPx()).toBe(250);
+        expect((panel as any).contentPanelWidthPx()).toBe(250);
     });
 });

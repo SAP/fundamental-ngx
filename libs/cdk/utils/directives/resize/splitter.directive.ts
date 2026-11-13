@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
     booleanAttribute,
     computed,
@@ -12,7 +11,7 @@ import {
     output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { fromEvent, merge, Subject, takeUntil } from 'rxjs';
 import { RtlService } from '../../services/rtl.service';
 
 /** Orientation of the splitter bar. `vertical` resizes a horizontal (width) dimension. */
@@ -36,7 +35,7 @@ export type FdkSplitterGrows = 'start' | 'end';
         '[attr.tabindex]': 'disabled() ? -1 : 0',
         '[attr.aria-disabled]': 'disabled() || null',
         '(keydown)': 'onKeydown($event)',
-        '(mousedown)': 'onPointerDown($event)'
+        '(pointerdown)': 'onPointerDown($event)'
     }
 })
 export class SplitterDirective {
@@ -89,13 +88,10 @@ export class SplitterDirective {
     private readonly _rtl = inject(RtlService, { optional: true });
 
     /** @hidden */
-    private readonly _document = inject(DOCUMENT);
-
-    /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    private _dragStop = new Subject<void>();
+    private readonly _dragStop = new Subject<void>();
 
     /** @hidden host keydown handler. Matches on event.key (tests dispatch key only). */
     protected onKeydown(event: KeyboardEvent): void {
@@ -105,6 +101,8 @@ export class SplitterDirective {
         const key = event.key;
 
         if (key === 'Home' || key === 'End' || key === 'Enter') {
+            // WAI-ARIA 1.2 separator role: Home = maximum value, End = minimum value.
+            // This is intentionally reversed from the usual "Home = start/min" convention.
             const target =
                 key === 'Home'
                     ? this.max()
@@ -132,8 +130,8 @@ export class SplitterDirective {
         this.resizeEnd.emit();
     }
 
-    /** @hidden host mousedown handler — starts a drag. */
-    protected onPointerDown(event: MouseEvent): void {
+    /** @hidden host pointerdown handler — starts a drag; supports mouse, touch, and stylus. */
+    protected onPointerDown(event: PointerEvent): void {
         if (this.disabled()) {
             return;
         }
@@ -141,28 +139,34 @@ export class SplitterDirective {
         // event.preventDefault() blocks the browser's native focus-on-click, so we do it explicitly.
         this._elementRef.nativeElement.focus({ preventScroll: true });
         event.preventDefault();
+        // Cancel any in-progress drag before starting a new one.
+        this._dragStop.next();
+        // Pointer capture routes subsequent pointermove/up/cancel to this element regardless
+        // of where the pointer moves, eliminating document-level listeners.
+        this._elementRef.nativeElement.setPointerCapture?.(event.pointerId);
         const horizontal = this.orientation() === 'horizontal';
         let last = horizontal ? event.clientY : event.clientX;
         const growthSign = this._pointerGrowthSign();
+        const el = this._elementRef.nativeElement;
 
         this.resizeStart.emit();
-        this._dragStop = new Subject<void>();
 
-        fromEvent<MouseEvent>(this._document, 'mousemove')
+        merge(
+            fromEvent<PointerEvent>(el, 'pointermove'),
+            fromEvent<PointerEvent>(el, 'pointerup'),
+            fromEvent<PointerEvent>(el, 'pointercancel')
+        )
             .pipe(takeUntil(this._dragStop), takeUntilDestroyed(this._destroyRef))
             .subscribe((e) => {
+                if (e.type !== 'pointermove') {
+                    this._dragStop.next();
+                    this.resizeEnd.emit();
+                    return;
+                }
                 const pos = horizontal ? e.clientY : e.clientX;
                 const delta = (pos - last) * growthSign;
                 last = pos;
                 this._setSize(this.size() + delta);
-            });
-
-        fromEvent(this._document, 'mouseup')
-            .pipe(takeUntil(this._dragStop), takeUntilDestroyed(this._destroyRef))
-            .subscribe(() => {
-                this._dragStop.next();
-                this._dragStop.complete();
-                this.resizeEnd.emit();
             });
     }
 

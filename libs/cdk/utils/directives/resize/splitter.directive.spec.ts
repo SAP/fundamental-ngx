@@ -3,6 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RtlService } from '../../services/rtl.service';
 import { SplitterDirective } from './splitter.directive';
 
+// JSDOM does not implement PointerEvent or pointer capture; define minimal polyfills.
+if (typeof PointerEvent === 'undefined') {
+    (window as Window & { PointerEvent: typeof PointerEvent }).PointerEvent = class PointerEvent extends MouseEvent {
+        readonly pointerId: number;
+        constructor(type: string, init: PointerEventInit & MouseEventInit = {}) {
+            super(type, init);
+            this.pointerId = init.pointerId ?? 0;
+        }
+    } as typeof PointerEvent;
+}
+if (!HTMLElement.prototype.setPointerCapture) {
+    HTMLElement.prototype.setPointerCapture = () => {};
+    HTMLElement.prototype.releasePointerCapture = () => {};
+}
+
 @Component({
     imports: [SplitterDirective],
     template: `
@@ -101,21 +116,21 @@ describe('SplitterDirective', () => {
 
     describe('pointer drag', () => {
         it('grows on +X movement when grows="end" (LTR), clamped, with start/end events', () => {
-            bar.dispatchEvent(new MouseEvent('mousedown', { clientX: 500, bubbles: true }));
+            bar.dispatchEvent(new PointerEvent('pointerdown', { clientX: 500, pointerId: 1, bubbles: true }));
             expect(fixture.componentInstance.startCount).toBe(1);
 
-            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 540 })); // +40 -> 240
+            bar.dispatchEvent(new PointerEvent('pointermove', { clientX: 540, pointerId: 1 })); // +40 -> 240
             fixture.detectChanges();
             expect(fixture.componentInstance.size).toBe(240);
 
-            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1000 })); // +460 -> clamp 400
+            bar.dispatchEvent(new PointerEvent('pointermove', { clientX: 1000, pointerId: 1 })); // +460 -> clamp 400
             fixture.detectChanges();
             expect(fixture.componentInstance.size).toBe(400);
 
-            document.dispatchEvent(new MouseEvent('mouseup'));
+            bar.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1 }));
             expect(fixture.componentInstance.endCount).toBe(1);
 
-            document.dispatchEvent(new MouseEvent('mousemove', { clientX: 1100 }));
+            bar.dispatchEvent(new PointerEvent('pointermove', { clientX: 1100, pointerId: 1 }));
             fixture.detectChanges();
             expect(fixture.componentInstance.size).toBe(400);
         });

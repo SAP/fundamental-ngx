@@ -1,4 +1,4 @@
-<div class="fd-side-panel__main-slot">
+<div class="fd-side-panel__main-container">
     <ng-content select="fd-side-panel-main" />
 </div>
 
@@ -152,7 +152,7 @@
     <fd-resize-splitter
         class="fd-side-panel__resizer"
         orientation="vertical"
-        [size]="contentWidthPx() ?? 0"
+        [size]="contentPanelWidthPx() ?? 0"
         [min]="resizeMinPx()"
         [max]="resizeMaxPx()"
         [defaultSize]="resizeDefaultPx()"
@@ -162,15 +162,15 @@
         [class.is-resizing]="isResizing()"
         [attr.aria-label]="resizeSplitterLabel()"
         [attr.title]="resizeSplitterLabel()"
-        [fdMenuTrigger]="widthMenu"
+        [fdMenuTrigger]="widthMenuEl"
         (resizeStart)="onResizeStart()"
-        (sizeChange)="contentWidthPx.set($event)"
+        (sizeChange)="contentPanelWidthPx.set($event)"
         (resizeEnd)="isResizing.set(false)"
         (contextmenu)="openWidthMenu($event)"
         (keydown)="onSplitterKeydown($event)"
         (dblclick)="cycleWidth()"
     />
-    <fd-menu #widthMenu [triggers]="[]" [placement]="side() === 'right' ? 'left' : 'right'">
+    <fd-menu #widthMenuEl [triggers]="[]" [placement]="side() === 'right' ? 'left' : 'right'">
         <li fd-menu-item>
             <a fd-menu-interactive (click)="setWidthToMax()">
                 <span fd-menu-title>{{ resizeExpandLabel() }}</span>
