@@ -1,3 +1,7 @@
+<div class="fd-side-panel__main-container">
+    <ng-content select="fd-side-panel-main" />
+</div>
+
 <div #actionBar class="fd-side-panel__action-bar">
     <div class="fd-side-panel__action-container fd-side-panel__nav-container">
         <button
@@ -47,9 +51,9 @@
                     >
                         <span class="fd-side-panel__action" [class.is-active]="item.id() === activeItem()">
                             <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
-                            @if (item.counter() !== undefined) {
+                            @if (item.counterDisplay() !== null) {
                                 <span class="fd-side-panel__action-counter" aria-hidden="true">{{
-                                    item.counter()! > 99 ? '99+' : item.counter()
+                                    item.counterDisplay()
                                 }}</span>
                             }
                         </span>
@@ -105,9 +109,7 @@
         #contentPanel
         class="fd-side-panel__content-panel"
         tabindex="-1"
-        [style.--fd-side-panel-content-width]="defaultWidth()"
-        [style.--fd-side-panel-content-min-width]="minWidth()"
-        [style.--fd-side-panel-content-max-width]="maxWidth()"
+        [class.is-resizing]="isResizing()"
         role="region"
         [attr.aria-label]="activeGroupLabel()"
     >
@@ -144,4 +146,45 @@
             }
         </div>
     </div>
+}
+
+@if (showSplitter()) {
+    <fd-resize-splitter
+        class="fd-side-panel__resizer"
+        orientation="vertical"
+        [size]="contentPanelWidthPx() ?? 0"
+        [min]="resizeMinPx()"
+        [max]="resizeMaxPx()"
+        [defaultSize]="resizeDefaultPx()"
+        [step]="resizeStep()"
+        [largeStep]="resizeLargeStep()"
+        [grows]="resizeGrows()"
+        [class.is-resizing]="isResizing()"
+        [attr.aria-label]="resizeSplitterLabel()"
+        [attr.title]="resizeSplitterLabel()"
+        [fdMenuTrigger]="widthMenuEl"
+        (resizeStart)="onResizeStart()"
+        (sizeChange)="contentPanelWidthPx.set($event)"
+        (resizeEnd)="isResizing.set(false)"
+        (contextmenu)="openWidthMenu($event)"
+        (keydown)="onSplitterKeydown($event)"
+        (dblclick)="cycleWidth()"
+    />
+    <fd-menu #widthMenuEl [triggers]="[]" [placement]="widthMenuPlacement()">
+        <li fd-menu-item>
+            <a fd-menu-interactive (click)="setWidthToMax()">
+                <span fd-menu-title>{{ resizeExpandLabel() }}</span>
+            </a>
+        </li>
+        <li fd-menu-item>
+            <a fd-menu-interactive (click)="setWidthToMin()">
+                <span fd-menu-title>{{ resizeCollapseLabel() }}</span>
+            </a>
+        </li>
+        <li fd-menu-item>
+            <a fd-menu-interactive (click)="resetWidthToDefault()">
+                <span fd-menu-title>{{ resizeResetLabel() }}</span>
+            </a>
+        </li>
+    </fd-menu>
 }

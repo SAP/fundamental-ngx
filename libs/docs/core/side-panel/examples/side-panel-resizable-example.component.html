@@ -1,0 +1,45 @@
+<div class="side-panel-example">
+    <fd-side-panel
+        side="right"
+        ariaLabel="Actions"
+        [resizable]="true"
+        defaultWidth="20rem"
+        minWidth="12rem"
+        maxWidth="90%"
+        [activeItem]="activeItem()"
+        (activeItemChange)="activeItem.set($event)"
+        [open]="open()"
+        (openChange)="open.set($event)"
+    >
+        <fd-side-panel-main>
+            <div class="side-panel-example__main-content">
+                <h2>Main Content</h2>
+                <p>
+                    The panel pushes this area aside when the component is wide enough (≥1024 px); in narrower
+                    containers it overlays instead.
+                </p>
+                <p>Drag the splitter bar (or use Arrow keys / right-click the bar) to resize the panel.</p>
+                <button fd-button (click)="activeItem.set('filters'); open.set(true)">Open Filters</button>
+            </div>
+        </fd-side-panel-main>
+
+        <fd-side-panel-item id="filters" icon="filter" label="Filters">
+            <ng-template fdSidePanelContent>
+                <p class="side-panel-example__panel-body">Filter controls go here.</p>
+            </ng-template>
+        </fd-side-panel-item>
+
+        <fd-side-panel-item id="settings" icon="settings" label="Settings">
+            <ng-template fdSidePanelContent>
+                <p class="side-panel-example__panel-body">Settings controls go here.</p>
+            </ng-template>
+        </fd-side-panel-item>
+
+        <fd-side-panel-item id="info" icon="hint" label="Info">
+            <ng-template fdSidePanelContent>
+                <p class="side-panel-example__panel-body">Information panel content.</p>
+            </ng-template>
+        </fd-side-panel-item>
+    </fd-side-panel>
+</div>
+<p>Active group: {{ activeItem() ?? 'none' }} | Panel: {{ open() ? 'open' : 'closed' }}</p>

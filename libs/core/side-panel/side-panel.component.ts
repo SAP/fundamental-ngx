@@ -2,6 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     afterNextRender,
+    booleanAttribute,
     Component,
     computed,
     contentChildren,
@@ -28,11 +29,26 @@ import {
     MenuTitleDirective,
     MenuTriggerDirective
 } from '@fundamental-ngx/core/menu';
+import { ResizeSplitterComponent } from '@fundamental-ngx/core/resize-splitter';
 import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { SidePanelItemComponent } from './side-panel-item.component';
 
 /** Edge the side panel is anchored to. */
 export type SidePanelSide = 'left' | 'right';
+
+/**
+ * Default width of the content panel when it is open alongside the collapsed (4.25rem cozy)
+ * action bar: total 20rem footprint − 4.25rem bar = 15.75rem.  Matches
+ * `$fd-side-panel-content-panel-default-width` in the SCSS.
+ */
+export const CONTENT_PANEL_OPEN_DEFAULT_WIDTH = '15.75rem';
+
+/** Viewport width (px) above which push mode (side-by-side) activates. */
+const PUSH_MODE_BREAKPOINT_PX = 1024;
+/** Fallback root font size (px) when `getComputedStyle` returns 0. */
+const DEFAULT_ROOT_FONT_PX = 16;
+/** Number of steps in the double-click width cycle (default → max → min → default). */
+const WIDTH_CYCLE_STEPS = 3;
 
 /** Display mode of the side panel action bar. */
 export type SidePanelMode = 'collapsed' | 'expanded';
@@ -68,13 +84,15 @@ export type SidePanelMode = 'collapsed' | 'expanded';
         MenuInteractiveComponent,
         MenuAddonDirective,
         MenuTitleDirective,
-        MenuTriggerDirective
+        MenuTriggerDirective,
+        ResizeSplitterComponent
     ],
     providers: [contentDensityObserverProviders()],
     host: {
         '[class]': 'hostClasses()',
         '[attr.role]': "'region'",
         '[attr.aria-label]': 'sidePanelLabel()',
+        '[style.--fd-side-panel-content-panel-width]': 'contentPanelWidthStyle()',
         '(keydown)': 'onHostKeydown($event)',
         '(keydown.escape)': 'onEscape($event)'
     }
@@ -83,7 +101,7 @@ export class SidePanelComponent {
     /** Edge the panel is anchored to. Defaults to `right`. */
     readonly side = input<SidePanelSide>('right');
 
-    /** Accessible label for the action bar (`toolbar`). */
+    /** Accessible label for the action group listbox. */
     readonly ariaLabel = input<string>();
 
     /**
@@ -96,8 +114,13 @@ export class SidePanelComponent {
     readonly open = model(false);
 
     /**
-     * Default width of the content panel (CSS value, e.g. `'20rem'` or `'300px'`).
-     * Effective when the viewport is ≥ 561px.
+     * Width of the panel when the action bar is in expanded (icons + labels) mode with no open
+     * content panel — e.g. `'20rem'` or `'300px'`. Also used as the "Reset to Default Width"
+     * target in expanded-bar mode.
+     *
+     * When the content panel is open alongside the collapsed action bar, the default width is
+     * instead `CONTENT_PANEL_OPEN_DEFAULT_WIDTH` (`15.75rem`), derived from the fundamental-styles
+     * SCSS, and is not affected by this input.
      */
     readonly defaultWidth = input<string>('20rem');
 
@@ -113,6 +136,14 @@ export class SidePanelComponent {
      */
     readonly maxWidth = input<string>('90%');
 
+    /** Whether the content panel can be resized by the user (drag / keyboard / width menu / double-click). */
+    readonly resizable = input(false, { transform: booleanAttribute });
+
+    /** Arrow-key resize step in px. */
+    readonly resizeStep = input<number>(10);
+    /** Shift/Page resize step in px. */
+    readonly resizeLargeStep = input<number>(100);
+
     /**
      * Display mode of the action bar.
      * - `'collapsed'` (default): icons-only, compact rail.
@@ -123,6 +154,9 @@ export class SidePanelComponent {
 
     /** @hidden Projected side panel items (content groups). */
     protected readonly items = contentChildren(SidePanelItemComponent);
+
+    /** @hidden True at ≥1024px: main content and panel sit side-by-side (push); else overlay. */
+    protected readonly pushMode = computed(() => this._hostWidthPx() >= PUSH_MODE_BREAKPOINT_PX);
 
     /** @hidden */
     protected readonly hostClasses = computed(() => {
@@ -135,6 +169,9 @@ export class SidePanelComponent {
         }
         if (this.isSingleAction()) {
             classes.push('fd-side-panel--single-action');
+        }
+        if (this.pushMode()) {
+            classes.push('fd-side-panel--push');
         }
         return classes.join(' ');
     });
@@ -180,20 +217,10 @@ export class SidePanelComponent {
     protected readonly focusedContainerIndex = signal(-1);
 
     /** @hidden Label of the currently active group, used as the content panel's accessible name. */
-    protected readonly activeGroupLabel = computed(
-        () =>
-            this.items()
-                .find((item) => item.id() === this.activeItem())
-                ?.label() ?? ''
-    );
+    protected readonly activeGroupLabel = computed(() => this._activeItem()?.label() ?? '');
 
     /** @hidden Icon glyph of the currently active group, shown in the content panel header. */
-    protected readonly activeGroupIcon = computed(
-        () =>
-            this.items()
-                .find((item) => item.id() === this.activeItem())
-                ?.icon() ?? ''
-    );
+    protected readonly activeGroupIcon = computed(() => this._activeItem()?.icon() ?? '');
 
     /** @hidden Tracks keyboard focus on the overflow toggle button — drives the is-focused container ring. */
     protected readonly overflowToggleFocused = signal(false);
@@ -205,6 +232,11 @@ export class SidePanelComponent {
         const isContentOnRight = (this.side() === 'right') === this._isRtl();
         return isContentOnRight ? 'right-end' : 'left-end';
     });
+
+    /** @hidden Placement for the width context menu: always on the content-facing side. */
+    protected readonly widthMenuPlacement = computed<'left' | 'right'>(() =>
+        this.side() === 'right' ? 'left' : 'right'
+    );
 
     /**
      * @hidden Extra CSS classes applied to the overflow menu body so its edge aligns with the
@@ -237,6 +269,14 @@ export class SidePanelComponent {
     protected readonly expandedAnnouncement = resolveTranslationSignal('coreSidePanel.expandedAnnouncement');
     /** @hidden */
     protected readonly collapsedAnnouncement = resolveTranslationSignal('coreSidePanel.collapsedAnnouncement');
+    /** @hidden */
+    protected readonly resizeExpandLabel = resolveTranslationSignal('coreSidePanel.resizeExpandToMax');
+    /** @hidden */
+    protected readonly resizeCollapseLabel = resolveTranslationSignal('coreSidePanel.resizeCollapseToMin');
+    /** @hidden */
+    protected readonly resizeResetLabel = resolveTranslationSignal('coreSidePanel.resizeResetToDefault');
+    /** @hidden */
+    protected readonly resizeSplitterLabel = resolveTranslationSignal('coreSidePanel.resizeSplitterLabel');
 
     /**
      * @hidden Number of items that fit in the visible action bar without overflowing.
@@ -264,11 +304,50 @@ export class SidePanelComponent {
     /** @hidden Items that overflow the visible action bar area. */
     protected readonly overflowItems = computed(() => this.items().slice(this.visibleItemCount()));
 
+    /** @hidden Reference to the content panel element for bounds measurement. */
+    protected readonly contentPanelRef = viewChild<ElementRef<HTMLElement>>('contentPanel');
+    /** @hidden Reference to the width context menu (right-click / Shift+F10). */
+    protected readonly widthMenu = viewChild<MenuComponent>('widthMenuEl');
+    /** @hidden Measured px min bound for the current drag/menu action. */
+    protected readonly resizeMinPx = signal(0);
+    /** @hidden Measured px max bound for the current drag/menu action. */
+    protected readonly resizeMaxPx = signal(Infinity);
+    /** @hidden Measured px default bound for reset actions (Enter / menu / double-click). */
+    protected readonly resizeDefaultPx = signal(0);
+    /** @hidden Whether a drag is in progress (disables width transition). */
+    protected readonly isResizing = signal(false);
+    /** @hidden `grows` direction for the splitter, derived from the docked side. */
+    protected readonly resizeGrows = computed<'start' | 'end'>(() => (this.side() === 'right' ? 'start' : 'end'));
+
+    /** @hidden Splitter shown in push mode when the panel occupies resizable horizontal space. */
+    protected readonly showSplitter = computed(
+        () => this.resizable() && this.pushMode() && (this.open() || this.mode() === 'expanded')
+    );
+
+    /** @hidden Live width in px for whichever element the splitter is currently sizing:
+     *  the content panel when open, the expanded action bar otherwise.
+     *  Reset to null on every open() transition so each mode starts from its own CSS default. */
+    protected readonly contentPanelWidthPx = linkedSignal<boolean, number | null>({
+        source: () => this.open(),
+        computation: () => null
+    });
+    /** @hidden CSS value for --fd-side-panel-content-panel-width. */
+    protected readonly contentPanelWidthStyle = computed(() => {
+        const px = this.contentPanelWidthPx();
+        if (px !== null) {
+            return `${px}px`;
+        }
+        // The same CSS variable drives two different elements depending on state:
+        // - Expanded action bar (mode='expanded', no content panel): full 20rem footprint.
+        // - Content panel alongside collapsed bar: CONTENT_PANEL_OPEN_DEFAULT_WIDTH.
+        // These two are mutually exclusive, so we select the right default here.
+        return this.open() ? CONTENT_PANEL_OPEN_DEFAULT_WIDTH : this.defaultWidth();
+    });
+
     /** @hidden Action option (`<li role="option">`) elements, in projection order. */
     private readonly _actionOptions = viewChildren<ElementRef<HTMLLIElement>>('actionOption');
 
     private readonly _actionBar = viewChild<ElementRef<HTMLDivElement>>('actionBar');
-    private readonly _contentPanel = viewChild<ElementRef<HTMLDivElement>>('contentPanel');
     private readonly _contentPanelClose = viewChild<ElementRef<HTMLButtonElement>>('contentPanelClose');
     private readonly _navArrowRef = viewChild<ElementRef<HTMLButtonElement>>('navArrow');
     private readonly _overflowToggleRef = viewChild<ElementRef<HTMLButtonElement>>('overflowToggle');
@@ -276,16 +355,35 @@ export class SidePanelComponent {
     private readonly _destroyRef = inject(DestroyRef);
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
     private readonly _document = inject(DOCUMENT);
+    private readonly _elementRef = inject(ElementRef);
     private readonly _availBarHeight = signal(0);
     private readonly _navContainerH = signal(0);
     private readonly _itemContainerH = signal(0);
     private readonly _itemGapPx = signal(0);
+
+    /** @hidden Measured host inline-size in px (updated by the ResizeObserver). */
+    private readonly _hostWidthPx = signal(0);
 
     private readonly _rtlService = inject(RtlService, { optional: true });
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
 
     /** @hidden Whether the content panel was open when the action bar was expanded. */
     private _contentWasOpen = false;
+
+    /** @hidden Position in the default→max→min cycle driven by double-click. Reset per open() transition. */
+    private readonly _widthCycle = linkedSignal<boolean, number>({
+        source: () => this.open(),
+        computation: () => 0
+    });
+
+    /** @hidden The currently active item, or `undefined` when none is active. */
+    private readonly _activeItem = computed(() => this.items().find((item) => item.id() === this.activeItem()));
+
+    /** @hidden Index of the currently active item within `items()`, or `-1` when none is active. */
+    private readonly _activeItemIndex = computed(() =>
+        this.items().findIndex((item) => item.id() === this.activeItem())
+    );
+
     /**
      * @hidden Guard against a stale keyup activating the first overflow item immediately
      * after the menu opens via Enter.  Enter on the `<button>` fires the native click
@@ -320,6 +418,22 @@ export class SidePanelComponent {
             }
         });
 
+        // Seed resize bounds + current width as soon as the splitter first appears (or re-appears
+        // after a mode switch), so ARIA and keyboard interactions work immediately.
+        // contentPanelWidthPx() === null is the gate: it's reset to null by the linkedSignal on
+        // every open() transition, so this fires once per mode (content-panel and expanded-bar).
+        // When the content panel is expected (open = true), also wait for its element to be in the
+        // DOM (contentPanelRef truthy), so measureBounds reads the content panel, not the action bar.
+        effect(() => {
+            if (!this.showSplitter() || this.contentPanelWidthPx() !== null) {
+                return;
+            }
+            if (this.open() && !this.contentPanelRef()) {
+                return;
+            }
+            this.measureBounds();
+        });
+
         afterNextRender(() => {
             const bar = this._actionBar()?.nativeElement;
             if (!bar) {
@@ -327,6 +441,8 @@ export class SidePanelComponent {
             }
 
             const measure = (): void => {
+                this._hostWidthPx.set((this._elementRef.nativeElement as HTMLElement).clientWidth);
+
                 const style = getComputedStyle(bar);
                 const paddingBlockStart = parseFloat(style.paddingBlockStart) || 0;
                 const barGap = parseFloat(style.gap) || 0;
@@ -347,6 +463,7 @@ export class SidePanelComponent {
 
             const observer = new ResizeObserver(measure);
             observer.observe(bar);
+            observer.observe(this._elementRef.nativeElement);
             measure();
 
             this._destroyRef.onDestroy(() => observer.disconnect());
@@ -389,11 +506,7 @@ export class SidePanelComponent {
                 this.open.set(false);
                 this.mode.set('expanded');
             } else {
-                this.mode.set('collapsed');
-                if (this._contentWasOpen) {
-                    this.open.set(true);
-                    this._contentWasOpen = false;
-                }
+                this._collapseExpandedBar();
             }
         }
         this._liveAnnouncer.announce(
@@ -407,21 +520,12 @@ export class SidePanelComponent {
             return;
         }
         this._focusItem(index);
-        const id = item.id();
-        const newActiveId = this.activeItem() === id ? null : id;
-        this.activeItem.set(newActiveId);
-        this.open.set(newActiveId !== null);
-        // Selecting an item while expanded collapses the action bar so the
-        // content panel and the bar together occupy the same footprint as
-        // the expanded bar.
-        if (this.mode() === 'expanded' && newActiveId !== null) {
-            this.mode.set('collapsed');
-        }
+        this._setActiveItem(item.id());
     }
 
     /** @hidden Close the content panel and return focus to the item's action button (or overflow toggle). */
     protected closeContentPanel(): void {
-        const index = this.items().findIndex((item) => item.id() === this.activeItem());
+        const index = this._activeItemIndex();
         this.open.set(false);
         this.activeItem.set(null);
         if (index > -1) {
@@ -517,14 +621,14 @@ export class SidePanelComponent {
         if (this.isSingleAction() || !this.open() || (!isF6 && !isModArrow)) {
             return;
         }
-        const panel = this._contentPanel()?.nativeElement;
+        const panel = this.contentPanelRef()?.nativeElement;
         if (!panel) {
             return;
         }
         event.preventDefault();
         if (panel.contains(document.activeElement)) {
             // Move focus back to the active option (or the overflow toggle when it's hidden).
-            const index = this.items().findIndex((item) => item.id() === this.activeItem());
+            const index = this._activeItemIndex();
             if (index > -1 && index >= this.visibleItemCount()) {
                 this._overflowToggleRef()?.nativeElement.focus();
             } else if (index > -1) {
@@ -550,13 +654,7 @@ export class SidePanelComponent {
             this._ignoreNextOverflowActivation = false;
             return;
         }
-        const id = item.id();
-        const newActiveId = this.activeItem() === id ? null : id;
-        this.activeItem.set(newActiveId);
-        this.open.set(newActiveId !== null);
-        if (this.mode() === 'expanded' && newActiveId !== null) {
-            this.mode.set('collapsed');
-        }
+        this._setActiveItem(item.id());
         this._overflowMenuRef()?.close();
     }
 
@@ -571,11 +669,143 @@ export class SidePanelComponent {
             }
         } else if (this.mode() === 'expanded') {
             event.preventDefault();
-            this.mode.set('collapsed');
-            if (this._contentWasOpen) {
-                this.open.set(true);
-                this._contentWasOpen = false;
+            this._collapseExpandedBar();
+        }
+    }
+
+    /**
+     * @hidden Measure the resize bounds against the panel's container and seed the live width.
+     * The resized element is always the content panel (the splitter only shows in push mode with an
+     * open content panel). `minWidth`/`maxWidth`/`defaultWidth` are resolved here (percentages against
+     * the container) so the panel can grow to nearly the full container width (e.g. `maxWidth="90%"`),
+     * matching the UI5 Side Panel splitter.
+     */
+    protected measureBounds(): void {
+        const target = this.contentPanelRef()?.nativeElement ?? this._actionBar()?.nativeElement;
+        if (!target) {
+            return;
+        }
+        const host = this._elementRef.nativeElement as HTMLElement;
+        const container = host.parentElement ?? host;
+        const containerWidth = container.clientWidth || host.clientWidth;
+        const rootFontPx =
+            parseFloat(getComputedStyle(this._document.documentElement).fontSize) || DEFAULT_ROOT_FONT_PX;
+        const resolve = (value: string, fallback: number): number => {
+            const v = (value ?? '').trim();
+            if (!v) {
+                return fallback;
             }
+            if (v.endsWith('%')) {
+                return (parseFloat(v) / 100) * containerWidth;
+            }
+            if (v.endsWith('rem')) {
+                return parseFloat(v) * rootFontPx;
+            }
+            const n = parseFloat(v);
+            return Number.isFinite(n) ? n : fallback;
+        };
+        this.resizeMinPx.set(resolve(this.minWidth(), 0));
+        this.resizeMaxPx.set(resolve(this.maxWidth(), Infinity));
+        // When the content panel is open it sits alongside the 4.25rem collapsed bar, so its
+        // own default width is CONTENT_PANEL_OPEN_DEFAULT_WIDTH (= 20rem total − 4.25rem bar).
+        // In expanded-bar mode (open=false) the full defaultWidth() applies. Use the same value
+        // for both "Reset to default" and the initial width seed so they stay consistent.
+        const initialStyle = this.open() ? CONTENT_PANEL_OPEN_DEFAULT_WIDTH : this.defaultWidth();
+        const defaultPx = resolve(initialStyle, target.offsetWidth);
+        this.resizeDefaultPx.set(defaultPx);
+        if (this.contentPanelWidthPx() === null) {
+            // Use the CSS-string default rather than offsetWidth: Angular effects run before
+            // the browser reflows, so offsetWidth can still reflect the old layout.
+            this.contentPanelWidthPx.set(defaultPx);
+        }
+    }
+
+    /** @hidden Splitter drag started: measure bounds and flag resizing. */
+    protected onResizeStart(): void {
+        this.measureBounds();
+        this.isResizing.set(true);
+    }
+
+    /** @hidden Open the width menu (right-click / keyboard). Measures bounds first. */
+    protected openWidthMenu(event: Event): void {
+        event.preventDefault();
+        this.measureBounds();
+        this.widthMenu()?.open();
+    }
+
+    /** @hidden Shift+F10 / ContextMenu key on the focused bar. */
+    protected onSplitterKeydown(event: KeyboardEvent): void {
+        const isMenuKey = event.key === 'ContextMenu' || (event.shiftKey && event.key === 'F10');
+        if (isMenuKey) {
+            this.openWidthMenu(event);
+        }
+    }
+
+    /** @hidden Set width to the measured max bound. Bounds are fresh (openWidthMenu measured on open). */
+    protected setWidthToMax(): void {
+        this.contentPanelWidthPx.set(this._resolveMaxPx());
+        this.widthMenu()?.close();
+    }
+
+    /** @hidden Set width to the measured min bound. */
+    protected setWidthToMin(): void {
+        this.contentPanelWidthPx.set(this.resizeMinPx());
+        this.widthMenu()?.close();
+    }
+
+    /** @hidden Revert to the configured default width string. */
+    protected resetWidthToDefault(): void {
+        this.measureBounds();
+        this.contentPanelWidthPx.set(this.resizeDefaultPx());
+        this.widthMenu()?.close();
+    }
+
+    /** @hidden Double-click the splitter: cycle content width default → max → min → default. */
+    protected cycleWidth(): void {
+        this.measureBounds();
+        const next = (this._widthCycle() + 1) % WIDTH_CYCLE_STEPS;
+        this._widthCycle.set(next);
+        if (next === 1) {
+            this.contentPanelWidthPx.set(this._resolveMaxPx());
+        } else if (next === 2) {
+            this.contentPanelWidthPx.set(this.resizeMinPx());
+        } else {
+            this.contentPanelWidthPx.set(this.resizeDefaultPx());
+        }
+    }
+
+    /**
+     * @hidden Resolve the effective max width in px.
+     * When the measured max is finite (a concrete CSS value), use it directly.
+     * When infinite (no `maxWidth` set), fall back to the content panel's current pixel width,
+     * and ultimately to the last measured default so the button never throws.
+     */
+    private _resolveMaxPx(): number {
+        const max = this.resizeMaxPx();
+        return Number.isFinite(max)
+            ? max
+            : (this.contentPanelRef()?.nativeElement.offsetWidth ?? this.resizeDefaultPx());
+    }
+
+    /** @hidden Toggle the active item: deactivates when already active, otherwise activates. */
+    private _setActiveItem(id: string): void {
+        const newActiveId = this.activeItem() === id ? null : id;
+        this.activeItem.set(newActiveId);
+        this.open.set(newActiveId !== null);
+        // Selecting an item while expanded collapses the action bar so the
+        // content panel and the bar together occupy the same footprint as
+        // the expanded bar.
+        if (this.mode() === 'expanded' && newActiveId !== null) {
+            this.mode.set('collapsed');
+        }
+    }
+
+    /** @hidden Collapse the expanded bar, restoring the content panel if it was open before expanding. */
+    private _collapseExpandedBar(): void {
+        this.mode.set('collapsed');
+        if (this._contentWasOpen) {
+            this.open.set(true);
+            this._contentWasOpen = false;
         }
     }
 

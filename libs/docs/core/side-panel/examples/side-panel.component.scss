@@ -5,16 +5,16 @@
     overflow: hidden;
     position: relative;
 
-    fd-side-panel {
-        flex-shrink: 0;
+    // Main-content slot inside fd-side-panel-main
+    &__main-content {
+        padding: 1rem;
+        overflow-y: auto;
+        block-size: 100%;
+        box-sizing: border-box;
     }
 
-    &__content {
-        flex: 1 1 auto;
-        padding: 1rem 1.5rem;
-        overflow-y: auto;
-        font-size: var(--sapFontSize, 0.875rem);
-        line-height: 1.5;
-        color: var(--sapTextColor, #32363a);
+    // Body padding for content projected into fd-side-panel-item panels
+    &__panel-body {
+        padding: 1rem;
     }
 }

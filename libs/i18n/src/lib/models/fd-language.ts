@@ -954,5 +954,13 @@ export interface FdLanguage {
         expandedAnnouncement: FdLanguageKey;
         /** Live announcement when the side panel action bar is collapsed */
         collapsedAnnouncement: FdLanguageKey;
+        /** Width-menu item that expands the content panel to its maximum width */
+        resizeExpandToMax: FdLanguageKey;
+        /** Width-menu item that collapses the content panel to its minimum width */
+        resizeCollapseToMin: FdLanguageKey;
+        /** Width-menu item that resets the content panel to its default width */
+        resizeResetToDefault: FdLanguageKey;
+        /** ARIA label for the side panel resize splitter */
+        resizeSplitterLabel: FdLanguageKey;
     };
 }

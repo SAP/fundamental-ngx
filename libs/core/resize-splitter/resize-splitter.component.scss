@@ -1,0 +1,120 @@
+.fd-resize-splitter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1rem; // 16 px grab area
+    cursor: col-resize;
+    background: transparent;
+    outline: none;
+
+    // ── Lines: gradient fade from grip outward, short and decorative ─────────
+
+    &__line-before {
+        flex: 0 0 4rem;
+        inline-size: 1rem;
+        background-image: linear-gradient(to top, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+        background-size: 0.0625rem 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition:
+            flex-basis 0.1s ease,
+            background-image 0.1s ease;
+    }
+
+    &__line-after {
+        flex: 0 0 4rem;
+        inline-size: 1rem;
+        background-image: linear-gradient(to bottom, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+        background-size: 0.0625rem 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition:
+            flex-basis 0.1s ease,
+            background-image 0.1s ease;
+    }
+
+    &:hover &__line-before,
+    &:hover &__line-after {
+        flex: 1 1 0;
+    }
+
+    // On active drag: lines grow to fill the container and turn solid blue
+    &.is-resizing &__line-before {
+        flex: 1 1 0;
+        background-image: linear-gradient(to top, var(--sapHighlightColor), var(--sapHighlightColor));
+    }
+
+    &.is-resizing &__line-after {
+        flex: 1 1 0;
+        background-image: linear-gradient(to top, var(--sapHighlightColor), var(--sapHighlightColor));
+    }
+
+    // ── Grip ─────────────────────────────────────────────────────────────────
+
+    &__grip {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        inline-size: 1.5rem;
+        block-size: 2rem;
+    }
+
+    &__grip-icon {
+        color: var(--sapButton_Lite_TextColor, #0064d9);
+        font-size: 1rem;
+    }
+
+    // ── Hover ─────────────────────────────────────────────────────────────────
+
+    &:hover {
+        background: var(--sapList_Hover_Background, #eaecee);
+    }
+
+    // Using :focus (not :focus-visible) because onPointerDown calls event.preventDefault(),
+    // preventing the browser's native focus-on-click — focus is given explicitly, so the
+    // browser no longer marks it as a "keyboard" interaction for :focus-visible heuristics.
+    // Negative outline-offset keeps the ring inside the element bounds; a positive offset
+    // would clip the top/bottom edges against the parent's overflow: hidden.
+    &:focus:not(.is-resizing) {
+        outline: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+        outline-offset: -0.125rem;
+    }
+
+    // ── Horizontal variant ────────────────────────────────────────────────────
+    &--horizontal {
+        flex-direction: row;
+        inline-size: auto;
+        block-size: 1rem;
+        cursor: row-resize;
+
+        .fd-resize-splitter__line-before {
+            flex: 0 0 4rem;
+            inline-size: auto;
+            block-size: 1rem;
+            background-image: linear-gradient(to left, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+            background-size: 100% 0.0625rem;
+            background-position: center;
+        }
+
+        .fd-resize-splitter__line-after {
+            flex: 0 0 4rem;
+            inline-size: auto;
+            block-size: 1rem;
+            background-image: linear-gradient(to right, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+            background-size: 100% 0.0625rem;
+            background-position: center;
+        }
+
+        &.is-resizing .fd-resize-splitter__line-before,
+        &.is-resizing .fd-resize-splitter__line-after {
+            flex: 1 1 0;
+            background-image: linear-gradient(
+                to top,
+                var(--sapButton_Lite_TextColor, #0064d9),
+                var(--sapButton_Lite_TextColor, #0064d9)
+            );
+        }
+    }
+}
