@@ -52,7 +52,7 @@ export class ShellbarBrandingComponent {
             if (brandingEl) {
                 brandingEl.style.display = 'none';
             }
-            this._shellbar._notifyTitleHidden(true);
+            this._shellbar.notifyTitleHidden(true);
         }
     }
 
@@ -62,7 +62,7 @@ export class ShellbarBrandingComponent {
         if (brandingEl) {
             brandingEl.style.display = '';
         }
-        this._shellbar._notifyTitleHidden(false);
+        this._shellbar.notifyTitleHidden(false);
     }
 
     /** @hidden */

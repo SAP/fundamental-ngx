@@ -18,7 +18,7 @@ import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
         tabindex: '0',
         'aria-haspopup': 'dialog',
         '[attr.aria-expanded]': 'isExpanded()',
-        '[attr.aria-label]': '_ariaLabel()',
+        '[attr.aria-label]': 'ariaLabel()',
         '(click)': 'onClick()',
         '(keydown)': 'onKeydown($event)'
     },
@@ -33,7 +33,7 @@ export class UserMenuControlComponent {
     readonly isExpanded = signal(false);
 
     /** @hidden */
-    protected readonly _ariaLabel = resolveTranslationSignal('coreUserMenu.ariaLabel');
+    protected readonly ariaLabel = resolveTranslationSignal('coreUserMenu.ariaLabel');
 
     /** @hidden */
     constructor(private el: ElementRef<HTMLElement>) {}

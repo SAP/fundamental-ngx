@@ -31,7 +31,7 @@ import { LineClampDirective, ResizeObserverService } from '@fundamental-ngx/cdk/
 })
 export class ShellbarTitleComponent {
     /** @hidden */
-    protected readonly _fontSize = signal<number | null>(null);
+    protected readonly fontSize = signal<number | null>(null);
 
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
@@ -88,12 +88,12 @@ export class ShellbarTitleComponent {
 
         const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
         if (!rootFontSize || isNaN(rootFontSize)) {
-            this._fontSize.set(null);
+            this.fontSize.set(null);
             return;
         }
 
         let fontSizeRem = this._maxFontSizeRem;
-        this._fontSize.set(fontSizeRem * rootFontSize);
+        this.fontSize.set(fontSizeRem * rootFontSize);
 
         // Clear any existing timeout
         if (this._adjustFontSizeTimeout) {
@@ -115,7 +115,7 @@ export class ShellbarTitleComponent {
                 iterations < maxIterations
             ) {
                 fontSizeRem -= 0.0625; // 1/16 = 0.0625rem increments
-                this._fontSize.set(fontSizeRem * rootFontSize);
+                this.fontSize.set(fontSizeRem * rootFontSize);
                 // Force synchronous style recalc
                 element.getBoundingClientRect();
                 iterations++;

@@ -5,5 +5,5 @@ export interface Shellbar {
     groupFlex: Nullable<ShellbarGroupFlexOptions>;
     _searchToggledFromActions: () => void;
     _actionsExceedShellbarWidth: () => boolean;
-    _notifyTitleHidden: (hidden: boolean) => void;
+    notifyTitleHidden: (hidden: boolean) => void;
 }

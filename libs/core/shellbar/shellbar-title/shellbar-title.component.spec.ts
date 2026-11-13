@@ -72,9 +72,9 @@ describe('ShellbarTitleComponent - Font Size Adjustment', () => {
         expect(mockResizeObserver.observe).toHaveBeenCalled();
     });
 
-    it('should have _fontSize signal', () => {
-        expect(titleComponent['_fontSize']).toBeDefined();
-        expect(typeof titleComponent['_fontSize']).toBe('function');
+    it('should have fontSize signal', () => {
+        expect(titleComponent['fontSize']).toBeDefined();
+        expect(typeof titleComponent['fontSize']).toBe('function');
     });
 
     it('should adjust font size when content overflows', () => {
@@ -86,7 +86,7 @@ describe('ShellbarTitleComponent - Font Size Adjustment', () => {
         longTextFixture.detectChanges();
 
         // Font size should be set (may be null if no adjustment needed)
-        const fontSize = titleComponent['_fontSize']();
+        const fontSize = titleComponent['fontSize']();
         expect(fontSize === null || typeof fontSize === 'number').toBe(true);
     });
 
@@ -109,7 +109,7 @@ describe('ShellbarTitleComponent - Font Size Adjustment', () => {
         titleComponent['_adjustFontSize']();
         longTextFixture.detectChanges();
 
-        const fontSize = titleComponent['_fontSize']();
+        const fontSize = titleComponent['fontSize']();
         if (fontSize !== null) {
             // Font size should be between min and max (0.875rem to 1rem)
             expect(fontSize).toBeGreaterThanOrEqual(0.875);
@@ -130,7 +130,7 @@ describe('ShellbarTitleComponent - Font Size Adjustment', () => {
             shortFixture.detectChanges();
 
             // Short text should not need font size adjustment
-            const fontSize = shortTitleComponent['_fontSize']();
+            const fontSize = shortTitleComponent['fontSize']();
             expect(fontSize).toBeNull();
         }
     });

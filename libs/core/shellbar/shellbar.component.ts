@@ -187,7 +187,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     _showMobileSearch = false;
 
     /** @hidden */
-    _isTitleHidden = false;
+    isTitleHidden = false;
 
     /** Whether the navigation button is expanded (for aria-expanded). */
     readonly navigationButtonExpanded = input<boolean | undefined>(undefined);
@@ -199,20 +199,20 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     protected readonly navigationIcon = computed<string>(() => (this.isRtl() ? 'slim-arrow-right' : 'nav-back'));
 
     /** @hidden */
-    protected readonly _contextAreas = contentChildren(ShellbarContextAreaComponent);
+    protected readonly contextAreas = contentChildren(ShellbarContextAreaComponent);
 
     /** @hidden */
-    protected readonly _contextArea = computed(() => this._contextAreas()[0]);
+    protected readonly firstContextArea = computed(() => this.contextAreas()[0]);
 
     /** @hidden */
-    protected readonly _shellbarLabel = resolveTranslationSignal('coreShellbar.shellbarLabel');
+    protected readonly shellbarLabel = resolveTranslationSignal('coreShellbar.shellbarLabel');
 
     /**
      * @hidden
      * Backward compatibility getter for single context area.
      */
     get contextArea(): ShellbarContextAreaComponent | undefined {
-        return this._contextArea();
+        return this.firstContextArea();
     }
 
     /** @hidden */
@@ -464,9 +464,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    _notifyTitleHidden(hidden: boolean): void {
-        this._isTitleHidden = hidden;
-        this._actions?._setTitleHidden(
+    notifyTitleHidden(hidden: boolean): void {
+        this.isTitleHidden = hidden;
+        this._actions?.setTitleHidden(
             hidden,
             this.branding?.getTitleText() || '',
             this.branding?.getLogoElement() || null,
@@ -475,7 +475,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    _handleKeydown(event: KeyboardEvent): void {
+    handleKeydown(event: KeyboardEvent): void {
         // Don't interfere with text input behavior
         const target = event.target as HTMLElement;
         const isTextInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
@@ -545,7 +545,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
                 (event: KeyboardEvent) => {
                     // Re-enter zone for focus changes to ensure change detection runs
                     this._ngZone.run(() => {
-                        this._handleKeydown(event);
+                        this.handleKeydown(event);
                     });
                 },
                 true // Use capture phase to catch events before they reach the target
@@ -631,7 +631,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         const size = this._currentSize$.value;
 
         // Search stays in shellbar at XL only if NO context areas exist
-        if ((size === 'xl' && this._contextAreas().length === 0) || (size === 's' && this._showMobileSearch)) {
+        if ((size === 'xl' && this.contextAreas().length === 0) || (size === 's' && this._showMobileSearch)) {
             this._attachSearch();
         } else {
             this._detachSearch();
@@ -664,7 +664,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
                 if (this._actionsExceedShellbarWidth()) {
                     this._actions._handleOverflow(true);
                 }
-                const contextArea = this._contextArea();
+                const contextArea = this.firstContextArea();
                 if (contextArea) {
                     contextArea.hideElementsIfNeeded();
                 }
@@ -683,7 +683,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
         if (this.branding) {
             this.branding.showTitle();
         }
-        const contextArea = this._contextArea();
+        const contextArea = this.firstContextArea();
         if (contextArea) {
             contextArea.showElements();
         }
@@ -774,7 +774,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
      * @hidden
      */
     private _setupContextAreaObservation(): void {
-        const contextArea = this._contextArea();
+        const contextArea = this.firstContextArea();
         if (!contextArea?.contextAreaGroups) {
             return;
         }

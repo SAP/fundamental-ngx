@@ -10,10 +10,10 @@
         <fd-shellbar-actions-mobile
             [shellbarActions]="shellbarActions"
             [searchExists]="!!_searchPortal"
-            [titleHidden]="_titleHidden()"
-            [hiddenTitleText]="_hiddenTitleText()"
-            [hiddenLogoElement]="_hiddenLogoElement()"
-            [brandingAriaLabel]="_brandingAriaLabel()"
+            [titleHidden]="titleHidden()"
+            [hiddenTitleText]="hiddenTitleText()"
+            [hiddenLogoElement]="hiddenLogoElement()"
+            [brandingAriaLabel]="brandingAriaLabel()"
             (showSearch)="_toggleSearch()"
             [assistiveToolsCallback]="assistiveToolsCallback"
         ></fd-shellbar-actions-mobile>

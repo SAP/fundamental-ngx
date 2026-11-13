@@ -282,7 +282,7 @@ describe('ShellbarComponent - Multiple Context Areas', () => {
 
     it('should support multiple context areas', () => {
         expect(shellbarComponent).toBeTruthy();
-        const contextAreas = shellbarComponent['_contextAreas']();
+        const contextAreas = shellbarComponent['contextAreas']();
         expect(contextAreas).toBeDefined();
         expect(contextAreas.length).toBe(2);
     });
@@ -337,12 +337,12 @@ describe('ShellbarComponent - Mobile Overflow Menu', () => {
         // Simulate title being hidden
         const branding = shellbarComponent['branding'];
         if (branding) {
-            shellbarComponent['_notifyTitleHidden'](true);
+            shellbarComponent['notifyTitleHidden'](true);
             mobileFixture.detectChanges();
 
             // Check that title hidden state is set
-            expect(actionsComponent._titleHidden()).toBe(true);
-            expect(actionsComponent._hiddenTitleText()).toBeTruthy();
+            expect(actionsComponent.titleHidden()).toBe(true);
+            expect(actionsComponent.hiddenTitleText()).toBeTruthy();
         }
     });
 
@@ -353,17 +353,17 @@ describe('ShellbarComponent - Mobile Overflow Menu', () => {
         }
 
         // Initially not hidden
-        expect(actionsComponent._titleHidden()).toBe(false);
+        expect(actionsComponent.titleHidden()).toBe(false);
 
         // Hide title
-        shellbarComponent['_notifyTitleHidden'](true);
+        shellbarComponent['notifyTitleHidden'](true);
         mobileFixture.detectChanges();
-        expect(actionsComponent._titleHidden()).toBe(true);
+        expect(actionsComponent.titleHidden()).toBe(true);
 
         // Show title again
-        shellbarComponent['_notifyTitleHidden'](false);
+        shellbarComponent['notifyTitleHidden'](false);
         mobileFixture.detectChanges();
-        expect(actionsComponent._titleHidden()).toBe(false);
+        expect(actionsComponent.titleHidden()).toBe(false);
     });
 
     it('should pass logo element to mobile overflow menu', () => {
@@ -374,10 +374,10 @@ describe('ShellbarComponent - Mobile Overflow Menu', () => {
 
         const branding = shellbarComponent['branding'];
         if (branding) {
-            shellbarComponent['_notifyTitleHidden'](true);
+            shellbarComponent['notifyTitleHidden'](true);
             mobileFixture.detectChanges();
 
-            const logoElement = actionsComponent._hiddenLogoElement();
+            const logoElement = actionsComponent.hiddenLogoElement();
             // Logo element should be passed when title is hidden
             expect(logoElement).toBeDefined();
         }

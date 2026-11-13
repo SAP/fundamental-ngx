@@ -82,7 +82,7 @@ export class ShellbarActionsMobileComponent {
     readonly toggled = input<boolean | undefined | null>();
 
     /** @hidden */
-    protected readonly _totalNotifications = computed(() => {
+    protected readonly totalNotifications = computed(() => {
         let total = 0;
         this.shellbarActions()?.forEach((action) => {
             const count = action.notificationCount();

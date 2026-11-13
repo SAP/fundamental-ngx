@@ -11,9 +11,9 @@
             [title]="('coreShellbar.collapsedItemMenuLabel' | fdTranslate)()"
             fdCozy
         >
-            @if (_totalNotifications()) {
+            @if (totalNotifications()) {
                 <span class="fd-button__badge">
-                    {{ _totalNotifications() }}
+                    {{ totalNotifications() }}
                 </span>
             }
         </button>

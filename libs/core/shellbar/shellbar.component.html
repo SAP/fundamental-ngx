@@ -2,8 +2,8 @@
     class="fd-shellbar"
     [class]="'fd-shellbar--' + _currentSize + _getSideNavClass()"
     [class.fd-shellbar--side-nav]="showNavigationButton === true"
-    [class.fd-shellbar--has-context-area]="_contextAreas().length > 0"
-    [attr.aria-label]="_shellbarLabel()"
+    [class.fd-shellbar--has-context-area]="contextAreas().length > 0"
+    [attr.aria-label]="shellbarLabel()"
     #shellbar
     fdCozy
 >
