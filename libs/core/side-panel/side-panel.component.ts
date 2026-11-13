@@ -705,13 +705,15 @@ export class SidePanelComponent {
         };
         this.resizeMinPx.set(resolve(this.minWidth(), 0));
         this.resizeMaxPx.set(resolve(this.maxWidth(), Infinity));
-        this.resizeDefaultPx.set(resolve(this.defaultWidth(), target.offsetWidth));
+        // When the content panel is open it sits alongside the 4.25rem collapsed bar, so its
+        // own default width is 15.75rem (= 20rem total − 4.25rem bar). In expanded-bar mode
+        // (open=false) the full 20rem applies. Use the same value for both "Reset to default"
+        // and the initial width seed so they stay consistent.
+        const initialStyle = this.open() ? '15.75rem' : this.defaultWidth();
+        this.resizeDefaultPx.set(resolve(initialStyle, target.offsetWidth));
         if (this.contentPanelWidthPx() === null) {
-            // Use the known CSS-string default to seed the pixel value rather than reading
-            // offsetWidth. Angular effects run before the browser reflows, so offsetWidth
-            // still reflects the old layout (e.g. collapsed 68px when entering expanded mode).
-            // rem values resolve mathematically; no DOM read needed.
-            const initialStyle = this.open() ? '15.75rem' : this.defaultWidth();
+            // Use the CSS-string default rather than offsetWidth: Angular effects run before
+            // the browser reflows, so offsetWidth can still reflect the old layout.
             this.contentPanelWidthPx.set(resolve(initialStyle, target.offsetWidth));
         }
     }
