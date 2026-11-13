@@ -238,6 +238,10 @@ export class RadioButtonComponent<T = any>
 
     /** @hidden */
     labelClicked(event: MouseEvent | KeyboardEvent, applyFocus = true): void {
+        if (this.readOnly) {
+            event.preventDefault();
+        }
+
         if (!this.readOnly && !this.disabled) {
             this.valueChange(this.value);
         }
@@ -258,6 +262,21 @@ export class RadioButtonComponent<T = any>
         this.changeDetectionRef.detectChanges();
         if (emitEvent) {
             this.onChange(value);
+        }
+    }
+
+    /** @hidden */
+    protected inputClicked(event: MouseEvent): void {
+        if (this.readOnly) {
+            // Cancel native preactivation so the browser restores the whole radio group.
+            event.preventDefault();
+        }
+    }
+
+    /** @hidden */
+    protected inputKeydown(event: KeyboardEvent): void {
+        if (this.readOnly && [' ', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+            event.preventDefault();
         }
     }
 

@@ -8,8 +8,21 @@
 
 <fd-docs-section-title id="reactive-forms" componentName="radio"> Radio Button Reactive Forms </fd-docs-section-title>
 <description>
-    Radio button element, like several other native html elements, support Angular reactive forms. Using the radio
-    button within the form element greatly simplifies value access and validation.
+    <p>
+        Bind every option in a group to the same <code>formControlName</code> and <code>name</code>, and give each a
+        different <code>value</code>. This component also requires <code>selectedValue</code> to match the control's
+        current value.
+    </p>
+    <p>
+        Set disabled state on the form control when you create it, or call <code>disable()</code> and
+        <code>enable()</code>. Disabled radios are skipped during keyboard navigation. In an enabled
+        <code>FormGroup</code>, disabled controls are left out of <code>value</code>; use <code>getRawValue()</code> to
+        include them. If the whole group is disabled, <code>value</code> includes its controls.
+    </p>
+    <p>
+        Read-only radios stay focusable but prevent users from changing the selection. Programmatic updates and reset
+        still work. Reset clears a nullable control; a <code>nonNullable</code> control resets to its initial value.
+    </p>
 </description>
 <component-example>
     <fd-radio-form-group-example></fd-radio-form-group-example>
