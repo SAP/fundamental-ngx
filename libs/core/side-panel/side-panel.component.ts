@@ -310,10 +310,12 @@ export class SidePanelComponent {
         () => this.resizable() && this.pushMode() && (this.open() || this.mode() === 'expanded')
     );
 
-    /** @hidden Live content-panel width in px; null = not yet resized (use defaultWidth string). */
+    /** @hidden Live width in px for whichever element the splitter is currently sizing:
+     *  the content panel when open, the expanded action bar otherwise.
+     *  Reset to null on every open() transition so each mode starts from its own CSS default. */
     protected readonly contentPanelWidthPx = linkedSignal<boolean, number | null>({
-        source: this.showSplitter,
-        computation: (show, prev) => (show ? (prev?.value ?? null) : null)
+        source: () => this.open(),
+        computation: () => null
     });
     /** @hidden CSS value for --fd-side-panel-content-panel-width. */
     protected readonly contentPanelWidthStyle = computed(() => {
@@ -354,10 +356,10 @@ export class SidePanelComponent {
     /** @hidden Whether the content panel was open when the action bar was expanded. */
     private _contentWasOpen = false;
 
-    /** @hidden Position in the default→max→min cycle driven by double-click. */
+    /** @hidden Position in the default→max→min cycle driven by double-click. Reset per open() transition. */
     private readonly _widthCycle = linkedSignal<boolean, number>({
-        source: this.showSplitter,
-        computation: (show, prev) => (show ? (prev?.value ?? 0) : 0)
+        source: () => this.open(),
+        computation: () => 0
     });
     /**
      * @hidden Guard against a stale keyup activating the first overflow item immediately
@@ -393,13 +395,20 @@ export class SidePanelComponent {
             }
         });
 
-        // Seed resize bounds + current width as soon as the splitter first appears, so the
-        // separator reports accurate ARIA and the first keyboard/menu interaction works
-        // (rather than a dead first keystroke against an unmeasured 0).
+        // Seed resize bounds + current width as soon as the splitter first appears (or re-appears
+        // after a mode switch), so ARIA and keyboard interactions work immediately.
+        // contentPanelWidthPx() === null is the gate: it's reset to null by the linkedSignal on
+        // every open() transition, so this fires once per mode (content-panel and expanded-bar).
+        // When the content panel is expected (open = true), also wait for its element to be in the
+        // DOM (contentPanelRef truthy), so measureBounds reads the content panel, not the action bar.
         effect(() => {
-            if (this.showSplitter() && this.contentPanelRef() && this.contentPanelWidthPx() === null) {
-                this.measureBounds();
+            if (!this.showSplitter() || this.contentPanelWidthPx() !== null) {
+                return;
             }
+            if (this.open() && !this.contentPanelRef()) {
+                return;
+            }
+            this.measureBounds();
         });
 
         afterNextRender(() => {
@@ -698,7 +707,12 @@ export class SidePanelComponent {
         this.resizeMaxPx.set(resolve(this.maxWidth(), Infinity));
         this.resizeDefaultPx.set(resolve(this.defaultWidth(), target.offsetWidth));
         if (this.contentPanelWidthPx() === null) {
-            this.contentPanelWidthPx.set(target.offsetWidth);
+            // Use the known CSS-string default to seed the pixel value rather than reading
+            // offsetWidth. Angular effects run before the browser reflows, so offsetWidth
+            // still reflects the old layout (e.g. collapsed 68px when entering expanded mode).
+            // rem values resolve mathematically; no DOM read needed.
+            const initialStyle = this.open() ? '15.75rem' : this.defaultWidth();
+            this.contentPanelWidthPx.set(resolve(initialStyle, target.offsetWidth));
         }
     }
 
