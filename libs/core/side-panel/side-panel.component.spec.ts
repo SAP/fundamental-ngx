@@ -5,7 +5,12 @@ import { By } from '@angular/platform-browser';
 import { SidePanelContentDirective } from './side-panel-content.directive';
 import { SidePanelItemComponent } from './side-panel-item.component';
 import { SidePanelMainComponent } from './side-panel-main.component';
-import { SidePanelComponent, SidePanelMode, SidePanelSide } from './side-panel.component';
+import {
+    CONTENT_PANEL_OPEN_DEFAULT_WIDTH,
+    SidePanelComponent,
+    SidePanelMode,
+    SidePanelSide
+} from './side-panel.component';
 
 @Component({
     selector: 'fd-test-host',
@@ -789,7 +794,7 @@ describe('SidePanelComponent — resize state & splitter', () => {
     describe('resize state', () => {
         it('contentPanelWidthStyle uses content-panel default (15.75rem) when panel is open, before any resize', () => {
             // open = true is set in beforeEach; collapsed bar (4.25rem) + 15.75rem = 20rem total footprint.
-            expect(component['contentPanelWidthStyle']()).toBe('15.75rem');
+            expect(component['contentPanelWidthStyle']()).toBe(CONTENT_PANEL_OPEN_DEFAULT_WIDTH);
         });
 
         it('contentPanelWidthStyle falls back to defaultWidth when panel is closed (expanded action bar mode)', () => {

@@ -51,9 +51,9 @@
                     >
                         <span class="fd-side-panel__action" [class.is-active]="item.id() === activeItem()">
                             <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
-                            @if (item.counter() !== undefined) {
+                            @if (item.counterDisplay() !== null) {
                                 <span class="fd-side-panel__action-counter" aria-hidden="true">{{
-                                    item.counter()! > 99 ? '99+' : item.counter()
+                                    item.counterDisplay()
                                 }}</span>
                             }
                         </span>
@@ -170,7 +170,7 @@
         (keydown)="onSplitterKeydown($event)"
         (dblclick)="cycleWidth()"
     />
-    <fd-menu #widthMenuEl [triggers]="[]" [placement]="side() === 'right' ? 'left' : 'right'">
+    <fd-menu #widthMenuEl [triggers]="[]" [placement]="widthMenuPlacement()">
         <li fd-menu-item>
             <a fd-menu-interactive (click)="setWidthToMax()">
                 <span fd-menu-title>{{ resizeExpandLabel() }}</span>

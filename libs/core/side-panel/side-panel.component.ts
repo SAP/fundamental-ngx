@@ -36,6 +36,20 @@ import { SidePanelItemComponent } from './side-panel-item.component';
 /** Edge the side panel is anchored to. */
 export type SidePanelSide = 'left' | 'right';
 
+/**
+ * Default width of the content panel when it is open alongside the collapsed (4.25rem cozy)
+ * action bar: total 20rem footprint − 4.25rem bar = 15.75rem.  Matches
+ * `$fd-side-panel-content-panel-default-width` in the SCSS.
+ */
+export const CONTENT_PANEL_OPEN_DEFAULT_WIDTH = '15.75rem';
+
+/** Viewport width (px) above which push mode (side-by-side) activates. */
+const PUSH_MODE_BREAKPOINT_PX = 1024;
+/** Fallback root font size (px) when `getComputedStyle` returns 0. */
+const DEFAULT_ROOT_FONT_PX = 16;
+/** Number of steps in the double-click width cycle (default → max → min → default). */
+const WIDTH_CYCLE_STEPS = 3;
+
 /** Display mode of the side panel action bar. */
 export type SidePanelMode = 'collapsed' | 'expanded';
 
@@ -100,8 +114,13 @@ export class SidePanelComponent {
     readonly open = model(false);
 
     /**
-     * Default width of the content panel (CSS value, e.g. `'20rem'` or `'300px'`).
-     * Effective when the viewport is ≥ 561px.
+     * Width of the panel when the action bar is in expanded (icons + labels) mode with no open
+     * content panel — e.g. `'20rem'` or `'300px'`. Also used as the "Reset to Default Width"
+     * target in expanded-bar mode.
+     *
+     * When the content panel is open alongside the collapsed action bar, the default width is
+     * instead `CONTENT_PANEL_OPEN_DEFAULT_WIDTH` (`15.75rem`), derived from the fundamental-styles
+     * SCSS, and is not affected by this input.
      */
     readonly defaultWidth = input<string>('20rem');
 
@@ -137,7 +156,7 @@ export class SidePanelComponent {
     protected readonly items = contentChildren(SidePanelItemComponent);
 
     /** @hidden True at ≥1024px: main content and panel sit side-by-side (push); else overlay. */
-    protected readonly pushMode = computed(() => this._hostWidthPx() >= 1024);
+    protected readonly pushMode = computed(() => this._hostWidthPx() >= PUSH_MODE_BREAKPOINT_PX);
 
     /** @hidden */
     protected readonly hostClasses = computed(() => {
@@ -198,20 +217,10 @@ export class SidePanelComponent {
     protected readonly focusedContainerIndex = signal(-1);
 
     /** @hidden Label of the currently active group, used as the content panel's accessible name. */
-    protected readonly activeGroupLabel = computed(
-        () =>
-            this.items()
-                .find((item) => item.id() === this.activeItem())
-                ?.label() ?? ''
-    );
+    protected readonly activeGroupLabel = computed(() => this._activeItem()?.label() ?? '');
 
     /** @hidden Icon glyph of the currently active group, shown in the content panel header. */
-    protected readonly activeGroupIcon = computed(
-        () =>
-            this.items()
-                .find((item) => item.id() === this.activeItem())
-                ?.icon() ?? ''
-    );
+    protected readonly activeGroupIcon = computed(() => this._activeItem()?.icon() ?? '');
 
     /** @hidden Tracks keyboard focus on the overflow toggle button — drives the is-focused container ring. */
     protected readonly overflowToggleFocused = signal(false);
@@ -223,6 +232,11 @@ export class SidePanelComponent {
         const isContentOnRight = (this.side() === 'right') === this._isRtl();
         return isContentOnRight ? 'right-end' : 'left-end';
     });
+
+    /** @hidden Placement for the width context menu: always on the content-facing side. */
+    protected readonly widthMenuPlacement = computed<'left' | 'right'>(() =>
+        this.side() === 'right' ? 'left' : 'right'
+    );
 
     /**
      * @hidden Extra CSS classes applied to the overflow menu body so its edge aligns with the
@@ -325,9 +339,9 @@ export class SidePanelComponent {
         }
         // The same CSS variable drives two different elements depending on state:
         // - Expanded action bar (mode='expanded', no content panel): full 20rem footprint.
-        // - Content panel alongside collapsed bar: 15.75rem = 20rem - 4.25rem cozy bar.
+        // - Content panel alongside collapsed bar: CONTENT_PANEL_OPEN_DEFAULT_WIDTH.
         // These two are mutually exclusive, so we select the right default here.
-        return this.open() ? '15.75rem' : this.defaultWidth();
+        return this.open() ? CONTENT_PANEL_OPEN_DEFAULT_WIDTH : this.defaultWidth();
     });
 
     /** @hidden Action option (`<li role="option">`) elements, in projection order. */
@@ -361,6 +375,15 @@ export class SidePanelComponent {
         source: () => this.open(),
         computation: () => 0
     });
+
+    /** @hidden The currently active item, or `undefined` when none is active. */
+    private readonly _activeItem = computed(() => this.items().find((item) => item.id() === this.activeItem()));
+
+    /** @hidden Index of the currently active item within `items()`, or `-1` when none is active. */
+    private readonly _activeItemIndex = computed(() =>
+        this.items().findIndex((item) => item.id() === this.activeItem())
+    );
+
     /**
      * @hidden Guard against a stale keyup activating the first overflow item immediately
      * after the menu opens via Enter.  Enter on the `<button>` fires the native click
@@ -483,11 +506,7 @@ export class SidePanelComponent {
                 this.open.set(false);
                 this.mode.set('expanded');
             } else {
-                this.mode.set('collapsed');
-                if (this._contentWasOpen) {
-                    this.open.set(true);
-                    this._contentWasOpen = false;
-                }
+                this._collapseExpandedBar();
             }
         }
         this._liveAnnouncer.announce(
@@ -501,21 +520,12 @@ export class SidePanelComponent {
             return;
         }
         this._focusItem(index);
-        const id = item.id();
-        const newActiveId = this.activeItem() === id ? null : id;
-        this.activeItem.set(newActiveId);
-        this.open.set(newActiveId !== null);
-        // Selecting an item while expanded collapses the action bar so the
-        // content panel and the bar together occupy the same footprint as
-        // the expanded bar.
-        if (this.mode() === 'expanded' && newActiveId !== null) {
-            this.mode.set('collapsed');
-        }
+        this._setActiveItem(item.id());
     }
 
     /** @hidden Close the content panel and return focus to the item's action button (or overflow toggle). */
     protected closeContentPanel(): void {
-        const index = this.items().findIndex((item) => item.id() === this.activeItem());
+        const index = this._activeItemIndex();
         this.open.set(false);
         this.activeItem.set(null);
         if (index > -1) {
@@ -618,7 +628,7 @@ export class SidePanelComponent {
         event.preventDefault();
         if (panel.contains(document.activeElement)) {
             // Move focus back to the active option (or the overflow toggle when it's hidden).
-            const index = this.items().findIndex((item) => item.id() === this.activeItem());
+            const index = this._activeItemIndex();
             if (index > -1 && index >= this.visibleItemCount()) {
                 this._overflowToggleRef()?.nativeElement.focus();
             } else if (index > -1) {
@@ -644,13 +654,7 @@ export class SidePanelComponent {
             this._ignoreNextOverflowActivation = false;
             return;
         }
-        const id = item.id();
-        const newActiveId = this.activeItem() === id ? null : id;
-        this.activeItem.set(newActiveId);
-        this.open.set(newActiveId !== null);
-        if (this.mode() === 'expanded' && newActiveId !== null) {
-            this.mode.set('collapsed');
-        }
+        this._setActiveItem(item.id());
         this._overflowMenuRef()?.close();
     }
 
@@ -665,11 +669,7 @@ export class SidePanelComponent {
             }
         } else if (this.mode() === 'expanded') {
             event.preventDefault();
-            this.mode.set('collapsed');
-            if (this._contentWasOpen) {
-                this.open.set(true);
-                this._contentWasOpen = false;
-            }
+            this._collapseExpandedBar();
         }
     }
 
@@ -688,7 +688,8 @@ export class SidePanelComponent {
         const host = this._elementRef.nativeElement as HTMLElement;
         const container = host.parentElement ?? host;
         const containerWidth = container.clientWidth || host.clientWidth;
-        const rootFontPx = parseFloat(getComputedStyle(this._document.documentElement).fontSize) || 16;
+        const rootFontPx =
+            parseFloat(getComputedStyle(this._document.documentElement).fontSize) || DEFAULT_ROOT_FONT_PX;
         const resolve = (value: string, fallback: number): number => {
             const v = (value ?? '').trim();
             if (!v) {
@@ -706,15 +707,16 @@ export class SidePanelComponent {
         this.resizeMinPx.set(resolve(this.minWidth(), 0));
         this.resizeMaxPx.set(resolve(this.maxWidth(), Infinity));
         // When the content panel is open it sits alongside the 4.25rem collapsed bar, so its
-        // own default width is 15.75rem (= 20rem total − 4.25rem bar). In expanded-bar mode
-        // (open=false) the full 20rem applies. Use the same value for both "Reset to default"
-        // and the initial width seed so they stay consistent.
-        const initialStyle = this.open() ? '15.75rem' : this.defaultWidth();
-        this.resizeDefaultPx.set(resolve(initialStyle, target.offsetWidth));
+        // own default width is CONTENT_PANEL_OPEN_DEFAULT_WIDTH (= 20rem total − 4.25rem bar).
+        // In expanded-bar mode (open=false) the full defaultWidth() applies. Use the same value
+        // for both "Reset to default" and the initial width seed so they stay consistent.
+        const initialStyle = this.open() ? CONTENT_PANEL_OPEN_DEFAULT_WIDTH : this.defaultWidth();
+        const defaultPx = resolve(initialStyle, target.offsetWidth);
+        this.resizeDefaultPx.set(defaultPx);
         if (this.contentPanelWidthPx() === null) {
             // Use the CSS-string default rather than offsetWidth: Angular effects run before
             // the browser reflows, so offsetWidth can still reflect the old layout.
-            this.contentPanelWidthPx.set(resolve(initialStyle, target.offsetWidth));
+            this.contentPanelWidthPx.set(defaultPx);
         }
     }
 
@@ -741,8 +743,7 @@ export class SidePanelComponent {
 
     /** @hidden Set width to the measured max bound. Bounds are fresh (openWidthMenu measured on open). */
     protected setWidthToMax(): void {
-        const max = this.resizeMaxPx();
-        this.contentPanelWidthPx.set(Number.isFinite(max) ? max : this.contentPanelRef()!.nativeElement.offsetWidth);
+        this.contentPanelWidthPx.set(this._resolveMaxPx());
         this.widthMenu()?.close();
     }
 
@@ -762,17 +763,49 @@ export class SidePanelComponent {
     /** @hidden Double-click the splitter: cycle content width default → max → min → default. */
     protected cycleWidth(): void {
         this.measureBounds();
-        const next = (this._widthCycle() + 1) % 3;
+        const next = (this._widthCycle() + 1) % WIDTH_CYCLE_STEPS;
         this._widthCycle.set(next);
-        const max = this.resizeMaxPx();
         if (next === 1) {
-            this.contentPanelWidthPx.set(
-                Number.isFinite(max) ? max : this.contentPanelRef()!.nativeElement.offsetWidth
-            );
+            this.contentPanelWidthPx.set(this._resolveMaxPx());
         } else if (next === 2) {
             this.contentPanelWidthPx.set(this.resizeMinPx());
         } else {
             this.contentPanelWidthPx.set(this.resizeDefaultPx());
+        }
+    }
+
+    /**
+     * @hidden Resolve the effective max width in px.
+     * When the measured max is finite (a concrete CSS value), use it directly.
+     * When infinite (no `maxWidth` set), fall back to the content panel's current pixel width,
+     * and ultimately to the last measured default so the button never throws.
+     */
+    private _resolveMaxPx(): number {
+        const max = this.resizeMaxPx();
+        return Number.isFinite(max)
+            ? max
+            : (this.contentPanelRef()?.nativeElement.offsetWidth ?? this.resizeDefaultPx());
+    }
+
+    /** @hidden Toggle the active item: deactivates when already active, otherwise activates. */
+    private _setActiveItem(id: string): void {
+        const newActiveId = this.activeItem() === id ? null : id;
+        this.activeItem.set(newActiveId);
+        this.open.set(newActiveId !== null);
+        // Selecting an item while expanded collapses the action bar so the
+        // content panel and the bar together occupy the same footprint as
+        // the expanded bar.
+        if (this.mode() === 'expanded' && newActiveId !== null) {
+            this.mode.set('collapsed');
+        }
+    }
+
+    /** @hidden Collapse the expanded bar, restoring the content panel if it was open before expanding. */
+    private _collapseExpandedBar(): void {
+        this.mode.set('collapsed');
+        if (this._contentWasOpen) {
+            this.open.set(true);
+            this._contentWasOpen = false;
         }
     }
 

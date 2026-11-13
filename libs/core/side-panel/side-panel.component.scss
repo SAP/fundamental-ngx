@@ -39,6 +39,15 @@ $fd-side-panel-expanded-width: 20rem;
 // This ensures opening the content panel does not widen the total beyond $fd-side-panel-expanded-width.
 // Compact equivalent: $fd-side-panel-expanded-width - $fd-side-panel-bar-width-compact = 16rem.
 $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-side-panel-bar-width-cozy; // 15.75rem
+// Padding-inline for each action-container row (cozy and compact).
+// Also equals the overflow-menu-body translateX offset used to align the menu
+// flush with the action bar's content-facing edge — both must stay in sync.
+$fd-side-panel-action-container-padding-cozy: 0.75rem;
+$fd-side-panel-action-container-padding-compact: 1rem;
+// Vertical gap between all action items (action bar, toolbar, list).
+$fd-side-panel-item-gap: 2rem;
+// z-index shared by elements that float above main content in overlay mode.
+$fd-side-panel-overlay-z-index: 5;
 
 .fd-side-panel {
     display: flex;
@@ -131,7 +140,7 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         inline-size: $fd-side-panel-bar-width-cozy;
         block-size: 100%;
         padding-block-start: 0.5rem;
-        gap: 2rem;
+        gap: $fd-side-panel-item-gap;
         box-sizing: border-box;
         overflow: hidden;
         background: var(--sapGroup_ContentBackground, #fff);
@@ -149,7 +158,7 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         flex-direction: column;
         align-items: center;
         inline-size: 100%;
-        gap: 2rem;
+        gap: $fd-side-panel-item-gap;
     }
 
     &__list {
@@ -159,7 +168,7 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         inline-size: 100%;
         margin: 0;
         padding: 0;
-        gap: 2rem;
+        gap: $fd-side-panel-item-gap;
         list-style: none;
     }
 
@@ -198,7 +207,7 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         display: flex;
         inline-size: 100%;
         box-sizing: border-box;
-        padding: 0.25rem 0.75rem;
+        padding: 0.25rem $fd-side-panel-action-container-padding-cozy;
         justify-content: center;
 
         // Selection bar (spec D) — invisible by default, positioned per-side in --right/--left
@@ -402,7 +411,7 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         .fd-side-panel__action-bar {
             position: absolute;
             inset-block: 0;
-            z-index: 5;
+            z-index: $fd-side-panel-overlay-z-index;
         }
 
         &.fd-side-panel--right .fd-side-panel__action-bar {
@@ -431,7 +440,7 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         // Compact padding-inline: 2rem button + 2 × 1rem = 4rem bar width.
         // Cozy default is 0.75rem; compact needs 1rem per spec.
         .fd-side-panel__action-container {
-            padding-inline: 1rem;
+            padding-inline: $fd-side-panel-action-container-padding-compact;
         }
 
         .fd-side-panel__action-icon {
@@ -471,7 +480,7 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         // Push mode (host ≥ 1440px) reverts to an in-flow flex child via `&--push` below.
         position: absolute;
         inset-block: 0;
-        z-index: 5;
+        z-index: $fd-side-panel-overlay-z-index;
     }
 
     // Content panel side-positioning.
@@ -588,8 +597,8 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        inline-size: 2rem;
-        block-size: 2rem;
+        inline-size: $fd-side-panel-action-size-compact;
+        block-size: $fd-side-panel-action-size-compact;
         padding: 0;
         border: none;
         border-radius: var(--sapButton_BorderCornerRadius, 0.5rem);
@@ -656,36 +665,36 @@ $fd-side-panel-content-panel-default-width: $fd-side-panel-expanded-width - $fd-
 .fd-side-panel__overflow-menu-body {
     &--right {
         &.fd-side-panel__overflow-menu-body--cozy {
-            transform: translateX(-0.75rem);
+            transform: translateX(-$fd-side-panel-action-container-padding-cozy);
 
             [dir='rtl'] & {
-                transform: translateX(0.75rem);
+                transform: translateX($fd-side-panel-action-container-padding-cozy);
             }
         }
 
         &.fd-side-panel__overflow-menu-body--compact {
-            transform: translateX(-1rem);
+            transform: translateX(-$fd-side-panel-action-container-padding-compact);
 
             [dir='rtl'] & {
-                transform: translateX(1rem);
+                transform: translateX($fd-side-panel-action-container-padding-compact);
             }
         }
     }
 
     &--left {
         &.fd-side-panel__overflow-menu-body--cozy {
-            transform: translateX(0.75rem);
+            transform: translateX($fd-side-panel-action-container-padding-cozy);
 
             [dir='rtl'] & {
-                transform: translateX(-0.75rem);
+                transform: translateX(-$fd-side-panel-action-container-padding-cozy);
             }
         }
 
         &.fd-side-panel__overflow-menu-body--compact {
-            transform: translateX(1rem);
+            transform: translateX($fd-side-panel-action-container-padding-compact);
 
             [dir='rtl'] & {
-                transform: translateX(-1rem);
+                transform: translateX(-$fd-side-panel-action-container-padding-compact);
             }
         }
     }
