@@ -10,6 +10,10 @@
         [glyphFont]="glyphFont()"
         [toggled]="toggled()"
         (click)="_handleClick($event)"
+        [attr.aria-expanded]="ariaExpanded()"
+        [attr.aria-haspopup]="ariaHaspopup()"
+        [attr.aria-controls]="ariaControls()"
+        [attr.aria-describedby]="ariaDescribedby()"
     >
         @if (notificationCount()) {
             <span class="fd-button__badge" [attr.aria-label]="notificationLabel()">
