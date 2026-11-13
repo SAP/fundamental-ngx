@@ -238,6 +238,10 @@ export class RadioButtonComponent<T = any>
 
     /** @hidden */
     labelClicked(event: MouseEvent | KeyboardEvent, applyFocus = true): void {
+        if (this.readOnly) {
+            event.preventDefault();
+        }
+
         if (!this.readOnly && !this.disabled) {
             this.valueChange(this.value);
         }
@@ -259,6 +263,56 @@ export class RadioButtonComponent<T = any>
         if (emitEvent) {
             this.onChange(value);
         }
+    }
+
+    /** @hidden */
+    protected onNgModelChange(value: T): void {
+        if (!this.readOnly) {
+            this.valueChange(value);
+        }
+    }
+
+    /** @hidden */
+    protected inputClicked(event: MouseEvent): void {
+        if (this.readOnly) {
+            // Cancel native preactivation so the browser restores the whole radio group.
+            event.preventDefault();
+        }
+    }
+
+    /** @hidden */
+    protected inputKeydown(event: KeyboardEvent): void {
+        if (this.readOnly && [' ', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
+            event.preventDefault();
+            if (event.key !== ' ') {
+                this._focusReadOnlyPeer(event.key);
+            }
+        }
+    }
+
+    /** @hidden */
+    private _focusReadOnlyPeer(key: string): void {
+        const input = this.inputElement.nativeElement;
+        if (!input.name) {
+            return;
+        }
+
+        // Native radio groups share a name, form owner and tree root, regardless of fieldsets.
+        const root = input.getRootNode() as Document | ShadowRoot;
+        const peers = Array.from(root.querySelectorAll<HTMLInputElement>('input[type="radio"]')).filter(
+            (peer) => peer.name === input.name && peer.form === input.form && !peer.matches(':disabled')
+        );
+        const index = peers.indexOf(input);
+        if (index === -1 || peers.length < 2) {
+            return;
+        }
+
+        let step = key === 'ArrowRight' || key === 'ArrowDown' ? 1 : -1;
+        const horizontal = key === 'ArrowRight' || key === 'ArrowLeft';
+        if (horizontal && input.ownerDocument.defaultView?.getComputedStyle(input).direction === 'rtl') {
+            step = -step;
+        }
+        peers[(index + step + peers.length) % peers.length].focus();
     }
 
     /** @hidden */
