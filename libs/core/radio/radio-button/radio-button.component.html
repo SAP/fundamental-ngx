@@ -17,7 +17,9 @@
     [attr.aria-readonly]="readOnly"
     [attr.aria-description]="readOnly ? ('coreRadio.readOnlyDescription' | fdTranslate)() : null"
     [ngModel]="currentValue"
-    (ngModelChange)="valueChange($event)"
+    (ngModelChange)="!readOnly && valueChange($event)"
+    (click)="inputClicked($event)"
+    (keydown)="inputKeydown($event)"
     [ngModelOptions]="{ standalone: standalone }"
     #inputElement
     [value]="value"

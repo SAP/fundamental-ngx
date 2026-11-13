@@ -1,12 +1,13 @@
-<form [formGroup]="customForm" class="flex-form">
+<form [formGroup]="customForm" class="sap-flex sap-flex--justify-space-between sap-flex--wrap sap-flex--gap-small">
     <fieldset fd-fieldset>
-        @for (value of radioInput.values; track value) {
+        <legend fd-form-legend>Editable radio buttons</legend>
+        @for (value of options; track value) {
             <div fd-form-item>
                 <fd-radio-button
                     [selectedValue]="customForm.controls.radioInput.value"
                     [value]="value"
-                    [name]="radioInput.name"
-                    [formControlName]="radioInput.formControlName"
+                    name="radio-input-form-1"
+                    formControlName="radioInput"
                 >
                     Option {{ value }}
                 </fd-radio-button>
@@ -20,13 +21,14 @@
         ><br />
     </fieldset>
     <fieldset fd-fieldset>
-        @for (value of disabledRadio.values; track value) {
+        <legend fd-form-legend>Disabled radio buttons</legend>
+        @for (value of options; track value) {
             <div fd-form-item>
                 <fd-radio-button
                     [selectedValue]="customForm.controls.disabledRadio.value"
                     [value]="value"
-                    [name]="disabledRadio.name"
-                    [formControlName]="disabledRadio.formControlName"
+                    name="radio-input-form-2"
+                    formControlName="disabledRadio"
                 >
                     Option {{ value }}
                 </fd-radio-button>
@@ -34,5 +36,52 @@
         }
         <small>Disabled Radio Button Value: {{ customForm.controls.disabledRadio.value }}</small>
     </fieldset>
+    <fieldset fd-fieldset id="radio-readonly-form-fieldset">
+        <legend fd-form-legend>Read-only radio buttons</legend>
+        @for (value of options; track value) {
+            <div fd-form-item>
+                <fd-radio-button
+                    [id]="'radio-readonly-form-' + value"
+                    [selectedValue]="readonlyRadioState().value"
+                    [value]="value"
+                    name="radio-readonly-form-example"
+                    formControlName="readonlyRadio"
+                    [readOnly]="true"
+                >
+                    Option {{ value }}
+                </fd-radio-button>
+            </div>
+        }
+        <div class="sap-flex sap-flex--wrap sap-flex--gap-tiny">
+            <button fd-button fdType="transparent" fdCompact type="button" (click)="setReadonlyRadioValue()">
+                Set value to 3
+            </button>
+            <button fd-button fdType="transparent" fdCompact type="button" (click)="resetReadonlyRadio()">
+                Reset control
+            </button>
+        </div>
+        <dl
+            id="radio-readonly-form-readout"
+            class="sap-flex sap-flex--column sap-flex--row-gap-tiny sap-margin-y-small"
+        >
+            <div class="sap-flex sap-flex--align-items-baseline sap-flex--gap-tiny">
+                <dt>Radio Button Value:</dt>
+                <dd class="sap-margin-inline-start-none">{{ readonlyRadioState().value ?? 'No selection' }}</dd>
+            </div>
+            <div class="sap-flex sap-flex--align-items-baseline sap-flex--gap-tiny">
+                <dt>Radio Button Touched:</dt>
+                <dd class="sap-margin-inline-start-none">{{ readonlyRadioState().touched }}</dd>
+            </div>
+            <div class="sap-flex sap-flex--align-items-baseline sap-flex--gap-tiny">
+                <dt>Radio Button Dirty:</dt>
+                <dd class="sap-margin-inline-start-none">{{ readonlyRadioState().dirty }}</dd>
+            </div>
+            <div class="sap-flex sap-flex--align-items-baseline sap-flex--gap-tiny">
+                <dt>Radio Button Valid:</dt>
+                <dd class="sap-margin-inline-start-none">
+                    {{ readonlyRadioState().valid ? 'Valid (no validators)' : 'Invalid' }}
+                </dd>
+            </div>
+        </dl>
+    </fieldset>
 </form>
-<br /><br />
