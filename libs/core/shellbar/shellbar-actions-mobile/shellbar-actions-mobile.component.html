@@ -1,4 +1,4 @@
-@if (shellbarActions()?.length || searchExists() || titleHidden()) {
+@if (actionItems().length || searchExists() || titleHidden()) {
     <div class="fd-shellbar-collapse">
         <button
             fd-button
@@ -38,11 +38,11 @@
                     </div>
                 </li>
             }
-            @for (action of shellbarActions(); track action) {
+            @for (action of actionItems(); track action) {
                 <li fd-menu-item>
                     <div
                         fd-menu-interactive
-                        (fdkClicked)="actionClicked(action, $event); menu.close()"
+                        (fdkClicked)="actionClicked(action, $event)"
                         [attr.aria-label]="action.ariaLabel() || null"
                         [attr.aria-expanded]="action.ariaExpanded()"
                         [attr.aria-haspopup]="action.ariaHaspopup() || null"
@@ -63,7 +63,7 @@
             }
             @if (assistiveToolsCallback()) {
                 <li fd-menu-item>
-                    <div fd-menu-interactive (fdkClicked)="assistiveToolsClickedHandler($event); menu.close()">
+                    <div fd-menu-interactive (fdkClicked)="assistiveToolsClickedHandler($event)">
                         <fd-menu-addon position="before" [glyph]="'sys-help'"></fd-menu-addon>
                         <span fd-menu-title>{{ ('coreShellbar.assistiveTools' | fdTranslate)() }}</span>
                     </div>

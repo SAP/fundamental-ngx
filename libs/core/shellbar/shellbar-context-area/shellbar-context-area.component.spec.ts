@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ShellbarNeverHideDirective } from '../shellbar-never-hide.directive';
 import { ShellbarPositionDirective } from '../shellbar-position.directive';
@@ -53,6 +53,142 @@ class ContextAreaTestComponent {
     imports: [ShellbarComponent, ShellbarContextAreaComponent, ShellbarPositionDirective]
 })
 class ContextAreaPositionTestComponent {}
+
+@Component({
+    template: `
+        <fd-shellbar>
+            <fd-shellbar-context-area
+                (elementHidden)="hidden.push($event)"
+                (elementShown)="shown.push($event)"
+                (contentItemVisibilityChange)="aggregate = $event"
+            >
+                <button id="mandatory" fdShellbarNeverHide data-width="80">Mandatory</button>
+                <div id="separator" class="fd-shellbar__separator" data-width="16"></div>
+                @if (priorities()) {
+                    <button id="low" fdShellbarHidePriority="1" data-width="20">Low</button>
+                    <button id="high" fdShellbarHidePriority="9" data-width="20">High</button>
+                }
+                @if (emptyGroup()) {
+                    <div
+                        id="empty-separator"
+                        fdShellbarPosition="right"
+                        class="fd-shellbar__separator"
+                        data-width="16"
+                    ></div>
+                }
+            </fd-shellbar-context-area>
+        </fd-shellbar>
+    `,
+    imports: [ShellbarComponent, ShellbarContextAreaComponent, ShellbarNeverHideDirective, ShellbarPositionDirective]
+})
+class ContextAreaFinalGeometryTestComponent {
+    hidden: HTMLElement[] = [];
+    shown: HTMLElement[] = [];
+    aggregate: HTMLElement[] = [];
+    readonly priorities = signal(false);
+    readonly emptyGroup = signal(false);
+}
+
+describe('final context visibility with display-dependent geometry', () => {
+    let geometryFixture: ComponentFixture<ContextAreaFinalGeometryTestComponent>;
+    let area: ShellbarContextAreaComponent;
+    let residual: number;
+    let children: () => HTMLElement[];
+    let visibleWidth: () => number;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({ imports: [ContextAreaFinalGeometryTestComponent] }).compileComponents();
+        geometryFixture = TestBed.createComponent(ContextAreaFinalGeometryTestComponent);
+        geometryFixture.detectChanges();
+        await geometryFixture.whenStable();
+        area = geometryFixture.debugElement.query(
+            (de) => de.componentInstance instanceof ShellbarContextAreaComponent
+        ).componentInstance;
+        const bar = geometryFixture.debugElement.query((de) => de.componentInstance instanceof ShellbarComponent)
+            .componentInstance as ShellbarComponent;
+        residual = 90;
+        children = () => Array.from(geometryFixture.nativeElement.querySelectorAll('[data-width]'));
+        visibleWidth = () =>
+            children().reduce(
+                (width, child) => width + (child.style.display === 'none' ? 0 : Number(child.dataset.width)),
+                0
+            );
+        jest.spyOn(bar, '_getShellbarEnd').mockImplementation(() => residual);
+        jest.spyOn(bar, '_getActionsEnd').mockImplementation(visibleWidth);
+    });
+
+    function reconcile(width: number): void {
+        residual = width;
+        area.showElements();
+        geometryFixture.componentInstance.hidden = [];
+        geometryFixture.componentInstance.shown = [];
+        area.hideElementsIfNeeded();
+    }
+
+    it('suppresses the separator at 90px and restores it at 120px repeatedly', () => {
+        for (const width of [90, 120, 90]) {
+            reconcile(width);
+            expect(children()[0].style.display).not.toBe('none');
+            expect(children()[1].style.display).toBe(width === 90 ? 'none' : '');
+            expect(visibleWidth()).toBeLessThanOrEqual(width);
+        }
+    });
+
+    it('reports only final-hidden elements after reconciliation', () => {
+        reconcile(90);
+        const actualHidden = children().filter((child) => child.style.display === 'none');
+        expect(geometryFixture.componentInstance.aggregate).toEqual(actualHidden);
+        expect(geometryFixture.componentInstance.hidden).toEqual(actualHidden);
+    });
+
+    it('preserves numeric priority and mandatory content when space can fit one optional item', () => {
+        geometryFixture.componentInstance.priorities.set(true);
+        geometryFixture.detectChanges();
+        reconcile(116);
+        expect(geometryFixture.nativeElement.querySelector('#high').style.display).toBe('none');
+        expect(geometryFixture.nativeElement.querySelector('#low').style.display).not.toBe('none');
+        expect(children()[0].style.display).not.toBe('none');
+        expect(visibleWidth()).toBe(116);
+    });
+
+    it('includes empty-group separators in final visibility outputs', () => {
+        geometryFixture.componentInstance.emptyGroup.set(true);
+        geometryFixture.detectChanges();
+        reconcile(120);
+        const emptySeparator = geometryFixture.nativeElement.querySelector('#empty-separator') as HTMLElement;
+        expect(emptySeparator.style.display).toBe('none');
+        expect(geometryFixture.componentInstance.aggregate).toContain(emptySeparator);
+    });
+
+    it('reports restored separators only when they remain visible after reconciliation', () => {
+        geometryFixture.componentInstance.emptyGroup.set(true);
+        geometryFixture.detectChanges();
+        reconcile(90);
+        geometryFixture.componentInstance.shown = [];
+        residual = 120;
+        area.showElements();
+        area.hideElementsIfNeeded();
+        const separator = geometryFixture.nativeElement.querySelector('#separator') as HTMLElement;
+        const emptySeparator = geometryFixture.nativeElement.querySelector('#empty-separator') as HTMLElement;
+        expect(geometryFixture.componentInstance.shown).toEqual([separator]);
+        expect(geometryFixture.componentInstance.aggregate).toEqual([emptySeparator]);
+        expect(separator.style.display).toBe('');
+        expect(emptySeparator.style.display).toBe('none');
+    });
+
+    it('keeps final visibility and individual events stable when a hide pass is repeated', () => {
+        reconcile(90);
+        const separator = geometryFixture.nativeElement.querySelector('#separator') as HTMLElement;
+        geometryFixture.componentInstance.hidden = [];
+        geometryFixture.componentInstance.shown = [];
+        area.hideElementsIfNeeded();
+        expect(separator.style.display).toBe('none');
+        expect(visibleWidth()).toBe(80);
+        expect(geometryFixture.componentInstance.aggregate).toEqual([separator]);
+        expect(geometryFixture.componentInstance.hidden).toEqual([]);
+        expect(geometryFixture.componentInstance.shown).toEqual([]);
+    });
+});
 
 describe('ShellbarContextAreaComponent', () => {
     let component: ContextAreaTestComponent;

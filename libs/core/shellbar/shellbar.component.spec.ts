@@ -35,6 +35,79 @@ import { ShellbarComponent } from './shellbar.component';
 class ShellbarKeyboardTestComponent {}
 
 @Component({
+    template: `
+        <fd-shellbar>
+            <fd-shellbar-context-area>
+                <button id="before-select">Before</button>
+                <select id="native-select">
+                    <option>First</option>
+                    <option selected>Middle</option>
+                    <option>Last</option>
+                </select>
+                <input id="native-input" />
+                <textarea id="native-textarea"></textarea>
+                <div id="native-editor" contenteditable="true" tabindex="0">Editable</div>
+                <button id="after-select">After</button>
+            </fd-shellbar-context-area>
+        </fd-shellbar>
+    `,
+    imports: [ShellbarComponent, ShellbarContextAreaComponent]
+})
+class ShellbarNativeSelectTestComponent {}
+
+describe('native key ownership through the capture listener', () => {
+    let nativeFixture: ComponentFixture<ShellbarNativeSelectTestComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({ imports: [ShellbarNativeSelectTestComponent] }).compileComponents();
+        nativeFixture = TestBed.createComponent(ShellbarNativeSelectTestComponent);
+        nativeFixture.detectChanges();
+        await nativeFixture.whenStable();
+        nativeFixture.nativeElement
+            .querySelectorAll('button, select, input, textarea, [contenteditable]')
+            .forEach((element: HTMLElement) => {
+                // jsdom has no layout; retain real tabbable discovery with visible geometry.
+                Object.defineProperty(element, 'getClientRects', { value: () => [{ width: 80, height: 32 }] });
+                if (element.hasAttribute('contenteditable')) {
+                    Object.defineProperty(element, 'isContentEditable', { value: true });
+                }
+            });
+    });
+
+    it.each([
+        ['Home', 36],
+        ['End', 35],
+        ['ArrowLeft', 37],
+        ['ArrowRight', 39]
+    ])('leaves SELECT %s uncancelled and focused', (key, keyCode) => {
+        const select = nativeFixture.nativeElement.querySelector('#native-select') as HTMLSelectElement;
+        select.focus();
+        const event = new KeyboardEvent('keydown', { key, keyCode, bubbles: true, cancelable: true });
+        select.dispatchEvent(event);
+        expect({ cancelled: event.defaultPrevented, focused: document.activeElement === select }).toEqual({
+            cancelled: false,
+            focused: true
+        });
+    });
+
+    it.each(['native-input', 'native-textarea', 'native-editor'])('preserves editable ownership for %s', (id) => {
+        const element = nativeFixture.nativeElement.querySelector('#' + id) as HTMLElement;
+        for (const [key, keyCode] of [
+            ['Home', 36],
+            ['End', 35],
+            ['ArrowLeft', 37],
+            ['ArrowRight', 39]
+        ] as const) {
+            element.focus();
+            const event = new KeyboardEvent('keydown', { key, keyCode, bubbles: true, cancelable: true });
+            element.dispatchEvent(event);
+            expect(event.defaultPrevented).toBe(false);
+            expect(document.activeElement).toBe(element);
+        }
+    });
+});
+
+@Component({
     selector: 'fd-test-shellbar-context-areas',
     template: `
         <fd-shellbar>
@@ -153,11 +226,14 @@ describe('ShellbarComponent - Keyboard Navigation', () => {
         keyboardFixture.detectChanges();
         await keyboardFixture.whenStable();
         shellbarEl = keyboardFixture.nativeElement.querySelector('.fd-shellbar');
+        shellbarEl.querySelectorAll<HTMLElement>('button').forEach((button) => {
+            Object.defineProperty(button, 'getClientRects', { value: () => [{ width: 80, height: 32 }] });
+        });
         // Give time for tabbable elements cache to be populated
         await new Promise((resolve) => setTimeout(resolve, 100));
     });
 
-    it.skip('should navigate to next element with right arrow key', () => {
+    it('should navigate to next element with right arrow key', () => {
         const button1 = shellbarEl.querySelector('#action1') as HTMLElement;
         const button2 = shellbarEl.querySelector('#action2') as HTMLElement;
 
@@ -172,7 +248,7 @@ describe('ShellbarComponent - Keyboard Navigation', () => {
         expect(document.activeElement).toBe(button2);
     });
 
-    it.skip('should navigate to previous element with left arrow key', () => {
+    it('should navigate to previous element with left arrow key', () => {
         const button1 = shellbarEl.querySelector('#action1') as HTMLElement;
         const button2 = shellbarEl.querySelector('#action2') as HTMLElement;
 
@@ -187,7 +263,7 @@ describe('ShellbarComponent - Keyboard Navigation', () => {
         expect(document.activeElement).toBe(button1);
     });
 
-    it.skip('should navigate to first element with Home key', () => {
+    it('should navigate to first element with Home key', () => {
         const button1 = shellbarEl.querySelector('#action1') as HTMLElement;
         const button3 = shellbarEl.querySelector('#action3') as HTMLElement;
 
@@ -202,7 +278,7 @@ describe('ShellbarComponent - Keyboard Navigation', () => {
         expect(document.activeElement).toBe(button1);
     });
 
-    it.skip('should navigate to last element with End key', () => {
+    it('should navigate to last element with End key', () => {
         const button1 = shellbarEl.querySelector('#action1') as HTMLElement;
         const button3 = shellbarEl.querySelector('#action3') as HTMLElement;
 

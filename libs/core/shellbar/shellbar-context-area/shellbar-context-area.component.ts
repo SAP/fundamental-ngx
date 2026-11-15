@@ -66,8 +66,12 @@ export class ShellbarContextAreaComponent {
      * Iteratively hides elements if the end of the actions exceed the end of the shellbar.
      */
     hideElementsIfNeeded(): void {
-        const newHiddenItems: HTMLElement[] = [];
         const contextAreaItems: { el: HTMLElement; priority: number }[] = this._getContextAreaItemsWithPriority();
+        const previouslyHidden = new Set(
+            contextAreaItems.filter((item) => item.el.style.display === 'none').map((item) => item.el)
+        );
+        const suppressedSeparators = new Set([...previouslyHidden].filter((item) => this._isSeparator(item)));
+        this._updateSeparatorVisibility(suppressedSeparators);
         while (this._shellbar._actionsExceedShellbarWidth()) {
             const shownElements = contextAreaItems.filter(
                 (item) => item?.el?.style?.display !== 'none' && !item?.el?.hasAttribute('fdShellbarNeverHide')
@@ -77,14 +81,23 @@ export class ShellbarContextAreaComponent {
             }
             const lastItem = shownElements[shownElements.length - 1];
             if (lastItem?.el?.style) {
-                newHiddenItems.push(lastItem.el);
                 lastItem.el.style.display = 'none';
-                this.elementHidden.emit(lastItem.el);
+                if (this._isSeparator(lastItem.el)) {
+                    suppressedSeparators.add(lastItem.el);
+                }
             }
         }
 
         // Hide separators if all other items in their group are hidden
-        this._updateSeparatorVisibility();
+        this._updateSeparatorVisibility(suppressedSeparators);
+        const newHiddenItems = contextAreaItems
+            .filter((item) => item.el.style.display === 'none')
+            .map((item) => item.el);
+        newHiddenItems.forEach((item) => {
+            if (!previouslyHidden.has(item)) {
+                this.elementHidden.emit(item);
+            }
+        });
 
         if (!this._arraysEqual(this._hiddenItems, newHiddenItems)) {
             this._hiddenItems = newHiddenItems;
@@ -97,18 +110,25 @@ export class ShellbarContextAreaComponent {
      * to exceed the end of the shellbar.
      */
     showElements(): void {
-        this._getContextAreaItemsWithPriority().forEach((item) => {
+        const contextAreaItems = this._getContextAreaItemsWithPriority();
+        const previouslyHidden = new Set(
+            contextAreaItems.filter((item) => item.el.style.display === 'none').map((item) => item.el)
+        );
+        contextAreaItems.forEach((item) => {
             if (item?.el?.style) {
-                const wasHidden = item.el.style.display === 'none';
                 item.el.style.display = '';
-                if (wasHidden) {
-                    this.elementShown.emit(item.el);
-                }
             }
         });
 
         // Show separators if there are visible items in their group
         this._updateSeparatorVisibility();
+        contextAreaItems.forEach(({ el }) => {
+            if (previouslyHidden.has(el) && el.style.display !== 'none') {
+                this.elementShown.emit(el);
+            } else if (!previouslyHidden.has(el) && el.style.display === 'none') {
+                this.elementHidden.emit(el);
+            }
+        });
     }
 
     /**
@@ -141,7 +161,7 @@ export class ShellbarContextAreaComponent {
 
     /**
      * Compares two arrays of HTMLElements for equality.
-     * Sorts both arrays and checks if all elements are the same.
+     * Checks membership regardless of order.
      */
     private _arraysEqual(arr1: HTMLElement[] | undefined, arr2: HTMLElement[]): boolean {
         if (!arr1 && arr2.length === 0) {
@@ -150,16 +170,14 @@ export class ShellbarContextAreaComponent {
         if (!arr1 || arr1.length !== arr2.length) {
             return false;
         }
-        const sorted1 = [...arr1].sort();
-        const sorted2 = [...arr2].sort();
-        return sorted1.every((el, index) => el === sorted2[index]);
+        return arr1.every((el) => arr2.includes(el));
     }
 
     /**
      * Updates separator visibility based on whether there are visible non-separator items
      * in each context area group.
      */
-    private _updateSeparatorVisibility(): void {
+    private _updateSeparatorVisibility(suppressedSeparators = new Set<HTMLElement>()): void {
         const contextAreaGroups = this.el.nativeElement.querySelectorAll('.fd-shellbar__group--context-area');
 
         contextAreaGroups.forEach((group: HTMLElement) => {
@@ -174,7 +192,7 @@ export class ShellbarContextAreaComponent {
 
             // Update separator visibility
             separators.forEach((separator) => {
-                if (hasVisibleNonSeparators) {
+                if (hasVisibleNonSeparators && !suppressedSeparators.has(separator)) {
                     separator.style.display = '';
                 } else {
                     separator.style.display = 'none';

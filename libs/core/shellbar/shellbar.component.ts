@@ -476,10 +476,14 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     handleKeydown(event: KeyboardEvent): void {
-        // Don't interfere with text input behavior
+        // Preserve native input key ownership.
         const target = event.target as HTMLElement;
-        const isTextInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
-        if (isTextInput) {
+        const isNativeInput =
+            target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.tagName === 'SELECT' ||
+            target.isContentEditable;
+        if (isNativeInput) {
             return;
         }
 

@@ -2,13 +2,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    DestroyRef,
     effect,
     ElementRef,
-    inject,
     input,
     output,
     QueryList,
+    signal,
     viewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -82,9 +81,12 @@ export class ShellbarActionsMobileComponent {
     readonly toggled = input<boolean | undefined | null>();
 
     /** @hidden */
+    protected readonly actionItems = computed(() => this._actions());
+
+    /** @hidden */
     protected readonly totalNotifications = computed(() => {
         let total = 0;
-        this.shellbarActions()?.forEach((action) => {
+        this._actions().forEach((action) => {
             const count = action.notificationCount();
             if (count && typeof count === 'number') {
                 total = total + count;
@@ -94,10 +96,19 @@ export class ShellbarActionsMobileComponent {
     });
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
+    private readonly _actions = signal<readonly ShellbarActionComponent[]>([]);
+
+    private readonly _menu = viewChild<MenuComponent>('menu');
 
     /** @hidden */
     constructor() {
+        effect((onCleanup) => {
+            const actions = this.shellbarActions();
+            this._actions.set(actions?.toArray() ?? []);
+            const subscription = actions?.changes.subscribe(() => this._actions.set(actions.toArray()));
+            onCleanup(() => subscription?.unsubscribe());
+        });
+
         // Insert logo when either the logo element or container changes
         // The effect automatically handles both initial render and updates
         effect(() => {
@@ -122,17 +133,26 @@ export class ShellbarActionsMobileComponent {
 
     /** @hidden */
     actionClicked(item: ShellbarActionComponent, event: MouseEvent | KeyboardEvent): void {
+        // Menu keyup generates the click; keydown must not invoke or close the row.
+        if (!(event instanceof MouseEvent)) {
+            return;
+        }
         const callbackFn = item.callback();
         if (callbackFn) {
-            callbackFn(event as MouseEvent);
+            callbackFn(event);
         }
+        this._menu()?.close();
     }
 
     /** @hidden */
     assistiveToolsClickedHandler(event: MouseEvent | KeyboardEvent): void {
+        if (!(event instanceof MouseEvent)) {
+            return;
+        }
         const callback = this.assistiveToolsCallback();
         if (callback) {
-            callback(event as MouseEvent);
+            callback(event);
         }
+        this._menu()?.close();
     }
 }
