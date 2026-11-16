@@ -29,11 +29,9 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
+    styleUrl: './message-box-container.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [PortalModule],
-    host: {
-        style: 'opacity: 0; position: relative; z-index: 999'
-    }
+    imports: [PortalModule]
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>

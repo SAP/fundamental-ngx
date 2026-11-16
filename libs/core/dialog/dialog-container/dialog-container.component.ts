@@ -36,10 +36,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
     styleUrls: ['./dialog-container.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [PortalModule],
-    host: {
-        style: 'opacity: 0; position: relative; z-index: 999'
-    }
+    imports: [PortalModule]
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>
