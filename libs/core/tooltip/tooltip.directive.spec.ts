@@ -612,3 +612,69 @@ describe('TooltipDirective programmatic control', () => {
         tick(1);
     }));
 });
+
+@Component({
+    template: ` <button #host type="button" [fdTooltip]="text()" [fdTooltipKeyShortcuts]="shortcuts()">Host</button> `,
+    imports: [TooltipDirective]
+})
+class TooltipShortcutTestComponent {
+    readonly host = viewChild.required('host', { read: ElementRef });
+    readonly text = signal('');
+    readonly shortcuts = signal<string | null>(null);
+}
+
+describe('TooltipDirective shortcut stripping in the screen reader description', () => {
+    let fixture: ComponentFixture<TooltipShortcutTestComponent>;
+    let component: TooltipShortcutTestComponent;
+    let host: HTMLButtonElement;
+
+    const getDescription = (): string | null | undefined => {
+        fixture.detectChanges();
+        const id = host.getAttribute('aria-describedby') ?? '';
+        return getDescriptionElement(id)?.textContent;
+    };
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({ imports: [TooltipShortcutTestComponent] });
+        fixture = TestBed.createComponent(TooltipShortcutTestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        host = component.host().nativeElement;
+    });
+
+    it('should strip a trailing parenthetical that matches the shortcut', () => {
+        component.text.set('Save (Ctrl+S)');
+        component.shortcuts.set('Control+S');
+        expect(getDescription()).toBe('Save');
+    });
+
+    it('should keep a trailing parenthetical that is not the shortcut', () => {
+        component.text.set('Print (3 copies)');
+        component.shortcuts.set('Control+P');
+        expect(getDescription()).toBe('Print (3 copies)');
+    });
+
+    it('should keep a parenthetical shortcut that does not match the configured one', () => {
+        component.text.set('Save (Ctrl+S)');
+        component.shortcuts.set('Control+Z');
+        expect(getDescription()).toBe('Save (Ctrl+S)');
+    });
+
+    it('should match any chord when several shortcuts are configured', () => {
+        component.text.set('Save (Ctrl+S)');
+        component.shortcuts.set('Control+S Meta+S');
+        expect(getDescription()).toBe('Save');
+    });
+
+    it('should strip a single-key shortcut', () => {
+        component.text.set('Help (F1)');
+        component.shortcuts.set('F1');
+        expect(getDescription()).toBe('Help');
+    });
+
+    it('should leave the text unchanged when no shortcut is configured', () => {
+        component.text.set('Redo (Ctrl+Y)');
+        component.shortcuts.set(null);
+        expect(getDescription()).toBe('Redo (Ctrl+Y)');
+    });
+});

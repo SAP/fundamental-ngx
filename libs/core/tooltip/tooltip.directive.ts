@@ -59,10 +59,36 @@ const toPlacement = (side: TooltipPlacement, alignment: TooltipAlignment): Place
 const normalizeText = (value: string): string => value.replace(/\s+/g, ' ').trim().toLowerCase();
 
 /**
+ * Normalises a keyboard shortcut for comparison so the human-readable form in the tooltip text
+ * (e.g. `Ctrl+S`) and the `aria-keyshortcuts` form (e.g. `Control+S`) compare equal. Lowercases,
+ * unifies common aliases (`ctrl`→`control`, `cmd`/`command`→`meta`, `opt`/`option`→`alt`,
+ * `esc`→`escape`) and collapses `+`/`-`/whitespace separators to a single `+`.
+ */
+const normalizeShortcut = (value: string): string =>
+    value
+        .toLowerCase()
+        .replace(/\bctrl\b/g, 'control')
+        .replace(/\b(cmd|command)\b/g, 'meta')
+        .replace(/\b(opt|option)\b/g, 'alt')
+        .replace(/\besc\b/g, 'escape')
+        .replace(/[\s+-]+/g, '+')
+        .replace(/^\+|\+$/g, '');
+
+/**
+ * Whether `parenthetical` (the inner text of a trailing `(...)` in the tooltip text) spells out one
+ * of the shortcut chords in `shortcuts` (an `aria-keyshortcuts` value, which may list several chords
+ * separated by spaces). Comparison is tolerant of separator and casing differences.
+ */
+const isShortcutNotation = (parenthetical: string, shortcuts: string): boolean => {
+    const candidate = normalizeShortcut(parenthetical);
+    return !!candidate && shortcuts.split(/\s+/).some((chord) => normalizeShortcut(chord) === candidate);
+};
+
+/**
  * Shows a short tooltip for the host element.
  *
  * By default, the tooltip opens after a delay on mouse hover or keyboard focus, and immediately on touch
- * long-press or `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac). It closes when the pointer or focus leaves, on `Escape`, when the host is
+ * long-press or `Ctrl+Alt+I` (Windows/Linux) / `Ctrl+Option+I` (Mac). It closes when the pointer or focus leaves, on `Escape`, when the host is
  * activated, on outside click, and when the window loses focus. With `fdTooltipTrigger="click"` it is
  * toggled by clicking the host instead.
  *
@@ -106,7 +132,7 @@ export class TooltipDirective {
      *   open until it is toggled again, `Escape` is pressed, the user clicks elsewhere or focus moves away.
      *   Use it only on hosts without their own action, e.g. an information button next to a label.
      *
-     * `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac) toggles the tooltip in both modes.
+     * `Ctrl+Alt+I` (Windows/Linux) / `Ctrl+Option+I` (Mac) toggles the tooltip in both modes.
      */
     readonly fdTooltipTrigger = input<TooltipTrigger>('hover');
 
@@ -131,8 +157,10 @@ export class TooltipDirective {
 
     /**
      * Keyboard shortcut of the host action in `aria-keyshortcuts` format, e.g. `Control+S`.
-     * It is set as `aria-keyshortcuts` on the host, and for text content the trailing parenthesised
-     * shortcut, e.g. ` (Ctrl+S)`, is removed from the screen reader description so it is not announced twice.
+     * It is set as `aria-keyshortcuts` on the host, and for text content a trailing parenthesised
+     * shortcut that matches this value, e.g. ` (Ctrl+S)`, is removed from the screen reader
+     * description so it is not announced twice. A trailing parenthetical that is not the shortcut
+     * (e.g. ` (3 copies)`) is left intact.
      */
     readonly fdTooltipKeyShortcuts = input<string | null>(null);
 
@@ -228,7 +256,15 @@ export class TooltipDirective {
      */
     private readonly _description = computed(() => {
         const text = this._text();
-        return this.fdTooltipKeyShortcuts() ? text.replace(/\s*\([^()]*\)$/, '') : text;
+        const shortcuts = this.fdTooltipKeyShortcuts();
+        if (!shortcuts) {
+            return text;
+        }
+        // Only strip the trailing parenthetical when it actually spells out the configured shortcut
+        // (e.g. "Save (Ctrl+S)" with fdTooltipKeyShortcuts="Control+S"), so the shortcut is not
+        // announced twice. A non-shortcut qualifier like "Print (3 copies)" is left intact.
+        const match = text.match(/\s*\(([^()]*)\)$/);
+        return match && isShortcutNotation(match[1], shortcuts) ? text.slice(0, match.index).trimEnd() : text;
     });
 
     /**
@@ -389,7 +425,7 @@ export class TooltipDirective {
     /**
      * @hidden
      * Attaches the host listeners for the given trigger and returns their cleanup functions.
-     * Both triggers listen to `keydown` for `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac).
+     * Both triggers listen to `keydown` for `Ctrl+Alt+I` (Windows/Linux) / `Ctrl+Option+I` (Mac).
      *
      * `click` trigger:
      * - `click`: toggles the tooltip immediately.
@@ -467,7 +503,7 @@ export class TooltipDirective {
 
     /**
      * @hidden
-     * Handles keyboard input on the host: `Ctrl+Alt+I` (Windows/Linux) / `Cmd+Option+I` (Mac) toggles the tooltip without delay. With the `hover`
+     * Handles keyboard input on the host: `Ctrl+Alt+I` (Windows/Linux) / `Ctrl+Option+I` (Mac) toggles the tooltip without delay. With the `hover`
      * trigger, `Enter` hides the tooltip because it triggers the host action; with the `click` trigger,
      * `Enter` already toggles it through the resulting `click` event.
      */
