@@ -1,3 +1,13 @@
+## 0.66.1-rc.26 (2026-11-16)
+
+### 🩹 Fixes
+
+- **core:** add padding configuration inputs to CardContentComponent ([#14668](https://github.com/SAP/fundamental-ngx/pull/14668))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.1-rc.25 (2026-11-11)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
