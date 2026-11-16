@@ -1,23 +1,28 @@
 import {
-    AfterContentChecked,
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
+    computed,
+    effect,
+    ElementRef,
     input,
-    Input,
-    Output,
+    output,
     QueryList,
+    signal,
+    viewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import {
-    ActionSheetBodyComponent,
-    ActionSheetComponent,
-    ActionSheetControlComponent,
-    ActionSheetItemComponent
-} from '@fundamental-ngx/core/action-sheet';
+import { ClickedDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType, defaultButtonType } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    MenuAddonDirective,
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
+import { TextComponent } from '@fundamental-ngx/core/text';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
 
@@ -28,36 +33,46 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ActionSheetComponent,
-        ActionSheetControlComponent,
-        ActionSheetItemComponent,
-        ActionSheetBodyComponent,
         ButtonComponent,
+        ClickedDirective,
         ContentDensityDirective,
-        FdTranslatePipe
+        MenuAddonDirective,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        MenuTriggerDirective,
+        FdTranslatePipe,
+        TextComponent
     ]
 })
-export class ShellbarActionsMobileComponent implements AfterContentChecked {
+export class ShellbarActionsMobileComponent {
     /** @hidden */
-    @Input()
-    shellbarActions: QueryList<ShellbarActionComponent>;
-
-    /**
-     * Whether the search is present in the shellbar.
-     */
-    @Input()
-    searchExists = false;
+    readonly shellbarActions = input<QueryList<ShellbarActionComponent>>();
 
     /** @hidden */
-    @Input()
-    assistiveToolsCallback: Nullable<(event: MouseEvent) => void>;
+    readonly searchExists = input(false);
 
     /** @hidden */
-    @Output()
-    showSearch = new EventEmitter<void>();
+    readonly titleHidden = input(false);
 
     /** @hidden */
-    totalNotifications: number;
+    readonly hiddenTitleText = input('');
+
+    /** @hidden */
+    readonly hiddenLogoElement = input<HTMLElement | null>(null);
+
+    /** @hidden */
+    readonly brandingAriaLabel = input('');
+
+    /** @hidden */
+    readonly assistiveToolsCallback = input<Nullable<(event: MouseEvent) => void>>();
+
+    /** @hidden */
+    readonly showSearch = output<void>();
+
+    /** @hidden */
+    readonly logoContainer = viewChild<ElementRef<HTMLElement>>('logoContainer');
 
     /** The button type for styling (e.g., 'transparent', 'emphasized'). */
     readonly fdType = input<ButtonType>(defaultButtonType);
@@ -66,22 +81,78 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     readonly toggled = input<boolean | undefined | null>();
 
     /** @hidden */
-    actionClicked(item: ShellbarActionComponent, event: MouseEvent): void {
+    protected readonly actionItems = computed(() => this._actions());
+
+    /** @hidden */
+    protected readonly totalNotifications = computed(() => {
+        let total = 0;
+        this._actions().forEach((action) => {
+            const count = action.notificationCount();
+            if (count && typeof count === 'number') {
+                total = total + count;
+            }
+        });
+        return total;
+    });
+
+    /** @hidden */
+    private readonly _actions = signal<readonly ShellbarActionComponent[]>([]);
+
+    private readonly _menu = viewChild<MenuComponent>('menu');
+
+    /** @hidden */
+    constructor() {
+        effect((onCleanup) => {
+            const actions = this.shellbarActions();
+            this._actions.set(actions?.toArray() ?? []);
+            const subscription = actions?.changes.subscribe(() => this._actions.set(actions.toArray()));
+            onCleanup(() => subscription?.unsubscribe());
+        });
+
+        // Insert logo when either the logo element or container changes
+        // The effect automatically handles both initial render and updates
+        effect(() => {
+            const logo = this.hiddenLogoElement();
+            const container = this.logoContainer();
+
+            // Clear container first, then insert logo if both are available
+            if (container) {
+                const containerEl = container.nativeElement;
+                containerEl.textContent = '';
+
+                if (logo) {
+                    // Clone and append the logo
+                    const logoClone = logo.cloneNode(true) as HTMLElement;
+                    // Remove display: none so the logo is visible in the overflow menu
+                    logoClone.style.display = '';
+                    containerEl.appendChild(logoClone);
+                }
+            }
+        });
+    }
+
+    /** @hidden */
+    actionClicked(item: ShellbarActionComponent, event: MouseEvent | KeyboardEvent): void {
+        // Menu keyup generates the click; keydown must not invoke or close the row.
+        if (!(event instanceof MouseEvent)) {
+            return;
+        }
         const callbackFn = item.callback();
         if (callbackFn) {
             callbackFn(event);
         }
+        this._menu()?.close();
     }
 
     /** @hidden */
-    ngAfterContentChecked(): void {
-        this.totalNotifications = 0;
-
-        this.shellbarActions?.forEach((action) => {
-            const count = action.notificationCount();
-            if (count && typeof count === 'number') {
-                this.totalNotifications = this.totalNotifications + count;
-            }
-        });
+    assistiveToolsClickedHandler(event: MouseEvent | KeyboardEvent): void {
+        if (!(event instanceof MouseEvent)) {
+            return;
+        }
+        const callback = this.assistiveToolsCallback();
+        if (callback) {
+            callback(event);
+        }
+        this._menu()?.close();
     }
 }

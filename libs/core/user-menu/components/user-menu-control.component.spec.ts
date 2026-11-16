@@ -1,5 +1,7 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { UserMenuControlComponent } from './user-menu-control.component';
 
 @Component({
@@ -21,8 +23,10 @@ describe('UserMenuControlComponent', () => {
     let controlElement: HTMLElement;
 
     beforeEach(waitForAsync(() => {
+        const languageSignal = signal(FD_LANGUAGE_ENGLISH);
         TestBed.configureTestingModule({
-            imports: [TestHostComponent]
+            imports: [TestHostComponent],
+            providers: [{ provide: FD_LANGUAGE_SIGNAL, useValue: languageSignal }]
         }).compileComponents();
     }));
 
@@ -108,6 +112,31 @@ describe('UserMenuControlComponent', () => {
             component.controlComponent.focus();
 
             expect(document.activeElement).toBe(controlElement);
+        });
+    });
+
+    describe('accessibility', () => {
+        it('should have aria-haspopup="dialog"', () => {
+            expect(controlElement.getAttribute('aria-haspopup')).toBe('dialog');
+        });
+
+        it('should have aria-expanded="false" by default', () => {
+            expect(controlElement.getAttribute('aria-expanded')).toBe('false');
+        });
+
+        it('should update aria-expanded when isExpanded changes', () => {
+            component.controlComponent.isExpanded.set(true);
+            fixture.detectChanges();
+            expect(controlElement.getAttribute('aria-expanded')).toBe('true');
+
+            component.controlComponent.isExpanded.set(false);
+            fixture.detectChanges();
+            expect(controlElement.getAttribute('aria-expanded')).toBe('false');
+        });
+
+        it('should have aria-label set to translated value', () => {
+            const ariaLabel = controlElement.getAttribute('aria-label');
+            expect(ariaLabel).toBe('User Menu');
         });
     });
 });

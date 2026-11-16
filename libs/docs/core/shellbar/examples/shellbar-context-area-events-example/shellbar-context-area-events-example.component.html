@@ -1,0 +1,103 @@
+<fd-shellbar [showNavigationButton]="true">
+    <fd-shellbar-branding ariaLabel="SAP Product Name Home">
+        <fd-shellbar-logo>
+            <a class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+        </fd-shellbar-logo>
+        <fd-shellbar-title>Product Name</fd-shellbar-title>
+    </fd-shellbar-branding>
+
+    <fd-shellbar-context-area (elementHidden)="onElementHidden($event)" (elementShown)="onElementShown($event)">
+        <span
+            fdShellbarPosition="left"
+            fdShellbarHidePriority="1"
+            fd-object-status
+            status="informative"
+            [inverted]="true"
+            label="Development"
+        ></span>
+        <span
+            fdShellbarPosition="left"
+            fdShellbarHidePriority="2"
+            fd-button
+            fdType="transparent"
+            label="Customer Rainbird"
+            ariaLabel="Customer Rainbird"
+        ></span>
+        <fd-info-label
+            fdShellbarPosition="left"
+            fdShellbarHidePriority="3"
+            type="icon"
+            glyph="example"
+            label="System 1"
+            ariaLabel="System 1"
+        ></fd-info-label>
+
+        @if (hiddenElements().length > 0) {
+            <fd-popover
+                fdShellbarPosition="left"
+                fdShellbarHidePriority="0"
+                [(isOpen)]="isPopoverOpen"
+                [noArrow]="false"
+                placement="bottom-start"
+            >
+                <fd-popover-control>
+                    <button
+                        fd-button
+                        fdType="transparent"
+                        glyph="slim-arrow-down"
+                        class="fd-shellbar__button"
+                        ariaLabel="Show hidden items"
+                        title="Show hidden items"
+                        (click)="togglePopover()"
+                    ></button>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <div style="padding: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; min-width: 12rem">
+                        @for (element of hiddenElements(); track element) {
+                            <div [innerHTML]="element.outerHTML"></div>
+                        }
+                    </div>
+                </fd-popover-body>
+            </fd-popover>
+        }
+    </fd-shellbar-context-area>
+
+    <fd-shellbar-actions>
+        <fd-shellbar-action
+            glyph="bell"
+            label="Notifications"
+            ariaLabel="Notifications"
+            title="Notifications"
+        ></fd-shellbar-action>
+        <fd-shellbar-action glyph="pool" label="Pool" ariaLabel="Pool" title="Pool"></fd-shellbar-action>
+
+        <fd-user-menu>
+            <fd-user-menu-control>
+                <fd-avatar
+                    fd-user-menu-control-element
+                    size="xs"
+                    [circle]="true"
+                    [interactive]="true"
+                    ariaLabel="User menu"
+                    image="https://picsum.photos/id/1018/400"
+                ></fd-avatar>
+            </fd-user-menu-control>
+            <fd-user-menu-body>
+                <div fd-user-menu-header>
+                    <fd-avatar
+                        [circle]="true"
+                        size="l"
+                        label="Lisa Miller"
+                        zoomGlyph="edit"
+                        title="Edit avatar"
+                    ></fd-avatar>
+                    <div fd-user-menu-header-container>
+                        <div fd-user-menu-user-name>Lisa Miller</div>
+                        <div fd-user-menu-subline>lisa.miller&#64;test.com</div>
+                        <div fd-user-menu-subline>User Experience Designer</div>
+                    </div>
+                </div>
+            </fd-user-menu-body>
+        </fd-user-menu>
+    </fd-shellbar-actions>
+</fd-shellbar>

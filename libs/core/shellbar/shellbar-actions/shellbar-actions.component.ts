@@ -12,7 +12,8 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
-    inject
+    inject,
+    signal
 } from '@angular/core';
 
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
@@ -87,7 +88,7 @@ export class ShellbarActionsComponent implements OnDestroy {
 
     /** @hidden */
     @Input()
-    assistiveToolsCallback: Nullable<(event: MouseEvent) => void>;
+    assistiveToolsCallback: ((event: MouseEvent) => void) | undefined;
 
     /**
      * Event emitted when search opened.
@@ -132,6 +133,18 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     _showMobileActions = false;
 
+    /** @hidden */
+    readonly titleHidden = signal(false);
+
+    /** @hidden */
+    readonly hiddenTitleText = signal('');
+
+    /** @hidden */
+    readonly hiddenLogoElement = signal<HTMLElement | null>(null);
+
+    /** @hidden */
+    readonly brandingAriaLabel = signal('');
+
     /**
      * Whether to show the search field.
      */
@@ -175,7 +188,7 @@ export class ShellbarActionsComponent implements OnDestroy {
     _handleOverflow(shouldOverflow: boolean): void {
         this._showMobileActions = shouldOverflow;
 
-        this.shellbarActions.forEach((action) => {
+        this.shellbarActions?.forEach((action) => {
             action._elRef.nativeElement.style.display = shouldOverflow ? 'none' : 'flex';
         });
 
@@ -222,6 +235,15 @@ export class ShellbarActionsComponent implements OnDestroy {
         }
 
         this._toggleSearchPortal(visible, visible);
+    }
+
+    /** @hidden */
+    setTitleHidden(hidden: boolean, titleText: string, logoElement: HTMLElement | null, ariaLabel: string): void {
+        this.titleHidden.set(hidden);
+        this.hiddenTitleText.set(titleText);
+        this.hiddenLogoElement.set(logoElement);
+        this.brandingAriaLabel.set(ariaLabel);
+        this._cd.detectChanges();
     }
 
     /** @hidden */

@@ -242,7 +242,9 @@ export default {
         cancel: 'Odustani',
         collapsedItemMenuLabel: 'Sažeti meni stavke',
         navigationButtonLabel: 'Usmeravanje',
-        search: 'Traži'
+        openSearch: 'Open Search',
+        search: 'Traži',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Drška klizača'
@@ -330,6 +332,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Zatvori',
         previousButton: 'Prethodno'
     },

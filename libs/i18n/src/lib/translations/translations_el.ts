@@ -241,7 +241,9 @@ export default {
         cancel: 'Ακύρωση',
         collapsedItemMenuLabel: 'Συνεπτυγμένο Μενού Στοιχείων',
         navigationButtonLabel: 'Πλοήγηση',
-        search: 'Αναζήτηση'
+        openSearch: 'Open Search',
+        search: 'Αναζήτηση',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Κλείσιμο',
         previousButton: 'Προηγούμενο'
     },

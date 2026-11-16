@@ -209,4 +209,43 @@ describe('ProductSwitchComponent', () => {
             expect(defaultButton).toBeFalsy();
         });
     });
+
+    describe('accessibility', () => {
+        it('should have aria-haspopup="dialog" on default button', () => {
+            const button = fixture.nativeElement.querySelector('button.fd-shellbar__button');
+            expect(button.getAttribute('aria-haspopup')).toBe('dialog');
+        });
+
+        it('should have aria-expanded="false" on default button when closed', () => {
+            const button = fixture.nativeElement.querySelector('button.fd-shellbar__button');
+            expect(button.getAttribute('aria-expanded')).toBe('false');
+        });
+
+        it('should have aria-expanded="true" on default button when open', () => {
+            component.isOpen.set(true);
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('button.fd-shellbar__button');
+            expect(button.getAttribute('aria-expanded')).toBe('true');
+        });
+
+        it('should update aria-expanded when isOpen changes', () => {
+            const button = fixture.nativeElement.querySelector('button.fd-shellbar__button');
+
+            component.isOpen.set(true);
+            fixture.detectChanges();
+            expect(button.getAttribute('aria-expanded')).toBe('true');
+
+            component.isOpen.set(false);
+            fixture.detectChanges();
+            expect(button.getAttribute('aria-expanded')).toBe('false');
+        });
+
+        it('should have translated aria-label on default button', () => {
+            const button = fixture.nativeElement.querySelector('button.fd-shellbar__button');
+            const ariaLabel = button.getAttribute('aria-label');
+            expect(ariaLabel).toBeTruthy();
+            expect(ariaLabel.length).toBeGreaterThan(0);
+        });
+    });
 });
