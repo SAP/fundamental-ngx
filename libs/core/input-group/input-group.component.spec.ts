@@ -126,6 +126,26 @@ describe('InputGroupComponent', () => {
             expect(button).toBeTruthy();
             expect(button.getAttribute('aria-label')).toBe('USD');
         });
+
+        it('should set title on addon button when glyphAriaLabel is provided', () => {
+            component.glyph = 'search';
+            component.glyphAriaLabel = 'Search';
+            component.button = true;
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('button[fd-button]');
+            expect(button.getAttribute('title')).toBe('Search');
+        });
+
+        it('should not set title on addon button when glyphAriaLabel is not provided', () => {
+            component.glyph = 'search';
+            component.glyphAriaLabel = null;
+            component.button = true;
+            fixture.detectChanges();
+
+            const button = fixture.nativeElement.querySelector('button[fd-button]');
+            expect(button.getAttribute('title')).toBeNull();
+        });
     });
 });
 

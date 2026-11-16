@@ -36,6 +36,7 @@
                     [attr.aria-expanded]="inShellbar ? isExpanded : null"
                     [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                     [attr.aria-controls]="_inputId"
+                    [attr.title]="glyphAriaLabel || undefined"
                     [disabled]="_cvaControl.cvaDirective?.disabled"
                     (mousedown)="_preventFocus($event)"
                     (keydown.enter)="$event.preventDefault()"
