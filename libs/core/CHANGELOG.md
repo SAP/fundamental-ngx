@@ -1,3 +1,7 @@
+## 0.66.1-rc.29 (2026-11-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.28 (2026-11-16)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
