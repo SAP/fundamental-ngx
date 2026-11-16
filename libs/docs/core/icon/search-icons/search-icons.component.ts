@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -6,7 +5,6 @@ import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent } from '@fundamental-ngx/core/info-label';
 import { MessageStripAlertService } from '@fundamental-ngx/core/message-strip';
 import {
@@ -41,13 +39,11 @@ import { FdIconDocsType, availableSapIcons } from './available-sap-icons';
         TableInitialStateDirective,
         FdpCellDef,
         InfoLabelComponent,
-        IconComponent,
         TableToolbarComponent,
         ButtonComponent,
         ContentDensityDirective,
         AvatarComponent,
         SearchHighlightPipe,
-        AsyncPipe,
         TableVirtualScrollDirective
     ]
 })

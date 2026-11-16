@@ -6,13 +6,12 @@ import { TableCell } from '@fundamental-ngx/ui5-webcomponents/table-cell';
 import { TableHeaderCell } from '@fundamental-ngx/ui5-webcomponents/table-header-cell';
 import { TableHeaderRow } from '@fundamental-ngx/ui5-webcomponents/table-header-row';
 import { TableRow } from '@fundamental-ngx/ui5-webcomponents/table-row';
-import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
 
 @Component({
     selector: 'ui5-expandable-text-basic-example',
     templateUrl: './basic-sample.html',
     standalone: true,
-    imports: [ExpandableText, Table, TableRow, TableHeaderRow, TableCell, TableHeaderCell, Label, Text]
+    imports: [ExpandableText, Table, TableRow, TableHeaderRow, TableCell, TableHeaderCell, Label]
 })
 export class ExpandableTextBasicExample {
     readonly sampleText = signal(

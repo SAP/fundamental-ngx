@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TableModule } from '@fundamental-ngx/core/table';
 import {
     CodeExampleComponent,
@@ -20,13 +18,11 @@ import { ToolHeaderExampleComponent } from './examples/tool-header-example.compo
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        FocusableGridDirective,
         TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         ToolHeaderExampleComponent,
-        MessageStripComponent,
         NestedExampleComponent
     ]
 })

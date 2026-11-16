@@ -1,14 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ComboboxComponent, ComboboxItemDirective } from '@fundamental-ngx/core/combobox';
-
 import { FormsModule } from '@angular/forms';
-import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { ListTitleDirective } from '@fundamental-ngx/core/list';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
-import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
 import {
     PlatformValueHelpDialogModule,
     ValueHelpColumnDefDirective,
@@ -75,16 +71,11 @@ const data = exampleDataSource();
         ButtonComponent,
         TokenComponent,
         TokenizerComponent,
-        TokenizerInputDirective,
         ContentDensityDirective,
         PlatformValueHelpDialogModule,
-        ComboboxComponent,
         ValueHelpFilterDefDirective,
         FormsModule,
-        FormControlComponent,
         ValueHelpColumnDefDirective,
-        ComboboxItemDirective,
-        SearchHighlightPipe,
         ListTitleDirective,
         SelectComponent,
         OptionComponent

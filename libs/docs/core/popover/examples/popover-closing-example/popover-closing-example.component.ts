@@ -1,17 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import {
-    BarComponent,
-    BarElementDirective,
-    BarLeftDirective,
-    BarMiddleDirective,
-    BarRightDirective,
-    ButtonBarComponent
-} from '@fundamental-ngx/core/bar';
+import { BarComponent, BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     PopoverBodyComponent,
-    PopoverBodyDirective,
     PopoverBodyHeaderDirective,
     PopoverComponent,
     PopoverControlComponent
@@ -28,14 +20,11 @@ import {
         PopoverBodyComponent,
         ButtonComponent,
         PopoverBodyHeaderDirective,
-        PopoverBodyDirective,
         AvatarComponent,
         BarComponent,
         ButtonBarComponent,
         BarElementDirective,
-        BarLeftDirective,
-        BarMiddleDirective,
-        BarRightDirective
+        BarLeftDirective
     ]
 })
 export class PopoverClosingExampleComponent {}

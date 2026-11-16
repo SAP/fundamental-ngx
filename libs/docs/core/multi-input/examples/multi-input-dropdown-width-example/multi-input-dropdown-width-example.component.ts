@@ -1,12 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-    ListBylineDirective,
-    ListContentDirective,
-    ListIconDirective,
-    ListTitleDirective
-} from '@fundamental-ngx/core/list';
+import { ListBylineDirective, ListContentDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 
 @Component({
@@ -14,15 +9,7 @@ import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
     templateUrl: './multi-input-dropdown-width-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        MultiInputComponent,
-        FormsModule,
-        JsonPipe,
-        ListIconDirective,
-        ListTitleDirective,
-        ListBylineDirective,
-        ListContentDirective
-    ]
+    imports: [MultiInputComponent, FormsModule, JsonPipe, ListTitleDirective, ListBylineDirective, ListContentDirective]
 })
 export class MultiInputDropdownWidthExampleComponent {
     selected = [
