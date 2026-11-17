@@ -1,3 +1,13 @@
+## 0.66.1-rc.31 (2026-11-17)
+
+### 🩹 Fixes
+
+- **core:** prevent selection changes in read-only radio groups ([#14678](https://github.com/SAP/fundamental-ngx/pull/14678))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1-rc.30 (2026-11-17)
 
 ### 🩹 Fixes
