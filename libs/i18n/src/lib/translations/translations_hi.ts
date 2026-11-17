@@ -241,7 +241,9 @@ export default {
         cancel: 'Cancel',
         collapsedItemMenuLabel: 'छोटा किया गया आइटम मेनू',
         navigationButtonLabel: 'Navigation',
-        search: 'Search'
+        openSearch: 'Open Search',
+        search: 'Search',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'ठीक है'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Close',
         previousButton: 'Previous'
     },

@@ -241,7 +241,9 @@ export default {
         cancel: 'בטל',
         collapsedItemMenuLabel: 'תפריט פריט מכווץ',
         navigationButtonLabel: 'ניווט',
-        search: 'חפש'
+        openSearch: 'Open Search',
+        search: 'חפש',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'נקודת אחיזה של מחוון'
@@ -329,6 +331,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'סגור',
         previousButton: 'הקודם'
     },

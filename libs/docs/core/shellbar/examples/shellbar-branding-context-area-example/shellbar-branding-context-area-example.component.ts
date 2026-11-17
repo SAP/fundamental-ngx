@@ -10,7 +10,6 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import {
     ShellbarComponent,
     ShellbarMenuItem,
@@ -50,7 +49,6 @@ import {
         ClickedDirective,
         ButtonComponent,
         FormsModule,
-        ProductSwitchModule,
         SearchFieldComponent,
         ObjectStatusComponent,
         UserMenuComponent,
@@ -89,7 +87,7 @@ export class ShellbarBrandingContextAreaExampleComponent {
 
     inputText = '';
 
-    showButtonWithPriority3 = true;
+    showStatusWithPriority2 = true;
 
     suggestions: SuggestionItem[] = [
         {
@@ -233,68 +231,6 @@ export class ShellbarBrandingContextAreaExampleComponent {
         }
     ];
 
-    productSwitcher: ProductSwitchItem[] = [
-        {
-            title: 'Home',
-            subtitle: 'Central Home',
-            icon: 'home',
-            callback: () => this.productSwitcherCallback('Home'),
-            disabledDragAndDrop: true,
-            stickToPosition: true
-        },
-        {
-            title: 'Analytics Cloud',
-            subtitle: 'Analytics Cloud',
-            icon: 'business-objects-experience',
-            selected: true
-        },
-        {
-            title: 'Catalog',
-            subtitle: 'Ariba',
-            icon: 'contacts'
-        },
-        {
-            title: 'Guided Buying',
-            icon: 'credit-card'
-        },
-        {
-            title: 'Strategic Procurement',
-            icon: 'cart-3'
-        },
-        {
-            title: 'Vendor Managemen',
-            subtitle: 'Fieldglass',
-            icon: 'shipping-status'
-        },
-        {
-            title: 'Human Capital Management',
-            icon: 'customer'
-        },
-        {
-            title: 'Sales Cloud',
-            subtitle: 'Sales Cloud',
-            icon: 'sales-notification'
-        },
-        {
-            title: 'Commerce Cloud',
-            subtitle: 'Commerce Cloud',
-            icon: 'retail-store'
-        },
-        {
-            title: 'Marketing Cloud',
-            subtitle: 'Marketing Cloud',
-            icon: 'marketing-campaign'
-        },
-        {
-            title: 'Service Cloud',
-            icon: 'family-care'
-        },
-        {
-            title: 'S/4HANA',
-            icon: 'batch-payments'
-        }
-    ];
-
     user: ShellbarUser = {
         fullName: 'William Willson',
         colorAccent: 6
@@ -339,20 +275,6 @@ export class ShellbarBrandingContextAreaExampleComponent {
         this.cartToggledState.set(!this.cartToggledState());
     }
 
-    productSwitcherCallback(product): void {
-        alert(product + 'Product Clicked');
-    }
-
-    navClicked(event): void {
-        console.log(event);
-        alert('Navigation Button Clicked');
-    }
-
-    backClicked(event): void {
-        console.log(event);
-        alert('Back Button Clicked');
-    }
-
     onSearchSubmit($event: SearchInput): void {
         this.searchTerm = $event.text;
     }
@@ -381,8 +303,8 @@ export class ShellbarBrandingContextAreaExampleComponent {
         });
     }
 
-    toggleButton3(): void {
-        this.showButtonWithPriority3 = !this.showButtonWithPriority3;
+    toggleStatus2(): void {
+        this.showStatusWithPriority2 = !this.showStatusWithPriority2;
     }
 
     itemVisibilityChanged(event: any): void {

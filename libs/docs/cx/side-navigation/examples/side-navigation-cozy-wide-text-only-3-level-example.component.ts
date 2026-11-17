@@ -2,18 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     NestedItemComponent,
     NestedLinkComponent,
-    NestedListButtonDirective,
     NestedListComponent,
-    NestedListContentDirective,
     NestedListExpandIconComponent,
-    NestedListHeaderDirective,
-    NestedListIconComponent,
-    NestedListPopoverComponent,
-    NestedListTitleDirective,
-    PreparedNestedListComponent
+    NestedListTitleDirective
 } from '@fundamental-ngx/cx/nested-list';
 import {
-    SideNavigationButtonDirective,
     SideNavigationComponent,
     SideNavigationMainComponent,
     SideNavigationUtilityDirective
@@ -26,16 +19,9 @@ import {
     imports: [
         NestedItemComponent,
         NestedLinkComponent,
-        NestedListButtonDirective,
         NestedListComponent,
-        NestedListContentDirective,
         NestedListExpandIconComponent,
-        NestedListHeaderDirective,
-        NestedListIconComponent,
-        NestedListPopoverComponent,
         NestedListTitleDirective,
-        PreparedNestedListComponent,
-        SideNavigationButtonDirective,
         SideNavigationComponent,
         SideNavigationMainComponent,
         SideNavigationUtilityDirective

@@ -9,7 +9,6 @@ import {
     ButtonBarComponent
 } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     PopoverBodyComponent,
     PopoverBodyFooterDirective,
@@ -37,7 +36,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         TitleComponent,
         AvatarComponent,
         PopoverBodyHeaderDirective,
-        ContentDensityDirective,
         PopoverBodyFooterDirective
     ]
 })

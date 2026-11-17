@@ -3,7 +3,6 @@ import { NavigationLayout } from '@fundamental-ngx/ui5-webcomponents-fiori/navig
 import { NavigationLayoutMode } from '@fundamental-ngx/ui5-webcomponents-fiori/types';
 import { Avatar } from '@fundamental-ngx/ui5-webcomponents/avatar';
 import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
-import { Icon } from '@fundamental-ngx/ui5-webcomponents/icon';
 import { List } from '@fundamental-ngx/ui5-webcomponents/list';
 import { ListItemStandard } from '@fundamental-ngx/ui5-webcomponents/list-item-standard';
 import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
@@ -25,7 +24,7 @@ interface ContentSection {
 @Component({
     selector: 'ui5-navigation-layout-sample',
     standalone: true,
-    imports: [NavigationLayout, Button, List, ListItemStandard, Title, Text, Avatar, Icon],
+    imports: [NavigationLayout, Button, List, ListItemStandard, Title, Text, Avatar],
     templateUrl: './navigation-layout-sample.html'
 })
 export class NavigationLayoutSample {

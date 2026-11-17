@@ -242,7 +242,9 @@ export default {
         cancel: 'Annulla',
         collapsedItemMenuLabel: 'Voce menu compressa',
         navigationButtonLabel: 'Navigazione',
-        search: 'Cerca'
+        openSearch: 'Open Search',
+        search: 'Cerca',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Cursore del dispositivo di scorrimento'
@@ -330,6 +332,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Chiudi',
         previousButton: 'Indietro'
     },

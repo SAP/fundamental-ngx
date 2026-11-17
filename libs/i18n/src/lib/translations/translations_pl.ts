@@ -242,7 +242,9 @@ export default {
         cancel: 'Anuluj',
         collapsedItemMenuLabel: 'Zwinięte menu pozycji',
         navigationButtonLabel: 'Nawigacja',
-        search: 'Wyszukiwanie'
+        openSearch: 'Open Search',
+        search: 'Wyszukiwanie',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Uchwyt suwaka'
@@ -330,6 +332,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Zamknij',
         previousButton: 'Poprzedni'
     },

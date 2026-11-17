@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, signal, WritableSignal } from '@angular/core';
-import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
     selector: 'header',
-    imports: [MessageStripComponent],
+    imports: [],
     template: `
         <h1 class="header">
             <ng-content></ng-content>

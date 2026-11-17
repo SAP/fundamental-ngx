@@ -63,6 +63,18 @@ export class ShellbarActionComponent {
     /** Whether the button is in toggled state. */
     readonly toggled = input<boolean | undefined | null>();
 
+    /** ARIA expanded state for the action. */
+    readonly ariaExpanded = input<boolean | null>(null);
+
+    /** ARIA haspopup attribute for indicating popup type. */
+    readonly ariaHaspopup = input<'true' | 'false' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' | null>(null);
+
+    /** ARIA controls attribute - ID of the element controlled by this action. */
+    readonly ariaControls = input<string | null>(null);
+
+    /** ARIA describedby attribute - ID(s) of elements that describe this action. */
+    readonly ariaDescribedby = input<string | null>(null);
+
     /** @hidden */
     _elRef = inject(ElementRef);
 

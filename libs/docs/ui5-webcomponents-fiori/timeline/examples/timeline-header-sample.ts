@@ -7,8 +7,6 @@ import { Button } from '@fundamental-ngx/ui5-webcomponents/button';
 import { Input } from '@fundamental-ngx/ui5-webcomponents/input';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { Tag } from '@fundamental-ngx/ui5-webcomponents/tag';
-import { Text } from '@fundamental-ngx/ui5-webcomponents/text';
-import { Title } from '@fundamental-ngx/ui5-webcomponents/title';
 import { Toolbar } from '@fundamental-ngx/ui5-webcomponents/toolbar';
 import { ToolbarButton } from '@fundamental-ngx/ui5-webcomponents/toolbar-button';
 
@@ -29,7 +27,7 @@ interface OrderEvent {
 @Component({
     selector: 'ui5-timeline-header-sample',
     templateUrl: './timeline-header-sample.html',
-    imports: [Timeline, TimelineItem, Bar, Button, Input, Label, Tag, Text, Title, Toolbar, ToolbarButton]
+    imports: [Timeline, TimelineItem, Bar, Button, Input, Label, Tag, Toolbar, ToolbarButton]
 })
 export class TimelineHeaderSample {
     readonly searchValue = signal<string>('');
