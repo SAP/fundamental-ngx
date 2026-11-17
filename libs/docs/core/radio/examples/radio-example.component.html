@@ -269,13 +269,13 @@
     </fd-form-group>
 </fieldset>
 
-<fieldset fd-fieldset>
+<fieldset fd-fieldset id="radio-readonly-ngmodel-fieldset">
     <legend fd-form-legend>Radio button States in read only mode</legend>
     <fd-form-group>
         <div fd-form-item>
             <fd-radio-button
-                name="radio-name-6"
-                [id]="'radio-22'"
+                name="radio-readonly-example"
+                [id]="'radio-readonly-0'"
                 value="val0"
                 state="default"
                 [readOnly]="true"
@@ -286,8 +286,8 @@
         </div>
         <div fd-form-item>
             <fd-radio-button
-                name="radio-name-6"
-                [id]="'radio-23'"
+                name="radio-readonly-example"
+                [id]="'radio-readonly-1'"
                 state="success"
                 value="val1"
                 [readOnly]="true"
@@ -298,8 +298,8 @@
         </div>
         <div fd-form-item>
             <fd-radio-button
-                name="radio-name-6"
-                [id]="'radio-24'"
+                name="radio-readonly-example"
+                [id]="'radio-readonly-2'"
                 value="val2"
                 state="warning"
                 [readOnly]="true"
@@ -310,8 +310,8 @@
         </div>
         <div fd-form-item>
             <fd-radio-button
-                name="radio-name-6"
-                [id]="'radio-25'"
+                name="radio-readonly-example"
+                [id]="'radio-readonly-3'"
                 value="val3"
                 state="error"
                 [readOnly]="true"
@@ -322,8 +322,8 @@
         </div>
         <div fd-form-item>
             <fd-radio-button
-                name="radio-name-6"
-                [id]="'radio-26'"
+                name="radio-readonly-example"
+                [id]="'radio-readonly-4'"
                 value="val4"
                 state="information"
                 [readOnly]="true"
@@ -334,8 +334,8 @@
         </div>
         <div fd-form-item>
             <fd-radio-button
-                name="radio-name-6"
-                [id]="'radio-27'"
+                name="radio-readonly-example"
+                [id]="'radio-readonly-5'"
                 value="val5"
                 state="information"
                 [readOnly]="true"
@@ -345,4 +345,5 @@
             </fd-radio-button>
         </div>
     </fd-form-group>
+    <small id="radio-readonly-ngmodel-readout">Radio Button Value: {{ optionSevenVariable }}</small>
 </fieldset>
