@@ -20,6 +20,7 @@
             [fillControlMode]="fillControlMode"
             [closeOnEscapeKey]="closeOnEscapeKey"
             [closeOnOutsideClick]="closeOnOutsideClick"
+            [additionalBodyClass]="additionalBodyClass"
         >
             @for (item of items; track item) {
                 <li (click)="itemClicked(item, $event)" fd-menu-item>

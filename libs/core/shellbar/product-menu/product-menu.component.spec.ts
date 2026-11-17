@@ -21,4 +21,14 @@ describe('ProductMenuComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should accept additionalBodyClass input', () => {
+        component.additionalBodyClass = 'custom-z-index';
+        expect(component.additionalBodyClass).toBe('custom-z-index');
+    });
+
+    it('should handle null additionalBodyClass', () => {
+        component.additionalBodyClass = null;
+        expect(component.additionalBodyClass).toBeNull();
+    });
 });
