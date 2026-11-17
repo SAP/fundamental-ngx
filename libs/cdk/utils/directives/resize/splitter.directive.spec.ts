@@ -134,6 +134,33 @@ describe('SplitterDirective', () => {
             fixture.detectChanges();
             expect(fixture.componentInstance.size).toBe(400);
         });
+
+        it('lostpointercapture ends the drag so subsequent pointermove has no effect', () => {
+            bar.dispatchEvent(new PointerEvent('pointerdown', { clientX: 500, pointerId: 1, bubbles: true }));
+            expect(fixture.componentInstance.startCount).toBe(1);
+
+            bar.dispatchEvent(new PointerEvent('pointermove', { clientX: 520, pointerId: 1 })); // +20 -> 220
+            fixture.detectChanges();
+            expect(fixture.componentInstance.size).toBe(220);
+
+            // Simulate pointer capture being stolen by another element
+            bar.dispatchEvent(new PointerEvent('lostpointercapture', { pointerId: 1 }));
+            expect(fixture.componentInstance.endCount).toBe(1);
+
+            bar.dispatchEvent(new PointerEvent('pointermove', { clientX: 600, pointerId: 1 }));
+            fixture.detectChanges();
+            expect(fixture.componentInstance.size).toBe(220); // must not change
+        });
+
+        it('releasePointerCapture is called when a new drag cancels an in-progress drag', () => {
+            const releaseSpy = jest.spyOn(bar, 'releasePointerCapture');
+
+            bar.dispatchEvent(new PointerEvent('pointerdown', { clientX: 500, pointerId: 1, bubbles: true }));
+            // Second pointerdown cancels the first via _dragStop.next(); finalize must release pointer 1
+            bar.dispatchEvent(new PointerEvent('pointerdown', { clientX: 510, pointerId: 2, bubbles: true }));
+
+            expect(releaseSpy).toHaveBeenCalledWith(1);
+        });
     });
 });
 
@@ -149,6 +176,22 @@ describe('SplitterDirective keyboard (RTL)', () => {
         el.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
         f.detectChanges();
         expect(f.componentInstance.size).toBe(190);
+    });
+
+    it('Home sets size to min and End sets size to max in RTL', () => {
+        TestBed.configureTestingModule({
+            imports: [HostComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: signal(true) } }]
+        });
+        const f = TestBed.createComponent(HostComponent);
+        f.detectChanges();
+        const el = f.nativeElement.querySelector('[fdkSplitter]') as HTMLElement;
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+        f.detectChanges();
+        expect(f.componentInstance.size).toBe(100); // min in RTL
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+        f.detectChanges();
+        expect(f.componentInstance.size).toBe(400); // max in RTL
     });
 });
 
@@ -246,5 +289,78 @@ describe('SplitterDirective presets when unbounded (min=0, max=Infinity)', () =>
         el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
         f.detectChanges();
         expect(f.componentInstance.sizeSignal()).toBe(200);
+    });
+});
+
+@Component({
+    imports: [SplitterDirective],
+    template: `
+        <div
+            fdkSplitter
+            defaultSize="250"
+            [size]="sizeSignal()"
+            [min]="80"
+            [max]="400"
+            [keyboardEndTarget]="200"
+            (sizeChange)="sizeSignal.set($event)"
+        ></div>
+    `
+})
+class KeyboardEndTargetSetHostComponent {
+    readonly sizeSignal = signal(300);
+}
+
+@Component({
+    imports: [SplitterDirective],
+    template: `
+        <div
+            fdkSplitter
+            defaultSize="250"
+            [size]="sizeSignal()"
+            [min]="80"
+            [max]="400"
+            (sizeChange)="sizeSignal.set($event)"
+        ></div>
+    `
+})
+class KeyboardEndTargetUnsetHostComponent {
+    readonly sizeSignal = signal(300);
+}
+
+describe('SplitterDirective keyboardEndTarget', () => {
+    it('End key goes to keyboardEndTarget instead of min when set', () => {
+        TestBed.configureTestingModule({ imports: [KeyboardEndTargetSetHostComponent] });
+        const f = TestBed.createComponent(KeyboardEndTargetSetHostComponent);
+        f.detectChanges();
+        const el = f.nativeElement.querySelector('[fdkSplitter]') as HTMLElement;
+
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+        f.detectChanges();
+        expect(f.componentInstance.sizeSignal()).toBe(200); // keyboardEndTarget, not min(80)
+    });
+
+    it('End key falls back to min when keyboardEndTarget is not bound', () => {
+        TestBed.configureTestingModule({ imports: [KeyboardEndTargetUnsetHostComponent] });
+        const f = TestBed.createComponent(KeyboardEndTargetUnsetHostComponent);
+        f.detectChanges();
+        const el = f.nativeElement.querySelector('[fdkSplitter]') as HTMLElement;
+
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+        f.detectChanges();
+        expect(f.componentInstance.sizeSignal()).toBe(80); // min
+    });
+
+    it('Home key uses keyboardEndTarget in RTL (Home = min-direction in RTL)', () => {
+        TestBed.configureTestingModule({
+            imports: [KeyboardEndTargetSetHostComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: signal(true) } }]
+        });
+        const f = TestBed.createComponent(KeyboardEndTargetSetHostComponent);
+        f.detectChanges();
+        const el = f.nativeElement.querySelector('[fdkSplitter]') as HTMLElement;
+
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+        f.detectChanges();
+        expect(f.componentInstance.sizeSignal()).toBe(200); // keyboardEndTarget, not min(80)
     });
 });

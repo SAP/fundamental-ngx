@@ -13,7 +13,7 @@
     &__line-before {
         flex: 0 0 4rem;
         inline-size: 1rem;
-        background-image: linear-gradient(to top, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+        background-image: linear-gradient(to top, var(--sapGroup_ContentBorderColor), transparent);
         background-size: 0.0625rem 100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -25,7 +25,7 @@
     &__line-after {
         flex: 0 0 4rem;
         inline-size: 1rem;
-        background-image: linear-gradient(to bottom, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+        background-image: linear-gradient(to bottom, var(--sapGroup_ContentBorderColor), transparent);
         background-size: 0.0625rem 100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -93,7 +93,7 @@
             flex: 0 0 4rem;
             inline-size: auto;
             block-size: 1rem;
-            background-image: linear-gradient(to left, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+            background-image: linear-gradient(to left, var(--sapGroup_ContentBorderColor), transparent);
             background-size: 100% 0.0625rem;
             background-position: center;
         }
@@ -102,7 +102,7 @@
             flex: 0 0 4rem;
             inline-size: auto;
             block-size: 1rem;
-            background-image: linear-gradient(to right, var(--sapGroup_ContentBorderColor, #d9d9d9), transparent);
+            background-image: linear-gradient(to right, var(--sapGroup_ContentBorderColor), transparent);
             background-size: 100% 0.0625rem;
             background-position: center;
         }

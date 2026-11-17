@@ -11,7 +11,7 @@ import {
     output
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, merge, Subject, takeUntil } from 'rxjs';
+import { finalize, fromEvent, merge, Subject, takeUntil } from 'rxjs';
 import { RtlService } from '../../services/rtl.service';
 
 /** Orientation of the splitter bar. `vertical` resizes a horizontal (width) dimension. */
@@ -63,6 +63,14 @@ export class SplitterDirective {
      */
     readonly defaultSize = input<number | undefined, unknown>(undefined, { transform: numberAttribute });
 
+    /**
+     * Override the size (px) the End key navigates to. Defaults to `min` when unset.
+     * Use when drag clamping and the keyboard End target should differ — e.g. to let
+     * drag go below the declared minimum for a collapse animation while keeping End
+     * at the user-configured minimum.
+     */
+    readonly keyboardEndTarget = input<number | undefined>(undefined);
+
     /** Logical pointer direction that increases size. `end` = toward the block/inline end. */
     readonly grows = input<FdkSplitterGrows>('end');
 
@@ -101,13 +109,19 @@ export class SplitterDirective {
         const key = event.key;
 
         if (key === 'Home' || key === 'End' || key === 'Enter') {
-            // WAI-ARIA 1.2 separator role: Home = maximum value, End = minimum value.
-            // This is intentionally reversed from the usual "Home = start/min" convention.
+            // WAI-ARIA 1.2 separator role: Home = maximum value, End = minimum value (LTR).
+            // In RTL the inline axis is mirrored, so Home/End targets are swapped.
+            const isRtl = !!this._rtl?.rtl();
+            // keyboardEndTarget overrides the key that navigates toward the minimum extent.
+            // In LTR that is End; in RTL the inline axis is mirrored so it is Home.
+            const minDirectionTarget = this.keyboardEndTarget() ?? this.min();
+            const homeTarget = isRtl ? minDirectionTarget : this.max();
+            const endTarget = isRtl ? this.max() : minDirectionTarget;
             const target =
                 key === 'Home'
-                    ? this.max()
+                    ? homeTarget
                     : key === 'End'
-                      ? this.min()
+                      ? endTarget
                       : (this.defaultSize() ?? (this.min() + this.max()) / 2);
             if (!Number.isFinite(target)) {
                 return;
@@ -141,22 +155,33 @@ export class SplitterDirective {
         event.preventDefault();
         // Cancel any in-progress drag before starting a new one.
         this._dragStop.next();
+        const pointerId = event.pointerId;
+        const el = this._elementRef.nativeElement;
         // Pointer capture routes subsequent pointermove/up/cancel to this element regardless
         // of where the pointer moves, eliminating document-level listeners.
-        this._elementRef.nativeElement.setPointerCapture?.(event.pointerId);
+        el.setPointerCapture?.(pointerId);
         const horizontal = this.orientation() === 'horizontal';
         let last = horizontal ? event.clientY : event.clientX;
         const growthSign = this._pointerGrowthSign();
-        const el = this._elementRef.nativeElement;
 
         this.resizeStart.emit();
 
         merge(
             fromEvent<PointerEvent>(el, 'pointermove'),
             fromEvent<PointerEvent>(el, 'pointerup'),
-            fromEvent<PointerEvent>(el, 'pointercancel')
+            fromEvent<PointerEvent>(el, 'pointercancel'),
+            // lostpointercapture fires when capture is stolen by another element without a
+            // preceding pointerup — without it the subscription stays alive and the splitter
+            // follows the mouse even after the user has released the button.
+            fromEvent<PointerEvent>(el, 'lostpointercapture')
         )
-            .pipe(takeUntil(this._dragStop), takeUntilDestroyed(this._destroyRef))
+            .pipe(
+                takeUntil(this._dragStop),
+                takeUntilDestroyed(this._destroyRef),
+                // Release capture on any teardown path: normal end, capture lost, or a new
+                // drag cancelling this one via _dragStop before pointerup fires.
+                finalize(() => el.releasePointerCapture?.(pointerId))
+            )
             .subscribe((e) => {
                 if (e.type !== 'pointermove') {
                     this._dragStop.next();

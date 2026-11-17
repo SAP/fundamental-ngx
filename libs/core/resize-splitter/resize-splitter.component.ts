@@ -27,7 +27,18 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     hostDirectives: [
         {
             directive: SplitterDirective,
-            inputs: ['orientation', 'size', 'min', 'max', 'step', 'largeStep', 'grows', 'defaultSize', 'disabled'],
+            inputs: [
+                'orientation',
+                'size',
+                'min',
+                'max',
+                'step',
+                'largeStep',
+                'grows',
+                'defaultSize',
+                'disabled',
+                'keyboardEndTarget'
+            ],
             outputs: ['sizeChange', 'resizeStart', 'resizeEnd']
         }
     ],

@@ -355,6 +355,15 @@ describe('SidePanelComponent — single-action', () => {
         const closeButton = fixture.nativeElement.querySelector('.fd-side-panel__content-panel-close');
         expect(document.activeElement).toBe(closeButton);
     });
+
+    it('content panel uses full defaultWidth (20rem) when open — no collapsed bar to share space with', () => {
+        const component = fixture.debugElement.query(By.directive(SidePanelComponent))
+            .componentInstance as SidePanelComponent;
+        const navArrow = getNavArrow(fixture);
+        navArrow.click();
+        fixture.detectChanges();
+        expect(component['contentPanelWidthStyle']()).toBe(component.defaultWidth());
+    });
 });
 
 describe('SidePanelComponent — counter', () => {
@@ -875,6 +884,35 @@ describe('SidePanelComponent — resize state & splitter', () => {
             bar.dispatchEvent(new KeyboardEvent('keydown', { key: 'F10', shiftKey: true, bubbles: true }));
             fixture.detectChanges();
             expect(component['widthMenu']()?.isOpen()).toBe(true);
+        });
+    });
+
+    describe('expanded action bar drag to minimum', () => {
+        beforeEach(() => {
+            (component as any)._hostWidthPx.set(1600);
+            component.open.set(false);
+            component.mode.set('expanded');
+            fixture.detectChanges();
+            component['resizeMinPx'].set(150);
+            component['resizeMaxPx'].set(500);
+        });
+
+        it('stays in expanded mode when dragged to minimum — no auto-collapse', () => {
+            component['contentPanelWidthPx'].set(150);
+            component['onResizeEnd']();
+            expect(component.mode()).toBe('expanded');
+        });
+
+        it('does not collapse when width is above minimum', () => {
+            component['contentPanelWidthPx'].set(200);
+            component['onResizeEnd']();
+            expect(component.mode()).toBe('expanded');
+        });
+
+        it('contentPanelWidthPx is preserved at minimum after drag — user can drag back to expand', () => {
+            component['contentPanelWidthPx'].set(150);
+            component['onResizeEnd']();
+            expect(component['contentPanelWidthPx']()).toBe(150);
         });
     });
 });

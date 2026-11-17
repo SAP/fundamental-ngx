@@ -18,3 +18,10 @@
         padding: 1rem;
     }
 }
+
+.side-panel-example__controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-block-end: 0.5rem;
+}

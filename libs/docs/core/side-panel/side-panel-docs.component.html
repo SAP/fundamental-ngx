@@ -3,7 +3,8 @@
     Use the <code>fd-side-panel</code> component with one <code>fd-side-panel-item</code> per content group. Each item
     contributes one button to the vertical action bar in the default <strong>collapsed</strong> mode, where
     <code>[icon]</code> is the button glyph and <code>[label]</code> is the group name shown as a tooltip on hover and
-    on keyboard focus. Use <code>[side]</code> (<code>'left' | 'right'</code>) to anchor the bar and bind
+    on keyboard focus. Use <code>[side]</code> (<code>'left' | 'right'</code>) to anchor the bar to either side of its
+    container — this is a physical placement choice independent of text direction and can be changed at runtime. Bind
     <code>[(activeItem)]</code> to track the selected group — clicking a button activates its group and clicking it
     again clears the selection. The nav arrow toggles the bar between <code>'collapsed'</code> (icons only) and
     <code>'expanded'</code> (320px wide with labels). Group content is projected through

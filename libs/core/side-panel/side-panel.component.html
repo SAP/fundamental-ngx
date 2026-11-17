@@ -94,9 +94,13 @@
                         }
                     </fd-menu>
                     @if (mode() === 'expanded') {
-                        <span class="fd-side-panel__action-label" aria-hidden="true">{{
-                            overflowMenu.isOpen() ? overflowShowLessLabel() : overflowShowMoreLabel()
-                        }}</span>
+                        <span
+                            class="fd-side-panel__action-label"
+                            aria-hidden="true"
+                            (pointerdown)="onOverflowLabelPointerDown()"
+                            (click)="onOverflowLabelClick()"
+                            >{{ overflowMenu.isOpen() ? overflowShowLessLabel() : overflowShowMoreLabel() }}</span
+                        >
                     }
                 </div>
             }
@@ -154,6 +158,7 @@
         orientation="vertical"
         [size]="contentPanelWidthPx() ?? 0"
         [min]="resizeMinPx()"
+        [keyboardEndTarget]="resizeKeyboardEndPx()"
         [max]="resizeMaxPx()"
         [defaultSize]="resizeDefaultPx()"
         [step]="resizeStep()"
@@ -165,7 +170,7 @@
         [fdMenuTrigger]="widthMenuEl"
         (resizeStart)="onResizeStart()"
         (sizeChange)="contentPanelWidthPx.set($event)"
-        (resizeEnd)="isResizing.set(false)"
+        (resizeEnd)="onResizeEnd()"
         (contextmenu)="openWidthMenu($event)"
         (keydown)="onSplitterKeydown($event)"
         (dblclick)="cycleWidth()"
