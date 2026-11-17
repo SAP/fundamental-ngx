@@ -1,3 +1,13 @@
+## 0.66.1-rc.30 (2026-11-17)
+
+### 🩹 Fixes
+
+- **core:** add additionalBodyClass input to fd-product-menu ([#14682](https://github.com/SAP/fundamental-ngx/pull/14682))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.1-rc.29 (2026-11-16)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
