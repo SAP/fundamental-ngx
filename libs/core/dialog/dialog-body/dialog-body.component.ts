@@ -5,6 +5,7 @@ import {
     Optional,
     ViewEncapsulation,
     booleanAttribute,
+    computed,
     input
 } from '@angular/core';
 import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
@@ -32,7 +33,7 @@ import { DialogRef } from '../utils/dialog-ref.class';
     templateUrl: 'dialog-body.component.html',
     host: {
         '[attr.role]': 'role()',
-        '[attr.aria-label]': 'ariaLabel() || defaultAriaLabel()',
+        '[attr.aria-label]': 'computedAriaLabel()',
         '[class.fd-dialog__body]': 'true',
         '[class.fd-settings__dialog-body]': 'dialogConfig.settings',
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
@@ -69,6 +70,12 @@ export class DialogBodyComponent {
 
     /** @hidden */
     protected readonly defaultAriaLabel = resolveTranslationSignal('coreDialog.bodyAriaLabel');
+
+    /** @hidden */
+    protected readonly computedAriaLabel = computed(() => {
+        const userProvidedLabel = this.elementRef.nativeElement.getAttribute('aria-label');
+        return userProvidedLabel || this.ariaLabel() || this.defaultAriaLabel();
+    });
 
     /** @hidden */
     constructor(

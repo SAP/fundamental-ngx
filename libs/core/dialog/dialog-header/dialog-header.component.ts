@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, inject, input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    ViewEncapsulation,
+    booleanAttribute,
+    computed,
+    inject,
+    input
+} from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { BarComponent, BarElementDirective, BarLeftDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
@@ -25,7 +34,7 @@ import { DialogConfig } from '../utils/dialog-config.class';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.role]': 'role()',
-        '[attr.aria-label]': 'ariaLabel() || defaultAriaLabel()'
+        '[attr.aria-label]': 'computedAriaLabel()'
     },
     providers: [
         {
@@ -57,4 +66,13 @@ export class DialogHeaderComponent extends DialogHeaderBase {
 
     /** @hidden */
     protected readonly defaultAriaLabel = resolveTranslationSignal('coreDialog.headerAriaLabel');
+
+    /** @hidden */
+    protected readonly computedAriaLabel = computed(() => {
+        const userProvidedLabel = this._elementRef.nativeElement.getAttribute('aria-label');
+        return userProvidedLabel || this.ariaLabel() || this.defaultAriaLabel();
+    });
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
 }

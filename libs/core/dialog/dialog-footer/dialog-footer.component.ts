@@ -1,4 +1,13 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewEncapsulation, inject, input } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    ViewEncapsulation,
+    computed,
+    inject,
+    input
+} from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
@@ -28,7 +37,7 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
     encapsulation: ViewEncapsulation.None,
     host: {
         '[attr.role]': 'role()',
-        '[attr.aria-label]': 'ariaLabel() || defaultAriaLabel()'
+        '[attr.aria-label]': 'computedAriaLabel()'
     },
     imports: [BarComponent, BarRightDirective, ContentDensityDirective, NgTemplateOutlet]
 })
@@ -44,6 +53,15 @@ export class DialogFooterComponent extends DialogFooterBase implements AfterView
 
     /** @hidden */
     protected readonly defaultAriaLabel = resolveTranslationSignal('coreDialog.footerAriaLabel');
+
+    /** @hidden */
+    protected readonly computedAriaLabel = computed(() => {
+        const userProvidedLabel = this._elementRef.nativeElement.getAttribute('aria-label');
+        return userProvidedLabel || this.ariaLabel() || this.defaultAriaLabel();
+    });
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
 
     /** @hidden */
     ngAfterViewInit(): void {
