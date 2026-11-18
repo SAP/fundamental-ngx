@@ -1,3 +1,13 @@
+## 0.66.1-rc.33 (2026-11-18)
+
+### 🩹 Fixes
+
+- **core:** show tooltip on fd-input-group addon button ([#14680](https://github.com/SAP/fundamental-ngx/pull/14680))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
 ## 0.66.1-rc.32 (2026-11-17)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
