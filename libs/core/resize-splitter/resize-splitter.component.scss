@@ -47,7 +47,7 @@
 
     &.is-resizing &__line-after {
         flex: 1 1 0;
-        background-image: linear-gradient(to top, var(--sapHighlightColor), var(--sapHighlightColor));
+        background-image: linear-gradient(to bottom, var(--sapHighlightColor), var(--sapHighlightColor));
     }
 
     // ── Grip ─────────────────────────────────────────────────────────────────
@@ -110,11 +110,7 @@
         &.is-resizing .fd-resize-splitter__line-before,
         &.is-resizing .fd-resize-splitter__line-after {
             flex: 1 1 0;
-            background-image: linear-gradient(
-                to top,
-                var(--sapButton_Lite_TextColor, #0064d9),
-                var(--sapButton_Lite_TextColor, #0064d9)
-            );
+            background-image: linear-gradient(to top, var(--sapHighlightColor), var(--sapHighlightColor));
         }
     }
 }

@@ -480,8 +480,8 @@ $fd-side-panel-overlay-z-index: 5;
     }
 
     // ── Content panel ────────────────────────────────────────────────────────
-    // Overlay by default (host < 1440px).
-    // At host ≥ 1440px (the `pushMode` signal → `--push` host class) the panel becomes
+    // Overlay by default (host < 1024px).
+    // At host ≥ 1024px (the `pushMode` signal → `--push` host class) the panel becomes
     // a flex sibling and pushes the main content — see the `&--push` rules below.
     // Width = expanded bar width − collapsed bar width so the total footprint
     // (action bar + content panel) always equals $fd-side-panel-expanded-width.
@@ -502,16 +502,16 @@ $fd-side-panel-overlay-z-index: 5;
         box-sizing: border-box;
         overflow: hidden;
 
-        // Overlay: float over main content below host width 1440px.
+        // Overlay: float over main content below host width 1024px.
         // Anchored relative to the fd-side-panel host (which has position: relative).
-        // Push mode (host ≥ 1440px) reverts to an in-flow flex child via `&--push` below.
+        // Push mode (host ≥ 1024px) reverts to an in-flow flex child via `&--push` below.
         position: absolute;
         inset-block: 0;
         z-index: $fd-side-panel-overlay-z-index;
     }
 
     // Content panel side-positioning.
-    // order: -1 keeps the action-bar at the inline-end (right) in push mode (host ≥ 1440px),
+    // order: -1 keeps the action-bar at the inline-end (right) in push mode (host ≥ 1024px),
     // where both are in flex flow; has no effect in overlay mode (position: absolute).
     // inset-inline-end positions the panel flush with the action bar in overlay mode;
     // reset to auto in push mode (via `&--push` below) — the flex layout already places it
@@ -569,7 +569,7 @@ $fd-side-panel-overlay-z-index: 5;
         inset-inline-start: 0;
     }
 
-    // Push mode (host ≥ 1440px, driven by the `pushMode` signal → `--push` host class):
+    // Push mode (host ≥ 1024px, driven by the `pushMode` signal → `--push` host class):
     // the content panel becomes an in-flow flex sibling that pushes the main content.
     // Below that width it stays `position: absolute` (overlay), floating over the main slot.
     &--push {
