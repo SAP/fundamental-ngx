@@ -11,6 +11,7 @@ import {
 import { BasicSample } from './examples/basic-sample';
 import { IconsSample } from './examples/icons-sample';
 import { InShellBarSample } from './examples/in-shell-bar-sample';
+import { LoadingSample } from './examples/loading-sample';
 
 const basicSampleTs = 'basic-sample.ts';
 const basicSampleHtml = 'basic-sample.html';
@@ -18,6 +19,8 @@ const iconsSampleTs = 'icons-sample.ts';
 const iconsSampleHtml = 'icons-sample.html';
 const inShellBarSampleTs = 'in-shell-bar-sample.ts';
 const inShellBarSampleHtml = 'in-shell-bar-sample.html';
+const loadingSampleTs = 'loading-sample.ts';
+const loadingSampleHtml = 'loading-sample.html';
 
 @Component({
     selector: 'ui5-doc-product-switch',
@@ -31,7 +34,8 @@ const inShellBarSampleHtml = 'in-shell-bar-sample.html';
         SeparatorComponent,
         BasicSample,
         IconsSample,
-        InShellBarSample
+        InShellBarSample,
+        LoadingSample
     ]
 })
 export class ProductSwitchDocs {
@@ -83,6 +87,23 @@ export class ProductSwitchDocs {
             code: getAssetFromModuleAssets(inShellBarSampleHtml),
             originalFileName: 'in-shell-bar-sample',
             component: 'InShellBarSample'
+        }
+    ]);
+
+    loadingExample = signal<ExampleFile[]>([
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(loadingSampleTs),
+            originalFileName: 'loading-sample',
+            component: 'LoadingSample',
+            typescriptFileCode: getAssetFromModuleAssets(loadingSampleTs),
+            scssFileCode: ''
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(loadingSampleHtml),
+            originalFileName: 'loading-sample',
+            component: 'LoadingSample'
         }
     ]);
 }

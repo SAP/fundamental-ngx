@@ -1,0 +1,28 @@
+<ui5-toast [open]="isToastOpen()" (ui5Close)="onToastClose()">{{ toastMessage() }}</ui5-toast>
+
+<ui5-table>
+    <ui5-table-header-row slot="headerRow">
+        @for (column of columns(); track column.id) {
+        <ui5-table-header-cell [id]="column.id" [interactive]="true" (ui5HeaderClick)="onHeaderClick($event, column)">
+            <span>{{ column.label }}</span>
+        </ui5-table-header-cell>
+        }
+    </ui5-table-header-row>
+
+    @for (product of products(); track product.rowKey) {
+    <ui5-table-row [rowKey]="product.rowKey">
+        <ui5-table-cell>
+            <ui5-label>{{ product.name }}</ui5-label>
+        </ui5-table-cell>
+        <ui5-table-cell>
+            <ui5-label>{{ product.supplier }}</ui5-label>
+        </ui5-table-cell>
+        <ui5-table-cell>
+            <ui5-label>{{ product.dimensions }}</ui5-label>
+        </ui5-table-cell>
+        <ui5-table-cell>
+            <ui5-label><b>{{ product.price }}</b> EUR</ui5-label>
+        </ui5-table-cell>
+    </ui5-table-row>
+    }
+</ui5-table>

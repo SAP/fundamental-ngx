@@ -73,6 +73,15 @@ export class EventsSample {
         this.logEvent('Search Field Toggle', `Search field ${expanded ? 'expanded' : 'collapsed'}`);
     }
 
+    onContentItemVisibilityChange(event: UI5WrapperCustomEvent<ShellBar, 'ui5ContentItemVisibilityChange'>): void {
+        const { items, revealedItems } = event.detail;
+        const hiddenCount = items.length - revealedItems.length;
+        this.logEvent(
+            'Content Item Visibility Change',
+            `${revealedItems.length} revealed, ${hiddenCount} hidden (${items.length} total)`
+        );
+    }
+
     clearLog(): void {
         this.eventLog.set([]);
     }

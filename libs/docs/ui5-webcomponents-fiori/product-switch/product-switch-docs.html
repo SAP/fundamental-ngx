@@ -37,3 +37,16 @@
     <ui5-doc-product-switch-in-shell-bar-sample />
 </component-example>
 <code-example [exampleFiles]="inShellBarExample()" />
+
+<separator />
+
+<fd-docs-section-title id="loading" componentName="product-switch"> Loading State </fd-docs-section-title>
+<description>
+    Set the <code>loading</code> input to <code>true</code> to display a busy indicator over the Product Switch content
+    while data is being fetched. Use the optional <code>loadingDelay</code> input (default: 1000ms) to control how long
+    to wait before the indicator appears, preventing flicker on fast loads.
+</description>
+<component-example>
+    <ui5-doc-product-switch-loading-sample />
+</component-example>
+<code-example [exampleFiles]="loadingExample()" />

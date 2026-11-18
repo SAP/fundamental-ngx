@@ -15,7 +15,8 @@
 <fd-docs-section-title id="all-features" componentName="shellbar"> All Features </fd-docs-section-title>
 <description>
     A comprehensive ShellBar demonstrating all available features including notifications, search, content items, and
-    profile.
+    profile. Individual <code>ui5-shellbar-item</code> entries can define a <code>tooltip</code> property, which is
+    shown when the user hovers over the item in the main shell bar area.
 </description>
 <component-example>
     <ui5-doc-shellbar-all-features-sample />
@@ -67,7 +68,9 @@
     The ShellBar fires various events for user interactions including logo clicks, profile clicks, notification clicks,
     product switch clicks, menu item clicks, and search-related events. Use these events to implement navigation,
     display popovers, or trigger other application logic. This example demonstrates tracking all major ShellBar events
-    with a history log.
+    with a history log. Three content-slot buttons (Dashboard, Analytics, Reports) are included — resize the browser to
+    trigger the experimental <code>ui5ContentItemVisibilityChange</code> event, which reports how many items were hidden
+    or revealed along with the <code>revealedItems</code> array added in v2.29.0.
 </description>
 <component-example>
     <ui5-doc-shellbar-events-sample />
