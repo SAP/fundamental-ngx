@@ -3,7 +3,7 @@
 <ui5-table>
     <ui5-table-header-row slot="headerRow">
         @for (column of columns(); track column.id) {
-        <ui5-table-header-cell [id]="column.id" [interactive]="true" (ui5HeaderClick)="onHeaderClick($event, column)">
+        <ui5-table-header-cell [id]="column.id" [interactive]="true" (ui5HeaderClick)="onHeaderClick(column)">
             <span>{{ column.label }}</span>
         </ui5-table-header-cell>
         }

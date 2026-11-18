@@ -52,7 +52,7 @@ export class EventsSample {
     }
 
     onNotificationsClick(): void {
-        this.logEvent('Notifications Click', `${this.notificationsCount()} notifications`);
+        this.logEvent('Notifications Click', `Notifications badge clicked (count: ${this.notificationsCount()})`);
     }
 
     onProductSwitchClick(): void {
@@ -75,10 +75,10 @@ export class EventsSample {
 
     onContentItemVisibilityChange(event: UI5WrapperCustomEvent<ShellBar, 'ui5ContentItemVisibilityChange'>): void {
         const { items, revealedItems } = event.detail;
-        const hiddenCount = items.length - revealedItems.length;
+        // items = currently hidden content items; revealedItems = items that just became visible
         this.logEvent(
             'Content Item Visibility Change',
-            `${revealedItems.length} revealed, ${hiddenCount} hidden (${items.length} total)`
+            `${items.length} hidden, ${revealedItems.length} just revealed`
         );
     }
 

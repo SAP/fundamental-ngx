@@ -22,7 +22,6 @@ interface Product {
 @Component({
     selector: 'ui5-doc-product-switch-loading-sample',
     templateUrl: './loading-sample.html',
-    standalone: true,
     imports: [ProductSwitch, ProductSwitchItem, ButtonComponent]
 })
 export class LoadingSample {

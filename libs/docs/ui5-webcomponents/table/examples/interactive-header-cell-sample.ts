@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { UI5WrapperCustomEvent } from '@fundamental-ngx/ui5-webcomponents-base';
 import { Label } from '@fundamental-ngx/ui5-webcomponents/label';
 import { Table } from '@fundamental-ngx/ui5-webcomponents/table';
 import { TableCell } from '@fundamental-ngx/ui5-webcomponents/table-cell';
@@ -61,9 +60,8 @@ export class InteractiveHeaderCellTableSample {
         }
     ]);
 
-    onHeaderClick(event: UI5WrapperCustomEvent<TableHeaderCell, 'ui5HeaderClick'>, column: TableColumn): void {
-        const target = event.target as HTMLElement;
-        this.toastMessage.set(`Header "${column.label}" clicked (column id: "${target.id}").`);
+    onHeaderClick(column: TableColumn): void {
+        this.toastMessage.set(`Header "${column.label}" clicked (column id: "${column.id}").`);
         this.isToastOpen.set(true);
     }
 
