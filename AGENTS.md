@@ -1,7 +1,7 @@
 <!--
 Document: Angular 22+ Development Guidelines for Fundamental NGX
-Last Updated: October 16, 2026
-Version: 5.2
+Last Updated: November 18, 2026
+Version: 5.3
 Purpose: Comprehensive guide for AI agents and developers working with Angular 22+ in NX monorepo
 Note: Detailed documentation has been split into separate files in docs/agents/
 -->
@@ -29,6 +29,8 @@ You are a dedicated Angular, TypeScript frontend developer who thrives on levera
 You are working in an **NX monorepo** with libraries: `core`, `platform`, `cdk`, `btp`, `cx`, `i18n`, `datetime-adapter`, `ui5-webcomponents`.
 
 **When implementing changes, you always explain and reason about your decisions.**
+
+**CSP authoring and review:** Read the [CSP guide](docs/agents/csp-guidelines.md) before styling authoring or review. Use classes/SCSS for fixed styles and verified bindings/CSSOM for dynamic values; avoid serialized attributes and whole-style writes. Report incompatible changes with file/line, operation/directive, impact, remedy and evidence. Check runtime behavior in strict-CSP browser tests and confirm CI coverage; the application owns stylesheet authorization.
 
 ---
 
@@ -77,47 +79,51 @@ Prefixes depend on the owning library:
 
 ## Quick Decision Guide
 
-| Scenario                                  | Solution                                    |
-| ----------------------------------------- | ------------------------------------------- |
-| Managing local component state            | Use `signal()`                              |
-| Deriving state from signals               | Use `computed()`                            |
-| Signal vs plain property                  | Only `signal()` if reactive consumer exists |
-| Deriving local mutable state from inputs  | Use `linkedSignal()`                        |
-| Reacting to signal changes (side effects) | Use `effect()`                              |
-| DOM manipulation after rendering          | Use `afterRender()` / `afterNextRender()`   |
-| Async data fetching with signals          | Use `resource()`                            |
-| Component input                           | Use `input()` signal                        |
-| Component output                          | Use `output()` function                     |
-| Two-way binding                           | Use `model()` signal                        |
-| Host bindings and event listeners         | Use `host: {}` in decorator                 |
-| Async operations (HTTP, timers)           | Use RxJS Observables                        |
-| BehaviorSubject for state                 | Migrate to `signal()`                       |
-| Querying view children/DOM elements       | Use `viewChild()` / `viewChildren()`        |
-| Querying projected content                | Use `contentChild()` / `contentChildren()`  |
-| Parent setting child defaults             | Use InjectionToken pattern                  |
-| Setting signal input programmatically     | Use setter method pattern                   |
+| Scenario                                  | Solution                                                                                                        |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Managing local component state            | Use `signal()`                                                                                                  |
+| Deriving state from signals               | Use `computed()`                                                                                                |
+| Signal vs plain property                  | Only `signal()` if reactive consumer exists                                                                     |
+| Deriving local mutable state from inputs  | Use `linkedSignal()`                                                                                            |
+| Reacting to signal changes (side effects) | Use `effect()`                                                                                                  |
+| DOM manipulation after rendering          | Use `afterRender()` / `afterNextRender()`                                                                       |
+| Async data fetching with signals          | Use `resource()`                                                                                                |
+| Component input                           | Use `input()` signal                                                                                            |
+| Component output                          | Use `output()` function                                                                                         |
+| Two-way binding                           | Use `model()` signal                                                                                            |
+| Host bindings and event listeners         | Use `host: {}` in decorator                                                                                     |
+| Async operations (HTTP, timers)           | Use RxJS Observables                                                                                            |
+| BehaviorSubject for state                 | Migrate to `signal()`                                                                                           |
+| Querying view children/DOM elements       | Use `viewChild()` / `viewChildren()`                                                                            |
+| Querying projected content                | Use `contentChild()` / `contentChildren()`                                                                      |
+| Parent setting child defaults             | Use InjectionToken pattern                                                                                      |
+| Setting signal input programmatically     | Use setter method pattern                                                                                       |
+| Authoring or reviewing styling            | Fixed styles in classes/SCSS; dynamic property writes; follow the [CSP contract](docs/agents/csp-guidelines.md) |
 
 ---
 
 ## Common Mistakes to Avoid
 
-| ❌ Don't Do This                      | ✅ Do This Instead                        | Why                                 |
-| ------------------------------------- | ----------------------------------------- | ----------------------------------- |
-| `@HostBinding()` / `@HostListener()`  | Use `host: {}` in decorator               | Better tree-shaking, AOT            |
-| `@Input()` / `@Output()` decorators   | Use `input()` / `output()`                | Signal-based, auto change detection |
-| `standalone: true` in decorator       | Omit it (default in Angular 22+)          | Cleaner code                        |
-| `ngClass` / `ngStyle`                 | Use `class` / `style` bindings            | Direct binding is simpler           |
-| `*ngIf` / `*ngFor` / `*ngSwitch`      | Use `@if` / `@for` / `@switch`            | New control flow syntax             |
-| `BehaviorSubject` for local state     | Use `signal()`                            | Simpler, automatic cleanup          |
-| `signal()` for internal bookkeeping   | Use plain property                        | No reactive consumer                |
-| `signal.set(); markForCheck();`       | Just `signal.set();`                      | Signals auto-notify                 |
-| Custom `DestroyedService`             | Use `DestroyRef` + `takeUntilDestroyed()` | Built-in Angular                    |
-| `CssClassBuilder` + `@applyCssClass`  | Use `computed()` + `host: { '[class]': }` | Signal-based                        |
-| Mutate object then `signal.set(same)` | `signal.update(o => ({...o, k: v}))`      | Reference equality = silent no-op   |
-| `effect(() => sig.set(derived))`      | Use `computed()` or `linkedSignal`        | Effects are for side effects only   |
-| Conditional signal read in `effect`   | Read tracked signals before `if`          | Unread signal = untracked dep       |
-| Protected after private members       | Protected before private                  | ESLint member ordering              |
-| `allowSignalWrites: true` in effect   | Remove the option                         | Deprecated in Angular 22+           |
+| ❌ Don't Do This                                                                      | ✅ Do This Instead                                                        | Why                                                         |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `@HostBinding()` / `@HostListener()`                                                  | Use `host: {}` in decorator                                               | Better tree-shaking, AOT                                    |
+| `@Input()` / `@Output()` decorators                                                   | Use `input()` / `output()`                                                | Signal-based, auto change detection                         |
+| `standalone: true` in decorator                                                       | Omit it (default in Angular 22+)                                          | Cleaner code                                                |
+| `ngClass` / `ngStyle`                                                                 | Use classes for fixed styles; named style bindings for dynamic values     | Repository convention; not a blanket CSP ban on bindings    |
+| Literal template/host `style`, `[attr.style]`, style interpolation                    | Use owning stylesheet/classes or dynamic named properties                 | Serialized attributes conflict with `style-src-attr 'none'` |
+| DOM/Renderer `setAttribute` on `style`                                                | Use individual CSSOM properties / `Renderer2.setStyle` for dynamic values | Avoid serialized attribute writes                           |
+| `cssText` writes, whole `element.style` assignment, Renderer `setProperty` on `style` | Use named property writes; keep unrelated styles                          | Whole-style text replacement is not per-property styling    |
+| `*ngIf` / `*ngFor` / `*ngSwitch`                                                      | Use `@if` / `@for` / `@switch`                                            | New control flow syntax                                     |
+| `BehaviorSubject` for local state                                                     | Use `signal()`                                                            | Simpler, automatic cleanup                                  |
+| `signal()` for internal bookkeeping                                                   | Use plain property                                                        | No reactive consumer                                        |
+| `signal.set(); markForCheck();`                                                       | Just `signal.set();`                                                      | Signals auto-notify                                         |
+| Custom `DestroyedService`                                                             | Use `DestroyRef` + `takeUntilDestroyed()`                                 | Built-in Angular                                            |
+| `CssClassBuilder` + `@applyCssClass`                                                  | Use `computed()` + `host: { '[class]': }`                                 | Signal-based                                                |
+| Mutate object then `signal.set(same)`                                                 | `signal.update(o => ({...o, k: v}))`                                      | Reference equality = silent no-op                           |
+| `effect(() => sig.set(derived))`                                                      | Use `computed()` or `linkedSignal`                                        | Effects are for side effects only                           |
+| Conditional signal read in `effect`                                                   | Read tracked signals before `if`                                          | Unread signal = untracked dep                               |
+| Protected after private members                                                       | Protected before private                                                  | ESLint member ordering                                      |
+| `allowSignalWrites: true` in effect                                                   | Remove the option                                                         | Deprecated in Angular 22+                                   |
 
 ---
 
@@ -282,18 +288,25 @@ BREAKING CHANGE: DestroyedService removed. Use DestroyRef + takeUntilDestroyed()
 
 For comprehensive patterns and examples, see the detailed documentation:
 
-| Topic                      | File                                                                   |
-| -------------------------- | ---------------------------------------------------------------------- |
-| **Angular Patterns**       | [docs/agents/angular-patterns.md](docs/agents/angular-patterns.md)     |
-| **Dependency Injection**   | [docs/agents/di-patterns.md](docs/agents/di-patterns.md)               |
-| **State Management**       | [docs/agents/state-management.md](docs/agents/state-management.md)     |
-| **Testing Guidelines**     | [docs/agents/testing-guidelines.md](docs/agents/testing-guidelines.md) |
-| **Internationalization**   | [docs/agents/i18n-patterns.md](docs/agents/i18n-patterns.md)           |
-| **NX Workflow**            | [docs/agents/nx-workflow.md](docs/agents/nx-workflow.md)               |
-| **Breaking Changes**       | [docs/agents/breaking-changes.md](docs/agents/breaking-changes.md)     |
-| **Fundamental Styles CSS** | [docs/agents/fundamental-styles.md](docs/agents/fundamental-styles.md) |
+| Topic                        | File                                                                   |
+| ---------------------------- | ---------------------------------------------------------------------- |
+| **Angular Patterns**         | [docs/agents/angular-patterns.md](docs/agents/angular-patterns.md)     |
+| **Dependency Injection**     | [docs/agents/di-patterns.md](docs/agents/di-patterns.md)               |
+| **State Management**         | [docs/agents/state-management.md](docs/agents/state-management.md)     |
+| **Testing Guidelines**       | [docs/agents/testing-guidelines.md](docs/agents/testing-guidelines.md) |
+| **Internationalization**     | [docs/agents/i18n-patterns.md](docs/agents/i18n-patterns.md)           |
+| **NX Workflow**              | [docs/agents/nx-workflow.md](docs/agents/nx-workflow.md)               |
+| **Breaking Changes**         | [docs/agents/breaking-changes.md](docs/agents/breaking-changes.md)     |
+| **Fundamental Styles CSS**   | [docs/agents/fundamental-styles.md](docs/agents/fundamental-styles.md) |
+| **CSP Authoring and Review** | [docs/agents/csp-guidelines.md](docs/agents/csp-guidelines.md)         |
 
 ### Detailed Documentation Contents
+
+**[csp-guidelines.md](docs/agents/csp-guidelines.md)**
+
+- Forbidden attribute/text writes and valid dynamic styling
+- Stylesheet nonce/origin integration, SSR and critical CSS
+- Review finding format, examples and browser checks
 
 **[angular-patterns.md](docs/agents/angular-patterns.md)**
 

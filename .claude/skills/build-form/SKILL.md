@@ -11,6 +11,8 @@ allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(ng build*), Write, Edit
 
 If `$ARGUMENTS` is empty, ask the user: (1) what the form is for, (2) which fields it needs, (3) whether validation is required.
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Determine Scope
 
 Parse from `$ARGUMENTS` or ask:
@@ -84,6 +86,7 @@ import {
 @Component({
     selector: 'app-[kebab-name]-form',
     templateUrl: './[kebab-name]-form.component.html',
+    styleUrl: './[kebab-name]-form.component.scss',
     imports: [
         ReactiveFormsModule,
         FormGroupComponent,
@@ -155,7 +158,7 @@ Use `columnLayout="XL2-L2-M2-S1"` for a 2-column layout (not `[layout]`).
     </fdp-form-group>
 
     <!-- Buttons go here, outside fdp-form-group but inside <form> -->
-    <div style="display: flex; gap: 0.5rem; margin-top: 1rem">
+    <div class="form-actions">
         <button fd-button fdType="emphasized" type="submit">Submit</button>
         <button fd-button fdType="transparent" type="button" (click)="form.reset()">Reset</button>
     </div>
@@ -181,7 +184,17 @@ readonly roleOptions: OptionItem[] = [
 
 ### SCSS (`.component.scss`)
 
-Leave empty — form spacing and layout are handled by `fundamental-styles`. Only add custom rules if product requirements demand it.
+Keep the platform field layout provided by `fundamental-styles`. Define the fixed layout of the component-owned action wrapper here and load it through the `styleUrl` above:
+
+```scss
+.form-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+```
+
+Use this owned class for the fixed layout; the CSP rules above cover stylesheet authorization.
 
 ## Critical Rules
 
@@ -197,7 +210,7 @@ Leave empty — form spacing and layout are handled by `fundamental-styles`. Onl
 - **`name` attribute on every control** — must be unique within the form; matches the `FormControlName`
 - **`[column]` (singular) not `[columns]`** — `fdp-form-field` uses `[column]` to set which column it occupies in the grid; `[columns]` is the span count
 - Do NOT add `standalone: true` — default since Angular 19
-- Do NOT use `ngClass` or `ngStyle` — use direct class/style bindings
+- Do NOT use `ngClass` or `ngStyle` — use classes/SCSS for fixed styles and named bindings for dynamic values. This is a repository convention, not a CSP restriction.
 
 ## Phase 5: Validate
 

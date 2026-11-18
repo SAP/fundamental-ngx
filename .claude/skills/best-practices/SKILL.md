@@ -13,6 +13,8 @@ If `$ARGUMENTS` is empty, ask the user for a component path or folder before pro
 
 Audit the code at `$ARGUMENTS` against the project's conventions. Unlike `/review-pr` which checks diffs, this audits existing code as-is.
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Checklist
 
 ### 1. Angular 22+ Patterns
