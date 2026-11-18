@@ -13,4 +13,12 @@ import { SidePanelModule, SidePanelSide } from '@fundamental-ngx/core/side-panel
 export class SidePanelBasicExampleComponent {
     activeItem = signal<string | null>(null);
     side = signal<SidePanelSide>('right');
+
+    set sideValue(v: SidePanelSide) {
+        this.side.set(v);
+    }
+
+    get sideValue(): SidePanelSide {
+        return this.side();
+    }
 }

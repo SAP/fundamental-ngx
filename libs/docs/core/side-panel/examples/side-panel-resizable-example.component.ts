@@ -15,4 +15,12 @@ export class SidePanelResizableExampleComponent {
     activeItem = signal<string | null>(null);
     open = signal(false);
     side = signal<SidePanelSide>('right');
+
+    set sideValue(v: SidePanelSide) {
+        this.side.set(v);
+    }
+
+    get sideValue(): SidePanelSide {
+        return this.side();
+    }
 }

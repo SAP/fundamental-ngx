@@ -1,11 +1,7 @@
 <div class="side-panel-example__controls">
     <span>Panel side</span>
-    <fd-radio-button name="side-panel-side" value="right" [ngModel]="side()" (ngModelChange)="side.set($event)">
-        Right
-    </fd-radio-button>
-    <fd-radio-button name="side-panel-side" value="left" [ngModel]="side()" (ngModelChange)="side.set($event)">
-        Left
-    </fd-radio-button>
+    <fd-radio-button name="basic-side-panel-side" value="right" [(ngModel)]="sideValue"> Right </fd-radio-button>
+    <fd-radio-button name="basic-side-panel-side" value="left" [(ngModel)]="sideValue"> Left </fd-radio-button>
 </div>
 <div class="side-panel-example">
     <fd-side-panel
