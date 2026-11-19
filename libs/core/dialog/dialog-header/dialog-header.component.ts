@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, booleanAttribute, inject, input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    ViewEncapsulation,
+    booleanAttribute,
+    computed,
+    inject,
+    input
+} from '@angular/core';
 
 import { NgTemplateOutlet } from '@angular/common';
 import { BarComponent, BarElementDirective, BarLeftDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DEFAULT_TITLE_SIZE } from '@fundamental-ngx/core/title';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { DialogHeaderBase } from '../base/dialog-header-base.class';
 import { DialogConfig } from '../utils/dialog-config.class';
 
@@ -22,6 +32,10 @@ import { DialogConfig } from '../utils/dialog-config.class';
     templateUrl: './dialog-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    host: {
+        '[attr.role]': 'role()',
+        '[attr.aria-label]': 'computedAriaLabel()'
+    },
     providers: [
         {
             provide: DEFAULT_TITLE_SIZE,
@@ -40,6 +54,25 @@ import { DialogConfig } from '../utils/dialog-config.class';
 export class DialogHeaderComponent extends DialogHeaderBase {
     /** @hidden */
     dialogConfig = inject(DialogConfig, { optional: true }) || {};
+
     /** @hidden */
-    inShellbar = input(false, { transform: booleanAttribute });
+    readonly inShellbar = input(false, { transform: booleanAttribute });
+
+    /** Role of the dialog header element Default is 'region' */
+    readonly role = input('region');
+
+    /** Aria label of the dialog header element */
+    readonly ariaLabel = input<string>();
+
+    /** @hidden */
+    protected readonly defaultAriaLabel = resolveTranslationSignal('coreDialog.headerAriaLabel');
+
+    /** @hidden */
+    protected readonly computedAriaLabel = computed(() => {
+        const userProvidedLabel = this._elementRef.nativeElement.getAttribute('aria-label');
+        return userProvidedLabel || this.ariaLabel() || this.defaultAriaLabel();
+    });
+
+    /** @hidden */
+    private readonly _elementRef = inject(ElementRef);
 }
