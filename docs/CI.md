@@ -127,11 +127,11 @@ During this job, the following tasks are run:
 
 ### Run affected E2E commands
 
-During this job, the following tasks are run:
+E2E tests run in their own [`e2e-test.yml`](../.github/workflows/e2e-test.yml) workflow, triggered on pull requests that touch library sources, the e2e harness (`apps/e2e-harness/`), or `playwright.config.ts`.
 
-- Firebase preview - Deploys PR version of the documentation to the firebase, so that it can be previewed.
-- E2E tests on firebase - If firebase preview deployment was successful, and we have a URL, which we could test
-  in headless chrome, then we run the e2e tests on the firebase preview deployment. This gives us ability to use multiple
-  agents to run our tests in truly parallel way, and to have a clean environment for each test run.
-- E2E tests on local - If firebase preview deployment was not successful, then we run the e2e tests on the local
-  headless chrome. This task is not preferred since it is not run in parallel.
+During this workflow, the following tasks are run:
+
+- Detect scope - Determines which libraries changed and selects the matching set of Playwright shards to run. If the e2e
+  infrastructure itself changed, all shards run.
+- Playwright E2E tests - Runs the [Playwright](https://playwright.dev/) test shards in parallel against the affected
+  libraries. See [e2e-testing.md](./e2e-testing.md) for details on the harness and how to run the suite locally.
