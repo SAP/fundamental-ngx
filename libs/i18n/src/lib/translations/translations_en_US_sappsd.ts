@@ -96,9 +96,9 @@ export default {
         displayTypeTimeLabel: '[[[Ţįɱē]]]'
     },
     coreDialog: {
-        bodyAriaLabel: 'Content',
-        footerAriaLabel: 'Footer',
-        headerAriaLabel: 'Header',
+        bodyAriaLabel: '[[[Ĉŏŋţēŋţ∙∙∙∙∙∙∙]]]',
+        footerAriaLabel: '[[[Ƒŏŏţēŗ∙∙∙∙∙∙∙∙]]]',
+        headerAriaLabel: '[[[Ĥēąƌēŗ∙∙∙∙∙∙∙∙]]]',
         resizable: '[[[Řēşįžąƃĺē∙∙∙∙∙]]]'
     },
     coreDynamicPage: {
