@@ -1,3 +1,13 @@
+## 0.66.1-rc.36 (2026-11-19)
+
+### 🚀 Features
+
+- **core:** add Tooltip directive with comprehensive accessibility support ([#14640](https://github.com/SAP/fundamental-ngx/pull/14640))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.1-rc.35 (2026-11-19)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
