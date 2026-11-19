@@ -14,7 +14,9 @@ import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example
 import { ShellbarBrandingContextAreaExampleComponent } from './examples/shellbar-branding-context-area-example/shellbar-branding-context-area-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
 import { ShellbarComplexSearchResultsExampleComponent } from './examples/shellbar-complex-search-results-example.component';
+import { ShellbarContextAreaEventsExampleComponent } from './examples/shellbar-context-area-events-example/shellbar-context-area-events-example.component';
 import { ShellbarContextAreaOverflowExampleComponent } from './examples/shellbar-context-area-overflow-example/shellbar-context-area-overflow-example.component';
+import { ShellbarDualContextAreaExampleComponent } from './examples/shellbar-dual-context-area-example/shellbar-dual-context-area-example.component';
 import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
 
@@ -37,6 +39,8 @@ const shellbarCollapsibleTSSrc = 'shellbar-collapsible-example.component.ts';
         ShellbarResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent,
         ShellbarBrandingContextAreaExampleComponent,
+        ShellbarDualContextAreaExampleComponent,
+        ShellbarContextAreaEventsExampleComponent,
         ShellbarContextAreaOverflowExampleComponent,
         ShellbarComplexSearchResultsExampleComponent
     ]
@@ -112,6 +116,26 @@ export class ShellbarDocsComponent {
         }),
         getExampleFile('shellbar-context-area-overflow-example/shellbar-context-area-overflow-example.component.html', {
             name: 'shellbar-context-area-overflow-example.html'
+        })
+    ];
+
+    shellbarDualContextAreaExample: ExampleFile[] = [
+        getExampleFile('shellbar-dual-context-area-example/shellbar-dual-context-area-example.component.ts', {
+            selector: 'shellbar-dual-context-area-example',
+            component: 'ShellbarDualContextAreaExampleComponent'
+        }),
+        getExampleFile('shellbar-dual-context-area-example/shellbar-dual-context-area-example.component.html', {
+            name: 'shellbar-dual-context-area-example.html'
+        })
+    ];
+
+    shellbarContextAreaEventsExample: ExampleFile[] = [
+        getExampleFile('shellbar-context-area-events-example/shellbar-context-area-events-example.component.ts', {
+            selector: 'shellbar-context-area-events-example',
+            component: 'ShellbarContextAreaEventsExampleComponent'
+        }),
+        getExampleFile('shellbar-context-area-events-example/shellbar-context-area-events-example.component.html', {
+            name: 'shellbar-context-area-events-example.html'
         })
     ];
 

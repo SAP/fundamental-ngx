@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: '[[[Ţįɱē]]]'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: '[[[Řēşįžąƃĺē∙∙∙∙∙]]]'
     },
     coreDynamicPage: {
@@ -240,9 +243,11 @@ export default {
         assistiveTools: '[[[Āşşįşţįʋē Ţŏŏĺş∙∙∙∙]]]',
         backButtonLabel: '[[[Ɓąċķ]]]',
         cancel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
-        collapsedItemMenuLabel: '[[[Ĉŏĺĺąρşēƌ Ĭţēɱ Μēŋű∙∙∙∙∙]]]',
-        navigationButtonLabel: '[[[Ńąʋįğąţįŏŋ∙∙∙∙]]]',
-        search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]'
+        collapsedItemMenuLabel: '[[[Āƌƌįţįŏŋąĺ Ŏρţįŏŋş∙∙∙∙∙∙]]]',
+        navigationButtonLabel: '[[[Μąįŋ Ńąʋįğąţįŏŋ∙∙∙∙]]]',
+        openSearch: '[[[Ŏρēŋ Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
+        search: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
+        shellbarLabel: '[[[Ŝĥēĺĺƃąŗ∙∙∙∙∙∙]]]'
     },
     coreSlider: {
         ariaLabel: '[[[Ŝĺįƌēŗ Ĥąŋƌĺē∙∙∙∙∙∙]]]'
@@ -330,6 +335,7 @@ export default {
         menuOkText: '[[[Ŏķ∙∙]]]'
     },
     coreUserMenu: {
+        ariaLabel: '[[[Ůşēŗ Μēŋű∙∙∙∙∙]]]',
         closeButton: '[[[Ĉĺŏşē∙∙∙∙∙∙∙∙∙]]]',
         previousButton: '[[[Ƥŗēʋįŏűş∙∙∙∙∙∙]]]'
     },
@@ -473,7 +479,7 @@ export default {
         deleteButtonAriaLabel: '[[[Řēɱŏʋē∙∙∙∙∙∙∙∙]]]',
         deleteButtonTitle: '[[[Řēɱŏʋē Ŝűğğēşţįŏŋ∙∙∙∙∙∙∙]]]',
         groupHeader: '[[[Ģŗŏűρ Ĥēąƌēŗ∙∙∙∙∙∙∙]]]',
-        searchInputLabel: '[[[Ŝēąŗċĥ∙∙∙∙∙∙∙∙]]]',
+        searchInputLabel: '[[[Ŝēąŗċĥ Ƒįēĺƌ∙∙∙∙∙∙∙]]]',
         searchSuggestionMessage: '[[[{count} şűğğēşţįŏŋş ƒŏűŋƌ.]]]',
         searchSuggestionNavigateMessage: '[[[űşē űρ ąŋƌ ƌŏŵŋ ąŗŗŏŵş ţŏ ŋąʋįğąţē∙∙∙∙∙∙∙∙∙∙∙]]]',
         selectScopeLabel: '[[[Ŝēĺēċţ şċŏρē∙∙∙∙∙∙∙]]]',

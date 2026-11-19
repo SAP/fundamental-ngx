@@ -6,11 +6,9 @@ import {
     DialogBodyComponent,
     DialogComponent,
     DialogFooterComponent,
-    DialogFullScreenTogglerButtonComponent,
     DialogHeaderComponent,
     DialogService,
-    DialogTemplateDirective,
-    DialogTitleDirective
+    DialogTemplateDirective
 } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -29,9 +27,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         DialogComponent,
         ButtonBarComponent,
         DialogBodyComponent,
-        DialogHeaderComponent,
-        DialogTitleDirective,
-        DialogFullScreenTogglerButtonComponent
+        DialogHeaderComponent
     ]
 })
 export class TemplateBasedDialogExampleComponent {

@@ -11,7 +11,9 @@ export const test = base.extend<{ strictStyles: void }>({
             const consoleErrors: string[] = [];
             const pageErrors: string[] = [];
             page.on('console', (message) => {
-                if (message.type() === 'error') {consoleErrors.push(message.text());}
+                if (message.type() === 'error') {
+                    consoleErrors.push(message.text());
+                }
             });
             page.on('pageerror', (error) => pageErrors.push(error.message));
             await page.addInitScript(() => {
@@ -31,7 +33,9 @@ export const test = base.extend<{ strictStyles: void }>({
                 const selector = 'fd-dialog-container, fd-message-box-container, fd-message-toast, e2e-csp-base-toast';
                 const observed = new WeakSet<Element>();
                 const capture = (element: Element, phase: string): void => {
-                    if (!element.matches(selector)) {return;}
+                    if (!element.matches(selector)) {
+                        return;
+                    }
                     const style = getComputedStyle(element);
                     state.initial.push({
                         tag: element.localName,

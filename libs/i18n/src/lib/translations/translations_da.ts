@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Klokkeslæt'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Størrelse kan tilpasses'
     },
     coreDynamicPage: {
@@ -241,7 +244,9 @@ export default {
         cancel: 'Annuller',
         collapsedItemMenuLabel: 'Minimeret elementmenu',
         navigationButtonLabel: 'Navigation',
-        search: 'Søg'
+        openSearch: 'Open Search',
+        search: 'Søg',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Greb for skyder'
@@ -329,6 +334,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Luk',
         previousButton: 'Forrige'
     },

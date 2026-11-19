@@ -14,10 +14,15 @@
                 (ui5MenuItemClick)="onMenuItemClick($event)"
                 (ui5SearchButtonClick)="onSearchButtonClick()"
                 (ui5SearchFieldToggle)="onSearchFieldToggle($event)"
+                (ui5ContentItemVisibilityChange)="onContentItemVisibilityChange($event)"
             >
                 <img slot="logo" src="https://ui5.github.io/webcomponents/images/sap-logo-svg.svg" alt="SAP Logo" />
 
                 <ui5-button slot="startButton" icon="menu2"></ui5-button>
+
+                <ui5-button slot="content" data-hide-order="3" design="Transparent">Reports</ui5-button>
+                <ui5-button slot="content" data-hide-order="2" design="Transparent">Analytics</ui5-button>
+                <ui5-button slot="content" data-hide-order="1" design="Transparent">Dashboard</ui5-button>
 
                 <ui5-li slot="menuItems" icon="home">Home</ui5-li>
                 <ui5-li slot="menuItems" icon="activities">Activities</ui5-li>

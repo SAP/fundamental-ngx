@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Час'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'С възможност за промяна на размера'
     },
     coreDynamicPage: {
@@ -242,7 +245,9 @@ export default {
         cancel: 'Отказ',
         collapsedItemMenuLabel: 'Свито меню на позиции',
         navigationButtonLabel: 'Навигация',
-        search: 'Търсене'
+        openSearch: 'Open Search',
+        search: 'Търсене',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Регулатор на плъзгач'
@@ -330,6 +335,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Затваряне',
         previousButton: 'Назад'
     },

@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'เวลา'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'สามารถปรับขนาดได้'
     },
     coreDynamicPage: {
@@ -241,7 +244,9 @@ export default {
         cancel: 'ยกเลิก',
         collapsedItemMenuLabel: 'เมนูไอเท็มแบบยุบรวม',
         navigationButtonLabel: 'การเนวิเกต',
-        search: 'ค้นหา'
+        openSearch: 'Open Search',
+        search: 'ค้นหา',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'ตัวจัดการแถบเลื่อน'
@@ -329,6 +334,7 @@ export default {
         menuOkText: 'ตกลง'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'ปิด',
         previousButton: 'ก่อนหน้า'
     },

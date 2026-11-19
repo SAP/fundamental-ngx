@@ -2,7 +2,7 @@
     <fd-dialog-header>
         <ng-template fdkTemplate="header">
             <div fd-bar-left>
-                @if (activeTab() !== 'filter') {
+                @if (showSubheader() || activeTab() !== 'filter') {
                     <fd-bar-element>
                         <span role="heading" [attr.aria-level]="headingLevel" fd-title [headerSize]="4">{{
                             ('platformTable.settingsDialogHeader' | fdTranslate)()

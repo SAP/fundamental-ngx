@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { BarModule, BarRightDirective } from '@fundamental-ngx/core/bar';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illustrated-message';
@@ -37,14 +36,12 @@ import { Observable, of } from 'rxjs';
         ShellbarTitleComponent,
         ShellbarActionsComponent,
         ShellbarBrandingComponent,
-        AvatarComponent,
         PopoverModule,
         ListModule,
         PanelModule,
         MenuModule,
         ButtonComponent,
         BarModule,
-        BarRightDirective,
         MessageToastModule,
         SearchFieldComponent,
         ShellbarActionComponent,

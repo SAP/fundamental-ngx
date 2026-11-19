@@ -187,6 +187,8 @@ export class MessagesListComponent implements AfterViewInit {
         let headingText = '';
         if (entry.heading.type === 'string' && entry.heading.message) {
             headingText = typeof entry.heading.message === 'string' ? entry.heading.message : '';
+        } else if (entry.heading.type === 'directive' && typeof entry.heading.error === 'string') {
+            headingText = entry.heading.error;
         }
         const additionalInfoText = this._additionalInfoText();
         return headingText ? `${headingText}. ${additionalInfoText}` : '';

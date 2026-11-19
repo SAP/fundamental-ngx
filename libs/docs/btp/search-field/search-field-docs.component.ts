@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { TableModule } from '@fundamental-ngx/core/table';
 import {
     CodeExampleComponent,
@@ -17,7 +16,6 @@ import { SearchFieldBasicExampleComponent } from './examples/basic-example/searc
     imports: [
         DocsSectionTitleComponent,
         DescriptionComponent,
-        FocusableGridDirective,
         TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,

@@ -5,6 +5,7 @@ import {
     Optional,
     ViewEncapsulation,
     booleanAttribute,
+    computed,
     input
 } from '@angular/core';
 import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
@@ -14,6 +15,7 @@ import { AsyncPipe } from '@angular/common';
 import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
 
@@ -30,6 +32,8 @@ import { DialogRef } from '../utils/dialog-ref.class';
     selector: 'fd-dialog-body',
     templateUrl: 'dialog-body.component.html',
     host: {
+        '[attr.role]': 'role()',
+        '[attr.aria-label]': 'computedAriaLabel()',
         '[class.fd-dialog__body]': 'true',
         '[class.fd-settings__dialog-body]': 'dialogConfig.settings',
         '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
@@ -56,7 +60,22 @@ export class DialogBodyComponent {
      * property to remove the horizontal and vertical paddings from the body
      * default is set to false
      */
-    disablePaddings = input(false, { transform: booleanAttribute });
+    readonly disablePaddings = input(false, { transform: booleanAttribute });
+
+    /** Role of the dialog body element Default is 'region' */
+    readonly role = input('region');
+
+    /** Aria label of the dialog body element */
+    readonly ariaLabel = input<string>();
+
+    /** @hidden */
+    protected readonly defaultAriaLabel = resolveTranslationSignal('coreDialog.bodyAriaLabel');
+
+    /** @hidden */
+    protected readonly computedAriaLabel = computed(() => {
+        const userProvidedLabel = this.elementRef.nativeElement.getAttribute('aria-label');
+        return userProvidedLabel || this.ariaLabel() || this.defaultAriaLabel();
+    });
 
     /** @hidden */
     constructor(

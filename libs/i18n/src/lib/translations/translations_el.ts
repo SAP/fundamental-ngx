@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Ώρα'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Με δυνατότητα αλλαγής μεγέθους'
     },
     coreDynamicPage: {
@@ -241,7 +244,9 @@ export default {
         cancel: 'Ακύρωση',
         collapsedItemMenuLabel: 'Συνεπτυγμένο Μενού Στοιχείων',
         navigationButtonLabel: 'Πλοήγηση',
-        search: 'Αναζήτηση'
+        openSearch: 'Open Search',
+        search: 'Αναζήτηση',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Slider Handle'
@@ -329,6 +334,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Κλείσιμο',
         previousButton: 'Προηγούμενο'
     },

@@ -1,0 +1,16 @@
+<div class="fd-tooltip-template-example">
+    <button fd-button glyph="message-warning" aria-label="Warnings" [fdTooltip]="warningsTooltip"></button>
+    <button fd-button label="Delivery" [fdTooltip]="deliveryTooltip" fdTooltipPlacement="right"></button>
+</div>
+
+<ng-template #warningsTooltip>
+    <span class="fd-tooltip-template-example__content">
+        <fd-icon glyph="message-warning" class="fd-tooltip-template-example__icon"></fd-icon>
+        <span><b>3 warnings</b> - Review them before saving</span>
+    </span>
+</ng-template>
+
+<ng-template #deliveryTooltip>
+    <b>Delivery status</b><br />
+    Shipped on 12 November, arrives in 2 days
+</ng-template>

@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Час'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'З можливістю зміни розміру'
     },
     coreDynamicPage: {
@@ -241,7 +244,9 @@ export default {
         cancel: 'Скасувати',
         collapsedItemMenuLabel: 'Згорнуте меню елементів',
         navigationButtonLabel: 'Навігація',
-        search: 'Пошук'
+        openSearch: 'Open Search',
+        search: 'Пошук',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Повзунок'
@@ -329,6 +334,7 @@ export default {
         menuOkText: 'ОК'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Закрити',
         previousButton: 'Назад'
     },

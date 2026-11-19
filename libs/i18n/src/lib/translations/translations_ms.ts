@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Masa'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Boleh diubah saiz semula'
     },
     coreDynamicPage: {
@@ -241,7 +244,9 @@ export default {
         cancel: 'Batalkan',
         collapsedItemMenuLabel: 'Menu Item yang Diruntuhkan',
         navigationButtonLabel: 'Navigasi',
-        search: 'Cari'
+        openSearch: 'Open Search',
+        search: 'Cari',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Pemegang Penggelongsor'
@@ -329,6 +334,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Tutup',
         previousButton: 'Sebelumnya'
     },

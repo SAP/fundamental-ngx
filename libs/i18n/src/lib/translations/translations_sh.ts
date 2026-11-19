@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Vreme'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Podesiva veličina'
     },
     coreDynamicPage: {
@@ -242,7 +245,9 @@ export default {
         cancel: 'Odustani',
         collapsedItemMenuLabel: 'Sažeti meni stavke',
         navigationButtonLabel: 'Usmeravanje',
-        search: 'Traži'
+        openSearch: 'Open Search',
+        search: 'Traži',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Drška klizača'
@@ -330,6 +335,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Zatvori',
         previousButton: 'Prethodno'
     },

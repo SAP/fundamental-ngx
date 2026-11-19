@@ -1,0 +1,13 @@
+<p>Close 12 subsidiaries and review the action results by severity.</p>
+
+<button fd-button type="button" label="Close reporting period" (click)="closePeriod()"></button>
+<p class="fd-margin-top--sm" role="status">{{ resultStatus() }}</p>
+
+<ng-template #literalMessageTemplate let-message>{{ message }}</ng-template>
+
+<fdp-message-view
+    [messages]="messages()"
+    title="Close reporting period"
+    detailsTitle="Result details"
+    (closed)="clearResults()"
+></fdp-message-view>

@@ -7,7 +7,7 @@ import {
     signal,
     viewChild
 } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/platform/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageViewComponent } from '@fundamental-ngx/platform/message-view';
 import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-shared';
 
@@ -21,6 +21,7 @@ import { MessagePopoverErrorGroup } from '@fundamental-ngx/platform/messages-sha
 export class MessageViewDefaultExampleComponent implements AfterViewInit {
     readonly messages = signal<MessagePopoverErrorGroup[]>([]);
     readonly customDescriptionTemplate = viewChild<TemplateRef<any>>('customDescriptionTemplate');
+    readonly literalMessageTemplate = viewChild<TemplateRef<any>>('literalMessageTemplate');
 
     ngAfterViewInit(): void {
         this.messages.set([
@@ -31,13 +32,14 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         type: 'error',
                         state: 'negative',
                         heading: {
-                            type: 'string',
-                            message: 'Required Field'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Required Field'
                         },
                         description: {
-                            type: 'string',
-                            message:
-                                'The username field is required and cannot be empty. Please provide a valid username to continue.'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'The username field is required and cannot be empty. Please provide a valid username to continue.'
                         },
                         name: 'username',
                         fieldName: 'Username',
@@ -47,8 +49,9 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         type: 'error',
                         state: 'negative',
                         heading: {
-                            type: 'string',
-                            message: 'Invalid Email'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Invalid Email'
                         },
                         description: {
                             type: 'directive',
@@ -69,14 +72,14 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         type: 'warning',
                         state: 'critical',
                         heading: {
-                            type: 'string',
-                            message:
-                                'Weak Password - Your password does not meet the minimum security requirements and should be updated immediately to protect your account from unauthorized access'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Weak Password - Your password does not meet the minimum security requirements and should be updated immediately to protect your account from unauthorized access'
                         },
                         description: {
-                            type: 'string',
-                            message:
-                                'Your password should contain at least 8 characters, including uppercase, lowercase, numbers, and special characters. This ensures better account security.'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Your password should contain at least 8 characters, including uppercase, lowercase, numbers, and special characters. This ensures better account security.'
                         },
                         name: 'password',
                         fieldName: 'Password',
@@ -92,13 +95,14 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         type: 'success',
                         state: 'positive',
                         heading: {
-                            type: 'string',
-                            message: 'Profile Saved'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Profile Saved'
                         },
                         description: {
-                            type: 'string',
-                            message:
-                                'Your profile changes have been saved successfully. The changes will be reflected across all your devices.'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Your profile changes have been saved successfully. The changes will be reflected across all your devices.'
                         },
                         name: 'profile',
                         fieldName: 'Profile',
@@ -112,13 +116,14 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         type: 'information',
                         state: 'informative',
                         heading: {
-                            type: 'string',
-                            message: 'Account Setup'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Account Setup'
                         },
                         description: {
-                            type: 'string',
-                            message:
-                                'Please complete your account setup by adding a profile picture. This helps other users recognize you.'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Please complete your account setup by adding a profile picture. This helps other users recognize you.'
                         },
                         name: 'account',
                         fieldName: 'Account',
@@ -132,13 +137,14 @@ export class MessageViewDefaultExampleComponent implements AfterViewInit {
                         type: 'default',
                         state: 'neutral',
                         heading: {
-                            type: 'string',
-                            message: 'Need Help?'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'Need Help?'
                         },
                         description: {
-                            type: 'string',
-                            message:
-                                'If you have questions about your account settings, visit our help center or contact support.'
+                            type: 'directive',
+                            message: this.literalMessageTemplate(),
+                            error: 'If you have questions about your account settings, visit our help center or contact support.'
                         },
                         name: 'help',
                         fieldName: 'Help',

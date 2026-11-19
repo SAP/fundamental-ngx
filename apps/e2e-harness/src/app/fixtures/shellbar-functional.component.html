@@ -1,0 +1,75 @@
+<main data-testid="shellbar-functional-fixture">
+    <h1>Shellbar functional regression fixture</h1>
+    <section data-testid="navigation-region" style="width: 1200px" [attr.dir]="_rtl.rtl() ? 'rtl' : 'ltr'">
+        <h2>Native key ownership and ordinary navigation</h2>
+        <fd-shellbar>
+            <fd-shellbar-context-area>
+                <button id="nav-first" fdShellbarNeverHide>First</button>
+                <select id="inside-select" fdShellbarNeverHide>
+                    <option>First</option>
+                    <option selected>Middle</option>
+                    <option>Last</option>
+                </select>
+                <input id="inside-input" fdShellbarNeverHide />
+                <textarea id="inside-textarea" fdShellbarNeverHide></textarea>
+                <div id="inside-editor" contenteditable="true" tabindex="0" fdShellbarNeverHide>Editable</div>
+                <button id="nav-middle" fdShellbarNeverHide>Middle button</button>
+                <button id="nav-last" fdShellbarPosition="right" fdShellbarNeverHide>Last</button>
+            </fd-shellbar-context-area>
+        </fd-shellbar>
+        <label for="outside-select">Outside select</label>
+        <select id="outside-select">
+            <option>First</option>
+            <option selected>Middle</option>
+            <option>Last</option>
+        </select>
+        <button data-testid="toggle-rtl" (click)="_rtl.rtl.set(!_rtl.rtl())">Toggle RTL</button>
+    </section>
+    <section data-testid="geometry-region">
+        <h2>Mandatory item and separator</h2>
+        <div [style.width.px]="geometryWidth()" data-testid="geometry-container">
+            <fd-shellbar #geometryBar size="xl">
+                <fd-shellbar-context-area
+                    #geometryArea
+                    (elementHidden)="noteHidden($event)"
+                    (elementShown)="noteShown($event)"
+                    (contentItemVisibilityChange)="noteAggregate($event)"
+                >
+                    <button
+                        id="geometry-mandatory"
+                        data-geometry
+                        fdShellbarNeverHide
+                        style="width: 80px; min-width: 80px; flex-shrink: 0; padding: 0"
+                    >
+                        Mandatory
+                    </button>
+                    <fd-shellbar-separator
+                        id="geometry-separator"
+                        data-geometry
+                        style="width: 16px; min-width: 16px; flex-shrink: 0; margin: 0"
+                    ></fd-shellbar-separator>
+                </fd-shellbar-context-area>
+                <fd-shellbar-actions
+                    ><button style="width: 32px; min-width: 32px; padding: 0">End</button></fd-shellbar-actions
+                >
+            </fd-shellbar>
+        </div>
+        <button data-testid="residual-narrow" (click)="setResidual(90)">90px residual</button>
+        <button data-testid="residual-wide" (click)="setResidual(120)">120px residual</button>
+        <pre data-testid="geometry-hidden">{{ hidden() }}</pre>
+        <pre data-testid="geometry-shown">{{ shown() }}</pre>
+        <pre data-testid="geometry-aggregate">{{ aggregate() }}</pre>
+    </section>
+    <section data-testid="projection-controls">
+        <h2>Default and literal position controls</h2>
+        <fd-shellbar>
+            <fd-shellbar-context-area>
+                <button id="default-position">Default</button>
+                <button id="literal-left" fdShellbarPosition="left">Left</button>
+                <button id="literal-right" fdShellbarPosition="right">Right</button>
+            </fd-shellbar-context-area>
+        </fd-shellbar>
+    </section>
+    <h2>Stable mounted 314px overflow with projected actions</h2>
+    <e2e-shellbar-mobile-projection></e2e-shellbar-mobile-projection>
+</main>

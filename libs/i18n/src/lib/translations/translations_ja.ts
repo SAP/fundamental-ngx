@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: '時刻'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'サイズ調整可能'
     },
     coreDynamicPage: {
@@ -242,7 +245,9 @@ export default {
         cancel: 'キャンセル',
         collapsedItemMenuLabel: '非表示の項目メニュー',
         navigationButtonLabel: 'ナビゲーション',
-        search: '検索'
+        openSearch: 'Open Search',
+        search: '検索',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'スライダハンドル'
@@ -330,6 +335,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: '閉じる',
         previousButton: '前へ'
     },

@@ -16,7 +16,6 @@ import 'fundamental-styles/dist/section.css';
 @Component({
     selector: 'ui5-segmented-button-sample',
     templateUrl: './segmented-button-sample.html',
-    standalone: true,
     imports: [SegmentedButton, SegmentedButtonItem, Button, TitleCasePipe]
 })
 export class SegmentedButtonExample implements AfterViewInit {

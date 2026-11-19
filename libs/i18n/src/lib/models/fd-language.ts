@@ -135,6 +135,12 @@ export interface FdLanguage {
     coreDialog: {
         /** Resizable description */
         resizable: FdLanguageKey;
+        /** Default aria-label for dialog header */
+        headerAriaLabel: FdLanguageKey;
+        /** Default aria-label for dialog body */
+        bodyAriaLabel: FdLanguageKey;
+        /** Default aria-label for dialog footer */
+        footerAriaLabel: FdLanguageKey;
     };
     coreDynamicPage: {
         breadcrumbsLabel: FdLanguageKey;
@@ -294,6 +300,9 @@ export interface FdLanguage {
         assistiveTools: FdLanguageKey;
         backButtonLabel: FdLanguageKey;
         navigationButtonLabel: FdLanguageKey;
+        openSearch: FdLanguageKey;
+        /** Shellbar label */
+        shellbarLabel: FdLanguageKey;
     };
     coreSlider: {
         /** Default aria-label value for Slider Handle */
@@ -375,7 +384,11 @@ export interface FdLanguage {
         valueStateWarningMessage: FdLanguageKey;
     };
     coreUserMenu: {
+        /** Aria label for the user menu control element */
+        ariaLabel: FdLanguageKey;
+        /** Aria label for the Close button in user menu */
         closeButton: FdLanguageKey;
+        /** Aria label for the Previous button in user menu */
         previousButton: FdLanguageKey;
     };
     coreToken: {

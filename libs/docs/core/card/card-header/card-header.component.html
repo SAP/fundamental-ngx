@@ -77,7 +77,18 @@
                     </li>
                 </ul>
             </li>
-            <li>content <code>fd-card-content</code>: the content area is reserved for application content.</li>
+            <li>
+                content <code>fd-card-content</code>: the content area is reserved for application content.
+                <ul>
+                    <li><code>padding</code> sets padding on all sides ('tiny', 'sm', 'md', 'lg')</li>
+                    <li><code>paddingInline</code> sets horizontal padding (left and right)</li>
+                    <li><code>paddingBlock</code> sets vertical padding (top and bottom)</li>
+                    <li>
+                        <code>paddingBottom</code> sets bottom padding specifically (useful for preventing focus outline
+                        overflow)
+                    </li>
+                </ul>
+            </li>
             <li>
                 footer (optional) <code>fd-card-footer</code>: the footer displays a list of actions
                 <code>*fdCardFooterActionItem</code> that can be performed on the card. When link is too long, or there

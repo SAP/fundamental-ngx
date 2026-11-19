@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Hora'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Redimensionável'
     },
     coreDynamicPage: {
@@ -241,7 +244,9 @@ export default {
         cancel: 'Cancelar',
         collapsedItemMenuLabel: 'Menu de item recolhido',
         navigationButtonLabel: 'Navegação',
-        search: 'Pesquisar'
+        openSearch: 'Open Search',
+        search: 'Pesquisar',
+        shellbarLabel: 'Shellbar'
     },
     coreSlider: {
         ariaLabel: 'Alça do controle deslizante'
@@ -329,6 +334,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Fechar',
         previousButton: 'Anterior'
     },

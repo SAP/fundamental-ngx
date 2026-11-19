@@ -6,11 +6,9 @@ import {
     TableDataProvider,
     TableDataSource,
     TableDataSourceDirective,
-    TableDraggableDirective,
     TableHeaderResizerDirective,
     TableInitialStateDirective,
-    TableState,
-    TableVirtualScrollDirective
+    TableState
 } from '@fundamental-ngx/platform/table-helpers';
 import { Observable, of } from 'rxjs';
 
@@ -21,8 +19,6 @@ import { Observable, of } from 'rxjs';
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        TableDraggableDirective,
-        TableVirtualScrollDirective,
         FdDatetimeModule,
         PaginationModule
     ],
