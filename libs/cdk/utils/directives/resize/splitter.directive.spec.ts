@@ -96,13 +96,13 @@ describe('SplitterDirective', () => {
             expect(fixture.componentInstance.size).toBe(400);
         });
 
-        it('Home sets size to max, End sets size to min', () => {
+        it('Home sets size to min, End sets size to max', () => {
             dispatchKey(bar, 'Home');
             fixture.detectChanges();
-            expect(fixture.componentInstance.size).toBe(400); // max
+            expect(fixture.componentInstance.size).toBe(100); // min
             dispatchKey(bar, 'End');
             fixture.detectChanges();
-            expect(fixture.componentInstance.size).toBe(100); // min
+            expect(fixture.componentInstance.size).toBe(400); // max
         });
 
         it('Enter resets size to the default input', () => {
@@ -178,7 +178,7 @@ describe('SplitterDirective keyboard (RTL)', () => {
         expect(f.componentInstance.size).toBe(190);
     });
 
-    it('Home sets size to min and End sets size to max in RTL', () => {
+    it('Home sets size to min and End sets size to max (same as LTR)', () => {
         TestBed.configureTestingModule({
             imports: [HostComponent],
             providers: [{ provide: RtlService, useValue: { rtl: signal(true) } }]
@@ -279,10 +279,16 @@ describe('SplitterDirective presets when unbounded (min=0, max=Infinity)', () =>
         el = f.nativeElement.querySelector('[fdkSplitter]') as HTMLElement;
     });
 
-    it('Home is a no-op (max is unbounded)', () => {
-        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+    it('End is a no-op (max is unbounded)', () => {
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
         f.detectChanges();
         expect(f.componentInstance.sizeSignal()).toBe(200);
+    });
+
+    it('Home sets size to min (0) when no lower bound is configured', () => {
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+        f.detectChanges();
+        expect(f.componentInstance.sizeSignal()).toBe(0);
     });
 
     it('Enter is a no-op (no defaultSize and unbounded midpoint)', () => {
@@ -301,7 +307,7 @@ describe('SplitterDirective presets when unbounded (min=0, max=Infinity)', () =>
             [size]="sizeSignal()"
             [min]="80"
             [max]="400"
-            [keyboardEndTarget]="200"
+            [keyboardHomeTarget]="200"
             (sizeChange)="sizeSignal.set($event)"
         ></div>
     `
@@ -327,30 +333,30 @@ class KeyboardEndTargetUnsetHostComponent {
     readonly sizeSignal = signal(300);
 }
 
-describe('SplitterDirective keyboardEndTarget', () => {
-    it('End key goes to keyboardEndTarget instead of min when set', () => {
+describe('SplitterDirective keyboardHomeTarget', () => {
+    it('Home key goes to keyboardHomeTarget instead of min when set', () => {
         TestBed.configureTestingModule({ imports: [KeyboardEndTargetSetHostComponent] });
         const f = TestBed.createComponent(KeyboardEndTargetSetHostComponent);
         f.detectChanges();
         const el = f.nativeElement.querySelector('[fdkSplitter]') as HTMLElement;
 
-        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
         f.detectChanges();
-        expect(f.componentInstance.sizeSignal()).toBe(200); // keyboardEndTarget, not min(80)
+        expect(f.componentInstance.sizeSignal()).toBe(200); // keyboardHomeTarget, not min(80)
     });
 
-    it('End key falls back to min when keyboardEndTarget is not bound', () => {
+    it('Home key falls back to min when keyboardHomeTarget is not bound', () => {
         TestBed.configureTestingModule({ imports: [KeyboardEndTargetUnsetHostComponent] });
         const f = TestBed.createComponent(KeyboardEndTargetUnsetHostComponent);
         f.detectChanges();
         const el = f.nativeElement.querySelector('[fdkSplitter]') as HTMLElement;
 
-        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'End', bubbles: true }));
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
         f.detectChanges();
         expect(f.componentInstance.sizeSignal()).toBe(80); // min
     });
 
-    it('Home key uses keyboardEndTarget in RTL (Home = min-direction in RTL)', () => {
+    it('Home key goes to keyboardHomeTarget in RTL', () => {
         TestBed.configureTestingModule({
             imports: [KeyboardEndTargetSetHostComponent],
             providers: [{ provide: RtlService, useValue: { rtl: signal(true) } }]
@@ -361,6 +367,6 @@ describe('SplitterDirective keyboardEndTarget', () => {
 
         el.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
         f.detectChanges();
-        expect(f.componentInstance.sizeSignal()).toBe(200); // keyboardEndTarget, not min(80)
+        expect(f.componentInstance.sizeSignal()).toBe(200); // keyboardHomeTarget, not min(80)
     });
 });

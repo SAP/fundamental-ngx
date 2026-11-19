@@ -5,12 +5,7 @@ import { By } from '@angular/platform-browser';
 import { SidePanelContentDirective } from './side-panel-content.directive';
 import { SidePanelItemComponent } from './side-panel-item.component';
 import { SidePanelMainComponent } from './side-panel-main.component';
-import {
-    CONTENT_PANEL_OPEN_DEFAULT_WIDTH,
-    SidePanelComponent,
-    SidePanelMode,
-    SidePanelSide
-} from './side-panel.component';
+import { SidePanelComponent, SidePanelMode, SidePanelSide } from './side-panel.component';
 
 @Component({
     selector: 'fd-test-host',
@@ -49,24 +44,6 @@ class TestHostComponent {
 class SingleActionTestHostComponent {
     open = false;
     activeItem: string | null = null;
-}
-
-@Component({
-    selector: 'fd-counter-badge-test-host',
-    template: `
-        <fd-side-panel ariaLabel="Groups">
-            <fd-side-panel-item id="a" icon="filter" label="Filter" [counter]="counter()">
-                <ng-template fdSidePanelContent></ng-template>
-            </fd-side-panel-item>
-            <fd-side-panel-item id="b" icon="menu2" label="Layout">
-                <ng-template fdSidePanelContent></ng-template>
-            </fd-side-panel-item>
-        </fd-side-panel>
-    `,
-    imports: [SidePanelComponent, SidePanelItemComponent, SidePanelContentDirective]
-})
-class CounterBadgeTestHostComponent {
-    readonly counter = signal<number | undefined>(undefined);
 }
 
 // The interactive element per item is the <li role="option"> (UI5 listbox/option model).
@@ -363,54 +340,6 @@ describe('SidePanelComponent — single-action', () => {
         navArrow.click();
         fixture.detectChanges();
         expect(component['contentPanelWidthStyle']()).toBe(component.defaultWidth());
-    });
-});
-
-describe('SidePanelComponent — counter', () => {
-    let host: CounterBadgeTestHostComponent;
-    let fixture: ComponentFixture<CounterBadgeTestHostComponent>;
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CounterBadgeTestHostComponent]
-        }).compileComponents();
-    }));
-
-    beforeEach(async () => {
-        fixture = TestBed.createComponent(CounterBadgeTestHostComponent);
-        host = fixture.componentInstance;
-        fixture.detectChanges();
-        await fixture.whenStable();
-    });
-
-    it('should not render counter when counter input is not set', () => {
-        const counter = fixture.nativeElement.querySelector('.fd-side-panel__action-counter');
-        expect(counter).toBeNull();
-    });
-
-    it('should render counter with the given value', () => {
-        host.counter.set(5);
-        fixture.detectChanges();
-
-        const counter = fixture.nativeElement.querySelector('.fd-side-panel__action-counter');
-        expect(counter).not.toBeNull();
-        expect(counter.textContent.trim()).toBe('5');
-    });
-
-    it('should render 99+ when counter exceeds 99', () => {
-        host.counter.set(100);
-        fixture.detectChanges();
-
-        const counter = fixture.nativeElement.querySelector('.fd-side-panel__action-counter');
-        expect(counter.textContent.trim()).toBe('99+');
-    });
-
-    it('should render exactly 99 without capping', () => {
-        host.counter.set(99);
-        fixture.detectChanges();
-
-        const counter = fixture.nativeElement.querySelector('.fd-side-panel__action-counter');
-        expect(counter.textContent.trim()).toBe('99');
     });
 });
 
@@ -801,9 +730,11 @@ describe('SidePanelComponent — resize state & splitter', () => {
     });
 
     describe('resize state', () => {
-        it('contentPanelWidthStyle uses content-panel default (15.75rem) when panel is open, before any resize', () => {
-            // open = true is set in beforeEach; collapsed bar (4.25rem) + 15.75rem = 20rem total footprint.
-            expect(component['contentPanelWidthStyle']()).toBe(CONTENT_PANEL_OPEN_DEFAULT_WIDTH);
+        it('contentPanelWidthStyle reflects DOM-measured width when panel is open (splitter shows and measures on afterNextRender)', () => {
+            // measureBounds() now runs eagerly via afterNextRender because showSplitter() is true when open.
+            // jsdom derives clientWidth from the initial rem-based inline style (15.75rem × 16 = 252px).
+            expect(component['contentPanelWidthPx']()).not.toBeNull();
+            expect(component['contentPanelWidthStyle']()).toBe(`${component['contentPanelWidthPx']()}px`);
         });
 
         it('contentPanelWidthStyle falls back to defaultWidth when panel is closed (expanded action bar mode)', () => {
@@ -820,8 +751,6 @@ describe('SidePanelComponent — resize state & splitter', () => {
 
     describe('splitter bar', () => {
         beforeEach(() => {
-            // The splitter only renders in push mode (host ≥ 1024px); clientWidth is 0 in jsdom.
-            (component as any)._hostWidthPx.set(1600);
             fixture.detectChanges();
         });
 
@@ -844,8 +773,6 @@ describe('SidePanelComponent — resize state & splitter', () => {
 
     describe('width menu', () => {
         beforeEach(() => {
-            // The splitter only renders in push mode (host ≥ 1024px); clientWidth is 0 in jsdom.
-            (component as any)._hostWidthPx.set(1600);
             fixture.detectChanges();
             component['measureBounds']();
             component['resizeMinPx'].set(150);
@@ -889,7 +816,6 @@ describe('SidePanelComponent — resize state & splitter', () => {
 
     describe('expanded action bar drag to minimum', () => {
         beforeEach(() => {
-            (component as any)._hostWidthPx.set(1600);
             component.open.set(false);
             component.mode.set('expanded');
             fixture.detectChanges();
@@ -942,23 +868,6 @@ describe('SidePanel main-content slot', () => {
         expect(fixture.nativeElement.querySelector('#page')?.textContent).toBe('Page body');
         expect(fixture.nativeElement.querySelector('.fd-side-panel__main-container')).toBeTruthy();
     });
-
-    it('toggles the --push host class with host width (pushMode)', () => {
-        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
-        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
-        fixture.detectChanges();
-        const panel = fixture.debugElement.query(By.directive(SidePanelComponent))
-            .componentInstance as SidePanelComponent;
-        const hostEl = fixture.debugElement.query(By.directive(SidePanelComponent)).nativeElement as HTMLElement;
-
-        (panel as any)._hostWidthPx.set(1600);
-        fixture.detectChanges();
-        expect(hostEl.classList.contains('fd-side-panel--push')).toBe(true);
-
-        (panel as any)._hostWidthPx.set(1000);
-        fixture.detectChanges();
-        expect(hostEl.classList.contains('fd-side-panel--push')).toBe(false);
-    });
 });
 
 @Component({
@@ -979,37 +888,28 @@ describe('SidePanel main-content slot', () => {
 class MainSlotNotResizableTestHostComponent {}
 
 describe('SidePanel resizable splitter', () => {
-    function openPush(fixture: ComponentFixture<unknown>, width: number): SidePanelComponent {
+    function openPanel(fixture: ComponentFixture<unknown>): SidePanelComponent {
         const panel = fixture.debugElement.query(By.directive(SidePanelComponent))
             .componentInstance as SidePanelComponent;
-        (panel as any)._hostWidthPx.set(width);
         panel.activeItem.set('filter');
         panel.open.set(true);
         fixture.detectChanges();
         return panel;
     }
 
-    it('renders fd-resize-splitter when resizable, push mode, and open', () => {
+    it('renders fd-resize-splitter when resizable and open', () => {
         TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
         const fixture = TestBed.createComponent(MainSlotTestHostComponent);
         fixture.detectChanges();
-        openPush(fixture, 1600);
+        openPanel(fixture);
         expect(fixture.nativeElement.querySelector('fd-resize-splitter')).toBeTruthy();
-    });
-
-    it('does NOT render the splitter in overlay mode (<1024)', () => {
-        TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
-        const fixture = TestBed.createComponent(MainSlotTestHostComponent);
-        fixture.detectChanges();
-        openPush(fixture, 1000);
-        expect(fixture.nativeElement.querySelector('fd-resize-splitter')).toBeFalsy();
     });
 
     it('does NOT render the splitter when resizable=false', () => {
         TestBed.configureTestingModule({ imports: [MainSlotNotResizableTestHostComponent] });
         const fixture = TestBed.createComponent(MainSlotNotResizableTestHostComponent);
         fixture.detectChanges();
-        openPush(fixture, 1600);
+        openPanel(fixture);
         expect(fixture.nativeElement.querySelector('fd-resize-splitter')).toBeFalsy();
     });
 
@@ -1017,7 +917,7 @@ describe('SidePanel resizable splitter', () => {
         TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
         const fixture = TestBed.createComponent(MainSlotTestHostComponent);
         fixture.detectChanges();
-        openPush(fixture, 1600);
+        openPanel(fixture);
         const splitter = fixture.nativeElement.querySelector('fd-resize-splitter');
         expect(splitter.getAttribute('aria-valuenow')).not.toBeNull();
     });
@@ -1026,7 +926,7 @@ describe('SidePanel resizable splitter', () => {
         TestBed.configureTestingModule({ imports: [MainSlotTestHostComponent] });
         const fixture = TestBed.createComponent(MainSlotTestHostComponent);
         fixture.detectChanges();
-        const panel = openPush(fixture, 1600);
+        const panel = openPanel(fixture);
         // cycleWidth() re-measures from the DOM; jsdom has no layout, so stub measureBounds
         // to keep the bounds we set below. The cycle logic is what this test verifies.
         jest.spyOn(panel as any, 'measureBounds').mockImplementation(() => {});

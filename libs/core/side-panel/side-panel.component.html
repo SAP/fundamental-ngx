@@ -51,11 +51,6 @@
                     >
                         <span class="fd-side-panel__action" [class.is-active]="item.id() === activeItem()">
                             <fd-icon class="fd-side-panel__action-icon" [glyph]="item.icon()" [ariaHidden]="true" />
-                            @if (item.counterDisplay() !== null) {
-                                <span class="fd-side-panel__action-counter" aria-hidden="true">{{
-                                    item.counterDisplay()
-                                }}</span>
-                            }
                         </span>
                         @if (mode() === 'expanded') {
                             <span class="fd-side-panel__action-label" aria-hidden="true">{{ item.label() }}</span>
@@ -126,6 +121,7 @@
                     type="button"
                     class="fd-side-panel__content-panel-close"
                     [attr.aria-label]="closePanelLabel()"
+                    [attr.title]="closePanelLabel()"
                     (click)="toggleNavArrow()"
                 >
                     <fd-icon [glyph]="navArrowIcon()" [ariaHidden]="true" />
@@ -136,6 +132,7 @@
                     type="button"
                     class="fd-side-panel__content-panel-close"
                     [attr.aria-label]="closeLabel()"
+                    [attr.title]="closeLabel()"
                     (click)="closeContentPanel()"
                 >
                     <fd-icon glyph="decline" [ariaHidden]="true" />
@@ -158,7 +155,7 @@
         orientation="vertical"
         [size]="contentPanelWidthPx() ?? 0"
         [min]="resizeMinPx()"
-        [keyboardEndTarget]="resizeKeyboardEndPx()"
+        [keyboardHomeTarget]="resizeKeyboardHomePx()"
         [max]="resizeMaxPx()"
         [defaultSize]="resizeDefaultPx()"
         [step]="resizeStep()"

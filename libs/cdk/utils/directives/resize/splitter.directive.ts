@@ -64,12 +64,12 @@ export class SplitterDirective {
     readonly defaultSize = input<number | undefined, unknown>(undefined, { transform: numberAttribute });
 
     /**
-     * Override the size (px) the End key navigates to. Defaults to `min` when unset.
-     * Use when drag clamping and the keyboard End target should differ — e.g. to let
-     * drag go below the declared minimum for a collapse animation while keeping End
+     * Override the size (px) the Home key navigates to. Defaults to `min` when unset.
+     * Use when drag clamping and the keyboard Home target should differ — e.g. to let
+     * drag go below the declared minimum for a collapse animation while keeping Home
      * at the user-configured minimum.
      */
-    readonly keyboardEndTarget = input<number | undefined>(undefined);
+    readonly keyboardHomeTarget = input<number | undefined>(undefined);
 
     /** Logical pointer direction that increases size. `end` = toward the block/inline end. */
     readonly grows = input<FdkSplitterGrows>('end');
@@ -109,14 +109,10 @@ export class SplitterDirective {
         const key = event.key;
 
         if (key === 'Home' || key === 'End' || key === 'Enter') {
-            // WAI-ARIA 1.2 separator role: Home = maximum value, End = minimum value (LTR).
-            // In RTL the inline axis is mirrored, so Home/End targets are swapped.
-            const isRtl = !!this._rtl?.rtl();
-            // keyboardEndTarget overrides the key that navigates toward the minimum extent.
-            // In LTR that is End; in RTL the inline axis is mirrored so it is Home.
-            const minDirectionTarget = this.keyboardEndTarget() ?? this.min();
-            const homeTarget = isRtl ? minDirectionTarget : this.max();
-            const endTarget = isRtl ? this.max() : minDirectionTarget;
+            // WAI-ARIA separator: Home = minimum value, End = maximum value.
+            // keyboardHomeTarget overrides the value Home navigates to.
+            const homeTarget = this.keyboardHomeTarget() ?? this.min();
+            const endTarget = this.max();
             const target =
                 key === 'Home'
                     ? homeTarget

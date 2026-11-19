@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, contentChild, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, contentChild, input, ViewEncapsulation } from '@angular/core';
 import { SidePanelContentDirective } from './side-panel-content.directive';
 
 let sidePanelItemId = 0;
@@ -36,19 +36,6 @@ export class SidePanelItemComponent {
 
     /** Whether the item is disabled. Disabled items cannot be activated. */
     readonly disabled = input(false, { transform: booleanAttribute });
-
-    /**
-     * Numeric count shown on the action button (e.g. unread message count).
-     * Values above 99 are capped and displayed as `99+`.
-     * When not set, no counter is shown.
-     */
-    readonly counter = input<number>();
-
-    /** @hidden Formatted counter string for the template; `null` when no counter is set. */
-    readonly counterDisplay = computed<string | null>(() => {
-        const count = this.counter();
-        return count === undefined ? null : count > 99 ? '99+' : String(count);
-    });
 
     /** @hidden Captured content template, rendered by the parent while the item is active. */
     readonly content = contentChild(SidePanelContentDirective);

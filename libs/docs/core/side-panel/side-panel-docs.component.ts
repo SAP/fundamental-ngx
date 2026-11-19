@@ -7,7 +7,6 @@ import {
     ExampleFile,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
-import { SidePanelBadgesExampleComponent } from './examples/side-panel-badges-example.component';
 import { SidePanelBasicExampleComponent } from './examples/side-panel-basic-example.component';
 import { SidePanelOverflowExampleComponent } from './examples/side-panel-overflow-example.component';
 import { SidePanelResizableExampleComponent } from './examples/side-panel-resizable-example.component';
@@ -17,9 +16,6 @@ const exampleScssCode = 'side-panel.component.scss';
 
 const basicExampleHtmlCode = 'side-panel-basic-example.component.html';
 const basicExampleTsCode = 'side-panel-basic-example.component.ts';
-
-const badgesExampleHtmlCode = 'side-panel-badges-example.component.html';
-const badgesExampleTsCode = 'side-panel-badges-example.component.ts';
 
 const singleActionExampleHtmlCode = 'side-panel-single-action-example.component.html';
 const singleActionExampleTsCode = 'side-panel-single-action-example.component.ts';
@@ -38,7 +34,6 @@ const resizableExampleTsCode = 'side-panel-resizable-example.component.ts';
         ComponentExampleComponent,
         CodeExampleComponent,
         SidePanelBasicExampleComponent,
-        SidePanelBadgesExampleComponent,
         SidePanelSingleActionExampleComponent,
         SidePanelOverflowExampleComponent,
         SidePanelResizableExampleComponent
@@ -59,17 +54,6 @@ export class SidePanelDocsComponent {
             code: getAssetFromModuleAssets(exampleScssCode),
             fileName: 'side-panel',
             component: 'SidePanelBasicExampleComponent',
-            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
-        }
-    ];
-
-    badges: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(badgesExampleHtmlCode),
-            fileName: 'side-panel-badges-example',
-            component: 'SidePanelBadgesExampleComponent',
-            typescriptFileCode: getAssetFromModuleAssets(badgesExampleTsCode),
             scssFileCode: getAssetFromModuleAssets(exampleScssCode)
         }
     ];
