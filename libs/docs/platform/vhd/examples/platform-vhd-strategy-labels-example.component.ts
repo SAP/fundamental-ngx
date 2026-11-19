@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent } from '@fundamental-ngx/core/token';
 import { patchLanguage } from '@fundamental-ngx/i18n';
 import {
     PlatformValueHelpDialogModule,
@@ -71,7 +70,6 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
         ButtonComponent,
         TokenComponent,
         TokenizerComponent,
-        TokenizerInputDirective,
         ContentDensityDirective,
         PlatformValueHelpDialogModule
     ]

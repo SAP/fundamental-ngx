@@ -15,15 +15,12 @@ import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
-import { FormGroupComponent } from '@fundamental-ngx/core/form';
 import {
     ListComponent,
-    ListGroupHeaderDirective,
     ListItemComponent,
     ListSecondaryDirective,
     ListTitleDirective
 } from '@fundamental-ngx/core/list';
-import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CollectionSort, SortDirection } from '@fundamental-ngx/platform/table-helpers';
@@ -53,17 +50,14 @@ let sortDialogSortByHeaderUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     imports: [
         ListComponent,
-        ListGroupHeaderDirective,
         ListTitleDirective,
         ListItemComponent,
         ListSecondaryDirective,
-        RadioButtonComponent,
         FormsModule,
         FdTranslatePipe,
         SegmentedButtonComponent,
         ButtonComponent,
-        ComboboxComponent,
-        FormGroupComponent
+        ComboboxComponent
     ]
 })
 export class SortingComponent {

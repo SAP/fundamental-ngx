@@ -241,7 +241,9 @@ export default {
         cancel: 'Peruuta',
         collapsedItemMenuLabel: 'Tiivistetty kohteen valikko',
         navigationButtonLabel: 'Navigointi',
-        search: 'Hae'
+        openSearch: 'Open Search',
+        search: 'Hae',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -344,6 +346,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Sulje',
         previousButton: 'Edellinen'
     },

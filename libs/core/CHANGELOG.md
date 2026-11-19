@@ -1,3 +1,66 @@
+## 0.66.1-rc.33 (2026-11-18)
+
+### 🩹 Fixes
+
+- **core:** show tooltip on fd-input-group addon button ([#14680](https://github.com/SAP/fundamental-ngx/pull/14680))
+
+### ❤️ Thank You
+
+- Maria Dineva @MariaIDineva
+
+## 0.66.1-rc.32 (2026-11-17)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.31 (2026-11-17)
+
+### 🩹 Fixes
+
+- **core:** prevent selection changes in read-only radio groups ([#14678](https://github.com/SAP/fundamental-ngx/pull/14678))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.66.1-rc.30 (2026-11-17)
+
+### 🩹 Fixes
+
+- **core:** add additionalBodyClass input to fd-product-menu ([#14682](https://github.com/SAP/fundamental-ngx/pull/14682))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.1-rc.29 (2026-11-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.28 (2026-11-16)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.27 (2026-11-16)
+
+### 🩹 Fixes
+
+- **core:** shellbar responsiveness updates, support for multiple context areas, a11y improvements ([#14621](https://github.com/SAP/fundamental-ngx/pull/14621))
+
+### ❤️ Thank You
+
+- droshev
+- Mike O'Donnell @mikerodonnell89
+
+## 0.66.1-rc.26 (2026-11-16)
+
+### 🩹 Fixes
+
+- **core:** add padding configuration inputs to CardContentComponent ([#14668](https://github.com/SAP/fundamental-ngx/pull/14668))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.1-rc.25 (2026-11-11)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

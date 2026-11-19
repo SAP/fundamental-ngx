@@ -242,7 +242,9 @@ export default {
         cancel: 'Zrušiť',
         collapsedItemMenuLabel: 'Zbalená ponuka položiek',
         navigationButtonLabel: 'Navigácia',
-        search: 'Vyhľadávanie'
+        openSearch: 'Open Search',
+        search: 'Vyhľadávanie',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -345,6 +347,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Zavrieť',
         previousButton: 'Predchádzajúce'
     },

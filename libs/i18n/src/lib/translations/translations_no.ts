@@ -242,7 +242,9 @@ export default {
         cancel: 'Avbryt',
         collapsedItemMenuLabel: 'Komprimert elementmeny',
         navigationButtonLabel: 'Navigering',
-        search: 'Søk'
+        openSearch: 'Open Search',
+        search: 'Søk',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -345,6 +347,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Lukk',
         previousButton: 'Forrige'
     },

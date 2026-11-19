@@ -242,7 +242,9 @@ export default {
         cancel: 'إلغاء',
         collapsedItemMenuLabel: 'قائمة عناصر تم طيها',
         navigationButtonLabel: 'تنقل',
-        search: 'بحث'
+        openSearch: 'Open Search',
+        search: 'بحث',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -345,6 +347,7 @@ export default {
         menuOkText: 'موافق'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'إغلاق',
         previousButton: 'السابق'
     },

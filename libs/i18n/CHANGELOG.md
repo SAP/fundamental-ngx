@@ -1,3 +1,42 @@
+## 0.66.1-rc.33 (2026-11-18)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.32 (2026-11-17)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.31 (2026-11-17)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.30 (2026-11-17)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.29 (2026-11-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.28 (2026-11-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.27 (2026-11-16)
+
+### 🩹 Fixes
+
+- **core:** shellbar responsiveness updates, support for multiple context areas, a11y improvements ([#14621](https://github.com/SAP/fundamental-ngx/pull/14621))
+
+### ❤️ Thank You
+
+- droshev
+- Mike O'Donnell @mikerodonnell89
+
+## 0.66.1-rc.26 (2026-11-16)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.25 (2026-11-11)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

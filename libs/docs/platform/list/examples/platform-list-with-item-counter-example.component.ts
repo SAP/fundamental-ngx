@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 export interface Counter {
@@ -10,7 +9,7 @@ export interface Counter {
 @Component({
     selector: 'fdp-platform-list-with-item-counter-example',
     templateUrl: './platform-list-with-item-counter-example.component.html',
-    imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
+    imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformListWithItemCounterExampleComponent {
     items: Counter[] = [

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
     DescriptionComponent,
@@ -19,8 +18,7 @@ import {
         DescriptionComponent,
         MessageStripComponent,
         ImportComponent,
-        HeaderTabsComponent,
-        IconComponent
+        HeaderTabsComponent
     ]
 })
 export class PopoverHeaderComponent {}

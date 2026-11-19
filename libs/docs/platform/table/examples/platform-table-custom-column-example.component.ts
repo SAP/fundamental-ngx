@@ -1,14 +1,11 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { Observable, of } from 'rxjs';
-
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { MenuComponent, MenuItemComponent, SplitMenuButtonComponent } from '@fundamental-ngx/platform';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
@@ -31,6 +28,7 @@ import {
     TableHeaderResizerDirective,
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-table-custom-column-example',
@@ -59,7 +57,6 @@ import {
         PlatformInputModule,
         FormsModule,
         ObjectStatusComponent,
-        AsyncPipe,
         FdDatetimeModule,
         SplitMenuButtonComponent,
         MenuComponent,

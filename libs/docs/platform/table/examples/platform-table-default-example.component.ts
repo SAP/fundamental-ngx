@@ -1,7 +1,4 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
-import { Observable, of } from 'rxjs';
-
-import { CdkDragPlaceholder } from '@angular/cdk/drag-drop';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
@@ -11,6 +8,7 @@ import {
     TableHeaderResizerDirective,
     TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-table-default-example',
@@ -31,7 +29,6 @@ import {
         TableInitialStateDirective,
         ButtonComponent,
         FdDatetimeModule,
-        CdkDragPlaceholder,
         IconComponent
     ]
 })

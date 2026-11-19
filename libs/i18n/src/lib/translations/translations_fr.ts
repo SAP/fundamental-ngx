@@ -243,7 +243,9 @@ export default {
         cancel: 'Annuler',
         collapsedItemMenuLabel: 'Menu des éléments réduits',
         navigationButtonLabel: 'Navigation',
-        search: 'Rechercher'
+        openSearch: 'Open Search',
+        search: 'Rechercher',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -346,6 +348,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Fermer',
         previousButton: 'Précédent'
     },

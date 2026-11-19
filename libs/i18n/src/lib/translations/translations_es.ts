@@ -242,7 +242,9 @@ export default {
         cancel: 'Cancelar',
         collapsedItemMenuLabel: 'Menú de elementos contraídos',
         navigationButtonLabel: 'Navegación',
-        search: 'Buscar'
+        openSearch: 'Open Search',
+        search: 'Buscar',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -345,6 +347,7 @@ export default {
         menuOkText: 'Aceptar'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Cerrar',
         previousButton: 'Anterior'
     },

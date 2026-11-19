@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
-import { TableCellDirective, TableRowDirective } from '@fundamental-ngx/core/table';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { TableService } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
@@ -9,7 +9,7 @@ import { TableService } from '@fundamental-ngx/platform/table-helpers';
     templateUrl: './table-footer-row.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [TableCellDirective, NgTemplateOutlet]
+    imports: [NgTemplateOutlet]
 })
 export class TableFooterRowComponent extends TableRowDirective {
     /** @hidden */

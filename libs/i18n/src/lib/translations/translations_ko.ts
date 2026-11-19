@@ -241,7 +241,9 @@ export default {
         cancel: '취소',
         collapsedItemMenuLabel: '접힌 항목 메뉴',
         navigationButtonLabel: '탐색',
-        search: '검색'
+        openSearch: 'Open Search',
+        search: '검색',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -344,6 +346,7 @@ export default {
         menuOkText: '확인'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: '닫기',
         previousButton: '이전'
     },

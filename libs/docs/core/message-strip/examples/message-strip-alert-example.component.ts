@@ -31,7 +31,7 @@ class ExampleStripAlertComponent implements OnDestroy {
             }
         }
     `,
-    imports: [AsyncPipe, ButtonComponent, ContentDensityDirective, LinkComponent],
+    imports: [AsyncPipe, ContentDensityDirective, LinkComponent],
     styles: [
         `
             :host {

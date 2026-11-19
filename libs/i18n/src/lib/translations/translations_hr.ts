@@ -242,7 +242,9 @@ export default {
         cancel: 'Otkaži',
         collapsedItemMenuLabel: 'Sažeti izbornik stavki',
         navigationButtonLabel: 'Navigacija',
-        search: 'Pretraži'
+        openSearch: 'Open Search',
+        search: 'Pretraži',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -345,6 +347,7 @@ export default {
         menuOkText: 'OK'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Zatvori',
         previousButton: 'Prethodno'
     },

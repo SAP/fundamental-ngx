@@ -241,7 +241,9 @@ export default {
         cancel: 'Cancel',
         collapsedItemMenuLabel: 'Menyja e artikullit të palosur',
         navigationButtonLabel: 'Navigation',
-        search: 'Search'
+        openSearch: 'Open Search',
+        search: 'Search',
+        shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
         close: 'Close',
@@ -344,6 +346,7 @@ export default {
         menuOkText: 'Ok'
     },
     coreUserMenu: {
+        ariaLabel: 'User Menu',
         closeButton: 'Close',
         previousButton: 'Previous'
     },

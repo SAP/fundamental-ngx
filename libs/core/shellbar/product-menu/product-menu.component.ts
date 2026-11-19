@@ -88,6 +88,20 @@ export class ProductMenuComponent {
     @Input()
     closePopoverOnSelect = false;
 
+    /**
+     * Additional CSS class(es) to apply to the popover body.
+     * Useful for custom styling, such as increasing z-index to prevent browser link previews from overlapping menu items.
+     * @example
+     * ```html
+     * <fd-product-menu [additionalBodyClass]="'custom-z-index'"></fd-product-menu>
+     * ```
+     * ```css
+     * .custom-z-index { z-index: 10000; }
+     * ```
+     */
+    @Input()
+    additionalBodyClass: string | null;
+
     /** @hidden */
     @ViewChild(MenuComponent)
     menu: MenuComponent;
