@@ -1,3 +1,4 @@
+import AxeBuilder from '@axe-core/playwright';
 import type { Locator, Page } from '@playwright/test';
 import { expect, test } from '../../fixtures/base.fixture';
 import { test as cspTest, expectNoStyleViolations, recordGeometry } from '../../fixtures/style-csp.fixture';
@@ -158,6 +159,77 @@ async function verifyFillControlFirstFrame(
 test.describe('core/select', () => {
     test.beforeEach(async ({ goto }) => {
         await goto('core/select/mode');
+    });
+
+    test('preserves ARIA relationships and value through keyboard selection and repeated dismissal', async ({
+        page
+    }) => {
+        const example = page.locator('fd-select-mode-example');
+        const control = example.locator('fd-select').first().getByRole('combobox');
+        const expectOpenRelationships = async (): Promise<Locator> => {
+            await expect(control).toHaveAttribute('aria-expanded', 'true');
+            const listboxId = await control.getAttribute('aria-controls');
+            expect(listboxId).toBeTruthy();
+            const openListbox = page.getByRole('listbox').filter({ has: page.getByRole('option') });
+            await expect(openListbox).toHaveAttribute('id', listboxId ?? '');
+            await expect(openListbox).toBeVisible();
+            const activeId = await control.getAttribute('aria-activedescendant');
+            if (activeId) {
+                await expect(openListbox.locator(`[role="option"][id="${activeId}"]`)).toBeVisible();
+            }
+            return openListbox;
+        };
+
+        await expect(control).toHaveAttribute('aria-expanded', 'false');
+        await control.focus();
+        await page.keyboard.press('Enter');
+        let listbox = await expectOpenRelationships();
+        await page.keyboard.press('Home');
+        await page.keyboard.press('Enter');
+        await expect(control).toContainText('Apple');
+        await expect(listbox).toBeHidden();
+        await expect(control).toBeFocused();
+
+        await page.keyboard.press('Enter');
+        await expectOpenRelationships();
+        await page.keyboard.press('ArrowDown');
+        await expectOpenRelationships();
+        await page.keyboard.press('ArrowUp');
+        await expectOpenRelationships();
+        await page.keyboard.press('ArrowDown');
+        await page.keyboard.press('Enter');
+        await expect(control).toContainText('Pineapple');
+        await expect(example.locator('small').first()).toHaveText('Selected value: Pineapple');
+        await expect(control).toHaveAttribute('aria-expanded', 'false');
+        await expect(control).toBeFocused();
+        for (let cycle = 0; cycle < 2; cycle++) {
+            await page.keyboard.press('Enter');
+            listbox = await expectOpenRelationships();
+            await page.keyboard.press('Escape');
+            await expect(control).toHaveAttribute('aria-expanded', 'false');
+            await expect(listbox).toBeHidden();
+            await expect(control).toBeFocused();
+            await expect(control).toContainText('Pineapple');
+        }
+    });
+
+    test('exposes valid ARIA attributes when closed and keyboard opened', async ({ page }, testInfo) => {
+        const scope = 'fd-select-mode-example > fd-select:first-of-type';
+        const control = page.locator(scope).getByRole('combobox');
+        for (const state of ['closed', 'open']) {
+            if (state === 'open') {
+                await control.focus();
+                await page.keyboard.press('Enter');
+                await expect(control).toHaveAttribute('aria-expanded', 'true');
+            }
+            const results = await new AxeBuilder({ page }).include(scope).withRules(['aria-valid-attr']).analyze();
+            await testInfo.attach(`aria-valid-attr-${state}`, {
+                body: JSON.stringify(results, null, 2),
+                contentType: 'application/json'
+            });
+            expect.soft(await control.getAttribute('aria-active'), state).toBeNull();
+            expect.soft(results.violations, state).toEqual([]);
+        }
     });
 
     test('opens dropdown on click and shows options', async ({ page }) => {
