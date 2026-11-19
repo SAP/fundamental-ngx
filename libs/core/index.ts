@@ -67,6 +67,7 @@ export * from '@fundamental-ngx/core/quick-view';
 export * from '@fundamental-ngx/core/radio';
 export * from '@fundamental-ngx/core/rating-indicator';
 export * from '@fundamental-ngx/core/resizable-card-layout';
+export * from '@fundamental-ngx/core/resize-splitter';
 export * from '@fundamental-ngx/core/scroll-spy';
 export * from '@fundamental-ngx/core/scrollbar';
 export * from '@fundamental-ngx/core/segmented-button';

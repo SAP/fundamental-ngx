@@ -1,25 +1,33 @@
+<div class="side-panel-example__controls">
+    <span>Panel side</span>
+    <fd-radio-button name="basic-side-panel-side" value="right" [(ngModel)]="sideValue"> Right </fd-radio-button>
+    <fd-radio-button name="basic-side-panel-side" value="left" [(ngModel)]="sideValue"> Left </fd-radio-button>
+</div>
 <div class="side-panel-example">
-    <div class="side-panel-example__content">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-        </p>
-        <p>
-            Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis molestie dictum semper,
-            nisl magna feugiat quam, at posuere velit purus ut augue. Sed pulvinar, nisl vel mattis efficitur, odio
-            metus sagittis libero, vel eleifend lacus nunc vitae magna. Praesent blandit laoreet nibh. Fusce convallis
-            metus id felis luctus adipiscing.
-        </p>
-    </div>
     <fd-side-panel
-        side="right"
+        [side]="side()"
         ariaLabel="Actions"
         [activeItem]="activeItem()"
         (activeItemChange)="activeItem.set($event)"
     >
+        <fd-side-panel-main>
+            <div class="side-panel-example__main-content">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis molestie dictum
+                    semper, nisl magna feugiat quam, at posuere velit purus ut augue. Sed pulvinar, nisl vel mattis
+                    efficitur, odio metus sagittis libero, vel eleifend lacus nunc vitae magna. Praesent blandit laoreet
+                    nibh. Fusce convallis metus id felis luctus adipiscing.
+                </p>
+            </div>
+        </fd-side-panel-main>
+
         <fd-side-panel-item id="run" icon="physical-activity" label="Run">
             <ng-template fdSidePanelContent>Run group content</ng-template>
         </fd-side-panel-item>

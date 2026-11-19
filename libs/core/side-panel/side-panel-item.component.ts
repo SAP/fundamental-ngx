@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, contentChild, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, input, ViewEncapsulation } from '@angular/core';
 import { SidePanelContentDirective } from './side-panel-content.directive';
 
 let sidePanelItemId = 0;
@@ -43,6 +43,12 @@ export class SidePanelItemComponent {
      * When not set, no counter is shown.
      */
     readonly counter = input<number>();
+
+    /** @hidden Formatted counter string for the template; `null` when no counter is set. */
+    readonly counterDisplay = computed<string | null>(() => {
+        const count = this.counter();
+        return count === undefined ? null : count > 99 ? '99+' : String(count);
+    });
 
     /** @hidden Captured content template, rendered by the parent while the item is active. */
     readonly content = contentChild(SidePanelContentDirective);

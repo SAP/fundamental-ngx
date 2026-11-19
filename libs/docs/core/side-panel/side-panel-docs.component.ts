@@ -10,6 +10,7 @@ import {
 import { SidePanelBadgesExampleComponent } from './examples/side-panel-badges-example.component';
 import { SidePanelBasicExampleComponent } from './examples/side-panel-basic-example.component';
 import { SidePanelOverflowExampleComponent } from './examples/side-panel-overflow-example.component';
+import { SidePanelResizableExampleComponent } from './examples/side-panel-resizable-example.component';
 import { SidePanelSingleActionExampleComponent } from './examples/side-panel-single-action-example.component';
 
 const exampleScssCode = 'side-panel.component.scss';
@@ -26,6 +27,9 @@ const singleActionExampleTsCode = 'side-panel-single-action-example.component.ts
 const overflowExampleHtmlCode = 'side-panel-overflow-example.component.html';
 const overflowExampleTsCode = 'side-panel-overflow-example.component.ts';
 
+const resizableExampleHtmlCode = 'side-panel-resizable-example.component.html';
+const resizableExampleTsCode = 'side-panel-resizable-example.component.ts';
+
 @Component({
     templateUrl: './side-panel-docs.component.html',
     imports: [
@@ -36,7 +40,8 @@ const overflowExampleTsCode = 'side-panel-overflow-example.component.ts';
         SidePanelBasicExampleComponent,
         SidePanelBadgesExampleComponent,
         SidePanelSingleActionExampleComponent,
-        SidePanelOverflowExampleComponent
+        SidePanelOverflowExampleComponent,
+        SidePanelResizableExampleComponent
     ]
 })
 export class SidePanelDocsComponent {
@@ -87,6 +92,17 @@ export class SidePanelDocsComponent {
             fileName: 'side-panel-overflow-example',
             component: 'SidePanelOverflowExampleComponent',
             typescriptFileCode: getAssetFromModuleAssets(overflowExampleTsCode),
+            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
+        }
+    ];
+
+    resizable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(resizableExampleHtmlCode),
+            fileName: 'side-panel-resizable-example',
+            component: 'SidePanelResizableExampleComponent',
+            typescriptFileCode: getAssetFromModuleAssets(resizableExampleTsCode),
             scssFileCode: getAssetFromModuleAssets(exampleScssCode)
         }
     ];
