@@ -1,3 +1,13 @@
+## 0.66.1-rc.34 (2026-11-19)
+
+### 🩹 Fixes
+
+- **core:** improve dialog accessibility with configurable roles and aria-labels ([#14670](https://github.com/SAP/fundamental-ngx/pull/14670))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.1-rc.33 (2026-11-18)
 
 ### 🩹 Fixes
