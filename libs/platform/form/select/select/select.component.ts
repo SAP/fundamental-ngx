@@ -68,7 +68,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
 
             // set maxWidth default is 40rem
             if (this.maxWidth) {
-                optionItem.setAttribute('style', 'max-width: ' + this.maxWidth + 'px');
+                optionItem.style.maxWidth = this.maxWidth + 'px';
             }
             // by default text will be overlapped, below it will help to truncate
             if (this.noWrapText) {
@@ -140,6 +140,7 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
 
     /** @hidden */
     private _setOptionAttribute(element: HTMLElement, proportion: number): void {
-        element.setAttribute('style', 'width: ' + proportion + '%; max-width: ' + proportion + '%');
+        element.style.width = proportion + '%';
+        element.style.maxWidth = proportion + '%';
     }
 }

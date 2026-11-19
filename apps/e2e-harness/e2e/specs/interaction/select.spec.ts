@@ -1,7 +1,65 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect, test } from '../../fixtures/base.fixture';
+import { test as cspTest, expectNoStyleViolations, recordGeometry } from '../../fixtures/style-csp.fixture';
 
 type DimensionSnapshot = { maxWidth: string; minWidth: string; width: string; renderedWidth: number };
+
+cspTest.describe('SEC-390 Platform Select', () => {
+    for (const scenario of ['select', 'select-ratios']) {
+        cspTest(
+            `initial viewport cap and ${scenario} layout survive strict styles`,
+            async ({ page, goto }, testInfo) => {
+                await goto(`style-csp?case=${scenario}`);
+                const select = page.locator('fdp-select');
+                await expect(select).toBeVisible();
+                const expectedCap = await select.evaluate(
+                    (element) =>
+                        window.innerWidth -
+                        (document.body.offsetWidth - document.body.clientWidth) -
+                        element.getBoundingClientRect().left
+                );
+                const control = select.locator('.fd-select__control');
+                await control.click();
+                const option = page.locator('li[fd-option]').first();
+                await expect(option).toBeVisible();
+                expect
+                    .soft(await option.evaluate((element) => getComputedStyle(element).maxWidth))
+                    .toBe(`${expectedCap}px`);
+                await expect(select.locator('.fd-select__text-content')).toHaveCSS(
+                    'width',
+                    scenario === 'select' ? '240px' : '360px'
+                );
+                if (scenario === 'select-ratios') {
+                    for (const [selector, percent] of [
+                        ['[fd-list-title]', 33],
+                        ['[fd-list-secondary]', 67]
+                    ] as const) {
+                        const actual = await option.locator(selector).evaluate((element) => {
+                            const style = getComputedStyle(element);
+                            const parent = getComputedStyle(element.parentElement!);
+                            return {
+                                maxWidth: style.maxWidth,
+                                width: parseFloat(style.width),
+                                available:
+                                    element.parentElement!.clientWidth -
+                                    parseFloat(parent.paddingLeft) -
+                                    parseFloat(parent.paddingRight)
+                            };
+                        });
+                        expect.soft(actual.maxWidth).toBe(`${percent}%`);
+                        expect.soft(actual.width).toBeCloseTo((actual.available * percent) / 100, 0);
+                    }
+                }
+                await recordGeometry(option, testInfo, scenario);
+                await page.keyboard.press('ArrowDown');
+                await page.keyboard.press('Enter');
+                await expect(option).toBeHidden();
+                await expect(page.locator('output')).not.toBeEmpty();
+                await expectNoStyleViolations(page);
+            }
+        );
+    }
+});
 
 async function verifyFillControlFirstFrame(
     page: Page,

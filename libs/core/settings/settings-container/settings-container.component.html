@@ -2,7 +2,7 @@
     <ng-content select="[fd-settings-list-area]"></ng-content>
 }
 @if (this.showDetailArea()) {
-    <div fd-settings-detail-area style="max-width: 100%; overflow: hidden">
+    <div fd-settings-detail-area>
         <div fd-bar barDesign="header" fd-settings-header>
             <div fd-bar-left>
                 @if (viewMode() !== 'lg' || hasStackedView()) {

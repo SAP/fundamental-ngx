@@ -46,7 +46,7 @@
                     </ng-template>
                 }
             </fd-dialog-header>
-            <fd-dialog-body style="padding: 0">
+            <fd-dialog-body [disablePaddings]="true">
                 <ng-container *ngTemplateOutlet="body"></ng-container>
             </fd-dialog-body>
             <fd-dialog-footer>

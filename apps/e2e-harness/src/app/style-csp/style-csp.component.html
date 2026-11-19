@@ -1,0 +1,97 @@
+<h1>Strict style CSP component fixtures</h1>
+<div class="authorized-sheet">Authorized Angular stylesheet</div>
+@switch (scenario) {
+    @case ('select') {
+        <fdp-select
+            name="produce"
+            ariaLabel="Produce"
+            width="240px"
+            [list]="options"
+            [formControl]="value"
+            [autoResize]="false"
+        />
+        <output>{{ value.value?.value || value.value }}</output>
+    }
+    @case ('select-ratios') {
+        <fdp-select
+            name="produce"
+            ariaLabel="Produce"
+            width="360px"
+            [list]="options"
+            [formControl]="value"
+            [autoResize]="false"
+            [firstColumnRatio]="1"
+            [secondColumnRatio]="2"
+            [showSecondaryText]="true"
+            secondaryKey="secondaryText"
+            [noWrapText]="true"
+        />
+        <output>{{ value.value?.value || value.value }}</output>
+    }
+    @case ('search') {
+        <fdp-search-field
+            placeholder="Search produce"
+            [suggestions]="[{ value: 'Apple' }]"
+            [searchResultsEmptyTemplate]="empty"
+        />
+        <ng-template #empty><span data-testid="empty-results">No matching produce</span></ng-template>
+    }
+    @case ('settings') {
+        <button (click)="settings.pushView(overview, 'Overview'); settings.pushView(detail, 'Wide detail')">
+            Open detail
+        </button>
+        <fd-settings-container #settings backBtnAriaLabel="Back" />
+        <ng-template #overview><p>Overview content</p></ng-template>
+        <ng-template #detail><div class="wide-detail">Wide detail content</div></ng-template>
+    }
+    @case ('dialog') {
+        <button (click)="openDialog()">Open dialog</button>
+    }
+    @case ('message-box') {
+        <button (click)="openMessageBox()">Open message box</button>
+    }
+    @case ('toast') {
+        <button (click)="openToast()">Open from String</button>
+    }
+    @case ('base-toast') {
+        @if (baseVisible()) {
+            <e2e-csp-base-toast #baseToast />
+            <button (click)="enterBase(baseToast)">Enter toast</button>
+            <button (click)="exitBase(baseToast)">Exit toast</button>
+        }
+        <output>{{ baseStatus() }}</output>
+    }
+    @case ('icon') {
+        <fdp-theme-selector-list-icon [size]="56" />
+    }
+    @case ('theme-list') {
+        <div [formGroup]="form">
+            <fdp-theme-selector-list
+                [formItem]="themeItem(custom)"
+                [form]="form"
+                formGroupName="appearance"
+                name="theme"
+            />
+        </div>
+        <ng-template #custom><span data-testid="custom-theme">Custom theme preview</span></ng-template>
+    }
+}
+@if (scenario === 'menu-mobile' || scenario === 'menu-desktop') {
+    <fd-user-menu [mobile]="scenario === 'menu-mobile'">
+        <fd-user-menu-control><button fd-user-menu-control-element>Open user menu</button></fd-user-menu-control>
+        <fd-user-menu-body>
+            <div fd-user-menu-header><div fd-user-menu-user-name>Lisa Miller</div></div>
+            <div fd-user-menu-content-container>
+                <fd-user-menu-list>
+                    <li fd-user-menu-list-item text="Preferences" hasSubmenu [submenu]="submenu"></li>
+                    @for (item of menuItems; track item) {
+                        <li fd-user-menu-list-item [text]="item"></li>
+                    }
+                </fd-user-menu-list>
+            </div>
+        </fd-user-menu-body>
+    </fd-user-menu>
+    <ng-template #submenu>
+        <div fd-user-menu-sublist><li fd-user-menu-list-item text="Theme preferences"></li></div>
+    </ng-template>
+}
