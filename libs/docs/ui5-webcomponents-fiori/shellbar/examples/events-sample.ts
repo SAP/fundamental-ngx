@@ -52,7 +52,7 @@ export class EventsSample {
     }
 
     onNotificationsClick(): void {
-        this.logEvent('Notifications Click', `${this.notificationsCount()} notifications`);
+        this.logEvent('Notifications Click', `Notifications badge clicked (count: ${this.notificationsCount()})`);
     }
 
     onProductSwitchClick(): void {
@@ -71,6 +71,15 @@ export class EventsSample {
     onSearchFieldToggle(event: UI5WrapperCustomEvent<ShellBar, 'ui5SearchFieldToggle'>): void {
         const expanded = event.detail.expanded;
         this.logEvent('Search Field Toggle', `Search field ${expanded ? 'expanded' : 'collapsed'}`);
+    }
+
+    onContentItemVisibilityChange(event: UI5WrapperCustomEvent<ShellBar, 'ui5ContentItemVisibilityChange'>): void {
+        const { items, revealedItems } = event.detail;
+        // items = currently hidden content items; revealedItems = items that just became visible
+        this.logEvent(
+            'Content Item Visibility Change',
+            `${items.length} hidden, ${revealedItems.length} just revealed`
+        );
     }
 
     clearLog(): void {
