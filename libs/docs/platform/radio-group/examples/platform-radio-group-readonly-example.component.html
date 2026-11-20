@@ -1,0 +1,40 @@
+<h3>Read-only Radio Group With Reactive Form</h3>
+<p>
+    The radio group is set to read-only via <code>[readonly]="true"</code>. In read-only state the user must not be able
+    to change the selection — clicking an enabled, unselected label or using the keyboard must not change the value or
+    mark the control dirty. Programmatic updates remain supported.
+</p>
+<fdp-form-group [formGroup]="readonlyForm">
+    <fdp-form-field id="radio-ro-reactive" [rank]="1">
+        <fdp-radio-group
+            name="radio-ro-reactive"
+            [list]="seasons"
+            [isInline]="true"
+            [readonly]="true"
+            formControlName="season"
+        >
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p [style.margin-left.rem]="2">
+    Selected value: {{ readonlyForm.controls.season.value }} <br />
+    Dirty: {{ readonlyForm.dirty }}
+</p>
+
+<hr />
+
+<h3>Read-only Radio Group With Template Driven Form</h3>
+<p>Same read-only behavior using <code>ngModel</code>.</p>
+<fdp-form-group>
+    <fdp-form-field id="radio-ro-ngmodel" [rank]="1">
+        <fdp-radio-group
+            name="radio-ro-ngmodel"
+            [list]="seasons"
+            [isInline]="true"
+            [readonly]="true"
+            [(ngModel)]="favoriteSeason"
+        >
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+<p [style.margin-left.rem]="2">Selected value: {{ favoriteSeason }}</p>

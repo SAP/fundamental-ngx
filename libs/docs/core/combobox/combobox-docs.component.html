@@ -254,3 +254,18 @@
     <fd-combobox-inside-dialog-example></fd-combobox-inside-dialog-example>
 </component-example>
 <code-example [exampleFiles]="comboboxInsideDialogExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="readonly" componentName="combobox"> Read-only State </fd-docs-section-title>
+<description>
+    The combobox can be set to read-only by passing <code>[readOnly]="true"</code>. In read-only state typing and
+    arrow/enter selection must not change the value or mark the control dirty, and programmatic updates remain
+    supported. The optional clear button is only rendered when <code>[showClearButton]="true"</code> (off by default);
+    the first example below enables it to demonstrate that clicking it currently still clears a read-only value, while
+    the second shows a default read-only combobox where typing is correctly blocked.
+</description>
+<component-example>
+    <fd-combobox-readonly-example></fd-combobox-readonly-example>
+</component-example>
+<code-example [exampleFiles]="comboboxReadonlyExample"></code-example>

@@ -20,6 +20,19 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="readonly" componentName="switch"> Read-only State </fd-docs-section-title>
+<description>
+    Switch can be set to read-only by passing <code>[readonly]="true"</code>. In read-only state the user must not be
+    able to toggle the switch (by pointer or keyboard), and doing so must not change the value or mark the control
+    dirty. Programmatic updates remain supported.
+</description>
+<component-example>
+    <fd-switch-readonly-example></fd-switch-readonly-example>
+</component-example>
+<code-example [exampleFiles]="switchReadonly"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="two-way-binding" componentName="switch"> Two-Way Binding </fd-docs-section-title>
 <description>It is possible to two-way bind to the checked property of the fd-switch.</description>
 <component-example>

@@ -1,0 +1,32 @@
+<fdp-form-group [formGroup]="customForm">
+    <fdp-form-field id="switch-readonly-ngmodel" label="Read-only Switch (ngModel)" [rank]="1">
+        <fdp-switch
+            name="switch-readonly-ngmodel"
+            ariaLabel="Read-only Switch ngModel"
+            ariaLabelledBy="switch-readonly-ngmodel-label"
+            [semantic]="false"
+            [readonly]="true"
+            [(ngModel)]="ngModelChecked"
+            [ngModelOptions]="{ standalone: true }"
+        >
+        </fdp-switch>
+    </fdp-form-field>
+
+    <fdp-form-field id="switch-readonly-reactive" label="Read-only Switch (Reactive Forms)" [rank]="1">
+        <fdp-switch
+            name="switch-readonly-reactive"
+            ariaLabel="Read-only Switch Reactive"
+            ariaLabelledBy="switch-readonly-reactive-label"
+            [semantic]="false"
+            [readonly]="true"
+            formControlName="switch"
+        >
+        </fdp-switch>
+    </fdp-form-field>
+</fdp-form-group>
+
+<div [style.padding-left.rem]="2">
+    ngModel value: {{ ngModelChecked }} <br />
+    reactive value: {{ customForm.getRawValue() | json }} <br />
+    form dirty: {{ customForm.dirty }}
+</div>

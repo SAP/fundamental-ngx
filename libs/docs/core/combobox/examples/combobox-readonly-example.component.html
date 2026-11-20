@@ -1,0 +1,41 @@
+<form [formGroup]="customForm" class="examples-column">
+    <!-- With clear button: demonstrates the read-only clear-button bug.
+         The clear (X) button only renders because [showClearButton]="true" is set
+         (it is OFF by default). Clicking the X / pressing Enter on it wipes the
+         value and marks the control dirty even though the combobox is read-only. -->
+    <div fd-form-item>
+        <label fd-form-label>Read-only Combobox — with clear button (shows the bug)</label>
+        <fd-combobox
+            formControlName="withClearButton"
+            [dropdownValues]="dropdownValues"
+            [readOnly]="true"
+            [showClearButton]="true"
+            placeholder="Type some text..."
+        ></fd-combobox>
+    </div>
+    <div>
+        <small>
+            Dirty: {{ customForm.controls.withClearButton.dirty }}<br />
+            Value: {{ customForm.controls.withClearButton.value | json }}
+        </small>
+    </div>
+
+    <!-- Default combobox (no clear button): read-only is respected. Typing and
+         ArrowDown/Enter do not change the value; there is no clear button to bypass
+         the guard. -->
+    <div fd-form-item>
+        <label fd-form-label>Read-only Combobox — default (no clear button)</label>
+        <fd-combobox
+            formControlName="default"
+            [dropdownValues]="dropdownValues"
+            [readOnly]="true"
+            placeholder="Type some text..."
+        ></fd-combobox>
+    </div>
+    <div>
+        <small>
+            Dirty: {{ customForm.controls.default.dirty }}<br />
+            Value: {{ customForm.controls.default.value | json }}
+        </small>
+    </div>
+</form>

@@ -11,6 +11,18 @@
 <code-example [exampleFiles]="datePickerExample"></code-example>
 
 <separator></separator>
+<fd-docs-section-title id="readonly" componentName="date-picker"> Read-only Date Picker </fd-docs-section-title>
+<description>
+    Date Picker can be set to read-only by passing <code>[readonly]="true"</code>. In read-only state the user must not
+    be able to change the value by typing a date into the input or by opening the picker, and such attempts must not
+    mark the control dirty. Programmatic updates remain supported.
+</description>
+<component-example>
+    <fdp-platform-date-picker-readonly-example></fdp-platform-date-picker-readonly-example>
+</component-example>
+<code-example [exampleFiles]="datePickerReadonlyExample"></code-example>
+
+<separator></separator>
 <fd-docs-section-title id="disable-calendar" componentName="date-picker">
     Disable parts of Calendar for selection
 </fd-docs-section-title>

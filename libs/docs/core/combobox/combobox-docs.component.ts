@@ -24,6 +24,7 @@ import { ComboboxIncludesExampleComponent } from './examples/combobox-includes-e
 import { ComboboxInsideDialogExampleComponent } from './examples/combobox-inside-dialog-example.component';
 import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
 import { ComboboxOpenControlExampleComponent } from './examples/combobox-open-control-example.component';
+import { ComboboxReadonlyExampleComponent } from './examples/combobox-readonly-example.component';
 import { ComboboxSearchFieldExampleComponent } from './examples/combobox-search-field-example.component';
 import { ComboboxSearchFunctionExampleComponent } from './examples/combobox-search-function-example.component';
 import { ComboboxTemplateExampleComponent } from './examples/combobox-template-example.component';
@@ -72,6 +73,10 @@ const comboboxInsideDialogT = 'combobox-inside-dialog-example.component.ts';
 const comboboxValuePropertyH = 'combobox-value-property-example.component.html';
 const comboboxValuePropertyT = 'combobox-value-property-example.component.ts';
 
+const comboboxReadonlyScss = 'combobox-readonly-example.component.scss';
+const comboboxReadonlyH = 'combobox-readonly-example.component.html';
+const comboboxReadonlyT = 'combobox-readonly-example.component.ts';
+
 @Component({
     selector: 'fd-combobox-docs',
     templateUrl: './combobox-docs.component.html',
@@ -99,7 +104,8 @@ const comboboxValuePropertyT = 'combobox-value-property-example.component.ts';
         ComboboxDisabledExampleComponent,
         ComboboxBylineExampleComponent,
         ComboboxInsideDialogExampleComponent,
-        ComboboxValuePropertyExampleComponent
+        ComboboxValuePropertyExampleComponent,
+        ComboboxReadonlyExampleComponent
     ]
 })
 export class ComboboxDocsComponent {
@@ -364,6 +370,21 @@ export class ComboboxDocsComponent {
             component: 'ComboboxValuePropertyExampleComponent',
             code: getAssetFromModuleAssets(comboboxValuePropertyT),
             fileName: 'combobox-value-property-example'
+        }
+    ];
+
+    comboboxReadonlyExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(comboboxReadonlyH),
+            fileName: 'combobox-readonly-example',
+            scssFileCode: getAssetFromModuleAssets(comboboxReadonlyScss)
+        },
+        {
+            language: 'typescript',
+            component: 'ComboboxReadonlyExampleComponent',
+            code: getAssetFromModuleAssets(comboboxReadonlyT),
+            fileName: 'combobox-readonly-example'
         }
     ];
 }

@@ -1,0 +1,13 @@
+<label for="readonlyNgModel">Read-only datetime picker (ngModel):</label>
+<br />
+<fdp-datetime-picker name="readonlyNgModel" [(ngModel)]="ngModelDate" [readonly]="true"> </fdp-datetime-picker>
+<br />
+<small>Value: {{ ngModelDate?.toDateString() }}, {{ ngModelDate?.hour }}:{{ ngModelDate?.minute }}</small>
+<br />
+<br />
+<form [formGroup]="readonlyForm">
+    <label for="readonlyReactive">Read-only datetime picker (Reactive Forms):</label>
+    <br />
+    <fdp-datetime-picker name="readonlyReactive" formControlName="datetime" [readonly]="true"> </fdp-datetime-picker>
+</form>
+<small>Dirty: {{ readonlyForm.dirty }}</small>

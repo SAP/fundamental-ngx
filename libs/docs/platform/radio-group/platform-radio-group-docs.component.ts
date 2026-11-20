@@ -8,6 +8,8 @@ const contentRadioGroupSrc = 'platform-radio-group-content-example.component.htm
 const contentRadioGroupSrcCode = 'platform-radio-group-content-example.component.ts';
 const disabledRadioGroupSrc = 'platform-radio-group-disabled-example.component.html';
 const disabledRadioGroupSrcCode = 'platform-radio-group-disabled-example.component.ts';
+const readonlyRadioGroupSrc = 'platform-radio-group-readonly-example.component.html';
+const readonlyRadioGroupSrcCode = 'platform-radio-group-readonly-example.component.ts';
 
 import {
     CodeExampleComponent,
@@ -21,6 +23,7 @@ import { PlatformRadioGroupContentExampleComponent } from './examples/platform-r
 import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-example.component';
 import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-example.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-example.component';
+import { PlatformRadioGroupReadonlyExampleComponent } from './examples/platform-radio-group-readonly-example.component';
 
 @Component({
     selector: 'app-radio-group',
@@ -33,7 +36,8 @@ import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform
         CodeExampleComponent,
         PlatformRadioGroupListExampleComponent,
         PlatformRadioGroupListItemsExampleComponent,
-        PlatformRadioGroupDisabledExampleComponent
+        PlatformRadioGroupDisabledExampleComponent,
+        PlatformRadioGroupReadonlyExampleComponent
     ]
 })
 export class PlatformRadioGroupDocsComponent {
@@ -90,6 +94,20 @@ export class PlatformRadioGroupDocsComponent {
             code: getAssetFromModuleAssets(disabledRadioGroupSrcCode),
             fileName: 'platform-radio-group-disabled-example',
             component: 'PlatformRadioGroupDisabledExampleComponent'
+        }
+    ];
+
+    readonlyRadioGroup: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(readonlyRadioGroupSrc),
+            fileName: 'platform-radio-group-readonly-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(readonlyRadioGroupSrcCode),
+            fileName: 'platform-radio-group-readonly-example',
+            component: 'PlatformRadioGroupReadonlyExampleComponent'
         }
     ];
 }
