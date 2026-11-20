@@ -1,0 +1,93 @@
+import { Component } from '@angular/core';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { SidePanelBasicExampleComponent } from './examples/side-panel-basic-example.component';
+import { SidePanelOverflowExampleComponent } from './examples/side-panel-overflow-example.component';
+import { SidePanelResizableExampleComponent } from './examples/side-panel-resizable-example.component';
+import { SidePanelSingleActionExampleComponent } from './examples/side-panel-single-action-example.component';
+
+const exampleScssCode = 'side-panel.component.scss';
+
+const basicExampleHtmlCode = 'side-panel-basic-example.component.html';
+const basicExampleTsCode = 'side-panel-basic-example.component.ts';
+
+const singleActionExampleHtmlCode = 'side-panel-single-action-example.component.html';
+const singleActionExampleTsCode = 'side-panel-single-action-example.component.ts';
+
+const overflowExampleHtmlCode = 'side-panel-overflow-example.component.html';
+const overflowExampleTsCode = 'side-panel-overflow-example.component.ts';
+
+const resizableExampleHtmlCode = 'side-panel-resizable-example.component.html';
+const resizableExampleTsCode = 'side-panel-resizable-example.component.ts';
+
+@Component({
+    templateUrl: './side-panel-docs.component.html',
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        CodeExampleComponent,
+        SidePanelBasicExampleComponent,
+        SidePanelSingleActionExampleComponent,
+        SidePanelOverflowExampleComponent,
+        SidePanelResizableExampleComponent
+    ]
+})
+export class SidePanelDocsComponent {
+    basic: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(basicExampleHtmlCode),
+            fileName: 'side-panel-basic-example',
+            component: 'SidePanelBasicExampleComponent',
+            typescriptFileCode: getAssetFromModuleAssets(basicExampleTsCode),
+            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
+        },
+        {
+            language: 'scss',
+            code: getAssetFromModuleAssets(exampleScssCode),
+            fileName: 'side-panel',
+            component: 'SidePanelBasicExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
+        }
+    ];
+
+    singleAction: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(singleActionExampleHtmlCode),
+            fileName: 'side-panel-single-action-example',
+            component: 'SidePanelSingleActionExampleComponent',
+            typescriptFileCode: getAssetFromModuleAssets(singleActionExampleTsCode),
+            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
+        }
+    ];
+
+    overflow: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(overflowExampleHtmlCode),
+            fileName: 'side-panel-overflow-example',
+            component: 'SidePanelOverflowExampleComponent',
+            typescriptFileCode: getAssetFromModuleAssets(overflowExampleTsCode),
+            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
+        }
+    ];
+
+    resizable: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(resizableExampleHtmlCode),
+            fileName: 'side-panel-resizable-example',
+            component: 'SidePanelResizableExampleComponent',
+            typescriptFileCode: getAssetFromModuleAssets(resizableExampleTsCode),
+            scssFileCode: getAssetFromModuleAssets(exampleScssCode)
+        }
+    ];
+}

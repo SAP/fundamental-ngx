@@ -948,4 +948,34 @@ export interface FdLanguage {
         /** Text for the information button in the segmented button */
         informationButton: FdLanguageKey;
     };
+    coreSidePanel: {
+        /** Aria label on the nav-arrow button when the action bar is in collapsed mode */
+        navArrowExpand: FdLanguageKey;
+        /** Aria label on the nav-arrow button when the action bar is in expanded mode */
+        navArrowCollapse: FdLanguageKey;
+        /** Aria label and visible label on the overflow toggle button when the popover is closed */
+        overflowShowMore: FdLanguageKey;
+        /** Aria label and visible label on the overflow toggle button when the popover is open */
+        overflowShowLess: FdLanguageKey;
+        /** Aria label on the close button in the content panel header in single-action mode */
+        closePanel: FdLanguageKey;
+        /** Aria label on the close button in the content panel header in multi-action mode */
+        close: FdLanguageKey;
+        /** Aria label for the side panel region landmark */
+        sidePanelLabel: FdLanguageKey;
+        /** Live announcement when the side panel action bar is expanded */
+        expandedAnnouncement: FdLanguageKey;
+        /** Live announcement when the side panel action bar is collapsed */
+        collapsedAnnouncement: FdLanguageKey;
+        /** Width-menu item that expands the content panel to its maximum width */
+        resizeExpandToMax: FdLanguageKey;
+        /** Width-menu item that collapses the content panel to its minimum width */
+        resizeCollapseToMin: FdLanguageKey;
+        /** Width-menu item that resets the content panel to its default width */
+        resizeResetToDefault: FdLanguageKey;
+        /** ARIA label for the side panel resize splitter */
+        resizeSplitterLabel: FdLanguageKey;
+        /** Fallback accessible label for the side panel action bar listbox */
+        actionsLabel: FdLanguageKey;
+    };
 }
