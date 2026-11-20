@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Saat'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Yeniden boyutlandırılabilir'
     },
     coreDynamicPage: {

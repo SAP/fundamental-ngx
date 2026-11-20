@@ -96,6 +96,9 @@ export default {
         displayTypeTimeLabel: 'Уақыт'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Өлшемі өзгертіледі'
     },
     coreDynamicPage: {

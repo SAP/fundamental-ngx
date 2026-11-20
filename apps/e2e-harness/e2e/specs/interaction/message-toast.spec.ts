@@ -1,5 +1,32 @@
 import { Locator } from '@playwright/test';
 import { expect, test } from '../../fixtures/base.fixture';
+import { test as cspTest, expectNoStyleViolations, recordGeometry } from '../../fixtures/style-csp.fixture';
+
+cspTest.describe('SEC-390 MessageToast', () => {
+    cspTest.use({ reducedMotion: 'no-preference' });
+    for (const animated of [true, false]) {
+        cspTest(`initial styles and completion with animated=${animated}`, async ({ page, goto }, testInfo) => {
+            await goto(`style-csp?case=toast&animated=${animated}`);
+            await page.getByRole('button', { name: 'Open from String' }).click();
+            const toast = page.locator('fd-message-toast');
+            await expect(toast).toHaveCSS('opacity', '1');
+            await expect(toast).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 0, 0)');
+            await expect(toast).toHaveCSS('width', '240px');
+            if (animated) {
+                const initial = await page.evaluate(() =>
+                    (window as any).__styleCsp.initial.find(
+                        (sample: { tag: string; phase: string }) =>
+                            sample.tag === 'fd-message-toast' && sample.phase === 'before-animation'
+                    )
+                );
+                expect.soft(initial).toMatchObject({ opacity: '0', transform: 'matrix(1, 0, 0, 1, 0, 16)' });
+            }
+            await recordGeometry(toast, testInfo, `toast-${animated}`);
+            await expect(toast).toHaveCount(0);
+            await expectNoStyleViolations(page);
+        });
+    }
+});
 
 async function boundingBoxOf(locator: Locator): Promise<{ x: number; y: number; width: number; height: number }> {
     const box = await locator.boundingBox();

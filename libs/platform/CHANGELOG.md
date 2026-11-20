@@ -1,3 +1,33 @@
+## 0.66.1-rc.39 (2026-11-19)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.38 (2026-11-19)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.37 (2026-11-19)
+
+### 🩹 Fixes
+
+- **core:** replace inline styling with CSP-compatible component styles ([#14683](https://github.com/SAP/fundamental-ngx/pull/14683))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.66.1-rc.36 (2026-11-19)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.35 (2026-11-19)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.1-rc.34 (2026-11-19)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.66.1-rc.33 (2026-11-18)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.

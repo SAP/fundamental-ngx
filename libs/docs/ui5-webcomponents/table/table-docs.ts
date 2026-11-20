@@ -11,6 +11,7 @@ import { BasicTableSample } from './examples/basic-sample';
 import { DragAndDropTableSample } from './examples/drag-and-drop-sample';
 import { GrowingTableSample } from './examples/growing-sample';
 import { HeaderCellAISample } from './examples/header-cell-ai-sample';
+import { InteractiveHeaderCellTableSample } from './examples/interactive-header-cell-sample';
 import { InteractiveRowsTableSample } from './examples/interactive-rows-sample';
 import { NoDataTableSample } from './examples/no-data-sample';
 import { OverflowModeTableSample } from './examples/overflow-mode-sample';
@@ -38,6 +39,8 @@ const rowActionSampleHtml = 'row-action-sample.html';
 const rowActionSampleTs = 'row-action-sample.ts';
 const headerCellAISampleHtml = 'header-cell-ai-sample.html';
 const headerCellAISampleTs = 'header-cell-ai-sample.ts';
+const interactiveHeaderCellSampleHtml = 'interactive-header-cell-sample.html';
+const interactiveHeaderCellSampleTs = 'interactive-header-cell-sample.ts';
 
 @Component({
     selector: 'ui5-table-docs',
@@ -57,7 +60,8 @@ const headerCellAISampleTs = 'header-cell-ai-sample.ts';
         SelectableTableSample,
         GrowingTableSample,
         RowActionTableSample,
-        HeaderCellAISample
+        HeaderCellAISample,
+        InteractiveHeaderCellTableSample
     ]
 })
 export class TableDocs {
@@ -201,6 +205,20 @@ export class TableDocs {
         }
     ]);
 
+    private readonly interactiveHeaderCellExampleFiles = signal<ExampleFile[]>([
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(interactiveHeaderCellSampleHtml),
+            originalFileName: 'interactive-header-cell-sample'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(interactiveHeaderCellSampleTs),
+            component: 'InteractiveHeaderCellTableSample',
+            originalFileName: 'interactive-header-cell-sample'
+        }
+    ]);
+
     readonly examples = computed(() => this.exampleFiles());
     readonly selectableExamples = computed(() => this.selectableExampleFiles());
     readonly growingExamples = computed(() => this.growingExampleFiles());
@@ -211,4 +229,5 @@ export class TableDocs {
     readonly dragAndDropExamples = computed(() => this.dragAndDropExampleFiles());
     readonly rowActionExamples = computed(() => this.rowActionExampleFiles());
     readonly headerCellAIExamples = computed(() => this.headerCellAIExampleFiles());
+    readonly interactiveHeaderCellExamples = computed(() => this.interactiveHeaderCellExampleFiles());
 }

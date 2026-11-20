@@ -140,3 +140,20 @@ fd-user-menu-control:is(:focus) {
 .fd-user-menu__footer {
     min-height: 2rem;
 }
+
+.fd-user-menu__mobile-header.fd-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.fd-user-menu__mobile-user-name.fd-user-menu__user-name {
+    text-align: center;
+    margin-inline-start: 2.75rem;
+}
+
+.fd-user-menu__submenu-popover {
+    width: 100%;
+}

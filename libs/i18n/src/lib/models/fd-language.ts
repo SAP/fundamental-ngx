@@ -135,6 +135,12 @@ export interface FdLanguage {
     coreDialog: {
         /** Resizable description */
         resizable: FdLanguageKey;
+        /** Default aria-label for dialog header */
+        headerAriaLabel: FdLanguageKey;
+        /** Default aria-label for dialog body */
+        bodyAriaLabel: FdLanguageKey;
+        /** Default aria-label for dialog footer */
+        footerAriaLabel: FdLanguageKey;
     };
     coreDynamicPage: {
         breadcrumbsLabel: FdLanguageKey;

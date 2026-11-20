@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: '시간'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: '크기 조정 가능'
     },
     coreDynamicPage: {

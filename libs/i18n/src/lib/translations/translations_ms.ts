@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Masa'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Boleh diubah saiz semula'
     },
     coreDynamicPage: {

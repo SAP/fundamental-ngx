@@ -1,0 +1,44 @@
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #editDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 id="fd-tooltip-dialog-title" fd-title>Edit Document</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <p>Tab to a button, wait for its tooltip, then press Escape twice.</p>
+            <div class="fd-tooltip-dialog-example">
+                <button
+                    fd-button
+                    glyph="save"
+                    aria-label="Save"
+                    fdTooltip="Save (Ctrl+S)"
+                    fdTooltipKeyShortcuts="Control+S"
+                    fdTooltipPlacement="top"
+                ></button>
+                <button
+                    fd-button
+                    glyph="undo"
+                    aria-label="Undo"
+                    fdTooltip="Undo (Ctrl+Z)"
+                    fdTooltipKeyShortcuts="Control+Z"
+                    fdTooltipPlacement="top"
+                ></button>
+                <button
+                    fd-button
+                    glyph="redo"
+                    aria-label="Redo"
+                    fdTooltip="Redo (Ctrl+Y)"
+                    fdTooltipKeyShortcuts="Control+Y"
+                    fdTooltipPlacement="top"
+                ></button>
+            </div>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar label="Close" (click)="dialog.dismiss('Close button')"></fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open Dialog" (click)="openDialog(editDialog)"></button>
+<p>{{ closeReason() }}</p>

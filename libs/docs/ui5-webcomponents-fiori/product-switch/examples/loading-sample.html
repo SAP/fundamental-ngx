@@ -1,0 +1,11 @@
+<button fd-button label="Toggle Loading" (click)="toggleLoading()"></button>
+
+<ui5-product-switch [loading]="loading()" [loadingDelay]="0">
+    @for (product of products(); track product.id) {
+    <ui5-product-switch-item
+        [titleText]="product.title"
+        [subtitleText]="product.subtitle"
+        [icon]="product.icon"
+    ></ui5-product-switch-item>
+    }
+</ui5-product-switch>

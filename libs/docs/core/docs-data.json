@@ -312,6 +312,10 @@
             "name": "Toolbar"
         },
         {
+            "url": "core/tooltip",
+            "name": "Tooltip"
+        },
+        {
             "url": "core/object-number",
             "name": "Object Number"
         },

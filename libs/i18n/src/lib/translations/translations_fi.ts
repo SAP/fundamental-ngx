@@ -95,6 +95,9 @@ export default {
         displayTypeTimeLabel: 'Aika'
     },
     coreDialog: {
+        bodyAriaLabel: 'Content',
+        footerAriaLabel: 'Footer',
+        headerAriaLabel: 'Header',
         resizable: 'Koko muutettavissa'
     },
     coreDynamicPage: {

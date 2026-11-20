@@ -41,6 +41,11 @@
         width: 100%;
         bottom: 0;
     }
+
+    &__empty-results {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
 }
 
 fdp-search-field {

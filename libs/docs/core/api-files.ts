@@ -452,6 +452,7 @@ export const API_FILES = {
     slider: ['SliderComponent', 'SliderPositionDirective'],
     token: ['TokenComponent', 'TokenizerComponent', 'TokenizerInputDirective'],
     toolbar: ['ToolbarComponent', 'ToolbarItemDirective', 'ToolbarSpacerDirective'],
+    tooltip: ['TooltipDirective', 'TooltipCoordinator'],
     tree: ['TreeComponent', 'TreeItemComponent', 'TreeItemDefDirective', 'TreeDataSourceParser', 'TreeItemDirective'],
     ratingIndicator: ['RatingIndicatorComponent', 'RatingStarLabelPipe'],
     wizard: [

@@ -2,11 +2,7 @@ import { DestroyRef, Directive, ElementRef, OnDestroy, inject } from '@angular/c
 import { BaseToastConfig } from './base-toast-config';
 import { BaseToastContainerComponent } from './base-toast-container.component';
 
-@Directive({
-    host: {
-        style: 'opacity: 0; transform: translateY(1rem)'
-    }
-})
+@Directive()
 export abstract class BaseToastAnimatedContainerComponent<P extends BaseToastConfig>
     extends BaseToastContainerComponent<P>
     implements OnDestroy
@@ -27,6 +23,15 @@ export abstract class BaseToastAnimatedContainerComponent<P extends BaseToastCon
     constructor(config: P) {
         super(config);
         this._animated = config.animated !== false;
+
+        // Initialize before enter without replacing consumer styles or resetting completed animations.
+        const el: HTMLElement = this._elementRef.nativeElement;
+        if (!el.style.opacity) {
+            el.style.opacity = '0';
+        }
+        if (!el.style.transform) {
+            el.style.transform = 'translateY(1rem)';
+        }
 
         // Register cleanup for animations
         this._destroyRef.onDestroy(() => {
