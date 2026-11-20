@@ -12,6 +12,7 @@ import { PlatformChekboxNoFormComponent } from './examples/platform-binary-check
 import { PlatformCompactChekboxExampleComponent } from './examples/platform-binary-checkbox.component';
 import { PlatformChekboxA11yExampleComponent } from './examples/platform-checkbox-a11y.component';
 import { PlatformChekboxStyleComponent } from './examples/platform-checkbox-error-handling.component';
+import { PlatformChekboxReadonlyComponent } from './examples/platform-checkbox-readonly.component';
 import { PlatformCozyChekboxExampleComponent } from './examples/platform-multiselect-checkbox.component';
 import { PlatformChekboxTristateComponent } from './examples/platform-tristate-checkbox.component';
 const multiselectCheckboxhtml = 'platform-multiselect-checkbox.component.html';
@@ -26,6 +27,8 @@ const triCheckboxhtml = 'platform-tristate-checkbox.component.html';
 const triCheckboxSrc = 'platform-tristate-checkbox.component.ts';
 const a11yCheckboxhtml = 'platform-checkbox-a11y.component.html';
 const a11yCheckboxSrc = 'platform-checkbox-a11y.component.ts';
+const readonlyCheckboxhtml = 'platform-checkbox-readonly.component.html';
+const readonlyCheckboxSrc = 'platform-checkbox-readonly.component.ts';
 
 @Component({
     selector: 'app-checkbox',
@@ -41,7 +44,8 @@ const a11yCheckboxSrc = 'platform-checkbox-a11y.component.ts';
         PlatformCozyChekboxExampleComponent,
         PlatformChekboxTristateComponent,
         PlatformChekboxStyleComponent,
-        PlatformChekboxA11yExampleComponent
+        PlatformChekboxA11yExampleComponent,
+        PlatformChekboxReadonlyComponent
     ]
 })
 export class PlatformCheckboxDocsComponent {
@@ -126,6 +130,20 @@ export class PlatformCheckboxDocsComponent {
             code: getAssetFromModuleAssets(a11yCheckboxSrc),
             fileName: 'platform-checkbox-a11y',
             component: 'PlatformChekboxA11yExampleComponent'
+        }
+    ];
+
+    readonlyCheckbox: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(readonlyCheckboxhtml),
+            fileName: 'platform-checkbox-readonly'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(readonlyCheckboxSrc),
+            fileName: 'platform-checkbox-readonly',
+            component: 'PlatformChekboxReadonlyComponent'
         }
     ];
 }

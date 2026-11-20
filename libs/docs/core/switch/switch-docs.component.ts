@@ -17,10 +17,12 @@ import { DisabledSwitchExampleComponent } from './examples/disabled-switch-examp
 import { SemanticSwitchExampleComponent } from './examples/semantic-switch-example/semantic-switch-example.component';
 import { SwitchBindingExampleComponent } from './examples/switch-binding-example/switch-binding-example.component';
 import { SwitchFormsExampleComponent } from './examples/switch-form-example/switch-forms-example.component';
+import { SwitchReadonlyExampleComponent } from './examples/switch-readonly-example/switch-readonly-example.component';
 import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/switch-sizes-example.component';
 
 const switchSizeExampleScssCode = 'switch-sizes-example/switch-sizes-example.component.scss';
 const switchDisableExampleScssCode = 'disabled-switch-example/disabled-switch-example.component.scss';
+const switchReadonlyExampleScssCode = 'switch-readonly-example/switch-readonly-example.component.scss';
 const switchBindingExampleScssCode = 'switch-binding-example/switch-binding-example.component.scss';
 
 const switchFormExampleScssCode = 'switch-form-example/switch-forms-example.component.scss';
@@ -29,6 +31,8 @@ const switchSizeExample = 'switch-sizes-example/switch-sizes-example.component.h
 const switchSizeExampleTsCode = 'switch-sizes-example/switch-sizes-example.component.ts';
 const switchDisableExample = 'disabled-switch-example/disabled-switch-example.component.html';
 const switchDisableExampleTsCode = 'disabled-switch-example/disabled-switch-example.component.ts';
+const switchReadonlyExample = 'switch-readonly-example/switch-readonly-example.component.html';
+const switchReadonlyExampleTsCode = 'switch-readonly-example/switch-readonly-example.component.ts';
 const switchBindingExampleHtml = 'switch-binding-example/switch-binding-example.component.html';
 const switchBindingExampleTsCode = 'switch-binding-example/switch-binding-example.component.ts';
 const switchFormExampleHtmlSrc = 'switch-form-example/switch-forms-example.component.html';
@@ -47,6 +51,7 @@ const semanticSwitchExampleTs = 'semantic-switch-example/semantic-switch-example
         CodeExampleComponent,
         SeparatorComponent,
         DisabledSwitchExampleComponent,
+        SwitchReadonlyExampleComponent,
         SwitchBindingExampleComponent,
         SemanticSwitchExampleComponent,
         SwitchFormsExampleComponent,
@@ -87,6 +92,17 @@ export class SwitchDocsComponent {
             typescriptFileCode: getAssetFromModuleAssets(switchDisableExampleTsCode),
             component: 'DisabledSwitchExampleComponent',
             scssFileCode: getAssetFromModuleAssets(switchDisableExampleScssCode)
+        }
+    ];
+
+    switchReadonly: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'switch-readonly-example',
+            code: getAssetFromModuleAssets(switchReadonlyExample),
+            typescriptFileCode: getAssetFromModuleAssets(switchReadonlyExampleTsCode),
+            component: 'SwitchReadonlyExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(switchReadonlyExampleScssCode)
         }
     ];
 

@@ -18,6 +18,7 @@ import { MultiComboboxGroupExampleComponent } from './examples/multi-combobox-gr
 import { MultiComboboxInsideDialogExampleComponent } from './examples/multi-combobox-inside-dialog/multi-combobox-inside-dialog-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
 import { MultiComboboxMobileExampleComponent } from './examples/multi-combobox-mobile/multi-combobox-mobile-example.component';
+import { MultiComboboxReadonlyExampleComponent } from './examples/multi-combobox-readonly/multi-combobox-readonly-example.component';
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 import { MultiComboboxResponsiveTokenizerExampleComponent } from './examples/tokenizer/multi-combobox-responsive-tokenizer-example.component';
 
@@ -37,6 +38,8 @@ const multiComboboxColumnsHtml = 'multi-combobox-columns/multi-combobox-columns-
 const multiComboboxColumnsTs = 'multi-combobox-columns/multi-combobox-columns-example.component.ts';
 const multiComboboxStatesHtml = 'multi-combobox-states/multi-combobox-states-example.component.html';
 const multiComboboxStatesTs = 'multi-combobox-states/multi-combobox-states-example.component.ts';
+const multiComboboxReadonlyHtml = 'multi-combobox-readonly/multi-combobox-readonly-example.component.html';
+const multiComboboxReadonlyTs = 'multi-combobox-readonly/multi-combobox-readonly-example.component.ts';
 const multiComboboxLoadingHtml = 'multi-combobox-loading/multi-combobox-loading-example.component.html';
 const multiComboboxLoadingTs = 'multi-combobox-loading/multi-combobox-loading-example.component.ts';
 const multiComboboxTokenizerHtml = 'tokenizer/multi-combobox-responsive-tokenizer-example.component.html';
@@ -63,6 +66,7 @@ const multiComboboxInsideDialogTs = 'multi-combobox-inside-dialog/multi-combobox
         MultiComboboxGroupExampleComponent,
         MultiComboboxColumnsExampleComponent,
         MultiComboboxStatesExampleComponent,
+        MultiComboboxReadonlyExampleComponent,
         MultiComboboxFormsExampleComponent,
         MultiComboboxLoadingExampleComponent,
         MultiComboboxResponsiveTokenizerExampleComponent,
@@ -166,6 +170,20 @@ export class MultiComboboxDocsComponent {
             fileName: 'multi-combobox-states-example',
             code: getAssetFromModuleAssets(multiComboboxStatesTs),
             component: 'MultiComboboxStatesExampleComponent'
+        }
+    ];
+
+    multiComboboxReadonlyExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-readonly-example',
+            code: getAssetFromModuleAssets(multiComboboxReadonlyHtml)
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-readonly-example',
+            code: getAssetFromModuleAssets(multiComboboxReadonlyTs),
+            component: 'MultiComboboxReadonlyExampleComponent'
         }
     ];
 

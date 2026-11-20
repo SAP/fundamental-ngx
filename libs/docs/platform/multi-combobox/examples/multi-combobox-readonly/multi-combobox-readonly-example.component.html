@@ -1,0 +1,23 @@
+<!--
+    Read-only multi-combobox with pre-selected tokens.
+    While read-only, the user must NOT be able to:
+      - type into the text input,
+      - delete a token via Backspace then Delete,
+      - remove a token by clicking its close (X) icon.
+    None of those actions should change the value or mark the control dirty.
+    Programmatic updates remain supported.
+-->
+<form [formGroup]="customForm">
+    <label for="readonlyCombo">Read-only Multi-Combobox (Reactive Forms):</label>
+    <fdp-multi-combobox
+        name="readonlyCombo"
+        inputId="readonlyCombo"
+        placeholder="Select items..."
+        [dataSource]="dataSource"
+        displayKey="name"
+        [readonly]="true"
+        formControlName="readonlyCombo"
+    ></fdp-multi-combobox>
+    <p>Form Value: {{ customForm.controls.readonlyCombo.value | json }}</p>
+    <p>Dirty: {{ customForm.controls.readonlyCombo.dirty }}</p>
+</form>

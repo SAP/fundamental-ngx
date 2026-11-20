@@ -13,12 +13,15 @@ import { DisabledSwitchExampleComponent } from './examples/disabled-switch-examp
 import { SemanticSwitchExampleComponent } from './examples/semantic-switch-example/semantic-switch-example.component';
 import { SwitchConfigExampleComponent } from './examples/switch-config-example/switch-config-example.component';
 import { SwitchFormsExampleComponent } from './examples/switch-form-example/switch-forms-example.component';
+import { SwitchReadonlyExampleComponent } from './examples/switch-readonly-example/switch-readonly-example.component';
 import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/switch-sizes-example.component';
 
 const switchSizeHtml = 'switch-sizes-example/switch-sizes-example.component.html';
 const switchSizeTs = 'switch-sizes-example/switch-sizes-example.component.ts';
 const switchDisableHtml = 'disabled-switch-example/disabled-switch-example.component.html';
 const switchDisableTs = 'disabled-switch-example/disabled-switch-example.component.ts';
+const switchReadonlyHtml = 'switch-readonly-example/switch-readonly-example.component.html';
+const switchReadonlyTs = 'switch-readonly-example/switch-readonly-example.component.ts';
 const switchSemanticHtml = 'semantic-switch-example/semantic-switch-example.component.html';
 const switchSemanticTs = 'semantic-switch-example/semantic-switch-example.component.ts';
 const switchFormExampleHtml = 'switch-form-example/switch-forms-example.component.html';
@@ -37,6 +40,7 @@ const switchConfigExampleTs = 'switch-config-example/switch-config-example.compo
         CodeExampleComponent,
         SeparatorComponent,
         DisabledSwitchExampleComponent,
+        SwitchReadonlyExampleComponent,
         SemanticSwitchExampleComponent,
         SwitchFormsExampleComponent,
         SwitchConfigExampleComponent
@@ -68,6 +72,20 @@ export class SwitchDocsComponent {
             code: getAssetFromModuleAssets(switchDisableTs),
             fileName: 'disabled-switch-example',
             component: 'DisabledSwitchExampleComponent'
+        }
+    ];
+
+    switchReadonly: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(switchReadonlyHtml),
+            fileName: 'switch-readonly-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(switchReadonlyTs),
+            fileName: 'switch-readonly-example',
+            component: 'SwitchReadonlyExampleComponent'
         }
     ];
 

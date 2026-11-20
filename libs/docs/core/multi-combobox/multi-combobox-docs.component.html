@@ -99,6 +99,21 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="readonly" componentName="multi-combobox"> Read-only State </fd-docs-section-title>
+<description>
+    The Multi Combobox can be set to read-only by passing <code>[readonly]="true"</code>. In read-only state the user
+    must not be able to type to filter, open the dropdown, or delete a token — neither via the token close icon nor via
+    the keyboard (focusing the input, pressing Backspace to move focus to a token, then Delete). None of these actions
+    should change the value or mark the control dirty. Programmatic updates (<code>setValue</code>, <code>reset</code>,
+    etc.) remain supported.
+</description>
+<component-example>
+    <fd-multi-combobox-readonly-example></fd-multi-combobox-readonly-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxReadonlyExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="reactive-form" componentName="multi-combobox"> Reactive Form </fd-docs-section-title>
 <description> The Multi-Combobox component may also be used within Angular Reactive Forms. </description>
 <component-example>

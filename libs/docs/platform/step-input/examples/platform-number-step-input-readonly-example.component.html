@@ -1,0 +1,17 @@
+<main class="fd-page">
+    <div class="fd-page__content fd-has-background-color-neutral-2">
+        <!-- Read-only is achieved with [editable]="false". NOTE: the inherited
+             [readonly] input from BaseInput is currently ignored by step input
+             (canChangeValue checks `editable`, not `readonly`). -->
+        <label fd-form-label> Read-only Number Step Input (template-driven / ngModel) </label>
+        <fdp-number-step-input name="qtyNgModel" [(ngModel)]="qty" [editable]="false"></fdp-number-step-input>
+        <pre>Qty: {{ qty }}</pre>
+
+        <form [formGroup]="readonlyForm">
+            <label fd-form-label> Read-only Number Step Input (reactive form) </label>
+            <fdp-number-step-input name="qtyReactive" formControlName="qty" [editable]="false"></fdp-number-step-input>
+        </form>
+        <pre>Form value: {{ readonlyForm.value | json }}</pre>
+        <pre>Form dirty: {{ readonlyForm.dirty }}</pre>
+    </div>
+</main>

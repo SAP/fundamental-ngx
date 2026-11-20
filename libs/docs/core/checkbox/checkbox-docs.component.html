@@ -116,3 +116,22 @@
     <fd-checkbox-states-example></fd-checkbox-states-example>
 </component-example>
 <code-example [exampleFiles]="checkboxStates"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="readonly" componentName="checkbox"> Read-only Checkbox </fd-docs-section-title>
+<description>
+    A checkbox can be made read-only with <code>[readonly]="true"</code>. In the read-only state a user must not be able
+    to toggle the checkbox, and doing so must not change the value or mark the control dirty, while programmatic updates
+    remain supported.
+    <br />
+    <br />
+    <strong>Note:</strong> This is currently a partial gap. Normal pointer clicks, label clicks and the
+    <code>Space</code> key are correctly blocked, but a direct native <code>input.click()</code> still flips the
+    underlying checkbox's <code>checked</code> state without updating the model, dirty state or
+    <code>aria-checked</code>. This example is provided so that path can be manually verified.
+</description>
+<component-example>
+    <fd-checkbox-readonly-example></fd-checkbox-readonly-example>
+</component-example>
+<code-example [exampleFiles]="checkboxReadonly"></code-example>

@@ -14,6 +14,8 @@ const platformMultiInputMobileExample = 'platform-multi-input-mobile-example.com
 const platformMultiInputMobileExampleTs = 'platform-multi-input-mobile-example.component.ts';
 const platformMultiInputReactiveExample = 'platform-multi-input-reactive-example.component.html';
 const platformMultiInputReactiveExampleTs = 'platform-multi-input-reactive-example.component.ts';
+const platformMultiInputReadonlyExample = 'platform-multi-input-readonly-example.component.html';
+const platformMultiInputReadonlyExampleTs = 'platform-multi-input-readonly-example.component.ts';
 const PlatformMultiInputCompactExampleComponent = 'platform-multi-input-compact-example.component.html';
 const PlatformMultiInputCompactExampleComponentTs = 'platform-multi-input-compact-example.component.ts';
 const PlatformMultiInputLoadingExampleComponent = 'platform-multi-input-loading-example.component.html';
@@ -37,6 +39,7 @@ import { PlatformMultiInputGroupedExampleComponent } from './examples/platform-m
 import { PlatformMultiInputLoadingExampleComponent as PlatformMultiInputLoadingExampleComponent_1 } from './examples/platform-multi-input-loading-example.component';
 import { PlatformMultiInputMobileExampleComponent } from './examples/platform-multi-input-mobile-example.component';
 import { PlatformMultiInputReactiveExampleComponent } from './examples/platform-multi-input-reactive-example.component';
+import { PlatformMultiInputReadonlyExampleComponent } from './examples/platform-multi-input-readonly-example.component';
 
 @Component({
     selector: 'fd-platform-multi-input-docs',
@@ -55,7 +58,8 @@ import { PlatformMultiInputReactiveExampleComponent } from './examples/platform-
         PlatformMultiInputDisabledExampleComponent,
         PlatformMultiInputMobileExampleComponent,
         PlatformMultiInputReactiveExampleComponent,
-        PlatformMultiInputLoadingExampleComponent_1
+        PlatformMultiInputLoadingExampleComponent_1,
+        PlatformMultiInputReadonlyExampleComponent
     ]
 })
 export class PlatformMultiInputDocsComponent {
@@ -174,6 +178,19 @@ export class PlatformMultiInputDocsComponent {
             code: getAssetFromModuleAssets(PlatformMultiInputLoadingExampleComponentTs),
             fileName: 'platform-multi-input-loading-example',
             component: 'PlatformMultiInputLoadingExampleComponent'
+        }
+    ];
+    multiInputReadonly: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(platformMultiInputReadonlyExample),
+            fileName: 'platform-multi-input-readonly-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(platformMultiInputReadonlyExampleTs),
+            fileName: 'platform-multi-input-readonly-example',
+            component: 'PlatformMultiInputReadonlyExampleComponent'
         }
     ];
 }

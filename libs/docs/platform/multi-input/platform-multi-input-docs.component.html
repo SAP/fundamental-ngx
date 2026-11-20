@@ -98,3 +98,17 @@
     <fdp-platform-multi-input-loading-example></fdp-platform-multi-input-loading-example>
 </component-example>
 <code-example [exampleFiles]="multiInputLoading"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="readonly" componentName="multi-input"> Read-only State </fd-docs-section-title>
+<description>
+    Multi Input can be marked read-only by passing <code>[readonly]="true"</code>. In read-only state the user must not
+    be able to delete the pre-selected tokens — neither by clicking a token close icon nor with the keyboard (focusing a
+    token and pressing <code>Backspace</code>/<code>Delete</code>) — and text typing is blocked. None of these actions
+    should change the value or mark the control dirty. Programmatic updates remain supported.
+</description>
+<component-example>
+    <fdp-platform-multi-input-readonly-example></fdp-platform-multi-input-readonly-example>
+</component-example>
+<code-example [exampleFiles]="multiInputReadonly"></code-example>

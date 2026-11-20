@@ -64,3 +64,17 @@
     <fdp-platform-checkbox-a11y></fdp-platform-checkbox-a11y>
 </component-example>
 <code-example [exampleFiles]="a11yCheckbox"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="readonly" componentName="checkbox"> Read-only Checkbox </fd-docs-section-title>
+<description>
+    A checkbox can be set to read-only by passing <code>[readonly]="true"</code>. In the read-only state the user must
+    not be able to change the value through normal interaction, and doing so must not mark the control dirty.
+    Programmatic updates remain supported. Note: this is a partial native-activation gap — normal pointer and Space
+    interaction are protected, but a direct native <code>input.click()</code> can still flip the checked state without
+    updating the model or ARIA. Use this example to verify the read-only behavior across those paths.
+</description>
+<component-example>
+    <fdp-platform-checkbox-readonly></fdp-platform-checkbox-readonly>
+</component-example>
+<code-example [exampleFiles]="readonlyCheckbox"></code-example>
