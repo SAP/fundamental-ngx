@@ -1,3 +1,13 @@
+## 0.66.1 (2026-11-20)
+
+### 🩹 Fixes
+
+- **core:** replace inline styling with CSP-compatible component styles ([#14683](https://github.com/SAP/fundamental-ngx/pull/14683))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1-rc.39 (2026-11-19)
 
 This was a version bump only for cdk to align it with other projects, there were no code changes.

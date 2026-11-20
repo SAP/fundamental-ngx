@@ -1,3 +1,36 @@
+## 0.66.1 (2026-11-20)
+
+### 🚀 Features
+
+- **core:** add Tooltip directive with comprehensive accessibility support ([#14640](https://github.com/SAP/fundamental-ngx/pull/14640))
+- **core:** introduce new features to number input ([#14626](https://github.com/SAP/fundamental-ngx/pull/14626))
+
+### 🩹 Fixes
+
+- **core:** replace inline styling with CSP-compatible component styles ([#14683](https://github.com/SAP/fundamental-ngx/pull/14683))
+- **core:** improve dialog accessibility with configurable roles and aria-labels ([#14670](https://github.com/SAP/fundamental-ngx/pull/14670))
+- **core:** show tooltip on fd-input-group addon button ([#14680](https://github.com/SAP/fundamental-ngx/pull/14680))
+- **core:** prevent selection changes in read-only radio groups ([#14678](https://github.com/SAP/fundamental-ngx/pull/14678))
+- **core:** add additionalBodyClass input to fd-product-menu ([#14682](https://github.com/SAP/fundamental-ngx/pull/14682))
+- **core:** shellbar responsiveness updates, support for multiple context areas, a11y improvements ([#14621](https://github.com/SAP/fundamental-ngx/pull/14621))
+- **core:** add padding configuration inputs to CardContentComponent ([#14668](https://github.com/SAP/fundamental-ngx/pull/14668))
+- **core,platform:** various shell search results improvements ([#14641](https://github.com/SAP/fundamental-ngx/pull/14641))
+- **core:** prevent initial popover max width transition ([#14655](https://github.com/SAP/fundamental-ngx/pull/14655))
+- **core:** tokens disappear in compact fd-tokenizer when long tokens are present ([#14628](https://github.com/SAP/fundamental-ngx/pull/14628), [#14627](https://github.com/SAP/fundamental-ngx/issues/14627))
+- **core:** parse datetime input with English day period labels ([#14625](https://github.com/SAP/fundamental-ngx/pull/14625))
+- **core:** collapse combobox caret after option selection ([#14652](https://github.com/SAP/fundamental-ngx/pull/14652))
+- **core:** drop am/pm when adding day period to a time-only format ([#14624](https://github.com/SAP/fundamental-ngx/pull/14624))
+- **core:** prevent popover layout-shift observer feedback loops ([#14610](https://github.com/SAP/fundamental-ngx/pull/14610), [#14629](https://github.com/SAP/fundamental-ngx/pull/14629))
+
+### ❤️ Thank You
+
+- deno
+- droshev
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+- Vitor Coelho @VitorCoelho
+
 ## 0.66.1-rc.39 (2026-11-19)
 
 This was a version bump only for core to align it with other projects, there were no code changes.

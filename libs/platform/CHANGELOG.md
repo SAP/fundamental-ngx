@@ -1,3 +1,24 @@
+## 0.66.1 (2026-11-20)
+
+### 🚀 Features
+
+- **platform:** add Message View close event and demo examples ([#14674](https://github.com/SAP/fundamental-ngx/pull/14674))
+- **core:** introduce new features to number input ([#14626](https://github.com/SAP/fundamental-ngx/pull/14626))
+
+### 🩹 Fixes
+
+- **core:** replace inline styling with CSP-compatible component styles ([#14683](https://github.com/SAP/fundamental-ngx/pull/14683))
+- **core:** shellbar responsiveness updates, support for multiple context areas, a11y improvements ([#14621](https://github.com/SAP/fundamental-ngx/pull/14621))
+- **platform:** settings dialog title should stay Settings in combined dialog ([#14672](https://github.com/SAP/fundamental-ngx/pull/14672))
+- **core,platform:** various shell search results improvements ([#14641](https://github.com/SAP/fundamental-ngx/pull/14641))
+
+### ❤️ Thank You
+
+- deno
+- droshev
+- Inna Atanasova @InnaAtanasova
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.66.1-rc.39 (2026-11-19)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
