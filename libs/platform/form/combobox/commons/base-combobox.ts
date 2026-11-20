@@ -175,18 +175,6 @@ export abstract class BaseCombobox
         return this._dataSource;
     }
 
-    /** Value of the combobox */
-    @Input()
-    set value(value: any) {
-        const selectedItems = coerceArraySafe(value);
-        this.setAsSelected(this._convertToOptionItems(selectedItems));
-        super.setValue(value);
-    }
-
-    get value(): any {
-        return super.getValue();
-    }
-
     /**
      * Action to perform when user shifts focus from the dropdown.
      * - `close` will close the dropdown preserving previously selected value.
@@ -234,7 +222,7 @@ export abstract class BaseCombobox
     set inputText(value: string) {
         this._inputTextValue = value;
 
-        this.onTouched();
+        this.touch.emit();
     }
 
     get inputText(): string {
@@ -355,13 +343,6 @@ export abstract class BaseCombobox
         return this.inputText.trim().length === 0;
     }
 
-    /** write value for ControlValueAccessor */
-    writeValue(value: any): void {
-        const selectedItems = coerceArraySafe(value);
-        this.setAsSelected(this._convertToOptionItems(selectedItems));
-        super.writeValue(value);
-    }
-
     /** @hidden */
     searchTermChanged(text: string): void {
         if (this.inputText === text) {
@@ -383,7 +364,7 @@ export abstract class BaseCombobox
         }
 
         this.isOpen = isOpen;
-        this.onTouched();
+        this.touch.emit();
         this.openChange.next(isOpen);
         this._onOpenChange(this.isOpen);
 
@@ -460,7 +441,7 @@ export abstract class BaseCombobox
      * @hidden
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
-        if (this.readonly) {
+        if (this.readonly()) {
             return;
         }
 
@@ -529,10 +510,21 @@ export abstract class BaseCombobox
                 return;
             }
         }
-        this.inputText = this.value ? this.inputText : '';
+        this.inputText = this.value() ? this.inputText : '';
         this.searchInputElement.nativeElement.focus();
         this.isOpenChangeHandle(false);
         this.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Apply value coming from the `value` model / programmatic set. Coerces to an array, marks items
+     * as selected, then stores via the base hook (replaces the former `writeValue` override).
+     */
+    protected _applyValue(value: any): void {
+        const selectedItems = coerceArraySafe(value);
+        this.setAsSelected(this._convertToOptionItems(selectedItems));
+        super._applyValue(value);
     }
 
     /** @hidden */

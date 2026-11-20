@@ -7,7 +7,7 @@
             (isOpenChange)="popoverOpenChangeHandle($event)"
             [isOpen]="isOpen"
             [triggers]="[]"
-            [disabled]="disabled"
+            [disabled]="disabled()"
             [fillControlMode]="fillControlMode"
         >
             <fd-popover-control>
@@ -27,13 +27,13 @@
             class="fdp-multi-combobox-input-group-custom"
             [state]="state"
             [buttonFocusable]="buttonFocusable"
-            [button]="!readonly"
-            [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
+            [button]="!readonly()"
+            [glyph]="!readonly() ? 'navigation-down-arrow' : ' '"
             [isControl]="true"
-            [disabled]="disabled || readonly"
+            [disabled]="disabled() || readonly()"
             [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-            [attr.aria-disabled]="disabled || readonly"
-            [attr.aria-readonly]="readonly"
+            [attr.aria-disabled]="disabled() || readonly()"
+            [attr.aria-readonly]="readonly()"
             [glyphAriaLabel]="ariaLabel || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)()"
             [iconTitle]="addonIconTitle || ('platformMultiCombobox.inputGlyphAriaLabel' | fdTranslate)()"
             (addOnButtonClicked)="_addOnClicked($event)"
@@ -51,7 +51,7 @@
                 [multiAnnouncerOptions]="_suggestions"
             >
                 @for (token of _selectedSuggestions; track token.label) {
-                    <fd-token [readOnly]="disabled" (onCloseClick)="removeToken(token, $event)">
+                    <fd-token [readOnly]="disabled()" (onCloseClick)="removeToken(token, $event)">
                         {{ token.label }}
                     </fd-token>
                 }
@@ -74,19 +74,19 @@
                     fd-input-group-input
                     tabindex="0"
                     [id]="id"
-                    [name]="name"
+                    [name]="name()"
                     (keydown)="onInputKeydownHandler($event)"
-                    [disabled]="disabled"
+                    [disabled]="disabled()"
                     [ngModelOptions]="{ standalone: true }"
                     [(ngModel)]="inputText"
                     (ngModelChange)="searchTermChanged()"
                     [attr.placeholder]="_selectedSuggestions.length ? null : placeholder"
-                    (focus)="onTouched(); tokenizer._showAllTokens()"
+                    (focus)="touch.emit(); tokenizer._showAllTokens()"
                     (blur)="!mobile && onBlur($event); tokenizer._hideTokens()"
                     [attr.aria-expanded]="isOpen"
-                    [readonly]="readonly"
-                    [attr.aria-readonly]="readonly"
-                    [attr.aria-required]="required"
+                    [readonly]="readonly()"
+                    [attr.aria-readonly]="readonly()"
+                    [attr.aria-required]="required()"
                     class="fd-tokenizer__input fd-input-group__input"
                 />
             </fd-tokenizer>
@@ -103,10 +103,10 @@
         [state]="state"
         [buttonFocusable]="false"
         [isControl]="true"
-        [disabled]="disabled || readonly"
+        [disabled]="disabled() || readonly()"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-        [attr.aria-disabled]="disabled || readonly"
-        [attr.aria-readonly]="readonly"
+        [attr.aria-disabled]="disabled() || readonly()"
+        [attr.aria-readonly]="readonly()"
         [glyphAriaLabel]="ariaLabel"
     >
         <input
@@ -127,18 +127,18 @@
             fd-input-group-input
             tabindex="0"
             [id]="id"
-            [name]="name"
+            [name]="name()"
             (keydown)="onInputKeydownHandler($event)"
-            [disabled]="disabled"
+            [disabled]="disabled()"
             [ngModelOptions]="{ standalone: true }"
             [(ngModel)]="inputText"
             (ngModelChange)="searchTermChanged()"
             [placeholder]="placeholder"
-            (focus)="onTouched()"
+            (focus)="touch.emit()"
             (blur)="!mobile && onBlur($event)"
             [attr.aria-expanded]="isOpen"
-            [readonly]="readonly"
-            [attr.aria-readonly]="readonly"
+            [readonly]="readonly()"
+            [attr.aria-readonly]="readonly()"
         />
     </fd-input-group>
 </ng-template>

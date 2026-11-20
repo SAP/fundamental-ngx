@@ -140,7 +140,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** Selected items of the multi input. */
     @Input()
     set selected(selectedValue: any[]) {
-        this.value = selectedValue;
+        this.setValue(selectedValue);
     }
     get selected(): any[] {
         return this._selected;
@@ -162,18 +162,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden */
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
-    }
-
-    /** @hidden Whether the input is disabled. */
-    protected _disabled = false;
-
-    /** Whether the multi input is disabled. */
-    @Input()
-    set disabled(value) {
-        this._disabled = value;
-    }
-    get disabled(): boolean {
-        return this._disabled;
     }
 
     /**
@@ -439,7 +427,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */
     _dialogApprove(): void {
-        this.onChange(this.selected);
         this._updateModel(this.selected);
         this.showList(false);
     }
@@ -472,8 +459,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden Update model */
     private _updateModel(value: any): void {
-        // setting value, it will call setValue()
-        this.value = value;
+        // setting value through the ControlValueAccessor path (also syncs the `value` model)
+        this.setValue(value);
     }
 
     /** @hidden */

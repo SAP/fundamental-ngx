@@ -219,7 +219,7 @@ describe('ComboboxComponent default values', () => {
     it('should select the proper item when there are 2 with matching names but different lookup keys', () => {
         combobox.selectOptionItem(combobox._suggestions[8]);
 
-        expect(combobox.value.id).toBe(component.dataSource[8].id);
+        expect(combobox.value().id).toBe(component.dataSource[8].id);
     });
 
     it('should focus the combobox input on close', () => {
@@ -232,13 +232,13 @@ describe('ComboboxComponent default values', () => {
     it('should not mutate value or emit selectionChange when the popover opens on an empty control', fakeAsync(() => {
         const selectionSpy = jest.fn();
         combobox.selectionChange.subscribe(selectionSpy);
-        const initialValue = combobox.value;
+        const initialValue = combobox.value();
 
         combobox.onPrimaryButtonClick();
         fixture.detectChanges();
         flush();
 
-        expect(combobox.value).toBe(initialValue);
+        expect(combobox.value()).toBe(initialValue);
         expect(selectionSpy).not.toHaveBeenCalled();
     }));
 
@@ -253,7 +253,7 @@ describe('ComboboxComponent default values', () => {
         fixture.detectChanges();
         flush();
 
-        expect(combobox.value).toBe(secondSuggestion.value);
+        expect(combobox.value()).toBe(secondSuggestion.value);
     }));
 
     it('commits a completed native autocomplete candidate once on Tab', fakeAsync(() => {
@@ -271,7 +271,7 @@ describe('ComboboxComponent default values', () => {
         combobox._close();
 
         expect(combobox.inputText).toBe('Banana');
-        expect(combobox.value).toEqual(component.dataSource[1]);
+        expect(combobox.value()).toEqual(component.dataSource[1]);
         expect(selectionSpy).toHaveBeenCalledTimes(1);
         expect(selectionSpy.mock.calls[0][0].payload).toEqual(component.dataSource[1]);
     }));
@@ -283,7 +283,7 @@ describe('ComboboxComponent default values', () => {
         combobox._onBlur(new FocusEvent('blur'));
 
         expect(combobox.inputText).toBe('Custom');
-        expect(combobox.value).toBe('Custom');
+        expect(combobox.value()).toBe('Custom');
     });
 
     it('restores the previous selection without emitting when tabOutStrategy is close', fakeAsync(() => {
@@ -301,7 +301,7 @@ describe('ComboboxComponent default values', () => {
         combobox._close();
 
         expect(combobox.inputText).toBe('Apple');
-        expect(combobox.value).toEqual(component.dataSource[0]);
+        expect(combobox.value()).toEqual(component.dataSource[0]);
         expect(selectionSpy).not.toHaveBeenCalled();
     }));
 });

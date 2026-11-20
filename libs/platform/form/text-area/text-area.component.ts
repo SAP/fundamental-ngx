@@ -93,27 +93,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     @Input()
     growing = false;
 
-    /**
-     * The textarea's value
-     */
-    @Input()
-    set value(value: any) {
-        if (value) {
-            super.setValue(value);
-            this.updateCounterInteractions();
-        } else {
-            // when custom value not set, we should set/reset counter to maxlength value when it becomes undefined
-            this._textAreaCharCount.set(0);
-            this.counterExcessOrRemaining.set(this.remainingText);
-            this.exceededCharCount.set(this.maxLength ? this.maxLength : 0);
-            // reset state by resetting value
-            super.setValue('');
-        }
-    }
-    get value(): any {
-        return super.getValue();
-    }
-
     /** @hidden */
     @ViewChild('counter')
     _textareaCounter?: ElementRef<HTMLDivElement>;
@@ -158,9 +137,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** @hidden */
     constructor(protected _textAreaConfig: TextAreaConfig) {
         super();
-        if (this.ngControl) {
-            this.ngControl.valueAccessor = this;
-        }
     }
 
     /** when backpress or delete key is pressed when showExceededText field is not set, simply remove excess characters,
@@ -175,11 +151,11 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         }
         if (this._shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
             // for the custom value set and showExceededText=false case, on any key press, remove excess characters
-            if (this.value) {
-                this._textAreaCharCount.set(this.value.length);
+            if (this.value()) {
+                this._textAreaCharCount.set(this.value().length);
                 if (this._textAreaCharCount() > this.maxLength) {
                     // remove excess characters
-                    this.value = this.value.substring(0, this.maxLength);
+                    this.setValue(this.value().substring(0, this.maxLength));
                     this.isValueCustomSet = false; // since value is now changed, it is no longer custom set
                 }
             }
@@ -192,7 +168,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
             throw new Error(`Textarea wrap type ${this.wrapType} is not supported`);
         }
         // if not custom set, set counter to max length value, else it calculates remaining/exceeded characters.
-        if (!this.value) {
+        if (!this.value()) {
             this.exceededCharCount.set(this.maxLength || 0);
         } else {
             this.isValueCustomSet = true;
@@ -218,22 +194,15 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         // when value is custom set(initial value is present), the heights don't get
         // set to show the full text in the ngAfterViewInit immediately. therefore, we call autoGrowTextArea in
         // ngAfterViewChecked and detect changes again.
-        if (this.value && this.isValueCustomSet) {
+        if (this.value() && this.isValueCustomSet) {
             this.autoGrowTextArea(); // if applicable, grow the textarea when value is custom set
             this.stateChanges.next('textarea: ngAfterViewChecked');
         }
     }
 
-    /** write value for ControlValueAccessor */
-    writeValue(value: any): void {
-        super.writeValue(value ?? '');
-        this.updateCounterInteractions();
-        this.stateChanges.next('textarea: writeValue');
-    }
-
     /** update the counter message and related interactions */
     updateCounterInteractions(): void {
-        this._textAreaCharCount.set(this.value?.length ?? 0);
+        this._textAreaCharCount.set(this.value()?.length ?? 0);
 
         if (this.maxLength) {
             // newly added to avoid unnecessary iteration, remove if issue found
@@ -323,14 +292,30 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return this._elementRef?.nativeElement;
     }
 
+    /** apply value (manages the character counter, then delegates to the base) */
+    protected _applyValue(value: any): void {
+        if (value) {
+            super._applyValue(value);
+            this.updateCounterInteractions();
+        } else {
+            // when custom value not set, we should set/reset counter to maxlength value when it becomes undefined
+            this._textAreaCharCount.set(0);
+            this.counterExcessOrRemaining.set(this.remainingText);
+            this.exceededCharCount.set(this.maxLength ? this.maxLength : 0);
+            // reset state by resetting value
+            super._applyValue('');
+        }
+        this.stateChanges.next('textarea: applyValue');
+    }
+
     /** @hidden get the length of the textarea content */
     private _getContentLength(): number {
         let contentLength;
         if (this._targetElement) {
             contentLength = this._targetElement.value.length;
         }
-        if (this.value) {
-            contentLength = this.value.length;
+        if (this.value()) {
+            contentLength = this.value().length;
         }
         return contentLength;
     }

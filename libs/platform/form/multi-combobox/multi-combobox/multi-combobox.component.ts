@@ -354,14 +354,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     private _mapAndUpdateModel(): void {
         const selectedItems = this._selectedSuggestions.map(({ value }) => value);
 
-        // setting value, it will call setValue()
-        this.value = selectedItems;
+        // setting value through the ControlValueAccessor path (also syncs the `value` model)
+        this.setValue(selectedItems);
     }
 
     /** @hidden */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
-            this.onChange(this._selectedSuggestions.map(({ value }) => value));
             this._mapAndUpdateModel();
         }
     }

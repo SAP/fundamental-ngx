@@ -32,14 +32,6 @@ export class SwitchComponent extends BaseInput {
     @Output()
     readonly switchChange: EventEmitter<SwitchChangeEvent> = new EventEmitter<SwitchChangeEvent>();
 
-    /** value for switch control */
-    set value(selectValue: any) {
-        this.setValue(selectValue);
-    }
-    get value(): any {
-        return this.getValue();
-    }
-
     /** @hidden
      * tracking switch current value
      */
@@ -53,14 +45,14 @@ export class SwitchComponent extends BaseInput {
     /** update controller on switch state change */
     onValueChange(modelValue: boolean): void {
         this._updateModel(modelValue);
-        this.onTouched();
+        this.touch.emit();
         this.stateChanges.next('switch: onValueChange');
     }
 
-    /** write value for ControlValueAccessor */
-    writeValue(value: any): void {
+    /** apply value (stores the switch state, then delegates to the base) */
+    protected _applyValue(value: any): void {
         this.switchCurrentValue = value;
-        super.writeValue(value);
+        super._applyValue(value);
     }
 
     /** @hidden
@@ -78,8 +70,8 @@ export class SwitchComponent extends BaseInput {
         event.source = this;
         event.payload = modelValue;
 
-        // setting value, it will call setValue()
-        this.value = modelValue;
+        // setting value through the ControlValueAccessor path (also syncs the `value` model)
+        this.setValue(modelValue);
         this.switchChange.emit(event);
     }
 }

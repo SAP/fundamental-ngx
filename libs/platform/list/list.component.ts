@@ -184,16 +184,6 @@ export class ListComponent<T>
     @Input()
     selectionMode: SelectionType = 'none';
 
-    /** setter and getter for radio button and checkbox. */
-    @Input()
-    set value(value: any) {
-        super.setValue(value);
-    }
-
-    get value(): any {
-        return super.getValue();
-    }
-
     /** setter and getter for row level Selection. */
     @Input()
     set rowSelection(value: boolean) {

@@ -58,16 +58,17 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     tristate = false;
 
     // this is undesired to have "checked" input instead of "value"
-    // but it was done this way initially and we have to keep this in order to not break anything
+    // but it was done this way initially and we have to keep this in order to not break anything.
+    // `value` itself is now a `model()` on BaseInput; this forwards the legacy `checked` alias to it.
     /**
      * Checked state of the checkbox control.
      */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('checked')
-    set value(selectValue: any) {
+    set checked(selectValue: any) {
         this.setValue(selectValue);
     }
-    get value(): any {
+    get checked(): any {
         return this.getValue();
     }
 
@@ -105,12 +106,12 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         super();
         // necessary to fulfill baseInput check.
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
-        this.name = `fdp-checkbox-${nextUniqueId++}`;
+        this.name.set(`fdp-checkbox-${nextUniqueId++}`);
         this.tabIndexValue = tabIndexValue;
     }
     /** update controller on checkbox state change */
     public onModelChange(value: any): void {
-        this.value = value;
+        this.setValue(value);
         this._emitChangeEvent();
         this.stateChanges.next('checkbox: onModelChange');
     }
@@ -119,10 +120,10 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      * Method to emit change event
      */
     private _emitChangeEvent(): void {
-        this.checkedChange.emit(this.value);
+        this.checkedChange.emit(this.value());
 
         const event = new PlatformCheckboxChange();
         event.source = this;
-        event.checked = this.value;
+        event.checked = this.value();
     }
 }

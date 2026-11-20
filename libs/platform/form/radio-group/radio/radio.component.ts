@@ -1,4 +1,3 @@
-import { FocusableOption } from '@angular/cdk/a11y';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -23,7 +22,14 @@ let uniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CoreRadioButtonComponent, FormsModule, NgTemplateOutlet]
 })
-export class RadioButtonComponent extends BaseInput implements AfterViewInit, FocusableOption {
+/**
+ * Implements the structural shape of CDK's `FocusableOption` (notably `focus()`) so it can drive a
+ * `FocusKeyManager`. It intentionally does NOT declare `implements FocusableOption`: `disabled` is a
+ * `ModelSignal<boolean>` (inherited from `BaseInput`), which is not assignable to the interface's
+ * optional plain `disabled?: boolean`. The radio group supplies a `skipPredicate` that calls
+ * `disabled()` so disabled-skipping keyboard nav is preserved.
+ */
+export class RadioButtonComponent extends BaseInput implements AfterViewInit {
     /** sets radio button tooltip */
     @Input()
     title: string;
@@ -33,15 +39,6 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
      */
     @Input()
     tabIndex = -1;
-
-    /** value for Radio button */
-    @Input()
-    set value(newValue: any) {
-        this._value = newValue;
-    }
-    get value(): any {
-        return super.getValue();
-    }
 
     /** used for radio button creation if list value present */
     @Input()
@@ -69,18 +66,10 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     constructor() {
         super();
 
-        if (this.ngControl) {
-            this.ngControl.valueAccessor = this;
-        }
         // @hidden have to set default initial values as base class has check and throws error
         this.id = `fdp-radio-id-${uniqueId}`;
-        this.name = `fdp-radio-name-${uniqueId}`;
+        this.name.set(`fdp-radio-name-${uniqueId}`);
         uniqueId++;
-    }
-
-    /** @hidden Controlvalue accessor */
-    writeValue(value: any): void {
-        this._valueChange(value);
     }
 
     /** @hidden */
@@ -90,7 +79,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** @hidden */
     _valueChange(value: any, emitEvent = false): void {
-        if (this.disabled) {
+        if (this.disabled()) {
             emitEvent = false;
         }
 
@@ -102,8 +91,7 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         this.tabIndex = this._isChecked ? 0 : -1;
         this.detectChanges();
         if (emitEvent) {
-            this.onChange(value);
-            this.onTouched();
+            this.touch.emit();
         }
     }
 
@@ -126,5 +114,26 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     setTabIndex(index: 0 | -1): void {
         this.tabIndex = index;
         this.markForCheck();
+    }
+
+    /**
+     * @hidden
+     * Applies a value coming from the `value` model. For the radio button the model value is the
+     * button's own selection value, routed through `_valueChange()` to run the selection logic that
+     * CVA `writeValue()` used to trigger.
+     */
+    protected _applyValue(value: any): void {
+        this._valueChange(value);
+    }
+
+    /**
+     * @hidden
+     * For the radio button, the `value` model is the button's own identity value (bound via
+     * `[value]="..."`), NOT the group's selected value. So applying a model value simply stores it
+     * as `_value` — matching the historical `set value` behavior — without running the selection
+     * logic that CVA `writeValue()` triggers through `_valueChange()`.
+     */
+    protected _applyModelValue(modelValue: any): void {
+        this._value = modelValue;
     }
 }

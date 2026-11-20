@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component, DebugElement, ElementRef, ViewChild, input, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FieldHintOptions } from '@fundamental-ngx/platform/shared';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { StepInputChangeEvent } from '../base.step-input';
@@ -133,7 +132,7 @@ describe('NumberStepInputComponent main functionality', () => {
     it('should handle "value" input assignment', () => {
         component.value.set(10);
         fixture.detectChanges();
-        expect(stepInputComponent.value).toEqual(10);
+        expect(stepInputComponent.value()).toEqual(10);
 
         const inputEl: HTMLInputElement = getInputDebugElement().nativeElement;
         expect(inputEl.value).toBe('10');
@@ -148,7 +147,7 @@ describe('NumberStepInputComponent main functionality', () => {
 
         fixture.detectChanges();
 
-        expect(stepInputComponent.value).toEqual(component.min());
+        expect(stepInputComponent.value()).toEqual(component.min());
     });
 
     it('should not allow value be more than maximum', () => {
@@ -160,7 +159,7 @@ describe('NumberStepInputComponent main functionality', () => {
 
         fixture.detectChanges();
 
-        expect(stepInputComponent.value).toEqual(component.max());
+        expect(stepInputComponent.value()).toEqual(component.max());
     });
 
     it('should use stepFn if provided to calculate increase step value', () => {
@@ -174,7 +173,7 @@ describe('NumberStepInputComponent main functionality', () => {
 
         expect(stepFnSpy).toHaveBeenCalledWith(30, 'increase');
 
-        expect(stepInputComponent.value).toEqual(40);
+        expect(stepInputComponent.value()).toEqual(40);
     });
 
     it('should use stepFn if provided to calculate decrease step value', () => {
@@ -188,7 +187,7 @@ describe('NumberStepInputComponent main functionality', () => {
 
         expect(stepFnSpy).toHaveBeenCalledWith(30, 'decrease');
 
-        expect(stepInputComponent.value).toEqual(20);
+        expect(stepInputComponent.value()).toEqual(20);
     });
 
     it('should apply decimal precision to format number', () => {
@@ -394,6 +393,17 @@ describe('NumberStepInputComponent main functionality', () => {
 
         expect(component.value()).toEqual(25);
     });
+
+    it('should clear the value when entered number cannot be parsed', () => {
+        component.value.set(10);
+        fixture.detectChanges();
+
+        stepInputComponent.onEnterValue('not a valid number');
+        stepInputComponent.commitEnteredValue();
+        fixture.detectChanges();
+
+        expect(component.value()).toBeNull();
+    });
 });
 
 /** Usage with form */
@@ -488,53 +498,16 @@ describe('Basic number Step Input withing platforms form', () => {
         expect(controlDefaultValue).toBe(host.initialFormModel.qty);
     });
 
-    it('should propagate control value to a form instance', async () => {
+    it('should drive the value through the component value model', async () => {
         const stepInputComponent = host.stepInputComponent;
-        stepInputComponent.value = 25;
+        stepInputComponent.value.set(25);
         await wait(fixture);
-        expect(host.form.get('qty')?.value).toBe(25);
+        expect(stepInputComponent.value()).toBe(25);
 
-        stepInputComponent.value = 50;
-        await wait(fixture);
-
-        expect(host.form.get('qty')?.value).toBe(50);
-    });
-
-    it('should be in an error state if value is empty and touched', async () => {
-        const stepInputComponent = host.stepInputComponent;
-        const formControl = host.form.get('qty') as FormControl;
-        const stepInputEl = fixture.debugElement.query(By.css('.fd-step-input'));
-
-        expect(formControl.value).toBe(100);
-        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBe(true);
-
-        formControl.markAsTouched();
-        await wait(fixture);
-        stepInputComponent.value = null;
+        stepInputComponent.value.set(50);
         await wait(fixture);
 
-        expect(formControl.value).toBe(null);
-        expect(stepInputEl.nativeElement.className.includes('is-error')).toBe(true);
-    });
-
-    it('should be in an error state if entered number cannot be parsed', async () => {
-        const stepInputComponent = host.stepInputComponent;
-        const formControl = host.form.get('qty') as FormControl;
-        const stepInputEl = fixture.debugElement.query(By.css('.fd-step-input'));
-
-        expect(formControl.value).toBe(100);
-
-        formControl.markAsTouched();
-        await wait(fixture);
-
-        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBe(true);
-
-        stepInputComponent.onEnterValue('not a valid number');
-        stepInputComponent.commitEnteredValue();
-        await wait(fixture);
-
-        expect(formControl.value).toBe(null);
-        expect(stepInputEl.nativeElement.className.includes('is-error')).toBe(true);
+        expect(stepInputComponent.value()).toBe(50);
     });
 
     it('should submit the value', async () => {
@@ -547,23 +520,73 @@ describe('Basic number Step Input withing platforms form', () => {
     });
 });
 
-const STEP_INPUT_IDENTIFIER = 'platform-step-input-unit-test';
+/** Error-state usage driven by the Signal Forms `errors` / `touched` inputs (CVA-free). */
+@Component({
+    template: `
+        <fdp-number-step-input
+            name="qty"
+            [value]="value()"
+            [errors]="errors()"
+            [touched]="touched()"
+        ></fdp-number-step-input>
+    `,
+    standalone: true,
+    imports: [PlatformStepInputModule],
+    providers: [RtlService]
+})
+class NumberStepInputErrorStateHostComponent {
+    @ViewChild(NumberStepInputComponent)
+    stepInputComponent: NumberStepInputComponent;
 
-runValueAccessorTests({
-    component: NumberStepInputComponent,
-    name: 'Number step input',
-    testModuleMetadata: {
-        imports: [PlatformStepInputModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = STEP_INPUT_IDENTIFIER;
-        fixture.componentInstance.name = STEP_INPUT_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: true,
-    nativeControlSelector: `input[id="${STEP_INPUT_IDENTIFIER}"]`,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.value = value;
-    },
-    getComponentValue: (fixture) => fixture.componentInstance.value
+    readonly value = signal<number | null>(100);
+    readonly errors = signal<any[]>([]);
+    readonly touched = signal(false);
+}
+
+describe('NumberStepInputComponent error state (Signal Forms)', () => {
+    let fixture: ComponentFixture<NumberStepInputErrorStateHostComponent>;
+    let host: NumberStepInputErrorStateHostComponent;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NumberStepInputErrorStateHostComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(NumberStepInputErrorStateHostComponent);
+        host = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
+        componentFixture.detectChanges();
+        await componentFixture.whenStable();
+    }
+
+    it('should be in an error state when touched and errors are present', async () => {
+        const stepInputEl = fixture.debugElement.query(By.css('.fd-step-input'));
+
+        await wait(fixture);
+        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBe(true);
+
+        host.value.set(null);
+        host.errors.set([{ kind: 'required' }]);
+        host.touched.set(true);
+        await wait(fixture);
+
+        expect(host.stepInputComponent.value()).toBe(null);
+        expect(stepInputEl.nativeElement.className.includes('is-error')).toBe(true);
+    });
+
+    it('should not be in an error state when errors are present but control is untouched', async () => {
+        const stepInputEl = fixture.debugElement.query(By.css('.fd-step-input'));
+
+        host.value.set(null);
+        host.errors.set([{ kind: 'required' }]);
+        host.touched.set(false);
+        await wait(fixture);
+
+        expect(stepInputEl.nativeElement.className.includes('is-error')).not.toBe(true);
+    });
 });

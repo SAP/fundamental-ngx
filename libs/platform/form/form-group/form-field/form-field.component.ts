@@ -11,6 +11,7 @@ import {
     EventEmitter,
     Inject,
     Input,
+    ModelSignal,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -30,7 +31,7 @@ import {
     inject
 } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn, Validators } from '@angular/forms';
-import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FormStates } from '@fundamental-ngx/cdk/forms';
 import { uniqBy } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
@@ -628,12 +629,12 @@ export class FormFieldComponent
      * Register underlying form control
      * @param formFieldControl
      */
-    registerFormFieldControl(formFieldControl: FormFieldControl): void {
+    registerFormFieldControl(formFieldControl: PlatformFormFieldControl): void {
         if (this.control) {
             throw Error('Form field can contain only one FormFieldControl');
         }
 
-        this.control = formFieldControl as PlatformFormFieldControl;
+        this.control = formFieldControl;
 
         formFieldControl.stateChanges.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._updateControlProperties();
@@ -696,7 +697,7 @@ export class FormFieldComponent
      * Unregister underlying form control
      * @param formFieldControl
      */
-    unregisterFormFieldControl(formFieldControl: FormFieldControl): void {
+    unregisterFormFieldControl(formFieldControl: PlatformFormFieldControl): void {
         if (formFieldControl !== this.control) {
             return;
         }
@@ -863,7 +864,14 @@ export class FormFieldComponent
     private _updateControlProperties(): void {
         if (this.control && this._editable) {
             this.control.id = this.id;
-            this.control.required = this.required;
+            // `required` is a signal `model()` on platform `BaseInput` controls, but a plain property
+            // on cdk/CVA-based controls (e.g. input-group). Support both.
+            const required = this.control.required as unknown as ModelSignal<boolean> | boolean;
+            if (typeof required === 'function') {
+                required.set(this.required);
+            } else {
+                (this.control as unknown as { required: boolean }).required = this.required;
+            }
 
             if (this.placeholder) {
                 this.control.placeholder = this.placeholder;

@@ -159,7 +159,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         if (!this._resolvingLeave) {
             this._resetLeaveCycle();
         }
-        this.onTouched();
+        this.touch.emit();
     }
 
     /** @hidden */
@@ -311,8 +311,8 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
     /** @hidden Update model */
     private _updateModel(value: any): void {
-        // setting value, it will call setValue()
-        this.value = value;
+        // setting value through the ControlValueAccessor path (also syncs the `value` model)
+        this.setValue(value);
 
         this.emitChangeEvent(value ? value : null);
     }
@@ -348,7 +348,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
                 const selectedLabel = this._selectedElement?.label ?? '';
                 this.inputText = selectedLabel;
                 this.searchInputElement.nativeElement.value = selectedLabel;
-            } else if (this._selectedElement?.label !== this.inputText && this.value !== this.inputText) {
+            } else if (this._selectedElement?.label !== this.inputText && this.value() !== this.inputText) {
                 this._updateModel(this.inputText);
             }
 
