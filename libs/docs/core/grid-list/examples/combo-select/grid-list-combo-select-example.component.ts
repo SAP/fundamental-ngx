@@ -58,7 +58,8 @@ export class GridListComboSelectComponent {
         {
             id: 2,
             title: 'Title 2',
-            description: 'Description 2',
+            description: 'Interactive item',
+            type: 'interactive',
             selected: true
         },
         {
