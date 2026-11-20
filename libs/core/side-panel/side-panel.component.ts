@@ -43,8 +43,6 @@ export type SidePanelSide = 'left' | 'right';
  */
 export const CONTENT_PANEL_OPEN_DEFAULT_WIDTH = '15.75rem';
 
-/** Viewport width (px) above which push mode (side-by-side) activates. */
-const PUSH_MODE_BREAKPOINT_PX = 1024;
 /** Fallback root font size (px) when `getComputedStyle` returns 0. */
 const DEFAULT_ROOT_FONT_PX = 16;
 
@@ -160,9 +158,6 @@ export class SidePanelComponent {
     /** @hidden Projected side panel items (content groups). */
     protected readonly items = contentChildren(SidePanelItemComponent);
 
-    /** @hidden True at ≥1024px: main content and panel sit side-by-side (push); else overlay. */
-    protected readonly pushMode = computed(() => this._hostWidthPx() >= PUSH_MODE_BREAKPOINT_PX);
-
     /** @hidden */
     protected readonly hostClasses = computed(() => {
         const classes = [`fd-side-panel`, `fd-side-panel--${this.side()}`];
@@ -174,9 +169,6 @@ export class SidePanelComponent {
         }
         if (this.isSingleAction()) {
             classes.push('fd-side-panel--single-action');
-        }
-        if (this.pushMode()) {
-            classes.push('fd-side-panel--push');
         }
         return classes.join(' ');
     });
@@ -315,11 +307,13 @@ export class SidePanelComponent {
     protected readonly widthMenu = viewChild<MenuComponent>('widthMenuEl');
     /** @hidden Measured px min bound for the current drag/menu action. */
     protected readonly resizeMinPx = signal(0);
-    /** @hidden Keyboard End target (px). Undefined = fall back to resizeMinPx.
-     *  In expanded-bar mode the drag floor is the collapsed-bar width (68 px) so dragging
-     *  can truncate labels smoothly; but End key should stop at the user's minWidth, not
-     *  the collapsed-bar width. */
-    protected readonly resizeKeyboardEndPx = signal<number | undefined>(undefined);
+    /**
+     * @hidden Keyboard Home target (px). Undefined = fall back to resizeMinPx.
+     * In expanded-bar mode the drag floor is the collapsed-bar width (68 px) so dragging
+     * can truncate labels smoothly; but Home key should stop at the user's minWidth, not
+     * the collapsed-bar width.
+     */
+    protected readonly resizeKeyboardHomePx = signal<number | undefined>(undefined);
     /** @hidden Measured px max bound for the current drag/menu action. */
     protected readonly resizeMaxPx = signal(Infinity);
     /** @hidden Measured px default bound for reset actions (Enter / menu / double-click). */
@@ -329,10 +323,8 @@ export class SidePanelComponent {
     /** @hidden `grows` direction for the splitter, derived from the docked side. */
     protected readonly resizeGrows = computed<'start' | 'end'>(() => (this.side() === 'right' ? 'start' : 'end'));
 
-    /** @hidden Splitter shown in push mode when the panel occupies resizable horizontal space. */
-    protected readonly showSplitter = computed(
-        () => this.resizable() && this.pushMode() && (this.open() || this.mode() === 'expanded')
-    );
+    /** @hidden Splitter shown when the panel occupies resizable horizontal space. */
+    protected readonly showSplitter = computed(() => this.resizable() && (this.open() || this.mode() === 'expanded'));
 
     /** @hidden Live width in px for whichever element the splitter is currently sizing:
      *  the content panel when open, the expanded action bar otherwise.
@@ -371,9 +363,6 @@ export class SidePanelComponent {
     private readonly _navContainerH = signal(0);
     private readonly _itemContainerH = signal(0);
     private readonly _itemGapPx = signal(0);
-
-    /** @hidden Measured host inline-size in px (updated by the ResizeObserver). */
-    private readonly _hostWidthPx = signal(0);
 
     private readonly _rtlService = inject(RtlService, { optional: true });
     private readonly _isRtl = computed(() => this._rtlService?.rtl() ?? false);
@@ -458,8 +447,6 @@ export class SidePanelComponent {
             }
 
             const measure = (): void => {
-                this._hostWidthPx.set((this._elementRef.nativeElement as HTMLElement).clientWidth);
-
                 const style = getComputedStyle(bar);
                 const paddingBlockStart = parseFloat(style.paddingBlockStart) || 0;
                 const barGap = parseFloat(style.gap) || 0;
@@ -480,7 +467,6 @@ export class SidePanelComponent {
 
             const observer = new ResizeObserver(measure);
             observer.observe(bar);
-            observer.observe(this._elementRef.nativeElement);
             measure();
 
             this._destroyRef.onDestroy(() => observer.disconnect());
@@ -744,10 +730,10 @@ export class SidePanelComponent {
             (isCompact ? COLLAPSED_BAR_WIDTH_COMPACT_REM : COLLAPSED_BAR_WIDTH_COZY_REM) * rootFontPx;
         const userMinPx = resolve(this.minWidth(), 0);
         this.resizeMinPx.set(this.open() ? userMinPx : collapsedBarWidthPx);
-        // Keyboard End targets the user's minWidth, not the drag floor (collapsed-bar width).
+        // Keyboard Home targets the user's minWidth, not the drag floor (collapsed-bar width).
         // Passing `undefined` lets the directive fall back to `min` — same thing for the content panel
         // case where both values are already the user's minWidth.
-        this.resizeKeyboardEndPx.set(this.open() ? undefined : userMinPx || undefined);
+        this.resizeKeyboardHomePx.set(this.open() ? undefined : userMinPx || undefined);
         this.resizeMaxPx.set(resolve(this.maxWidth(), Infinity));
         // When the content panel is open alongside the collapsed bar, its own default is
         // CONTENT_PANEL_OPEN_DEFAULT_WIDTH (= 20rem total − 4.25rem bar). In single-action the

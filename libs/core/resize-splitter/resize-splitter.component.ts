@@ -37,7 +37,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
                 'grows',
                 'defaultSize',
                 'disabled',
-                'keyboardEndTarget'
+                'keyboardHomeTarget'
             ],
             outputs: ['sizeChange', 'resizeStart', 'resizeEnd']
         }
