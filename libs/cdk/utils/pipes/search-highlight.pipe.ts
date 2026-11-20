@@ -13,6 +13,7 @@ export class SearchHighlightPipe implements PipeTransform {
         active: boolean = true,
         includeSpans: boolean = false
     ): string {
+        const rawValue = String(value);
         value = escape(value);
         let result: string = value;
         if (value && active && matches) {
@@ -22,11 +23,18 @@ export class SearchHighlightPipe implements PipeTransform {
                     result = result.replace(matchingString, '<strong>' + matchingString + '</strong>');
                 });
             } else if (typeof matches === 'string') {
-                const testStr: string = escape(matches.trim().toLowerCase());
-                const startIndex = value.toLowerCase().indexOf(testStr);
+                // Search in the original text and escape each part separately, so that the term
+                // never matches inside an escaped character such as "&amp;" or "&lt;".
+                const testStr: string = matches.trim().toLowerCase();
+                const startIndex = rawValue.toLowerCase().indexOf(testStr);
                 if (startIndex !== -1) {
-                    const matchingString = value.substring(startIndex, startIndex + testStr.length);
-                    result = value.replace(matchingString, '<strong>' + matchingString + '</strong>');
+                    const endIndex = startIndex + testStr.length;
+                    result =
+                        escape(rawValue.substring(0, startIndex)) +
+                        '<strong>' +
+                        escape(rawValue.substring(startIndex, endIndex)) +
+                        '</strong>' +
+                        escape(rawValue.substring(endIndex));
                 }
             }
         }
