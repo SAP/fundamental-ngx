@@ -11,6 +11,10 @@ Skills are markdown-based task playbooks specifically designed for AI assistants
 - **Project conventions** — Enforced Angular 22+ patterns, NX workspace commands, and library-specific rules
 - **Validation steps** — How to verify the output compiles and behaves correctly
 
+## CSP guidance in standalone installations
+
+Skills load the shared CSP guide at `docs/agents/csp-guidelines.md` in the repository. Standalone installations require access to the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md). Publish the current guide together with the skill updates before distributing them.
+
 ## Available Skills
 
 fundamental-ngx provides **14 skills** organized by purpose:

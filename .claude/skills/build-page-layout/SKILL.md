@@ -11,6 +11,8 @@ allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(ng build*), Write, Edit
 
 If `$ARGUMENTS` is empty, ask the user: (1) what this page displays, (2) whether it needs tabs, a collapsible subheader, or a floating footer.
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Determine Scope
 
 Parse from `$ARGUMENTS` or ask:

@@ -12,6 +12,8 @@ Parse `$ARGUMENTS` as a comma-separated list of fundamental-styles component nam
 
 ---
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Discover
 
 For each component name, locate its Angular implementation across all library packages.
@@ -209,7 +211,7 @@ If the plan includes i18n keys:
 
 ### 4.5 Preflight
 
-Run local quality gates:
+Run local checks:
 
 ```bash
 yarn format
@@ -218,51 +220,10 @@ nx run <library>:lint
 nx run <library>:test --skip-nx-cache
 ```
 
-Report results per gate (PASS/FAIL). If any gate fails, diagnose and fix before reporting completion.
+Report each check as PASS or FAIL. Diagnose and fix failures before reporting completion.
 
 ---
 
-## Phase 5: Retrospective
+## Completion
 
-After execution is complete and all quality gates pass, produce a retrospective report.
-
-### Output format
-
-```
-## Retrospective
-
-### What went well
-- [List components/changes where discovery → analysis → execution was smooth]
-- [Patterns that were fast to apply]
-- [MCP tools that returned accurate, complete data]
-
-### What was slow or needed manual judgment
-- [Components where file discovery was non-obvious]
-- [MCP tools that returned incomplete/unexpected data for specific components]
-- [Structural changes that needed careful reasoning beyond simple attribute additions]
-- [i18n overhead]
-- [Test generation that required unusual setup or mocking]
-
-### Suggested improvements
-
-#### This skill (`adopt-styles`)
-- [Specific changes to improve discovery, analysis, or execution]
-
-#### Other skills / docs
-- [Updates to other skill files, agent docs, or rules that would reduce friction]
-- [e.g., "i18n-manage skill could accept batch of keys", "fundamental-styles MCP rule could note that get_component_html may not show all variants"]
-
-#### fundamental-styles MCP
-- [Gaps in MCP tool coverage or data quality encountered during this run]
-
-### Timing
-| Phase | Duration | Notes |
-|-------|----------|-------|
-| Discover | ~X min | |
-| Analyze | ~X min | |
-| Plan + approval | ~X min | |
-| Execute | ~X min | |
-| **Total** | **~X min** | |
-```
-
-**Ask the user if they would like to apply any of the suggested improvements now.** If approved, make the updates to skill files, docs, or rules directly.
+Summarize the adopted components and changes, validation results, and remaining issues.
