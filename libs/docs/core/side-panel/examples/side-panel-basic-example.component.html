@@ -4,12 +4,7 @@
     <fd-radio-button name="basic-side-panel-side" value="left" [(ngModel)]="sideValue"> Left </fd-radio-button>
 </div>
 <div class="side-panel-example">
-    <fd-side-panel
-        [side]="side()"
-        ariaLabel="Actions"
-        [activeItem]="activeItem()"
-        (activeItemChange)="activeItem.set($event)"
-    >
+    <fd-side-panel [side]="side()" ariaLabel="Actions" [(activeItem)]="activeItem">
         <fd-side-panel-main>
             <div class="side-panel-example__main-content">
                 <p>

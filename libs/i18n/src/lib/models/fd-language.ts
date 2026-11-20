@@ -975,5 +975,7 @@ export interface FdLanguage {
         resizeResetToDefault: FdLanguageKey;
         /** ARIA label for the side panel resize splitter */
         resizeSplitterLabel: FdLanguageKey;
+        /** Fallback accessible label for the side panel action bar listbox */
+        actionsLabel: FdLanguageKey;
     };
 }

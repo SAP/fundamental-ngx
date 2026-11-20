@@ -249,6 +249,7 @@ export default {
         shellbarLabel: 'Shellbar'
     },
     coreSidePanel: {
+        actionsLabel: 'Actions',
         close: 'Close',
         closePanel: 'Close panel',
         collapsedAnnouncement: 'Side panel collapsed',

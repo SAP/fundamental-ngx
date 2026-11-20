@@ -250,6 +250,7 @@ export default {
         shellbarLabel: '[[[Ŝĥēĺĺƃąŗ∙∙∙∙∙∙]]]'
     },
     coreSidePanel: {
+        actionsLabel: 'Actions',
         close: 'Close',
         closePanel: 'Close panel',
         collapsedAnnouncement: 'Side panel collapsed',

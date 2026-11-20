@@ -172,6 +172,7 @@ export type FdLanguageKeyIdentifier =
     | 'coreShellbar.openSearch'
     | 'coreShellbar.search'
     | 'coreShellbar.shellbarLabel'
+    | 'coreSidePanel.actionsLabel'
     | 'coreSidePanel.close'
     | 'coreSidePanel.closePanel'
     | 'coreSidePanel.collapsedAnnouncement'

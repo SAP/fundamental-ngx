@@ -88,6 +88,15 @@ describe('SplitterDirective', () => {
             expect(fixture.componentInstance.size).toBe(300);
         });
 
+        it('PageUp grows by largeStep, PageDown shrinks by largeStep', () => {
+            dispatchKey(bar, 'PageUp');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.size).toBe(300);
+            dispatchKey(bar, 'PageDown');
+            fixture.detectChanges();
+            expect(fixture.componentInstance.size).toBe(200);
+        });
+
         it('clamps at max', () => {
             fixture.componentInstance.size = 395;
             fixture.detectChanges();

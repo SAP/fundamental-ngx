@@ -27,7 +27,7 @@
                 role="listbox"
                 aria-multiselectable="false"
                 tabindex="-1"
-                [attr.aria-label]="ariaLabel()"
+                [attr.aria-label]="ariaLabel() || actionsLabel()"
             >
                 @for (item of items(); track item.id(); let i = $index) {
                     <li

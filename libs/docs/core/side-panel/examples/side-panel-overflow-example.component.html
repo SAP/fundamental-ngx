@@ -1,10 +1,5 @@
 <div class="side-panel-example">
-    <fd-side-panel
-        side="right"
-        ariaLabel="Actions"
-        [activeItem]="activeItem()"
-        (activeItemChange)="activeItem.set($event)"
-    >
+    <fd-side-panel side="right" ariaLabel="Actions" [(activeItem)]="activeItem">
         <fd-side-panel-main>
             <div class="side-panel-example__main-content">
                 <p>

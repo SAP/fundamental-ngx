@@ -11,10 +11,8 @@
         defaultWidth="20rem"
         minWidth="12rem"
         maxWidth="90%"
-        [activeItem]="activeItem()"
-        (activeItemChange)="activeItem.set($event)"
-        [open]="open()"
-        (openChange)="open.set($event)"
+        [(activeItem)]="activeItem"
+        [(open)]="open"
     >
         <fd-side-panel-main>
             <div class="side-panel-example__main-content">

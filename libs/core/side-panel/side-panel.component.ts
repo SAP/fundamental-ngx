@@ -104,7 +104,10 @@ export class SidePanelComponent {
     /** Edge the panel is anchored to. Defaults to `right`. */
     readonly side = input<SidePanelSide>('right');
 
-    /** Accessible label for the action group listbox. */
+    /**
+     * Accessible label for the action group listbox.
+     * Defaults to the i18n translation of "Actions" when not provided.
+     */
     readonly ariaLabel = input<string>();
 
     /**
@@ -274,6 +277,8 @@ export class SidePanelComponent {
     protected readonly resizeResetLabel = resolveTranslationSignal('coreSidePanel.resizeResetToDefault');
     /** @hidden */
     protected readonly resizeSplitterLabel = resolveTranslationSignal('coreSidePanel.resizeSplitterLabel');
+    /** @hidden Fallback accessible name for the action bar listbox when ariaLabel is not provided. */
+    protected readonly actionsLabel = resolveTranslationSignal('coreSidePanel.actionsLabel');
 
     /**
      * @hidden Number of items that fit in the visible action bar without overflowing.
@@ -431,10 +436,15 @@ export class SidePanelComponent {
         // When the content panel is expected (open = true), also wait for its element to be in the
         // DOM (contentPanelRef truthy), so measureBounds reads the content panel, not the action bar.
         effect(() => {
-            if (!this.showSplitter() || this.contentPanelWidthPx() !== null) {
+            const splitterVisible = this.showSplitter();
+            const widthPx = this.contentPanelWidthPx();
+            const isOpen = this.open();
+            const panelRef = this.contentPanelRef();
+
+            if (!splitterVisible || widthPx !== null) {
                 return;
             }
-            if (this.open() && !this.contentPanelRef()) {
+            if (isOpen && !panelRef) {
                 return;
             }
             this.measureBounds();
