@@ -11,7 +11,7 @@ import {
     viewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ClickedDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType, defaultButtonType } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
@@ -66,7 +66,7 @@ export class ShellbarActionsMobileComponent {
     readonly brandingAriaLabel = input('');
 
     /** @hidden */
-    readonly assistiveToolsCallback = input<Nullable<(event: MouseEvent) => void>>();
+    readonly assistiveToolsCallback = input<((event: MouseEvent) => void) | null | undefined>();
 
     /** @hidden */
     readonly showSearch = output<void>();

@@ -1,16 +1,390 @@
-import type { Page, TestInfo } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import type { Locator, Page, TestInfo } from '@playwright/test';
 import { expect, test } from '@playwright/test';
+
+interface PageEvents {
+    readonly console: { type: string; text: string }[];
+    readonly errors: string[];
+}
+
+const pageEvents = new WeakMap<Page, PageEvents>();
 
 async function receipt(page: Page, info: TestInfo, name: string, data: unknown): Promise<void> {
     await info.attach(name + '.json', { body: JSON.stringify(data, null, 2), contentType: 'application/json' });
     await info.attach(name + '.png', { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
 }
 
+function eventsFor(page: Page): PageEvents {
+    const events = pageEvents.get(page);
+    if (!events) {
+        throw new Error('Page events were not registered before navigation.');
+    }
+    return events;
+}
+
+async function settle(page: Page): Promise<{ activeElement: string | null; hasFocus: boolean }> {
+    await page.evaluate(
+        () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
+    );
+    return page.evaluate(() => ({
+        activeElement: document.activeElement instanceof HTMLElement ? document.activeElement.outerHTML : null,
+        hasFocus: document.hasFocus()
+    }));
+}
+
 test.beforeEach(async ({ page }) => {
+    const events: PageEvents = { console: [], errors: [] };
+    pageEvents.set(page, events);
+    page.on('console', (message) => events.console.push({ type: message.type(), text: message.text() }));
+    page.on('pageerror', (error) => events.errors.push(error.message));
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto('/__e2e/shellbar/functional');
     await expect(page.getByTestId('shellbar-functional-fixture')).toBeVisible();
     await expect(page.getByTestId('mobile-region').locator('button .fd-button__badge')).toHaveText('1');
+    await settle(page);
+});
+
+function logicalActions(page: Page): Locator {
+    return page.getByTestId('logical-actions-shellbar').locator('fd-shellbar-actions').first();
+}
+
+async function expectToolbarForCount(page: Page, count: number): Promise<void> {
+    const actions = logicalActions(page);
+    if (count > 1) {
+        await expect(actions).toHaveAttribute('role', 'toolbar');
+        await expect(actions).toHaveAttribute('aria-label', 'Shellbar');
+    } else {
+        await expect(actions).not.toHaveAttribute('role');
+        await expect(actions).not.toHaveAttribute('aria-label');
+    }
+}
+
+async function expectToolbarForSearch(actions: Locator, count: number): Promise<void> {
+    if (count > 1) {
+        await expect(actions).toHaveRole('toolbar');
+        await expect(actions).toHaveAccessibleName('Shellbar');
+    } else {
+        await expect(actions).not.toHaveAttribute('role');
+        await expect(actions).not.toHaveAttribute('aria-label');
+    }
+}
+
+test('core/shellbar default named banner is owned by the shellbar host', async ({ page }, info) => {
+    const scope = page.getByTestId('default-banner-shellbar');
+    const shellbar = scope.locator('fd-shellbar');
+    const axe = await new AxeBuilder({ page }).include('[data-testid=default-banner-shellbar]').analyze();
+    await receipt(page, info, 'default-banner', {
+        host: await shellbar.evaluate((element) => ({
+            role: element.getAttribute('role'),
+            name: element.getAttribute('aria-label')
+        })),
+        axe
+    });
+    await expect(scope.getByRole('banner', { name: 'Shellbar' })).toHaveCount(1);
+    await expect(shellbar).toHaveAttribute('role', 'banner');
+    await expect(shellbar).toHaveAttribute('aria-label', 'Shellbar');
+    await expect(shellbar.locator('.fd-shellbar')).not.toHaveAttribute('aria-label');
+});
+
+test('core/shellbar consumer group override retains its outer banner', async ({ page }) => {
+    const wrapper = page.getByTestId('group-banner-wrapper');
+    await expect(wrapper).toHaveAttribute('role', 'banner');
+    await expect(wrapper.locator('fd-shellbar')).toHaveAttribute('role', 'group');
+    await expect(
+        page.locator(
+            '[data-testid=group-banner-wrapper][role=banner], [data-testid=group-banner-wrapper] [role=banner]'
+        )
+    ).toHaveCount(1);
+});
+
+test('core/shellbar isolated landmark route has valid named host and group axe contexts', async ({ page }, info) => {
+    await page.goto('/__e2e/shellbar/landmarks');
+    const host = page.getByTestId('landmark-default-shellbar');
+    const actions = page.getByTestId('landmark-actions');
+    await expect(host).toHaveRole('banner');
+    await expect(host).toHaveAccessibleName('Shellbar');
+    await expect(page.getByRole('banner')).toHaveCount(1);
+    await expect(actions).toHaveRole('toolbar');
+    await expect(actions).toHaveAccessibleName('Shellbar');
+    const hostAxe = await new AxeBuilder({ page }).include('[data-testid=landmark-default-shellbar]').analyze();
+    const actionsAxe = await new AxeBuilder({ page }).include('[data-testid=landmark-actions]').analyze();
+    const ancestors = await host.evaluate((element) => {
+        const result: { tag: string; role: string | null }[] = [];
+        for (let current = element.parentElement; current; current = current.parentElement) {
+            result.push({ tag: current.tagName.toLowerCase(), role: current.getAttribute('role') });
+        }
+        return result;
+    });
+    const defaultFocus = await settle(page);
+    const events = eventsFor(page);
+    await receipt(page, info, 'isolated-landmarks', {
+        ancestors,
+        hostAxe,
+        actionsAxe,
+        defaultFocus,
+        console: events.console,
+        pageErrors: events.errors
+    });
+    expect(hostAxe.violations).toEqual([]);
+    expect(hostAxe.incomplete).toEqual([]);
+    expect(actionsAxe.violations).toEqual([]);
+    expect(actionsAxe.incomplete).toEqual([]);
+    expect(ancestors).not.toContainEqual({ tag: 'main', role: null });
+    expect(events.errors).toEqual([]);
+    await page.getByTestId('landmark-toggle').click();
+    const wrapper = page.getByTestId('landmark-wrapper');
+    const group = page.getByTestId('landmark-group-shellbar');
+    const groupActions = group.locator('fd-shellbar-actions');
+    await expect(wrapper).toHaveAttribute('role', 'banner');
+    await expect(group).toHaveAttribute('role', 'group');
+    await expect(group).toHaveRole('group');
+    await expect(group).toHaveAccessibleName('Shellbar');
+    await expect(page.getByRole('banner')).toHaveCount(1);
+    await expect(groupActions).toHaveRole('toolbar');
+    await expect(groupActions).toHaveAccessibleName('Shellbar');
+    const wrapperAxe = await new AxeBuilder({ page }).include('[data-testid=landmark-wrapper]').analyze();
+    const wrapperActionsAxe = await new AxeBuilder({ page })
+        .include('[data-testid=landmark-group-shellbar] fd-shellbar-actions')
+        .analyze();
+    const wrapperAncestors = await group.evaluate((element) => {
+        const result: { tag: string; role: string | null }[] = [];
+        for (let current = element.parentElement; current; current = current.parentElement) {
+            result.push({ tag: current.tagName.toLowerCase(), role: current.getAttribute('role') });
+        }
+        return result;
+    });
+    const wrapperFocus = await settle(page);
+    await receipt(page, info, 'isolated-landmark-wrapper', {
+        wrapperAxe,
+        wrapperActionsAxe,
+        wrapperAncestors,
+        wrapperFocus,
+        console: events.console,
+        pageErrors: events.errors
+    });
+    expect(wrapperAxe.violations).toEqual([]);
+    expect(wrapperAxe.incomplete).toEqual([]);
+    expect(wrapperActionsAxe.violations).toEqual([]);
+    expect(wrapperActionsAxe.incomplete).toEqual([]);
+    expect(wrapperAncestors).not.toContainEqual({ tag: 'main', role: null });
+    expect(events.errors).toEqual([]);
+});
+
+test('core/shellbar action components transition 0 to 1 to 2 to 1 to 0 logical entries', async ({ page }, info) => {
+    const history: unknown[] = [];
+    for (const count of [0, 1, 2, 1, 0]) {
+        await page.getByTestId('semantic-actions-' + count).click();
+        await expect(logicalActions(page).locator('fd-shellbar-action')).toHaveCount(count);
+        await expectToolbarForCount(page, count);
+        history.push({ count, role: await logicalActions(page).getAttribute('role') });
+    }
+    await receipt(page, info, 'action-transitions', history);
+});
+
+test('core/shellbar plain fd-button projections transition 0 to 1 to 2 to 1 to 0', async ({ page }, info) => {
+    const history: unknown[] = [];
+    for (const count of [0, 1, 2, 1, 0]) {
+        await page.getByTestId('semantic-buttons-' + count).click();
+        await expect(logicalActions(page).locator('[data-semantic-button]')).toHaveCount(count);
+        await expectToolbarForCount(page, count);
+        if (count === 1) {
+            await expect(logicalActions(page).locator('[data-semantic-button]')).toHaveRole('button');
+        }
+        history.push({ count, role: await logicalActions(page).getAttribute('role') });
+    }
+    await receipt(page, info, 'plain-button-transitions', history);
+});
+
+test('core/shellbar mixed action and plain-button composite entries are counted once each', async ({ page }) => {
+    await page.getByTestId('semantic-actions-1').click();
+    await page.getByTestId('semantic-buttons-1').click();
+    await expect(logicalActions(page).locator('fd-shellbar-action')).toHaveCount(1);
+    await expect(logicalActions(page).locator('[data-semantic-button]')).toHaveCount(1);
+    await expectToolbarForCount(page, 2);
+});
+
+test('core/shellbar generated assistive entry updates a stable plain-button projection', async ({ page }, info) => {
+    await page.getByTestId('semantic-buttons-1').click();
+    await expectToolbarForCount(page, 1);
+    await page.getByTestId('semantic-assistive-toggle').click();
+    await expectToolbarForCount(page, 2);
+    await page.getByTestId('semantic-assistive-toggle').click();
+    await expectToolbarForCount(page, 1);
+    await receipt(page, info, 'generated-entry', { role: await logicalActions(page).getAttribute('role') });
+});
+
+test('core/shellbar composite controls are one logical entry beside one stable action', async ({ page }, info) => {
+    const composites = [
+        ['combobox', 'combobox-shellbar', 'combobox-actions', 'semantic-combobox'],
+        ['legacy-user', 'legacy-user-shellbar', 'legacy-user-actions', 'semantic-legacy-user'],
+        ['user-menu', 'user-menu-shellbar', 'user-menu-actions', 'semantic-user-menu'],
+        ['product-switch', 'product-switch-shellbar', 'product-switch-actions', 'semantic-product-switch']
+    ] as const;
+    const ledger: unknown[] = [];
+    for (const [name, shellbarTestId, actionsTestId, controlTestId] of composites) {
+        const shellbar = page.getByTestId(shellbarTestId);
+        const actions = page.getByTestId(actionsTestId);
+        const control = page.getByTestId(controlTestId);
+        await expect(shellbar.locator('fd-shellbar-actions')).toHaveCount(1);
+        await expect(control).toHaveCount(1);
+        const internalButtons = await control.locator('button').count();
+        expect(internalButtons).toBeGreaterThan(0);
+        await expect(actions.locator('fd-shellbar-action')).toHaveCount(0);
+        await expect(actions).not.toHaveAttribute('role');
+        await page.getByTestId('semantic-composite-stable-toggle').click();
+        await expect(actions.locator('fd-shellbar-action')).toHaveCount(1);
+        await expect(actions).toHaveRole('toolbar');
+        await expect(actions).toHaveAccessibleName('Shellbar');
+        await page.getByTestId('semantic-composite-stable-toggle').click();
+        await expect(actions).not.toHaveAttribute('role');
+        ledger.push({
+            name,
+            internalButtons,
+            roleAfterRemoval: await actions.getAttribute('role')
+        });
+    }
+    const settled = await settle(page);
+    const events = eventsFor(page);
+    await receipt(page, info, 'composite-ledger', {
+        ledger,
+        settled,
+        console: events.console,
+        pageErrors: events.errors
+    });
+    expect(events.errors).toEqual([]);
+});
+
+test('core/shellbar real Platform Search attaches and detaches as one entry beside a stable projection', async ({
+    page
+}, info) => {
+    const shellbar = page.getByTestId('search-shellbar');
+    const actions = page.getByTestId('search-actions');
+    await expect(shellbar.locator('fd-shellbar-actions')).toHaveCount(1);
+    await expect(actions.locator('fd-shellbar-action')).toHaveCount(1);
+    await expectToolbarForSearch(actions, 1);
+    await page.getByTestId('semantic-search-toggle').click();
+    const search = page.getByTestId('semantic-search');
+    await expect(search).toHaveCount(1);
+    await expectToolbarForSearch(actions, 2);
+    await expect(actions.locator('fd-shellbar-action')).toHaveCount(2);
+    const searchButton = actions.locator('fd-shellbar-action').first().getByRole('button');
+    await expect(searchButton).toHaveAttribute('aria-expanded', 'false');
+    await searchButton.click();
+    const portalledSearch = actions.locator('.fd-shellbar__action fdp-search-field');
+    await expect(portalledSearch).toHaveCount(1);
+    await expect(portalledSearch).toBeVisible();
+    const expandedFocus = await settle(page);
+    expect(expandedFocus.hasFocus).toBe(true);
+    await expectToolbarForSearch(actions, 2);
+    const beforeDetach = await shellbar.evaluate((element) => ({
+        actionsRole: element.querySelector('[data-testid=search-actions]')?.getAttribute('role'),
+        portalledSearch: !!element.querySelector('[data-testid=search-actions] fdp-search-field'),
+        searchParent: element.querySelector('[data-testid=semantic-search]')?.parentElement?.className
+    }));
+    await page.getByTestId('semantic-search-toggle').click();
+    const afterDetachFocus = await settle(page);
+    const afterDetach = await shellbar.evaluate((element) => ({
+        actionsRole: element.querySelector('[data-testid=search-actions]')?.getAttribute('role'),
+        remainingSearch: !!element.querySelector('[data-testid=semantic-search]'),
+        actionCount: element.querySelectorAll('[data-testid=search-actions] fd-shellbar-action').length
+    }));
+    const events = eventsFor(page);
+    await receipt(page, info, 'platform-search-detach', {
+        beforeDetach,
+        expandedFocus,
+        afterDetach,
+        afterDetachFocus,
+        console: events.console,
+        pageErrors: events.errors
+    });
+    await expect(search).toHaveCount(0);
+    await expectToolbarForSearch(actions, 1);
+    await receipt(page, info, 'platform-search-lifecycle', {
+        actionCount: await actions.locator('fd-shellbar-action').count(),
+        role: await actions.getAttribute('role'),
+        console: events.console,
+        pageErrors: events.errors
+    });
+    expect(events.errors).toEqual([]);
+});
+
+test('core/shellbar real actions host overflows and restores through narrow wide narrow geometry', async ({
+    page
+}, info) => {
+    const container = page.getByTestId('real-overflow-container');
+    const shellbar = page.getByTestId('real-overflow-shellbar');
+    const actions = page.getByTestId('real-overflow-actions');
+    const history: unknown[] = [];
+
+    for (const [width, expectOverflow] of [
+        ['narrow', true],
+        ['wide', false],
+        ['narrow', true]
+    ] as const) {
+        await page.getByTestId('real-overflow-' + width).click();
+        // The real overflow layout measures asynchronously after a container resize.
+        await page.waitForTimeout(150);
+        const focus = await settle(page);
+        await expect(actions).toHaveRole('toolbar');
+        await expect(actions).toHaveAccessibleName('Shellbar');
+        await expect(actions.locator('fd-shellbar-action')).toHaveCount(2);
+        const overflowTrigger = actions.locator('fd-shellbar-actions-mobile button');
+        if (expectOverflow) {
+            await expect(overflowTrigger).toHaveCount(1);
+            await expect(actions.getByRole('button', { name: 'Overflow one' })).not.toBeVisible();
+            await expect(actions.getByRole('button', { name: 'Overflow two' })).not.toBeVisible();
+            await overflowTrigger.click();
+            const rows = page.locator('[fd-menu-interactive]:visible');
+            await expect(rows.filter({ hasText: 'Overflow one' })).toHaveCount(1);
+            await expect(rows.filter({ hasText: 'Overflow two' })).toHaveCount(1);
+            await page.keyboard.press('Escape');
+            await expect(rows).toHaveCount(0);
+        } else {
+            await expect(overflowTrigger).toHaveCount(0);
+            await expect(actions.getByRole('button', { name: 'Overflow one' })).toBeVisible();
+            await expect(actions.getByRole('button', { name: 'Overflow two' })).toBeVisible();
+        }
+        history.push({
+            focus,
+            state: await container.evaluate((element) => {
+                const shellbarElement = element.querySelector('.fd-shellbar') as HTMLElement;
+                const actionsElement = element.querySelector('fd-shellbar-actions') as HTMLElement;
+                return {
+                    width: element.getBoundingClientRect().width,
+                    shellbarWidth: shellbarElement.getBoundingClientRect().width,
+                    actionsWidth: actionsElement.getBoundingClientRect().width,
+                    actionsEnd: actionsElement.getBoundingClientRect().right,
+                    shellbarEnd: shellbarElement.getBoundingClientRect().right,
+                    role: actionsElement.getAttribute('role'),
+                    labels: Array.from(actionsElement.querySelectorAll('fd-shellbar-action')).map((action) =>
+                        action.getAttribute('aria-label')
+                    )
+                };
+            })
+        });
+        await expect(shellbar.locator('fd-shellbar-actions')).toHaveCount(1);
+    }
+    const events = eventsFor(page);
+    await receipt(page, info, 'real-overflow-lifecycle', {
+        history,
+        console: events.console,
+        pageErrors: events.errors
+    });
+    expect(events.errors).toEqual([]);
+});
+
+test('core/shellbar overflow keeps projected membership and menu semantics', async ({ page }, info) => {
+    const mobile = page.getByTestId('mobile-region');
+    const trigger = mobile.locator('button');
+    await page.getByTestId('add-action').click();
+    await trigger.click();
+    const rows = page.locator('[fd-menu-interactive]:visible');
+    await expect(rows.filter({ hasText: 'One' })).toHaveCount(1);
+    await expect(rows.filter({ hasText: 'Five' })).toHaveCount(1);
+    await expect(rows.first()).toHaveRole('menuitem');
+    await receipt(page, info, 'overflow-preservation', { rows: await rows.allTextContents() });
+    await page.keyboard.press('Escape');
+    await expect(rows).toHaveCount(0);
 });
 
 test('default/literal projection controls retain exactly one item on each requested side', async ({ page }) => {

@@ -1,0 +1,18 @@
+@if (wrapper()) {
+    <header role="banner" data-testid="landmark-wrapper">
+        <fd-shellbar role="group" data-testid="landmark-group-shellbar">
+            <fd-shellbar-actions>
+                <button fd-button>One</button>
+                <button fd-button>Two</button>
+            </fd-shellbar-actions>
+        </fd-shellbar>
+    </header>
+} @else {
+    <fd-shellbar data-testid="landmark-default-shellbar">
+        <fd-shellbar-actions data-testid="landmark-actions">
+            <fd-shellbar-action ariaLabel="One" glyph="bell"></fd-shellbar-action>
+            <fd-shellbar-action ariaLabel="Two" glyph="bell"></fd-shellbar-action>
+        </fd-shellbar-actions>
+    </fd-shellbar>
+}
+<button data-testid="landmark-toggle" (click)="wrapper.set(!wrapper())">Toggle wrapper</button>

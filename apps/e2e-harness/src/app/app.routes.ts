@@ -45,5 +45,11 @@ export const routes: Routes = [
                 (module) => module.ShellbarSearchAccessibilityComponent
             )
     },
+    {
+        path: '__e2e/shellbar/landmarks',
+        loadComponent: () =>
+            import('./fixtures/shellbar-landmarks.component').then((module) => module.ShellbarLandmarksComponent),
+        data: { bareLayout: true }
+    },
     ...generatedRoutes
 ];
