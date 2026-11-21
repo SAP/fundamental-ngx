@@ -12,10 +12,12 @@ import {
     QueryList,
     ViewChild,
     ViewEncapsulation,
+    contentChildren,
     inject,
     signal
 } from '@angular/core';
 
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { FD_PRODUCT_SWITCH_COMPONENT, ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 
@@ -23,7 +25,7 @@ import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { UserMenuComponent } from '@fundamental-ngx/core/user-menu';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSignal } from '@fundamental-ngx/i18n';
 import { ShellbarSizes } from '../model/shellbar-sizes';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
@@ -59,7 +61,9 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-shellbar__group]': 'true',
-        '[class.fd-shellbar__group--actions]': 'true'
+        '[class.fd-shellbar__group--actions]': 'true',
+        '[attr.role]': 'hasMultipleActions() ? "toolbar" : null',
+        '[attr.aria-label]': 'hasMultipleActions() ? shellbarLabel() : null'
     },
     imports: [
         PortalModule,
@@ -157,6 +161,15 @@ export class ShellbarActionsComponent implements OnDestroy {
     _elRef = inject(ElementRef);
 
     /** @hidden */
+    protected readonly shellbarLabel = resolveTranslationSignal('coreShellbar.shellbarLabel');
+
+    private readonly _projectedActions = contentChildren<ShellbarActionComponent>(FD_SHELLBAR_ACTION_COMPONENT, {
+        descendants: false
+    });
+
+    private readonly _projectedButtons = contentChildren<ButtonComponent>(FD_BUTTON_COMPONENT, { descendants: false });
+
+    /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
@@ -244,6 +257,21 @@ export class ShellbarActionsComponent implements OnDestroy {
         this.hiddenLogoElement.set(logoElement);
         this.brandingAriaLabel.set(ariaLabel);
         this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    protected hasMultipleActions(): boolean {
+        // Read plain generated flags on every host evaluation as well as reactive projected membership.
+        const count =
+            this._projectedActions().length +
+            this._projectedButtons().length +
+            Number(!!this.comboboxComponent) +
+            Number(!!this.userItem) +
+            Number(!!this.userMenuComponent) +
+            Number(!!this.productSwitchComponent) +
+            Number(this._addSearchIcon) +
+            Number(this.assistiveTools);
+        return count > 1;
     }
 
     /** @hidden */

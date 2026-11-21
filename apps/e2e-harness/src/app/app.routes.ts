@@ -11,5 +11,11 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./fixtures/shellbar-functional.component').then((module) => module.ShellbarFunctionalComponent)
     },
+    {
+        path: '__e2e/shellbar/landmarks',
+        loadComponent: () =>
+            import('./fixtures/shellbar-landmarks.component').then((module) => module.ShellbarLandmarksComponent),
+        data: { bareLayout: true }
+    },
     ...generatedRoutes
 ];

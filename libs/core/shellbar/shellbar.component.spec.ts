@@ -55,6 +55,20 @@ class ShellbarKeyboardTestComponent {}
 })
 class ShellbarNativeSelectTestComponent {}
 
+@Component({
+    selector: 'fd-test-shellbar-landmarks',
+    template: `
+        <section id="default-shellbar">
+            <fd-shellbar></fd-shellbar>
+        </section>
+        <header id="product-header" role="banner">
+            <fd-shellbar role="group"></fd-shellbar>
+        </header>
+    `,
+    imports: [ShellbarComponent]
+})
+class ShellbarLandmarksTestComponent {}
+
 describe('native key ownership through the capture listener', () => {
     let nativeFixture: ComponentFixture<ShellbarNativeSelectTestComponent>;
 
@@ -208,6 +222,40 @@ describe('ShellbarComponent', () => {
 
         expect(productElementClass).toContain('fd-shellbar__group--shrink');
         expect(productElementClass).toContain('fd-shellbar__group--basis-auto');
+    });
+});
+
+describe('ShellbarComponent landmark semantics', () => {
+    let landmarkFixture: ComponentFixture<ShellbarLandmarksTestComponent>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({ imports: [ShellbarLandmarksTestComponent] }).compileComponents();
+        landmarkFixture = TestBed.createComponent(ShellbarLandmarksTestComponent);
+        landmarkFixture.detectChanges();
+        await landmarkFixture.whenStable();
+    });
+
+    it('names its host banner once without leaving a labelled inner visual wrapper', () => {
+        const container = landmarkFixture.nativeElement.querySelector('#default-shellbar') as HTMLElement;
+        const shellbar = container.querySelector('fd-shellbar') as HTMLElement;
+        const visualShellbar = shellbar.querySelector('.fd-shellbar') as HTMLElement;
+
+        expect(container.querySelectorAll('[role="banner"]')).toHaveLength(1);
+        expect(shellbar.getAttribute('role')).toBe('banner');
+        expect(shellbar.getAttribute('aria-label')).toBe('Shellbar');
+        expect(visualShellbar.hasAttribute('role')).toBe(false);
+        expect(visualShellbar.hasAttribute('aria-label')).toBe(false);
+    });
+
+    it('retains a consumer group override inside a product header without a nested banner', () => {
+        const productHeader = landmarkFixture.nativeElement.querySelector('#product-header') as HTMLElement;
+        const shellbar = productHeader.querySelector('fd-shellbar') as HTMLElement;
+
+        expect(productHeader.tagName).toBe('HEADER');
+        expect(productHeader.getAttribute('role')).toBe('banner');
+        expect(productHeader.querySelectorAll('[role="banner"]')).toHaveLength(0);
+        expect(shellbar.getAttribute('role')).toBe('group');
+        expect(shellbar.getAttribute('aria-label')).toBe('Shellbar');
     });
 });
 
