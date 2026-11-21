@@ -1,4 +1,4 @@
-import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, X } from '@angular/cdk/keycodes';
+import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, UP_ARROW, X } from '@angular/cdk/keycodes';
 import { ModifierKeys } from '@angular/cdk/testing';
 import {
     ChangeDetectionStrategy,
@@ -300,6 +300,56 @@ describe('SelectComponent', () => {
     });
 
     describe('keyboard navigation', () => {
+        it.each([false, true])('should omit aria-active when expanded is %s', async (expanded) => {
+            const combobox: HTMLElement = element.nativeElement.querySelector('[role="combobox"]');
+            if (expanded) {
+                combobox.dispatchEvent(keyboardEventWithModifier('keydown', ENTER));
+                await wait(fixture);
+            }
+            expect(combobox.getAttribute('aria-expanded')).toBe(String(expanded));
+            expect(combobox.hasAttribute('aria-active')).toBe(false);
+        });
+
+        it('should preserve listbox relationships through keyboard selection and repeated dismissal', async () => {
+            fixture.componentRef.setInput('value', 'value-1');
+            await wait(fixture);
+            const combobox: HTMLElement = element.nativeElement.querySelector('[role="combobox"]');
+            const press = async (keyCode: number): Promise<void> => {
+                combobox.dispatchEvent(keyboardEventWithModifier('keydown', keyCode));
+                await wait(fixture);
+            };
+            const expectOpenRelationships = (optionId: string): void => {
+                expect(combobox.getAttribute('aria-expanded')).toBe('true');
+                const listbox = document.getElementById(combobox.getAttribute('aria-controls')!);
+                expect(listbox?.getAttribute('role')).toBe('listbox');
+                expect(combobox.getAttribute('aria-activedescendant')).toBe(optionId);
+                const option = document.getElementById(optionId);
+                expect(option?.getAttribute('role')).toBe('option');
+                expect(listbox?.contains(option)).toBe(true);
+            };
+
+            expect(combobox.getAttribute('aria-expanded')).toBe('false');
+            await press(ENTER);
+            expectOpenRelationships('option-1');
+            await press(DOWN_ARROW);
+            expectOpenRelationships('option-2');
+            await press(UP_ARROW);
+            expectOpenRelationships('option-1');
+            await press(DOWN_ARROW);
+            await press(ENTER);
+            expect(fixture.componentInstance.value()).toBe('value-2');
+            expect(combobox.textContent).toContain('Test2');
+            expect(combobox.getAttribute('aria-expanded')).toBe('false');
+
+            for (let cycle = 0; cycle < 2; cycle++) {
+                await press(ENTER);
+                expectOpenRelationships('option-2');
+                await press(ESCAPE);
+                expect(combobox.getAttribute('aria-expanded')).toBe('false');
+                expect(fixture.componentInstance.value()).toBe('value-2');
+            }
+        });
+
         it('should navigate to second item, when pressing ArrowDown and FirstItem is focused', async () => {
             component.value = 'value-1';
             await wait(fixture);
