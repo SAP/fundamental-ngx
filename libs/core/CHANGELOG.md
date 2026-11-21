@@ -1,3 +1,13 @@
+## 0.66.2-rc.0 (2026-11-21)
+
+### 🩹 Fixes
+
+- **core:** remove invalid aria-active attribute from Select ([#14695](https://github.com/SAP/fundamental-ngx/pull/14695))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1 (2026-11-20)
 
 ### 🚀 Features
