@@ -54,6 +54,10 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
     styleUrls: ['./shellbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        role: 'banner',
+        '[attr.aria-label]': 'shellbarLabel()'
+    },
     providers: [
         {
             provide: FD_SHELLBAR_COMPONENT,
@@ -231,6 +235,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             }
             // Notify actions component to remove search icon and reset state
             this._actions?._detachSearch();
+            // A destroyed projected view removes the portal anchor before CDK can restore its element.
+            this._searchPortal?.element.remove();
             return;
         }
 
@@ -632,6 +638,9 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     }
 
     private _placeSearch(): void {
+        if (!this._searchComponent) {
+            return;
+        }
         const size = this._currentSize$.value;
 
         // Search stays in shellbar at XL only if NO context areas exist

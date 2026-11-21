@@ -1,5 +1,8 @@
-import { afterNextRender, Component, inject, signal, viewChild } from '@angular/core';
+import { afterNextRender, Component, computed, inject, signal, viewChild } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
+import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 import {
     FD_SHELLBAR_COMPONENT,
     ShellbarActionComponent,
@@ -9,8 +12,15 @@ import {
     ShellbarContextAreaComponent,
     ShellbarNeverHideDirective,
     ShellbarPositionDirective,
-    ShellbarSeparatorComponent
+    ShellbarSeparatorComponent,
+    ShellbarUserMenuComponent
 } from '@fundamental-ngx/core/shellbar';
+import {
+    UserMenuComponent,
+    UserMenuControlComponent,
+    UserMenuControlElementDirective
+} from '@fundamental-ngx/core/user-menu';
+import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'e2e-shellbar-mobile-projection',
@@ -113,10 +123,19 @@ export class ShellbarMobileProjectionComponent {
     imports: [
         ShellbarComponent,
         ShellbarContextAreaComponent,
+        ShellbarActionComponent,
+        ButtonComponent,
         ShellbarActionsComponent,
         ShellbarNeverHideDirective,
         ShellbarPositionDirective,
         ShellbarSeparatorComponent,
+        ShellbarUserMenuComponent,
+        ComboboxComponent,
+        ProductSwitchComponent,
+        UserMenuComponent,
+        UserMenuControlComponent,
+        UserMenuControlElementDirective,
+        SearchFieldComponent,
         ShellbarMobileProjectionComponent
     ]
 })
@@ -125,6 +144,15 @@ export class ShellbarFunctionalComponent {
     readonly hidden = signal<string[]>([]);
     readonly shown = signal<string[]>([]);
     readonly aggregate = signal<string[]>([]);
+    readonly semanticActions = signal(0);
+    readonly semanticButtons = signal(0);
+    readonly semanticAssistiveTools = signal(false);
+    readonly semanticCompositeStable = signal(false);
+    readonly semanticSearch = signal(false);
+    readonly semanticUser = { initials: 'RU', fullName: 'Recovery User' };
+    readonly realOverflowWidth = signal(500);
+    readonly semanticActionItems = computed(() => Array.from({ length: this.semanticActions() }));
+    readonly semanticButtonItems = computed(() => Array.from({ length: this.semanticButtons() }));
     readonly geometryBar = viewChild.required<ShellbarComponent>('geometryBar');
     readonly area = viewChild.required<ShellbarContextAreaComponent>('geometryArea');
     protected readonly _rtl = inject(RtlService);
@@ -139,6 +167,18 @@ export class ShellbarFunctionalComponent {
 
     noteAggregate(elements: HTMLElement[]): void {
         this.aggregate.set(elements.map((element) => element.id));
+    }
+
+    setSemanticActions(count: number): void {
+        this.semanticActions.set(count);
+    }
+
+    setSemanticButtons(count: number): void {
+        this.semanticButtons.set(count);
+    }
+
+    setRealOverflowWidth(width: number): void {
+        this.realOverflowWidth.set(width);
     }
 
     async setResidual(residual: number): Promise<void> {
