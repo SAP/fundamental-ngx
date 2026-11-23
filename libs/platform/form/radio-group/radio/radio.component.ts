@@ -65,6 +65,15 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     /** @hidden Radio checked status */
     _isChecked = false;
 
+    /**
+     * @hidden
+     * Read-only state propagated from the parent radio group. Combined with the
+     * radio button's own `readonly` input to compute the effective read-only state,
+     * so a group-level change can be toggled on and off without clobbering a
+     * per-radio override.
+     */
+    groupReadonly = false;
+
     /** @hidden */
     constructor() {
         super();
@@ -83,6 +92,11 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         this._valueChange(value);
     }
 
+    /** @hidden Effective read-only state: the radio's own `readonly` input or the group's. */
+    get isReadonly(): boolean {
+        return !!this.readonly || this.groupReadonly;
+    }
+
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
@@ -90,8 +104,14 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
 
     /** @hidden */
     _valueChange(value: any, emitEvent = false): void {
-        if (this.disabled) {
+        if (this.disabled || this.isReadonly) {
             emitEvent = false;
+        }
+
+        // Read-only radios accept programmatic writes (select/unselect pass emitEvent=false),
+        // but must not react to user interaction (ngModelChange passes emitEvent=true).
+        if (this.isReadonly && emitEvent) {
+            return;
         }
 
         this._currentValue = value;
@@ -110,6 +130,12 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     /** method for cdk FocusKeymanager */
     focus(): void {
         this.coreRadioButton?.inputElement.nativeElement.focus();
+    }
+
+    /** Whether this radio button's native input currently holds focus. */
+    isFocused(): boolean {
+        const input = this.coreRadioButton?.inputElement?.nativeElement;
+        return !!input && input.getRootNode()['activeElement'] === input;
     }
 
     /** method to select radio button */

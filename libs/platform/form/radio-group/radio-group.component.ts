@@ -91,9 +91,6 @@ export class RadioGroupComponent
     // eslint-disable-next-line @angular-eslint/no-output-native
     change: EventEmitter<RadioButtonComponent> = new EventEmitter<RadioButtonComponent>();
 
-    /** @hidden */
-    private _activeItemSet = false;
-
     /** @hidden The currently selected radio button. Should match value. */
     private _selected: RadioButtonComponent | null = null;
 
@@ -113,18 +110,25 @@ export class RadioGroupComponent
     @HostListener('keydown', ['$event'])
     _handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
-        if (this._keyboardEventsManager) {
-            // sets Active item. so arrow key starts after the active item.
-            // Need to do only once, when one radio is already selected
-            if (this._selected && !this._activeItemSet) {
-                this._keyboardEventsManager.setActiveItem(this._selected);
-                this._activeItemSet = true;
+        if (!this._keyboardEventsManager) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
+            // Sync the key manager's active item to the radio that currently holds focus
+            // (or the selected one) so the first arrow press advances instead of only
+            // initializing the active item.
+            const radios = (
+                this.viewRadioButtons?.length ? this.viewRadioButtons : this.contentRadioButtons
+            )?.toArray();
+            const focused = radios?.find((radio) => radio.isFocused());
+            const anchor = focused ?? this._selected;
+            if (anchor && this._keyboardEventsManager.activeItem !== anchor) {
+                this._keyboardEventsManager.setActiveItem(anchor);
             }
 
-            if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
-                // passing the event to key manager so we get a change fired
-                this._keyboardEventsManager.onKeydown(event);
-            }
+            // passing the event to key manager so we get a change fired
+            this._keyboardEventsManager.onKeydown(event);
         }
     }
 
@@ -153,7 +157,10 @@ export class RadioGroupComponent
         if (!this._validateRadioButtons()) {
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
         }
-        this.contentRadioButtons.forEach((button) => (button.state = this.state));
+        this.contentRadioButtons.forEach((button) => {
+            button.state = this.state;
+            button.groupReadonly = this.readonly;
+        });
         this.markForCheck();
     }
 
@@ -283,6 +290,7 @@ export class RadioGroupComponent
             button.name = this.name;
             button.state = this.state;
             button.disabled = button.disabled ? button.disabled : this._disabled;
+            button.groupReadonly = this.readonly;
         }
     }
 
