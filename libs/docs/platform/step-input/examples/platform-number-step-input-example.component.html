@@ -53,6 +53,15 @@
             [id]="'stepNumberReadOnly'"
             name="stepNumberReadOnly"
             [value]="50"
+            [readonly]="true"
+        ></fdp-number-step-input>
+    </div>
+    <div class="step-input-example">
+        <label fd-form-label for="stepNumberEditable">Read Only (via editable)</label>
+        <fdp-number-step-input
+            [id]="'stepNumberEditable'"
+            name="stepNumberEditable"
+            [value]="50"
             [editable]="false"
         ></fdp-number-step-input>
     </div>

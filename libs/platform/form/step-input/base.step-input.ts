@@ -1,4 +1,17 @@
-import { computed, Directive, EventEmitter, inject, Input, OnInit, Output, Renderer2, signal } from '@angular/core';
+import {
+    booleanAttribute,
+    computed,
+    Directive,
+    EventEmitter,
+    inject,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    Renderer2,
+    signal,
+    SimpleChanges
+} from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -38,7 +51,7 @@ const ALIGN_INPUT_OPTIONS_LIST = [StepInputAlign.Left, StepInputAlign.Center, St
  * This holds base Step Input functionality that can be abstracted
  */
 @Directive()
-export abstract class StepInputComponent extends BaseInput implements OnInit {
+export abstract class StepInputComponent extends BaseInput implements OnInit, OnChanges {
     /** Create valueChange event */
     abstract createChangeEvent(value: number): StepInputChangeEvent;
 
@@ -139,6 +152,22 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     @Input()
     decrementLabel: string = inject(StepInputConfig).decrementLabel;
 
+    /**
+     * Tell the component if we are in editing mode.
+     *
+     * @deprecated Kept for backwards compatibility. Prefer `readonly` — setting
+     * `[editable]="false"` is equivalent to `[readonly]="true"`.
+     */
+    @Input({ transform: booleanAttribute })
+    override set editable(value: boolean) {
+        this._editable$.set(value);
+        this.markForCheck();
+        this.stateChanges.next('editable');
+    }
+    override get editable(): boolean {
+        return this._editable$();
+    }
+
     /** Emits new value when control value has changed */
     @Output()
     valueChange = new EventEmitter<StepInputChangeEvent>();
@@ -159,8 +188,24 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** @hidden */
     get canChangeValue(): boolean {
-        return !(this.disabled || !this.editable);
+        return !(this.disabled || this._isReadonly$());
     }
+
+    /** @hidden
+     * Reactive mirror of the inherited `readonly` input (synced in `ngOnChanges`).
+     */
+    readonly _readonly$ = signal(false);
+
+    /** @hidden
+     * Backing signal for the `editable` input. Defaults to `true` (editable).
+     */
+    readonly _editable$ = signal(true);
+
+    /** @hidden
+     * Combined read-only state. The control is read-only when `readonly` is `true`
+     * OR `editable` is `false` — the two inputs are kept equivalent for backwards compatibility.
+     */
+    readonly _isReadonly$ = computed(() => this._readonly$() || !this._editable$());
 
     /** @hidden */
     readonly _align$ = signal<StepInputAlign | null>(null);
@@ -232,6 +277,18 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this.lastEmittedValue = this._value;
 
         this._listenToFormErrorState();
+    }
+
+    /** @hidden
+     * The `readonly` input is inherited from `BaseInput` as a plain property, so it cannot be
+     * reactive on its own. Mirror its bound value into `_readonly$` so the read-only state
+     * (styling, native attribute, value gating) reacts to `[readonly]` binding changes —
+     * keeping it equivalent to `[editable]`.
+     */
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('readonly' in changes) {
+            this._readonly$.set(booleanAttribute(this.readonly));
+        }
     }
 
     /** @hidden
