@@ -473,6 +473,7 @@ export default {
         allButtonLabel: 'الكل',
         cancelLabel: 'إلغاء',
         clearButtonTitle: 'مسح البحث',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'إجمالي النتائج: {count}',
         deleteButtonAriaLabel: 'إزالة',
         deleteButtonTitle: 'إزالة الاقتراح',

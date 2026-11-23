@@ -474,6 +474,7 @@ export default {
         allButtonLabel: 'Sve',
         cancelLabel: 'Odustani',
         clearButtonTitle: 'Očisti pretraživanje',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Ukupan broj rezultata: {count}',
         deleteButtonAriaLabel: 'Ukloni',
         deleteButtonTitle: 'Ukloni prijedlog',

@@ -474,6 +474,7 @@ export default {
         allButtonLabel: 'Összes',
         cancelLabel: 'Mégse',
         clearButtonTitle: 'Keresés törlése',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Találatok száma összesen: {count}',
         deleteButtonAriaLabel: 'Eltávolítás',
         deleteButtonTitle: 'Javaslat eltávolítása',

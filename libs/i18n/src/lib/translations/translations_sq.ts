@@ -474,6 +474,7 @@ export default {
         allButtonLabel: 'All',
         cancelLabel: 'Cancel',
         clearButtonTitle: 'Pastro',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Total results: {count}',
         deleteButtonAriaLabel: 'Remove',
         deleteButtonTitle: 'Remove Suggestion',

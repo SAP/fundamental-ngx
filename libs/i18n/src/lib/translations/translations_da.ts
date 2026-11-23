@@ -473,6 +473,7 @@ export default {
         allButtonLabel: 'Alle',
         cancelLabel: 'Annuller',
         clearButtonTitle: 'Ryd søgning',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Samlet antal resultater: {count}',
         deleteButtonAriaLabel: 'Fjern',
         deleteButtonTitle: 'Fjern forslag',

@@ -621,6 +621,7 @@ export interface FdLanguage {
     };
     platformSearchField: {
         clearButtonTitle: FdLanguageKey;
+        advancedFilterButtonTitle: FdLanguageKey;
         submitButtonTitle: FdLanguageKey;
         searchInputLabel: FdLanguageKey;
         synchronizeButtonTitle: FdLanguageKey;

@@ -473,6 +473,7 @@ export default {
         allButtonLabel: 'Kaikki',
         cancelLabel: 'Peruuta',
         clearButtonTitle: 'Tyhjennä haku',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Kaikki tulokset: {count}',
         deleteButtonAriaLabel: 'Poista',
         deleteButtonTitle: 'Poista ehdotus',

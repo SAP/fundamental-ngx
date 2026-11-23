@@ -471,6 +471,7 @@ export default {
         allButtonLabel: '全部',
         cancelLabel: '取消',
         clearButtonTitle: '清除搜尋',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: '總計結果：{count}',
         deleteButtonAriaLabel: '刪除',
         deleteButtonTitle: '刪除建議',

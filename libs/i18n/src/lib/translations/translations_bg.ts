@@ -474,6 +474,7 @@ export default {
         allButtonLabel: 'Всички',
         cancelLabel: 'Отказ',
         clearButtonTitle: 'Изчистване на търсенето',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Общо резултати: {count}',
         deleteButtonAriaLabel: 'Премахване',
         deleteButtonTitle: 'Премахване на предложението',

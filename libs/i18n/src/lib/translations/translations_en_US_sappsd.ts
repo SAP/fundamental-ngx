@@ -475,6 +475,7 @@ export default {
         allButtonLabel: '[[[Āĺĺ∙]]]',
         cancelLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         clearButtonTitle: '[[[Ĉĺēąŗ Ŝēąŗċĥ∙∙∙∙∙∙∙]]]',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: '[[[Ţŏţąĺ ŗēşűĺţş: {count}]]]',
         deleteButtonAriaLabel: '[[[Řēɱŏʋē∙∙∙∙∙∙∙∙]]]',
         deleteButtonTitle: '[[[Řēɱŏʋē Ŝűğğēşţįŏŋ∙∙∙∙∙∙∙]]]',

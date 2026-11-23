@@ -470,6 +470,7 @@ export default {
         allButtonLabel: '所有',
         cancelLabel: '取消',
         clearButtonTitle: '清除搜索',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: '结果总数：{count}',
         deleteButtonAriaLabel: '移除',
         deleteButtonTitle: '移除建议',

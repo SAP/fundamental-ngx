@@ -474,6 +474,7 @@ export default {
         allButtonLabel: 'Барлығы',
         cancelLabel: 'Болдырмау',
         clearButtonTitle: 'Іздеуді тазарту',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Жалпы нәтижелер: {count}',
         deleteButtonAriaLabel: 'Жою',
         deleteButtonTitle: 'Ұсынысты жою',

@@ -475,6 +475,7 @@ export default {
         allButtonLabel: 'Todos',
         cancelLabel: 'Cancelar',
         clearButtonTitle: 'Borrar búsqueda',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Total de resultados: {count}',
         deleteButtonAriaLabel: 'Eliminar',
         deleteButtonTitle: 'Eliminar sugerencia',

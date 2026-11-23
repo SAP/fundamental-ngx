@@ -474,6 +474,7 @@ export default {
         allButtonLabel: 'Все',
         cancelLabel: 'Отмена',
         clearButtonTitle: 'Очистить поиск',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Всего результатов: {count}',
         deleteButtonAriaLabel: 'Удалить',
         deleteButtonTitle: 'Удалить предложение',

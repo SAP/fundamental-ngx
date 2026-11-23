@@ -473,6 +473,7 @@ export default {
         allButtonLabel: 'All',
         cancelLabel: 'Cancel',
         clearButtonTitle: 'გასუფთავება',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Total results: {count}',
         deleteButtonAriaLabel: 'Remove',
         deleteButtonTitle: 'Remove Suggestion',

@@ -474,6 +474,7 @@ export default {
         allButtonLabel: 'Tümü',
         cancelLabel: 'İptal',
         clearButtonTitle: 'Aramayı Temizle',
+        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Toplam Sonuç: {count}',
         deleteButtonAriaLabel: 'Kaldır',
         deleteButtonTitle: 'Öneriyi Kaldır',
