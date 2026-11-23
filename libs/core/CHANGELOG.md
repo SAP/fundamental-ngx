@@ -1,3 +1,13 @@
+## 0.66.2-rc.1 (2026-11-23)
+
+### 🩹 Fixes
+
+- **core:** add interactive type to grid-list-item ([#14697](https://github.com/SAP/fundamental-ngx/pull/14697))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.2-rc.0 (2026-11-21)
 
 ### 🩹 Fixes
