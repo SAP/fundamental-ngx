@@ -29,6 +29,15 @@ Don't write tests for:
 - Implementation details (internal signal updates, private methods)
 - Impossible states (null in non-nullable fields)
 
+## CSP Browser Validation
+
+Follow the [CSP guide](../../docs/agents/csp-guidelines.md) and [review examples](../../docs/agents/csp-guidelines.md#review-examples). Add browser regression tests for CSP-sensitive components; unit/jsdom tests cannot verify enforcement.
+
+- Enforce `style-src-attr 'none'` with authorized stylesheets. Confirm bootstrap, capture `securitypolicyviolation` before it, and check for zero attributable component violations. Include a separate blocked-attribute control.
+- Assert computed styles/layout and interactions, including initial/settled states, consumer styles, themes, portals and supported SSR/hydration. Report the exercised browser/version scope.
+- Reuse existing CSP fixtures. Confirm the intended tests are discovered and executed with the actual Playwright/CI configuration, projects and filters.
+- Report file/line, operation/directive, impact, remedy and evidence. Separate source findings, browser failures, setup failures and missing checks.
+
 ## Signal-Based Components
 
 ```typescript

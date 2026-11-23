@@ -69,6 +69,8 @@ export class ExampleComponent {
 
 ## CSS Class Building
 
+Read the [CSP guide](../../docs/agents/csp-guidelines.md) before styling authoring or review. Use classes/SCSS for fixed styles and verified bindings/CSSOM for dynamic values; avoid serialized attributes and whole-style writes. Report incompatible changes with file/line, operation/directive, impact, remedy and evidence. Check runtime behavior in strict-CSP browser tests and confirm CI coverage; the application owns stylesheet authorization.
+
 Replace `CssClassBuilder` + `@applyCssClass` with `computed()` + `host`:
 
 ```typescript
@@ -120,7 +122,7 @@ The codebase is migrating toward zoneless change detection. For new code:
 
 - Don't add `standalone: true` -- it's the default since Angular 19.
 - Don't use `*ngIf` / `*ngFor` / `*ngSwitch` -- use `@if` / `@for` / `@switch`.
-- Don't use `ngClass` / `ngStyle` -- use direct `class` / `style` bindings.
+- Don't use `ngClass` / `ngStyle` -- use classes for fixed styles and named bindings for dynamic values. This is a repository convention, not a CSP restriction.
 - Don't use custom `DestroyedService` -- use `DestroyRef` + `takeUntilDestroyed()`.
 - Don't use `signal.set()` then `markForCheck()` when the signal is read in the template -- Angular tracks it automatically. `markForCheck()` is still valid when you need to trigger change detection outside of a template-consumed signal.
 - Don't mutate objects/arrays in place then call `signal.set()` with the same reference -- signals use reference equality (`===`), so same-reference updates are silently ignored. Always create new references: `signal.update(arr => [...arr, item])`.

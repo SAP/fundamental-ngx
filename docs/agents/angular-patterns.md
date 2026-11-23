@@ -330,9 +330,12 @@ effect(() => {
 
 All host interactions should be defined in the `host` property of the decorator:
 
+Follow the [CSP guide](csp-guidelines.md): keep constants in the owning stylesheet; use verified named/aggregate bindings or individual CSSOM writes for dynamic values. Prefer named properties. Avoid `[attr.style]`, interpolation and whole-style writes; the application owns stylesheet authorization.
+
 ```typescript
 @Component({
     selector: 'fd-button',
+    styleUrl: './button.component.scss',
     host: {
         // Static classes
         class: 'fd-button',
@@ -346,9 +349,8 @@ All host interactions should be defined in the `host` property of the decorator:
         '[attr.role]': '"button"',
         '[attr.tabindex]': 'disabled() ? -1 : 0',
 
-        // Style bindings
+        // Dynamic style bindings
         '[style.width]': 'width()',
-        '[style.display]': '"inline-block"',
 
         // Event listeners
         '(click)': 'handleClick($event)',
@@ -369,6 +371,16 @@ export class Button {
     }
 }
 ```
+
+The fixed display rule belongs in `button.component.scss`:
+
+```scss
+:host {
+    display: inline-block;
+}
+```
+
+This moves a constant to SCSS; the former binding was CSP-compatible. Dynamic `width()`, `maxHeight` and lifecycle `height` writes remain valid.
 
 **Why use `host` instead of decorators:**
 

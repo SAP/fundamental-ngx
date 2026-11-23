@@ -11,6 +11,8 @@ allowed-tools: Read, Grep, Glob, Bash(nx *), Bash(ng build*), Write, Edit
 
 If `$ARGUMENTS` is empty, ask: (1) what data the table displays, (2) which features are needed.
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Determine Scope
 
 Parse from `$ARGUMENTS` or ask:

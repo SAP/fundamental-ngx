@@ -60,6 +60,8 @@ npx playwright show-report             # View results
 
 ## Landmines
 
+- **CSP authoring and review:** Read the [CSP guide](docs/agents/csp-guidelines.md) before styling authoring or review. Use classes/SCSS for fixed styles and verified bindings/CSSOM for dynamic values; avoid serialized attributes and whole-style writes. Report incompatible changes with file/line, operation/directive, impact, remedy and evidence. Check runtime behavior in strict-CSP browser tests and confirm CI coverage; the application owns stylesheet authorization.
+
 - **DO NOT** add `standalone: true` to components/directives/pipes -- it's the default since Angular 19.
 - **DO NOT** use `@HostBinding` / `@HostListener` -- use `host: {}` in the decorator.
 - **DO NOT** use `*ngIf` / `*ngFor` / `*ngSwitch` -- use `@if` / `@for` / `@switch` control flow.
@@ -72,7 +74,7 @@ npx playwright show-report             # View results
 - **DO NOT** mutate objects/arrays in place then call `signal.set()` with the same reference -- signals use reference equality (`===`), so same-reference updates are silently ignored. Always create new references: `signal.update(arr => [...arr, newItem])`, `signal.update(obj => ({ ...obj, key: val }))`.
 - **DO NOT** use `effect()` to derive state from other signals -- use `computed()` (read-only) or `linkedSignal()` (writable/resettable). Effects are for **side effects only**: DOM manipulation, logging, external API calls.
 - **DO NOT** rely on conditional signal reads inside `effect()` / `computed()` -- if a signal is only read inside an `if` branch, it won't be tracked when that branch isn't taken. Read tracked signals before conditional logic, or restructure to ensure all dependencies are always read.
-- **DO NOT** use `ngClass` / `ngStyle` -- use direct `class` / `style` bindings.
+- **DO NOT** use `ngClass` / `ngStyle` -- use classes for fixed styles and named bindings for dynamic values. This is a repository convention, not a CSP restriction.
 - **DO NOT** grep `node_modules/fundamental-styles/` for CSS classes -- use the `fundamental-styles` MCP tools (`get_css_classes`, `get_component_html`, etc.) which provide structured, complete data.
 - **DO NOT** use `afterNextRender()` / `afterRender()` to set properties on child components -- we hit NG0100 when `FormItemComponent` used `afterNextRender` to set `ariaLabelledBy` on a content child (PR #14045). Moving to `ngAfterContentInit` fixed it. Angular docs recommend `afterNextRender` for DOM operations (measuring layout, third-party library init), not for modifying component state.
 - ESLint enforces **member ordering**: decorated props, then signal inputs/outputs, then public, then protected, then private. Protected **before** private, always.

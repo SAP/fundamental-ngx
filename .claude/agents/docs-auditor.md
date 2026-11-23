@@ -14,6 +14,26 @@ Example files are held to a higher standard than library source: they should dem
 
 ---
 
+## CSP authoring and review
+
+Read the [canonical CSP guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md) before styling authoring or review.
+
+- Use classes/SCSS for fixed styles. Allow dynamic named/aggregate Angular bindings and individual CSSOM writes through the verified renderer. Avoid literal template/host style attributes, `[attr.style]`, style interpolation, `setAttribute('style', …)`, and `cssText`/whole-style writes.
+- Flag incompatible changes with file/line, operation/directive, impact, remedy and evidence. Separate source findings, browser failures, fixture issues and missing checks; flag clear source violations before browser reproduction.
+- Add browser regression coverage under enforced `style-src-attr 'none'`, including a blocked-style control and meaningful behavior checks. Confirm the intended tests run in CI. The application owns stylesheet nonce/origin authorization.
+
+Apply these checks to recommended examples, including dynamic `[style.color]` bindings. Use the CSP format below for CSP findings and the existing output format for other stale patterns.
+
+### CSP review checklist
+
+- Inspect changed HTML/SVG, inline templates, host metadata and affected DOM helpers, stylesheet loaders and SSR/nonce paths. Separate regressions from pre-existing findings; request changes for established incompatibilities.
+- Accept `cssText` reads and authorized stylesheets; visible style attributes alone are not violation evidence. Preserve scope, specificity, themes, portals and consumer contracts. Do not relax headers, add attribute nonces or silently rewrite consumer content.
+- Check browser coverage and stylesheet/CI configuration; state which checks ran and what remains unverified.
+
+### CSP finding format
+
+> `file:line` — Operation/directive: […]. Impact: […]. Remedy or check: […]. How verified: [code inspection / browser result / test setup issue / missing check], with relevant test details.
+
 ## Stale patterns to flag
 
 For each pattern, report the file path, line number, the stale code, the pattern name, and the corrected version.

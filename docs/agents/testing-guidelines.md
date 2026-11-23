@@ -6,6 +6,7 @@
 
 - [Test Commands](#test-commands)
 - [Test Writing Guidelines](#test-writing-guidelines)
+- [CSP Browser Validation](#csp-browser-validation)
 - [Testing Signal-Based Components](#testing-signal-based-components)
 - [Testing DI Patterns](#testing-di-patterns)
 - [Testing Async Operations](#testing-async-operations)
@@ -83,6 +84,15 @@ it('should handle undefined defaultContentDensity', () => {
 ```
 
 ---
+
+## CSP Browser Validation
+
+Follow the [CSP guide](csp-guidelines.md) and [review examples](csp-guidelines.md#review-examples). Add browser regression tests for CSP-sensitive components; unit/jsdom tests cannot verify enforcement.
+
+- Enforce `style-src-attr 'none'` with authorized stylesheets. Confirm bootstrap, capture `securitypolicyviolation` before it, and check for zero attributable component violations. Include a separate blocked-attribute control.
+- Assert computed styles/layout and interactions, including initial/settled states, consumer styles, themes, portals and supported SSR/hydration. Report the exercised browser/version scope.
+- Reuse existing CSP fixtures. Confirm the intended tests are discovered and executed with the actual Playwright/CI configuration, projects and filters.
+- Report file/line, operation/directive, impact, remedy and evidence. Separate source findings, browser failures, setup failures and missing checks.
 
 ## Testing Signal-Based Components
 
