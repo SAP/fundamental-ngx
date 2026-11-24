@@ -39,9 +39,10 @@ describe('SearchHighlightPipe', () => {
         expect(result.highlighted).toBe('M');
     });
 
-    it('should not break "<" and ">" when the term matches "lt" or "gt"', () => {
-        expect(render(pipe.transform('a < b', 'l')).text).toBe('a < b');
-        expect(render(pipe.transform('x > y (gt)', 'gt'))).toEqual({ text: 'x > y (gt)', highlighted: 'gt' });
+    it('should not break "<", ">" or a non-breaking space that comes before the match', () => {
+        expect(render(pipe.transform('a < l', 'l'))).toEqual({ text: 'a < l', highlighted: 'l' });
+        expect(render(pipe.transform('1 > 0 (gt)', 'gt'))).toEqual({ text: '1 > 0 (gt)', highlighted: 'gt' });
+        expect(render(pipe.transform('Total\u00a0net', 'n'))).toEqual({ text: 'Total\u00a0net', highlighted: 'n' });
     });
 
     it('should return the escaped value when the term is not found', () => {
