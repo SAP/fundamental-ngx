@@ -313,3 +313,41 @@ describe('approval-flow-graph: makePathsSameLength (multiple parallel blocks)', 
         expect(flatIds).toContain('C');
     });
 });
+
+describe('approval-flow-graph: sortPaths keeps the order of unrelated root nodes', () => {
+    const node = (id: string, targets: string[]): ApprovalNode => ({
+        id,
+        name: id,
+        approvers: [],
+        status: 'in progress',
+        targets
+    });
+
+    const firstColumnIds = (nodes: ApprovalNode[]): string[] =>
+        generateApprovalFlowGraph(nodes).columns[0].nodes.map((n) => n.id);
+
+    it('should keep the order of the first column when no paths share nodes', () => {
+        const nodes = [
+            node('ID1', ['ID6']),
+            node('ID2', ['ID5']),
+            node('ID3', ['ID4']),
+            node('ID4', []),
+            node('ID5', []),
+            node('ID6', [])
+        ];
+        expect(firstColumnIds(nodes)).toEqual(['ID1', 'ID2', 'ID3']);
+    });
+
+    it('should not move a root node to the top when a parallel root is added after it', () => {
+        const nodes = [
+            node('ID1', ['ID6']),
+            node('ID2', ['ID5']),
+            node('ID3', ['ID4']),
+            node('J', ['ID4']),
+            node('ID4', []),
+            node('ID5', []),
+            node('ID6', [])
+        ];
+        expect(firstColumnIds(nodes)).toEqual(['ID1', 'ID2', 'ID3', 'J']);
+    });
+});

@@ -322,48 +322,40 @@ function getBlankNodes(count: number, status: ApprovalStatus): ApprovalGraphNode
     return nodes;
 }
 
-/** Sort paths by their likeness (= count of the same nodes relatively to the other paths) between each other to avoid paths crossing */
+/**
+ * Sort paths by their likeness (= count of the same nodes relatively to the other paths) between each other to avoid paths crossing.
+ * The first path stays first, and every next path is the unused one most similar to the previously placed path.
+ * Ties keep the original order, so paths that share nothing are not rearranged.
+ */
 function sortPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     if (paths.length === 1) {
         return paths;
     }
 
-    /** [pathIndex, relativeToPathIndex, sameNodesCount][] */
-    let similarities: number[][] = [];
-    let pathSimilarity = 0;
+    const similarity = (a: ApprovalGraphNode[], b: ApprovalGraphNode[]): number =>
+        a.reduce((count, node, index) => (node.id === b[index]?.id ? count + 1 : count), 0);
 
-    paths.forEach((path, index) => {
-        for (let i = 0; i < paths.length; i++) {
-            if (index !== i && !similarities.some((likely) => index === likely[1] && i === likely[0])) {
-                pathSimilarity = 0;
-
-                for (let j = 0; j < path.length; j++) {
-                    if (path[j].id === paths[i][j].id) {
-                        pathSimilarity++;
-                    }
-                }
-
-                similarities.push([index, i, pathSimilarity]);
-            }
-        }
-    });
-
-    similarities = similarities.sort((a, b) => (a[2] > b[2] ? -1 : 1));
-
-    const usedPathIndexes: number[] = [];
+    const remaining = [...paths];
     const processedPaths: ApprovalGraphNode[][] = [];
+    let last = remaining.shift();
 
-    similarities.forEach((similarity) => {
-        if (!usedPathIndexes.some((i) => i === similarity[0])) {
-            processedPaths.push(paths[similarity[0]]);
-            usedPathIndexes.push(similarity[0]);
-        }
+    while (last) {
+        processedPaths.push(last);
+        const previous: ApprovalGraphNode[] = last;
+        let bestIndex = -1;
+        let bestSimilarity = -1;
 
-        if (!usedPathIndexes.some((i) => i === similarity[1])) {
-            processedPaths.push(paths[similarity[1]]);
-            usedPathIndexes.push(similarity[1]);
-        }
-    });
+        remaining.forEach((path, index) => {
+            const current = similarity(previous, path);
+
+            if (current > bestSimilarity) {
+                bestSimilarity = current;
+                bestIndex = index;
+            }
+        });
+
+        last = bestIndex > -1 ? remaining.splice(bestIndex, 1)[0] : undefined;
+    }
 
     return processedPaths;
 }
