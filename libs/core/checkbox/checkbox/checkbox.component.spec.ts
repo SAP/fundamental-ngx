@@ -215,6 +215,54 @@ describe('CheckboxComponent', () => {
         expect(hostComponent.value()).toBe(false);
     });
 
+    it('should protect native checked state from programmatic click() when readonly', async () => {
+        checkbox.setReadOnlyState(true);
+        fixture.componentRef.setInput('value', true);
+        await whenStable(fixture);
+
+        const checkboxInput = getCheckboxInput(fixture);
+
+        // Verify initial state
+        expect(checkbox.checkboxValue).toBe(true);
+        expect(checkbox.isChecked).toBe(true);
+        expect(checkboxInput.checked).toBe(true);
+        expect(checkboxInput.getAttribute('aria-checked')).toBe('true');
+
+        // Directly call click() on the native input - simulates programmatic activation
+        checkboxInput.click();
+        await whenStable(fixture);
+
+        // The native checked state should be restored, model and aria should remain unchanged
+        expect(checkbox.checkboxValue).toBe(true);
+        expect(hostComponent.value()).toBe(true);
+        expect(checkboxInput.checked).toBe(true);
+        expect(checkboxInput.getAttribute('aria-checked')).toBe('true');
+    });
+
+    it('should protect native checked state from programmatic click() when displayOnly', async () => {
+        checkbox.displayOnly = true;
+        fixture.componentRef.setInput('value', false);
+        await whenStable(fixture);
+
+        const checkboxInput = getCheckboxInput(fixture);
+
+        // Verify initial state
+        expect(checkbox.checkboxValue).toBe(false);
+        expect(checkbox.isChecked).toBe(false);
+        expect(checkboxInput.checked).toBe(false);
+        expect(checkboxInput.getAttribute('aria-checked')).toBe('false');
+
+        // Directly call click() on the native input
+        checkboxInput.click();
+        await whenStable(fixture);
+
+        // The native checked state should be restored, model and aria should remain unchanged
+        expect(checkbox.checkboxValue).toBe(false);
+        expect(hostComponent.value()).toBe(false);
+        expect(checkboxInput.checked).toBe(false);
+        expect(checkboxInput.getAttribute('aria-checked')).toBe('false');
+    });
+
     it('should use custom values', async () => {
         checkbox.values = { trueValue: 'Yes', falseValue: 'No' };
         fixture.componentRef.setInput('value', 'Yes');

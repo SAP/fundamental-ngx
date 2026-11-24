@@ -256,6 +256,23 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
         this._projectedContent = !!this._domPortal.element.innerHTML.trim();
         this._changeDetectorRef.detectChanges();
         this._portalOutlet?.attach(this._domPortal);
+
+        // Protect against direct programmatic input.click() calls in readonly mode
+        this._subscriptions.add(
+            this.renderer.listen(this.inputElement.nativeElement, 'click', (event: MouseEvent) => {
+                if (this.readonly || this.displayOnly) {
+                    // Restore the correct checked state immediately after any programmatic click
+                    this.renderer.setProperty(this.inputElement.nativeElement, 'checked', this.isChecked);
+                    this.renderer.setProperty(this.inputElement.nativeElement, 'indeterminate', this.isIndeterminate);
+                    // Update aria-checked to stay in sync
+                    this.renderer.setAttribute(
+                        this.inputElement.nativeElement,
+                        'aria-checked',
+                        this.isChecked ? 'true' : this.isIndeterminate ? 'mixed' : 'false'
+                    );
+                }
+            })
+        );
     }
 
     /** @hidden */
