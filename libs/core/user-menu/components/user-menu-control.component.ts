@@ -15,7 +15,6 @@ import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        role: 'button',
         tabindex: '0',
         'aria-haspopup': 'dialog',
         '[attr.aria-expanded]': 'isExpanded()',

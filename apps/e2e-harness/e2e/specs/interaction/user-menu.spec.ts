@@ -201,26 +201,100 @@ for (const surface of surfaces) {
         }
 
         if (surface.mobile || surface.suite === 'core/shellbar') {
-            test('names each account image while retaining account row text and actions', async ({
-                page
-            }, testInfo) => {
+            test('keeps account text and actions accessible with decorative avatars', async ({ page }, testInfo) => {
                 await page.locator(surface.selector + ' fd-user-menu-control').click();
                 const body = page.locator('fd-user-menu-body:visible');
                 await expect(body).toHaveCount(1);
-                const avatars = body.locator('fd-panel li fd-avatar');
+                const rows = body.locator('fd-panel li');
+                await expect(rows).toHaveCount(3);
+                const avatars = rows.locator('fd-avatar');
                 await expect(avatars).toHaveCount(3);
                 const axe = await new AxeBuilder({ page })
-                    .include('fd-user-menu-body fd-panel li fd-avatar')
+                    .include('fd-user-menu-body fd-panel li')
                     .withRules(['role-img-alt'])
                     .analyze();
                 await testInfo.attach('account-axe', { body: JSON.stringify(axe), contentType: 'application/json' });
                 for (const [index, name] of ['Lisa Miller', 'John Doe', 'Jane Doe'].entries()) {
-                    await expect.soft(avatars.nth(index)).toHaveRole('img');
-                    await expect.soft(avatars.nth(index)).toHaveAccessibleName(name);
-                    await expect(body.locator('fd-panel li').nth(index)).toContainText(name);
+                    const row = rows.nth(index);
+                    await expect(row).toBeVisible();
+                    await expect(avatars.nth(index)).toBeVisible();
+                    const snapshot = await row.ariaSnapshot();
+                    await testInfo.attach('account-' + index + '-accessibility', {
+                        body: snapshot,
+                        contentType: 'text/plain'
+                    });
+                    expect.soft(snapshot).toContain(name);
+                    expect.soft(snapshot).toContain(name.toLowerCase().replace(' ', '.') + '@test.com');
+                    await expect.soft(row.getByRole('img')).toHaveCount(0);
                 }
                 expect.soft(axe.violations).toEqual([]);
+                await rows.nth(1).click();
+                await expect(rows.nth(1)).toBeFocused();
+                await expect(body).toBeVisible();
             });
         }
+    });
+}
+
+for (const mode of ['desktop', 'mobile']) {
+    test.describe('core/user-menu native button ' + mode, () => {
+        test.beforeEach(async ({ page, goto }) => {
+            await goto('style-csp?case=menu-' + mode);
+            await expect(page.getByRole('button', { name: 'Open user menu', exact: true })).toBeVisible();
+        });
+
+        test.afterEach(async ({ page }) => {
+            await page.evaluate(() => {
+                const browser = window as unknown as ProbeWindow;
+                browser.userMenuProbe?.cleanup();
+                delete browser.userMenuProbe;
+            });
+        });
+
+        test('exposes the native button without an enclosing button role', async ({ page }, testInfo) => {
+            const menu = page.locator('fd-user-menu');
+            const button = menu.getByRole('button', { name: 'Open user menu', exact: true });
+            await expect.soft(menu.getByRole('button')).toHaveCount(1);
+            expect
+                .soft(await button.evaluate((element) => !!element.parentElement?.closest('[role="button"]')))
+                .toBe(false);
+            await testInfo.attach('native-trigger-accessibility', {
+                body: await menu.ariaSnapshot(),
+                contentType: 'text/plain'
+            });
+            const axe = await new AxeBuilder({ page })
+                .include('fd-user-menu-control')
+                .withRules(['nested-interactive'])
+                .analyze();
+            await testInfo.attach('native-trigger-axe', { body: JSON.stringify(axe), contentType: 'application/json' });
+            expect.soft(axe.violations).toEqual([]);
+        });
+
+        test('preserves pointer and existing keyboard activation state and Escape dismissal', async ({
+            page,
+            browserName
+        }) => {
+            const menu = page.locator('fd-user-menu');
+            const control = menu.locator('fd-user-menu-control');
+            const button = menu.getByRole('button', { name: 'Open user menu', exact: true });
+            await subscribe(menu);
+            const expectedEvents: boolean[] = [];
+            for (const method of ['pointer', 'Enter', 'Space']) {
+                const target = method === 'pointer' || mode === 'mobile' ? button : control;
+                await activate(target, method);
+                await expect(page.locator('fd-user-menu-body:visible')).toHaveCount(1);
+                await expect(control).toHaveAttribute('aria-expanded', 'true');
+                expectedEvents.push(true);
+                expect(await events(page)).toEqual(expectedEvents);
+                await page.keyboard.press('Escape');
+                await expect(page.locator('fd-user-menu-body:visible')).toHaveCount(0);
+                await expect(control).toHaveAttribute('aria-expanded', 'false');
+                // This fixture captures wrapper focus for WebKit pointer activation.
+                const nativeFocus = mode === 'mobile' && (method !== 'pointer' || browserName !== 'webkit');
+                await expect(nativeFocus ? button : control).toBeFocused();
+                expectedEvents.push(false);
+                expect(await events(page)).toEqual(expectedEvents);
+            }
+        });
     });
 }
