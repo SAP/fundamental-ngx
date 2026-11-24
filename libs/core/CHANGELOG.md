@@ -1,3 +1,13 @@
+## 0.66.2-rc.3 (2026-11-24)
+
+### 🩹 Fixes
+
+- **core:** prevent native click from bypassing readonly state in checkbox ([#14711](https://github.com/SAP/fundamental-ngx/pull/14711))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.2-rc.2 (2026-11-23)
 
 This was a version bump only for core to align it with other projects, there were no code changes.
