@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -88,6 +89,45 @@ describe('PlatformMultiInputComponent', () => {
         fixture.detectChanges();
         const toggleButton = fixture.nativeElement.querySelectorAll('.fd-token');
         expect(toggleButton.length).toBe(1);
+    });
+
+    describe('readonly', () => {
+        const addToken = (readonly: boolean): void => {
+            const multiInput = component.platformMultiInputComponent;
+            multiInput.addToArray('name1');
+            multiInput.readonly = readonly;
+            multiInput.markForCheck();
+            fixture.detectChanges();
+        };
+
+        it('should hide the token close icon and keep the token when keyboard deletion fires while readonly', () => {
+            addToken(true);
+            const multiInput = component.platformMultiInputComponent;
+            const tokens = fixture.debugElement.queryAll(By.css('fd-token'));
+            expect(tokens.length).toBe(1);
+            expect(fixture.nativeElement.querySelector('.fd-token__close')).toBeNull();
+
+            // Delete / Backspace in the tokenizer emit onCloseClick on the token without a mouse event.
+            tokens[0].componentInstance.onCloseClick.emit(undefined);
+            fixture.detectChanges();
+
+            expect(multiInput.selected.length).toBe(1);
+            expect(fixture.debugElement.queryAll(By.css('fd-token')).length).toBe(1);
+        });
+
+        it('should not remove a token through removeToken while readonly', () => {
+            addToken(true);
+            const multiInput = component.platformMultiInputComponent;
+            multiInput.removeToken(multiInput.selected[0]);
+            expect(multiInput.selected.length).toBe(1);
+        });
+
+        it('should still remove a token when not readonly', () => {
+            addToken(false);
+            const multiInput = component.platformMultiInputComponent;
+            multiInput.removeToken(multiInput.selected[0]);
+            expect(multiInput.selected.length).toBe(0);
+        });
     });
 
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {

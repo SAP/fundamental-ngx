@@ -347,6 +347,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     removeToken(token: any): void {
+        if (this.readonly) {
+            return;
+        }
         this.selected.splice(this.selected.indexOf(token), 1);
         this.emitChangeEvent(token ? this.selected : null);
         this.searchInputElement.nativeElement.focus();

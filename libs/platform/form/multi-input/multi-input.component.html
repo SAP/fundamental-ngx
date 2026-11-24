@@ -38,6 +38,7 @@
     >
         <fd-tokenizer
             [tokenizerFocusable]="false"
+            [disableKeyboardDeletion]="readonly"
             [compactCollapse]="true"
             [showOverflowPopover]="false"
             #tokenizer
@@ -50,7 +51,7 @@
         >
             @for (token of selected; track token; let i = $index) {
                 <fd-token
-                    [readOnly]="disabled"
+                    [readOnly]="disabled || readonly"
                     (onCloseClick)="removeToken(token)"
                     [attr.aria-posinset]="i"
                     [attr.aria-setsize]="selected.length"
