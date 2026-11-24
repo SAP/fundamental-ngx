@@ -108,12 +108,6 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
             emitEvent = false;
         }
 
-        // Read-only radios accept programmatic writes (select/unselect pass emitEvent=false),
-        // but must not react to user interaction (ngModelChange passes emitEvent=true).
-        if (this.isReadonly && emitEvent) {
-            return;
-        }
-
         this._currentValue = value;
         this._isChecked = this._currentValue === super.getValue();
         if (this._isChecked && emitEvent) {

@@ -41,6 +41,6 @@ export class PlatformRadioGroupReadonlyExampleComponent {
     customForm = new FormGroup({
         example1: new FormControl('winter'),
         example2: new FormControl('spring'),
-        example3: new FormControl('summer')
+        example3: new FormControl('Summer')
     });
 }
