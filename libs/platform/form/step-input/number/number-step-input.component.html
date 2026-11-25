@@ -2,7 +2,7 @@
     <div
         class="fd-step-input"
         [class.is-focus]="focused"
-        [class.is-readonly]="!editable"
+        [class.is-readonly]="_isReadonly$()"
         [class.is-disabled]="disabled"
         [class.fd-step-input--without-buttons]="showLabels"
         [class]="state ? 'is-' + state : ''"
@@ -28,7 +28,7 @@
             [id]="id"
             [name]="name"
             [disabled]="disabled"
-            [readonly]="!editable"
+            [readonly]="_isReadonly$()"
             [attr.placeholder]="placeholder || ''"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
