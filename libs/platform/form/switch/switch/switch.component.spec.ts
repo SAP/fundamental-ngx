@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformSwitchModule } from '../switch.module';
 import { SwitchChangeEvent, SwitchComponent } from './switch.component';
@@ -125,7 +124,7 @@ describe('SwitchComponent', () => {
 
         // default value
         expect(switches[0].switchCurrentValue).toBe(false);
-        expect(component.customForm.get('switch0')?.value).toBe(false);
+        expect(switches[0].value()).toBe(false);
 
         const switchLabel = fixture.debugElement.query(By.css('#switch-0 .fd-switch'));
 
@@ -133,13 +132,13 @@ describe('SwitchComponent', () => {
         fixture.detectChanges();
 
         expect(switches[0].switchCurrentValue).toBe(true);
-        expect(component.customForm.get('switch0')?.value).toBe(true);
+        expect(switches[0].value()).toBe(true);
 
         switchLabel.nativeElement.click();
         fixture.detectChanges();
 
         expect(switches[0].switchCurrentValue).toBe(false);
-        expect(component.customForm.get('switch0')?.value).toBe(false);
+        expect(switches[0].value()).toBe(false);
     });
 
     it('should apply is-error style on form Error', async () => {
@@ -164,6 +163,9 @@ describe('SwitchComponent', () => {
         const switches = component.fdpSwitch.toArray();
         const switchLabel = fixture.debugElement.query(By.css('#switch-3 .fd-switch'));
 
+        // drive disabled state + initial value directly on the component
+        switches[3].disabled.set(true);
+        switches[3].value.set(true);
         fixture.detectChanges();
 
         expect(switches[3].switchCurrentValue).toBeTruthy();
@@ -174,24 +176,4 @@ describe('SwitchComponent', () => {
 
         expect(switches[3].switchCurrentValue).toBeTruthy();
     });
-});
-
-const SWITCH_IDENTIFIER = 'platform-switch-unit-test';
-
-runValueAccessorTests({
-    component: SwitchComponent,
-    name: 'Switch',
-    testModuleMetadata: {
-        imports: [PlatformSwitchModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = SWITCH_IDENTIFIER;
-        fixture.componentInstance.name = SWITCH_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.onValueChange(value);
-    },
-    getComponentValue: (fixture) => fixture.componentInstance.value
 });

@@ -3,10 +3,10 @@
     [attr.ariaLabelledBy]="ariaLabelledBy"
     [attr.ariaDescribedBy]="ariaDescribedBy"
     [inputId]="id"
-    [required]="required"
+    [required]="required()"
     [time]="time"
     [meridian]="meridian"
-    [disabled]="disabled"
+    [disabled]="disabled()"
     [displayFormat]="displayFormat"
     [spinnerButtons]="spinnerButtons"
     [displaySeconds]="displaySeconds"
@@ -26,7 +26,7 @@
     (isOpenChange)="handleOpenChange($event)"
     (ngModelChange)="handleTimeChange($event)"
     [ngModelOptions]="{ standalone: true }"
-    [(ngModel)]="value"
+    [ngModel]="value()"
 >
     <ng-content></ng-content>
 </fd-time-picker>

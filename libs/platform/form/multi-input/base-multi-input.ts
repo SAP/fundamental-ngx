@@ -162,18 +162,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     @Input()
     openDropdownOnAddOnClicked = true;
 
-    /** Value of the multi input */
-    @Input()
-    set value(value: any) {
-        const selectedItems = Array.isArray(value) ? value : [value];
-        this.setAsSelected(this._convertToOptionItems(selectedItems));
-        super.setValue(value);
-    }
-
-    get value(): any {
-        return super.getValue();
-    }
-
     /** @hidden Emits event when the menu is opened/closed */
     @Output()
     readonly isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -332,13 +320,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
-    /** write value for ControlValueAccessor */
-    writeValue(value: any): void {
-        const selectedItems = Array.isArray(value) ? value : [value];
-        this.setAsSelected(this._convertToOptionItems(selectedItems));
-        super.writeValue(value);
-    }
-
     /** @hidden */
     _popoverOpenChangeHandle(isOpen: boolean): void {
         if (!isOpen) {
@@ -423,7 +404,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      * @hidden
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
-        if (this.readonly) {
+        if (this.readonly()) {
             return;
         }
 
@@ -461,6 +442,22 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         }
     }
 
+    /**
+     * @hidden
+     * Apply value coming from the `value` model / programmatic set. Coerces to an array and marks items
+     * as selected, then stores via the base hook (replaces the former `writeValue` override).
+     */
+    protected _applyValue(value: any): void {
+        const selectedItems = Array.isArray(value) ? value : [value];
+        this.setAsSelected(this._convertToOptionItems(selectedItems));
+        super._applyValue(value);
+    }
+
+    /** @hidden */
+    protected get ds(): MultiInputDataSource<any> {
+        return this.dataSource as MultiInputDataSource<any>;
+    }
+
     /** @hidden */
     private _displayFn = (value: any): string => this.displayValue(value);
 
@@ -476,11 +473,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             return value;
         }
     };
-
-    /** @hidden */
-    protected get ds(): MultiInputDataSource<any> {
-        return this.dataSource as MultiInputDataSource<any>;
-    }
 
     /** @hidden
      * Method that picks other value moved from current one by offset, called only when Multi Input is closed */

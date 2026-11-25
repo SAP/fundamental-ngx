@@ -88,19 +88,10 @@ export class SliderComponent extends BaseInput {
     @Output()
     readonly sliderChange = new EventEmitter<SliderChangeEvent>();
 
-    /** value for slider control */
-    @Input()
-    set value(selectValue: any) {
-        this.setValue(selectValue);
-    }
-    get value(): any {
-        return this.getValue();
-    }
-
     /** @hidden */
     _onModelChange(modelValue: SliderControlValue): void {
         this._emitChangeEvent(modelValue);
-        this.onTouched();
+        this.touch.emit();
         this.stateChanges.next('Slider: onValueChange');
     }
 
@@ -112,8 +103,8 @@ export class SliderComponent extends BaseInput {
         event.source = this;
         event.payload = modelValue;
 
-        // setting value, it will call setValue()
-        this.value = modelValue;
+        // setting value through the ControlValueAccessor path (also syncs the `value` model)
+        this.setValue(modelValue);
         this.sliderChange.emit(event);
     }
 }

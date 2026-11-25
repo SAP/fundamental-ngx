@@ -1,8 +1,8 @@
 <fd-switch
     [id]="id"
-    [required]="required"
-    [name]="name"
-    [disabled]="disabled"
+    [required]="required()"
+    [name]="name()"
+    [disabled]="disabled()"
     [semantic]="semantic"
     [ariaLabel]="ariaLabel || ('platformSwitch.ariaLabel' | fdTranslate)()"
     [ariaLabelledBy]="ariaLabelledBy"

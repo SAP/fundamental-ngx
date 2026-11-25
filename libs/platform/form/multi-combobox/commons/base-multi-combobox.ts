@@ -171,15 +171,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     /** Turns on/off Adjustable Width feature. */
     @Input()
     autoResize = false;
-    /** Value of the multi combobox */
-    @Input()
-    set value(value: any) {
-        super.setValue(value, true);
-    }
-
-    get value(): any {
-        return super.getValue();
-    }
 
     /**
      * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
@@ -275,7 +266,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     set inputText(value: string) {
         this._inputTextValue = value;
 
-        this.onTouched();
+        this.touch.emit();
     }
 
     /** Get the input text of the input. */
@@ -454,20 +445,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
         }
     }
 
-    /** write value for ControlValueAccessor */
-    writeValue(value: any): void {
-        this.selectedItems = coerceArraySafe(value);
-        super.writeValue(this.selectedItems);
-        this._setSelectedSuggestions();
-        this._emitChangeEvent();
-    }
-
     /** @hidden */
     popoverOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
         this._rangeSelector.reset();
         if (!isOpen) {
-            this.onTouched();
+            this.touch.emit();
         }
         this._onOpenChange(this.isOpen);
     }
@@ -503,7 +486,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     showList(isOpen: boolean): void {
         if (this.isOpen !== isOpen) {
             this.isOpen = isOpen;
-            this.onTouched();
+            this.touch.emit();
             this.openChange.next(isOpen);
         }
 
@@ -557,7 +540,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
      * @hidden
      */
     onInputKeydownHandler(event: KeyboardEvent): void {
-        if (this.readonly) {
+        if (this.readonly()) {
             return;
         }
 
@@ -618,7 +601,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
      * Method to emit change event
      */
     _emitChangeEvent(): void {
-        const event = new MultiComboboxSelectionChangeEvent(this, this.value);
+        const event = new MultiComboboxSelectionChangeEvent(this, this.value());
 
         this.selectionChange.emit(event);
     }
@@ -632,6 +615,18 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
     protected setValue(value: any, emitOnChange = true): void {
         this.selectedItems = coerceArraySafe(value);
         super.setValue(this.selectedItems, emitOnChange);
+        this._setSelectedSuggestions();
+        this._emitChangeEvent();
+    }
+
+    /**
+     * @hidden
+     * Apply value coming from the `value` model / programmatic set. Coerces to an array, refreshes the
+     * selected suggestions and emits the change event (replaces the former `writeValue` override).
+     */
+    protected _applyValue(value: any): void {
+        this.selectedItems = coerceArraySafe(value);
+        super._applyValue(this.selectedItems);
         this._setSelectedSuggestions();
         this._emitChangeEvent();
     }

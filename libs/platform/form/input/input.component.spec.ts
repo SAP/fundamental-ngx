@@ -30,17 +30,17 @@ describe('InputComponent Unit Tests', () => {
     });
 
     it('should be able to type and change value', () => {
-        component.value = 'test';
+        component.value.set('test');
         fixture.detectChanges();
         inputElement.value = 'test';
         inputElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
-        expect(component.value).toBe('test');
+        expect(component.value()).toBe('test');
 
         inputElement.value = 'new test';
         inputElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
-        expect(component.value).toBe('new test');
+        expect(component.value()).toBe('new test');
     });
 
     it('should emit focus and blur events', fakeAsync(() => {
@@ -77,16 +77,16 @@ describe('InputComponent Unit Tests', () => {
 
     it('should accept various input values', () => {
         const testValues = 'text123@#!$';
-        component.value = testValues;
+        component.value.set(testValues);
         fixture.detectChanges();
         inputElement.value = testValues;
         inputElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
-        expect(component.value).toBe(testValues);
+        expect(component.value()).toBe(testValues);
     });
 
     it('should disable input when disabled is true', fakeAsync(() => {
-        component.disabled = true;
+        component.disabled.set(true);
         fixture.detectChanges();
         tick();
 
@@ -133,26 +133,26 @@ describe('InputComponent Unit Tests', () => {
     }));
 
     it('should enable editing the entered characters', () => {
-        component.value = 'abcdef';
+        component.value.set('abcdef');
         fixture.detectChanges();
         inputElement.value = 'abcdef';
         inputElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
-        expect(component.value).toBe('abcdef');
+        expect(component.value()).toBe('abcdef');
 
         inputElement.value = 'abcde';
         inputElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
-        expect(component.value).toBe('abcde');
+        expect(component.value()).toBe('abcde');
 
         inputElement.value = '';
         inputElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
-        expect(component.value).toBe('');
+        expect(component.value()).toBe('');
     });
 
     it('should have visual cue for required input', fakeAsync(() => {
-        component.required = true;
+        component.required.set(true);
         fixture.detectChanges();
         tick();
 

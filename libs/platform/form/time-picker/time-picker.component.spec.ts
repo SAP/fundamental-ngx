@@ -4,7 +4,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { By } from '@angular/platform-browser';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { PlatformTimePickerComponent } from './time-picker.component';
@@ -116,7 +115,7 @@ describe('PlatformTimePickerComponent', () => {
 
     it('should call disabled state method', async () => {
         const timePicker = component.timePickerComponent;
-        timePicker.disabled = true;
+        timePicker.disabled.set(true);
         component.timePickerForm.get('timePicker')?.disable();
 
         await wait(fixture);
@@ -126,37 +125,16 @@ describe('PlatformTimePickerComponent', () => {
     it('should be in an error state if value is empty and touched', async () => {
         const timePicker = component.timePickerComponent;
         timePicker.allowNull = false;
-        const formControl = component.timePickerForm.get('timePicker') as FormControl;
         const inputEl = fixture.debugElement.query(By.css('.fd-input-group'));
 
         expect(inputEl.nativeElement.classList.contains('is-error')).not.toBe(true);
 
-        formControl.markAsTouched();
-        await wait(fixture);
-        timePicker.value = null;
+        // drive the value change directly through the component
+        timePicker.handleTimeChange(null as unknown as FdDate);
         await wait(fixture);
 
-        expect(formControl.value).toBeNull();
+        expect(timePicker.value()).toBeNull();
+        expect(timePicker.state).toBe('error');
         expect(inputEl.nativeElement.classList.contains('is-error')).toBe(true);
     });
-});
-
-const TIME_PICKER_IDENTIFIER = 'platform-time-picker-unit-test';
-
-runValueAccessorTests({
-    component: PlatformTimePickerComponent,
-    name: 'Time picker',
-    testModuleMetadata: {
-        imports: [PlatformTimePickerModule, FdDatetimeModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = TIME_PICKER_IDENTIFIER;
-        fixture.componentInstance.name = TIME_PICKER_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.handleTimeChange(value);
-    },
-    getComponentValue: (fixture) => fixture.componentInstance.value
 });

@@ -1,7 +1,7 @@
 import { computed, Directive, EventEmitter, inject, Input, OnInit, Output, Renderer2, signal } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { BaseInput } from '@fundamental-ngx/platform/shared';
 import { StepInputConfig } from './step-input.config';
 import { addAndCutFloatingNumberDistortion, getNumberDecimalLength } from './step-input.util';
@@ -50,18 +50,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** Parse value entered "in focus" mode */
     abstract parseValueInFocusMode(value: string): number | null;
-    /** Sets input value */
-    @Input()
-    set value(value: Nullable<number>) {
-        if (value !== this._value) {
-            super.setValue(value);
-            this._calculateCanDecrementIncrement();
-        }
-    }
-    get value(): Nullable<number> {
-        return super.getValue();
-    }
-
     /** Sets minimum value boundary */
     @Input()
     set min(min: number) {
@@ -159,7 +147,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** @hidden */
     get canChangeValue(): boolean {
-        return !(this.disabled || !this.editable);
+        return !(this._isDisabled || !this.editable);
     }
 
     /** @hidden */
@@ -234,22 +222,13 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._listenToFormErrorState();
     }
 
-    /** @hidden
-     * Override writeValue method to keep input view value up to date
-     */
-    writeValue(value: number): void {
-        super.writeValue(value);
-        this._updateViewValue();
-        this._resetPendingEnteredValue();
-    }
-
     /** Increase value */
     increase(step = this._getStepValueForIncrease()): void {
         if (!this.canIncrement) {
             return;
         }
         const value = addAndCutFloatingNumberDistortion(this._currentValue, step);
-        this.value = this._validateValueByLimits(value);
+        this.setValue(this._validateValueByLimits(value));
         this._emitChangedValue();
     }
 
@@ -259,7 +238,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
             return;
         }
         const value = addAndCutFloatingNumberDistortion(this._currentValue, -step);
-        this.value = this._validateValueByLimits(value);
+        this.setValue(this._validateValueByLimits(value));
         this._emitChangedValue();
     }
 
@@ -301,7 +280,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
         const needToUpdateView = this._value === newValue;
 
-        this.value = newValue;
+        this.setValue(newValue);
 
         if (needToUpdateView) {
             this._updateViewValue();
@@ -333,6 +312,16 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     onBlur(): void {
         super._onFocusChanged(false);
         this._updateViewValue();
+    }
+
+    /** @hidden
+     * Override _applyValue method to keep input view value up to date
+     */
+    protected _applyValue(value: number): void {
+        super._applyValue(value);
+        this._updateViewValue();
+        this._resetPendingEnteredValue();
+        this._calculateCanDecrementIncrement();
     }
 
     /** @hidden */

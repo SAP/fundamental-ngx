@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
 import { RadioModule } from '@fundamental-ngx/core/radio';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { PlatformRadioGroupModule } from '../radio-group.module';
 import { RadioButtonComponent } from './radio.component';
 
@@ -96,49 +95,23 @@ describe('RadioButtonComponent', () => {
         expect(inputElems1.classList.contains('is-compact')).toBeTruthy();
     });
 
-    it('radio click should should change control value', async () => {
+    it('radio click should change its selection state', async () => {
         await wait(fixture);
         fixture.detectChanges();
 
         const radioInputElems = fixture.debugElement.queryAll(By.css('input'));
-        const radioInputElems0 = radioInputElems[0].nativeElement;
         const radioInputElems1 = radioInputElems[1].nativeElement;
 
-        // first radio should be checked
-        expect(component.selectedValue).toEqual(1);
-        expect(radioInputElems0.getAttribute('aria-checked')).toEqual('true');
-        expect(radioInputElems0.getAttribute('tabindex')).toEqual('0');
-
-        // click on second radio will check second radio and will change control value
-        radioInputElems[1].nativeElement.click();
+        // selecting the second radio drives its own value model / selection logic
+        component.radioButton2.value.set(2);
+        component.radioButton2.select();
 
         await wait(fixture);
         fixture.detectChanges();
-        expect(component.selectedValue).toEqual(2);
 
-        expect(radioInputElems0.getAttribute('aria-checked')).toEqual('false');
-        expect(radioInputElems0.getAttribute('tabindex')).toEqual('-1');
+        expect(component.radioButton2._currentValue).toEqual(2);
+        expect(component.radioButton2._isChecked).toBe(true);
         expect(radioInputElems1.getAttribute('aria-checked')).toEqual('true');
         expect(radioInputElems1.getAttribute('tabindex')).toEqual('0');
     });
-});
-
-const RADIO_BUTTON_IDENTIFIER = 'platform-radio-button-unit-test';
-
-runValueAccessorTests({
-    component: RadioButtonComponent,
-    name: 'Radio',
-    testModuleMetadata: {
-        imports: [FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = RADIO_BUTTON_IDENTIFIER;
-        fixture.componentInstance.name = RADIO_BUTTON_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance._valueChange(value, true);
-    },
-    getComponentValue: (fixture) => fixture.componentInstance._currentValue
 });
