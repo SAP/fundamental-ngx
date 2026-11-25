@@ -470,10 +470,10 @@ export default {
         detailsActionAriaLabel: 'รายละเอียด'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'ทั้งหมด',
         cancelLabel: 'ยกเลิก',
         clearButtonTitle: 'เคลียร์การค้นหา',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'ผลลัพธ์ทั้งหมด: {count}',
         deleteButtonAriaLabel: 'เอาออก',
         deleteButtonTitle: 'เอาคำแนะนำออก',

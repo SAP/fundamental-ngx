@@ -472,10 +472,10 @@ export default {
         detailsActionAriaLabel: 'detaliu'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Toate',
         cancelLabel: 'Anulare',
         clearButtonTitle: 'Golire căutare',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Total rezultate: {count}',
         deleteButtonAriaLabel: 'Eliminare',
         deleteButtonTitle: 'Eliminare sugestie',

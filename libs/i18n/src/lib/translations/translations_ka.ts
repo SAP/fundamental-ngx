@@ -470,10 +470,10 @@ export default {
         detailsActionAriaLabel: 'დეტალები'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'All',
         cancelLabel: 'Cancel',
         clearButtonTitle: 'გასუფთავება',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Total results: {count}',
         deleteButtonAriaLabel: 'Remove',
         deleteButtonTitle: 'Remove Suggestion',

@@ -115,7 +115,6 @@ class TestComponent {
             ></fdp-search-field>
         </fd-shellbar>
     `,
-    standalone: true,
     imports: [ShellbarComponent, PlatformSearchFieldModule]
 })
 class ShellbarSearchTestComponent {

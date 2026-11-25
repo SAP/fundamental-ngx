@@ -470,10 +470,10 @@ export default {
         detailsActionAriaLabel: 'التفاصيل'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'الكل',
         cancelLabel: 'إلغاء',
         clearButtonTitle: 'مسح البحث',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'إجمالي النتائج: {count}',
         deleteButtonAriaLabel: 'إزالة',
         deleteButtonTitle: 'إزالة الاقتراح',

@@ -471,10 +471,10 @@ export default {
         detailsActionAriaLabel: 'сведения'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Все',
         cancelLabel: 'Отмена',
         clearButtonTitle: 'Очистить поиск',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Всего результатов: {count}',
         deleteButtonAriaLabel: 'Удалить',
         deleteButtonTitle: 'Удалить предложение',

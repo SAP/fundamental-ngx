@@ -3,6 +3,7 @@ import baseConfig from './playwright.config';
 
 export default defineConfig({
     ...baseConfig,
+    testMatch: '**/shellbar-search-accessibility.spec.ts',
     forbidOnly: true,
     retries: 0,
     projects: [

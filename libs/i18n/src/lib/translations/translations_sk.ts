@@ -471,10 +471,10 @@ export default {
         detailsActionAriaLabel: 'Detail'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Všetky',
         cancelLabel: 'Zrušiť',
         clearButtonTitle: 'Vymazať hľadanie',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Celkový počet výsledkov: {count}',
         deleteButtonAriaLabel: 'Odstrániť',
         deleteButtonTitle: 'Odstrániť návrh',

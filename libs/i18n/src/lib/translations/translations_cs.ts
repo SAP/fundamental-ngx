@@ -470,10 +470,10 @@ export default {
         detailsActionAriaLabel: 'detail'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Vše',
         cancelLabel: 'Zrušit',
         clearButtonTitle: 'Vymazat hledání',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Celkový počet výsledků: {count}',
         deleteButtonAriaLabel: 'Odebrat',
         deleteButtonTitle: 'Odebrat návrhy',

@@ -471,10 +471,10 @@ export default {
         detailsActionAriaLabel: 'detalj'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Sve',
         cancelLabel: 'Odustani',
         clearButtonTitle: 'Poništi traženje',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Ukupni rezultati: {count}',
         deleteButtonAriaLabel: 'Ukloni',
         deleteButtonTitle: 'Ukloni predlog',

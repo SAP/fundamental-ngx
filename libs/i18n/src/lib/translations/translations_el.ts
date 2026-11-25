@@ -471,10 +471,10 @@ export default {
         detailsActionAriaLabel: 'αναλυτικό'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Όλα',
         cancelLabel: 'Ακύρωση',
         clearButtonTitle: 'Εκκαθάριση Αναζήτησης',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Συνολικά αποτελέσματα: {count}',
         deleteButtonAriaLabel: 'Κατάργηση',
         deleteButtonTitle: 'Διαγραφή Πρότασης',

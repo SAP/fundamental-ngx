@@ -469,10 +469,10 @@ export default {
         detailsActionAriaLabel: 'butiran'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Semua',
         cancelLabel: 'Batalkan',
         clearButtonTitle: 'Kosongkan Carian',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Jumlah hasil: {count}',
         deleteButtonAriaLabel: 'Keluarkan',
         deleteButtonTitle: 'Keluarkan Cadangan',

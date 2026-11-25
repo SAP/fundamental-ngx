@@ -472,10 +472,10 @@ export default {
         detailsActionAriaLabel: 'detail'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Alles',
         cancelLabel: 'Annuleren',
         clearButtonTitle: 'Zoekopdracht wissen',
-        advancedFilterButtonTitle: 'Advanced filter',
         counterLabel: 'Totaal aantal resultaten: {count}',
         deleteButtonAriaLabel: 'Verwijderen',
         deleteButtonTitle: 'Suggestie verwijderen',
