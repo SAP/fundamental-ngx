@@ -1,3 +1,13 @@
+## 0.66.2-rc.6 (2026-11-25)
+
+### 🩹 Fixes
+
+- **core:** improve user menu accessibility and mobile state ([#14696](https://github.com/SAP/fundamental-ngx/pull/14696))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.2-rc.5 (2026-11-25)
 
 ### 🩹 Fixes
