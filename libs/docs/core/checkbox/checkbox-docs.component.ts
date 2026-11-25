@@ -14,6 +14,7 @@ import { CheckboxCustomValuesExampleComponent } from './examples/checkbox-custom
 import { CheckboxDefaultExampleComponent } from './examples/checkbox-default-example.component';
 import { CheckboxLabelWrappingExampleComponent } from './examples/checkbox-label-wrapping-example.component';
 import { CheckboxReactiveFormsExampleComponent } from './examples/checkbox-reactive-forms-example.component';
+import { CheckboxReadonlyExampleComponent } from './examples/checkbox-readonly-example.component';
 import { CheckboxStatesExampleComponent } from './examples/checkbox-states-example.component';
 import { CheckboxTristateExampleComponent } from './examples/checkbox-tristate-example.component';
 
@@ -21,6 +22,7 @@ const checkboxDefaultTsCode = 'checkbox-default-example.component.ts';
 const checkboxTristateTsCode = 'checkbox-tristate-example.component.ts';
 const checkboxCustomValuesTsCode = 'checkbox-custom-values-example.component.ts';
 const checkboxReactiveFormsTsCode = 'checkbox-reactive-forms-example.component.ts';
+const checkboxReadonlyTsCode = 'checkbox-readonly-example.component.ts';
 const checkboxStatesTsCode = 'checkbox-states-example.component.ts';
 const checkboxCustomLabelTsCode = 'checkbox-custom-label-example.component.ts';
 const checkboxWrappingTsCode = 'checkbox-label-wrapping-example.component.ts';
@@ -40,7 +42,8 @@ const checkboxWrappingTsCode = 'checkbox-label-wrapping-example.component.ts';
         CheckboxReactiveFormsExampleComponent,
         CheckboxCustomLabelExampleComponent,
         CheckboxLabelWrappingExampleComponent,
-        CheckboxStatesExampleComponent
+        CheckboxStatesExampleComponent,
+        CheckboxReadonlyExampleComponent
     ]
 })
 export class CheckboxDocsComponent {
@@ -104,6 +107,15 @@ export class CheckboxDocsComponent {
             fileName: 'checkbox-label-wrapping-example',
             component: 'CheckboxLabelWrappingExampleComponent',
             code: getAssetFromModuleAssets(checkboxWrappingTsCode)
+        }
+    ];
+
+    checkboxReadonly: ExampleFile[] = [
+        {
+            language: 'typescript',
+            fileName: 'checkbox-readonly-example',
+            component: 'CheckboxReadonlyExampleComponent',
+            code: getAssetFromModuleAssets(checkboxReadonlyTsCode)
         }
     ];
 }

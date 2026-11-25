@@ -1,0 +1,24 @@
+<fdp-form-group [formGroup]="customForm">
+    <fdp-form-field
+        label="Read-only Multi Input Field"
+        id="fdp-id-readonly"
+        [rank]="1"
+        placeholder="Field placeholder text"
+    >
+        <fdp-multi-input
+            formControlName="item"
+            placeholder="Field placeholder text"
+            type="text"
+            id="fdp-id-readonly-input"
+            name="input1"
+            [readonly]="true"
+            [dataSource]="_datasource"
+            displayKey="state"
+            selectionMode="multi"
+        >
+        </fdp-multi-input>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p>Form Selected Item: {{ customForm.value | json }}</p>
+<p>Form Dirty: {{ customForm.dirty }}</p>

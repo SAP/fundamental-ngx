@@ -10,6 +10,9 @@ const datepickerFormatTs = 'platform-date-picker-format-example.component.ts';
 const datepickerFormatHtml = 'platform-date-picker-format-example.component.html';
 const datePickerUpdateOnBlurSrcTs = 'platform-date-picker-update-on-blur-example.component.ts';
 
+const datepickerReadonlyHtml = 'platform-date-picker-readonly-example.component.html';
+const datepickerReadonlyTs = 'platform-date-picker-readonly-example.component.ts';
+
 const datepickerMobileTs = 'mobile/platform-date-picker-mobile-example.component.ts';
 const datepickerMobileHtml = 'mobile/platform-date-picker-mobile-example.component.html';
 
@@ -33,6 +36,7 @@ import { PlatformDatePickerDisableFuncExampleComponent } from './examples/platfo
 import { PlatformDatePickerExampleComponent } from './examples/platform-date-picker-example.component';
 import { PlatformDatePickerFormatExampleComponent } from './examples/platform-date-picker-format-example.component';
 import { PlatformDatePickeri18nExampleComponent } from './examples/platform-date-picker-i18n-example.component';
+import { PlatformDatePickerReadonlyExampleComponent } from './examples/platform-date-picker-readonly-example.component';
 import { PlatformDatePickerUpdateOnBlurExampleComponent } from './examples/platform-date-picker-update-on-blur-example.component';
 
 @Component({
@@ -43,6 +47,7 @@ import { PlatformDatePickerUpdateOnBlurExampleComponent } from './examples/platf
         DescriptionComponent,
         ComponentExampleComponent,
         PlatformDatePickerExampleComponent,
+        PlatformDatePickerReadonlyExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         PlatformDatePickerDisableFuncExampleComponent,
@@ -56,6 +61,20 @@ import { PlatformDatePickerUpdateOnBlurExampleComponent } from './examples/platf
     ]
 })
 export class PlatformDatePickerDocsComponent {
+    datePickerReadonlyExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(datepickerReadonlyHtml),
+            fileName: 'platform-date-picker-readonly-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(datepickerReadonlyTs),
+            fileName: 'platform-date-picker-readonly-example',
+            component: 'PlatformDatePickerReadonlyExampleComponent'
+        }
+    ];
+
     datePickerExample: ExampleFile[] = [
         {
             language: 'html',

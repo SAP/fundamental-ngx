@@ -1,0 +1,12 @@
+<label fd-form-label> Read-only Switch (ngModel) </label>
+<fd-switch [(ngModel)]="ngModelChecked" [readonly]="true"></fd-switch>
+<small> Value: {{ ngModelChecked }} </small>
+
+<form [formGroup]="readonlyForm">
+    <label fd-form-label> Read-only Switch (Reactive Forms) </label>
+    <fd-switch formControlName="switch" [readonly]="true"></fd-switch>
+</form>
+<small>
+    Value: {{ readonlyForm.controls.switch.value }} <br />
+    Dirty: {{ readonlyForm.dirty }}
+</small>

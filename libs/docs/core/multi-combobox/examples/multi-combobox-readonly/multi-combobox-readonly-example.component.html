@@ -1,0 +1,34 @@
+<!-- Read-only multi-combobox: tokens are pre-selected. In read-only state the user must NOT be able to
+     type to filter, open the dropdown, delete a token (Backspace from input then Delete, or the token close
+     icon), or otherwise change the value / mark the control dirty. Programmatic updates remain supported. -->
+
+<form [formGroup]="customForm">
+    <div fd-form-item>
+        <label fd-form-label for="readonlyCombo">Read-only (Reactive Forms):</label>
+        <fd-multi-combobox
+            name="readonlyCombo"
+            inputId="readonlyCombo"
+            placeholder="Select items..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            [readonly]="true"
+            formControlName="readonlyCombo"
+        ></fd-multi-combobox>
+        <p>Form Value: {{ customForm.controls.readonlyCombo.value | json }}</p>
+        <p>Dirty: {{ customForm.dirty }}</p>
+    </div>
+</form>
+
+<div fd-form-item>
+    <label fd-form-label for="readonlyComboNgModel">Read-only (ngModel):</label>
+    <fd-multi-combobox
+        name="readonlyComboNgModel"
+        inputId="readonlyComboNgModel"
+        placeholder="Select items..."
+        [dataSource]="dataSource"
+        displayKey="name"
+        [readonly]="true"
+        [(ngModel)]="ngModelSelection"
+    ></fd-multi-combobox>
+    <p>Value: {{ ngModelSelection | json }}</p>
+</div>

@@ -90,6 +90,20 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="readonly" componentName="multi-combobox"> Read-only State </fd-docs-section-title>
+<description>
+    The Multi-Combobox can be set to read-only by passing <code>[readonly]="true"</code>. In read-only state the user
+    must not be able to type into the input, delete a token (via Backspace then Delete or by clicking a token's close
+    icon), nor otherwise change the selection. None of those actions should change the value or mark the control dirty.
+    Programmatic updates remain supported.
+</description>
+<component-example>
+    <fdp-multi-combobox-readonly-example></fdp-multi-combobox-readonly-example>
+</component-example>
+<code-example [exampleFiles]="multiComboboxReadonlyExample"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="delayed-datasource" componentName="multi-combobox">
     Programmatic Value Set Before Datasource Loads
 </fd-docs-section-title>

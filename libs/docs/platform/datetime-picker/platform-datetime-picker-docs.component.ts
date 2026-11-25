@@ -8,6 +8,8 @@ const datetimePickerReactiveTs = 'platform-datetime-picker-reactive-example.comp
 const datetimePickerTemplateHtml = 'platform-datetime-picker-template-example.component.html';
 const datetimePickerTemplateTs = 'platform-datetime-picker-template-example.component.ts';
 const datetimePickerUpdateOnBlurTs = 'platform-datetime-picker-update-on-blur-example.component.ts';
+const datetimePickerReadonlyHtml = 'platform-datetime-picker-readonly-example.component.html';
+const datetimePickerReadonlyTs = 'platform-datetime-picker-readonly-example.component.ts';
 
 const datetimePickerMobileHtml = 'mobile/platform-datetime-picker-mobile-example.component.html';
 const datetimePickerMobileeTs = 'mobile/platform-datetime-picker-mobile-example.component.ts';
@@ -27,6 +29,7 @@ import { PlatformDatetimePickerMobileExampleComponent } from './examples/mobile/
 import { PlatformDatetimePickerBasicExampleComponent } from './examples/platform-datetime-picker-basic-example.component';
 import { PlatformDatetimePickerDisableFunctionExampleComponent } from './examples/platform-datetime-picker-disable-function-example.component';
 import { PlatformDatetimePickerReactiveExampleComponent } from './examples/platform-datetime-picker-reactive-example.component';
+import { PlatformDatetimePickerReadonlyExampleComponent } from './examples/platform-datetime-picker-readonly-example.component';
 import { PlatformDatetimePickerTemplateExampleComponent } from './examples/platform-datetime-picker-template-example.component';
 import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './examples/platform-datetime-picker-update-on-blur-example.component';
 
@@ -41,6 +44,7 @@ import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './examples/p
         CodeExampleComponent,
         SeparatorComponent,
         PlatformDatetimePickerReactiveExampleComponent,
+        PlatformDatetimePickerReadonlyExampleComponent,
         PlatformDatetimePickerTemplateExampleComponent,
         PlatformDatetimePickerDisableFunctionExampleComponent,
         PlatformDatetimePickerUpdateOnBlurExampleComponent,
@@ -75,6 +79,20 @@ export class PlatformDatetimePickerDocsComponent {
             code: getAssetFromModuleAssets(datetimePickerReactiveTs),
             fileName: 'platform-datetime-picker-reactive-example',
             component: 'PlatformDatetimePickerReactiveExampleComponent'
+        }
+    ];
+
+    datetimePickerReadonly: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(datetimePickerReadonlyHtml),
+            fileName: 'platform-datetime-picker-readonly-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(datetimePickerReadonlyTs),
+            fileName: 'platform-datetime-picker-readonly-example',
+            component: 'PlatformDatetimePickerReadonlyExampleComponent'
         }
     ];
 

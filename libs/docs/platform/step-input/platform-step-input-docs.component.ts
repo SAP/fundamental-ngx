@@ -11,6 +11,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { PlatformNumberStepInputExampleComponent } from './examples/platform-number-step-input-example.component';
 import { PlatformNumberStepInputFormExampleComponent } from './examples/platform-number-step-input-reactive-example.component';
+import { PlatformNumberStepInputReadonlyExampleComponent } from './examples/platform-number-step-input-readonly-example.component';
 import { PlatformNumberStepInputStateExampleComponent } from './examples/platform-number-step-input-state-example.component';
 import { PlatformNumberStepInputTemplateFormExampleComponent } from './examples/platform-number-step-input-template-example.component';
 
@@ -23,6 +24,8 @@ const templateFormExampleHtml = 'platform-number-step-input-template-example.com
 const templateFormExampleTs = 'platform-number-step-input-template-example.component.ts';
 const statesExampleHtml = 'platform-number-step-input-state-example.component.html';
 const statesExampleTs = 'platform-number-step-input-state-example.component.ts';
+const readonlyExampleHtml = 'platform-number-step-input-readonly-example.component.html';
+const readonlyExampleTs = 'platform-number-step-input-readonly-example.component.ts';
 
 @Component({
     selector: 'app-step-input',
@@ -37,7 +40,8 @@ const statesExampleTs = 'platform-number-step-input-state-example.component.ts';
         SeparatorComponent,
         PlatformNumberStepInputStateExampleComponent,
         PlatformNumberStepInputFormExampleComponent,
-        PlatformNumberStepInputTemplateFormExampleComponent
+        PlatformNumberStepInputTemplateFormExampleComponent,
+        PlatformNumberStepInputReadonlyExampleComponent
     ]
 })
 export class PlatformStepInputDocsComponent {
@@ -97,6 +101,21 @@ export class PlatformStepInputDocsComponent {
             code: getAssetFromModuleAssets(statesExampleTs),
             fileName: 'platform-number-step-input-state-example',
             component: 'PlatformNumberStepInputStateExampleComponent',
+            scssFileCode: getAssetFromModuleAssets(exampleScss)
+        }
+    ];
+
+    numberStepInputReadonly: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(readonlyExampleHtml),
+            fileName: 'platform-number-step-input-readonly-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(readonlyExampleTs),
+            fileName: 'platform-number-step-input-readonly-example',
+            component: 'PlatformNumberStepInputReadonlyExampleComponent',
             scssFileCode: getAssetFromModuleAssets(exampleScss)
         }
     ];

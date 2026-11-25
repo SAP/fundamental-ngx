@@ -16,6 +16,19 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="readonly" componentName="switch">Read-only State</fd-docs-section-title>
+<description>
+    Switch can be set to read-only by passing <code>[readonly]="true"</code>. In the read-only state the user must not
+    be able to toggle the switch (by pointer or keyboard), and doing so must not change the value or mark the control
+    dirty. Programmatic updates (setValue/patchValue/writeValue/reset) remain supported.
+</description>
+<component-example>
+    <fdp-switch-readonly-example></fdp-switch-readonly-example>
+</component-example>
+<code-example [exampleFiles]="switchReadonly"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="semantic-compact" componentName="switch">Semantic and Compact Mode</fd-docs-section-title>
 <description>
     It is possible to add semantic mode by passing <code>[semantic]="true"</code> and compact mode by using

@@ -42,3 +42,14 @@
     <fdp-platform-radio-group-disabled-example></fdp-platform-radio-group-disabled-example>
 </component-example>
 <code-example [exampleFiles]="disabledRadioGroup"></code-example>
+
+<fd-docs-section-title id="readonly" componentName="radio-group"> Read-only Radio Group </fd-docs-section-title>
+<description>
+    A radio group can be set to read-only via <code>[readonly]="true"</code>. In read-only state the user must not be
+    able to change the selection by pointer or keyboard, and doing so must not change the value or mark the control
+    dirty. Programmatic updates remain supported.
+</description>
+<component-example>
+    <fdp-platform-radio-group-readonly-example></fdp-platform-radio-group-readonly-example>
+</component-example>
+<code-example [exampleFiles]="readonlyRadioGroup"></code-example>
