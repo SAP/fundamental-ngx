@@ -8,7 +8,7 @@
 
     <fd-shellbar-actions>
         <fd-user-menu (isOpenChange)="isOpenChange($event)">
-            <fd-user-menu-control>
+            <fd-user-menu-control role="button">
                 <fd-avatar
                     fd-user-menu-control-element
                     size="xs"
@@ -56,7 +56,7 @@
                         <div fd-panel-content noPadding ariaLabel="Panel Content" id="panel-content-1">
                             <ul fd-list [subline]="true">
                                 <li fd-list-item [interactive]="true" [active]="true">
-                                    <fd-avatar size="s" label="Lisa Miller"></fd-avatar>
+                                    <fd-avatar size="s" label="Lisa Miller" aria-hidden="true"></fd-avatar>
                                     <div fd-list-content>
                                         <div fd-list-title>Lisa Miller</div>
                                         <div fd-list-subline>lisa.miller&#64;test.com</div>
@@ -64,7 +64,7 @@
                                     </div>
                                 </li>
                                 <li fd-list-item [interactive]="true">
-                                    <fd-avatar size="s" label="John Doe"></fd-avatar>
+                                    <fd-avatar size="s" label="John Doe" aria-hidden="true"></fd-avatar>
                                     <div fd-list-content>
                                         <div fd-list-title>John Doe</div>
                                         <div fd-list-subline>john.doe&#64;test.com</div>
@@ -72,7 +72,11 @@
                                     </div>
                                 </li>
                                 <li fd-list-item [interactive]="true">
-                                    <fd-avatar image="https://picsum.photos/id/1018/400" size="s"></fd-avatar>
+                                    <fd-avatar
+                                        image="https://picsum.photos/id/1018/400"
+                                        size="s"
+                                        aria-hidden="true"
+                                    ></fd-avatar>
                                     <div fd-list-content>
                                         <div fd-list-title>Jane Doe</div>
                                         <div fd-list-subline>jane.doe&#64;test.com</div>

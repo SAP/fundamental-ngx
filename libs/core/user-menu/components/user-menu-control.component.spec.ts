@@ -1,13 +1,16 @@
-import { Component, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, viewChild, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { FD_LANGUAGE_SIGNAL } from '@fundamental-ngx/i18n';
 import { FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n/en';
 import { UserMenuControlComponent } from './user-menu-control.component';
 
 @Component({
-    template: `<fd-user-menu-control #elRef>User Menu Control Test</fd-user-menu-control>`,
+    template: `<fd-user-menu-control role="button" #elRef
+        ><fd-avatar label="Lisa Miller" ariaLabel="Lisa Miller"
+    /></fd-user-menu-control>`,
     standalone: true,
-    imports: [UserMenuControlComponent]
+    imports: [UserMenuControlComponent, AvatarComponent]
 })
 class TestHostComponent {
     @ViewChild('elRef', { read: ElementRef })
@@ -53,7 +56,7 @@ describe('UserMenuControlComponent', () => {
             fixture.detectChanges();
 
             expect(event.preventDefault).toHaveBeenCalled();
-            expect(clickedSpy).toHaveBeenCalled();
+            expect(clickedSpy).toHaveBeenCalledTimes(1);
         });
 
         it('should emit clicked event on Space key', () => {
@@ -67,7 +70,7 @@ describe('UserMenuControlComponent', () => {
             fixture.detectChanges();
 
             expect(event.preventDefault).toHaveBeenCalled();
-            expect(clickedSpy).toHaveBeenCalled();
+            expect(clickedSpy).toHaveBeenCalledTimes(1);
         });
 
         it('should not emit clicked event on other keys', () => {
@@ -99,7 +102,7 @@ describe('UserMenuControlComponent', () => {
             controlElement.click();
             fixture.detectChanges();
 
-            expect(clickedSpy).toHaveBeenCalled();
+            expect(clickedSpy).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -116,6 +119,13 @@ describe('UserMenuControlComponent', () => {
     });
 
     describe('accessibility', () => {
+        it('preserves an application-owned named button with one tab stop and a noninteractive avatar', () => {
+            expect(controlElement.getAttribute('role')).toBe('button');
+            expect(controlElement.getAttribute('aria-label')).toBe('User Menu');
+            expect(controlElement.tabIndex).toBe(0);
+            expect(controlElement.querySelectorAll('button, [role="button"], [tabindex="0"]').length).toBe(0);
+            expect(controlElement.getAttribute('aria-expanded')).toBe('false');
+        });
         it('should have aria-haspopup="dialog"', () => {
             expect(controlElement.getAttribute('aria-haspopup')).toBe('dialog');
         });
@@ -138,5 +148,45 @@ describe('UserMenuControlComponent', () => {
             const ariaLabel = controlElement.getAttribute('aria-label');
             expect(ariaLabel).toBe('User Menu');
         });
+    });
+});
+
+@Component({
+    template: `<fd-user-menu-control><button type="button">Open user menu</button></fd-user-menu-control>`,
+    imports: [UserMenuControlComponent]
+})
+class NativeButtonHostComponent {
+    readonly controlComponent = viewChild.required(UserMenuControlComponent);
+}
+
+describe('UserMenuControlComponent projected native button', () => {
+    let fixture: ComponentFixture<NativeButtonHostComponent>;
+    let button: HTMLButtonElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({ imports: [NativeButtonHostComponent] }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(NativeButtonHostComponent);
+        fixture.detectChanges();
+        button = fixture.nativeElement.querySelector('button');
+    });
+
+    it('leaves the native button as the sole button without an enclosing button role', () => {
+        expect(fixture.nativeElement.querySelectorAll('button, [role="button"]').length).toBe(1);
+        expect(button.parentElement?.closest('[role="button"]')).toBeNull();
+    });
+
+    it.each(['pointer', 'Enter', 'Space'])('preserves %s activation through the projected native button', (method) => {
+        const clicked = jest.fn();
+        fixture.componentInstance.controlComponent().clicked.subscribe(clicked);
+        if (method === 'pointer') {
+            button.click();
+        } else {
+            const key = method === 'Space' ? ' ' : method;
+            button.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+        }
+        expect(clicked).toHaveBeenCalledTimes(1);
     });
 });
