@@ -122,6 +122,7 @@ describe('RadioButtonComponent', () => {
                         [value]="option"
                         [id]="'model-radio-' + option"
                         [readOnly]="readOnly()"
+                        [managedFocus]="managedFocus()"
                         [disabled]="disabled()"
                         (ngModelChange)="modelEvents.push($event)"
                         [name]="radioName()"
@@ -147,6 +148,7 @@ class ReadOnlyNgModelRadioHostComponent {
     readonly modelEvents: (number | null)[] = [];
     readonly selectedValue = signal<number | null>(1);
     readonly readOnly = signal(false);
+    readonly managedFocus = signal(false);
     readonly radioName = signal('model-radio');
     readonly direction = signal('ltr');
     readonly fieldsetDisabled = signal<number[]>([]);
@@ -239,6 +241,21 @@ describe('RadioButtonComponent ngModel group', () => {
         }
         expect(component.form.controls['model-radio'].touched).toBe(true);
     });
+
+    it.each(['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'] as const)(
+        'read-only %s is cancelled but does not move focus when focus is managed by an ancestor',
+        async (key) => {
+            component.readOnly.set(true);
+            component.managedFocus.set(true);
+            await settle();
+            inputs[0].focus();
+            // Default is still prevented (selection blocked), but the component does not move
+            // focus itself — the ancestor (e.g. platform radio group FocusKeyManager) handles it.
+            expect(pressArrow(key).defaultPrevented).toBe(true);
+            expect(document.activeElement).toBe(inputs[0]);
+            await expectNavigationUnchanged();
+        }
+    );
 
     it.each([
         ['ArrowRight', 2],

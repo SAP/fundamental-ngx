@@ -8,6 +8,7 @@ import {
     ElementRef,
     forwardRef,
     Input,
+    input,
     OnChanges,
     OnDestroy,
     ViewChild,
@@ -142,6 +143,14 @@ export class RadioButtonComponent<T = any>
 
     /** Vertical position of the label compared to the radio button */
     @Input() valignLabel: 'top' | 'middle' = 'middle';
+
+    /**
+     * Whether arrow-key navigation between read-only radios is handled by an ancestor
+     * (e.g. the platform `fdp-radio-group`, which drives focus via a `FocusKeyManager`).
+     * When `true`, this radio still blocks selection while read-only but does not move
+     * focus itself, avoiding double navigation that would skip buttons.
+     */
+    readonly managedFocus = input(false, { transform: booleanAttribute });
 
     /** Whether the radio button is checked. */
     get checked(): boolean {
@@ -284,7 +293,9 @@ export class RadioButtonComponent<T = any>
     protected inputKeydown(event: KeyboardEvent): void {
         if (this.readOnly && [' ', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) {
             event.preventDefault();
-            if (event.key !== ' ') {
+            // When an ancestor manages focus (e.g. the platform radio group's FocusKeyManager),
+            // let it move focus so navigation isn't handled twice.
+            if (event.key !== ' ' && !this.managedFocus()) {
                 this._focusReadOnlyPeer(event.key);
             }
         }
@@ -292,24 +303,24 @@ export class RadioButtonComponent<T = any>
 
     /** @hidden */
     private _focusReadOnlyPeer(key: string): void {
-        const input = this.inputElement.nativeElement;
-        if (!input.name) {
+        const inputEl = this.inputElement.nativeElement;
+        if (!inputEl.name) {
             return;
         }
 
         // Native radio groups share a name, form owner and tree root, regardless of fieldsets.
-        const root = input.getRootNode() as Document | ShadowRoot;
+        const root = inputEl.getRootNode() as Document | ShadowRoot;
         const peers = Array.from(root.querySelectorAll<HTMLInputElement>('input[type="radio"]')).filter(
-            (peer) => peer.name === input.name && peer.form === input.form && !peer.matches(':disabled')
+            (peer) => peer.name === inputEl.name && peer.form === inputEl.form && !peer.matches(':disabled')
         );
-        const index = peers.indexOf(input);
+        const index = peers.indexOf(inputEl);
         if (index === -1 || peers.length < 2) {
             return;
         }
 
         let step = key === 'ArrowRight' || key === 'ArrowDown' ? 1 : -1;
         const horizontal = key === 'ArrowRight' || key === 'ArrowLeft';
-        if (horizontal && input.ownerDocument.defaultView?.getComputedStyle(input).direction === 'rtl') {
+        if (horizontal && inputEl.ownerDocument.defaultView?.getComputedStyle(inputEl).direction === 'rtl') {
             step = -step;
         }
         peers[(index + step + peers.length) % peers.length].focus();
