@@ -1,3 +1,13 @@
+## 0.66.2-rc.5 (2026-11-25)
+
+### 🩹 Fixes
+
+- **core, platform:** forward readonly to radio group buttons and fix keyboard navigation ([#14713](https://github.com/SAP/fundamental-ngx/pull/14713))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.2-rc.4 (2026-11-25)
 
 ### 🩹 Fixes
