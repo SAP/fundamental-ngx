@@ -13,37 +13,34 @@ import { TableRow } from './models/table-row.model';
 export const filterByString = (rows: TableRow[], filter: CollectionStringFilter): TableRow[] => {
     const filterValue = filter.value && filter.value.toLocaleLowerCase();
     const filterValue2 = (filter.value2 && filter.value2.toLocaleLowerCase()) || '';
+    // Compare the text of the value, so that numbers and other non-string values do not throw.
+    // Rows without a value never match.
+    const matches = (predicate: (rowValue: string) => boolean): TableRow[] =>
+        rows.filter((r) => {
+            const rowValue = get(r.value, filter.field);
+            return rowValue !== null && rowValue !== undefined && predicate(String(rowValue).toLocaleLowerCase());
+        });
 
     switch (filter.strategy) {
         case FILTER_STRING_STRATEGY.EQ:
-            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() === filterValue);
+            return matches((rowValue) => rowValue === filterValue);
         case FILTER_STRING_STRATEGY.GT:
-            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() > filterValue);
+            return matches((rowValue) => rowValue > filterValue);
         case FILTER_STRING_STRATEGY.GTE:
-            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() >= filterValue);
+            return matches((rowValue) => rowValue >= filterValue);
         case FILTER_STRING_STRATEGY.LT:
-            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() < filterValue);
+            return matches((rowValue) => rowValue < filterValue);
         case FILTER_STRING_STRATEGY.LTE:
-            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase() <= filterValue);
+            return matches((rowValue) => rowValue <= filterValue);
         case FILTER_STRING_STRATEGY.BETWEEN:
-            return rows.filter((r) => {
-                const rowValue = get(r.value, filter.field).toLocaleLowerCase();
-                return rowValue >= filterValue && rowValue <= filterValue2;
-            });
+            return matches((rowValue) => rowValue >= filterValue && rowValue <= filterValue2);
         case FILTER_STRING_STRATEGY.BEGINS_WITH:
-            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase().startsWith(filterValue));
+            return matches((rowValue) => rowValue.startsWith(filterValue));
         case FILTER_STRING_STRATEGY.ENDS_WITH:
-            return rows.filter((r) => get(r.value, filter.field).toLocaleLowerCase().endsWith(filterValue));
+            return matches((rowValue) => rowValue.endsWith(filterValue));
         case FILTER_STRING_STRATEGY.CONTAINS:
         default:
-            return rows.filter((r) => {
-                let rowValue = get(r.value, filter.field);
-                if (typeof rowValue === 'number') {
-                    rowValue = rowValue.toString();
-                }
-
-                return rowValue.toLocaleLowerCase().includes(filterValue);
-            });
+            return matches((rowValue) => rowValue.includes(filterValue));
     }
 };
 

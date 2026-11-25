@@ -164,9 +164,9 @@ export abstract class BaseTableDataProvider<T, P = T[]> {
     protected filterString(item: T, filter: CollectionStringFilter): boolean {
         const filterValue = filter.value && filter.value.toLocaleLowerCase();
         const filterValue2 = (filter.value2 && filter.value2.toLocaleLowerCase()) || '';
-        let itemValue = get(item, filter.field);
-
-        itemValue = itemValue ? itemValue.toLocaleLowerCase() : itemValue;
+        const rawValue = get(item, filter.field);
+        // Compare the text of the value, so that numbers and other non-string values do not throw.
+        const itemValue = rawValue === null || rawValue === undefined ? rawValue : String(rawValue).toLocaleLowerCase();
 
         let result: boolean;
 
@@ -190,10 +190,10 @@ export abstract class BaseTableDataProvider<T, P = T[]> {
                 result = itemValue >= filterValue && itemValue <= filterValue2;
                 break;
             case 'beginsWith':
-                result = itemValue.startsWith(filterValue);
+                result = typeof itemValue === 'string' && itemValue.startsWith(filterValue);
                 break;
             case 'endsWith':
-                result = itemValue.endsWith(filterValue);
+                result = typeof itemValue === 'string' && itemValue.endsWith(filterValue);
                 break;
             case 'contains':
             default:
