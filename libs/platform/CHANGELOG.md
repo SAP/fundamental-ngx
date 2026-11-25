@@ -1,3 +1,13 @@
+## 0.66.2-rc.4 (2026-11-25)
+
+### 🩹 Fixes
+
+- **platform:** make readonly work on number step input, aligned with editable ([#14712](https://github.com/SAP/fundamental-ngx/pull/14712))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
 ## 0.66.2-rc.3 (2026-11-24)
 
 This was a version bump only for platform to align it with other projects, there were no code changes.
