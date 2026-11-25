@@ -163,11 +163,9 @@ export class ShellbarActionsComponent implements OnDestroy {
     /** @hidden */
     protected readonly shellbarLabel = resolveTranslationSignal('coreShellbar.shellbarLabel');
 
-    private readonly _projectedActions = contentChildren<ShellbarActionComponent>(FD_SHELLBAR_ACTION_COMPONENT, {
-        descendants: false
-    });
+    private readonly _projectedActions = contentChildren<ShellbarActionComponent>(FD_SHELLBAR_ACTION_COMPONENT);
 
-    private readonly _projectedButtons = contentChildren<ButtonComponent>(FD_BUTTON_COMPONENT, { descendants: false });
+    private readonly _projectedButtons = contentChildren<ButtonComponent>(FD_BUTTON_COMPONENT);
 
     /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);

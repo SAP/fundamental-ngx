@@ -1,6 +1,6 @@
 @if (wrapper()) {
     <header role="banner" data-testid="landmark-wrapper">
-        <fd-shellbar role="group" data-testid="landmark-group-shellbar">
+        <fd-shellbar role="group" aria-label="Product tools" data-testid="landmark-group-shellbar">
             <fd-shellbar-actions>
                 <button fd-button>One</button>
                 <button fd-button>Two</button>
@@ -8,7 +8,7 @@
         </fd-shellbar>
     </header>
 } @else {
-    <fd-shellbar data-testid="landmark-default-shellbar">
+    <fd-shellbar [aria-label]="label()" [role]="role()" data-testid="landmark-default-shellbar">
         <fd-shellbar-actions data-testid="landmark-actions">
             <fd-shellbar-action ariaLabel="One" glyph="bell"></fd-shellbar-action>
             <fd-shellbar-action ariaLabel="Two" glyph="bell"></fd-shellbar-action>
@@ -16,3 +16,6 @@
     </fd-shellbar>
 }
 <button data-testid="landmark-toggle" (click)="wrapper.set(!wrapper())">Toggle wrapper</button>
+<button data-testid="landmark-custom-label" (click)="label.set('Workspace tools')">Set custom label</button>
+<button data-testid="landmark-default-label" (click)="label.set(undefined)">Use default label</button>
+<button data-testid="landmark-role" (click)="role.set(role() === 'banner' ? 'group' : 'banner')">Toggle role</button>

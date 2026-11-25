@@ -55,8 +55,8 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        role: 'banner',
-        '[attr.aria-label]': 'shellbarLabel()'
+        '[attr.role]': 'role()',
+        '[attr.aria-label]': 'ariaLabel() ?? shellbarLabel()'
     },
     providers: [
         {
@@ -198,6 +198,12 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** ID of the element controlled by the navigation button (for aria-controls). Typically references the side navigation element. */
     readonly navigationButtonControls = input<string | undefined>(undefined);
+
+    /** Accessible role. Use "group" when an outer header owns the banner landmark. */
+    readonly role = input('banner');
+
+    /** Accessible name of the shellbar. Defaults to the localized shellbar label. */
+    readonly ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' });
 
     /** @hidden */
     protected readonly navigationIcon = computed<string>(() => (this.isRtl() ? 'slim-arrow-right' : 'nav-back'));

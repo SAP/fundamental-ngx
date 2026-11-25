@@ -9,4 +9,6 @@ import { ShellbarActionComponent, ShellbarActionsComponent, ShellbarComponent } 
 })
 export class ShellbarLandmarksComponent {
     readonly wrapper = signal(false);
+    readonly label = signal<string | undefined>(undefined);
+    readonly role = signal('banner');
 }

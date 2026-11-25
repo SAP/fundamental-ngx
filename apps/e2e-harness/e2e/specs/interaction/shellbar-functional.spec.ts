@@ -138,7 +138,7 @@ test('core/shellbar isolated landmark route has valid named host and group axe c
     await expect(wrapper).toHaveAttribute('role', 'banner');
     await expect(group).toHaveAttribute('role', 'group');
     await expect(group).toHaveRole('group');
-    await expect(group).toHaveAccessibleName('Shellbar');
+    await expect(group).toHaveAccessibleName('Product tools');
     await expect(page.getByRole('banner')).toHaveCount(1);
     await expect(groupActions).toHaveRole('toolbar');
     await expect(groupActions).toHaveAccessibleName('Shellbar');
@@ -169,6 +169,53 @@ test('core/shellbar isolated landmark route has valid named host and group axe c
     expect(wrapperAncestors).not.toContainEqual({ tag: 'main', role: null });
     expect(events.errors).toEqual([]);
 });
+
+test('core/shellbar consumer label and role inputs update without remounting', async ({ page }) => {
+    await page.goto('/__e2e/shellbar/landmarks');
+    const shellbar = page.getByTestId('landmark-default-shellbar');
+    await expect(shellbar).toHaveRole('banner');
+    await expect(shellbar).toHaveAccessibleName('Shellbar');
+
+    await page.getByTestId('landmark-custom-label').click();
+    await expect(shellbar).toHaveAccessibleName('Workspace tools');
+    await page.getByTestId('landmark-role').click();
+    await expect(shellbar).toHaveRole('group');
+    await expect(shellbar).toHaveAccessibleName('Workspace tools');
+
+    await page.getByTestId('landmark-default-label').click();
+    await expect(shellbar).toHaveAccessibleName('Shellbar');
+    await page.getByTestId('landmark-role').click();
+    await expect(shellbar).toHaveRole('banner');
+});
+
+for (const route of [
+    'core/product-switch/dnd',
+    'core/shellbar/context-area-events',
+    'core/shellbar/context-area-overflow',
+    'core/shellbar/dual-context-area'
+]) {
+    test('core/shellbar embedded example retains its group and main landmarks on ' + route, async ({ page }) => {
+        await page.goto('/' + route);
+        const shellbar = page.locator('fd-shellbar');
+        await expect(shellbar).toHaveRole('group');
+        await expect(shellbar).toHaveAccessibleName('Shellbar');
+        await expect(page.locator('main')).toHaveCount(1);
+        await expect(page.locator('main fd-shellbar')).toHaveCount(1);
+        const axe = await new AxeBuilder({ page })
+            .withRules([
+                'landmark-banner-is-top-level',
+                'landmark-no-duplicate-banner',
+                'landmark-unique',
+                'landmark-one-main'
+            ])
+            .analyze();
+        expect(axe.violations).toEqual([]);
+
+        await page.goto('/core/button/types');
+        await expect(page.locator('main')).toBeVisible();
+        await expect(page.locator('main button').first()).toBeVisible();
+    });
+}
 
 test('core/shellbar action components transition 0 to 1 to 2 to 1 to 0 logical entries', async ({ page }, info) => {
     const history: unknown[] = [];
