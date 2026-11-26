@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
+import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
@@ -479,6 +480,155 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
         fdradiobuttonsLabels[17].nativeElement.click();
         fixture.detectChanges();
         expect(component.favSeason).toEqual('autumn');
+    });
+});
+
+@Component({
+    selector: 'fdp-test-readonly-radio-group',
+    template: `
+        <form [formGroup]="form">
+            <fdp-radio-group [name]="'season'" [readonly]="readonly" formControlName="season">
+                <fdp-radio-button [value]="'winter'">Winter</fdp-radio-button>
+                <fdp-radio-button [value]="'spring'">Spring</fdp-radio-button>
+                <fdp-radio-button [value]="'summer'">Summer</fdp-radio-button>
+            </fdp-radio-group>
+
+            <fdp-radio-group
+                [name]="'brand'"
+                [list]="pizzaBrands"
+                [readonly]="readonly"
+                formControlName="brand"
+            ></fdp-radio-group>
+        </form>
+    `,
+    standalone: true,
+    imports: [PlatformRadioGroupModule, FormsModule, ReactiveFormsModule]
+})
+class TestReadonlyRadioGroupComponent {
+    @ViewChildren(RadioGroupComponent)
+    radioGroups: QueryList<RadioGroupComponent>;
+
+    readonly = true;
+    pizzaBrands: string[] = ['Dominos', 'Pizza Hut', 'Papa Johns'];
+
+    form = new FormGroup({
+        season: new FormControl('winter'),
+        brand: new FormControl('Dominos')
+    });
+}
+
+describe('Radio Group readonly', () => {
+    let component: TestReadonlyRadioGroupComponent;
+    let fixture: ComponentFixture<TestReadonlyRadioGroupComponent>;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [TestReadonlyRadioGroupComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestReadonlyRadioGroupComponent);
+        component = fixture.componentInstance;
+    });
+
+    async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
+        componentFixture.detectChanges();
+        await componentFixture.whenStable();
+    }
+
+    it('should forward readonly from the group to content-projected radios', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        const contentRadios = component.radioGroups.first.contentRadioButtons.toArray();
+        expect(contentRadios.length).toBeGreaterThan(0);
+        contentRadios.forEach((radio) => expect(radio.isReadonly).toBe(true));
+
+        // underlying core radio-button inputs reflect the readonly state
+        const groupEl = fixture.debugElement.query(By.directive(RadioGroupComponent));
+        const readonlyInputs = groupEl.queryAll(By.css('input[aria-readonly="true"]'));
+        expect(readonlyInputs.length).toBe(contentRadios.length);
+
+        // the core radios delegate arrow navigation to the group's FocusKeyManager
+        const coreRadios = groupEl.queryAll(By.directive(CoreRadioButtonComponent));
+        expect(coreRadios.length).toBeGreaterThan(0);
+        coreRadios.forEach((radio) => expect(radio.componentInstance.managedFocus()).toBe(true));
+    });
+
+    it('should forward readonly from the group to list-generated radios', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        const listRadios = component.radioGroups.last.viewRadioButtons.toArray();
+        expect(listRadios.length).toBeGreaterThan(0);
+        listRadios.forEach((radio) => expect(radio.isReadonly).toBe(true));
+    });
+
+    it('should not change the selection or mark dirty when a readonly radio is clicked', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(component.form.controls.season.value).toEqual('winter');
+        expect(component.form.controls.season.dirty).toBe(false);
+
+        const labels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
+        labels[1].nativeElement.click(); // Spring
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(component.form.controls.season.value).toEqual('winter');
+        expect(component.form.controls.season.dirty).toBe(false);
+    });
+
+    it('should still accept programmatic updates while readonly', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        component.form.controls.season.setValue('summer');
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(component.form.controls.season.value).toEqual('summer');
+        expect(component.radioGroups.first.value).toEqual('summer');
+    });
+
+    it('should allow selection again once readonly is removed', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        component.readonly = false;
+        await wait(fixture);
+        fixture.detectChanges();
+
+        const labels = fixture.debugElement.queryAll(By.css('.fd-radio__label'));
+        labels[1].nativeElement.click(); // Spring
+        await wait(fixture);
+        fixture.detectChanges();
+
+        expect(component.form.controls.season.value).toEqual('spring');
+    });
+
+    it('should move focus by exactly one radio on the first arrow key press', async () => {
+        await wait(fixture);
+        fixture.detectChanges();
+
+        const groupEl = fixture.debugElement.query(By.directive(RadioGroupComponent));
+        const inputs = groupEl
+            .queryAll(By.css('input[type="radio"]'))
+            .map((de) => de.nativeElement as HTMLInputElement);
+        expect(inputs.length).toBeGreaterThan(2);
+
+        // Focus the first radio, then a single ArrowRight should advance to the next one.
+        inputs[0].focus();
+        inputs[0].dispatchEvent(
+            new KeyboardEvent('keydown', { key: 'ArrowRight', keyCode: 39, which: 39, bubbles: true, cancelable: true })
+        );
+        await wait(fixture);
+
+        expect(document.activeElement).toBe(inputs[1]);
+        // read-only: navigation must not change the selected value
+        expect(component.form.controls.season.value).toEqual('winter');
     });
 });
 

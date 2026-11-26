@@ -10,6 +10,8 @@ agent: general-purpose
 
 If `$ARGUMENTS` is empty, ask the user for a component path before proceeding.
 
+For tests that verify CSP-sensitive styling behavior, follow the [CSP guide](../../../docs/agents/csp-guidelines.md), especially its browser-validation section; independently installed skills should use the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Analyze the component
 
 Read the component file at `$ARGUMENTS`. Extract:

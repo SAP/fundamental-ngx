@@ -18,6 +18,8 @@ If `$ARGUMENTS` is empty, ask the user which pattern they want. Supported patter
 - `shell` — app shell with shellbar and navigation
 - `layout-grid` — responsive grid layout
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Identify Pattern
 
 Parse the pattern name from `$ARGUMENTS`. If a variant is specified (e.g., `dialog component-ref`), note it for Phase 3.

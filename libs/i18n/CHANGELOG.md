@@ -1,3 +1,46 @@
+## 0.66.2-rc.6 (2026-11-25)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.5 (2026-11-25)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.4 (2026-11-25)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.3 (2026-11-24)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.2 (2026-11-23)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.1 (2026-11-23)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.0 (2026-11-21)
+
+This was a version bump only for i18n to align it with other projects, there were no code changes.
+
+## 0.66.1 (2026-11-20)
+
+### 🩹 Fixes
+
+- **core:** improve dialog accessibility with configurable roles and aria-labels ([#14670](https://github.com/SAP/fundamental-ngx/pull/14670))
+- **core:** shellbar responsiveness updates, support for multiple context areas, a11y improvements ([#14621](https://github.com/SAP/fundamental-ngx/pull/14621))
+- **core:** tokens disappear in compact fd-tokenizer when long tokens are present ([#14628](https://github.com/SAP/fundamental-ngx/pull/14628), [#14627](https://github.com/SAP/fundamental-ngx/issues/14627))
+
+### ❤️ Thank You
+
+- droshev
+- Inna Atanasova @InnaAtanasova
+- Maria Dineva @MariaIDineva
+- Mike O'Donnell @mikerodonnell89
+
 ## 0.66.1-rc.39 (2026-11-19)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

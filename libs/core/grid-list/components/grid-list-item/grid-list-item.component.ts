@@ -52,7 +52,7 @@ export interface GridListItemOutputEvent<T> {
     value?: T;
 }
 
-export type GridListItemType = 'inactive' | 'active' | 'detail' | 'detailsAndActive' | 'navigation';
+export type GridListItemType = 'inactive' | 'active' | 'detail' | 'detailsAndActive' | 'navigation' | 'interactive';
 export type GridListItemState = 'unread' | 'locked' | 'error' | 'draft';
 export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
 

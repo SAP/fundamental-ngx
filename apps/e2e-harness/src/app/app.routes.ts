@@ -11,5 +11,32 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./fixtures/shellbar-functional.component').then((module) => module.ShellbarFunctionalComponent)
     },
+    {
+        path: '__e2e/user-menu/default',
+        loadComponent: () =>
+            // Existing harness examples use source imports; these components have no barrel exports.
+            // eslint-disable-next-line @nx/enforce-module-boundaries
+            import('../../../../libs/docs/core/user-menu/examples/user-menu-default-example.component').then(
+                (m) => m.UserMenuDefaultExampleComponent
+            )
+    },
+    {
+        path: '__e2e/user-menu/mobile',
+        loadComponent: () =>
+            // Existing harness examples use source imports; these components have no barrel exports.
+            // eslint-disable-next-line @nx/enforce-module-boundaries
+            import('../../../../libs/docs/core/user-menu/examples/user-menu-mobile-example.component').then(
+                (m) => m.UserMenuMobileExampleComponent
+            )
+    },
+    {
+        path: '__e2e/shellbar/basic',
+        loadComponent: () =>
+            // Existing harness examples use source imports; these components have no barrel exports.
+            // eslint-disable-next-line @nx/enforce-module-boundaries
+            import('../../../../libs/docs/core/shellbar/examples/shellbar-basic-example.component').then(
+                (m) => m.ShellbarBasicExampleComponent
+            )
+    },
     ...generatedRoutes
 ];

@@ -220,6 +220,7 @@ export class UserMenuComponent implements AfterViewInit {
             ariaDescribedBy: 'fd-user-menu-body',
             contentDensity: ContentDensityMode.COZY
         });
+        this.isOpenChangeHandle(true);
 
         // Focus first list item when dialog loads
         // Use requestAnimationFrame for consistent timing with popover mode
@@ -239,10 +240,12 @@ export class UserMenuComponent implements AfterViewInit {
 
         const refSub = this._dialogRef.afterClosed.subscribe({
             next: () => {
+                this.isOpenChangeHandle(false);
                 this.userMenuControl()?.focus();
                 refSub.unsubscribe();
             },
             error: (type) => {
+                this.isOpenChangeHandle(false);
                 if (type === 'escape') {
                     this._clearSubmenu();
                     refSub.unsubscribe();

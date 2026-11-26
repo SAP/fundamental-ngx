@@ -31,7 +31,14 @@
 <ng-template #listvalues>
     @if (hasNoValue) {
         <div fd-form-item>
-            <fdp-radio-button [name]="name" value="None" [state]="state" [disabled]="disabled" [forceRender]="true">
+            <fdp-radio-button
+                [name]="name"
+                value="None"
+                [state]="state"
+                [disabled]="disabled"
+                [readonly]="readonly"
+                [forceRender]="true"
+            >
                 {{ noValueLabel }}
             </fdp-radio-button>
         </div>
@@ -43,6 +50,7 @@
                 [value]="lookupValue(item)"
                 [state]="state"
                 [disabled]="_getListItemDisabledValue(item)"
+                [readonly]="readonly"
                 [forceRender]="true"
             >
                 {{ getDisplayValue(item) }}

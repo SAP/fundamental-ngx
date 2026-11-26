@@ -16,7 +16,6 @@ import { NumberStepInputComponent } from './number-step-input.component';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`,
-    standalone: true,
     imports: [PlatformStepInputModule],
     providers: [RtlService]
 })
@@ -84,7 +83,6 @@ describe('NumberStepInputComponent default values', () => {
             (valueChange)="onValueChanged($event)"
         ></fdp-number-step-input>
     `,
-    standalone: true,
     imports: [PlatformStepInputModule, ContentDensityModule],
     providers: [RtlService]
 })
@@ -396,6 +394,151 @@ describe('NumberStepInputComponent main functionality', () => {
     });
 });
 
+/** Read-only behavior via `readonly` and the backwards-compatible `editable` */
+@Component({
+    template: `
+        <fdp-number-step-input
+            name="number"
+            [value]="value()"
+            [readonly]="readonly()"
+            [editable]="editable()"
+            (valueChange)="onValueChanged($event)"
+        ></fdp-number-step-input>
+    `,
+    imports: [PlatformStepInputModule],
+    providers: [RtlService]
+})
+class NumberStepInputReadonlyHostComponent {
+    @ViewChild(NumberStepInputComponent) stepInputCmp: NumberStepInputComponent;
+
+    value = signal(10);
+    readonly = signal(false);
+    editable = signal(true);
+
+    onValueChanged(event: StepInputChangeEvent): void {
+        this.value.set(event.payload);
+    }
+}
+
+describe('NumberStepInputComponent read-only behavior', () => {
+    let component: NumberStepInputReadonlyHostComponent;
+    let fixture: ComponentFixture<NumberStepInputReadonlyHostComponent>;
+    let stepInputComponent: NumberStepInputComponent;
+
+    const getInput = (): HTMLInputElement => fixture.debugElement.query(By.css('.fd-step-input__input')).nativeElement;
+    const getDecreaseBtn = (): HTMLButtonElement =>
+        fixture.debugElement.queryAll(By.css('.fd-step-input__button'))[0].nativeElement;
+    const getIncreaseBtn = (): HTMLButtonElement =>
+        fixture.debugElement.queryAll(By.css('.fd-step-input__button'))[1].nativeElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NumberStepInputReadonlyHostComponent]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(NumberStepInputReadonlyHostComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        stepInputComponent = component.stepInputCmp;
+    });
+
+    it('should reflect read-only state on the native input and styling when [readonly]="true"', () => {
+        component.readonly.set(true);
+        fixture.detectChanges();
+
+        expect(getInput().readOnly).toBe(true);
+        expect(fixture.debugElement.query(By.css('.fd-step-input')).nativeElement.classList).toContain('is-readonly');
+        expect(stepInputComponent.canChangeValue).toBe(false);
+    });
+
+    it('should block typing when [readonly]="true"', () => {
+        component.readonly.set(true);
+        fixture.detectChanges();
+
+        const inputEl = getInput();
+        inputEl.focus();
+        inputEl.value = '55';
+        inputEl.dispatchEvent(new InputEvent('input'));
+        inputEl.dispatchEvent(new InputEvent('change'));
+        fixture.detectChanges();
+
+        expect(component.value()).toEqual(10);
+    });
+
+    it('should block ArrowUp/ArrowDown keys when [readonly]="true"', () => {
+        component.readonly.set(true);
+        fixture.detectChanges();
+
+        const inputEl = getInput();
+        inputEl.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+        fixture.detectChanges();
+        inputEl.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+        fixture.detectChanges();
+
+        expect(component.value()).toEqual(10);
+    });
+
+    it('should block the increment/decrement buttons when [readonly]="true"', () => {
+        component.readonly.set(true);
+        fixture.detectChanges();
+
+        const increaseBtn = getIncreaseBtn();
+        increaseBtn.dispatchEvent(new MouseEvent('mousedown'));
+        fixture.detectChanges();
+        increaseBtn.dispatchEvent(new MouseEvent('mouseup'));
+        fixture.detectChanges();
+
+        const decreaseBtn = getDecreaseBtn();
+        decreaseBtn.dispatchEvent(new MouseEvent('mousedown'));
+        fixture.detectChanges();
+        decreaseBtn.dispatchEvent(new MouseEvent('mouseup'));
+        fixture.detectChanges();
+
+        expect(component.value()).toEqual(10);
+    });
+
+    it('should still allow programmatic value updates while read-only', () => {
+        component.readonly.set(true);
+        fixture.detectChanges();
+
+        stepInputComponent.writeValue(42);
+        fixture.detectChanges();
+
+        expect(stepInputComponent.value).toEqual(42);
+    });
+
+    it('should react to [readonly] toggling back to editable', () => {
+        component.readonly.set(true);
+        fixture.detectChanges();
+        expect(stepInputComponent.canChangeValue).toBe(false);
+
+        component.readonly.set(false);
+        fixture.detectChanges();
+
+        expect(getInput().readOnly).toBe(false);
+        expect(stepInputComponent.canChangeValue).toBe(true);
+    });
+
+    it('should behave identically when read-only is set via [editable]="false"', () => {
+        component.editable.set(false);
+        fixture.detectChanges();
+
+        expect(getInput().readOnly).toBe(true);
+        expect(fixture.debugElement.query(By.css('.fd-step-input')).nativeElement.classList).toContain('is-readonly');
+        expect(stepInputComponent.canChangeValue).toBe(false);
+
+        const increaseBtn = getIncreaseBtn();
+        increaseBtn.dispatchEvent(new MouseEvent('mousedown'));
+        fixture.detectChanges();
+        increaseBtn.dispatchEvent(new MouseEvent('mouseup'));
+        fixture.detectChanges();
+
+        expect(component.value()).toEqual(10);
+    });
+});
+
 /** Usage with form */
 @Component({
     template: `
@@ -422,7 +565,6 @@ describe('NumberStepInputComponent main functionality', () => {
             <button type="submit" #submitButton>Submit</button>
         </form>
     `,
-    standalone: true,
     imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
     providers: [RtlService]
 })

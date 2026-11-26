@@ -1,6 +1,6 @@
 ---
 name: preflight
-description: Run local quality gates before creating a PR
+description: Run local validation checks before creating a PR
 argument-hint: [library]
 disable-model-invocation: true
 context: fork
@@ -9,7 +9,9 @@ agent: general-purpose
 
 # Preflight Check
 
-Run all local quality gates for the affected library. If no argument provided, detect the library from changed files via `git diff --name-only`.
+Run all local validation checks for the affected library. If no argument provided, detect the library from changed files via `git diff --name-only`.
+
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
 
 ## Steps
 
@@ -28,7 +30,7 @@ Map changed file paths to library names (`libs/core/` → `core`, `libs/platform
 yarn format
 ```
 
-Ensure all code is formatted before running quality gates.
+Ensure all code is formatted before running validation checks.
 
 ### 3. Build
 
@@ -74,7 +76,7 @@ If breaking changes found, verify the commit message contains `BREAKING CHANGE:`
 ```
 ## Preflight Report
 
-| Gate              | Status | Details          |
+| Check             | Status | Details          |
 |-------------------|--------|------------------|
 | Format            | PASS   |                  |
 | Build             | PASS   |                  |
@@ -84,7 +86,7 @@ If breaking changes found, verify the commit message contains `BREAKING CHANGE:`
 | Breaking Changes  | WARN   | 1 input removed  |
 
 ### Failures
-[details for each failed gate]
+[details for each failed check]
 
 ### Action Required
 [what needs fixing before PR]
