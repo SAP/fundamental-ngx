@@ -46,9 +46,9 @@ class SingleActionTestHostComponent {
     activeItem: string | null = null;
 }
 
-// The interactive element per item is the <li role="option"> (UI5 listbox/option model).
+// The interactive element per item is the <li role="menuitem"> (menubar/menuitem model).
 function getOptions(fixture: ComponentFixture<unknown>): HTMLElement[] {
-    return Array.from(fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]'));
+    return Array.from(fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="menuitem"]'));
 }
 
 function getToolbar(fixture: ComponentFixture<unknown>): HTMLElement {
@@ -95,24 +95,21 @@ describe('SidePanelComponent', () => {
         expect(hostEl.getAttribute('aria-label')).toBe('Side Panel');
     });
 
-    it('should render a vertical toolbar wrapping a single-select listbox with its aria-label', () => {
+    it('should render a vertical toolbar wrapping a menubar with its aria-label', () => {
         const toolbar = getToolbar(fixture);
         expect(toolbar.getAttribute('role')).toBe('toolbar');
         expect(toolbar.getAttribute('aria-orientation')).toBe('vertical');
 
-        const listbox: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__list');
-        expect(listbox.getAttribute('role')).toBe('listbox');
-        expect(listbox.getAttribute('aria-multiselectable')).toBe('false');
-        expect(listbox.getAttribute('aria-label')).toBe('Groups');
+        const menubar: HTMLElement = fixture.nativeElement.querySelector('.fd-side-panel__list');
+        expect(menubar.getAttribute('role')).toBe('menubar');
+        expect(menubar.getAttribute('aria-label')).toBe('Groups');
     });
 
-    it('should expose options with posinset/setsize and the group name', () => {
+    it('should expose menu items with the group name and disabled state', () => {
         const [filter, , tasks] = getOptions(fixture);
-        expect(filter.getAttribute('role')).toBe('option');
+        expect(filter.getAttribute('role')).toBe('menuitem');
         expect(filter.getAttribute('aria-label')).toBe('Filter');
         expect(filter.getAttribute('title')).toBe('Filter');
-        expect(filter.getAttribute('aria-posinset')).toBe('1');
-        expect(filter.getAttribute('aria-setsize')).toBe('3');
         expect(tasks.getAttribute('aria-disabled')).toBe('true');
     });
 
@@ -123,7 +120,7 @@ describe('SidePanelComponent', () => {
 
         expect(host.activeItem).toBe('filter');
         expect(filter.classList).toContain('is-active');
-        expect(filter.getAttribute('aria-selected')).toBe('true');
+        expect(filter.getAttribute('aria-expanded')).toBe('true');
     });
 
     it('should toggle the active item off when its option is clicked again', () => {
@@ -136,7 +133,7 @@ describe('SidePanelComponent', () => {
         fixture.detectChanges();
         expect(host.activeItem).toBeNull();
         expect(filter.classList).not.toContain('is-active');
-        expect(filter.getAttribute('aria-selected')).toBe('false');
+        expect(filter.getAttribute('aria-expanded')).toBe('false');
     });
 
     it('should not activate a disabled item', () => {
@@ -161,7 +158,7 @@ describe('SidePanelComponent', () => {
         fixture.detectChanges();
 
         expect(host.activeItem).toBe('layout');
-        expect(layout.getAttribute('aria-selected')).toBe('true');
+        expect(layout.getAttribute('aria-expanded')).toBe('true');
     });
 
     it('should use a roving tabindex, defaulting the first item to tabindex 0', () => {
@@ -457,7 +454,7 @@ describe('SidePanelComponent — content panel', () => {
 
     it('should return focus to the option when the close button is clicked', () => {
         const [filterOption] = Array.from<HTMLElement>(
-            fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]')
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="menuitem"]')
         );
         filterOption.click();
         fixture.detectChanges();
@@ -586,7 +583,7 @@ describe('SidePanelComponent — overflow', () => {
         // visible=1 → options at index 1, 2, 3 get overflow-hidden class
         setMeasurements(200, 60, 48, 4);
         const options = Array.from<HTMLElement>(
-            fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]')
+            fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="menuitem"]')
         );
         const hidden = options.filter((el) =>
             el.classList.contains('fd-side-panel__action-container--overflow-hidden')
@@ -639,7 +636,7 @@ describe('SidePanelComponent — keyboard shortcuts & announcements', () => {
     }
 
     function getOptionEls(): HTMLElement[] {
-        return Array.from(fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="option"]'));
+        return Array.from(fixture.nativeElement.querySelectorAll('.fd-side-panel__list [role="menuitem"]'));
     }
 
     beforeEach(waitForAsync(() => {
