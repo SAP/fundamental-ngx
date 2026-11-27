@@ -55,7 +55,13 @@
                         }
                     </div>
                     <div fd-bar-right>
-                        <button fd-button fdType="transparent" (click)="popover.close()" glyph="decline"></button>
+                        <button
+                            fd-button
+                            fdType="transparent"
+                            glyph="decline"
+                            [attr.aria-label]="('platformMessagePopover.closeButton' | fdTranslate)()"
+                            (click)="popover.close()"
+                        ></button>
                     </div>
                 </div>
             </div>

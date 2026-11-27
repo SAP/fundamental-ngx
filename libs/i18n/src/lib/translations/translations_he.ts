@@ -435,6 +435,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'הכול',
         backButton: 'חזור',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'דוא"ל לא חוקי',
             max: 'השדה חורג מהערך המרבי',

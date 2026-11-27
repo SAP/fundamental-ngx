@@ -434,6 +434,7 @@ export default {
     platformMessagePopover: {
         allErrors: '全部',
         backButton: '返回',
+        closeButton: 'Close',
         defaultErrors: {
             email: '電子郵件無效',
             max: '欄位超過最大值',

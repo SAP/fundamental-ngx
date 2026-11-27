@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Vse',
         backButton: 'Nazaj',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-pošta ni veljavna',
             max: 'Polje presega največjo vrednost',

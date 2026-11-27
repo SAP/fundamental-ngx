@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Барлығы',
         backButton: 'Артқа',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Электрондық пошта мекенжайы жарамсыз',
             max: 'Өріс максималды мәннен асады',

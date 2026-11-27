@@ -435,6 +435,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Semua',
         backButton: 'Kembali',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-mel tidak sah',
             max: 'Medan melebihi nilai maksimum',

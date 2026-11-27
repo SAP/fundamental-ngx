@@ -436,6 +436,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'ყველა',
         backButton: 'Go back',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'ელ-ფოსტა არასწორია',
             max: 'ველის მნიშვნელობა აღემატება დაშვებულ მაქსიმუმს',

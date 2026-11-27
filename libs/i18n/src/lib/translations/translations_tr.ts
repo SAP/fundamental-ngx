@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Tümü',
         backButton: 'Geri git',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-posta geçersiz',
             max: 'Alan azami değeri aşıyor',

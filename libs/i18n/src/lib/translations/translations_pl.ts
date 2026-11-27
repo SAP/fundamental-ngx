@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Wszystko',
         backButton: 'Wróć',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-mail jest nieprawidłowy',
             max: 'Pole przekracza maksymalną wartość',

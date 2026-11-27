@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Όλοι',
         backButton: 'Επιστροφή',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Email είναι άκυρο',
             max: 'Το πεδίο υπερβαίνει τη μέγιστη τιμή',

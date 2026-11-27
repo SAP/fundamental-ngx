@@ -436,6 +436,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Усе',
         backButton: 'Назад',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Адреса електронної пошти є недійсною',
             max: 'Поле перевищує максимальне значення',

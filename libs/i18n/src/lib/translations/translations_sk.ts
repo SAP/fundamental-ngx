@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Všetko',
         backButton: 'Vrátiť sa späť',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-mail je neplatný',
             max: 'Pole prekračuje maximálnu hodnotu',

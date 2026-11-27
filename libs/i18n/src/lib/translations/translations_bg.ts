@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Всички',
         backButton: 'Връщане',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Имейлът е невалиден',
             max: 'Полето надхвърля максималната стойност',
