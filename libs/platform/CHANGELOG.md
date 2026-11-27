@@ -1,3 +1,43 @@
+## 0.66.2-rc.6 (2026-11-25)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.5 (2026-11-25)
+
+### 🩹 Fixes
+
+- **core, platform:** forward readonly to radio group buttons and fix keyboard navigation ([#14713](https://github.com/SAP/fundamental-ngx/pull/14713))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.2-rc.4 (2026-11-25)
+
+### 🩹 Fixes
+
+- **platform:** make readonly work on number step input, aligned with editable ([#14712](https://github.com/SAP/fundamental-ngx/pull/14712))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.2-rc.3 (2026-11-24)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.2 (2026-11-23)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.1 (2026-11-23)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.0 (2026-11-21)
+
+This was a version bump only for platform to align it with other projects, there were no code changes.
+
 ## 0.66.1 (2026-11-20)
 
 ### 🚀 Features

@@ -1,3 +1,61 @@
+## 0.66.2-rc.6 (2026-11-25)
+
+### 🩹 Fixes
+
+- **core:** improve user menu accessibility and mobile state ([#14696](https://github.com/SAP/fundamental-ngx/pull/14696))
+
+### ❤️ Thank You
+
+- deno
+
+## 0.66.2-rc.5 (2026-11-25)
+
+### 🩹 Fixes
+
+- **core, platform:** forward readonly to radio group buttons and fix keyboard navigation ([#14713](https://github.com/SAP/fundamental-ngx/pull/14713))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.2-rc.4 (2026-11-25)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.3 (2026-11-24)
+
+### 🩹 Fixes
+
+- **core:** prevent native click from bypassing readonly state in checkbox ([#14711](https://github.com/SAP/fundamental-ngx/pull/14711))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.2-rc.2 (2026-11-23)
+
+This was a version bump only for core to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.1 (2026-11-23)
+
+### 🩹 Fixes
+
+- **core:** add interactive type to grid-list-item ([#14697](https://github.com/SAP/fundamental-ngx/pull/14697))
+
+### ❤️ Thank You
+
+- Inna Atanasova @InnaAtanasova
+
+## 0.66.2-rc.0 (2026-11-21)
+
+### 🩹 Fixes
+
+- **core:** remove invalid aria-active attribute from Select ([#14695](https://github.com/SAP/fundamental-ngx/pull/14695))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.1 (2026-11-20)
 
 ### 🚀 Features

@@ -1,3 +1,31 @@
+## 0.66.2-rc.6 (2026-11-25)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.5 (2026-11-25)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.4 (2026-11-25)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.3 (2026-11-24)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.2 (2026-11-23)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.1 (2026-11-23)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
+## 0.66.2-rc.0 (2026-11-21)
+
+This was a version bump only for cx to align it with other projects, there were no code changes.
+
 ## 0.66.1 (2026-11-20)
 
 This was a version bump only for cx to align it with other projects, there were no code changes.

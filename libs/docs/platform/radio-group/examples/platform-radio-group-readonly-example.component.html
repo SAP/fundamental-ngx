@@ -1,0 +1,79 @@
+<h3>Read-only Radio Button With Reactive Form</h3>
+<p>Platform radio buttons passed as content projection and the whole group is read-only</p>
+<fdp-form-group [formGroup]="customForm">
+    <fdp-form-field id="ro-radio1" [rank]="1">
+        <fdp-radio-group name="ro-radio1" fdCompact [readonly]="true" [isInline]="true" formControlName="example1">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p>Platform radio buttons passed as content projection and some radio buttons are read-only</p>
+<fdp-form-group [formGroup]="customForm">
+    <fdp-form-field id="ro-radio2" [rank]="1">
+        <fdp-radio-group name="ro-radio2" fdCompact [isInline]="true" formControlName="example2">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer" [readonly]="true">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn" [readonly]="true">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p>Platform radio button created from list of string values and the whole group is read-only</p>
+<fdp-form-group [formGroup]="customForm">
+    <fdp-form-field id="ro-radio3" [rank]="1">
+        <fdp-radio-group
+            name="ro-radio3"
+            [list]="seasons"
+            [isInline]="true"
+            fdCompact
+            [readonly]="true"
+            formControlName="example3"
+        >
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<hr />
+<h3>Read-only Radio Button With Template Driven Form</h3>
+<p>Platform radio buttons passed as content projection and group is read-only</p>
+<fdp-form-group>
+    <fdp-form-field id="ro-radio4" [rank]="1">
+        <fdp-radio-group name="ro-radio4" fdCompact [readonly]="true" [isInline]="true" [(ngModel)]="favoriteSeason1">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p>Platform radio buttons passed as content projection and individual radio button is read-only</p>
+<fdp-form-group>
+    <fdp-form-field id="ro-radio5" [rank]="1">
+        <fdp-radio-group name="ro-radio5" fdCompact [isInline]="true" [(ngModel)]="favoriteSeason2">
+            <fdp-radio-button value="winter">Winter</fdp-radio-button>
+            <fdp-radio-button value="spring">Spring</fdp-radio-button>
+            <fdp-radio-button value="summer" [readonly]="true">Summer</fdp-radio-button>
+            <fdp-radio-button value="autumn" [readonly]="true">Autumn</fdp-radio-button>
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>
+
+<p>Platform radio buttons created from list of SelectItem objects and group is read-only</p>
+<fdp-form-group>
+    <fdp-form-field id="ro-radio6" [rank]="1">
+        <fdp-radio-group
+            name="ro-radio6"
+            [list]="items"
+            [readonly]="true"
+            [isInline]="true"
+            [(ngModel)]="favoriteSeason3"
+        >
+        </fdp-radio-group>
+    </fdp-form-field>
+</fdp-form-group>

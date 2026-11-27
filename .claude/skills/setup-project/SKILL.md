@@ -11,6 +11,8 @@ allowed-tools: Read, Bash(node --version), Bash(npm *), Bash(npx *), Bash(yarn *
 
 If `$ARGUMENTS` is empty, ask: (1) project name, (2) preferred SAP theme (default: `horizon`).
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Check Prerequisites
 
 ```bash
@@ -127,15 +129,16 @@ import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 @Component({
     selector: 'app-hello',
     template: `
-        <h1 style="font-family: var(--sapFontFamily); font-size: 1.5rem; margin: 1rem">Hello fundamental-ngx</h1>
-        <div style="padding: 1rem; display: flex; gap: 0.5rem; align-items: center">
+        <h1 class="hello-title">Hello fundamental-ngx</h1>
+        <div class="hello-actions">
             <button fd-button fdType="emphasized" (click)="onClick()">Click me</button>
             <button fd-button fdType="transparent" (click)="showMessage.set(false)">Reset</button>
         </div>
         @if (showMessage()) {
-            <fd-message-strip type="success" style="margin: 1rem"> Setup is working correctly! </fd-message-strip>
+            <fd-message-strip type="success" class="hello-message"> Setup is working correctly! </fd-message-strip>
         }
     `,
+    styleUrl: './hello.component.scss',
     imports: [ButtonModule, MessageStripModule]
 })
 export class HelloComponent {
@@ -146,7 +149,28 @@ export class HelloComponent {
 }
 ```
 
-> **Note:** Do NOT use `<h1 fd-title [level]="1">` — `[level]` is not a valid input on the `fd-title` directive in the currently published package. Use a plain `<h1>` with SAP CSS variables for font styling, or omit the title entirely.
+Create the owning `src/app/hello/hello.component.scss` for the fixed typography, spacing and layout:
+
+```scss
+.hello-title {
+    font-family: var(--sapFontFamily);
+    font-size: 1.5rem;
+    margin: 1rem;
+}
+
+.hello-actions {
+    padding: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.hello-message {
+    margin: 1rem;
+}
+```
+
+> **Note:** `[level]` is not an input on the published `fd-title` directive. Use a plain `<h1>` with the owned `hello-title` class and SAP CSS variables, or omit the title.
 
 Add `HelloComponent` to `AppComponent`'s `imports` array and place `<app-hello>` in its template:
 

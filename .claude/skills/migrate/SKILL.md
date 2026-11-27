@@ -8,6 +8,8 @@ argument-hint: [component-path-or-folder]
 
 If `$ARGUMENTS` is empty, ask the user for a component path or folder before proceeding.
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Phase 1: Analyze
 
 Read all files in the target path. For each component, directive, or service, scan for migration items below. If a folder is given, process all `.ts` and `.html` files within it.

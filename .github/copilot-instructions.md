@@ -15,6 +15,7 @@ The main documentation includes:
 - Commit message and PR conventions
 - Testing patterns and requirements
 - Code quality standards
+- [CSP authoring and review](../docs/agents/csp-guidelines.md): read before styling changes. Use classes/SCSS for constants and verified dynamic bindings/CSSOM; avoid serialized attributes and whole-style writes. Report file/line, operation/directive, impact, remedy and evidence. Check runtime behavior in strict-CSP browser tests and confirm CI coverage; the application owns stylesheet authorization.
 
 ---
 

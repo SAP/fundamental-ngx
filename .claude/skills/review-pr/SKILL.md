@@ -11,6 +11,8 @@ allowed-tools: Read, Grep, Glob, Bash(gh *), Bash(nx *)
 
 If `$0` is empty or not a number, ask the user for a PR number before proceeding.
 
+For styling changes or reviews, read the [local CSP guide](../../../docs/agents/csp-guidelines.md) in this repository; independently installed skills must read the [published guide](https://github.com/SAP/fundamental-ngx/blob/main/docs/agents/csp-guidelines.md).
+
 ## Context
 
 Fetch the PR details:

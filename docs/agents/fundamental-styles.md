@@ -7,6 +7,7 @@
 - [Architecture](#architecture)
 - [BEM Naming Convention](#bem-naming-convention)
 - [SCSS Import Pattern](#scss-import-pattern)
+- [CSP and Style Ownership](#csp-and-style-ownership)
 - [CSS Class Building](#css-class-building)
 - [Design Tokens](#design-tokens)
 - [Accessibility](#accessibility)
@@ -71,6 +72,14 @@ Global styles in `apps/docs/src/styles.scss` import shared CSS:
 ```
 
 ---
+
+## CSP and Style Ownership
+
+Read the [CSP guide](csp-guidelines.md) before styling authoring or review. Use classes/SCSS for constants and verified bindings/CSSOM for dynamic values. Avoid serialized attributes and whole-style writes; report incompatible changes using the guide's finding format.
+
+Verify utility/state classes against the installed version and loaded bundle. Preserve scope, specificity, themes, portals and consumer contracts; exported CDK behavior must not depend on optional Core CSS. The application owns stylesheet nonce/origin authorization.
+
+For runtime changes, follow the [browser checks](csp-guidelines.md#browser-validation), including initial/settled behavior and supported SSR/hydration.
 
 ## CSS Class Building
 
