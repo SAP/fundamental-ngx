@@ -438,6 +438,7 @@ export default {
     platformMessagePopover: {
         allErrors: '[[[Āĺĺ∙]]]',
         backButton: '[[[Ģŏ ƃąċķ∙∙∙∙∙∙∙]]]',
+        closeButton: 'Close',
         defaultErrors: {
             email: '[[[Ĕɱąįĺ įş įŋʋąĺįƌ∙∙∙∙∙∙∙∙]]]',
             max: '[[[Ţĥē ƒįēĺƌ ēχċēēƌş ɱąχįɱűɱ ʋąĺűē∙∙∙∙∙∙∙∙∙∙]]]',

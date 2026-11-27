@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'すべて',
         backButton: '戻る',
+        closeButton: 'Close',
         defaultErrors: {
             email: '電子メールが無効です。',
             max: 'このフィールドは最大値を超過しています。',

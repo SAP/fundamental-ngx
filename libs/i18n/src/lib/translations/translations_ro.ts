@@ -438,6 +438,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Toate',
         backButton: 'Înapoi',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-mailul este nevalid',
             max: 'Câmpul depășește valoarea maximă',

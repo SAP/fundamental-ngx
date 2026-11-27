@@ -438,6 +438,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Alle',
         backButton: 'Ga terug',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-mail is ongeldig',
             max: 'Waarde van veld is groter dan toegestaan',

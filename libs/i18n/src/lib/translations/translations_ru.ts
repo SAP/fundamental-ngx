@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Все',
         backButton: 'Назад',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Недействительный адрес электронной почты',
             max: 'Превышено максимальное значение поля',

@@ -436,6 +436,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Alla',
         backButton: 'Gå tillbaka',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Ogiltig e-post',
             max: 'Fältet överskrider maximalt värde',

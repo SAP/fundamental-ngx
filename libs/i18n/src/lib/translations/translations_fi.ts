@@ -436,6 +436,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Kaikki',
         backButton: 'Palaa',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Sähköposti on virheellinen',
             max: 'Kenttä ylittää maksimiarvon',

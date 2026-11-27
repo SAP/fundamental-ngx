@@ -436,6 +436,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'ทั้งหมด',
         backButton: 'ย้อนกลับ',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'อีเมล์ไม่ถูกต้อง',
             max: 'ฟิลด์นี้เกินค่าสูงสุด',

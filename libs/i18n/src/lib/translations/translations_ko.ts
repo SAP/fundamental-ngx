@@ -435,6 +435,7 @@ export default {
     platformMessagePopover: {
         allErrors: '모두',
         backButton: '뒤로 가기',
+        closeButton: 'Close',
         defaultErrors: {
             email: '전자메일이 유효하지 않습니다.',
             max: '필드가 최대값을 초과합니다.',

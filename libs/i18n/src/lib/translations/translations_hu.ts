@@ -437,6 +437,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Összes',
         backButton: 'Vissza',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'Az e-mail-cím érvénytelen',
             max: 'A mező értéke nagyobb a megengedett maximális értéknél',

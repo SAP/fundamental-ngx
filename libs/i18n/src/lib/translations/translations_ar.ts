@@ -436,6 +436,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'الكل',
         backButton: 'رجوع',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'البريد الإلكتروني غير صالح',
             max: 'يتجاوز الحقل الحد الأقصى للقيمة',

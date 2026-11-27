@@ -438,6 +438,7 @@ export default {
     platformMessagePopover: {
         allErrors: 'Alle',
         backButton: 'Zurück',
+        closeButton: 'Close',
         defaultErrors: {
             email: 'E-Mail ist ungültig',
             max: 'Das Feld überschreitet den maximalen Wert',
