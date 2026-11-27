@@ -468,6 +468,7 @@ export default {
         detailsActionAriaLabel: '詳細資訊'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: '全部',
         cancelLabel: '取消',
         clearButtonTitle: '清除搜尋',

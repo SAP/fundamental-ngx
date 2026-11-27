@@ -469,6 +469,7 @@ export default {
         detailsActionAriaLabel: 'פירוט'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'הכול',
         cancelLabel: 'בטל',
         clearButtonTitle: 'נקה חיפוש',

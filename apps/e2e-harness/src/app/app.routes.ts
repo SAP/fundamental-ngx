@@ -38,5 +38,12 @@ export const routes: Routes = [
                 (m) => m.ShellbarBasicExampleComponent
             )
     },
+    {
+        path: '__e2e/shellbar/search-accessibility',
+        loadComponent: () =>
+            import('./fixtures/shellbar-search-accessibility.component').then(
+                (module) => module.ShellbarSearchAccessibilityComponent
+            )
+    },
     ...generatedRoutes
 ];

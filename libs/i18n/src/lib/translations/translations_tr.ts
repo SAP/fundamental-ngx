@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: 'ayrıntı'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Tümü',
         cancelLabel: 'İptal',
         clearButtonTitle: 'Aramayı Temizle',

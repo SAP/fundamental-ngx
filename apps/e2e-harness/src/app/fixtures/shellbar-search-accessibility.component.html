@@ -1,0 +1,56 @@
+<main data-testid="shellbar-search-accessibility-fixture">
+    <h1>Shellbar search accessibility</h1>
+    <section data-testid="shellbar-host">
+        <button data-testid="before-shellbar">Before Shellbar search</button>
+        <fd-shellbar size="m">
+            <fdp-search-field
+                data-testid="shellbar-search"
+                [suggestions]="suggestions"
+                [dataSource]="dataSource"
+                [categories]="categories"
+                [allowEmptySearch]="allowEmptySearch()"
+                [showAdvancedFilter]="showAdvancedFilter()"
+                (inputChange)="recordInput(desktopInputEvents, $event)"
+                (cancelSearch)="recordCancel($event)"
+                (advancedFilterButtonClick)="incrementFilter()"
+            ></fdp-search-field>
+            <fd-shellbar-actions>
+                <fd-shellbar-action data-testid="shellbar-action" glyph="action" ariaLabel="Shellbar action">
+                </fd-shellbar-action>
+            </fd-shellbar-actions>
+        </fd-shellbar>
+        <button data-testid="after-shellbar">After Shellbar search</button>
+        <output data-testid="desktop-input-events">{{ desktopInputEvents() | json }}</output>
+        <output data-testid="desktop-cancel-events">{{ desktopCancelEvents() | json }}</output>
+        <output data-testid="desktop-filter-events">{{ desktopFilterEvents() }}</output>
+        <output data-testid="source-queries">{{ sourceQueries() | json }}</output>
+    </section>
+    <section data-testid="controls">
+        <button data-testid="toggle-empty" (click)="allowEmptySearch.set(!allowEmptySearch())">
+            Toggle empty suggestions
+        </button>
+        <button data-testid="toggle-filter" (click)="showAdvancedFilter.set(!showAdvancedFilter())">
+            Toggle advanced filter
+        </button>
+        <button data-testid="set-fixture-filter-language" (click)="useFixtureAdvancedFilterLabel()">
+            Set fixture filter language
+        </button>
+    </section>
+    <section data-testid="standalone-host">
+        <fdp-search-field
+            data-testid="standalone-search"
+            [mobile]="false"
+            [suggestions]="suggestions"
+            (inputChange)="recordInput(standaloneInputEvents, $event)"
+        ></fdp-search-field>
+        <output data-testid="standalone-input-events">{{ standaloneInputEvents() | json }}</output>
+    </section>
+    <section data-testid="mobile-host">
+        <fdp-search-field
+            data-testid="mobile-search"
+            [mobile]="true"
+            [mobileConfig]="{ hasCloseButton: true }"
+            [suggestions]="suggestions"
+        ></fdp-search-field>
+    </section>
+</main>

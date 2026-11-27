@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: 'αναλυτικό'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Όλα',
         cancelLabel: 'Ακύρωση',
         clearButtonTitle: 'Εκκαθάριση Αναζήτησης',

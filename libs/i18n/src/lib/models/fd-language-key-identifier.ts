@@ -338,6 +338,7 @@ export type FdLanguageKeyIdentifier =
     | 'platformMultiCombobox.mobileShowSelectedItemsButton'
     | 'platformObjectListItem.deleteActionAriaLabel'
     | 'platformObjectListItem.detailsActionAriaLabel'
+    | 'platformSearchField.advancedFilterButtonTitle'
     | 'platformSearchField.allButtonLabel'
     | 'platformSearchField.cancelLabel'
     | 'platformSearchField.clearButtonTitle'

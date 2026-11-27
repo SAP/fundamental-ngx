@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: 'részlet'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Összes',
         cancelLabel: 'Mégse',
         clearButtonTitle: 'Keresés törlése',

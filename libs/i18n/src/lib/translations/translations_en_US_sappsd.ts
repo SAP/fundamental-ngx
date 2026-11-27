@@ -472,6 +472,7 @@ export default {
         detailsActionAriaLabel: '[[[ƌēţąįĺ∙∙∙∙∙∙∙∙]]]'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: '[[[Āĺĺ∙]]]',
         cancelLabel: '[[[Ĉąŋċēĺ∙∙∙∙∙∙∙∙]]]',
         clearButtonTitle: '[[[Ĉĺēąŗ Ŝēąŗċĥ∙∙∙∙∙∙∙]]]',

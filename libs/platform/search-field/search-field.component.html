@@ -171,7 +171,9 @@
                     class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.searchCategoryClass }}"
                 >
                     <button
-                        (fdkClicked)="_advancedFilterButtonClicked()"
+                        (click)="_advancedFilterButtonClicked()"
+                        [attr.title]="('platformSearchField.advancedFilterButtonTitle' | fdTranslate)()"
+                        [attr.aria-label]="('platformSearchField.advancedFilterButtonTitle' | fdTranslate)()"
                         class="fdp-search-field__category-button fdp-search-field__advanced-filter-button fd-input-group__button fd-button fd-button--transparent fd-button--menu {{
                             appearance()?.categoryButtonClass
                         }}"
@@ -225,8 +227,8 @@
             @if (inputText() && inputText().length > 0) {
                 <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance()?.addonClass }}">
                     <button
-                        tabindex="-1"
-                        [attr.aria-hidden]="!mobile()"
+                        [attr.tabindex]="_shellbar && !mobile() ? 0 : -1"
+                        [attr.aria-hidden]="!mobile() && !_shellbar"
                         [attr.title]="('platformSearchField.clearButtonTitle' | fdTranslate)()"
                         [attr.aria-label]="('platformSearchField.clearButtonTitle' | fdTranslate)()"
                         class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance()?.buttonClass }}"

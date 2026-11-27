@@ -470,6 +470,7 @@ export default {
         detailsActionAriaLabel: 'lisätieto'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Kaikki',
         cancelLabel: 'Peruuta',
         clearButtonTitle: 'Tyhjennä haku',

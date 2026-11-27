@@ -473,6 +473,7 @@ export default {
         detailsActionAriaLabel: 'détails'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Tout',
         cancelLabel: 'Annuler',
         clearButtonTitle: 'Effacer la recherche',

@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: 'подробности'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Всички',
         cancelLabel: 'Отказ',
         clearButtonTitle: 'Изчистване на търсенето',

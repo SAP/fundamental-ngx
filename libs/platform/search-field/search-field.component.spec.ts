@@ -2,6 +2,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, input, OnInit, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -100,6 +101,35 @@ class TestComponent {
     }
 }
 
+@Component({
+    selector: 'fdp-shellbar-search-test',
+    template: `
+        <fd-shellbar size="xl">
+            <fdp-search-field
+                #component
+                [suggestions]="suggestions"
+                [showAdvancedFilter]="showAdvancedFilter"
+                (inputChange)="inputEvents.push($event)"
+                (cancelSearch)="cancelEvents.push($event)"
+                (advancedFilterButtonClick)="recordAdvancedFilter()"
+            ></fdp-search-field>
+        </fd-shellbar>
+    `,
+    imports: [ShellbarComponent, PlatformSearchFieldModule]
+})
+class ShellbarSearchTestComponent {
+    @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
+    suggestions: SuggestionItem[] = [{ value: 'Apple' }];
+    showAdvancedFilter = true;
+    inputEvents: SearchInput[] = [];
+    cancelEvents: SearchInput[] = [];
+    advancedFilterEvents = 0;
+
+    recordAdvancedFilter(): void {
+        this.advancedFilterEvents += 1;
+    }
+}
+
 describe('SearchFieldComponent', () => {
     let component: SearchFieldComponent;
     let host: TestComponent;
@@ -119,6 +149,46 @@ describe('SearchFieldComponent', () => {
         host.inputValue = null;
         host.submitValue = null;
         fixture.detectChanges();
+    });
+
+    describe('Shellbar accessibility contracts', () => {
+        let shellbarFixture: ComponentFixture<ShellbarSearchTestComponent>;
+        let shellbarHost: ShellbarSearchTestComponent;
+
+        beforeEach(() => {
+            shellbarFixture = TestBed.createComponent(ShellbarSearchTestComponent);
+            shellbarHost = shellbarFixture.componentInstance;
+            shellbarFixture.detectChanges();
+        });
+
+        it('exposes desktop Shellbar clear with its native name and tab stop', () => {
+            const nativeInput = shellbarFixture.debugElement.query(By.css('input.fd-input'))
+                .nativeElement as HTMLInputElement;
+            nativeInput.value = 'apple';
+            nativeInput.dispatchEvent(new Event('input'));
+            shellbarFixture.detectChanges();
+
+            const clear = shellbarFixture.debugElement.query(By.css('button.fdp-search-field__clear'))
+                .nativeElement as HTMLButtonElement;
+            expect(clear.getAttribute('aria-label')).toBe('Clear Search');
+            expect(clear.getAttribute('aria-hidden')).not.toBe('true');
+            expect(clear.getAttribute('tabindex')).toBe('0');
+
+            clear.click();
+            shellbarFixture.detectChanges();
+
+            expect(shellbarHost.inputEvents.at(-1)).toEqual({ text: '', category: null });
+            expect(shellbarHost.cancelEvents).toEqual([{ text: '', category: null }]);
+        });
+
+        it('renders the configured advanced filter with its localized accessible name and emits once', () => {
+            const filter = shellbarFixture.debugElement.query(By.css('button.fdp-search-field__advanced-filter-button'))
+                .nativeElement as HTMLButtonElement;
+            expect(filter.getAttribute('aria-label')).toBe('Advanced filter');
+            expect(filter.getAttribute('title')).toBe('Advanced filter');
+            filter.click();
+            expect(shellbarHost.advancedFilterEvents).toBe(1);
+        });
     });
 
     it('should allow "placeholder" text to be set', () => {

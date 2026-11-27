@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: '詳細'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'すべて',
         cancelLabel: 'キャンセル',
         clearButtonTitle: '検索をクリア',

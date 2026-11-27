@@ -470,6 +470,7 @@ export default {
         detailsActionAriaLabel: 'विवरण'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'All',
         cancelLabel: 'Cancel',
         clearButtonTitle: 'साफ़ करें',

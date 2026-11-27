@@ -470,6 +470,7 @@ export default {
         detailsActionAriaLabel: 'відомості'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Усі',
         cancelLabel: 'Скасувати',
         clearButtonTitle: 'Очистити пошук',

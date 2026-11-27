@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: 'detalj'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Sve',
         cancelLabel: 'Odustani',
         clearButtonTitle: 'Poništi traženje',

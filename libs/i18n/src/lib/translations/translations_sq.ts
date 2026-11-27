@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: 'detaje'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'All',
         cancelLabel: 'Cancel',
         clearButtonTitle: 'Pastro',

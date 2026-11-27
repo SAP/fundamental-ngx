@@ -469,6 +469,7 @@ export default {
         detailsActionAriaLabel: '세부사항'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: '모두',
         cancelLabel: '취소',
         clearButtonTitle: '검색 지우기',

@@ -472,6 +472,7 @@ export default {
         detailsActionAriaLabel: 'detalj'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Alle',
         cancelLabel: 'Avbryt',
         clearButtonTitle: 'Tilbakestill søk',

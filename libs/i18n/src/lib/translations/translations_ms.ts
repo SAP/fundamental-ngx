@@ -469,6 +469,7 @@ export default {
         detailsActionAriaLabel: 'butiran'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Semua',
         cancelLabel: 'Batalkan',
         clearButtonTitle: 'Kosongkan Carian',

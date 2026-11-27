@@ -470,6 +470,7 @@ export default {
         detailsActionAriaLabel: 'დეტალები'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'All',
         cancelLabel: 'Cancel',
         clearButtonTitle: 'გასუფთავება',

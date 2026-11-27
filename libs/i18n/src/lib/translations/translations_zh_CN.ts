@@ -467,6 +467,7 @@ export default {
         detailsActionAriaLabel: '详细信息'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: '所有',
         cancelLabel: '取消',
         clearButtonTitle: '清除搜索',

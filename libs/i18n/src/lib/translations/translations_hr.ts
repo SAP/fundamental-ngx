@@ -471,6 +471,7 @@ export default {
         detailsActionAriaLabel: 'pojedinost'
     },
     platformSearchField: {
+        advancedFilterButtonTitle: 'Advanced filter',
         allButtonLabel: 'Sve',
         cancelLabel: 'Odustani',
         clearButtonTitle: 'Očisti pretraživanje',
