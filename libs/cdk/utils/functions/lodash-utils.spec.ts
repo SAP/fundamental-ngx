@@ -192,6 +192,23 @@ describe('lodash-utils', () => {
             const result = merge({ a: 1 } as any, { fn });
             expect(result.fn).toBe(fn);
         });
+
+        it('should not overwrite existing values with undefined source values', () => {
+            const target = { theme: 'sap_horizon', nested: { x: 1, y: 2 } };
+            const result = merge(target, { theme: undefined, nested: { x: undefined, y: 3 } } as any);
+            expect(result).toEqual({ theme: 'sap_horizon', nested: { x: 1, y: 3 } });
+        });
+
+        it('should add undefined source values for keys missing in the target', () => {
+            const result = merge({ a: 1 } as any, { b: undefined });
+            expect(result).toEqual({ a: 1, b: undefined });
+            expect('b' in result).toBe(true);
+        });
+
+        it('should still overwrite existing values with null', () => {
+            const result = merge({ a: 1 } as any, { a: null });
+            expect(result).toEqual({ a: null });
+        });
     });
 
     describe('mergeWith', () => {
@@ -206,6 +223,14 @@ describe('lodash-utils', () => {
             const source = { arr: [3, 4] };
             const result = mergeWith(target, source, customizer);
             expect(result.arr).toEqual([1, 2, 3, 4]);
+        });
+
+        it('should not overwrite existing values with undefined when customizer returns undefined', () => {
+            const customizer = (): undefined => undefined;
+            const target = { a: 1, nested: { x: 1, y: 2 } } as any;
+            const source = { a: undefined, nested: { x: undefined, y: 3 } };
+            const result = mergeWith(target, source, customizer);
+            expect(result).toEqual({ a: 1, nested: { x: 1, y: 3 } });
         });
 
         it('should use default merge behavior when customizer returns undefined', () => {
