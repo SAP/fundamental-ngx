@@ -24,12 +24,13 @@
 </ng-template>
 <ng-template #controlTemplate>
     <fd-input-group
-        [button]="true"
+        [button]="!readonly"
         [buttonFocusable]="buttonFocusable"
         [isControl]="true"
-        glyph="value-help"
+        [glyph]="readonly ? '' : 'value-help'"
         [state]="state"
         [disabled]="disabled"
+        [readonly]="readonly"
         (keydown)="removeSelectedTokens($event)"
         (addOnButtonClicked)="addOnButtonClick($event)"
         (click)="onInputGroupClicked()"
@@ -39,7 +40,9 @@
         <fd-tokenizer
             [tokenizerFocusable]="false"
             [compactCollapse]="true"
-            [showOverflowPopover]="false"
+            [showOverflowPopover]="readonly"
+            [disableKeyboardDeletion]="readonly"
+            [class.fd-tokenizer--readonly]="readonly"
             #tokenizer
             class="fd-multi-input-tokenizer-custom"
             (moreClickedEvent)="moreClicked()"
@@ -50,7 +53,7 @@
         >
             @for (token of selected; track token; let i = $index) {
                 <fd-token
-                    [readOnly]="disabled"
+                    [readOnly]="disabled || readonly"
                     (onCloseClick)="removeToken(token)"
                     [attr.aria-posinset]="i"
                     [attr.aria-setsize]="selected.length"
@@ -77,8 +80,8 @@
                 (ngModelChange)="searchTermChanged()"
                 [ngModelOptions]="{ standalone: true }"
                 [attr.placeholder]="selected.length ? null : placeholder"
-                (focus)="onTouched(); tokenizer._showAllTokens()"
-                (blur)="tokenizer._hideTokens()"
+                (focus)="onTouched(); !readonly && tokenizer._showAllTokens()"
+                (blur)="!readonly && tokenizer._hideTokens()"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
                 aria-haspopup="listbox"

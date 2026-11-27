@@ -45,11 +45,12 @@
             class="fd-multi-input-input-group-custom"
             [state]="state"
             [buttonFocusable]="buttonFocusable"
-            [button]="showAddonButton"
+            [button]="showAddonButton && !readonly()"
             [disabled]="disabled"
+            [readonly]="readonly()"
             [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
-            [glyph]="showAddonButton ? glyph : ''"
+            [glyph]="showAddonButton && !readonly() ? glyph : ''"
             [glyphFont]="glyphFont"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
             [glyphAriaLabel]="addOnButtonAriaLabel"
@@ -57,10 +58,12 @@
         >
             <fd-tokenizer
                 #tokenizer
+                [class.fd-tokenizer--readonly]="readonly()"
                 [compactCollapse]="compactCollapse"
-                [showOverflowPopover]="false"
+                [showOverflowPopover]="readonly()"
                 [open]="open"
                 [tokenizerFocusable]="false"
+                [disableKeyboardDeletion]="readonly()"
                 [externalHiddenCount]="hiddenCount()"
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
@@ -71,6 +74,7 @@
                 @for (option of renderedTokens(); track valueFn(option.item)) {
                     <fd-token
                         [disabled]="disabled"
+                        [readOnly]="readonly()"
                         (onCloseClick)="_onTokenCloseClick(option, false, $event)"
                         (onRemove)="_onTokenCloseClick(option, false)"
                         [title]="option.label"

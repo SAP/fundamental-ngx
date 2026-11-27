@@ -302,6 +302,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     addOnButtonClick(event: Event): void {
+        if (this.readonly) {
+            return;
+        }
         if (isFunction(this.addOnButtonClickFn)) {
             this.addOnButtonClickFn();
             return;
@@ -325,6 +328,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden */
     moreClicked(): void {
+        if (this.readonly) {
+            return;
+        }
         this.open();
         this._suggestions = this.selected;
         this.markForCheck();

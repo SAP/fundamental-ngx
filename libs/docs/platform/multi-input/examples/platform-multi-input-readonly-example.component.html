@@ -1,0 +1,15 @@
+<fdp-form-group>
+    <fdp-form-field label="Readonly Multi Input Field" id="multi-input-readonly" name="readonlyInput" [rank]="1">
+        <fdp-multi-input
+            placeholder="Field placeholder text"
+            type="text"
+            id="fdp-id-readonly"
+            name="input1"
+            [dataSource]="_datasource"
+            displayKey="state"
+            [readonly]="true"
+            [(ngModel)]="selected"
+        >
+        </fdp-multi-input>
+    </fdp-form-field>
+</fdp-form-group>

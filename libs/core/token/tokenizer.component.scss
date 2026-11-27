@@ -35,7 +35,8 @@ input {
     }
 }
 
-.fd-tokenizer__overflow-list-item {
+.fd-tokenizer__overflow-list .fd-tokenizer__overflow-list-item {
     display: flex;
     justify-content: space-between;
+    border-bottom: none;
 }

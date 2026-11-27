@@ -19,6 +19,10 @@ $block: fd-multi-input;
         @include fd-compact() {
             width: calc(100% - 2rem);
         }
+
+        &.fd-tokenizer--readonly {
+            background-color: transparent;
+        }
     }
 
     &__invisible-text {
