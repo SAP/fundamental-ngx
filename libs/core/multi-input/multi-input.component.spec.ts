@@ -497,4 +497,66 @@ describe('MultiInputComponent', () => {
             });
         });
     });
+
+    describe('readonly mode', () => {
+        async function setSelected(count: number): Promise<void> {
+            await fixture.whenStable();
+            const values = Array.from({ length: count }, (_, i) => `item${i}`);
+            updateComponentInput('dropdownValues', values);
+            component.selected = values;
+            fixture.detectChanges();
+            await fixture.whenStable();
+            fixture.detectChanges();
+        }
+
+        it('defaults readonly to false', () => {
+            expect(component.readonly()).toBe(false);
+        });
+
+        it('renders all tokens (no count-based slicing) when readonly: 50 selected → 50 tokens', async () => {
+            fixture.componentRef.setInput('readonly', true);
+            await setSelected(50);
+
+            expect(fixture.nativeElement.querySelectorAll('fd-token').length).toBe(50);
+        });
+
+        it('reports hiddenCount of 0 when readonly even over the limit', async () => {
+            fixture.componentRef.setInput('readonly', true);
+            await setSelected(50);
+
+            expect(component['hiddenCount']()).toBe(0);
+        });
+
+        it('does not open the popover when readonly', async () => {
+            fixture.componentRef.setInput('readonly', true);
+            await setSelected(3);
+            const openChangeSpy = jest.spyOn(component.openChange, 'emit');
+
+            component.openChangeHandle(true);
+
+            expect(component.open).toBe(false);
+            expect(openChangeSpy).not.toHaveBeenCalled();
+        });
+
+        it('does not expand tokens on input focus when readonly', async () => {
+            fixture.componentRef.setInput('readonly', true);
+            await setSelected(3);
+            const showAllSpy = jest.spyOn(component.tokenizer, '_showAllTokens');
+
+            component._onInputFocus();
+
+            expect(showAllSpy).not.toHaveBeenCalled();
+        });
+
+        it('does not add a new token on submit when readonly', async () => {
+            fixture.componentRef.setInput('readonly', true);
+            component.allowNewTokens = true;
+            await fixture.whenStable();
+            component.searchTerm = 'brand-new';
+
+            component._onSubmit();
+
+            expect(component.selected).toEqual([]);
+        });
+    });
 });

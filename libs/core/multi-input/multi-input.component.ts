@@ -1,6 +1,7 @@
 import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -432,6 +433,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
      */
     readonly maxVisibleTokens = input(12);
 
+    /** Whether the input is read-only. */
+    readonly readonly = input(false, { transform: booleanAttribute });
+
     /** Placement of the popover relative to the input.*/
     readonly placement = input<'top' | 'bottom'>('bottom');
 
@@ -463,15 +467,17 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden — slice (or full list) of options rendered into <fd-tokenizer>. */
     protected readonly renderedTokens = computed(() => {
         const all = this._selectedOptionsSignal();
-        if (this._renderAllTokens() || all.length <= this.maxVisibleTokens()) {
+        // In readonly mode we render every token and let the tokenizer's native width-based
+        // collapse decide which ones overflow into the "+N more" popover.
+        if (this.readonly() || this._renderAllTokens() || all.length <= this.maxVisibleTokens()) {
             return all;
         }
         return all.slice(0, this.maxVisibleTokens());
     });
 
     /** @hidden — count of selected tokens not currently rendered. Fed into tokenizer's externalHiddenCount input. */
-    protected readonly hiddenCount = computed(
-        () => this._selectedOptionsSignal().length - this.renderedTokens().length
+    protected readonly hiddenCount = computed(() =>
+        this.readonly() ? 0 : this._selectedOptionsSignal().length - this.renderedTokens().length
     );
 
     /** @hidden — the selected option list as a signal, derived from the view model. */
@@ -547,6 +553,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden Called on input focus — render all tokens, then expand the tokenizer. */
     _onInputFocus(): void {
+        if (this.readonly()) {
+            return;
+        }
         this._renderAllTokens.set(true);
         this.tokenizer._showAllTokens();
     }
@@ -646,7 +655,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     openChangeHandle(open: boolean): void {
-        if (this.disabled) {
+        if (this.disabled || this.readonly()) {
             return;
         }
 
@@ -808,6 +817,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     _onSubmit(): void {
+        if (this.readonly()) {
+            return;
+        }
         const searchTerm = this.searchTerm;
         if (searchTerm === '') {
             return;

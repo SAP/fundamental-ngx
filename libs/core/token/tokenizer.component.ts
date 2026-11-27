@@ -253,7 +253,9 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             this._renderer.listen('window', 'click', (e: Event) => {
                 if (this.elementRef.nativeElement.contains(e.target) === false) {
                     this.tokenList.forEach((token) => {
-                        token.selected.set(false);
+                        if (!token.readOnly()) {
+                            token.selected.set(false);
+                        }
                     });
                 }
             })
@@ -365,6 +367,10 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
                 token.onTokenClick.subscribe((event) => {
                     event.stopPropagation();
                     this.focusTokenElement(index);
+                    // Read-only tokens may receive focus but never get an active/selected state.
+                    if (token.readOnly()) {
+                        return;
+                    }
                     if (this._isControlKey(event)) {
                         this._ctrlSelected(token, index);
                     } else if (!event.shiftKey || this._ctrlPrevious) {
@@ -414,6 +420,11 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         const rtl = this._rtlService?.rtl() ?? false;
         if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
             const token = this.tokenList.find((_, index) => index === fromIndex);
+            if (token?.readOnly()) {
+                // Read-only tokens never toggle selection.
+                event.preventDefault();
+                return;
+            }
             this.tokenList.forEach((shadowedToken) => {
                 if (shadowedToken !== token) {
                     shadowedToken.selected.set(false);
@@ -433,7 +444,11 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             newIndex = fromIndex + 1;
         } else if (KeyUtil.isKeyCode(event, A) && !this._getInputValue() && this._isControlKey(event)) {
             event.preventDefault();
-            this.tokenList.forEach((token) => token.selected.set(true));
+            this.tokenList.forEach((token) => {
+                if (!token.readOnly()) {
+                    token.selected.set(true);
+                }
+            });
         }
         if (newIndex === this.tokenList.length && this._goForwardRequested(event, rtl)) {
             this._focusInput();

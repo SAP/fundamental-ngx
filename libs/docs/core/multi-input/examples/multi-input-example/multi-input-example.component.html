@@ -24,6 +24,19 @@ Selected: {{ secondSelected | json }}
 
 <br /><br />
 
+<label fd-label for="readonlyMultiInput1">Readonly Multi Input</label>
+<fd-multi-input
+    inputId="readonlyMultiInput1"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
+    placeholder="Search here..."
+    [(ngModel)]="readonlySelected"
+    readonly
+></fd-multi-input>
+
+Selected: {{ readonlySelected | json }}
+
+<br /><br />
+
 <label fd-label for="noAddonMultiInput1">Hidden Addon Button</label>
 <fd-multi-input
     inputId="noAddonMultiInput1"
@@ -51,7 +64,7 @@ Selected: {{ selectedDisabledAutoComplete | json }}
 
 <br /><br />
 
-<label fd-label for="multiInputDisabledAutoComplete">With Object Values and top placement</label>
+<label fd-label for="multiInputWithObjectValues">With Object Values and top placement</label>
 <fd-multi-input
     inputId="multiInputWithObjectValues"
     placement="top"

@@ -16,6 +16,11 @@
     @include fd-compact() {
         width: calc(100% - 2rem);
     }
+
+    &.fd-tokenizer--readonly {
+        width: 100%;
+        background-color: transparent;
+    }
 }
 // code to adjust to the parent width
 

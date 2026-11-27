@@ -67,6 +67,23 @@
 </component-example>
 <code-example [exampleFiles]="multiInputDisable"></code-example>
 <separator></separator>
+<fd-docs-section-title id="readonly" componentName="multi-input"> Multi Input Readonly </fd-docs-section-title>
+<description>
+    <p>
+        A read-only Multi Input displays its selected values but prevents editing. Set
+        <code>[readonly]="true"</code> on the <code>fdp-multi-input</code> component.
+    </p>
+    <p>
+        The suggestion dropdown does not open, tokens cannot be removed or selected, and the value-help button is
+        hidden. Selected tokens that do not fit on the row collapse into a read-only
+        <code>+N more</code> list.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-multi-input-readonly-example></fdp-platform-multi-input-readonly-example>
+</component-example>
+<code-example [exampleFiles]="multiInputReadonly"></code-example>
+<separator></separator>
 <fd-docs-section-title id="mobile" componentName="multi-input"> Multi Input Mobile </fd-docs-section-title>
 <description>
     This example shows default Multi Input with simple list implementation to support mobile interface.

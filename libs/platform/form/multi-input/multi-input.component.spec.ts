@@ -118,6 +118,42 @@ describe('PlatformMultiInputComponent', () => {
         expect(component.platformMultiInputComponent.maxWidth()).toBe(800);
         expect(component.platformMultiInputComponent.minWidth()).toBe(298);
     });
+
+    describe('readonly mode', () => {
+        beforeEach(() => {
+            component.platformMultiInputComponent.readonly = true;
+            fixture.detectChanges();
+        });
+
+        it('does not open the popover when readonly', () => {
+            component.platformMultiInputComponent.open();
+            expect(component.platformMultiInputComponent.isOpen).toBe(false);
+        });
+
+        it('does not open the popover from moreClicked when readonly', () => {
+            jest.spyOn(component.platformMultiInputComponent, 'open');
+            component.platformMultiInputComponent.moreClicked();
+            expect(component.platformMultiInputComponent.open).not.toHaveBeenCalled();
+            expect(component.platformMultiInputComponent.isOpen).toBe(false);
+        });
+
+        it('does not open the list from the add-on button when readonly', () => {
+            jest.spyOn(component.platformMultiInputComponent, 'showList');
+            component.platformMultiInputComponent.addOnButtonClick(new MouseEvent('click'));
+            expect(component.platformMultiInputComponent.showList).not.toHaveBeenCalled();
+            expect(component.platformMultiInputComponent.isOpen).toBe(false);
+        });
+
+        it('renders tokens as read-only with no close button when readonly', () => {
+            component.platformMultiInputComponent.addToArray({ name: 'Name1' });
+            fixture.detectChanges();
+
+            const readonlyTokens = fixture.nativeElement.querySelectorAll('.fd-token--readonly');
+            const closeButtons = fixture.nativeElement.querySelectorAll('.fd-token__close');
+            expect(readonlyTokens.length).toBe(1);
+            expect(closeButtons.length).toBe(0);
+        });
+    });
 });
 
 const MULTI_INPUT_IDENTIFIER = 'platform-multi-input-unit-test';

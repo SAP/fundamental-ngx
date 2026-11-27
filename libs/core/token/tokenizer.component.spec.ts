@@ -48,6 +48,23 @@ class SingleTokenHostComponent {
     @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
 }
 
+@Component({
+    selector: 'fd-tokenizer-readonly-test-component',
+    template: `
+        <fd-tokenizer>
+            <fd-token [readOnly]="true">Readonly 1</fd-token>
+            <fd-token>Editable 2</fd-token>
+            <fd-token [readOnly]="true">Readonly 3</fd-token>
+            <input fd-tokenizer-input fd-form-control />
+        </fd-tokenizer>
+    `,
+    standalone: true,
+    imports: [TokenComponent, TokenizerComponent, TokenizerInputDirective, FormControlComponent, ContentDensityModule]
+})
+class ReadonlyTokenHostComponent {
+    @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
+}
+
 describe('TokenizerComponent', () => {
     let component: TokenizerComponent;
     let fixture: ComponentFixture<HostComponent>;
@@ -571,6 +588,79 @@ describe('TokenizerComponent', () => {
             fixture.detectChanges();
             await whenStable(fixture);
             expect(fixture.nativeElement.querySelector('.fd-tokenizer-more')).toBeNull();
+        });
+    });
+
+    describe('read-only tokens', () => {
+        let readonlyFixture: ComponentFixture<ReadonlyTokenHostComponent>;
+        let readonlyComponent: TokenizerComponent;
+
+        beforeEach(async () => {
+            readonlyFixture = TestBed.createComponent(ReadonlyTokenHostComponent);
+            await whenStable(readonlyFixture);
+            readonlyComponent = readonlyFixture.componentInstance.tokenizer;
+            readonlyComponent.ngAfterViewInit();
+            await whenStable(readonlyFixture);
+        });
+
+        function tokenEl(index: number): HTMLElement {
+            const token = readonlyComponent.tokenList.toArray()[index];
+            return token.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement;
+        }
+
+        it('does not toggle selection on SPACE for a read-only token', () => {
+            const readonlyToken = readonlyComponent.tokenList.first;
+            const event = new KeyboardEvent('keydown', { key: ' ' });
+
+            readonlyComponent.handleKeyDown(event, 0);
+
+            expect(readonlyToken.selected()).toBe(false);
+        });
+
+        it('toggles selection on SPACE for an editable token', () => {
+            const editableToken = readonlyComponent.tokenList.toArray()[1];
+            const event = new KeyboardEvent('keydown', { key: ' ' });
+
+            readonlyComponent.handleKeyDown(event, 1);
+
+            expect(editableToken.selected()).toBe(true);
+        });
+
+        it('does not select a read-only token on click', () => {
+            tokenEl(0).dispatchEvent(new MouseEvent('click'));
+
+            expect(readonlyComponent.tokenList.first.selected()).toBe(false);
+        });
+
+        it('selects an editable token on click', () => {
+            tokenEl(1).dispatchEvent(new MouseEvent('click'));
+
+            expect(readonlyComponent.tokenList.toArray()[1].selected()).toBe(true);
+        });
+
+        it('skips read-only tokens when selecting all with Ctrl+A', () => {
+            const event = new KeyboardEvent('keydown', { key: 'KeyA', ctrlKey: true });
+
+            readonlyComponent.handleKeyDown(event, 0);
+
+            const tokens = readonlyComponent.tokenList.toArray();
+            expect(tokens[0].selected()).toBe(false);
+            expect(tokens[1].selected()).toBe(true);
+            expect(tokens[2].selected()).toBe(false);
+        });
+
+        it('does not deselect read-only tokens on outside window click', () => {
+            const editableToken = readonlyComponent.tokenList.toArray()[1];
+            // Pre-select both an editable and a read-only token.
+            editableToken.selected.set(true);
+            readonlyComponent.tokenList.first.selected.set(true);
+
+            document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+            readonlyFixture.detectChanges();
+
+            // Read-only token keeps its (programmatic) selection; editable is cleared.
+            expect(editableToken.selected()).toBe(false);
+            expect(readonlyComponent.tokenList.first.selected()).toBe(true);
         });
     });
 
