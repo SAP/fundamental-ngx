@@ -639,6 +639,23 @@ describe('ComboboxComponent', () => {
             (component as any)._handleClearSearchTerm();
             expect(component.onChange).toHaveBeenCalledWith(null);
         });
+
+        it('should not clear the value via _handleClearSearchTerm when read-only', () => {
+            component.onMenuClickHandler(items[0]);
+            jest.spyOn(component, 'onChange');
+            jest.spyOn(component.inputTextChange, 'emit');
+            const inputTextBefore = component.inputText;
+
+            component.readOnly = true;
+            component.mobile = false;
+            fixture.detectChanges();
+
+            (component as any)._handleClearSearchTerm();
+
+            expect(component.onChange).not.toHaveBeenCalled();
+            expect(component.inputTextChange.emit).not.toHaveBeenCalled();
+            expect(component.inputText).toBe(inputTextBefore);
+        });
     });
 
     it('should pause and unpause focus trap when open changes', () => {

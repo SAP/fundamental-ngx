@@ -702,6 +702,9 @@ export class ComboboxComponent<T = any>
 
     /** @hidden */
     _handleClearSearchTerm(): void {
+        if (this.readOnly) {
+            return;
+        }
         this.inputTextValue = '';
         this.inputTextChange.emit('');
         this.displayedValues = this.dropdownValues || [];
