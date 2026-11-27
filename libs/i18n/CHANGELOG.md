@@ -1,3 +1,13 @@
+## 0.66.2-rc.7 (2026-11-27)
+
+### 🩹 Fixes
+
+- **platform:** expose shellbar search clear and name advanced filter ([#14710](https://github.com/SAP/fundamental-ngx/pull/14710))
+
+### ❤️ Thank You
+
+- deno
+
 ## 0.66.2-rc.6 (2026-11-25)
 
 This was a version bump only for i18n to align it with other projects, there were no code changes.

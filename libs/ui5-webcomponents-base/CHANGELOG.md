@@ -1,3 +1,7 @@
+## 0.66.2-rc.7 (2026-11-27)
+
+This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
+
 ## 0.66.2-rc.6 (2026-11-25)
 
 This was a version bump only for ui5-webcomponents-base to align it with other projects, there were no code changes.
