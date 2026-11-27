@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FD_LANGUAGE_SIGNAL, FdLanguage } from '@fundamental-ngx/i18n';
 import { ShellbarActionComponent } from './shellbar-action/shellbar-action.component';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { ShellbarBrandingComponent } from './shellbar-branding/shellbar-branding.component';
@@ -54,6 +55,24 @@ class ShellbarKeyboardTestComponent {}
     imports: [ShellbarComponent, ShellbarContextAreaComponent]
 })
 class ShellbarNativeSelectTestComponent {}
+
+@Component({
+    selector: 'fd-test-shellbar-landmarks',
+    template: `
+        <section id="default-shellbar">
+            <fd-shellbar></fd-shellbar>
+        </section>
+        <header id="product-header" role="banner">
+            <fd-shellbar role="group"></fd-shellbar>
+        </header>
+        <fd-shellbar id="static-label-shellbar" role="group" aria-label="Product tools"></fd-shellbar>
+        <fd-shellbar id="dynamic-label-shellbar" role="group" [aria-label]="label()"></fd-shellbar>
+    `,
+    imports: [ShellbarComponent]
+})
+class ShellbarLandmarksTestComponent {
+    readonly label = signal<string | undefined>('Account tools');
+}
 
 describe('native key ownership through the capture listener', () => {
     let nativeFixture: ComponentFixture<ShellbarNativeSelectTestComponent>;
@@ -208,6 +227,86 @@ describe('ShellbarComponent', () => {
 
         expect(productElementClass).toContain('fd-shellbar__group--shrink');
         expect(productElementClass).toContain('fd-shellbar__group--basis-auto');
+    });
+});
+
+describe('ShellbarComponent landmark semantics', () => {
+    let landmarkFixture: ComponentFixture<ShellbarLandmarksTestComponent>;
+    let language: WritableSignal<FdLanguage>;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({ imports: [ShellbarLandmarksTestComponent] }).compileComponents();
+        language = TestBed.inject(FD_LANGUAGE_SIGNAL);
+        landmarkFixture = TestBed.createComponent(ShellbarLandmarksTestComponent);
+        landmarkFixture.detectChanges();
+        await landmarkFixture.whenStable();
+    });
+
+    it('names its host banner once without leaving a labelled inner visual wrapper', () => {
+        const container = landmarkFixture.nativeElement.querySelector('#default-shellbar') as HTMLElement;
+        const shellbar = container.querySelector('fd-shellbar') as HTMLElement;
+        const visualShellbar = shellbar.querySelector('.fd-shellbar') as HTMLElement;
+
+        expect(container.querySelectorAll('[role="banner"]')).toHaveLength(1);
+        expect(shellbar.getAttribute('role')).toBe('banner');
+        expect(shellbar.getAttribute('aria-label')).toBe('Shellbar');
+        expect(visualShellbar.hasAttribute('role')).toBe(false);
+        expect(visualShellbar.hasAttribute('aria-label')).toBe(false);
+    });
+
+    it('retains a consumer group override inside a product header without a nested banner', () => {
+        const productHeader = landmarkFixture.nativeElement.querySelector('#product-header') as HTMLElement;
+        const shellbar = productHeader.querySelector('fd-shellbar') as HTMLElement;
+
+        expect(productHeader.tagName).toBe('HEADER');
+        expect(productHeader.getAttribute('role')).toBe('banner');
+        expect(productHeader.querySelectorAll('[role="banner"]')).toHaveLength(0);
+        expect(shellbar.getAttribute('role')).toBe('group');
+        expect(shellbar.getAttribute('aria-label')).toBe('Shellbar');
+    });
+
+    it('preserves a static consumer aria-label on its host', () => {
+        const shellbar = landmarkFixture.nativeElement.querySelector('#static-label-shellbar') as HTMLElement;
+        expect(shellbar.getAttribute('aria-label')).toBe('Product tools');
+    });
+
+    it('updates a bound consumer label and returns to the current translation when cleared', async () => {
+        const shellbar = landmarkFixture.nativeElement.querySelector('#dynamic-label-shellbar') as HTMLElement;
+        expect(shellbar.getAttribute('aria-label')).toBe('Account tools');
+
+        landmarkFixture.componentInstance.label.set('Workspace tools');
+        landmarkFixture.detectChanges();
+        await landmarkFixture.whenStable();
+        expect(shellbar.getAttribute('aria-label')).toBe('Workspace tools');
+
+        language.set({
+            ...language(),
+            coreShellbar: { ...language().coreShellbar, shellbarLabel: 'Application header' }
+        });
+        landmarkFixture.detectChanges();
+        await landmarkFixture.whenStable();
+        expect(shellbar.getAttribute('aria-label')).toBe('Workspace tools');
+        expect(
+            landmarkFixture.nativeElement.querySelector('#default-shellbar fd-shellbar').getAttribute('aria-label')
+        ).toBe('Application header');
+
+        landmarkFixture.componentInstance.label.set(undefined);
+        landmarkFixture.detectChanges();
+        await landmarkFixture.whenStable();
+        expect(shellbar.getAttribute('aria-label')).toBe('Application header');
+    });
+
+    it('updates its role through the component input API', async () => {
+        const shellbarFixture = TestBed.createComponent(ShellbarComponent);
+        shellbarFixture.componentRef.setInput('role', 'group');
+        shellbarFixture.detectChanges();
+        await shellbarFixture.whenStable();
+        expect(shellbarFixture.nativeElement.getAttribute('role')).toBe('group');
+
+        shellbarFixture.componentRef.setInput('role', 'banner');
+        shellbarFixture.detectChanges();
+        await shellbarFixture.whenStable();
+        expect(shellbarFixture.nativeElement.getAttribute('role')).toBe('banner');
     });
 });
 

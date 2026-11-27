@@ -70,6 +70,111 @@
             </fd-shellbar-context-area>
         </fd-shellbar>
     </section>
+    <section data-testid="shellbar-semantics">
+        <h2>Shellbar landmark and logical action semantics</h2>
+        <div data-testid="default-banner-shellbar">
+            <fd-shellbar><fd-shellbar-context-area>Default banner</fd-shellbar-context-area></fd-shellbar>
+        </div>
+        <header role="banner" data-testid="group-banner-wrapper">
+            <fd-shellbar role="group"
+                ><fd-shellbar-context-area>Grouped shellbar</fd-shellbar-context-area></fd-shellbar
+            >
+        </header>
+        <div data-testid="logical-actions-shellbar">
+            <fd-shellbar>
+                <fd-shellbar-actions [assistiveTools]="semanticAssistiveTools()">
+                    @for (item of semanticActionItems(); track $index) {
+                        <fd-shellbar-action [label]="'Action ' + ($index + 1)" glyph="bell"></fd-shellbar-action>
+                    }
+                    @for (item of semanticButtonItems(); track $index) {
+                        <button fd-button [attr.data-semantic-button]="$index">Plain {{ $index + 1 }}</button>
+                    }
+                </fd-shellbar-actions>
+            </fd-shellbar>
+        </div>
+        <button data-testid="semantic-actions-0" (click)="setSemanticActions(0)">Actions 0</button>
+        <button data-testid="semantic-actions-1" (click)="setSemanticActions(1)">Actions 1</button>
+        <button data-testid="semantic-actions-2" (click)="setSemanticActions(2)">Actions 2</button>
+        <button data-testid="semantic-buttons-0" (click)="setSemanticButtons(0)">Buttons 0</button>
+        <button data-testid="semantic-buttons-1" (click)="setSemanticButtons(1)">Buttons 1</button>
+        <button data-testid="semantic-buttons-2" (click)="setSemanticButtons(2)">Buttons 2</button>
+        <button data-testid="semantic-assistive-toggle" (click)="semanticAssistiveTools.set(!semanticAssistiveTools())">
+            Toggle assistive tools
+        </button>
+        <button
+            data-testid="semantic-composite-stable-toggle"
+            (click)="semanticCompositeStable.set(!semanticCompositeStable())"
+        >
+            Toggle composite stable action
+        </button>
+        <button data-testid="semantic-search-toggle" (click)="semanticSearch.set(!semanticSearch())">
+            Toggle search
+        </button>
+        <button data-testid="real-overflow-narrow" (click)="setRealOverflowWidth(80)">Real overflow narrow</button>
+        <button data-testid="real-overflow-wide" (click)="setRealOverflowWidth(500)">Real overflow wide</button>
+    </section>
     <h2>Stable mounted 314px overflow with projected actions</h2>
     <e2e-shellbar-mobile-projection></e2e-shellbar-mobile-projection>
+    <section data-testid="recovery-semantic-rigs">
+        <div data-testid="composite-shellbars">
+            <fd-shellbar data-testid="combobox-shellbar">
+                <fd-shellbar-actions data-testid="combobox-actions">
+                    @if (semanticCompositeStable()) {
+                        <fd-shellbar-action ariaLabel="Stable combobox action" glyph="bell"></fd-shellbar-action>
+                    }
+                    <fd-combobox data-testid="semantic-combobox"></fd-combobox>
+                </fd-shellbar-actions>
+            </fd-shellbar>
+            <fd-shellbar data-testid="legacy-user-shellbar">
+                <fd-shellbar-actions [user]="semanticUser" data-testid="legacy-user-actions">
+                    @if (semanticCompositeStable()) {
+                        <fd-shellbar-action ariaLabel="Stable legacy user action" glyph="bell"></fd-shellbar-action>
+                    }
+                    <fd-shellbar-user-menu
+                        [user]="semanticUser"
+                        data-testid="semantic-legacy-user"
+                    ></fd-shellbar-user-menu>
+                </fd-shellbar-actions>
+            </fd-shellbar>
+            <fd-shellbar data-testid="user-menu-shellbar">
+                <fd-shellbar-actions data-testid="user-menu-actions">
+                    @if (semanticCompositeStable()) {
+                        <fd-shellbar-action ariaLabel="Stable user menu action" glyph="bell"></fd-shellbar-action>
+                    }
+                    <fd-user-menu data-testid="semantic-user-menu">
+                        <fd-user-menu-control>
+                            <button fd-button fd-user-menu-control-element aria-label="Recovery user menu">
+                                Recovery user menu
+                            </button>
+                        </fd-user-menu-control>
+                    </fd-user-menu>
+                </fd-shellbar-actions>
+            </fd-shellbar>
+            <fd-shellbar data-testid="product-switch-shellbar">
+                <fd-shellbar-actions data-testid="product-switch-actions">
+                    @if (semanticCompositeStable()) {
+                        <fd-shellbar-action ariaLabel="Stable product switch action" glyph="bell"></fd-shellbar-action>
+                    }
+                    <fd-product-switch data-testid="semantic-product-switch"></fd-product-switch>
+                </fd-shellbar-actions>
+            </fd-shellbar>
+        </div>
+        <fd-shellbar data-testid="search-shellbar">
+            <fd-shellbar-context-area>Search context</fd-shellbar-context-area>
+            <fd-shellbar-actions data-testid="search-actions">
+                <fd-shellbar-action ariaLabel="Stable search action" glyph="bell"></fd-shellbar-action>
+                @if (semanticSearch()) {
+                    <fdp-search-field data-testid="semantic-search"></fdp-search-field>
+                }
+            </fd-shellbar-actions>
+        </fd-shellbar>
+        <div [style.width.px]="realOverflowWidth()" data-testid="real-overflow-container">
+            <fd-shellbar data-testid="real-overflow-shellbar">
+                <fd-shellbar-actions data-testid="real-overflow-actions" style="min-width: 200px; flex-shrink: 0">
+                    <fd-shellbar-action ariaLabel="Overflow one" label="Overflow one" glyph="bell"></fd-shellbar-action>
+                    <fd-shellbar-action ariaLabel="Overflow two" label="Overflow two" glyph="bell"></fd-shellbar-action>
+                </fd-shellbar-actions>
+            </fd-shellbar>
+        </div>
+    </section>
 </main>
