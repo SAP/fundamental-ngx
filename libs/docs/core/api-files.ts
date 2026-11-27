@@ -79,6 +79,7 @@ export const API_FILES = {
         'DynamicSideContentSideComponent',
         'DynamicSideContentMainComponent'
     ],
+    sidePanel: ['SidePanelComponent', 'SidePanelItemComponent', 'SidePanelContentDirective'],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemComponent'],
     busyIndicator: ['BusyIndicatorComponent', 'BusyIndicatorExtendedDirective'],
     button: ['ButtonComponent', 'ButtonBadgeDirective'],

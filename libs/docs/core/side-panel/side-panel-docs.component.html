@@ -1,0 +1,56 @@
+<fd-docs-section-title id="basic" componentName="side-panel"> Basic usage </fd-docs-section-title>
+<description>
+    Use the <code>fd-side-panel</code> component with one <code>fd-side-panel-item</code> per content group. Each item
+    contributes one button to the vertical action bar in the default <strong>collapsed</strong> mode, where
+    <code>[icon]</code> is the button glyph and <code>[label]</code> is the group name shown as a tooltip on hover and
+    on keyboard focus. Use <code>[side]</code> (<code>'left' | 'right'</code>) to anchor the bar to either side of its
+    container — this is a physical placement choice independent of text direction and can be changed at runtime. Bind
+    <code>[(activeItem)]</code> to track the selected group — clicking a button activates its group and clicking it
+    again clears the selection. The nav arrow toggles the bar between <code>'collapsed'</code> (icons only) and
+    <code>'expanded'</code> (320px wide with labels). Group content is projected through
+    <code>*fdSidePanelContent</code> and appears in the content panel when the group is active.
+</description>
+<component-example>
+    <fd-side-panel-basic-example></fd-side-panel-basic-example>
+</component-example>
+<code-example [exampleFiles]="basic"></code-example>
+
+<fd-docs-section-title id="single-action" componentName="side-panel"> Single action </fd-docs-section-title>
+<description>
+    When the side panel contains exactly one <code>fd-side-panel-item</code>, it enters
+    <strong>single-action</strong> mode automatically. In this mode no action button is shown — only the nav arrow,
+    which directly opens and closes the content panel. Bind <code>[(open)]</code> to track the panel state. The single
+    item's label is displayed next to the nav arrow when the bar is in <code>'expanded'</code> mode.
+</description>
+<component-example>
+    <fd-side-panel-single-action-example></fd-side-panel-single-action-example>
+</component-example>
+<code-example [exampleFiles]="singleAction"></code-example>
+
+<fd-docs-section-title id="overflow" componentName="side-panel"> Overflow </fd-docs-section-title>
+<description>
+    When more <code>fd-side-panel-item</code> elements are projected than the action bar can display at its current
+    height, a <code>•••</code> overflow toggle button appears automatically at the bottom of the visible items. No
+    inputs or configuration are required — overflow is detected via a <code>ResizeObserver</code> and is entirely
+    automatic. Clicking the toggle opens a floating list showing the hidden items with their icon and label. Clicking an
+    item from the list activates it and closes the list. The overflow list supports keyboard navigation: use
+    <code>ArrowDown</code> / <code>ArrowUp</code> to move between items, <code>Enter</code> or <code>Space</code> to
+    activate, and <code>Escape</code> to close and return focus to the <code>•••</code> button.
+</description>
+<component-example>
+    <fd-side-panel-overflow-example></fd-side-panel-overflow-example>
+</component-example>
+<code-example [exampleFiles]="overflow"></code-example>
+
+<fd-docs-section-title id="resizable" componentName="side-panel"> Resizable </fd-docs-section-title>
+<description>
+    Set <code>[resizable]="true"</code> on <code>fd-side-panel</code> to enable the resize splitter. The content panel
+    can then be resized by dragging the splitter bar on its inner edge, with the Arrow keys (Shift+Arrow for larger
+    steps) while the bar is focused, or via the width menu (right-click the bar or press Shift+F10): Expand to Maximum
+    Width, Collapse to Minimum Width, Reset to Default Width. Use <code>defaultWidth</code>, <code>minWidth</code>, and
+    <code>maxWidth</code> to control the initial and clamped sizes.
+</description>
+<component-example>
+    <fd-side-panel-resizable-example></fd-side-panel-resizable-example>
+</component-example>
+<code-example [exampleFiles]="resizable"></code-example>

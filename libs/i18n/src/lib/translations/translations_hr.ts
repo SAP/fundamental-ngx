@@ -249,6 +249,22 @@ export default {
         search: 'Pretraži',
         shellbarLabel: 'Shellbar'
     },
+    coreSidePanel: {
+        actionsLabel: 'Actions',
+        close: 'Close',
+        closePanel: 'Close panel',
+        collapsedAnnouncement: 'Side panel collapsed',
+        expandedAnnouncement: 'Side panel expanded',
+        navArrowCollapse: 'Collapse side panel',
+        navArrowExpand: 'Expand side panel',
+        overflowShowLess: 'Show Less',
+        overflowShowMore: 'More Actions',
+        resizeCollapseToMin: 'Collapse to Minimum Width',
+        resizeExpandToMax: 'Expand to Maximum Width',
+        resizeResetToDefault: 'Reset to Default Width',
+        resizeSplitterLabel: 'Resize side panel',
+        sidePanelLabel: 'Side Panel'
+    },
     coreSlider: {
         ariaLabel: 'Ručica klizača'
     },

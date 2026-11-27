@@ -248,6 +248,10 @@
             "name": "Side Navigation"
         },
         {
+            "url": "core/side-panel",
+            "name": "Side Panel"
+        },
+        {
             "url": "core/status-indicator",
             "name": "Status Indicator"
         },
